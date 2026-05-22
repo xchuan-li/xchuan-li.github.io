@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://xiaochuan.dev', // change to your real domain
+  site: 'https://xchuan-li.github.io',
   integrations: [mdx(), react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

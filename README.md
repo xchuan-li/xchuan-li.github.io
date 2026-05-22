@@ -45,16 +45,19 @@ For Vercel/Netlify instead: just connect the repo, no config needed (Astro is au
 
 ## Editing checklist
 
-Things to swap before going live:
+Things already filled in:
 
-- [ ] Replace `Xiaochuan ___` everywhere with your actual English name
-  (`Base.astro` × 1, `index.astro` × 1, every page `title` × ~7, CV header)
-- [ ] Replace `xiaochuan.dev` in `astro.config.mjs` and `contact.astro`
-- [ ] Replace `github.com/__/__` in `Base.astro` footer
-- [ ] Add real email, GitHub username, Scholar URL in `contact.astro`
-- [ ] Drop a real `cv.pdf` into `public/`
-- [ ] Edit `index.astro` hero paragraph to your own voice
-- [ ] Update paper status / dates in `research/sc-certification.astro` as paper1 evolves
+- [x] Name: **Xiaochuan Li**
+- [x] Email: **xiaochuan.li@utn.de**
+- [x] GitHub: **github.com/xchuan-li**
+
+Still to do before going live:
+
+- [ ] Add a real Google Scholar URL in `src/pages/contact.astro` (currently a generic placeholder)
+- [ ] Buy a domain or use `username.github.io`, then update `site` in `astro.config.mjs` (currently `xiaochuanli.com`)
+- [ ] Drop a real `cv.pdf` into `public/` for the CV download button
+- [ ] Rewrite the `src/pages/index.astro` hero paragraph in your own voice
+- [ ] Keep paper status / dates in `src/pages/research/sc-certification.astro` up to date as paper1 evolves
 
 ## Adding a new interactive demo
 

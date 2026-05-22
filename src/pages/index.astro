@@ -8,6 +8,7 @@ const projects = [
     desc: "An acyclic framework using do(class-3) interventions to test whether a hypothesized licensing structure M is counterfactually load-bearing for a model's output — not merely accuracy-correlated. Includes a real-world demonstration on MNLI / HANS.",
     tags: ["causal inference", "certification"],
     href: "/research/sc-certification",
+    color: "var(--accent-coral)",
     demo: true,
   },
   {
@@ -16,6 +17,7 @@ const projects = [
     desc: "Fictional concept names with path-encoded naming conventions let us locate where shortcut substitution replaces compositional reasoning, hop by hop, without ever opening the model.",
     tags: ["behavioral probing", "reasoning"],
     href: "/research/isotrace",
+    color: "var(--accent-teal)",
   },
   {
     title: "CIY — causal inferential yield",
@@ -23,6 +25,7 @@ const projects = [
     desc: "A graded measure over SC-grounded items. If we can construct two models matched on accuracy and grounding but with opposing CIY, CIY is a genuine thermometer for causal reasoning; if not, it collapses into accuracy repackaging. Falsifiability is the point.",
     tags: ["measurement", "falsifiability"],
     href: "/research/ciy",
+    color: "var(--accent-purple)",
   },
   {
     title: "LiT — latent control states under prompt framing",
@@ -30,6 +33,7 @@ const projects = [
     desc: "Five-person collaboration studying whether prompt-induced behavioral shifts correspond to causally relevant states in activation space. I lead the experimental design and downstream causal analysis.",
     tags: ["mech interp"],
     href: "/research/lit",
+    color: "var(--accent-amber)",
   },
 ];
 
@@ -38,14 +42,23 @@ const posts = [
   { title: "What philosophy gave me that ML didn't", meta: "Essay · on causal commitments vs. benchmark thinking" },
   { title: "Reading notes — LeCun, Pearl, and the world-model lineage", meta: "Notes" },
 ];
+
+const now = [
+  "Finishing the SC-certification paper for an August deadline — currently scoping the MNLI/HANS demonstration in §6.5.",
+  "Co-leading the LiT mech-interp project at UTN with collaborators at DFKI Saarbrücken.",
+  "Reading: Pearl's Causality (3rd ed., re-read), and the recent Anthropic interpretability work on attribution graphs.",
+  "Preparing for the late-2026 PhD application window — focus on causal foundations of interpretability.",
+];
 ---
 
 <Base>
   <section class="mb-14">
-    <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan ___</h1>
-    <p class="text-base text-[var(--color-text-muted)] mb-6">
-      Master's student, Human and AI — UTN Nürnberg
-    </p>
+    <div class="hero-accent">
+      <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan Li</h1>
+      <p class="text-base text-[var(--color-text-muted)] mb-6">
+        Master's student, Human and AI — UTN Nürnberg
+      </p>
+    </div>
     <p class="leading-relaxed mb-3">
       I work on causal foundations of interpretability: when can we say a model's behavior is
       <em>licensed</em> by the structure we think it has, rather than being a coincidence of accuracy?
@@ -58,13 +71,20 @@ const posts = [
   </section>
 
   <section class="mb-14">
-    <h2 class="text-lg font-medium mb-4">Current research</h2>
-    <div class="divide-y divide-[var(--color-border)]">
+    <div class="flex items-baseline justify-between mb-4">
+      <h2 class="text-lg font-medium">Current research</h2>
+      <a href="/research" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all projects →</a>
+    </div>
+    <div>
       {
         projects.map((p) => (
-          <a href={p.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+          <a
+            href={p.href}
+            class="proj-card block py-5 group hover:bg-[var(--color-surface)] -mx-3 pr-3 rounded-md transition-colors"
+            style={`--proj-color: ${p.color}`}
+          >
             <div class="flex justify-between items-baseline gap-3 mb-1.5">
-              <span class="text-[15px] font-medium group-hover:text-[var(--color-accent)]">
+              <span class="text-[15px] font-medium group-hover:text-[var(--color-accent)] transition-colors">
                 {p.title}
               </span>
               <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.meta}</span>
@@ -88,8 +108,18 @@ const posts = [
     </div>
   </section>
 
+  <section class="mb-14">
+    <h2 class="text-lg font-medium mb-4">Currently</h2>
+    <ul class="now-list">
+      {now.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
   <section>
-    <h2 class="text-lg font-medium mb-4">Writing</h2>
+    <div class="flex items-baseline justify-between mb-4">
+      <h2 class="text-lg font-medium">Writing</h2>
+      <a href="/writing" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all posts →</a>
+    </div>
     <div class="divide-y divide-[var(--color-border)]">
       {
         posts.map((p) => (

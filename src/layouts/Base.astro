@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  showProgress?: boolean;
 }
 
 const {
-  title = "Xiaochuan ___",
+  title = "Xiaochuan Li",
   description = "Causal foundations of interpretability — research, writing, and demos.",
+  showProgress = false,
 } = Astro.props;
 
 const nav = [
@@ -31,6 +33,9 @@ const path = Astro.url.pathname;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -40,10 +45,13 @@ const path = Astro.url.pathname;
     <meta property="og:type" content="website" />
   </head>
   <body>
+    {showProgress && <div id="reading-progress" class="reading-progress"></div>}
+
     <div class="mx-auto max-w-[720px] px-6 pt-10 pb-20">
-      <header class="mb-12 flex items-baseline justify-between border-b border-[var(--color-border)] pb-4 text-sm">
-        <a href="/" class="font-medium tracking-tight hover:text-[var(--color-accent)]">
-          Xiaochuan ___
+      <header class="mb-12 flex items-center justify-between border-b border-[var(--color-border)] pb-4 text-sm">
+        <a href="/" class="flex items-center gap-2.5 hover:text-[var(--color-accent)] transition-colors">
+          <span class="monogram">XL</span>
+          <span class="font-medium tracking-tight">Xiaochuan Li</span>
         </a>
         <nav class="flex gap-5">
           {
@@ -55,7 +63,7 @@ const path = Astro.url.pathname;
                   class={
                     active
                       ? "text-[var(--color-text)] font-medium"
-                      : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                      : "text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
                   }
                 >
                   {item.label}
@@ -73,10 +81,29 @@ const path = Astro.url.pathname;
       <footer class="mt-20 pt-6 border-t border-[var(--color-border)] flex justify-between text-xs text-[var(--color-text-dim)]">
         <span>Last updated {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
         <span>
-          Built with <a href="https://astro.build" class="hover:text-[var(--color-text)]">Astro</a>
-          · <a href="https://github.com/__/__" class="hover:text-[var(--color-text)]">source</a>
+          Built with <a href="https://astro.build" class="hover:text-[var(--color-text)] transition-colors">Astro</a>
+          · <a href="https://github.com/xchuan-li/xchuan-li.github.io" class="hover:text-[var(--color-text)] transition-colors">source</a>
         </span>
       </footer>
     </div>
+
+    {showProgress && (
+      <script is:inline>
+        (function () {
+          const bar = document.getElementById("reading-progress");
+          if (!bar) return;
+          function update() {
+            const h = document.documentElement;
+            const scrolled = h.scrollTop;
+            const total = h.scrollHeight - h.clientHeight;
+            const pct = total > 0 ? (scrolled / total) * 100 : 0;
+            bar.style.width = pct + "%";
+          }
+          window.addEventListener("scroll", update, { passive: true });
+          window.addEventListener("resize", update);
+          update();
+        })();
+      </script>
+    )}
   </body>
 </html>
