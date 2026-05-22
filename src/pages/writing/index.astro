@@ -1,0 +1,55 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Placeholder posts — once you add real .mdx files in src/content/writing/,
+// swap this for a content-collections query.
+const posts = [
+  {
+    slug: "decidability-boundary",
+    title: "Why interpretability needs a decidability boundary",
+    date: "May 2026",
+    excerpt: "There is a difference between a measurement being hard and a quantity being undefined. The interpretability literature mostly assumes the first; I think much of it is in fact the second, past a certain depth.",
+    status: "draft",
+  },
+  {
+    slug: "from-philosophy",
+    title: "What philosophy gave me that ML didn't",
+    date: "April 2026",
+    excerpt: "An undergraduate in philosophy is mostly training in two things: noticing where an argument actually does work, and tolerating the discomfort of conclusions you cannot yet ground. Both turn out to matter a lot in research taste.",
+    status: "essay",
+  },
+  {
+    slug: "world-model-lineage",
+    title: "Reading notes — LeCun, Pearl, and the world-model lineage",
+    date: "March 2026",
+    excerpt: "Notes from a slow read of three threads that, taken together, sketch a research program counter to LLM scaling.",
+    status: "notes",
+  },
+];
+---
+
+<Base title="Writing · Xiaochuan ___">
+  <h1 class="text-2xl font-medium tracking-tight mb-2">Writing</h1>
+  <p class="text-[var(--color-text-muted)] mb-10 max-w-prose">
+    Longer-form notes and essays. I write here when an idea is too messy for a paper but too
+    specific for a tweet — usually about research taste, causal-inferential rigor, or what
+    philosophy training does to how one reads ML papers.
+  </p>
+
+  <div class="divide-y divide-[var(--color-border)]">
+    {
+      posts.map((p) => (
+        <a href={`/writing/${p.slug}`} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+          <div class="flex justify-between items-baseline gap-3 mb-2">
+            <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
+            <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.date}</span>
+          </div>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{p.excerpt}</p>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
+            {p.status}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</Base>

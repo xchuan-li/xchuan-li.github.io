@@ -1,0 +1,88 @@
+---
+import Base from "../../layouts/Base.astro";
+import SCDemo from "../../components/SCDemo.tsx";
+---
+
+<Base title="Stable is not grounded · Xiaochuan ___"
+       description="A strict accuracy–stability–grounding hierarchy, observable only as deep as both sides are transparent.">
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Paper · in progress · target deadline Aug 2026
+    </div>
+    <h1>Stable is not grounded</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      A strict accuracy–stability–grounding hierarchy, observable only as deep as both sides are transparent.
+    </p>
+
+    <p>
+      A model that answers correctly may be doing so for a reason the benchmark never checks.
+      The now-standard response is to perturb the input in meaning-preserving ways and ask whether
+      the answer survives. We take that response seriously and then show it is <strong>one level too shallow</strong>.
+    </p>
+
+    <p>
+      "Correct" answers decompose strictly — <code>accuracy ⊋ stability ⊋ grounding</code> — with every
+      containment non-empty. Headline accuracy merges three behaviors that come apart under
+      answer-preserving perturbation: unstable, stable-wrong, stable-correct. The standard fix of
+      checking stability separates only the first. The residual ambiguity is itself reflexive: a
+      stable-correct answer can hold because the model tracks the structure that licenses the
+      conclusion, or because it stably rides a shortcut also correlated with the answer at evaluation.
+    </p>
+
+    <blockquote>
+      Stability is necessary but not sufficient for grounding.
+    </blockquote>
+
+    <h2>A 91%-accurate model that has learned nothing</h2>
+
+    <p>
+      In a controlled "can X fly?" setting, a classifier reaches <strong>0.912</strong> accuracy and
+      is <strong>stable</strong> under every answer-preserving presentation. By current practice it
+      clears both the accuracy bar and the robustness check — and would ship. It was never reading
+      the animal. It was reading an irrelevant color feature the training set happened to correlate
+      with the label (<code>|r| ≈ 0.81</code>). The demo below lets you push the button that reveals this:
+    </p>
+
+    <SCDemo client:load />
+
+    <p>
+      Severing that one correlation with a <code>do</code>-intervention drops accuracy by <strong>.408</strong>,
+      while a matched pure-noise control moves only <strong>.021</strong> — so the collapse is the
+      shortcut, not fragility to any change. On a deployment slice where color no longer tracks the
+      label, this model is at chance. Accuracy hid this; the stability check <em>endorsed</em> it.
+      This is the <code>SC-spurious</code> bucket.
+    </p>
+
+    <h2>The decidability boundary</h2>
+
+    <p>
+      The deepest cut, <code>SC → {"{grounded, spurious}"}</code>, requires <strong>two-sided observability</strong>:
+      the item's ground-truth causal graph must be stipulated by construction (benchmark-side), and
+      the candidate shortcut's training correlation must be auditable (model-side). When both sides
+      are open the cut is decidable; when either goes dark it is non-identifiable from the available
+      observations.
+    </p>
+
+    <p>
+      On a real benchmark with an opaque-pretrained model, the honest decomposition stops at the
+      level-two split. Reporting a "causally grounded" fraction there is not a stronger result; it is
+      an underdetermined one.
+    </p>
+
+    <h2>Status</h2>
+
+    <ul>
+      <li><strong>v2 draft</strong> — main theoretical hierarchy and controlled demonstration complete.</li>
+      <li><strong>§6.5 in progress</strong> — real-world demonstration on MNLI / HANS (go signal: SC-spurious present + HANS ΔAcc ≥ 0.10).</li>
+      <li><strong>Phase 2 (late July)</strong> — expansion to 2–3 models and negative controls.</li>
+      <li><strong>Companion paper</strong> — the formal in-the-wild non-identifiability argument is split off; this paper is empirical-first.</li>
+    </ul>
+
+    <hr />
+
+    <p class="!text-sm !text-[var(--color-text-muted)]">
+      Draft available on request. Contact:
+      <a href="/contact">/contact</a>.
+    </p>
+  </article>
+</Base>

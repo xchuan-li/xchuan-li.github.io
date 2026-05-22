@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="CV · Xiaochuan ___">
+  <div class="flex items-baseline justify-between mb-8">
+    <h1 class="text-2xl font-medium tracking-tight">Curriculum vitae</h1>
+    <a href="/cv.pdf" class="text-sm text-[var(--color-accent)] hover:underline">Download PDF ↗</a>
+  </div>
+
+  <section class="mb-10">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Education</h2>
+    <div class="space-y-4">
+      <div class="flex justify-between gap-4">
+        <div>
+          <p class="font-medium">M.Sc., Human and AI</p>
+          <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg (UTN)</p>
+        </div>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 — 2027</p>
+      </div>
+      <div class="flex justify-between gap-4">
+        <div>
+          <p class="font-medium">B.A., Philosophy</p>
+          <p class="text-sm text-[var(--color-text-muted)]">China · undergraduate</p>
+        </div>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">— 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research</h2>
+    <div class="space-y-5">
+      <div>
+        <p class="font-medium text-[15px]">LiT — Latent Control States in LLMs</p>
+        <p class="text-sm text-[var(--color-text-muted)]">UTN team project · 5-person · May–Dec 2026 · supervised by Simon Ostermann (DFKI), Michael Roth (UTN)</p>
+        <p class="text-sm mt-1">Lead on Objectives 3 and 4 (experimental design + downstream causal analysis).</p>
+      </div>
+      <div>
+        <p class="font-medium text-[15px]">ProtoBias — Prototypical Representations in Multimodal Models</p>
+        <p class="text-sm text-[var(--color-text-muted)]">UTN semester project · with Subhadeep (supervisor)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers in progress</h2>
+    <ul class="space-y-3 text-sm">
+      <li>
+        <span class="font-medium">Stable is not grounded.</span>
+        <span class="text-[var(--color-text-muted)]"> Acyclic certification framework using do(class-3) interventions. Target Aug 2026.</span>
+      </li>
+      <li>
+        <span class="font-medium">Isotrace.</span>
+        <span class="text-[var(--color-text-muted)]"> Behavioral tracing of multi-hop reasoning via path-encoded fictional names.</span>
+      </li>
+      <li>
+        <span class="font-medium">Causal Inferential Yield (CIY).</span>
+        <span class="text-[var(--color-text-muted)]"> A graded measure over SC-grounded items with a built-in falsifiability test.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Interests</h2>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
+      Causal inference and its application to interpretability. The boundary between behavioral and
+      mechanistic methods. Philosophy of measurement in ML. World-model approaches (LeCun, Pearl) and
+      the limits of pure-LLM paradigms.
+    </p>
+  </section>
+</Base>

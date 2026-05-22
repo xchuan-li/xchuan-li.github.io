@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Isotrace · Xiaochuan ___">
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Paper · in progress
+    </div>
+    <h1>Isotrace — behavioral tracing of multi-hop reasoning</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      Locating where shortcut substitution replaces compositional reasoning — without opening the model.
+    </p>
+
+    <p>
+      <em>Detail page coming. The short version:</em> we use fictional concept names
+      (<code>Zorb</code>, <code>Veln</code>, <code>Quasp</code>) whose naming conventions encode the
+      multi-hop reasoning path. By comparing model outputs across an adversarial contrast — same
+      surface names, different underlying facts — we can localize the hop at which the model stops
+      reasoning compositionally and starts riding the naming pattern.
+    </p>
+
+    <p>
+      The complementarity to <a href="/research/sc-certification">SC certification</a> is the point:
+      that work asks <em>whether</em> a model's stable-correct behavior is grounded; Isotrace asks
+      <em>where</em> the shortcut fires, hop by hop. Behavioral tracing and mechanistic
+      interpretability as mutual validation.
+    </p>
+
+    <hr/>
+    <p class="!text-sm !text-[var(--color-text-muted)]">An interactive demo will live here once the writeup is further along.</p>
+  </article>
+</Base>

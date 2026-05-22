@@ -1,0 +1,104 @@
+---
+import Base from "../layouts/Base.astro";
+
+const projects = [
+  {
+    title: "Stable is not grounded",
+    meta: "Paper · in progress · Aug 2026",
+    desc: "An acyclic framework using do(class-3) interventions to test whether a hypothesized licensing structure M is counterfactually load-bearing for a model's output — not merely accuracy-correlated. Includes a real-world demonstration on MNLI / HANS.",
+    tags: ["causal inference", "certification"],
+    href: "/research/sc-certification",
+    demo: true,
+  },
+  {
+    title: "Isotrace — behavioral tracing of multi-hop reasoning",
+    meta: "Paper · in progress",
+    desc: "Fictional concept names with path-encoded naming conventions let us locate where shortcut substitution replaces compositional reasoning, hop by hop, without ever opening the model.",
+    tags: ["behavioral probing", "reasoning"],
+    href: "/research/isotrace",
+  },
+  {
+    title: "CIY — causal inferential yield",
+    meta: "Paper · draft",
+    desc: "A graded measure over SC-grounded items. If we can construct two models matched on accuracy and grounding but with opposing CIY, CIY is a genuine thermometer for causal reasoning; if not, it collapses into accuracy repackaging. Falsifiability is the point.",
+    tags: ["measurement", "falsifiability"],
+    href: "/research/ciy",
+  },
+  {
+    title: "LiT — latent control states under prompt framing",
+    meta: "Team project · May–Dec 2026 · DFKI",
+    desc: "Five-person collaboration studying whether prompt-induced behavioral shifts correspond to causally relevant states in activation space. I lead the experimental design and downstream causal analysis.",
+    tags: ["mech interp"],
+    href: "/research/lit",
+  },
+];
+
+const posts = [
+  { title: "Why interpretability needs a decidability boundary", meta: "Draft · on the limits of in-the-wild certification" },
+  { title: "What philosophy gave me that ML didn't", meta: "Essay · on causal commitments vs. benchmark thinking" },
+  { title: "Reading notes — LeCun, Pearl, and the world-model lineage", meta: "Notes" },
+];
+---
+
+<Base>
+  <section class="mb-14">
+    <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan ___</h1>
+    <p class="text-base text-[var(--color-text-muted)] mb-6">
+      Master's student, Human and AI — UTN Nürnberg
+    </p>
+    <p class="leading-relaxed mb-3">
+      I work on causal foundations of interpretability: when can we say a model's behavior is
+      <em>licensed</em> by the structure we think it has, rather than being a coincidence of accuracy?
+      My current research sits at the intersection of mechanistic interpretability, causal inference,
+      and the limits of LLM-style learning.
+    </p>
+    <p class="text-sm text-[var(--color-text-muted)]">
+      Previously: philosophy (BA, China). Applying for PhD positions starting fall 2027.
+    </p>
+  </section>
+
+  <section class="mb-14">
+    <h2 class="text-lg font-medium mb-4">Current research</h2>
+    <div class="divide-y divide-[var(--color-border)]">
+      {
+        projects.map((p) => (
+          <a href={p.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+            <div class="flex justify-between items-baseline gap-3 mb-1.5">
+              <span class="text-[15px] font-medium group-hover:text-[var(--color-accent)]">
+                {p.title}
+              </span>
+              <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.meta}</span>
+            </div>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{p.desc}</p>
+            <div class="flex gap-1.5 flex-wrap">
+              {p.demo && (
+                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
+                  interactive demo ↗
+                </span>
+              )}
+              {p.tags.map((t) => (
+                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-medium mb-4">Writing</h2>
+    <div class="divide-y divide-[var(--color-border)]">
+      {
+        posts.map((p) => (
+          <div class="py-3">
+            <p class="text-sm font-medium mb-1">{p.title}</p>
+            <p class="text-xs text-[var(--color-text-dim)]">{p.meta}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="CIY · Xiaochuan ___">
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Paper · draft
+    </div>
+    <h1>CIY — causal inferential yield</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      A graded measure over SC-grounded items, designed to be falsifiable.
+    </p>
+
+    <p>
+      <em>Detail page coming.</em> CIY is a graded measure defined over the items that
+      <a href="/research/sc-certification">SC certification</a> has already cleared as grounded. It
+      asks not just whether the model is reading the licensing structure, but how much of the
+      structure's inferential weight it is actually using.
+    </p>
+
+    <p>
+      The design constraint is falsifiability. If we cannot construct two models matched on accuracy
+      and on grounding but with opposing CIY, CIY is not a real measurement — it has collapsed into
+      accuracy repackaging. The instantiation protocol is designed precisely to expose that
+      collapse, not paper over it.
+    </p>
+
+    <hr/>
+    <p class="!text-sm !text-[var(--color-text-muted)]">An interactive falsifiability widget will live here.</p>
+  </article>
+</Base>

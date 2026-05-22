@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Xiaochuan ___",
+  description = "Causal foundations of interpretability — research, writing, and demos.",
+} = Astro.props;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/research", label: "Research" },
+  { href: "/writing", label: "Writing" },
+  { href: "/cv", label: "CV" },
+  { href: "/contact", label: "Contact" },
+];
+
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div class="mx-auto max-w-[720px] px-6 pt-10 pb-20">
+      <header class="mb-12 flex items-baseline justify-between border-b border-[var(--color-border)] pb-4 text-sm">
+        <a href="/" class="font-medium tracking-tight hover:text-[var(--color-accent)]">
+          Xiaochuan ___
+        </a>
+        <nav class="flex gap-5">
+          {
+            nav.slice(1).map((item) => {
+              const active = path === item.href || (item.href !== "/" && path.startsWith(item.href));
+              return (
+                <a
+                  href={item.href}
+                  class={
+                    active
+                      ? "text-[var(--color-text)] font-medium"
+                      : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  }
+                >
+                  {item.label}
+                </a>
+              );
+            })
+          }
+        </nav>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="mt-20 pt-6 border-t border-[var(--color-border)] flex justify-between text-xs text-[var(--color-text-dim)]">
+        <span>Last updated {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
+        <span>
+          Built with <a href="https://astro.build" class="hover:text-[var(--color-text)]">Astro</a>
+          · <a href="https://github.com/__/__" class="hover:text-[var(--color-text)]">source</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>
