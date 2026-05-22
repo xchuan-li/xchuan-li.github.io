@@ -48,12 +48,11 @@ const path = Astro.url.pathname;
     {showProgress && <div id="reading-progress" class="reading-progress"></div>}
 
     <div class="mx-auto max-w-[720px] px-6 pt-10 pb-20">
-      <header class="mb-12 flex items-center justify-between border-b border-[var(--color-border)] pb-4 text-sm">
-        <a href="/" class="flex items-center gap-2.5 hover:text-[var(--color-accent)] transition-colors">
-          <span class="monogram">XL</span>
-          <span class="font-medium tracking-tight">Xiaochuan Li</span>
+      <header class="mb-12 flex items-center justify-between border-b border-[var(--color-border)] pb-4">
+        <a href="/" class="text-lg font-medium tracking-tight hover:text-[var(--color-accent)] transition-colors">
+          Xiaochuan Li
         </a>
-        <nav class="flex gap-5">
+        <nav class="flex gap-5 text-sm">
           {
             nav.slice(1).map((item) => {
               const active = path === item.href || (item.href !== "/" && path.startsWith(item.href));
