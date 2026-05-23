@@ -34,11 +34,10 @@ src/
 │   │                               # Props-configurable so paper revs swap numbers without code changes.
 │   ├── HeroFigure.astro            # Static SVG for paper1: two parallel small DAGs
 │   │                               # (SC-grounded vs SC-spurious).
-│   ├── ResearchRouteFigure.tsx     # Interactive homepage schematic of the research route across projects.
 │   └── SectionDivider.astro        # Horizontal line + tiny SVG mark (dots/arrow/node/x).
 │                                   # Used between sections on the homepage.
 ├── pages/
-│   ├── index.astro                 # Home: hero + project cards + "Currently" + writing
+│   ├── index.astro                 # Home: hero + idea→experiment timeline + "Currently" + writing
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
 │   ├── contact.astro               # Email, GitHub, location, PhD-application note
 │   ├── research/
@@ -46,7 +45,7 @@ src/
 │   │   ├── sc-certification.astro  # paper1 detail page — embeds <SCDemo client:load />
 │   │   ├── isotrace.astro          # Stub — needs interactive demo eventually
 │   │   ├── ciy.astro               # Stub — needs falsifiability widget eventually
-│   │   ├── lit.astro               # Stub — mech interp project
+│   │   ├── latent-control-states.astro  # Stub — mech interp project (formerly "LiT")
 │   │   └── cross-lingual-protobias.astro
 │   └── writing/
 │       ├── index.astro             # Writing index (placeholder posts)
@@ -91,7 +90,7 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
 
 3. **CIY (causal inferential yield)**: A graded measure over SC-grounded items. The falsifiability test: if you cannot construct two models matched on accuracy + grounding but with opposing CIY, CIY collapses into accuracy repackaging.
 
-4. **LiT** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. Do not foreground collaborators or supervision here; the public website should introduce the project itself.
+4. **Latent control states** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation); refer to the project only by its full descriptive name. Lives at `/research/latent-control-states`. Do not foreground collaborators or supervision here.
 
 5. **Cross-lingual ProtoBias** (Topic 6, in progress): Multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation. Frame it as part of the grounding/shortcut research line: semantic image-text alignment is tested against prototype-driven, culturally variable shortcuts.
 

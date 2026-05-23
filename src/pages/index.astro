@@ -1,49 +1,63 @@
 ---
 import Base from "../layouts/Base.astro";
 import SectionDivider from "../components/SectionDivider.astro";
-import ResearchRouteFigure from "../components/ResearchRouteFigure.tsx";
 
-const projects = [
+const timeline = [
   {
+    type: "idea",
+    note: "from-leibniz",
+    text: "When can a system's behavior be reduced to the minimum structure that licenses it? I spent an undergraduate thesis asking this of Leibniz; I'm now asking it of models.",
+  },
+  {
+    type: "idea",
+    note: "decidability-boundary",
+    text: "A model can be perfectly stable and perfectly accurate and still be reading the wrong feature — as long as that feature tracks the label on the slice you happen to test.",
+  },
+  {
+    type: "project",
+    n: "01",
     title: "Stable is not grounded",
-    meta: "Paper · in progress · Aug 2026",
-    desc: "An acyclic certification framework. A do(class-3) intervention severs a candidate shortcut and asks whether the licensing structure M was actually load-bearing for the model's output, or merely accuracy-correlated. Real-world demonstration on MNLI / HANS.",
-    tags: ["causal inference", "certification"],
-    href: "/research/sc-certification",
     color: "var(--accent-coral)",
-    demo: true,
+    href: "/research/sc-certification",
+    code: "https://github.com/xchuan-li/Stable_is_not_grounded",
+    text: "A do-intervention severs a candidate shortcut to test whether the licensing structure was load-bearing for the answer, or merely accuracy-correlated — with the controlled result running live as an interactive figure.",
   },
   {
-    title: "Isotrace — behavioral tracing of multi-hop reasoning",
-    meta: "Paper · in progress",
-    desc: "Fictional concept names with path-encoded naming conventions. Locates where shortcut substitution replaces compositional reasoning, hop by hop — without opening the model.",
-    tags: ["behavioral probing", "reasoning"],
-    href: "/research/isotrace",
+    type: "project",
+    n: "02",
+    title: "Isotrace",
     color: "var(--accent-teal)",
+    href: "/research/isotrace",
+    text: "Once a shortcut is exposed, locate where compositional reasoning gives way to a surface pattern — hop by hop, without opening the model.",
   },
   {
-    title: "CIY — causal inferential yield",
-    meta: "Paper · draft",
-    desc: "A graded measure over the items SC-certification has already cleared as grounded. The falsifiability constraint: if two models matched on accuracy and grounding but opposing CIY cannot be constructed, CIY has collapsed into accuracy repackaging.",
-    tags: ["measurement", "falsifiability"],
-    href: "/research/ciy",
+    type: "idea",
+    note: "inferential-productivity",
+    text: "Producing conclusions is cheap; anything that composes has it for free. The expensive, almost-unmeasured direction is the reverse — given a behavior, what is the smallest causal structure that has to be there?",
+  },
+  {
+    type: "project",
+    n: "03",
+    title: "Causal inferential yield",
     color: "var(--accent-purple)",
+    href: "/research/ciy",
+    text: "A graded, falsifiable measure of how much of the licensing structure a model actually uses — built so it can't quietly collapse back into accuracy.",
   },
   {
-    title: "LiT — latent control states under prompt framing",
-    meta: "Project · May–Dec 2026",
-    desc: "Whether prompt-induced behavioral shifts correspond to causally relevant states in activation space, or merely to surface features that travel with the prompt.",
-    tags: ["mech interp"],
-    href: "/research/lit",
+    type: "project",
+    n: "04",
+    title: "Latent control states",
     color: "var(--accent-amber)",
+    href: "/research/latent-control-states",
+    text: "From behavioral evidence to mechanism: do prompt-framing effects correspond to causally relevant states in activation space, or to surface features that merely travel with the prompt?",
   },
   {
+    type: "project",
+    n: "05",
     title: "Cross-lingual ProtoBias",
-    meta: "Topic 6 · in progress",
-    desc: "Whether multimodal AI evaluations remain semantically grounded across languages, or shift toward language- and culture-specific prototypes in socially sensitive contexts.",
-    tags: ["multimodal AI", "bias", "cross-lingual"],
-    href: "/research/cross-lingual-protobias",
     color: "var(--accent-indigo)",
+    href: "/research/cross-lingual-protobias",
+    text: "The same semantic-versus-shortcut question, stress-tested across languages: does a multimodal evaluator track meaning, or culture-specific prototypes that shift with the prompt's language?",
   },
 ];
 
@@ -62,14 +76,14 @@ const posts = [
 
 const now = [
   "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
-  "Developing the LiT mech-interp project on prompt-framing effects and causally relevant activation-space states.",
+  "Developing the latent-control-states mech-interp project on prompt-framing effects and causally relevant activation-space states.",
   "Starting a cross-lingual ProtoBias project on prototypicality bias in multimodal AI evaluation.",
   "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
 ];
 ---
 
 <Base>
-  <section class="mb-14">
+  <section class="mb-12">
     <div class="hero-accent mb-8">
       <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan Li</h1>
       <p class="text-base text-[var(--color-text-muted)]">
@@ -84,8 +98,6 @@ const now = [
       doing the work.
     </p>
 
-    <ResearchRouteFigure client:load />
-
     <blockquote class="pull-quote">
       Stability is necessary but not sufficient for grounding.
     </blockquote>
@@ -98,41 +110,49 @@ const now = [
   <SectionDivider mark="node" />
 
   <section class="mb-8">
-    <div class="flex items-baseline justify-between mb-4">
-      <h2 class="text-lg font-medium">Current research</h2>
+    <div class="flex items-baseline justify-between mb-3">
+      <h2 class="text-lg font-medium">From idea to experiment</h2>
       <a href="/research" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all projects →</a>
     </div>
-    <div>
+    <p class="text-sm text-[var(--color-text-muted)] mb-8 max-w-prose">
+      One question — when is a model's behavior licensed by the structure we think it has? — traced
+      from where it started to the experiments testing it now. Open marks are ideas; the filled,
+      numbered nodes are the projects that implement them.
+    </p>
+
+    <ol class="timeline">
       {
-        projects.map((p) => (
-          <a
-            href={p.href}
-            class="proj-card block py-5 group hover:bg-[var(--color-surface)] -mx-3 pr-3 rounded-md transition-colors"
-            style={`--proj-color: ${p.color}`}
-          >
-            <div class="flex justify-between items-baseline gap-3 mb-1.5">
-              <span class="text-[15px] font-medium group-hover:text-[var(--color-accent)] transition-colors">
-                {p.title}
-              </span>
-              <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.meta}</span>
-            </div>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{p.desc}</p>
-            <div class="flex gap-1.5 flex-wrap">
-              {p.demo && (
-                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--accent-teal-tint)] text-[var(--accent-teal-deep)]">
-                  interactive figure ↗
-                </span>
-              )}
-              {p.tags.map((t) => (
-                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </a>
-        ))
+        timeline.map((item) =>
+          item.type === "idea" ? (
+            <li class="tl-item tl-idea">
+              <span class="tl-marker"></span>
+              <div class="tl-body">
+                <div class="tl-kicker">idea</div>
+                <p class="tl-idea-text">{item.text}</p>
+                <a href={`/writing/${item.note}`} class="tl-link">read the note →</a>
+              </div>
+            </li>
+          ) : (
+            <li class="tl-item tl-project" style={`--c: ${item.color}`}>
+              <span class="tl-marker"></span>
+              <div class="tl-body">
+                <div class="tl-head">
+                  <span class="tl-num">{item.n}</span>
+                  <h3 class="tl-title">{item.title}</h3>
+                </div>
+                <p class="tl-text">{item.text}</p>
+                <div class="tl-links">
+                  <a href={item.href} class="tl-link">open project →</a>
+                  {item.code && (
+                    <a href={item.code} class="tl-code">experiments + code ↗</a>
+                  )}
+                </div>
+              </div>
+            </li>
+          )
+        )
       }
-    </div>
+    </ol>
   </section>
 
   <SectionDivider mark="arrow" />
