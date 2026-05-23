@@ -34,12 +34,10 @@ const box = { x: 178, y: 64, w: 348, h: 176 };
     </defs>
 
     <!-- LEFT — the isotope-labeled tracer -->
-    <text class="iso-lbl iso-lbl-teal" x="78" y="56" text-anchor="middle">labeled tracer</text>
     <polygon class="iso-tracer" points={hex(78, cyHop, 31)} />
     <text class="iso-sup iso-sup-teal" x="61" y="150">1</text>
     <text class="iso-token iso-token-teal" x="82" y="163" text-anchor="middle">Zorb</text>
     <line class="iso-inject" x1="112" y1="158" x2="172" y2="158" marker-end="url(#iso-teal)" />
-    <text class="iso-mini" x="142" y="148" text-anchor="middle">inject</text>
 
     <!-- CENTER — the opaque model -->
     <rect class="iso-box" x={box.x} y={box.y} width={box.w} height={box.h} rx="10" />
@@ -65,7 +63,6 @@ const box = { x: 178, y: 64, w: 348, h: 176 };
 
     <!-- RIGHT — the detector reads which label sequence emerged -->
     <line class="iso-out" x1={box.x + box.w} y1={cyHop} x2={box.x + box.w + 44} y2={cyHop} marker-end="url(#iso-teal)" />
-    <text class="iso-lbl iso-lbl-dim" x="640" y="56" text-anchor="middle">detector</text>
     <line class="iso-detface" x1="592" y1="120" x2="592" y2="196" />
     <circle class="iso-dot-teal" cx="606" cy="138" r="4" />
     <text class="iso-read iso-read-teal" x="618" y="142">¹²³ · composed</text>
@@ -73,11 +70,7 @@ const box = { x: 178, y: 64, w: 348, h: 176 };
     <text class="iso-read iso-read-gray" x="618" y="182">¹·³ · shortcut</text>
   </svg>
   <figcaption>
-    The coined words are inert tracers — the model has no priors on <code>Zorb</code>,
-    <code>Veln</code>, <code>Quasp</code>, so it must compose them — and their superscripts
-    path-encode the hop order. We never open the box; we follow the label. The full chain
-    <code>¹²³</code> emerging means the model reasoned through every hop; a missing
-    <code>²</code> localizes the exact hop where a shortcut substituted for reasoning.
+    Coined words as inert tracers — superscripts path-encode hop order. Follow the label, not the internals. <code>¹²³</code> = composed through every hop; <code>¹·³</code> = shortcut at hop two.
   </figcaption>
 </figure>
 

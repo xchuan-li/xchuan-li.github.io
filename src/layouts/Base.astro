@@ -48,7 +48,7 @@ const path = Astro.url.pathname;
     {showProgress && <div id="reading-progress" class="reading-progress"></div>}
 
     <div class="mx-auto max-w-[720px] px-6 pt-10 pb-20">
-      <header class="mb-12 flex items-center justify-between border-b border-[var(--color-border)] pb-4">
+      <header class="mb-4 flex items-center justify-between border-b border-[var(--color-border)] pb-4">
         <a href="/" class="text-lg font-medium tracking-tight hover:text-[var(--color-accent)] transition-colors">
           Xiaochuan Li
         </a>
@@ -72,6 +72,30 @@ const path = Astro.url.pathname;
           }
         </nav>
       </header>
+
+      <!-- Decorative causal chain: X → do(Y) → Z with shortcut arc — appears on every page -->
+      <div class="page-deco" aria-hidden="true">
+        <svg viewBox="0 0 320 28" class="deco-strip" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="pd-arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="4" markerHeight="4" orient="auto">
+              <path d="M0 1.5 L6.5 4 L0 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <!-- shortcut arc: X ⤳ Z (dashed, above the chain) -->
+          <path d="M63 12 C110 2, 210 2, 257 12" fill="none" stroke="currentColor" stroke-width="0.9" stroke-dasharray="3 2.5" />
+          <!-- X → do(Y) -->
+          <line x1="63.5" y1="16" x2="152" y2="16" stroke="currentColor" stroke-width="0.9" marker-end="url(#pd-arr)" />
+          <!-- do(Y) → Z -->
+          <line x1="168" y1="16" x2="256" y2="16" stroke="currentColor" stroke-width="0.9" marker-end="url(#pd-arr)" />
+          <!-- X node -->
+          <circle cx="60" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.2" />
+          <!-- do(Y): outer ring + inner dot -->
+          <circle cx="160" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="1.2" />
+          <circle cx="160" cy="16" r="2.5" fill="currentColor" />
+          <!-- Z node -->
+          <circle cx="260" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.2" />
+        </svg>
+      </div>
 
       <main>
         <slot />
