@@ -4,6 +4,8 @@ title: Reasoning is generative; grounding needs the other direction
 description: A note on why I think the missing piece in interpretability is not more reasoning but a measure of inferential compression.
 ---
 
+import DirectionsFigure from "../../components/DirectionsFigure.astro";
+
 <div class="prose">
 
 <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
@@ -19,6 +21,8 @@ I want to call this *inferential productivity*: the rate at which a system, give
 The thing I keep noticing in my own work is that productivity is not what's hard to get. What's hard to get — and what almost none of our standard tools measure — is the opposite motion. Given a set of conclusions a system arrives at, what is the minimum causal structure that licenses them? Not which structure *can* license them, in the sense of being consistent; but which is the smallest structure that *must* be appealed to for the conclusions to land. Call this the *minimum licensing structure*, in the spirit of Occam's razor and minimum description length, but specifically over causal rather than statistical sufficiency.
 
 These two directions are not symmetric, and that asymmetry is the part I think is doing real work.
+
+<DirectionsFigure />
 
 Productivity is cheap. Anything that composes — a grammar, a vector space, a transformer layer — has productivity for free. Modern models are by default high-productivity systems; that's what scale gets you. Minimum licensing structure, on the other hand, is expensive. It requires not just generating outputs but explaining which substructure of the model is doing the explanatory work, and showing that the rest is removable without behavioral cost. This is, in the limit, a causal claim, not a statistical one. Stability under perturbation is not enough — a stable answer can still be riding a shortcut, as the SC-spurious case in my [first paper](/research/sc-certification) makes explicit.
 

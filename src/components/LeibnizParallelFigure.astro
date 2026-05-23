@@ -1,0 +1,65 @@
+---
+// LeibnizParallelFigure — the structural parallel between Leibniz's reduction
+// and the modern grounding question. Two aligned tracks; dashed analogy links.
+---
+<figure class="essay-fig">
+  <svg viewBox="0 0 660 198" role="img" aria-label="Parallel tracks: Leibniz's concept-symbol-calculus-truth maps onto structure-behavior-intervention-grounding">
+    <defs>
+      <marker id="lp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <text class="track-lbl" x="16" y="28">Leibniz's characteristica</text>
+    <text class="track-lbl track-lbl-accent" x="16" y="190">grounding a model</text>
+
+    <!-- top track: Leibniz -->
+    <rect class="box" x="16"  y="44" width="132" height="40" rx="7" />
+    <rect class="box" x="181" y="44" width="132" height="40" rx="7" />
+    <rect class="box" x="346" y="44" width="132" height="40" rx="7" />
+    <rect class="box" x="511" y="44" width="132" height="40" rx="7" />
+    <text class="box-lbl" x="82"  y="68" text-anchor="middle">concept</text>
+    <text class="box-lbl" x="247" y="68" text-anchor="middle">symbol</text>
+    <text class="box-lbl" x="412" y="68" text-anchor="middle">calculus</text>
+    <text class="box-lbl" x="577" y="68" text-anchor="middle">truth?</text>
+
+    <line class="seq" x1="150" y1="64" x2="179" y2="64" marker-end="url(#lp-arrow)" />
+    <line class="seq" x1="315" y1="64" x2="344" y2="64" marker-end="url(#lp-arrow)" />
+    <line class="seq" x1="480" y1="64" x2="509" y2="64" marker-end="url(#lp-arrow)" />
+
+    <!-- analogy connectors -->
+    <line class="conn" x1="82"  y1="84" x2="82"  y2="118" />
+    <line class="conn" x1="247" y1="84" x2="247" y2="118" />
+    <line class="conn" x1="412" y1="84" x2="412" y2="118" />
+    <line class="conn" x1="577" y1="84" x2="577" y2="118" />
+
+    <!-- bottom track: modern -->
+    <rect class="box" x="16"  y="118" width="132" height="40" rx="7" />
+    <rect class="box" x="181" y="118" width="132" height="40" rx="7" />
+    <rect class="box" x="346" y="118" width="132" height="40" rx="7" />
+    <rect class="box" x="511" y="118" width="132" height="40" rx="7" />
+    <text class="box-lbl box-lbl-accent" x="82"  y="142" text-anchor="middle">structure</text>
+    <text class="box-lbl box-lbl-accent" x="247" y="142" text-anchor="middle">behavior</text>
+    <text class="box-lbl box-lbl-accent" x="412" y="142" text-anchor="middle">do(·)</text>
+    <text class="box-lbl box-lbl-accent" x="577" y="142" text-anchor="middle">grounded?</text>
+
+    <line class="seq" x1="150" y1="138" x2="179" y2="138" marker-end="url(#lp-arrow)" />
+    <line class="seq" x1="315" y1="138" x2="344" y2="138" marker-end="url(#lp-arrow)" />
+    <line class="seq" x1="480" y1="138" x2="509" y2="138" marker-end="url(#lp-arrow)" />
+  </svg>
+  <figcaption>
+    The same structural question in two vocabularies: does the symbol faithfully encode the concept
+    (Leibniz) — is the behavior actually licensed by the structure (now)?
+  </figcaption>
+</figure>
+
+<style>
+  .essay-fig svg { color: var(--color-text-dim); max-height: 220px; }
+  .box { fill: var(--color-bg); stroke: var(--color-text-dim); stroke-width: 1; }
+  .box-lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text-muted); }
+  .box-lbl-accent { fill: var(--color-accent); }
+  .seq { stroke: var(--color-text-dim); color: var(--color-text-dim); stroke-width: 1; }
+  .conn { stroke: var(--color-text-dim); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+  .track-lbl { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--color-text-dim); }
+  .track-lbl-accent { fill: var(--color-accent); }
+</style>

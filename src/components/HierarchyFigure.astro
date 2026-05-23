@@ -1,0 +1,33 @@
+---
+// HierarchyFigure — nested containment accuracy ⊋ stability ⊋ grounding.
+// The grounding band is dashed: decidable only under two-sided observability.
+---
+<figure class="essay-fig">
+  <svg viewBox="0 0 640 206" role="img" aria-label="Nested regions: accuracy contains stability contains grounding, each containment strict">
+    <rect class="band band-outer" x="16" y="16" width="608" height="174" rx="10" />
+    <text class="lbl" x="30" y="38">accuracy</text>
+
+    <rect class="band band-mid" x="58" y="52" width="524" height="120" rx="8" />
+    <text class="lbl" x="72" y="74">stability</text>
+
+    <rect class="band band-inner" x="112" y="88" width="416" height="66" rx="6" />
+    <text class="lbl lbl-accent" x="126" y="110">grounding</text>
+    <text class="note" x="320" y="136" text-anchor="middle">decidable only under two-sided observability</text>
+  </svg>
+  <figcaption>
+    <code>accuracy ⊋ stability ⊋ grounding</code> — each containment strict. The deepest cut is
+    decidable only when the benchmark graph is stipulated and training is auditable; in the wild it
+    is non-identifiable.
+  </figcaption>
+</figure>
+
+<style>
+  .essay-fig svg { color: var(--color-text-muted); max-height: 230px; }
+  .band { fill: none; }
+  .band-outer { stroke: var(--color-border-strong); stroke-width: 1; }
+  .band-mid { stroke: var(--color-text-dim); stroke-width: 1; }
+  .band-inner { stroke: var(--color-accent); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text-muted); }
+  .lbl-accent { fill: var(--color-accent); }
+  .note { font-family: var(--font-sans); font-size: 11px; font-style: italic; fill: var(--color-text-dim); }
+</style>
