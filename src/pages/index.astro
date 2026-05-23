@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import SectionDivider from "../components/SectionDivider.astro";
+import HeroFigure from "../components/HeroFigure.astro";
 
 const projects = [
   {
     title: "Stable is not grounded",
     meta: "Paper · in progress · Aug 2026",
-    desc: "An acyclic framework using do(class-3) interventions to test whether a hypothesized licensing structure M is counterfactually load-bearing for a model's output — not merely accuracy-correlated. Includes a real-world demonstration on MNLI / HANS.",
+    desc: "An acyclic certification framework. A do(class-3) intervention severs a candidate shortcut and asks whether the licensing structure M was actually load-bearing for the model's output, or merely accuracy-correlated. Real-world demonstration on MNLI / HANS.",
     tags: ["causal inference", "certification"],
     href: "/research/sc-certification",
     color: "var(--accent-coral)",
@@ -15,7 +16,7 @@ const projects = [
   {
     title: "Isotrace — behavioral tracing of multi-hop reasoning",
     meta: "Paper · in progress",
-    desc: "Fictional concept names with path-encoded naming conventions let us locate where shortcut substitution replaces compositional reasoning, hop by hop, without ever opening the model.",
+    desc: "Fictional concept names with path-encoded naming conventions. Locates where shortcut substitution replaces compositional reasoning, hop by hop — without opening the model.",
     tags: ["behavioral probing", "reasoning"],
     href: "/research/isotrace",
     color: "var(--accent-teal)",
@@ -23,7 +24,7 @@ const projects = [
   {
     title: "CIY — causal inferential yield",
     meta: "Paper · draft",
-    desc: "A graded measure over SC-grounded items. If we can construct two models matched on accuracy and grounding but with opposing CIY, CIY is a genuine thermometer for causal reasoning; if not, it collapses into accuracy repackaging. Falsifiability is the point.",
+    desc: "A graded measure over the items SC-certification has already cleared as grounded. The falsifiability constraint: if two models matched on accuracy and grounding but opposing CIY cannot be constructed, CIY has collapsed into accuracy repackaging.",
     tags: ["measurement", "falsifiability"],
     href: "/research/ciy",
     color: "var(--accent-purple)",
@@ -31,7 +32,7 @@ const projects = [
   {
     title: "LiT — latent control states under prompt framing",
     meta: "Team project · May–Dec 2026 · DFKI",
-    desc: "Five-person collaboration studying whether prompt-induced behavioral shifts correspond to causally relevant states in activation space. I lead the experimental design and downstream causal analysis.",
+    desc: "Whether prompt-induced behavioral shifts correspond to causally relevant states in activation space. Five-person collaboration with DFKI Saarbrücken. I lead the experimental design and downstream causal analysis.",
     tags: ["mech interp"],
     href: "/research/lit",
     color: "var(--accent-amber)",
@@ -52,28 +53,35 @@ const posts = [
 ];
 
 const now = [
-  "Finishing the SC-certification paper for an August deadline — currently scoping the MNLI/HANS demonstration in §6.5.",
-  "Co-leading the LiT mech-interp project at UTN with collaborators at DFKI Saarbrücken.",
-  "Reading: Pearl's Causality (3rd ed., re-read), and the recent Anthropic interpretability work on attribution graphs.",
-  "Preparing for the late-2026 PhD application window — focus on causal foundations of interpretability.",
+  "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
+  "Co-leading the LiT mech-interp project with DFKI Saarbrücken. My slice is experimental design and the downstream causal analysis.",
+  "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
 ];
 ---
 
 <Base>
   <section class="mb-14">
-    <div class="hero-accent">
+    <div class="hero-accent mb-8">
       <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan Li</h1>
-      <p class="text-base text-[var(--color-text-muted)] mb-6">
+      <p class="text-base text-[var(--color-text-muted)]">
         Master's student, Human and AI — University of Technology Nuremberg
       </p>
     </div>
-    <p class="leading-relaxed mb-3">
-      I work on causal foundations of interpretability: when can we say a model's behavior is
-      <em>licensed</em> by the structure we think it has, rather than being a coincidence of accuracy?
-      My current research sits at the intersection of mechanistic interpretability, causal inference,
-      and the limits of LLM-style learning.
+
+    <p class="leading-relaxed mb-5 text-[15.5px]">
+      I work at the intersection of causal inference and interpretability. The question I keep
+      coming back to is whether a model's stable-correct behavior is licensed by the structure
+      we'd point to as the reason, or whether the structure is decorative and something else is
+      doing the work.
     </p>
-    <p class="text-sm text-[var(--color-text-muted)]">
+
+    <HeroFigure />
+
+    <blockquote class="pull-quote">
+      Stability is necessary but not sufficient for grounding.
+    </blockquote>
+
+    <p class="text-sm text-[var(--color-text-muted)] mt-6">
       Previously: B.A. Philosophy, Shenzhen University. Applying for PhD positions starting fall 2027.
     </p>
   </section>
@@ -102,8 +110,8 @@ const now = [
             <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{p.desc}</p>
             <div class="flex gap-1.5 flex-wrap">
               {p.demo && (
-                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
-                  interactive demo ↗
+                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--accent-teal-tint)] text-[var(--accent-teal-deep)]">
+                  interactive figure ↗
                 </span>
               )}
               {p.tags.map((t) => (

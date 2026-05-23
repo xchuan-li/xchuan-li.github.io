@@ -1,0 +1,183 @@
+---
+// HeroFigure — a static, landscape-format signature illustration of the
+// SC-certification setup. Two parallel small DAGs side by side, captioned.
+// Acts as a visual anchor for the homepage and a teaser for the demo.
+---
+
+<figure class="hero-figure">
+  <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two parallel causal DAGs: one SC-grounded, one SC-spurious">
+    <defs>
+      <marker id="hf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <!-- LEFT PANEL: SC-grounded -->
+    <g class="panel" transform="translate(0, 0)">
+      <!-- M visible -->
+      <g class="node-group">
+        <circle cx="60" cy="80" r="18" class="node node-m" />
+        <text x="60" y="84" text-anchor="middle" class="node-label">M</text>
+      </g>
+      <!-- Y (label, target) -->
+      <g class="node-group">
+        <circle cx="240" cy="80" r="20" class="node node-y" />
+        <text x="240" y="85" text-anchor="middle" class="node-label-y">Y</text>
+      </g>
+      <!-- shortcut (color) -->
+      <g class="node-group">
+        <circle cx="60" cy="160" r="15" class="node node-dim" />
+        <text x="60" y="164" text-anchor="middle" class="node-label-sm">c</text>
+      </g>
+
+      <!-- arrows -->
+      <line x1="80" y1="80" x2="218" y2="80" class="arrow arrow-load" marker-end="url(#hf-arrow)" />
+      <line x1="74" y1="148" x2="222" y2="92" class="arrow arrow-dim" marker-end="url(#hf-arrow)" />
+
+      <text x="150" y="200" text-anchor="middle" class="caption">SC-grounded · M carries the answer</text>
+    </g>
+
+    <!-- DIVIDER -->
+    <line x1="350" y1="40" x2="350" y2="180" class="divider" />
+
+    <!-- RIGHT PANEL: SC-spurious -->
+    <g class="panel" transform="translate(390, 0)">
+      <!-- M hidden -->
+      <g class="node-group">
+        <circle cx="60" cy="80" r="18" class="node node-hidden" stroke-dasharray="3 3" />
+        <text x="60" y="84" text-anchor="middle" class="node-label-hidden">M</text>
+      </g>
+      <!-- Y -->
+      <g class="node-group">
+        <circle cx="240" cy="80" r="20" class="node node-y" />
+        <text x="240" y="85" text-anchor="middle" class="node-label-y">Y</text>
+      </g>
+      <!-- shortcut (color) -->
+      <g class="node-group">
+        <circle cx="60" cy="160" r="15" class="node node-shortcut" />
+        <text x="60" y="164" text-anchor="middle" class="node-label-sm">c</text>
+      </g>
+
+      <!-- arrows: M dimmed, shortcut active -->
+      <line x1="80" y1="80" x2="218" y2="80" class="arrow arrow-dim" stroke-dasharray="3 3" marker-end="url(#hf-arrow)" />
+      <line x1="74" y1="148" x2="222" y2="92" class="arrow arrow-load-shortcut" marker-end="url(#hf-arrow)" />
+
+      <text x="150" y="200" text-anchor="middle" class="caption">SC-spurious · the shortcut carries it</text>
+    </g>
+  </svg>
+  <figcaption>
+    Two structurally identical situations. Headline accuracy and stability cannot tell them apart;
+    a <code>do</code>-intervention can.
+  </figcaption>
+</figure>
+
+<style>
+  .hero-figure {
+    margin: 1.5rem 0 1.25rem;
+    padding: 1.25rem 1rem 0.75rem;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 8px;
+  }
+  .hero-figure svg {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    color: var(--color-text-muted);
+  }
+  .hero-figure figcaption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .hero-figure code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: transparent;
+    padding: 0 2px;
+    color: var(--color-text);
+    font-style: normal;
+  }
+  .node {
+    fill: var(--color-bg);
+    stroke: var(--color-text-muted);
+    stroke-width: 1;
+  }
+  .node-m {
+    stroke: var(--accent-indigo);
+    stroke-width: 1.5;
+  }
+  .node-y {
+    stroke: var(--color-text);
+    stroke-width: 1.5;
+  }
+  .node-dim {
+    stroke: var(--color-text-dim);
+    stroke-width: 1;
+    opacity: 0.55;
+  }
+  .node-hidden {
+    stroke: var(--color-text-dim);
+    stroke-width: 1;
+    fill: transparent;
+    opacity: 0.5;
+  }
+  .node-shortcut {
+    stroke: var(--accent-coral);
+    stroke-width: 1.5;
+  }
+  .node-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    fill: var(--accent-indigo);
+  }
+  .node-label-y {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    fill: var(--color-text);
+  }
+  .node-label-sm {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--color-text-muted);
+  }
+  .node-label-hidden {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    fill: var(--color-text-dim);
+    opacity: 0.5;
+  }
+  .arrow {
+    stroke: var(--color-text-muted);
+    stroke-width: 1.2;
+    fill: none;
+  }
+  .arrow-load {
+    stroke: var(--accent-indigo);
+    stroke-width: 1.5;
+  }
+  .arrow-load-shortcut {
+    stroke: var(--accent-coral);
+    stroke-width: 1.5;
+  }
+  .arrow-dim {
+    stroke: var(--color-text-dim);
+    stroke-width: 1;
+    opacity: 0.45;
+  }
+  .divider {
+    stroke: var(--color-border);
+    stroke-width: 0.5;
+    stroke-dasharray: 2 3;
+  }
+  .caption {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>

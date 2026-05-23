@@ -17,10 +17,22 @@
   --color-border-strong: rgba(0, 0, 0, 0.18);
   --color-accent: #b8350f;
 
+  /* Project bar palette */
   --accent-coral: #d85a30;
   --accent-teal: #1d9e75;
   --accent-purple: #7f77dd;
   --accent-amber: #ba7517;
+
+  /* Extended palette — deep, used sparingly */
+  --accent-indigo: #2d4a7c;       /* hero figure load-bearing edges */
+  --accent-deep-purple: #5d3b8c;  /* pull quote rule */
+  --accent-champagne: #b8924b;    /* signature accents, monogram strokes */
+
+  /* Tinted backgrounds for tags + verdicts */
+  --accent-teal-tint: #e1f5ee;
+  --accent-teal-deep: #0f6e56;
+  --accent-coral-tint: #faece7;
+  --accent-coral-deep: #993c1d;
 
   color-scheme: light;
 }
@@ -40,6 +52,15 @@
     --accent-teal: #5dcaa5;
     --accent-purple: #afa9ec;
     --accent-amber: #ef9f27;
+
+    --accent-indigo: #7b9bd1;
+    --accent-deep-purple: #b09cdb;
+    --accent-champagne: #d9b576;
+
+    --accent-teal-tint: rgba(8, 80, 65, 0.4);
+    --accent-teal-deep: #5dcaa5;
+    --accent-coral-tint: rgba(113, 43, 19, 0.4);
+    --accent-coral-deep: #f0997b;
 
     color-scheme: dark;
   }
@@ -121,6 +142,19 @@ body { font-size: 16px; line-height: 1.7; }
   color: var(--color-text-dim);
   font-family: var(--font-mono);
   font-size: 13px;
+}
+
+.pull-quote {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--color-text);
+  border-left: 2px solid var(--accent-deep-purple);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  margin: 1.75rem 0 0.5rem;
+  letter-spacing: -0.005em;
+  max-width: 32rem;
 }
 
 .prose { max-width: 65ch; font-size: 17px; line-height: 1.75; }

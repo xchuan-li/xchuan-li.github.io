@@ -32,6 +32,8 @@ src/
 │   │                               #   - Regime A vs B bar chart across baseline/do(3)/do(2)
 │   │                               #   - §6.1 three-model Δ table (TF-IDF, DistilBERT, Qwen LoRA)
 │   │                               # Props-configurable so paper revs swap numbers without code changes.
+│   ├── HeroFigure.astro            # Static signature SVG on homepage: two parallel small DAGs
+│   │                               # (SC-grounded vs SC-spurious). The site's visual anchor.
 │   └── SectionDivider.astro        # Horizontal line + tiny SVG mark (dots/arrow/node/x).
 │                                   # Used between sections on the homepage.
 ├── pages/
@@ -67,6 +69,7 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
 
 - One warm accent color (`--color-accent`, terracotta in light mode, soft coral in dark)
 - Four project accent colors (coral / teal / purple / amber) used only as 2px left-border on research cards — one color per paper, consistent everywhere
+- Extended palette (deep, used sparingly): `--accent-indigo` (hero figure load-bearing edges), `--accent-deep-purple` (pull-quote rule on homepage), `--accent-champagne` (signature accents, currently reserved)
 - Light + dark mode via `prefers-color-scheme` (CSS variables in `global.css`)
 - Fonts: Inter (sans), Crimson Pro (serif, used in monogram + select editorial moments), JetBrains Mono (code)
 - Body: 16px / 1.7. Long-form prose: 17px / 1.75, max-width 65ch.
