@@ -32,8 +32,9 @@ src/
 │   │                               #   - Regime A vs B bar chart across baseline/do(3)/do(2)
 │   │                               #   - §6.1 three-model Δ table (TF-IDF, DistilBERT, Qwen LoRA)
 │   │                               # Props-configurable so paper revs swap numbers without code changes.
-│   ├── HeroFigure.astro            # Static signature SVG on homepage: two parallel small DAGs
-│   │                               # (SC-grounded vs SC-spurious). The site's visual anchor.
+│   ├── HeroFigure.astro            # Static SVG for paper1: two parallel small DAGs
+│   │                               # (SC-grounded vs SC-spurious).
+│   ├── ResearchRouteFigure.tsx     # Interactive homepage schematic of the research route across projects.
 │   └── SectionDivider.astro        # Horizontal line + tiny SVG mark (dots/arrow/node/x).
 │                                   # Used between sections on the homepage.
 ├── pages/
@@ -45,7 +46,8 @@ src/
 │   │   ├── sc-certification.astro  # paper1 detail page — embeds <SCDemo client:load />
 │   │   ├── isotrace.astro          # Stub — needs interactive demo eventually
 │   │   ├── ciy.astro               # Stub — needs falsifiability widget eventually
-│   │   └── lit.astro               # Stub — team project at DFKI
+│   │   ├── lit.astro               # Stub — mech interp project
+│   │   └── cross-lingual-protobias.astro
 │   └── writing/
 │       ├── index.astro             # Writing index (placeholder posts)
 │       └── decidability-boundary.mdx  # Sample MDX post showing how to embed React inline
@@ -68,7 +70,7 @@ src/
 The look is intentionally restrained — academic-personal, not portfolio-flashy. References: Cosma Shalizi, Lena Voita, Maria Antoniak, Andy Matuschak's now page. **Not** Apple keynote, not Vercel marketing site, not al-folio.
 
 - One warm accent color (`--color-accent`, terracotta in light mode, soft coral in dark)
-- Four project accent colors (coral / teal / purple / amber) used only as 2px left-border on research cards — one color per paper, consistent everywhere
+- Project accent colors used only as 2px left-border on research cards — one color per project, consistent everywhere
 - Extended palette (deep, used sparingly): `--accent-indigo` (hero figure load-bearing edges), `--accent-deep-purple` (pull-quote rule on homepage), `--accent-champagne` (signature accents, currently reserved)
 - Light + dark mode via `prefers-color-scheme` (CSS variables in `global.css`)
 - Fonts: Inter (sans), Crimson Pro (serif, used in monogram + select editorial moments), JetBrains Mono (code)
@@ -81,7 +83,7 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
   - Reading-progress bar at top of long-form pages (`<Base showProgress={true}>`)
   - `.now-list` for the "Currently" section (arrow bullets)
 
-## The research papers (high-level — don't summarize wrong)
+## The research projects (high-level — don't summarize wrong)
 
 1. **Stable is not grounded** (paper1, target Aug 2026 deadline): An acyclic certification framework. Hierarchy is `accuracy ⊋ stability ⊋ grounding`; the deepest cut `SC → {grounded, spurious}` requires **two-sided observability** (benchmark graph stipulated + training auditable). The §6.1 controlled demo: TF-IDF + LR classifier reaches 0.912 accuracy, fully stable; `do(class-3)` drops it Δ +.408, negative control `do(class-2)` only Δ +.021. This is what the live SCDemo on /research/sc-certification reproduces interactively.
 
@@ -89,7 +91,9 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
 
 3. **CIY (causal inferential yield)**: A graded measure over SC-grounded items. The falsifiability test: if you cannot construct two models matched on accuracy + grounding but with opposing CIY, CIY collapses into accuracy repackaging.
 
-4. **LiT** (team project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. DFKI collaboration. Supervised by Simon Ostermann; primary UTN contact Michael Roth.
+4. **LiT** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. Do not foreground collaborators or supervision here; the public website should introduce the project itself.
+
+5. **Cross-lingual ProtoBias** (Topic 6, in progress): Multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation. Frame it as part of the grounding/shortcut research line: semantic image-text alignment is tested against prototype-driven, culturally variable shortcuts.
 
 ## Editing rules
 

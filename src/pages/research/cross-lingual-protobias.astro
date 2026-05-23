@@ -1,0 +1,81 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base
+  title="Cross-lingual ProtoBias · Xiaochuan Li"
+  description="A multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation."
+  showProgress={true}
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Topic 6 · in progress · Subhadeep
+    </div>
+    <h1>Cross-lingual prototypicality bias in multimodal AI evaluation</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      A semantic-grounding stress test for multimodal evaluators under language variation.
+    </p>
+
+    <p>
+      This project extends my main grounding question into multimodal evaluation. If a model says
+      an image matches a prompt, is it tracking the semantic content of the description, or is it
+      leaning on a prototype that happens to feel more typical? The ambiguity is structurally close
+      to the one in <a href="/research/sc-certification">SC certification</a>: a judgment can be
+      stable and plausible while still being carried by the wrong feature.
+    </p>
+
+    <p>
+      ProtoBias gives a controlled way to probe this. Each prompt is paired with two images: one is
+      semantically correct but less prototypical, and the other is more prototypical but incorrect.
+      For "a doctor treating a patient," for example, the semantically correct image might violate a
+      stereotype, while the more typical image satisfies the stereotype but fails the prompt. The
+      question is whether multimodal systems prefer semantic fit or prototype fit when those come
+      apart.
+    </p>
+
+    <p>
+      The cross-lingual turn makes the test sharper. We hold the image pairs fixed and translate the
+      same prompts into multiple languages. If the model's preference changes across translations,
+      then the evaluator is not simply reading the visual scene against a language-independent
+      meaning. It may be importing language- and culture-specific expectations into what should be a
+      semantic alignment decision.
+    </p>
+
+    <h2>Research questions</h2>
+    <ul>
+      <li>
+        <strong>RQ1:</strong> Is prototypicality bias consistent across languages when the semantic
+        content of the prompt is held fixed?
+      </li>
+      <li>
+        <strong>RQ2:</strong> Are cross-lingual differences stronger in socially sensitive contexts
+        such as wealth, intelligence, and profession than in neutral domains such as animals or
+        objects?
+      </li>
+    </ul>
+
+    <h2>AI relation</h2>
+    <p>
+      The project uses multimodal large language models as evaluators of image-text alignment. The
+      key object of study is not only whether a model gets an item right, but what kind of signal its
+      decision appears to ride on: semantic consistency, visual typicality, or a culturally specific
+      prototype activated by the prompt language.
+    </p>
+
+    <h2>Data</h2>
+    <p>
+      The project uses the ProtoBias dataset, with prompts translated into multiple languages while
+      keeping the image pairs fixed. This makes the translation itself an intervention on the
+      linguistic presentation of the same underlying semantic task.
+    </p>
+
+    <h2>Literature</h2>
+    <ol>
+      <li><a href="https://aclanthology.org/2025.findings-acl.585/">ACL Findings 2025 paper</a></li>
+      <li><a href="https://aclanthology.org/2024.emnlp-main.474/">EMNLP 2024 paper</a></li>
+      <li><a href="https://aclanthology.org/2022.gebnlp-1.9/">GeBNLP 2022 paper</a></li>
+      <li><a href="https://aclanthology.org/2025.findings-emnlp.783/">EMNLP Findings 2025 paper</a></li>
+      <li><a href="https://arxiv.org/abs/2601.04946">ProtoBias</a></li>
+    </ol>
+  </article>
+</Base>

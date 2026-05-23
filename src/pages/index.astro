@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SectionDivider from "../components/SectionDivider.astro";
-import HeroFigure from "../components/HeroFigure.astro";
+import ResearchRouteFigure from "../components/ResearchRouteFigure.tsx";
 
 const projects = [
   {
@@ -31,11 +31,19 @@ const projects = [
   },
   {
     title: "LiT — latent control states under prompt framing",
-    meta: "Team project · May–Dec 2026 · DFKI",
-    desc: "Whether prompt-induced behavioral shifts correspond to causally relevant states in activation space. Five-person collaboration with DFKI Saarbrücken. I lead the experimental design and downstream causal analysis.",
+    meta: "Project · May–Dec 2026",
+    desc: "Whether prompt-induced behavioral shifts correspond to causally relevant states in activation space, or merely to surface features that travel with the prompt.",
     tags: ["mech interp"],
     href: "/research/lit",
     color: "var(--accent-amber)",
+  },
+  {
+    title: "Cross-lingual ProtoBias",
+    meta: "Topic 6 · in progress",
+    desc: "Whether multimodal AI evaluations remain semantically grounded across languages, or shift toward language- and culture-specific prototypes in socially sensitive contexts.",
+    tags: ["multimodal AI", "bias", "cross-lingual"],
+    href: "/research/cross-lingual-protobias",
+    color: "var(--accent-indigo)",
   },
 ];
 
@@ -54,7 +62,8 @@ const posts = [
 
 const now = [
   "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
-  "Co-leading the LiT mech-interp project with DFKI Saarbrücken. My slice is experimental design and the downstream causal analysis.",
+  "Developing the LiT mech-interp project on prompt-framing effects and causally relevant activation-space states.",
+  "Starting a cross-lingual ProtoBias project on prototypicality bias in multimodal AI evaluation.",
   "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
 ];
 ---
@@ -75,7 +84,7 @@ const now = [
       doing the work.
     </p>
 
-    <HeroFigure />
+    <ResearchRouteFigure client:load />
 
     <blockquote class="pull-quote">
       Stability is necessary but not sufficient for grounding.
