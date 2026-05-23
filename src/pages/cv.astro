@@ -3,41 +3,64 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base title="CV · Xiaochuan Li">
-  <div class="flex items-baseline justify-between mb-8">
-    <h1 class="text-2xl font-medium tracking-tight">Curriculum vitae</h1>
-    <a href="/cv.pdf" class="text-sm text-[var(--color-accent)] hover:underline">Download PDF ↗</a>
-  </div>
+  <header class="mb-10">
+    <div class="flex items-baseline justify-between gap-4">
+      <h1 class="text-3xl font-medium tracking-tight">Xiaochuan Li</h1>
+      <a href="/cv.pdf" class="no-print text-sm text-[var(--color-accent)] hover:underline whitespace-nowrap">Download PDF ↗</a>
+    </div>
+    <p class="text-[var(--color-text-muted)] mt-1">
+      M.Sc. Human and AI · University of Technology Nuremberg
+    </p>
+    <p class="text-sm text-[var(--color-text-dim)] mt-2">
+      <a href="mailto:xiaochuan.li@utn.de" class="hover:text-[var(--color-accent)] transition-colors">xiaochuan.li@utn.de</a>
+      · <a href="https://github.com/xchuan-li" class="hover:text-[var(--color-accent)] transition-colors">github.com/xchuan-li</a>
+      · Nürnberg, Germany
+    </p>
+  </header>
 
-  <section class="mb-10">
+  <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Education</h2>
     <div class="space-y-4">
-      <div class="flex justify-between gap-4">
+      <div class="flex justify-between gap-4 break-inside-avoid">
         <div>
           <p class="font-medium">M.Sc., Human and AI</p>
           <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg (UTN)</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1">Focus: mechanistic interpretability — causally relevant states underlying model behavior.</p>
         </div>
         <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 — 2027</p>
       </div>
-      <div class="flex justify-between gap-4">
+      <div class="flex justify-between gap-4 break-inside-avoid">
+        <div>
+          <p class="font-medium">German language program</p>
+          <p class="text-sm text-[var(--color-text-muted)]">University of Marburg · intensive German for graduate study</p>
+        </div>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2024 — 2025</p>
+      </div>
+      <div class="flex justify-between gap-4 break-inside-avoid">
         <div>
           <p class="font-medium">B.A., Philosophy</p>
           <p class="text-sm text-[var(--color-text-muted)]">Shenzhen University · College of Humanities</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">Senior thesis: <em>On Leibniz's Logical Theory</em> (advisor: Zang Yong)</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1">
+            Senior thesis: <a href="/writing/from-leibniz" class="text-[var(--color-accent)] hover:underline"><em>On Leibniz's Logical Theory</em></a> (advisor: Zang Yong)
+          </p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1">
+            Coursework: logic, history of philosophy, analytic philosophy, mathematical logic; electives in cognitive psychology and linguistics.
+          </p>
         </div>
         <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2020 — 2024</p>
       </div>
     </div>
   </section>
 
-  <section class="mb-10">
+  <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research</h2>
     <div class="space-y-5">
-      <div>
+      <div class="break-inside-avoid">
         <p class="font-medium text-[15px]">LiT — Latent Control States in LLMs</p>
         <p class="text-sm text-[var(--color-text-muted)]">Project · May–Dec 2026</p>
         <p class="text-sm mt-1">Mechanistic interpretability of prompt-framing effects and causally relevant activation-space states.</p>
       </div>
-      <div>
+      <div class="break-inside-avoid">
         <p class="font-medium text-[15px]">Cross-lingual Prototypicality Bias in Multimodal AI Evaluation</p>
         <p class="text-sm text-[var(--color-text-muted)]">Topic 6 · Subhadeep · in progress</p>
         <p class="text-sm mt-1">Multilingual ProtoBias study of whether image-text alignment judgments shift with language- and culture-specific prototypes.</p>
@@ -45,22 +68,55 @@ import Base from "../layouts/Base.astro";
     </div>
   </section>
 
-  <section class="mb-10">
+  <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers in progress</h2>
     <ul class="space-y-3 text-sm">
-      <li>
+      <li class="break-inside-avoid">
         <span class="font-medium">Stable is not grounded.</span>
         <span class="text-[var(--color-text-muted)]"> Acyclic certification framework using do(class-3) interventions. Target Aug 2026.</span>
       </li>
-      <li>
+      <li class="break-inside-avoid">
         <span class="font-medium">Isotrace.</span>
         <span class="text-[var(--color-text-muted)]"> Behavioral tracing of multi-hop reasoning via path-encoded fictional names.</span>
       </li>
-      <li>
+      <li class="break-inside-avoid">
         <span class="font-medium">Causal Inferential Yield (CIY).</span>
         <span class="text-[var(--color-text-muted)]"> A graded measure over SC-grounded items with a built-in falsifiability test.</span>
       </li>
     </ul>
+  </section>
+
+  <section class="mb-9">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Experience</h2>
+    <div class="space-y-4">
+      <div class="flex justify-between gap-4 break-inside-avoid">
+        <div>
+          <p class="font-medium">IT Student Assistant</p>
+          <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1">Hardware maintenance and general IT support for staff and teaching labs.</p>
+        </div>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">Apr 2026 — present</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-9">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Skills</h2>
+    <div class="space-y-2 text-sm">
+      <div class="flex gap-3 break-inside-avoid">
+        <span class="text-[var(--color-text-dim)] w-32 shrink-0">Working knowledge</span>
+        <span>Python (NumPy, pandas, scikit-learn), LaTeX, Git</span>
+      </div>
+      <div class="flex gap-3 break-inside-avoid">
+        <span class="text-[var(--color-text-dim)] w-32 shrink-0">Currently learning</span>
+        <span>PyTorch &amp; HuggingFace transformers (incl. LoRA fine-tuning), interventional causal-inference tooling (do-interventions, causal graphs)</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-9">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Languages</h2>
+    <p class="text-sm text-[var(--color-text-muted)]">Mandarin Chinese (native) · German (C1) · English (C1)</p>
   </section>
 
   <section>
