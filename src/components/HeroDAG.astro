@@ -1,0 +1,92 @@
+---
+// HeroDAG — a minimal, slowly-animated causal graph as homepage backdrop.
+// The animation is *purely decorative*; nothing depends on it. Respects
+// prefers-reduced-motion. Uses the accent palette so it ties to the theme.
+---
+
+<div class="hero-dag" aria-hidden="true">
+  <svg viewBox="0 0 400 100" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="hero-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    {/* edges */}
+    <line class="edge edge-1" x1="60" y1="30" x2="195" y2="30" />
+    <line class="edge edge-2" x1="60" y1="70" x2="195" y2="30" />
+    <line class="edge edge-3" x1="220" y1="30" x2="340" y2="50" />
+
+    {/* sever marker — appears on edge-2 periodically */}
+    <g class="sever">
+      <line x1="119" y1="44" x2="131" y2="56" />
+      <line x1="119" y1="56" x2="131" y2="44" />
+    </g>
+
+    {/* nodes */}
+    <circle class="node" cx="40" cy="30" r="3.5" />
+    <circle class="node" cx="40" cy="70" r="3.5" />
+    <circle class="node node-y" cx="210" cy="30" r="4.5" />
+    <circle class="node" cx="355" cy="50" r="3.5" />
+  </svg>
+</div>
+
+<style>
+  .hero-dag {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 110px;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.55;
+    z-index: 0;
+  }
+  .hero-dag svg {
+    width: 100%;
+    height: 100%;
+    color: var(--color-text-muted);
+  }
+  .edge {
+    stroke: var(--color-text-muted);
+    stroke-width: 1;
+    fill: none;
+    marker-end: url(#hero-arrow);
+    opacity: 0.45;
+  }
+  .edge-2 {
+    animation: severPulse 9s ease-in-out infinite;
+  }
+  .sever {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    opacity: 0;
+    animation: severShow 9s ease-in-out infinite;
+  }
+  .node {
+    fill: var(--color-text-muted);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  .node-y {
+    fill: var(--color-accent);
+  }
+  .node:nth-of-type(2) { animation-delay: 1.5s; }
+  .node:nth-of-type(3) { animation-delay: 3s; }
+  .node:nth-of-type(4) { animation-delay: 4.5s; }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.85; }
+  }
+  @keyframes severPulse {
+    0%, 30%, 100% { opacity: 0.45; stroke-dasharray: 0 0; }
+    45%, 70% { opacity: 0.2; stroke-dasharray: 3 3; }
+  }
+  @keyframes severShow {
+    0%, 30%, 100% { opacity: 0; }
+    45%, 70% { opacity: 0.75; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .edge-2, .sever, .node { animation: none; }
+    .sever { opacity: 0; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+layout: ../../layouts/Base.astro
+title: From Leibniz to do(class-3) — what philosophy gave me that ML didn't
+description: A note on how a senior thesis on Leibniz's universal characteristic became, in retrospect, the same question I'm now asking about causal interpretability.
+---
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Note · May 2026
+</div>
+
+# From Leibniz to do(class-3)
+
+## What philosophy gave me that ML didn't
+
+My undergraduate thesis was on Leibniz. Specifically, on the *characteristica universalis* — Leibniz's lifelong project to construct a universal symbolic system in which every concept would be a calculable expression, every inference a calculation, and disputes between philosophers would be resolved by sitting down together and saying *calculemus*, let us calculate. The thesis traced this ambition through Leibniz's combinatorial, arithmetic, and geometric attempts, the early predicate logic that grew out of it, the principle of sufficient reason, and the long downstream arc through Frege, Russell, and the founding of modern mathematical logic.
+
+I did not, at the time, think of it as research relevant to AI. It was the philosophy of language and logic. It was about Leibniz. It was finished, and then I went to do other things.
+
+What I notice now — two years and a discipline change later — is that the project that has come to occupy me at UTN is, at its core, the same question, asked under different constraints.
+
+---
+
+Leibniz's bet was that the disorderly outside world could be *reduced* — first to a small inventory of conceptual primitives, then to symbolic representations of those primitives, then to a calculus that operated on those representations and produced new symbolic states that, decoded, would correspond to true claims about the world. The bet was reductive in a specific sense: it claimed that you could, in principle, get from arbitrary natural-language disagreement to a finite formal procedure whose outputs settled the disagreement. Calculation as the terminal court of appeal.
+
+He never finished the project. Almost no one thinks any more that the strong form of it is achievable. But what the thesis spent a long time on, in the back of my head, was not whether the project succeeded — it was the structural question that the project *posed*: under what conditions is the reduction even decidable? When you say "this concept maps to this symbol," when can that mapping be checked, rather than asserted? When you say "this conclusion follows from these premises in the calculus," when is that a fact about the world, and when is it an artifact of the encoding?
+
+Those questions stayed with me. They turned out to be the same questions I needed when I started reading the interpretability literature.
+
+---
+
+The contemporary version goes like this. We have a model. The model produces outputs. We want to know whether the outputs are *licensed* by something we'd recognize as the right structure — the underlying task, the causal graph of the data, the genuine concept — or whether they are produced by something else, a shortcut or a correlation, that happens to be aligned with the right structure on the slice we're testing.
+
+This is, almost exactly, Leibniz's reduction question recast. The "right structure" plays the role of the conceptual primitive; the model's behavior plays the role of the symbolic state; and the question "is the behavior licensed by the structure?" plays the role of "is this symbolic state a faithful encoding of the underlying concept?". The difference is that we have, today, an actual tool — interventional causal inference — for asking this question with some rigor. Where Leibniz had to gesture at the form of the reduction, we can stipulate a causal graph by construction and perform <code>do</code>-interventions to test which substructures are actually load-bearing.
+
+But the deeper continuity is in what *cannot* be done. The thing my [first paper](/research/sc-certification) argues, and the thing I think is genuinely interesting, is that the *decidability* of grounding is not a free lunch. It requires what I call two-sided observability: the underlying causal structure has to be stipulated by construction, and the model's training distribution has to be auditable. Outside that regime, the grounding question is not hard — it is *non-identifiable from the available observations*. There is no measurement procedure that returns the right answer, because the quantity being measured is not pinned down by the data.
+
+This is, at root, the same structural lesson Leibniz's project teaches. The reduction is not a universally available operation. There are conditions under which symbols faithfully encode concepts, and conditions under which they do not, and the latter is the generic case. What's hard is not the calculus. What's hard is securing the conditions under which the calculus is doing anything at all.
+
+---
+
+I would not have known to look for this lesson if I hadn't spent a year reading Leibniz. The ML literature, as a literature, does not foreground this distinction. It tends to treat "is this model reasoning?" as a measurement problem with a noisy answer, rather than as a question whose well-posedness depends on observational conditions that may or may not obtain. Coming to it from philosophy — specifically from the part of philosophy that has spent four centuries trying to figure out what symbolic systems can and cannot do — made the *non-identifiability* part visible, where the typical ML training would have made it invisible.
+
+This is, I think, the answer to a question I sometimes get from people who notice the trajectory: why philosophy first? Was it useful? It was useful in two ways that are hard to substitute for. The first is training in noticing the difference between a hard measurement and an undefined quantity — Leibniz, Frege, the whole logical-empiricism debate is precisely about this distinction. The second is tolerance for sitting with conclusions you cannot yet ground. ML, as a field, rewards speed and benchmarks. Philosophy rewards being slow about what your claims actually commit you to. Both are real skills, and the second one turns out to matter a lot when you are trying to do interpretability in a way that is not just confident pattern-matching.
+
+The project I'm working on now is not Leibniz's project. The ambition is smaller, and the tools are different. But the question — *under what conditions can a system's behavior be reduced to a minimum structure that licenses it?* — is the same question, and the disciplinary continuity is real. I owe the framing to a year I spent on a senior thesis I did not, at the time, think had anything to do with my future.
+
+---
+
+*Lightly held. Closer to autobiography than to argument.*
+
+</div>

@@ -1,29 +1,20 @@
 ---
 import Base from "../../layouts/Base.astro";
 
-// Placeholder posts — once you add real .mdx files in src/content/writing/,
-// swap this for a content-collections query.
 const posts = [
   {
-    slug: "decidability-boundary",
-    title: "Why interpretability needs a decidability boundary",
+    slug: "from-leibniz",
+    title: "From Leibniz to do(class-3) — what philosophy gave me that ML didn't",
     date: "May 2026",
-    excerpt: "There is a difference between a measurement being hard and a quantity being undefined. The interpretability literature mostly assumes the first; I think much of it is in fact the second, past a certain depth.",
-    status: "draft",
+    excerpt: "My undergraduate thesis was on Leibniz's characteristica universalis. I did not, at the time, think of it as research relevant to AI. The project I'm working on now, two years and a discipline change later, turns out to be the same structural question asked under different constraints.",
+    status: "note",
   },
   {
-    slug: "from-philosophy",
-    title: "What philosophy gave me that ML didn't",
-    date: "April 2026",
-    excerpt: "An undergraduate in philosophy is mostly training in two things: noticing where an argument actually does work, and tolerating the discomfort of conclusions you cannot yet ground. Both turn out to matter a lot in research taste.",
-    status: "essay",
-  },
-  {
-    slug: "world-model-lineage",
-    title: "Reading notes — LeCun, Pearl, and the world-model lineage",
-    date: "March 2026",
-    excerpt: "Notes from a slow read of three threads that, taken together, sketch a research program counter to LLM scaling.",
-    status: "notes",
+    slug: "inferential-productivity",
+    title: "Reasoning is generative; grounding needs the other direction",
+    date: "May 2026",
+    excerpt: "Most conceptual machinery we have for reasoning runs in one direction — premises into conclusions, conclusions into more conclusions. The harder direction, and the one that almost no standard tool measures, is the reverse: given a system's behavior, what is the smallest causal structure that has to be there for the behavior to land?",
+    status: "note",
   },
 ];
 ---

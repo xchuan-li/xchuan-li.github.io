@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 
 const projects = [
   {
@@ -38,9 +39,16 @@ const projects = [
 ];
 
 const posts = [
-  { title: "Why interpretability needs a decidability boundary", meta: "Draft · on the limits of in-the-wild certification" },
-  { title: "What philosophy gave me that ML didn't", meta: "Essay · on causal commitments vs. benchmark thinking" },
-  { title: "Reading notes — LeCun, Pearl, and the world-model lineage", meta: "Notes" },
+  {
+    slug: "from-leibniz",
+    title: "From Leibniz to do(class-3) — what philosophy gave me that ML didn't",
+    meta: "Note · May 2026",
+  },
+  {
+    slug: "inferential-productivity",
+    title: "Reasoning is generative; grounding needs the other direction",
+    meta: "Note · May 2026",
+  },
 ];
 
 const now = [
@@ -56,7 +64,7 @@ const now = [
     <div class="hero-accent">
       <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan Li</h1>
       <p class="text-base text-[var(--color-text-muted)] mb-6">
-        Master's student, Human and AI — UTN Nürnberg
+        Master's student, Human and AI — University of Technology Nuremberg
       </p>
     </div>
     <p class="leading-relaxed mb-3">
@@ -66,11 +74,13 @@ const now = [
       and the limits of LLM-style learning.
     </p>
     <p class="text-sm text-[var(--color-text-muted)]">
-      Previously: philosophy (BA, China). Applying for PhD positions starting fall 2027.
+      Previously: B.A. Philosophy, Shenzhen University. Applying for PhD positions starting fall 2027.
     </p>
   </section>
 
-  <section class="mb-14">
+  <SectionDivider mark="node" />
+
+  <section class="mb-8">
     <div class="flex items-baseline justify-between mb-4">
       <h2 class="text-lg font-medium">Current research</h2>
       <a href="/research" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all projects →</a>
@@ -108,12 +118,16 @@ const now = [
     </div>
   </section>
 
-  <section class="mb-14">
+  <SectionDivider mark="arrow" />
+
+  <section class="mb-8">
     <h2 class="text-lg font-medium mb-4">Currently</h2>
     <ul class="now-list">
       {now.map((item) => <li>{item}</li>)}
     </ul>
   </section>
+
+  <SectionDivider mark="dots" />
 
   <section>
     <div class="flex items-baseline justify-between mb-4">
@@ -123,10 +137,10 @@ const now = [
     <div class="divide-y divide-[var(--color-border)]">
       {
         posts.map((p) => (
-          <div class="py-3">
-            <p class="text-sm font-medium mb-1">{p.title}</p>
+          <a href={`/writing/${p.slug}`} class="block py-3 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+            <p class="text-sm font-medium mb-1 group-hover:text-[var(--color-accent)] transition-colors">{p.title}</p>
             <p class="text-xs text-[var(--color-text-dim)]">{p.meta}</p>
-          </div>
+          </a>
         ))
       }
     </div>

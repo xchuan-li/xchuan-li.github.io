@@ -26,9 +26,14 @@ Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
 src/
 ├── layouts/Base.astro              # Shared header (with XL monogram), footer, nav, reading-progress bar
 ├── components/
-│   └── SCDemo.tsx                  # Interactive demo for paper1: SC-grounded vs SC-spurious.
-│                                   # Props-configurable (modelLabel, regimeA, regimeB) so numbers
-│                                   # can be swapped without code changes when the paper revs.
+│   ├── SCDemo.tsx                  # Interactive demo for paper1: SC-grounded vs SC-spurious.
+│   │                               # Includes three integrated figures:
+│   │                               #   - DAG (M, Y, color, name) with severable arrows that respond to do()
+│   │                               #   - Regime A vs B bar chart across baseline/do(3)/do(2)
+│   │                               #   - §6.1 three-model Δ table (TF-IDF, DistilBERT, Qwen LoRA)
+│   │                               # Props-configurable so paper revs swap numbers without code changes.
+│   └── SectionDivider.astro        # Horizontal line + tiny SVG mark (dots/arrow/node/x).
+│                                   # Used between sections on the homepage.
 ├── pages/
 │   ├── index.astro                 # Home: hero + project cards + "Currently" + writing
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
@@ -49,11 +54,12 @@ src/
 ## Identity (do not change without asking)
 
 - Display name: **Xiaochuan Li**
-- Monogram: **XL** (serif, in `.monogram` class)
 - Email: **xiaochuan.li@utn.de** (UTN, used everywhere — preferred over Gmail for academic context)
 - GitHub: **github.com/xchuan-li**
 - Domain: `xchuan-li.github.io` (free GitHub Pages; may move to custom domain later)
 - Languages: site is in **English only** (international academic audience)
+- Undergrad: **B.A. Philosophy, Shenzhen University, College of Humanities (2020–2024)**. Senior thesis on Leibniz's *characteristica universalis* (advisor: Zang Yong). The intellectual bridge from undergrad to current ML/causal-interpretability work is real and explicitly thematized in `/writing/from-leibniz`.
+- Graduate: **M.Sc. Human and AI, University of Technology Nuremberg (UTN), 2025–2027.**
 
 ## Visual / design philosophy
 
@@ -66,8 +72,8 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
 - Body: 16px / 1.7. Long-form prose: 17px / 1.75, max-width 65ch.
 - No gradients, no drop shadows, no decorative effects. 0.5px borders. Generous whitespace.
 - Single accent visual elements:
-  - Monogram (XL) in top-left of every page
   - Vertical accent bar left of homepage h1 (`.hero-accent`)
+  - Section dividers between homepage sections (`<SectionDivider mark="..." />`)
   - Project color bars on research cards (`.proj-card`, color set via inline `--proj-color`)
   - Reading-progress bar at top of long-form pages (`<Base showProgress={true}>`)
   - `.now-list` for the "Currently" section (arrow bullets)
