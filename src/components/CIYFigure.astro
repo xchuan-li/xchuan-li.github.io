@@ -1,0 +1,114 @@
+---
+// CIYFigure — causal inferential yield.
+// One causal structure M, the same licensed inferences, handed to two models.
+// Model A realizes most of what the structure licenses (high yield); Model B
+// realizes only a fraction (low yield). Same information in, different valid
+// conclusions out — that realized fraction is CIY, and it can diverge even when
+// accuracy and grounding are matched.
+const slotX = 488;
+const modelRight = 286;
+const offsets = [-52, -31, -10, 11, 32, 53];
+
+const mkPanel = (my: number, realized: number) => ({
+  my,
+  links: offsets.map((dy, i) => ({
+    x1: modelRight, y1: my, x2: slotX - 7, y2: my + dy, on: i < realized,
+  })),
+  slots: offsets.map((dy, i) => ({ cx: slotX, cy: my + dy, on: i < realized })),
+});
+const panels = [
+  { name: "model A", tag: "high yield", ...mkPanel(86, 5), frac: 0.82 },
+  { name: "model B", tag: "low yield", ...mkPanel(250, 2), frac: 0.3 },
+];
+
+const gx = 600;
+const gr = 24;
+const needle = (gy: number, frac: number) => {
+  const a = (180 * (1 - frac)) * Math.PI / 180;
+  return { x: +(gx + (gr - 4) * Math.cos(a)).toFixed(1), y: +(gy - (gr - 4) * Math.sin(a)).toFixed(1) };
+};
+---
+<figure class="essay-fig ciy-fig">
+  <svg viewBox="0 0 700 330" role="img" aria-label="One causal structure feeds two models; model A realizes most of the conclusions it licenses, model B realizes few — the same information yields different valid conclusions">
+    <defs>
+      <marker id="ciy-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 1 L 9 5 L 0 9" class="ciy-head" />
+      </marker>
+    </defs>
+
+    <!-- LEFT — the shared causal structure M -->
+    <text class="ciy-lbl ciy-lbl-acc" x="78" y="40" text-anchor="middle">same causal</text>
+    <text class="ciy-lbl ciy-lbl-acc" x="78" y="54" text-anchor="middle">information</text>
+    <line class="ciy-edge" x1="54" y1="150" x2="96" y2="168" />
+    <line class="ciy-edge" x1="54" y1="190" x2="96" y2="172" />
+    <line class="ciy-edge" x1="54" y1="150" x2="54" y2="190" />
+    <circle class="ciy-mnode" cx="54" cy="150" r="5" />
+    <circle class="ciy-mnode" cx="54" cy="190" r="5" />
+    <circle class="ciy-mnode ciy-mnode-fill" cx="100" cy="170" r="6" />
+    <text class="ciy-m" x="116" y="174">M</text>
+    <text class="ciy-lbl ciy-lbl-dim" x="84" y="226" text-anchor="middle">structure M licenses</text>
+    <text class="ciy-lbl ciy-lbl-dim" x="84" y="240" text-anchor="middle">6 inferences</text>
+
+    <!-- split to both models (same structure to each) -->
+    <path class="ciy-split" d="M 108 162 C 150 120, 170 110, 214 96" marker-end="url(#ciy-arr)" />
+    <path class="ciy-split" d="M 108 178 C 150 220, 170 234, 214 250" marker-end="url(#ciy-arr)" />
+
+    {panels.map((p) => (
+      <g>
+        {/* the same six licensed conclusions, only some realized */}
+        {p.links.map((l) => (
+          <line class={l.on ? "ciy-link on" : "ciy-link"} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} />
+        ))}
+        {p.slots.map((s) => (
+          <circle class={s.on ? "ciy-slot on" : "ciy-slot"} cx={s.cx} cy={s.cy} r="4.5" />
+        ))}
+
+        {/* model node */}
+        <rect class="ciy-model" x="222" y={p.my - 14} width="64" height="28" rx="6" />
+        <text class="ciy-model-lbl" x="254" y={p.my + 4} text-anchor="middle">{p.name}</text>
+
+        {/* yield gauge */}
+        <path class="ciy-gauge-arc" d={`M ${gx - gr} ${p.my} A ${gr} ${gr} 0 0 1 ${gx + gr} ${p.my}`} />
+        <line class="ciy-needle" x1={gx} y1={p.my} x2={needle(p.my, p.frac).x} y2={needle(p.my, p.frac).y} />
+        <circle class="ciy-hub" cx={gx} cy={p.my} r="2.6" />
+        <text class="ciy-tag" x={gx} y={p.my + 22} text-anchor="middle">{p.tag}</text>
+      </g>
+    ))}
+
+    <text class="ciy-mid" x="392" y="170" text-anchor="middle">same six licensed inferences ·</text>
+    <text class="ciy-mid" x="392" y="184" text-anchor="middle">different fraction realized</text>
+  </svg>
+  <figcaption>
+    Both models are handed the same causal structure, licensing the same conclusions. Model A
+    realizes most of them; Model B realizes a few. The realized fraction — not the accuracy —
+    is the <em>causal inferential yield</em>. The design holds only if two models can be matched on
+    accuracy and grounding yet pulled apart on CIY; if they can't, CIY has collapsed into accuracy.
+  </figcaption>
+</figure>
+
+<style>
+  .essay-fig.ciy-fig svg { max-height: 340px; }
+  .ciy-lbl { font-family: var(--font-mono); font-size: 11px; }
+  .ciy-lbl-acc { fill: var(--accent-purple); }
+  .ciy-lbl-dim { fill: var(--color-text-dim); }
+  .ciy-edge { stroke: var(--accent-purple); stroke-width: 1; opacity: 0.7; }
+  .ciy-mnode { fill: none; stroke: var(--accent-purple); stroke-width: 1.3; }
+  .ciy-mnode-fill { fill: var(--accent-purple); stroke: none; }
+  .ciy-m { font-family: var(--font-mono); font-size: 13px; font-weight: 500; fill: var(--accent-purple); }
+  .ciy-split { fill: none; stroke: var(--accent-purple); stroke-width: 1.2; opacity: 0.75; }
+  .ciy-head { fill: none; stroke: var(--accent-purple); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
+
+  .ciy-link { stroke: var(--color-text-dim); stroke-width: 1; fill: none; stroke-dasharray: 3 3; opacity: 0.5; }
+  .ciy-link.on { stroke: var(--accent-purple); stroke-width: 1.4; stroke-dasharray: none; opacity: 1; }
+  .ciy-slot { fill: none; stroke: var(--color-text-dim); stroke-width: 1.1; stroke-dasharray: 2.5 2.5; opacity: 0.6; }
+  .ciy-slot.on { fill: var(--accent-purple); stroke: none; opacity: 1; }
+
+  .ciy-model { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1.2; }
+  .ciy-model-lbl { font-family: var(--font-mono); font-size: 11.5px; fill: var(--color-text); }
+
+  .ciy-gauge-arc { fill: none; stroke: var(--color-text-dim); stroke-width: 1.4; opacity: 0.7; }
+  .ciy-needle { stroke: var(--accent-purple); stroke-width: 1.6; stroke-linecap: round; }
+  .ciy-hub { fill: var(--accent-purple); }
+  .ciy-tag { font-family: var(--font-mono); font-size: 10px; fill: var(--color-text-muted); }
+  .ciy-mid { font-family: var(--font-mono); font-size: 10px; fill: var(--color-text-dim); font-style: italic; }
+</style>

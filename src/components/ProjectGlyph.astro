@@ -1,0 +1,132 @@
+---
+// ProjectGlyph — a small, restrained SVG mark for each research project.
+// One glyph per project, drawn in the project's accent color (passed via `color`).
+// Vocabulary matches the rest of the site: thin strokes, rings, dots, no fills.
+//   sc        — a do-intervention severs a candidate shortcut into the target
+//   isotrace  — a multi-hop chain with a shortcut arc that bypasses the middle hop
+//   ciy       — a graded dial: a falsifiable measure read partway up its range
+//   latent    — activation-space scatter with two causally-relevant states linked
+//   protobias — one meaning routed to language tokens; one branch drifts to a prototype
+interface Props {
+  kind: "sc" | "isotrace" | "ciy" | "latent" | "protobias";
+  color?: string;
+}
+const { kind, color = "var(--color-accent)" } = Astro.props;
+const hex = (cx: number, cy: number, r: number) =>
+  Array.from({ length: 6 }, (_, k) => {
+    const a = (60 * k) * Math.PI / 180;
+    return `${+(cx + r * Math.cos(a)).toFixed(1)},${+(cy + r * Math.sin(a)).toFixed(1)}`;
+  }).join(" ");
+const labels: Record<Props["kind"], string> = {
+  sc: "do-intervention severs a shortcut",
+  isotrace: "a shortcut arc bypasses a reasoning hop",
+  ciy: "a graded, falsifiable measure",
+  latent: "causally relevant states in activation space",
+  protobias: "one meaning, one branch drifts to a prototype",
+};
+---
+
+<svg
+  class="proj-glyph"
+  viewBox="0 0 80 56"
+  role="img"
+  aria-label={labels[kind]}
+  style={`color:${color}`}
+>
+  {
+    kind === "sc" && (
+      <g>
+        <marker id="glyph-arr-sc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead" />
+        </marker>
+        <circle class="gl-acc" cx="14" cy="15" r="5" />
+        <circle class="gl-dim" cx="14" cy="43" r="5" />
+        <circle class="gl-acc" cx="61" cy="29" r="9" />
+        <line class="gl-acc gl-w" x1="18.5" y1="17" x2="51" y2="26" marker-end="url(#glyph-arr-sc)" />
+        <line class="gl-dim gl-cut-line" x1="18.5" y1="41" x2="51" y2="32" marker-end="url(#glyph-arr-sc)" />
+        <line class="gl-acc gl-cut" x1="31" y1="33" x2="37" y2="41" />
+        <line class="gl-acc gl-cut" x1="37" y1="33" x2="31" y2="41" />
+      </g>
+    )
+  }
+  {
+    kind === "isotrace" && (
+      <g>
+        <marker id="glyph-arr-iso" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead" />
+        </marker>
+        <marker id="glyph-arr-iso-dim" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead-dim" />
+        </marker>
+        <path class="gl-dim gl-dash" d="M 14 36 C 27 8, 53 8, 66 36" marker-end="url(#glyph-arr-iso-dim)" />
+        <line class="gl-acc" x1="22" y1="44" x2="31" y2="44" marker-end="url(#glyph-arr-iso)" />
+        <line class="gl-acc" x1="48" y1="44" x2="57" y2="44" marker-end="url(#glyph-arr-iso)" />
+        <polygon class="gl-acc" points={hex(14, 44, 7)} />
+        <polygon class="gl-acc" points={hex(40, 44, 7)} />
+        <polygon class="gl-acc-f" points={hex(66, 44, 7)} />
+      </g>
+    )
+  }
+  {
+    kind === "ciy" && (
+      <g>
+        <path class="gl-dim gl-w" d="M 13 44 A 27 27 0 0 1 67 44" />
+        <line class="gl-dim" x1="13" y1="44" x2="17" y2="44" />
+        <line class="gl-dim" x1="40" y1="17" x2="40" y2="21" />
+        <line class="gl-dim" x1="63" y1="44" x2="67" y2="44" />
+        <line class="gl-acc gl-w" x1="40" y1="44" x2="52" y2="25" />
+        <circle class="gl-acc-f" cx="40" cy="44" r="3" />
+      </g>
+    )
+  }
+  {
+    kind === "latent" && (
+      <g>
+        <circle class="gl-dim-f" cx="12" cy="20" r="2" />
+        <circle class="gl-dim-f" cx="22" cy="40" r="2" />
+        <circle class="gl-dim-f" cx="51" cy="13" r="2" />
+        <circle class="gl-dim-f" cx="64" cy="38" r="2" />
+        <circle class="gl-dim-f" cx="68" cy="20" r="2" />
+        <circle class="gl-dim-f" cx="37" cy="47" r="2" />
+        <line class="gl-acc gl-w" x1="34" y1="22" x2="52" y2="31" />
+        <circle class="gl-acc-f" cx="34" cy="22" r="3.5" />
+        <circle class="gl-acc-f" cx="52" cy="31" r="3.5" />
+      </g>
+    )
+  }
+  {
+    kind === "protobias" && (
+      <g>
+        <marker id="glyph-arr-pb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead-dim" />
+        </marker>
+        <marker id="glyph-arr-pb-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead" />
+        </marker>
+        <circle class="gl-acc" cx="14" cy="28" r="6" />
+        <line class="gl-dim" x1="21" y1="25" x2="56" y2="13" marker-end="url(#glyph-arr-pb)" />
+        <line class="gl-dim" x1="21" y1="28" x2="56" y2="28" marker-end="url(#glyph-arr-pb)" />
+        <path class="gl-acc gl-dash" d="M 21 31 C 40 36, 44 50, 57 49" marker-end="url(#glyph-arr-pb-acc)" />
+        <rect class="gl-dim" x="58" y="9" width="8" height="8" rx="1.5" />
+        <rect class="gl-dim" x="58" y="24" width="8" height="8" rx="1.5" />
+        <rect class="gl-acc" x="58" y="45" width="8" height="8" rx="1.5" />
+      </g>
+    )
+  }
+</svg>
+
+<style>
+  .proj-glyph { display: block; width: 100%; height: auto; overflow: visible; }
+  .gl-acc { stroke: currentColor; fill: none; stroke-width: 1.3; }
+  .gl-dim { stroke: var(--color-text-dim); fill: none; stroke-width: 1; }
+  .gl-w { stroke-width: 1.5; }
+  .gl-dash { stroke-dasharray: 3 2.5; }
+  .gl-cut-line { stroke-dasharray: 3 2.5; opacity: 0.8; }
+  .gl-acc-f { fill: currentColor; stroke: none; }
+  .gl-dim-f { fill: var(--color-text-dim); stroke: none; }
+  .gl-cut { stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
+  .gl-arrhead { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .gl-arrhead-dim { fill: none; stroke: var(--color-text-dim); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .proj-glyph path { fill: none; }
+  .proj-glyph line { stroke-linecap: round; }
+</style>

@@ -1,11 +1,14 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ProjectGlyph from "../../components/ProjectGlyph.astro";
 
 const projects = [
   {
     title: "Stable is not grounded",
     href: "/research/sc-certification",
     status: "in progress · Aug 2026",
+    color: "var(--accent-coral)",
+    glyph: "sc",
     one_line: "An acyclic certification framework that uses do-interventions to test whether a model's stable-correct behavior is causally grounded in the licensing structure M, or merely riding a shortcut.",
     has_demo: true,
   },
@@ -13,24 +16,32 @@ const projects = [
     title: "Isotrace",
     href: "/research/isotrace",
     status: "in progress",
+    color: "var(--accent-teal)",
+    glyph: "isotrace",
     one_line: "Fictional concept names with path-encoded naming locate where shortcut substitution replaces compositional multi-hop reasoning — without any access to the model's internals.",
   },
   {
     title: "CIY — causal inferential yield",
     href: "/research/ciy",
     status: "draft",
+    color: "var(--accent-purple)",
+    glyph: "ciy",
     one_line: "A graded measure over SC-grounded items, designed with a falsifiability test that prevents silent collapse into accuracy repackaging.",
   },
   {
     title: "Latent control states",
     href: "/research/latent-control-states",
     status: "project · May–Dec 2026",
+    color: "var(--accent-amber)",
+    glyph: "latent",
     one_line: "Mechanistic interpretability of prompt-framing effects: do behavioral shifts under different framings correspond to causally relevant latent states?",
   },
   {
     title: "Cross-lingual prototypicality bias in multimodal AI evaluation",
     href: "/research/cross-lingual-protobias",
     status: "in progress",
+    color: "var(--accent-indigo)",
+    glyph: "protobias",
     one_line: "A multilingual ProtoBias study testing whether multimodal AI judgments stay semantically grounded, or shift toward culturally specific prototypes across languages.",
   },
 ];
@@ -48,16 +59,23 @@ const projects = [
     {
       projects.map((p) => (
         <a href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-          <div class="flex justify-between items-baseline gap-3 mb-2">
-            <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
-            <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.status}</span>
+          <div class="flex items-center gap-5">
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-baseline gap-3 mb-2">
+                <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
+                <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.status}</span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.one_line}</p>
+              {p.has_demo && (
+                <span class="inline-block mt-2 text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
+                  interactive demo ↗
+                </span>
+              )}
+            </div>
+            <div class="proj-glyph-cell" aria-hidden="true">
+              <ProjectGlyph kind={p.glyph} color={p.color} />
+            </div>
           </div>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.one_line}</p>
-          {p.has_demo && (
-            <span class="inline-block mt-2 text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
-              interactive demo ↗
-            </span>
-          )}
         </a>
       ))
     }

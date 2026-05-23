@@ -234,10 +234,19 @@ body::before {
 }
 .tl-code:hover { color: var(--color-text); border-color: var(--color-text-muted); }
 
-/* Essay figures (writing posts) — shared card wrapper; SVG internals are scoped per component */
-.essay-fig { margin: 1.75rem 0 1.5rem; padding: 1.25rem 1rem 0.85rem; background: var(--color-surface); border: 0.5px solid var(--color-border); border-radius: 8px; }
-.essay-fig svg { width: 100%; height: auto; }
-.essay-fig figcaption { text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: 8px; font-style: italic; line-height: 1.5; }
+/* Project glyphs — small mark on the right of each project (timeline + research index) */
+.tl-body-project { display: flex; align-items: center; gap: 1.25rem; }
+.tl-main { flex: 1 1 auto; min-width: 0; }
+.tl-glyph { flex: 0 0 84px; width: 84px; }
+.proj-glyph-cell { flex: 0 0 88px; width: 88px; }
+@media (max-width: 540px) {
+  .tl-glyph, .proj-glyph-cell { display: none; }
+}
+
+/* Essay / research figures — no card; the figure sits directly on the page background. */
+.essay-fig { margin: 2.25rem 0 2rem; padding: 0; background: none; border: none; }
+.essay-fig svg { width: 100%; height: auto; display: block; }
+.essay-fig figcaption { text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: 10px; font-style: italic; line-height: 1.55; max-width: 52ch; margin-left: auto; margin-right: auto; }
 .essay-fig figcaption code { font-family: var(--font-mono); font-size: 11px; font-style: normal; background: transparent; border: none; padding: 0 2px; color: var(--color-text); }
 
 .prose { max-width: 65ch; font-size: 17px; line-height: 1.75; }
