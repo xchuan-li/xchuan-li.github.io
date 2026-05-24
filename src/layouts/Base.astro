@@ -22,34 +22,6 @@ const nav = [
 ];
 
 const path = Astro.url.pathname;
-
-// Node-constellation banner (top of every page). Hand-placed for a balanced,
-// intentional network; the two accent nodes act as glowing hubs.
-const dcNodes = [
-  { x: 34, y: 30, r: 1.6 },
-  { x: 72, y: 46, r: 2.2 },
-  { x: 104, y: 20, r: 1.8 },
-  { x: 148, y: 36, r: 2.8 },
-  { x: 192, y: 50, r: 1.6 },
-  { x: 214, y: 24, r: 2 },
-  { x: 262, y: 42, r: 2.4 },
-  { x: 298, y: 16, r: 1.6 },
-  { x: 330, y: 32, r: 3.6, accent: true, delay: 0 },
-  { x: 378, y: 48, r: 1.8 },
-  { x: 410, y: 26, r: 2.2 },
-  { x: 452, y: 42, r: 2.6 },
-  { x: 492, y: 18, r: 1.6 },
-  { x: 528, y: 34, r: 2 },
-  { x: 566, y: 48, r: 1.8 },
-  { x: 598, y: 28, r: 3.2, accent: true, delay: 2.6 },
-  { x: 642, y: 40, r: 2.2 },
-  { x: 686, y: 30, r: 1.6 },
-];
-const dcEdges = [
-  [0, 1], [1, 3], [2, 3], [3, 4], [3, 5], [5, 6], [4, 6], [6, 8], [7, 8], [8, 9],
-  [8, 10], [10, 11], [9, 11], [10, 12], [11, 13], [12, 13], [13, 14], [13, 15], [14, 15], [15, 16], [16, 17],
-];
-const dcAccents = dcNodes.filter((n) => n.accent);
 ---
 
 <!doctype html>
@@ -76,32 +48,16 @@ const dcAccents = dcNodes.filter((n) => n.accent);
     {showProgress && <div id="reading-progress" class="reading-progress"></div>}
 
     <div class="mx-auto max-w-[720px] px-6 pt-10 pb-20">
-      <!-- Node-constellation banner — abstract structure/causal network, crowns every page; see .page-deco in global.css -->
-      <div class="page-deco" aria-hidden="true">
-        <svg viewBox="0 0 720 60" class="deco-strip" xmlns="http://www.w3.org/2000/svg" role="presentation" preserveAspectRatio="xMidYMid meet">
-          <g class="pd-edges">
-            {dcEdges.map(([a, b]) => (
-              <line x1={dcNodes[a].x} y1={dcNodes[a].y} x2={dcNodes[b].x} y2={dcNodes[b].y} />
-            ))}
-          </g>
-          {dcAccents.map((n) => (
-            <circle class="pd-halo" cx={n.x} cy={n.y} r={n.r * 3.4} style={`animation-delay:${n.delay}s`} />
-          ))}
-          {dcNodes.map((n) => (
-            <circle
-              class={n.accent ? "pd-pt pd-pt-accent" : "pd-pt"}
-              cx={n.x}
-              cy={n.y}
-              r={n.r}
-              style={n.accent ? `animation-delay:${n.delay}s` : undefined}
-            />
-          ))}
-        </svg>
-      </div>
-
       <header class="mb-4 flex items-center justify-between border-b border-[var(--color-border)] pb-4">
-        <a href="/" class="text-lg font-medium tracking-tight hover:text-[var(--color-accent)] transition-colors">
-          Xiaochuan Li
+        <a href="/" class="site-brand flex items-center gap-2.5">
+          <svg class="site-mark" viewBox="0 0 24 24" width="22" height="22" role="img" aria-label="Home">
+            <line class="sm-edge" x1="7.8" y1="7.5" x2="14" y2="10.6" />
+            <line class="sm-edge" x1="7.8" y1="16.5" x2="14" y2="13.4" />
+            <circle class="sm-node" cx="5.5" cy="6.5" r="2.5" />
+            <circle class="sm-node" cx="5.5" cy="17.5" r="2.5" />
+            <circle class="sm-target" cx="17.5" cy="12" r="3.2" />
+          </svg>
+          <span class="text-lg font-medium tracking-tight transition-colors">Xiaochuan Li</span>
         </a>
         <nav class="flex gap-5 text-sm">
           {

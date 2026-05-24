@@ -44,6 +44,7 @@ src/
 │   │   ├── index.astro             # Research index (list of all projects)
 │   │   ├── sc-certification.astro  # paper1 detail page — embeds <SCDemo client:load />
 │   │   ├── isotrace.astro          # Stub — needs interactive demo eventually
+│   │   ├── mini-causal-models.astro # Stub — synthetic ground-truth sandbox; needs interactive sandbox eventually
 │   │   ├── ciy.astro               # Stub — needs falsifiability widget eventually
 │   │   ├── latent-control-states.astro  # Stub — mech interp project (formerly "LiT")
 │   │   └── cross-lingual-protobias.astro
@@ -88,11 +89,13 @@ The look is intentionally restrained — academic-personal, not portfolio-flashy
 
 2. **Isotrace**: Behavioral tracing of multi-hop reasoning. Fictional concept names (Zorb, Veln, Quasp) with path-encoded naming conventions locate where shortcut substitution fires, hop-by-hop, without opening the model. Complementary to mech interp.
 
-3. **CIY (causal inferential yield)**: A graded measure over SC-grounded items. The falsifiability test: if you cannot construct two models matched on accuracy + grounding but with opposing CIY, CIY collapses into accuracy repackaging.
+3. **Mini causal models** (project, exploratory): A synthetic sandbox for the minimum-licensing-structure question raised in `/writing/inferential-productivity`. Plant a small causal model with known structure, simulate data, train a model on it, then recover the minimal structure from behavior alone. Because the truth is *planted*, the recovery can be scored against ground truth — this is "both": developing the recovery method and validating it. Sits between Isotrace (*where* a shortcut fires) and CIY (*how much* of a structure is used) — a mini causal model is exactly the structure CIY reads a yield over. Lives at `/research/mini-causal-models`.
 
-4. **Latent control states** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation); refer to the project only by its full descriptive name. Lives at `/research/latent-control-states`. Do not foreground collaborators or supervision here.
+4. **CIY (causal inferential yield)**: A graded measure over SC-grounded items. The falsifiability test: if you cannot construct two models matched on accuracy + grounding but with opposing CIY, CIY collapses into accuracy repackaging.
 
-5. **Cross-lingual ProtoBias** (Topic 6, in progress): Multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation. Frame it as part of the grounding/shortcut research line: semantic image-text alignment is tested against prototype-driven, culturally variable shortcuts.
+5. **Latent control states** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation); refer to the project only by its full descriptive name. Lives at `/research/latent-control-states`. Do not foreground collaborators or supervision here.
+
+6. **Cross-lingual ProtoBias** (Topic 6, in progress): Multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation. Frame it as part of the grounding/shortcut research line: semantic image-text alignment is tested against prototype-driven, culturally variable shortcuts.
 
 ## Editing rules
 
