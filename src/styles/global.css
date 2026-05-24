@@ -263,9 +263,46 @@ body::before {
   .essay-fig figcaption { margin-top: 0.5rem; }
 }
 
-/* Page-top decorative strip — causal chain motif, appears on every page */
-.page-deco { display: flex; justify-content: center; margin: 1rem 0 2.5rem; }
-.deco-strip { display: block; width: 100%; max-width: 300px; height: 28px; color: var(--color-text-dim); opacity: 0.4; }
+/* Page-top constellation banner — an abstract structure/causal network that
+   crowns every page above the masthead. Boxless: fades to transparent at both
+   edges via a mask, so it dissolves into the page. Theme-aware; calm motion
+   that respects reduced-motion. */
+.page-deco { margin: 0 0 1.75rem; }
+.deco-strip {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-text-muted);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+}
+.deco-strip .pd-edges line {
+  stroke: var(--color-text-muted);
+  stroke-width: 0.6;
+  opacity: 0.3;
+}
+.deco-strip .pd-pt { fill: var(--color-text-muted); opacity: 0.68; }
+.deco-strip .pd-pt-accent {
+  fill: var(--color-accent);
+  opacity: 1;
+  animation: pdGlow 6s ease-in-out infinite;
+}
+.deco-strip .pd-halo {
+  fill: var(--color-accent);
+  opacity: 0.1;
+  animation: pdHalo 6s ease-in-out infinite;
+}
+@keyframes pdGlow {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+@keyframes pdHalo {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.15; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .deco-strip .pd-pt-accent, .deco-strip .pd-halo { animation: none; }
+}
 
 .prose { max-width: 65ch; font-size: 17px; line-height: 1.75; }
 .prose h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.01em; margin: 2rem 0 1rem; }
@@ -309,7 +346,7 @@ body::before {
   @page { margin: 1.5cm 1.7cm; }
   html { background: #fff; scroll-behavior: auto; }
   body { font-size: 10.5pt; line-height: 1.45; }
-  body > div > header, body > div > footer, .reading-progress, body::before, .no-print { display: none !important; }
+  body > div > header, body > div > footer, .reading-progress, body::before, .no-print, .page-deco { display: none !important; }
   body > div { max-width: none !important; padding: 0 !important; }
   a { text-decoration: none; }
   h1 { font-size: 19pt; }
