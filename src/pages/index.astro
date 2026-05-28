@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import ProjectGlyph from "../components/ProjectGlyph.astro";
+import ProjectCover from "../components/ProjectCover.astro";
 import SCHierarchyFigure from "../components/SCHierarchyFigure.astro";
 import TrajectoryTimeline from "../components/TrajectoryTimeline.astro";
 
@@ -358,7 +358,7 @@ const areas = [
               style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
             >
               <div class="proj-grid-visual">
-                <ProjectGlyph kind={p.glyph} color={p.color} />
+                <ProjectCover kind={p.glyph} color={p.color} />
                 <div class="proj-grid-overlay">
                   <span>View project →</span>
                 </div>
