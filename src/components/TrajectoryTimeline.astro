@@ -1,0 +1,240 @@
+---
+// TrajectoryTimeline — horizontal sibling of the old vertical homepage timeline.
+// Reads a sequence of `idea` and `project` items and lays them out on a single
+// horizontal line. Idea labels sit above the line, project labels below; the
+// alternation mirrors the asymmetry between margin commentary (ideas) and
+// landed experiments (projects).
+//
+// Items: { type: 'idea' | 'project', ... }
+//   idea:    { type, kicker, label, href }
+//   project: { type, n, title, color, href }
+interface TimelineItem {
+  type: "idea" | "project";
+  kicker?: string;
+  label?: string;
+  n?: string;
+  title?: string;
+  color?: string;
+  href: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="trajectory-scroll">
+  <ol class="trajectory" style={`--cols: ${items.length};`}>
+    {
+      items.map((it) => (
+        <li
+          class={`tr-item ${it.type === "idea" ? "tr-idea" : "tr-project"}`}
+          style={it.type === "project" && it.color ? `--c: ${it.color};` : undefined}
+        >
+          {it.type === "idea" && (
+            <a class="tr-tag tr-tag-above" href={it.href}>
+              <span class="tr-kicker">Idea</span>
+              <span class="tr-label tr-label-idea">{it.label}</span>
+            </a>
+          )}
+
+          <span class="tr-node" aria-hidden="true"></span>
+
+          {it.type === "project" && (
+            <a class="tr-tag tr-tag-below" href={it.href}>
+              <span class="tr-num">{it.n}</span>
+              <span class="tr-label tr-label-project">{it.title}</span>
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <div class="trajectory-hint" aria-hidden="true">← scroll →</div>
+</div>
+
+<style>
+  .trajectory-scroll {
+    margin: 3rem -1.5rem 0;
+    padding: 0 1.5rem 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+    position: relative;
+  }
+  .trajectory-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .trajectory-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 3px;
+  }
+  .trajectory-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .trajectory {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 9), minmax(126px, 1fr));
+    min-width: 1080px;
+    align-items: stretch;
+    height: 280px;
+  }
+  .trajectory::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--color-border-strong);
+    transform: translateY(-0.5px);
+    z-index: 0;
+  }
+
+  .tr-item {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 0 0.4rem;
+  }
+
+  /* The node sits exactly on the line */
+  .tr-node {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
+    display: block;
+    border-radius: 50%;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+  .tr-idea .tr-node {
+    width: 14px;
+    height: 14px;
+    background: var(--color-bg);
+    border: 1.5px solid var(--accent-deep-purple);
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+  .tr-project .tr-node {
+    width: 16px;
+    height: 16px;
+    background: var(--c, var(--color-accent));
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+  .tr-item:hover .tr-node {
+    transform: scale(1.18);
+  }
+  .tr-project:hover .tr-node {
+    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 6.5px color-mix(in srgb, var(--c) 35%, transparent);
+  }
+
+  /* Tags */
+  .tr-tag {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    width: 100%;
+    max-width: 140px;
+    display: block;
+    padding: 0 0.25rem;
+    transition: color 0.2s ease, transform 0.25s ease;
+  }
+  .tr-tag-above {
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 1.1rem;
+  }
+  .tr-tag-below {
+    grid-row: 3;
+    align-self: start;
+    padding-top: 1.1rem;
+  }
+
+  .tr-kicker {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-deep-purple);
+    display: block;
+    margin-bottom: 0.35rem;
+    opacity: 0.85;
+  }
+  .tr-label {
+    display: block;
+    line-height: 1.3;
+  }
+  .tr-label-idea {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .tr-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--c, var(--color-text-dim));
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .tr-label-project {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-text);
+    letter-spacing: -0.005em;
+    transition: color 0.2s ease;
+  }
+
+  .tr-idea:hover .tr-label-idea { color: var(--accent-deep-purple); }
+  .tr-project:hover .tr-label-project { color: var(--c, var(--color-accent)); }
+
+  /* Connector tick from node up/down to its tag — keeps the asymmetry readable.
+     Renders as a short hairline. */
+  .tr-tag-above::after,
+  .tr-tag-below::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 14px;
+    margin: 0 auto;
+    background: var(--color-border-strong);
+  }
+  .tr-tag-above::after {
+    margin-top: 0.5rem;
+  }
+  .tr-tag-below::before {
+    margin-bottom: 0.5rem;
+  }
+
+  .trajectory-hint {
+    display: none;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--color-text-dim);
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 880px) {
+    .trajectory-hint {
+      display: block;
+    }
+    .trajectory {
+      height: 260px;
+    }
+  }
+</style>

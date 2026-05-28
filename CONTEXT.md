@@ -24,7 +24,11 @@ Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
 
 ```
 src/
-├── layouts/Base.astro              # Shared header (with XL monogram), footer, nav, reading-progress bar
+├── layouts/Base.astro              # Shared shell: fixed frosted-glass nav (causal-triad mark +
+│                                   # wordmark + page links + theme toggle), footer,
+│                                   # IntersectionObserver script (.fade-in / .fade-in-up),
+│                                   # pre-paint theme script (localStorage), reading-progress bar.
+│                                   # `wide` prop opts out of the 720px container (homepage uses it).
 ├── components/
 │   ├── SCDemo.tsx                  # Interactive demo for paper1: SC-grounded vs SC-spurious.
 │   │                               # Includes three integrated figures:
@@ -34,10 +38,17 @@ src/
 │   │                               # Props-configurable so paper revs swap numbers without code changes.
 │   ├── HeroFigure.astro            # Static SVG for paper1: two parallel small DAGs
 │   │                               # (SC-grounded vs SC-spurious).
-│   └── SectionDivider.astro        # Horizontal line + tiny SVG mark (dots/arrow/node/x).
-│                                   # Used between sections on the homepage.
+│   ├── SCHierarchyFigure.astro     # Homepage About section concept figure — three concentric
+│   │                               # rounded panels (accuracy ⊋ stable-correct ⊋ grounded) with
+│   │                               # populations of dots in each band; do(C) callout arrow.
+│   ├── ProjectGlyph.astro          # The six per-project glyphs; reused as 16:10-card centerpieces
+│   │                               # on the homepage research grid.
+│   └── SectionDivider.astro        # (Legacy) horizontal line + tiny SVG mark; no longer used on
+│                                   # the new homepage but kept for inner pages.
 ├── pages/
-│   ├── index.astro                 # Home: hero + idea→experiment timeline + "Currently" + writing
+│   ├── index.astro                 # Home: scroll-portfolio sections — Hero / About (figure+bio
+│   │                               # +Research-focus card) / Currently / Research grid / Writing /
+│   │                               # Contact CTA. Uses `<Base wide={true}>`.
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
 │   ├── contact.astro               # Email, GitHub, location, PhD-application note
 │   ├── research/
@@ -51,8 +62,10 @@ src/
 │   └── writing/
 │       ├── index.astro             # Writing index (placeholder posts)
 │       └── decidability-boundary.mdx  # Sample MDX post showing how to embed React inline
-└── styles/global.css               # Design tokens (CSS variables), prose typography, dark mode,
-                                    # monogram, reading-progress, hero-accent, project color bars
+└── styles/global.css               # Design tokens (dark-default, .light override), frosted nav,
+                                    # hero/section/about-grid/proj-grid/areas-card/contact-cta,
+                                    # buttons (.btn-primary/.btn-secondary), fade-in-up,
+                                    # prose, essay-fig, print stylesheet for /cv PDF.
 ```
 
 ## Identity (do not change without asking)
@@ -67,21 +80,22 @@ src/
 
 ## Visual / design philosophy
 
-The look is intentionally restrained — academic-personal, not portfolio-flashy. References: Cosma Shalizi, Lena Voita, Maria Antoniak, Andy Matuschak's now page. **Not** Apple keynote, not Vercel marketing site, not al-folio.
+The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass sticky nav, big display headings, fade-in-on-scroll, project grid with hover overlays. Inner pages (research detail, writing, cv, contact) keep the narrow 720px container with prose typography. Academic-honest tone throughout: no inflated credentials, no skill-percentage bars, no marketing copy.
 
-- One warm accent color (`--color-accent`, terracotta in light mode, soft coral in dark)
-- Project accent colors used only as 2px left-border on research cards — one color per project, consistent everywhere
-- Extended palette (deep, used sparingly): `--accent-indigo` (hero figure load-bearing edges), `--accent-deep-purple` (pull-quote rule on homepage), `--accent-champagne` (signature accents, currently reserved)
-- Light + dark mode via `prefers-color-scheme` (CSS variables in `global.css`)
-- Fonts: Inter (sans), Crimson Pro (serif, used in monogram + select editorial moments), JetBrains Mono (code)
-- Body: 16px / 1.7. Long-form prose: 17px / 1.75, max-width 65ch.
-- No gradients, no drop shadows, no decorative effects. 0.5px borders. Generous whitespace.
-- Single accent visual elements:
-  - Vertical accent bar left of homepage h1 (`.hero-accent`)
-  - Section dividers between homepage sections (`<SectionDivider mark="..." />`)
-  - Project color bars on research cards (`.proj-card`, color set via inline `--proj-color`)
-  - Reading-progress bar at top of long-form pages (`<Base showProgress={true}>`)
-  - `.now-list` for the "Currently" section (arrow bullets)
+- **Theme.** Dark is default (`<html>` ships clean, `:root` carries dark tokens). User toggle adds `.light` and persists to `localStorage('theme')`. The pre-paint script in Base.astro applies the saved class before first paint to avoid flash.
+- **Accent.** One warm accent color (`--color-accent`, terracotta in light, soft coral in dark). Project accent colors are scoped to research cards (driven by inline `--proj-color` and `--proj-tint`). Extended palette (deep, used sparingly): `--accent-indigo`, `--accent-deep-purple` (hero pull-quote rule), `--accent-champagne`, `--accent-amber` (load-bearing in the SCHierarchyFigure).
+- **Fonts.** Inter (sans, also reused as `--font-display` at large sizes), Crimson Pro (serif — used for the hero pull-quote and the timeline's "idea" lines), JetBrains Mono (code, status tags, formula captions in figures).
+- **Type scale.** Hero heading `clamp(2.6rem, 9vw, 7.5rem)` / `font-weight: 700` / `line-height: 0.96`. Section heading `clamp(2.1rem, 5.5vw, 3.75rem)`. Body 16px / 1.7. Long-form prose 17px / 1.75, max-width 65ch.
+- **Nav.** Fixed top, 60px tall, `backdrop-filter: blur(28px) saturate(1.4)`, 1px bottom border. Brand mark on left, page links centre-right, theme toggle far right. Hides nav-links below 720px.
+- **Buttons.** `.btn-primary` (filled — white on dark / black on light), `.btn-secondary` (outline). Uppercase, 0.1em tracking, 12px, slight `translateY` lift on hover.
+- **Scroll choreography.** `.fade-in-up` (28px translate + opacity) and `.fade-in` (opacity only); revealed by an IntersectionObserver in Base.astro at `threshold: 0.1`. `.fade-delay-100..600` modifiers stagger entries. `prefers-reduced-motion` disables all of it.
+- **Cards.** Subtle `var(--card-bg)` background, `var(--card-border)` 1px border, 8–12px radius, hover bumps to `var(--card-hover-bg)` + `var(--card-hover-border)`. No drop shadows.
+- **Section rhythm.** Every section opens with: optional `.divider-line` (1px hairline) → `.section-label` (uppercase 0.3em tracking) → `.section-heading` (big bold) → optional `.section-sub`. The pattern is consistent across About / Currently / Research / Writing / Contact.
+- **Homepage figures.**
+  - `SCHierarchyFigure` is load-bearing in the About section — concentric containment of `accuracy ⊋ stable-correct ⊋ grounded` with dot populations and a `do(C)` callout arrow. Boxless, no card chrome.
+  - `ProjectGlyph` is reused at large size as the centerpiece of each 16:10 research card; the card visual cell has a project-tinted radial gradient behind it.
+  - Hero background is a faint node-constellation SVG anchored top-right; `opacity: 0.55`.
+- **Research focus card** (replaces the reference site's "skills with percentages"). Five rows of uppercase label + monospace status tag + thin colored hairline. No numbers — status tags are honest text: `Primary`, `Active`, `Exploratory`, `2026`, `Background`.
 
 ## The research projects (high-level — don't summarize wrong)
 
@@ -123,10 +137,11 @@ For new interactive demos: write the React component in `src/components/`, then 
 ## What this site is NOT
 
 - Not a blog with comments / sign-ups / analytics
-- Not a portfolio site for client work
+- Not a portfolio site for client work (the scroll-portfolio aesthetic is the visual chassis; the content is still academic — papers, projects, writing)
 - Not a Substack / Medium replacement
 - Not a place to host real datasets (Drive / HF for that)
 - Not internationalized — English only
+- Not a place for inflated credentials: no skill-percentage bars, no "creative developer" copy, no claims about expertise the user doesn't have. The user is an MSc student building toward a PhD; the site reflects that.
 
 ## Useful commands
 
@@ -138,4 +153,14 @@ pnpm preview      # preview production build locally
 
 ## If asked to make stylistic changes
 
-Default to subtraction over addition. The site is already at the visual density it should be. Things that *would* be appropriate to add: micro-interactions on demos, better typography on prose pages, accessibility improvements, performance tweaks. Things that *would not*: hero images, parallax, animated gradients, decorative SVGs, "creative" cursors, social-media-style cards, AI-art backgrounds.
+The site's visual language is established: dark-default scroll-portfolio chassis + academic-honest content. Stay inside it unless the user is explicitly redirecting.
+
+- Reuse the existing tokens and classes (`.section`, `.section-label`, `.section-heading`, `.btn-primary/secondary`, `.fade-in-up`, `.areas-card`, `.proj-grid-card`, `.contact-cta`) before inventing new ones.
+- New homepage figures should match `SCHierarchyFigure`'s level of concept density — boxless, theme-aware via `var(--color-text-*)` and accent CSS vars, captioned with a small monospace footer if needed.
+- Hero/section heading scale is `clamp(...)`-based; don't hard-code px sizes for the display layer.
+- If you need a new "skills"-shaped block, copy the `.areas-card` pattern (uppercase label + monospace status tag + thin colored hairline). Don't introduce percentages.
+- Inner pages stay narrow (720px) by default via `<Base>`; only the homepage uses `<Base wide={true}>`. Don't widen prose pages.
+- `prefers-reduced-motion` must continue to disable fade-ins and the scroll-indicator animation.
+- Print stylesheet must stay light-themed so `/cv.pdf` exports cleanly regardless of the screen theme.
+
+Out of scope without explicit ask: parallax, animated gradients, "creative" cursors, AI-art backgrounds, marketing-style social cards, hero stock photos.
