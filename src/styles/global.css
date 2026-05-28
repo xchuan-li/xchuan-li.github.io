@@ -484,19 +484,18 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
     var(--color-surface);
   border-bottom: 1px solid var(--card-border);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem 1.75rem;
+  display: block;
 }
+.proj-grid-visual .proj-cover,
 .proj-grid-visual .proj-glyph {
-  width: 70%;
-  max-height: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  display: block;
   color: var(--proj-color, var(--color-accent));
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
-.proj-grid-card:hover .proj-grid-visual .proj-glyph { transform: scale(1.06); }
+.proj-grid-card:hover .proj-grid-visual .proj-cover,
+.proj-grid-card:hover .proj-grid-visual .proj-glyph { transform: scale(1.03); }
 .proj-grid-overlay {
   position: absolute;
   inset: 0;
