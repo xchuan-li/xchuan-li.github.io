@@ -194,9 +194,13 @@ const labels: Record<Props["kind"], string> = {
           <text class="pc-row-label" x="22" y="9">model A</text>
           <text class="pc-row-value" x="105" y="10" text-anchor="end">.78</text>
         </g>
-        <!-- Falsifiability bracket -->
-        <line class="pc-tick-line pc-dash" x1="8" y1="46" x2="8" y2="74" />
-        <text class="pc-axis pc-axis-rotate" x="-32" y="62">falsifiable</text>
+        <!-- Falsifiability bracket — short vertical hairline with end caps connecting A & B -->
+        <g class="pc-bracket">
+          <line x1="8" y1="46" x2="8" y2="74" />
+          <line x1="5" y1="46" x2="11" y2="46" />
+          <line x1="5" y1="74" x2="11" y2="74" />
+        </g>
+        <text class="pc-axis pc-axis-dim" x="18" y="64">falsifiable</text>
 
         <!-- Model B: low CIY (dim outlined) -->
         <g transform="translate(0,78)">
@@ -388,7 +392,9 @@ const labels: Record<Props["kind"], string> = {
     letter-spacing: 0.04em;
   }
   .pc-axis-dim { fill: var(--color-text-dim); font-style: italic; }
-  .pc-axis-rotate { transform: rotate(-90deg); transform-origin: 0 0; }
+  .pc-bracket line { stroke: var(--color-text-dim); stroke-width: 1; opacity: 0.7; stroke-linecap: round; stroke-dasharray: 2.5 2; }
+  .pc-bracket line:first-child { stroke-dasharray: 2.5 2; }
+  .pc-bracket line:nth-child(2), .pc-bracket line:nth-child(3) { stroke-dasharray: 0; }
 
   /* Track + fill for the SC bars */
   .pc-bar-track { fill: var(--color-text-dim); opacity: 0.18; }
