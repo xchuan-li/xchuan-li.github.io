@@ -1,79 +1,140 @@
 ---
 import Base from "../layouts/Base.astro";
-import SectionDivider from "../components/SectionDivider.astro";
 import ProjectGlyph from "../components/ProjectGlyph.astro";
+import SCHierarchyFigure from "../components/SCHierarchyFigure.astro";
+import TrajectoryTimeline from "../components/TrajectoryTimeline.astro";
 
-const timeline = [
+const trajectory = [
   {
     type: "idea",
-    note: "from-leibniz",
-    text: "When can a system's behavior be reduced to the minimum structure that licenses it? I spent an undergraduate thesis asking this of Leibniz; I'm now asking it of models.",
+    kicker: "Idea",
+    label: "Leibniz's question",
+    href: "/writing/from-leibniz",
   },
   {
     type: "idea",
-    note: "decidability-boundary",
-    text: "A model can be perfectly stable and perfectly accurate and still be reading the wrong feature — as long as that feature tracks the label on the slice you happen to test.",
+    kicker: "Idea",
+    label: "Stable ≠ grounded",
+    href: "/writing/decidability-boundary",
   },
   {
     type: "project",
     n: "01",
     title: "Stable is not grounded",
     color: "var(--accent-coral)",
-    glyph: "sc",
     href: "/research/sc-certification",
-    code: "https://github.com/xchuan-li/Stable_is_not_grounded",
-    text: "A do-intervention severs a candidate shortcut to test whether the licensing structure was load-bearing for the answer, or merely accuracy-correlated — with the controlled result running live as an interactive figure.",
   },
   {
     type: "project",
     n: "02",
     title: "Isotrace",
     color: "var(--accent-teal)",
-    glyph: "isotrace",
     href: "/research/isotrace",
-    text: "Once a shortcut is exposed, locate where compositional reasoning gives way to a surface pattern — hop by hop, without opening the model.",
   },
   {
     type: "idea",
-    note: "inferential-productivity",
-    text: "Producing conclusions is cheap; anything that composes has it for free. The expensive, almost-unmeasured direction is the reverse — given a behavior, what is the smallest causal structure that has to be there?",
+    kicker: "Idea",
+    label: "The other direction",
+    href: "/writing/inferential-productivity",
   },
   {
     type: "project",
     n: "03",
     title: "Mini causal models",
     color: "var(--accent-slate)",
-    glyph: "mcm",
     href: "/research/mini-causal-models",
-    text: "Make that question concrete where the answer is known: plant a small causal model, train on its data, and recover the minimal structure from behavior alone — both to build the recovery and to score it against the planted truth.",
   },
   {
     type: "project",
     n: "04",
     title: "Causal inferential yield",
     color: "var(--accent-purple)",
-    glyph: "ciy",
     href: "/research/ciy",
-    text: "A graded, falsifiable measure of how much of the licensing structure a model actually uses — built so it can't quietly collapse back into accuracy.",
   },
   {
     type: "project",
     n: "05",
     title: "Latent control states",
     color: "var(--accent-amber)",
-    glyph: "latent",
     href: "/research/latent-control-states",
-    text: "From behavioral evidence to mechanism: do prompt-framing effects correspond to causally relevant states in activation space, or to surface features that merely travel with the prompt?",
   },
   {
     type: "project",
     n: "06",
     title: "Cross-lingual ProtoBias",
     color: "var(--accent-indigo)",
-    glyph: "protobias",
     href: "/research/cross-lingual-protobias",
-    text: "The same semantic-versus-shortcut question, stress-tested across languages: does a multimodal evaluator track meaning, or culture-specific prototypes that shift with the prompt's language?",
   },
+];
+
+const projects = [
+  {
+    n: "01",
+    title: "Stable is not grounded",
+    href: "/research/sc-certification",
+    color: "var(--accent-coral)",
+    tint: "rgba(240, 153, 123, 0.10)",
+    glyph: "sc",
+    tags: ["Paper", "Aug 2026"],
+    desc: "A do-intervention severs a candidate shortcut to test whether the licensing structure was load-bearing for the answer — with the controlled result running live as an interactive figure.",
+  },
+  {
+    n: "02",
+    title: "Isotrace",
+    href: "/research/isotrace",
+    color: "var(--accent-teal)",
+    tint: "rgba(93, 202, 165, 0.10)",
+    glyph: "isotrace",
+    tags: ["Concept", "In progress"],
+    desc: "Fictional concept names with path-encoded naming locate where compositional reasoning gives way to surface patterns — hop by hop, without opening the model.",
+  },
+  {
+    n: "03",
+    title: "Mini causal models",
+    href: "/research/mini-causal-models",
+    color: "var(--accent-slate)",
+    tint: "rgba(116, 180, 206, 0.10)",
+    glyph: "mcm",
+    tags: ["Sandbox", "Exploratory"],
+    desc: "Plant a small causal model with known structure, train on its data, then recover the minimal structure from behavior alone — so the recovery can be scored against a planted truth.",
+  },
+  {
+    n: "04",
+    title: "Causal inferential yield",
+    href: "/research/ciy",
+    color: "var(--accent-purple)",
+    tint: "rgba(175, 169, 236, 0.10)",
+    glyph: "ciy",
+    tags: ["Measure", "Draft"],
+    desc: "A graded, falsifiable measure of how much of the licensing structure a model actually uses — built so it cannot quietly collapse back into accuracy.",
+  },
+  {
+    n: "05",
+    title: "Latent control states",
+    href: "/research/latent-control-states",
+    color: "var(--accent-amber)",
+    tint: "rgba(239, 159, 39, 0.10)",
+    glyph: "latent",
+    tags: ["Mech interp", "May – Dec 2026"],
+    desc: "From behavioral evidence to mechanism: do prompt-framing effects correspond to causally relevant states in activation space, or to surface features that merely travel with the prompt?",
+  },
+  {
+    n: "06",
+    title: "Cross-lingual ProtoBias",
+    href: "/research/cross-lingual-protobias",
+    color: "var(--accent-indigo)",
+    tint: "rgba(123, 155, 209, 0.10)",
+    glyph: "protobias",
+    tags: ["Multilingual", "In progress"],
+    desc: "The same semantic-versus-shortcut question, stress-tested across languages: does a multimodal evaluator track meaning, or culture-specific prototypes that shift with the prompt's language?",
+  },
+];
+
+const now = [
+  "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
+  "Developing the latent-control-states mech-interp project on prompt-framing effects and causally relevant activation-space states.",
+  "Starting a cross-lingual ProtoBias project on prototypicality bias in multimodal AI evaluation.",
+  "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
 ];
 
 const posts = [
@@ -94,117 +155,284 @@ const posts = [
   },
 ];
 
-const now = [
-  "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
-  "Developing the latent-control-states mech-interp project on prompt-framing effects and causally relevant activation-space states.",
-  "Starting a cross-lingual ProtoBias project on prototypicality bias in multimodal AI evaluation.",
-  "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
+const areas = [
+  { label: "Causal certification", status: "Primary", color: "var(--accent-coral)" },
+  { label: "Behavioral tracing", status: "Active", color: "var(--accent-teal)" },
+  { label: "Synthetic sandboxes", status: "Exploratory", color: "var(--accent-slate)" },
+  { label: "Mechanistic interpretability", status: "2026", color: "var(--accent-amber)" },
+  { label: "Philosophy of inference", status: "Background", color: "var(--accent-deep-purple)" },
 ];
 ---
 
-<Base>
-  <section class="mb-12">
-    <div class="hero-accent mb-8">
-      <h1 class="text-3xl font-medium tracking-tight mb-2">Xiaochuan Li</h1>
-      <p class="text-base text-[var(--color-text-muted)]">
-        Master's student, Human and AI — University of Technology Nuremberg
-      </p>
+<Base wide={true}>
+  <!-- =========== HERO =========== -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <g stroke="currentColor" stroke-opacity="0.10" fill="none" stroke-width="1">
+          <line x1="780" y1="120" x2="940" y2="200" />
+          <line x1="940" y1="200" x2="1080" y2="160" />
+          <line x1="940" y1="200" x2="1020" y2="320" />
+          <line x1="780" y1="120" x2="700" y2="280" />
+          <line x1="700" y1="280" x2="840" y2="360" />
+          <line x1="840" y1="360" x2="1020" y2="320" />
+          <line x1="1020" y1="320" x2="1100" y2="460" />
+          <line x1="840" y1="360" x2="920" y2="520" />
+          <line x1="920" y1="520" x2="1100" y2="460" />
+          <line x1="700" y1="280" x2="620" y2="460" />
+          <line x1="620" y1="460" x2="920" y2="520" />
+        </g>
+        <g fill="currentColor" fill-opacity="0.20">
+          <circle cx="780" cy="120" r="2.6" />
+          <circle cx="940" cy="200" r="3.2" />
+          <circle cx="1080" cy="160" r="2.4" />
+          <circle cx="700" cy="280" r="2.6" />
+          <circle cx="1020" cy="320" r="2.8" />
+          <circle cx="840" cy="360" r="3.0" />
+          <circle cx="1100" cy="460" r="2.4" />
+          <circle cx="620" cy="460" r="2.6" />
+          <circle cx="920" cy="520" r="2.8" />
+        </g>
+        <circle cx="940" cy="200" r="6.5" fill="var(--color-accent)" fill-opacity="0.55" />
+      </svg>
     </div>
 
-    <p class="leading-relaxed mb-5 text-[15.5px]">
-      I work at the intersection of causal inference and interpretability. The question I keep
-      coming back to is whether a model's stable-correct behavior is licensed by the structure
-      we'd point to as the reason, or whether the structure is decorative and something else is
-      doing the work.
-    </p>
-
-    <blockquote class="pull-quote">
-      Stability is necessary but not sufficient for grounding.
-    </blockquote>
-
-    <p class="text-sm text-[var(--color-text-muted)] mt-6">
-      Previously: B.A. Philosophy, Shenzhen University. Applying for PhD positions starting fall 2027.
-    </p>
-  </section>
-
-  <SectionDivider mark="node" />
-
-  <section class="mb-8">
-    <div class="flex items-baseline justify-between mb-3">
-      <h2 class="text-lg font-medium">From idea to experiment</h2>
-      <a href="/research" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all projects →</a>
-    </div>
-    <p class="text-sm text-[var(--color-text-muted)] mb-8 max-w-prose">
-      One question — when is a model's behavior licensed by the structure we think it has? — traced
-      from where it started to the experiments testing it now. Open marks are ideas; the filled,
-      numbered nodes are the projects that implement them.
-    </p>
-
-    <ol class="timeline">
-      {
-        timeline.map((item) =>
-          item.type === "idea" ? (
-            <li class="tl-item tl-idea">
-              <span class="tl-marker"></span>
-              <div class="tl-body">
-                <div class="tl-kicker">idea</div>
-                <p class="tl-idea-text">{item.text}</p>
-                <a href={`/writing/${item.note}`} class="tl-link">read the note →</a>
-              </div>
-            </li>
-          ) : (
-            <li class="tl-item tl-project" style={`--c: ${item.color}`}>
-              <span class="tl-marker"></span>
-              <div class="tl-body tl-body-project">
-                <div class="tl-main">
-                  <div class="tl-head">
-                    <span class="tl-num">{item.n}</span>
-                    <h3 class="tl-title">{item.title}</h3>
-                  </div>
-                  <p class="tl-text">{item.text}</p>
-                  <div class="tl-links">
-                    <a href={item.href} class="tl-link">open project →</a>
-                    {item.code && (
-                      <a href={item.code} class="tl-code">experiments + code ↗</a>
-                    )}
-                  </div>
-                </div>
-                <div class="tl-glyph" aria-hidden="true">
-                  <ProjectGlyph kind={item.glyph} color={item.color} />
-                </div>
-              </div>
-            </li>
-          )
-        )
-      }
-    </ol>
-  </section>
-
-  <SectionDivider mark="arrow" />
-
-  <section class="mb-8">
-    <h2 class="text-lg font-medium mb-4">Currently</h2>
-    <ul class="now-list">
-      {now.map((item) => <li>{item}</li>)}
-    </ul>
-  </section>
-
-  <SectionDivider mark="dots" />
-
-  <section>
-    <div class="flex items-baseline justify-between mb-4">
-      <h2 class="text-lg font-medium">Writing</h2>
-      <a href="/writing" class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">all posts →</a>
-    </div>
-    <div class="divide-y divide-[var(--color-border)]">
-      {
-        posts.map((p) => (
-          <a href={`/writing/${p.slug}`} class="block py-3 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-            <p class="text-sm font-medium mb-1 group-hover:text-[var(--color-accent)] transition-colors">{p.title}</p>
-            <p class="text-xs text-[var(--color-text-dim)]">{p.meta}</p>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-tagline fade-in">Master's student · Human and AI · UTN Nürnberg</p>
+        <h1 class="hero-heading fade-in-up">
+          <span>Hi, I am</span>
+          <span class="line-2">Xiaochuan Li.</span>
+        </h1>
+        <p class="hero-desc fade-in-up fade-delay-200">
+          I work at the intersection of causal inference and interpretability — asking when a model's
+          stable-correct behavior is licensed by the structure we'd point to as the reason, or whether
+          the structure is decorative and something else is doing the work.
+        </p>
+        <blockquote class="hero-pull fade-in-up fade-delay-300">
+          Stability is necessary but not sufficient for grounding.
+        </blockquote>
+        <div class="hero-cta fade-in-up fade-delay-300">
+          <a href="#research" class="btn btn-primary">
+            View research
+            <span class="btn-arrow">↓</span>
           </a>
-        ))
-      }
+          <a href="#contact" class="btn btn-secondary">Get in touch</a>
+        </div>
+        <div class="hero-social fade-in-up fade-delay-400">
+          <span class="hero-social-label">Reach me</span>
+          <a class="hero-social-link" href="mailto:xiaochuan.li@utn.de" aria-label="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="M3 7l9 6 9-6"></path>
+            </svg>
+          </a>
+          <a class="hero-social-link" href="https://github.com/xchuan-li" aria-label="GitHub" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+          <a class="hero-social-link" href="/cv.pdf" aria-label="Download CV (PDF)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <path d="M14 2v6h6" />
+              <path d="M12 18v-6" />
+              <path d="M9 15l3 3 3-3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-indicator" aria-label="Scroll to about">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- =========== ABOUT =========== -->
+  <section id="about" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="about-grid">
+        <div class="about-fig fade-in-up">
+          <SCHierarchyFigure />
+        </div>
+
+        <div>
+          <p class="section-label fade-in-up">About</p>
+          <h2 class="section-heading fade-in-up fade-delay-100">
+            One question, traced backward.
+          </h2>
+          <div class="about-bio fade-in-up fade-delay-200">
+            <p>
+              I read undergraduate Philosophy at <strong>Shenzhen University</strong>, finishing a
+              senior thesis on Leibniz's <em>characteristica universalis</em> — about which
+              structures are minimally licensed by which behaviors. That question quietly survived
+              the move into machine learning.
+            </p>
+            <p>
+              I'm currently in the M.Sc. in <strong>Human and AI</strong> at the University of
+              Technology Nuremberg (UTN), and I work on the same question with different tools:
+              when a model's stable-correct behavior looks justified, was the licensing structure
+              actually load-bearing — or was something correlated with the answer doing the work?
+            </p>
+            <p>
+              I'm preparing PhD applications for fall 2027 on causal foundations of interpretability.
+            </p>
+          </div>
+
+          <div class="areas-card fade-in-up fade-delay-300">
+            <h3 class="areas-card-title">Research focus</h3>
+            {
+              areas.map((a) => (
+                <div class="areas-row">
+                  <div class="areas-row-top">
+                    <span class="areas-label">{a.label}</span>
+                    <span class="areas-status">{a.status}</span>
+                  </div>
+                  <div class="areas-line" style={`--areas-color: ${a.color}`}></div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== TRAJECTORY =========== -->
+  <section id="trajectory" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Trajectory</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">From idea to experiment.</h2>
+        <p class="section-sub fade-in-up fade-delay-200">
+          One question — when is a model's behavior licensed by the structure we think it has? —
+          traced from where it started to the six experiments testing it now. Open marks are ideas;
+          filled, numbered nodes are the projects that implement them.
+        </p>
+      </div>
+      <div class="fade-in-up fade-delay-300">
+        <TrajectoryTimeline items={trajectory} />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== CURRENTLY =========== -->
+  <section id="currently" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Currently</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">What I'm working on now.</h2>
+      </div>
+      <ul class="now-list fade-in-up fade-delay-200">
+        {now.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- =========== RESEARCH GRID =========== -->
+  <section id="research" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Research</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">Six cuts at one question.</h2>
+        <p class="section-sub fade-in-up fade-delay-200">
+          When can a model's behavior be reduced to the minimum structure that licenses it? Each
+          project takes a different cut at that — by construction, by behavioral tracing, by minimal
+          reconstruction, by graded measurement, by mech interp, and by multilingual evaluation.
+        </p>
+      </div>
+
+      <div class="proj-grid">
+        {
+          projects.map((p, i) => (
+            <a
+              href={p.href}
+              class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
+              style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
+            >
+              <div class="proj-grid-visual">
+                <ProjectGlyph kind={p.glyph} color={p.color} />
+                <div class="proj-grid-overlay">
+                  <span>View project →</span>
+                </div>
+              </div>
+              <div class="proj-grid-body">
+                <div class="proj-grid-tags">
+                  <span>{p.n}</span>
+                  <span class="sep">·</span>
+                  {p.tags.map((t, ti) => (
+                    <>
+                      <span>{t}</span>
+                      {ti < p.tags.length - 1 && <span class="sep">·</span>}
+                    </>
+                  ))}
+                </div>
+                <h3 class="proj-grid-title">{p.title}</h3>
+                <p class="proj-grid-desc">{p.desc}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== WRITING =========== -->
+  <section id="writing" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Writing</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">Notes &amp; essays.</h2>
+        <p class="section-sub fade-in-up fade-delay-200">
+          Short pieces that sit upstream of the experiments — what the right question is, why the
+          standard fix is one level too shallow, what philosophy gave me that ML didn't.
+        </p>
+      </div>
+      <div class="writing-list fade-in-up fade-delay-300">
+        {
+          posts.map((p) => (
+            <a href={`/writing/${p.slug}`} class="writing-row">
+              <span class="writing-title">{p.title}</span>
+              <span class="writing-meta">{p.meta}</span>
+            </a>
+          ))
+        }
+      </div>
+      <div class="fade-in-up fade-delay-400" style="margin-top: 1.75rem;">
+        <a href="/writing" class="btn btn-secondary">All writing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== CONTACT CTA =========== -->
+  <section id="contact" class="section" style="padding-bottom: 7rem;">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="contact-cta fade-in-up">
+        <div>
+          <h2 class="contact-cta-head">Let's talk.</h2>
+          <p class="contact-cta-sub">
+            Best by email — I read everything and reply slowly. If it's about a paper draft or a
+            research direction, expect a thoughtful response in a few days rather than an immediate
+            one.
+          </p>
+        </div>
+        <div class="hero-cta" style="margin: 0;">
+          <a class="btn btn-primary" href="mailto:xiaochuan.li@utn.de">
+            Email me
+            <span class="btn-arrow">↗</span>
+          </a>
+          <a class="btn btn-secondary" href="/contact">More ways</a>
+        </div>
+      </div>
     </div>
   </section>
 </Base>
