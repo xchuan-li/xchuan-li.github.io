@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "og": "node scripts/gen-og.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/react": "^4.1.2",
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.2.1",
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.1.1",
@@ -19,6 +21,7 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2"
   }

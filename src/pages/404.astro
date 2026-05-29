@@ -1,0 +1,79 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Not found · Xiaochuan Li" description="That page doesn't exist.">
+  <section class="notfound">
+    <svg class="nf-mark" viewBox="0 0 120 80" aria-hidden="true" fill="none">
+      <line x1="20" y1="20" x2="52" y2="34" stroke="currentColor" stroke-opacity="0.25" />
+      <line x1="20" y1="60" x2="52" y2="46" stroke="currentColor" stroke-opacity="0.25" />
+      <line class="nf-dash" x1="60" y1="40" x2="100" y2="40" stroke="currentColor" stroke-opacity="0.25" stroke-dasharray="3 5" />
+      <circle cx="16" cy="18" r="4" fill="currentColor" fill-opacity="0.35" />
+      <circle cx="16" cy="62" r="4" fill="currentColor" fill-opacity="0.35" />
+      <circle cx="56" cy="40" r="4" fill="currentColor" fill-opacity="0.35" />
+      <circle cx="104" cy="40" r="5.5" fill="var(--color-accent)" fill-opacity="0.55" />
+    </svg>
+
+    <p class="nf-code">404</p>
+    <h1 class="nf-title">This path has no node.</h1>
+    <p class="nf-desc">
+      The page you're looking for isn't here — it may have moved, or never existed.
+      Let's get you back to solid structure.
+    </p>
+    <div class="nf-links">
+      <a href="/" class="btn btn-primary">Back home</a>
+      <a href="/research" class="btn btn-secondary">Browse research</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    min-height: 56vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .nf-mark {
+    width: 120px;
+    height: 80px;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .nf-mark .nf-dash {
+    stroke-dashoffset: 16;
+    animation: nf-flow 2.2s linear infinite;
+  }
+  @keyframes nf-flow {
+    to { stroke-dashoffset: 0; }
+  }
+  .nf-code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+  .nf-title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .nf-desc {
+    color: var(--color-text-muted);
+    max-width: 34rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .nf-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nf-mark .nf-dash { animation: none; }
+  }
+</style>

@@ -1,40 +1,16 @@
 ---
 import Base from "../../layouts/Base.astro";
-
-const posts = [
-  {
-    slug: "causal-residue",
-    title: "Causal structure as residue — training as elimination",
-    date: "May 2026",
-    excerpt: "Every training example is a falsifier — a behavioral observation compatible with some causal structures and incompatible with others. The structure a learner ends up with is the residue of cumulative cutting. This may be the hidden unification of the four projects on this site.",
-    status: "note",
-  },
-  {
-    slug: "from-leibniz",
-    title: "From Leibniz to do(class-3) — what philosophy gave me that ML didn't",
-    date: "May 2026",
-    excerpt: "My undergraduate thesis was on Leibniz's characteristica universalis. I did not, at the time, think of it as research relevant to AI. The project I'm working on now, two years and a discipline change later, turns out to be the same structural question asked under different constraints.",
-    status: "note",
-  },
-  {
-    slug: "decidability-boundary",
-    title: "Why interpretability needs a decidability boundary",
-    date: "May 2026",
-    excerpt: "There is a difference between a measurement being hard and a quantity being undefined. Past a certain depth, much of what interpretability treats as a hard measurement is in fact an undefined quantity.",
-    status: "draft",
-  },
-  {
-    slug: "inferential-productivity",
-    title: "Reasoning is generative; grounding needs the other direction",
-    date: "May 2026",
-    excerpt: "Most conceptual machinery we have for reasoning runs in one direction — premises into conclusions, conclusions into more conclusions. The harder direction, and the one that almost no standard tool measures, is the reverse: given a system's behavior, what is the smallest causal structure that has to be there for the behavior to land?",
-    status: "note",
-  },
-];
+import { posts } from "../../data/writing";
 ---
 
-<Base title="Writing · Xiaochuan Li">
-  <h1 class="text-2xl font-medium tracking-tight mb-2">Writing</h1>
+<Base
+  title="Writing · Xiaochuan Li"
+  description="Longer-form notes and essays on causal-inferential rigor, research taste, and what philosophy training does to how one reads ML papers."
+>
+  <div class="flex items-baseline justify-between gap-3 mb-2">
+    <h1 class="text-2xl font-medium tracking-tight">Writing</h1>
+    <a href="/rss.xml" class="text-xs text-[var(--color-text-dim)] hover:text-[var(--color-accent)] transition-colors whitespace-nowrap">RSS</a>
+  </div>
   <p class="text-[var(--color-text-muted)] mb-10 max-w-prose">
     Longer-form notes and essays. I write here when an idea is too messy for a paper but too
     specific for a tweet — usually about research taste, causal-inferential rigor, or what
