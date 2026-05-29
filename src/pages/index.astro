@@ -191,18 +191,22 @@ const areas = [
         </defs>
 
         <g class="hb-edges" stroke="currentColor" stroke-opacity="0.10" fill="none" stroke-width="1">
-          <path id="hb-e1"  d="M 780 120 L 940 200" />
-          <path id="hb-e2"  d="M 940 200 L 1080 160" />
-          <path id="hb-e3"  d="M 940 200 L 1020 320" />
-          <path id="hb-e4"  d="M 780 120 L 700 280" />
-          <path id="hb-e5"  d="M 700 280 L 840 360" />
-          <path id="hb-e6"  d="M 840 360 L 1020 320" />
-          <path id="hb-e7"  d="M 1020 320 L 1100 460" />
-          <path id="hb-e8"  d="M 840 360 L 920 520" />
-          <path id="hb-e9"  d="M 920 520 L 1100 460" />
-          <path id="hb-e10" d="M 700 280 L 620 460" />
-          <path id="hb-e11" d="M 620 460 L 920 520" />
+          <path d="M 780 120 L 940 200" />
+          <path d="M 940 200 L 1080 160" />
+          <path d="M 940 200 L 1020 320" />
+          <path d="M 780 120 L 700 280" />
+          <path d="M 700 280 L 840 360" />
+          <path d="M 840 360 L 1020 320" />
+          <path d="M 1020 320 L 1100 460" />
+          <path d="M 840 360 L 920 520" />
+          <path d="M 920 520 L 1100 460" />
+          <path d="M 700 280 L 620 460" />
+          <path d="M 620 460 L 920 520" />
         </g>
+
+        <!-- invisible multi-edge routes traced by the two drifting signals -->
+        <path id="hb-route-a" d="M 780 120 L 940 200 L 1020 320 L 1100 460" fill="none" stroke="none" />
+        <path id="hb-route-b" d="M 780 120 L 700 280 L 840 360 L 920 520" fill="none" stroke="none" />
 
         <g fill="currentColor" fill-opacity="0.20">
           <circle cx="780" cy="120" r="2.6" />
@@ -218,60 +222,19 @@ const areas = [
         <circle cx="940" cy="200" r="6.5" fill="var(--color-accent)" fill-opacity="0.55" />
 
         <g class="hb-particles" filter="url(#hb-glow)" fill="var(--color-accent)">
-          <circle r="1.6">
-            <animateMotion dur="7s" begin="0s" repeatCount="indefinite">
-              <mpath href="#hb-e1" />
+          <circle r="2" opacity="0">
+            <animateMotion dur="9s" begin="0s" repeatCount="indefinite">
+              <mpath href="#hb-route-a" />
             </animateMotion>
+            <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
+                     values="0;1;1;0" keyTimes="0;0.12;0.85;1" />
           </circle>
-          <circle r="1.6">
-            <animateMotion dur="6.5s" begin="2.5s" repeatCount="indefinite">
-              <mpath href="#hb-e2" />
+          <circle r="2" opacity="0">
+            <animateMotion dur="11s" begin="4.5s" repeatCount="indefinite">
+              <mpath href="#hb-route-b" />
             </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="7.5s" begin="1.2s" repeatCount="indefinite">
-              <mpath href="#hb-e3" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="8s" begin="3.5s" repeatCount="indefinite">
-              <mpath href="#hb-e4" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="7s" begin="0.8s" repeatCount="indefinite">
-              <mpath href="#hb-e5" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="6.8s" begin="2.2s" repeatCount="indefinite">
-              <mpath href="#hb-e6" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="8.5s" begin="4.5s" repeatCount="indefinite">
-              <mpath href="#hb-e7" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="7.2s" begin="1.5s" repeatCount="indefinite">
-              <mpath href="#hb-e8" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="6.5s" begin="3.8s" repeatCount="indefinite">
-              <mpath href="#hb-e9" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="8s" begin="2s" repeatCount="indefinite">
-              <mpath href="#hb-e10" />
-            </animateMotion>
-          </circle>
-          <circle r="1.6">
-            <animateMotion dur="7s" begin="0.5s" repeatCount="indefinite">
-              <mpath href="#hb-e11" />
-            </animateMotion>
+            <animate attributeName="opacity" dur="11s" begin="4.5s" repeatCount="indefinite"
+                     values="0;1;1;0" keyTimes="0;0.12;0.85;1" />
           </circle>
         </g>
       </svg>
