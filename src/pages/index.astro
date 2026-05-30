@@ -2,87 +2,90 @@
 import Base from "../layouts/Base.astro";
 import ProjectCover from "../components/ProjectCover.astro";
 import SCHierarchyFigure from "../components/SCHierarchyFigure.astro";
-import TrajectoryTimeline from "../components/TrajectoryTimeline.astro";
+import ResearchSpine from "../components/TrajectoryTimeline.astro";
 
-const trajectory = [
+const researchSpine = [
   {
-    type: "idea",
-    kicker: "Idea",
+    kind: "idea",
     label: "Leibniz's question",
     href: "/writing/from-leibniz",
   },
   {
-    type: "idea",
-    kicker: "Idea",
+    kind: "idea",
     label: "Stable ≠ grounded",
     href: "/writing/decidability-boundary",
   },
   {
-    type: "project",
+    kind: "paper",
     n: "01",
-    title: "Stable is not grounded",
+    title: "Stable Is Not Grounded",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
   },
   {
-    type: "project",
+    kind: "paper",
     n: "02",
     title: "Isotrace",
     color: "var(--accent-teal)",
     href: "/research/isotrace",
   },
   {
-    type: "idea",
-    kicker: "Idea",
-    label: "The other direction",
+    kind: "idea",
+    label: "Minimum licensing structure",
     href: "/writing/inferential-productivity",
   },
   {
-    type: "project",
+    kind: "paper",
     n: "03",
-    title: "Mini causal models",
-    color: "var(--accent-slate)",
-    href: "/research/mini-causal-models",
-  },
-  {
-    type: "project",
-    n: "04",
-    title: "Causal inferential yield",
+    title: "Causal Inferential Yield",
     color: "var(--accent-purple)",
     href: "/research/ciy",
   },
   {
-    type: "project",
-    n: "05",
-    title: "Latent control states",
-    color: "var(--accent-amber)",
-    href: "/research/latent-control-states",
-  },
-  {
-    type: "project",
-    n: "06",
-    title: "Cross-lingual ProtoBias",
-    color: "var(--accent-indigo)",
-    href: "/research/cross-lingual-protobias",
-  },
-  {
-    type: "idea",
-    kicker: "Idea",
+    kind: "idea",
     label: "Causal residue",
     href: "/writing/causal-residue",
+  },
+];
+
+const researchSandbox = {
+  kicker: "Supporting sandbox",
+  title: "Mini Causal Models",
+  desc: "Planted causal structures for testing recovery and CIY against a known target.",
+  href: "/research/mini-causal-models",
+  color: "var(--accent-slate)",
+  anchor: 6,
+};
+
+const researchExtensions = [
+  {
+    kicker: "Mechanistic bridge",
+    title: "Latent Control States",
+    desc: "Do behavioral control states correspond to activation-space states or directions?",
+    href: "/research/latent-control-states",
+    color: "var(--accent-amber)",
+    anchor: 5,
+  },
+  {
+    kicker: "Applied stress test",
+    title: "Cross-lingual ProtoBias",
+    desc: "Semantic content versus language- and culture-specific prototype shortcuts.",
+    href: "/research/cross-lingual-protobias",
+    color: "var(--accent-indigo)",
   },
 ];
 
 const projects = [
   {
     n: "01",
-    title: "Stable is not grounded",
+    title: "Stable Is Not Grounded",
     href: "/research/sc-certification",
     color: "var(--accent-coral)",
     tint: "rgba(240, 153, 123, 0.10)",
     glyph: "sc",
-    tags: ["Paper", "Aug 2026"],
-    desc: "A do-intervention severs a candidate shortcut to test whether the licensing structure was load-bearing for the answer — with the controlled result running live as an interactive figure.",
+    tags: ["Paper 1", "Binary certification"],
+    desc: "Tests whether the licensing structure is counterfactually load-bearing at all: stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
+    group: "core",
   },
   {
     n: "02",
@@ -91,56 +94,90 @@ const projects = [
     color: "var(--accent-teal)",
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
-    tags: ["Concept", "In progress"],
-    desc: "Fictional concept names with path-encoded naming locate where compositional reasoning gives way to surface patterns — hop by hop, without opening the model.",
+    tags: ["Paper 2", "Path localization"],
+    desc: "A behavioral path-tracing protocol that makes distinct hypothesized reasoning paths produce distinct observable labels, locating which hop was used, bypassed, or shortcut-replaced.",
+    group: "core",
   },
   {
     n: "03",
-    title: "Mini causal models",
-    href: "/research/mini-causal-models",
-    color: "var(--accent-slate)",
-    tint: "rgba(116, 180, 206, 0.10)",
-    glyph: "mcm",
-    tags: ["Sandbox", "Exploratory"],
-    desc: "Plant a small causal model with known structure, train on its data, then recover the minimal structure from behavior alone — so the recovery can be scored against a planted truth.",
-  },
-  {
-    n: "04",
-    title: "Causal inferential yield",
+    title: "Causal Inferential Yield",
     href: "/research/ciy",
     color: "var(--accent-purple)",
     tint: "rgba(175, 169, 236, 0.10)",
     glyph: "ciy",
-    tags: ["Measure", "Draft"],
-    desc: "A graded, falsifiable measure of how much of the licensing structure a model actually uses — built so it cannot quietly collapse back into accuracy.",
+    tags: ["Paper 3", "Quantification"],
+    desc: "Grades how much causal structure the model reliably extracts, defined on certified or controlled items rather than arbitrary benchmark accuracy.",
+    group: "core",
   },
   {
-    n: "05",
-    title: "Latent control states",
+    n: "S",
+    title: "Mini Causal Models",
+    href: "/research/mini-causal-models",
+    color: "var(--accent-slate)",
+    tint: "rgba(116, 180, 206, 0.10)",
+    glyph: "mcm",
+    tags: ["Sandbox", "Planted structure"],
+    desc: "A controlled planted-ground-truth environment for testing causal-structure recovery, Isotrace-style localization, and CIY-style grading against a known target.",
+    group: "support",
+  },
+  {
+    n: "E1",
+    title: "Latent Control States",
     href: "/research/latent-control-states",
     color: "var(--accent-amber)",
     tint: "rgba(239, 159, 39, 0.10)",
     glyph: "latent",
-    tags: ["Mech interp", "May – Dec 2026"],
-    desc: "From behavioral evidence to mechanism: do prompt-framing effects correspond to causally relevant states in activation space, or to surface features that merely travel with the prompt?",
+    tags: ["Extension", "Mechanistic"],
+    desc: "Asks whether behavioral causal control states have corresponding states or directions in activation space, without making mechanism the main thesis spine.",
+    group: "extension",
   },
   {
-    n: "06",
+    n: "E2",
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
     color: "var(--accent-indigo)",
     tint: "rgba(123, 155, 209, 0.10)",
     glyph: "protobias",
-    tags: ["Multilingual", "In progress"],
-    desc: "The same semantic-versus-shortcut question, stress-tested across languages: does a multimodal evaluator track meaning, or culture-specific prototypes that shift with the prompt's language?",
+    tags: ["Extension", "Applied stress test"],
+    desc: "Applies the same semantic-versus-shortcut ambiguity to multilingual and multimodal evaluation: semantic content or language- and culture-specific prototype shortcuts?",
+    group: "extension",
+  },
+];
+
+const programSections = [
+  {
+    label: "Core sequence",
+    title: "Hierarchical Causal Evidence",
+    desc: "The main sequence moves from binary certification, to hop-level localization, to quantitative grading of causal structure use.",
+    projects: projects.filter((p) => p.group === "core"),
+  },
+  {
+    label: "Supporting sandbox",
+    title: "Controlled planted structure",
+    desc: "Mini Causal Models provide the known-target environment where recovery and grading methods can be tested before being trusted elsewhere.",
+    projects: projects.filter((p) => p.group === "support"),
+  },
+  {
+    label: "Extensions",
+    title: "Mechanistic and applied stress tests",
+    desc: "These projects extend the same causal-licensing question into activation-space mechanism and multilingual/multimodal evaluation.",
+    projects: projects.filter((p) => p.group === "extension"),
   },
 ];
 
 const now = [
-  "Writing the SC-certification paper for an August target. The §6.5 demonstration on MNLI / HANS is the current bottleneck.",
-  "Developing the latent-control-states mech-interp project on prompt-framing effects and causally relevant activation-space states.",
-  "Starting a cross-lingual ProtoBias project on prototypicality bias in multimodal AI evaluation.",
-  "Preparing PhD applications for late 2026 — causal foundations of interpretability, ELLIS / MPI / DFKI-affiliated groups.",
+  {
+    label: "Primary",
+    text: "Writing Stable Is Not Grounded as a workshop-targeted paper on why stability is not sufficient for grounding.",
+  },
+  {
+    label: "Next",
+    text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
+  },
+  {
+    label: "Extensions",
+    text: "Exploring Latent Control States as a mechanistic bridge, and Cross-lingual ProtoBias as an applied multilingual/multimodal stress test.",
+  },
 ];
 
 const posts = [
@@ -167,10 +204,11 @@ const posts = [
 ];
 
 const areas = [
-  { label: "Causal certification", status: "Primary", color: "var(--accent-coral)" },
-  { label: "Behavioral tracing", status: "Active", color: "var(--accent-teal)" },
-  { label: "Synthetic sandboxes", status: "Exploratory", color: "var(--accent-slate)" },
-  { label: "Mechanistic interpretability", status: "2026", color: "var(--accent-amber)" },
+  { label: "Binary certification", status: "Paper 1", color: "var(--accent-coral)" },
+  { label: "Behavioral path tracing", status: "Paper 2", color: "var(--accent-teal)" },
+  { label: "Causal structure grading", status: "Paper 3", color: "var(--accent-purple)" },
+  { label: "Planted-structure sandbox", status: "Support", color: "var(--accent-slate)" },
+  { label: "Mechanistic / applied tests", status: "Extensions", color: "var(--accent-amber)" },
   { label: "Philosophy of inference", status: "Background", color: "var(--accent-deep-purple)" },
 ];
 ---
@@ -248,9 +286,9 @@ const areas = [
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
         <p class="hero-desc fade-in-up fade-delay-200">
-          I work at the intersection of causal inference and interpretability — asking when a model's
-          stable-correct behavior is licensed by the structure we'd point to as the reason, or whether
-          the structure is decorative and something else is doing the work.
+          I study when a model's stable behavior is actually licensed by the causal structure we
+          think it is using. My work asks when model behavior can be causally reduced to the minimum
+          structure that licenses it.
         </p>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
           Stability is necessary but not sufficient for grounding.
@@ -323,8 +361,9 @@ const areas = [
             <p>
               I'm currently in the M.Sc. in <strong>Human and AI</strong> at the University of
               Technology Nuremberg (UTN), and I work on the same question with different tools:
-              when a model's stable-correct behavior looks justified, was the licensing structure
-              actually load-bearing — or was something correlated with the answer doing the work?
+              when a model's stable-correct behavior looks justified, was the minimum licensing
+              structure actually load-bearing — or was something correlated with the answer doing
+              the work?
             </p>
             <p>
               I'm preparing PhD applications for fall 2027 on causal foundations of interpretability.
@@ -359,12 +398,12 @@ const areas = [
         <h2 class="section-heading fade-in-up fade-delay-100">From idea to experiment.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
           One question — when is a model's behavior licensed by the structure we think it has? —
-          traced from where it started to the six experiments testing it now. Open marks are ideas;
-          filled, numbered nodes are the projects that implement them.
+          traced from where it started to a core sequence, a controlled sandbox, and two extensions.
+          Open marks are ideas; filled nodes are the projects that implement them.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">
-        <TrajectoryTimeline items={trajectory} />
+        <ResearchSpine spine={researchSpine} sandbox={researchSandbox} extensions={researchExtensions} />
       </div>
     </div>
   </section>
@@ -378,7 +417,13 @@ const areas = [
         <h2 class="section-heading fade-in-up fade-delay-100">What I'm working on now.</h2>
       </div>
       <ul class="now-list fade-in-up fade-delay-200">
-        {now.map((item) => <li>{item}</li>)}
+        {
+          now.map((item) => (
+            <li>
+              <strong>{item.label}:</strong> {item.text}
+            </li>
+          ))
+        }
       </ul>
     </div>
   </section>
@@ -389,43 +434,58 @@ const areas = [
       <div class="divider-line"></div>
       <div class="section-head">
         <p class="section-label fade-in-up">Research</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Six cuts at one question.</h2>
+        <h2 class="section-heading fade-in-up fade-delay-100">One research spine, with extensions.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
-          When can a model's behavior be reduced to the minimum structure that licenses it? Each
-          project takes a different cut at that — by construction, by behavioral tracing, by minimal
-          reconstruction, by graded measurement, by mech interp, and by multilingual evaluation.
+          When can a model's behavior be reduced to the minimum causal structure that should support
+          it? The roadmap is a core sequence in hierarchical causal evidence, supported by a planted
+          sandbox and extended into mechanism and applied evaluation.
         </p>
       </div>
 
-      <div class="proj-grid">
+      <div class="space-y-14">
         {
-          projects.map((p, i) => (
-            <a
-              href={p.href}
-              class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
-              style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
-            >
-              <div class="proj-grid-visual">
-                <ProjectCover kind={p.glyph} color={p.color} />
-                <div class="proj-grid-overlay">
-                  <span>View project →</span>
-                </div>
+          programSections.map((section, si) => (
+            <div class={`fade-in-up fade-delay-${(si % 3) * 100 + 100}`}>
+              <div class="mb-5 max-w-2xl">
+                <p class="text-[11px] uppercase tracking-[0.22em] text-[var(--color-text-dim)] font-medium mb-2">
+                  {section.label}
+                </p>
+                <h3 class="text-xl font-medium tracking-tight mb-2">{section.title}</h3>
+                <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{section.desc}</p>
               </div>
-              <div class="proj-grid-body">
-                <div class="proj-grid-tags">
-                  <span>{p.n}</span>
-                  <span class="sep">·</span>
-                  {p.tags.map((t, ti) => (
-                    <>
-                      <span>{t}</span>
-                      {ti < p.tags.length - 1 && <span class="sep">·</span>}
-                    </>
-                  ))}
-                </div>
-                <h3 class="proj-grid-title">{p.title}</h3>
-                <p class="proj-grid-desc">{p.desc}</p>
+              <div class="proj-grid">
+                {
+                  section.projects.map((p, i) => (
+                    <a
+                      href={p.href}
+                      class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
+                      style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
+                    >
+                      <div class="proj-grid-visual">
+                        <ProjectCover kind={p.glyph} color={p.color} />
+                        <div class="proj-grid-overlay">
+                          <span>View project →</span>
+                        </div>
+                      </div>
+                      <div class="proj-grid-body">
+                        <div class="proj-grid-tags">
+                          <span>{p.n}</span>
+                          <span class="sep">·</span>
+                          {p.tags.map((t, ti) => (
+                            <>
+                              <span>{t}</span>
+                              {ti < p.tags.length - 1 && <span class="sep">·</span>}
+                            </>
+                          ))}
+                        </div>
+                        <h3 class="proj-grid-title">{p.title}</h3>
+                        <p class="proj-grid-desc">{p.desc}</p>
+                      </div>
+                    </a>
+                  ))
+                }
               </div>
-            </a>
+            </div>
           ))
         }
       </div>

@@ -2,92 +2,140 @@
 import Base from "../../layouts/Base.astro";
 import ProjectGlyph from "../../components/ProjectGlyph.astro";
 
-const projects = [
+const coreProjects = [
   {
-    title: "Stable is not grounded",
+    title: "Stable Is Not Grounded",
     href: "/research/sc-certification",
-    status: "in progress · Aug 2026",
+    status: "Paper 1 · binary certification",
     color: "var(--accent-coral)",
     glyph: "sc",
-    one_line: "An acyclic certification framework that uses do-interventions to test whether a model's stable-correct behavior is causally grounded in the licensing structure M, or merely riding a shortcut.",
+    one_line: "Binary certification: is the licensing structure counterfactually load-bearing at all?",
     has_demo: true,
   },
   {
     title: "Isotrace",
     href: "/research/isotrace",
-    status: "in progress",
+    status: "Paper 2 · path localization",
     color: "var(--accent-teal)",
     glyph: "isotrace",
-    one_line: "Fictional concept names with path-encoded naming locate where shortcut substitution replaces compositional multi-hop reasoning — without any access to the model's internals.",
+    one_line: "Path localization: where in the reasoning path is the structure used, bypassed, or shortcut-replaced?",
   },
   {
-    title: "Mini causal models",
-    href: "/research/mini-causal-models",
-    status: "exploratory",
-    color: "var(--accent-slate)",
-    glyph: "mcm",
-    one_line: "A synthetic sandbox for the minimum-licensing-structure question: plant a small causal model with known structure, train on its data, and recover the minimal structure from behavior — so the recovery can be scored against a planted ground truth before it ever meets a real model.",
-  },
-  {
-    title: "CIY — causal inferential yield",
+    title: "Causal Inferential Yield",
     href: "/research/ciy",
-    status: "draft",
+    status: "Paper 3 · quantification",
     color: "var(--accent-purple)",
     glyph: "ciy",
-    one_line: "A graded measure over SC-grounded items, designed with a falsifiability test that prevents silent collapse into accuracy repackaging.",
+    one_line: "Quantification: how much causal structure does the model reliably extract?",
   },
+];
+
+const sandboxProjects = [
   {
-    title: "Latent control states",
+    title: "Mini Causal Models",
+    href: "/research/mini-causal-models",
+    status: "supporting sandbox",
+    color: "var(--accent-slate)",
+    glyph: "mcm",
+    one_line: "A planted-ground-truth environment for testing causal-structure recovery, Isotrace-style path localization, and CIY-style quantitative grading.",
+  },
+];
+
+const extensionProjects = [
+  {
+    title: "Latent Control States",
     href: "/research/latent-control-states",
-    status: "project · May–Dec 2026",
+    status: "mechanistic extension",
     color: "var(--accent-amber)",
     glyph: "latent",
-    one_line: "Mechanistic interpretability of prompt-framing effects: do behavioral shifts under different framings correspond to causally relevant latent states?",
+    one_line: "Mechanistic bridge from behavioral causal evidence to activation-space states.",
   },
   {
-    title: "Cross-lingual prototypicality bias in multimodal AI evaluation",
+    title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
-    status: "in progress",
+    status: "applied extension",
     color: "var(--accent-indigo)",
     glyph: "protobias",
-    one_line: "A multilingual ProtoBias study testing whether multimodal AI judgments stay semantically grounded, or shift toward culturally specific prototypes across languages.",
+    one_line: "Applied multilingual/multimodal stress test of semantic grounding versus language- and culture-specific prototype shortcuts.",
+  },
+];
+
+const sections = [
+  {
+    eyebrow: "Core Research Program",
+    title: "Hierarchical Causal Evidence",
+    description:
+      "The core sequence moves from binary certification, to path-level localization, to quantitative grading of causal structure use.",
+    projects: coreProjects,
+  },
+  {
+    eyebrow: "Supporting Sandbox",
+    title: "Mini Causal Models",
+    description:
+      "Mini Causal Models are infrastructure for the core program, not a fourth equal core paper.",
+    projects: sandboxProjects,
+  },
+  {
+    eyebrow: "Extensions",
+    title: "Mechanistic and applied extensions",
+    description:
+      "These projects keep the same causal-licensing question visible while moving it into activation-space mechanism and multilingual/multimodal evaluation.",
+    projects: extensionProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="Six interlocking projects on one question — when is a model's behavior licensed by the causal structure we think it has, rather than by shortcuts that merely travel with it?"
+  description="One research spine, with mechanistic and applied extensions: when is a model's behavior licensed by the minimum causal structure that should support it?"
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-10 max-w-prose">
-    My work is organized around one question: <em>when can we say a model's behavior is licensed by
-    the structure we think it has?</em> The projects below each take a different cut at that — by
-    construction, by behavioral tracing, by minimal reconstruction, by graded measurement, by mech interp, and by multimodal bias evaluation.
+    My work is organized around one question: <em>when is a model's behavior licensed by the
+    minimum causal structure that should support it?</em> The roadmap is a core sequence, with a
+    supporting sandbox and two extensions.
   </p>
 
-  <div class="divide-y divide-[var(--color-border)]">
+  <div class="space-y-12">
     {
-      projects.map((p) => (
-        <a href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-          <div class="flex items-center gap-5">
-            <div class="flex-1 min-w-0">
-              <div class="flex justify-between items-baseline gap-3 mb-2">
-                <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
-                <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.status}</span>
-              </div>
-              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.one_line}</p>
-              {p.has_demo && (
-                <span class="inline-block mt-2 text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
-                  interactive demo ↗
-                </span>
-              )}
-            </div>
-            <div class="proj-glyph-cell" aria-hidden="true">
-              <ProjectGlyph kind={p.glyph} color={p.color} />
-            </div>
+      sections.map((section) => (
+        <section>
+          <div class="mb-5">
+            <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+              {section.eyebrow}
+            </p>
+            <h2 class="text-xl font-medium tracking-tight mb-2">{section.title}</h2>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
+              {section.description}
+            </p>
           </div>
-        </a>
+
+          <div class="divide-y divide-[var(--color-border)]">
+            {
+              section.projects.map((p) => (
+                <a href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+                  <div class="flex items-center gap-5">
+                    <div class="flex-1 min-w-0">
+                      <div class="flex justify-between items-baseline gap-3 mb-2">
+                        <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h3>
+                        <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.status}</span>
+                      </div>
+                      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.one_line}</p>
+                      {p.has_demo && (
+                        <span class="inline-block mt-2 text-[11px] px-2 py-0.5 rounded-full bg-[#E1F5EE] text-[#0F6E56] dark:bg-[#085041]/40 dark:text-[#5DCAA5]">
+                          interactive demo ↗
+                        </span>
+                      )}
+                    </div>
+                    <div class="proj-glyph-cell" aria-hidden="true">
+                      <ProjectGlyph kind={p.glyph} color={p.color} />
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </section>
       ))
     }
   </div>

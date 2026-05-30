@@ -4,14 +4,14 @@ import HeroFigure from "../../components/HeroFigure.astro";
 import SCDemo from "../../components/SCDemo.tsx";
 ---
 
-<Base title="Stable is not grounded · Xiaochuan Li"
+<Base title="Stable Is Not Grounded · Xiaochuan Li"
        description="A strict accuracy–stability–grounding hierarchy, observable only as deep as both sides are transparent."
        showProgress={true}>
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Paper · in progress · target deadline Aug 2026
+      Paper 1 · v2 draft complete · workshop target
     </div>
-    <h1>Stable is not grounded</h1>
+    <h1>Stable Is Not Grounded</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
       A strict accuracy–stability–grounding hierarchy, observable only as deep as both sides are transparent.
     </p>
@@ -76,10 +76,11 @@ import SCDemo from "../../components/SCDemo.tsx";
     <h2>Status</h2>
 
     <ul>
-      <li><strong>v2 draft</strong> — main theoretical hierarchy and controlled demonstration complete.</li>
-      <li><strong>§6.5 in progress</strong> — real-world demonstration on MNLI / HANS (go signal: SC-spurious present + HANS ΔAcc ≥ 0.10).</li>
-      <li><strong>Phase 2 (late July)</strong> — expansion to 2–3 models and negative controls.</li>
-      <li><strong>Companion paper</strong> — the formal in-the-wild non-identifiability argument is split off; this paper is empirical-first.</li>
+      <li><strong>Status:</strong> v2 draft complete. Controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks are integrated. Current work: workshop framing, reproducibility package, and tightening the formal scope statement.</li>
+      <li><strong>Target:</strong> workshop paper / methodological position paper.</li>
+      <li><strong>Role in the program:</strong> Paper 1. Establishes the <code>accuracy ⊋ stability ⊋ grounding</code> hierarchy and gives a binary certification protocol for stable-correct behavior under construction-and-auditability assumptions.</li>
+      <li><strong>Scope condition:</strong> level three is licensed only when the item graph is stipulated and the training entanglement is auditable. The method does not solve grounding in the wild.</li>
+      <li><strong>Future work:</strong> a full identification-theoretic treatment is left to future work; the present paper gives the operational boundary and empirical separation witnesses.</li>
     </ul>
 
     <hr />

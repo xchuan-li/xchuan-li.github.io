@@ -19,7 +19,7 @@ export const posts: Post[] = [
     date: "May 2026",
     pubDate: "2026-05-28",
     excerpt:
-      "Every training example is a falsifier — a behavioral observation compatible with some causal structures and incompatible with others. The structure a learner ends up with is the residue of cumulative cutting. This may be the hidden unification of the four projects on this site.",
+      "Every training example is a falsifier — a behavioral observation compatible with some causal structures and incompatible with others. The structure a learner ends up with is the residue of cumulative cutting. This may be the hidden unification of the core program and its extensions.",
     status: "note",
   },
   {

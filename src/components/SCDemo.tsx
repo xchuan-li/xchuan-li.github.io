@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // ============================================================
-// SCDemo — Interactive Figure for "Stable is not grounded"
+// SCDemo — Interactive Figure for "Stable Is Not Grounded"
 //
 // Reproduces §6.1 with three coordinated views:
 //  (1) DAG of the data-generating process; do() severs an arrow
@@ -119,7 +119,7 @@ export default function SCDemo({
       <div className="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-1">
         Interactive figure · {modelLabel}
       </div>
-      <h3 className="text-lg font-medium mb-1">Stable is not grounded</h3>
+      <h3 className="text-lg font-medium mb-1">Stable Is Not Grounded</h3>
       <p className="text-sm text-[var(--color-text-muted)] italic mb-6">
         A 91%-accurate, fully stable model that has learned nothing — and the intervention that reveals it.
       </p>

@@ -41,7 +41,7 @@ src/
 │   ├── SCHierarchyFigure.astro     # Homepage About section concept figure — three concentric
 │   │                               # rounded panels (accuracy ⊋ stable-correct ⊋ grounded) with
 │   │                               # populations of dots in each band; do(C) callout arrow.
-│   ├── ProjectGlyph.astro          # The six per-project glyphs; reused as 16:10-card centerpieces
+│   ├── ProjectGlyph.astro          # Project glyphs; reused as 16:10-card centerpieces
 │   │                               # on the homepage research grid.
 │   └── SectionDivider.astro        # (Legacy) horizontal line + tiny SVG mark; no longer used on
 │                                   # the new homepage but kept for inner pages.
@@ -52,12 +52,12 @@ src/
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
 │   ├── contact.astro               # Email, GitHub, location, PhD-application note
 │   ├── research/
-│   │   ├── index.astro             # Research index (list of all projects)
+│   │   ├── index.astro             # Research index (core sequence + sandbox + extensions)
 │   │   ├── sc-certification.astro  # paper1 detail page — embeds <SCDemo client:load />
-│   │   ├── isotrace.astro          # Stub — needs interactive demo eventually
-│   │   ├── mini-causal-models.astro # Stub — synthetic ground-truth sandbox; needs interactive sandbox eventually
-│   │   ├── ciy.astro               # Stub — needs falsifiability widget eventually
-│   │   ├── latent-control-states.astro  # Stub — mech interp project (formerly "LiT")
+│   │   ├── isotrace.astro          # Expanded method page — behavioral path tracing
+│   │   ├── mini-causal-models.astro # Supporting planted-ground-truth sandbox
+│   │   ├── ciy.astro               # Paper 3 — quantitative grading
+│   │   ├── latent-control-states.astro  # Mechanistic extension (formerly "LiT")
 │   │   └── cross-lingual-protobias.astro
 │   └── writing/
 │       ├── index.astro             # Writing index (placeholder posts)
@@ -95,21 +95,28 @@ The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass s
   - `SCHierarchyFigure` is load-bearing in the About section — concentric containment of `accuracy ⊋ stable-correct ⊋ grounded` with dot populations and a `do(C)` callout arrow. Boxless, no card chrome.
   - `ProjectGlyph` is reused at large size as the centerpiece of each 16:10 research card; the card visual cell has a project-tinted radial gradient behind it.
   - Hero background is a faint node-constellation SVG anchored top-right; `opacity: 0.55`.
-- **Research focus card** (replaces the reference site's "skills with percentages"). Five rows of uppercase label + monospace status tag + thin colored hairline. No numbers — status tags are honest text: `Primary`, `Active`, `Exploratory`, `2026`, `Background`.
+- **Research focus card** (replaces the reference site's "skills with percentages"). Rows use uppercase label + monospace status tag + thin colored hairline. No numbers — status tags should reflect the roadmap (`Paper 1`, `Paper 2`, `Paper 3`, `Support`, `Extensions`, `Background`).
 
-## The research projects (high-level — don't summarize wrong)
+## The research program (high-level — don't summarize wrong)
 
-1. **Stable is not grounded** (paper1, target Aug 2026 deadline): An acyclic certification framework. Hierarchy is `accuracy ⊋ stability ⊋ grounding`; the deepest cut `SC → {grounded, spurious}` requires **two-sided observability** (benchmark graph stipulated + training auditable). The §6.1 controlled demo: TF-IDF + LR classifier reaches 0.912 accuracy, fully stable; `do(class-3)` drops it Δ +.408, negative control `do(class-2)` only Δ +.021. This is what the live SCDemo on /research/sc-certification reproduces interactively.
+Central question: **when is a model's behavior licensed by the minimum causal structure that should support it?** Do not present the roadmap as six equal projects. It is a core sequence, with a supporting sandbox and two extensions.
 
-2. **Isotrace**: Behavioral tracing of multi-hop reasoning. Fictional concept names (Zorb, Veln, Quasp) with path-encoded naming conventions locate where shortcut substitution fires, hop-by-hop, without opening the model. Complementary to mech interp.
+Core sequence: **Hierarchical Causal Evidence**.
 
-3. **Mini causal models** (project, exploratory): A synthetic sandbox for the minimum-licensing-structure question raised in `/writing/inferential-productivity`. Plant a small causal model with known structure, simulate data, train a model on it, then recover the minimal structure from behavior alone. Because the truth is *planted*, the recovery can be scored against ground truth — this is "both": developing the recovery method and validating it. Sits between Isotrace (*where* a shortcut fires) and CIY (*how much* of a structure is used) — a mini causal model is exactly the structure CIY reads a yield over. Lives at `/research/mini-causal-models`.
+1. **Stable Is Not Grounded** (Paper 1): Binary certification. Establishes `accuracy ⊋ stability ⊋ grounding`; the deepest cut `SC → {grounded, spurious}` requires **two-sided observability** (benchmark graph stipulated + training auditable). The §6.1 controlled demo: TF-IDF + LR classifier reaches 0.912 accuracy, fully stable; `do(class-3)` drops it Δ +.408, negative control `do(class-2)` only Δ +.021. The page status says v2 draft complete, with controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks integrated.
 
-4. **CIY (causal inferential yield)**: A graded measure over SC-grounded items. The falsifiability test: if you cannot construct two models matched on accuracy + grounding but with opposing CIY, CIY collapses into accuracy repackaging.
+2. **Isotrace** (Paper 2): Behavioral path tracing in LLMs via synthetic concept labeling. Fictional concept names (Zorb, Veln, Quasp) and path-encoded naming conventions make different hypothesized reasoning paths produce different observable labels. This is behavioral evidence, not direct access to internal reasoning.
 
-5. **Latent control states** (project, May–Dec 2026): Mechanistic interpretability of prompt-framing effects. **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation); refer to the project only by its full descriptive name. Lives at `/research/latent-control-states`. Do not foreground collaborators or supervision here.
+3. **Causal Inferential Yield (CIY)** (Paper 3): Quantitative grading. Defined on items whose grounding status is already certified or controlled, not arbitrary benchmark accuracy. The falsifiability test: if CIY cannot distinguish accuracy-matched and grounding-matched models, it collapses into accuracy repackaging.
 
-6. **Cross-lingual ProtoBias** (Topic 6, in progress): Multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation. Frame it as part of the grounding/shortcut research line: semantic image-text alignment is tested against prototype-driven, culturally variable shortcuts.
+Supporting sandbox:
+
+- **Mini Causal Models**: A controlled planted-ground-truth sandbox for the core program. It provides small causal structures whose true generating graph is known, so structure recovery, Isotrace-style path localization, and CIY-style grading can be tested against a known target.
+
+Extensions:
+
+- **Latent Control States**: Mechanistic extension. If a behavioral intervention reveals a causal control state, can a corresponding state or direction be found in activation space? **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation). Do not foreground collaborators or supervision here.
+- **Cross-lingual ProtoBias**: Applied multilingual/multimodal stress test. Does an evaluator track semantic content of an image-text pair, or lean on language- and culture-specific prototype shortcuts?
 
 ## Editing rules
 

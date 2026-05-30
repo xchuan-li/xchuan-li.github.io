@@ -4,37 +4,41 @@ import MiniCausalFigure from "../../components/MiniCausalFigure.astro";
 ---
 
 <Base
-  title="Mini causal models · Xiaochuan Li"
-  description="Plant a small causal model with known structure, train on its data, then recover the minimal structure from behavior alone — so the recovery can be scored against a planted truth."
+  title="Mini Causal Models · Xiaochuan Li"
+  description="A controlled planted-ground-truth sandbox for testing causal-structure recovery, Isotrace-style path localization, and CIY-style quantitative grading."
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Project · exploratory
+      Supporting sandbox · planted structure
     </div>
-    <h1>Mini causal models — a sandbox with a known answer</h1>
+    <h1>Mini Causal Models — a sandbox with a known answer</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      Plant a small causal model, train on its data, and recover the minimal structure from behavior — where the truth is known.
+      Controlled planted-ground-truth infrastructure for the core program.
     </p>
 
     <p>
-      <em>Detail page coming.</em> The hard direction in my
-      <a href="/writing/inferential-productivity">note on inferential productivity</a> — given a
-      behavior, what is the <em>smallest</em> causal structure that has to be there — is hard partly
-      because, on a real model, there is no ground truth to check a recovered structure against. So I
-      start small and synthetic: plant a causal model whose structure I fully control, simulate data
-      from it, train a model on that data, and then try to recover the minimal structure from
-      behavior alone.
+      Mini Causal Models are a controlled planted-ground-truth sandbox for the core program. They
+      provide small causal structures whose true generating graph is known, so that structure
+      recovery, <a href="/research/isotrace">Isotrace</a>-style path localization, and
+      <a href="/research/ciy">CIY</a>-style quantitative grading can be tested against a known
+      target.
     </p>
 
     <MiniCausalFigure />
 
     <p>
-      Because the structure is <em>planted</em>, the recovery can actually be scored — that is the
-      whole point of staying synthetic before trusting the method on a real model. It sits between
-      <a href="/research/isotrace">Isotrace</a>, which locates <em>where</em> a shortcut replaces
-      composition, and <a href="/research/ciy">CIY</a>, which measures <em>how much</em> of a
-      structure a model uses: a mini causal model is exactly the kind of structure CIY needs in order
-      to read a yield, and this is where I build and stress-test the recovery that produces it.
+      The hard direction in my <a href="/writing/inferential-productivity">note on inferential
+      productivity</a> is reverse: given a behavior, what is the <em>smallest</em> causal structure
+      that has to be there? On a real model, there is usually no ground truth against which to score
+      a recovered structure. The sandbox keeps the problem synthetic before trusting the method
+      elsewhere: plant the graph, simulate data, train or evaluate a model on that data, and test
+      whether behavioral recovery returns the structure that was actually planted.
+    </p>
+
+    <p>
+      This is supporting infrastructure, not a fourth equal core paper. It exists to make the
+      quantitative and structure-recovery parts of Hierarchical Causal Evidence falsifiable against
+      a known answer.
     </p>
 
     <hr/>

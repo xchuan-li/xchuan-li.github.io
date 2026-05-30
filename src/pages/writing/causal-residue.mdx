@@ -14,9 +14,12 @@ import CausalResidueFigure from "../../components/CausalResidueFigure.astro";
 
 # Causal structure as residue — training as elimination
 
-A short note putting down what I think is the hidden unification of the projects I'm
-working on. It came out of a conversation and I'm writing it here partly to see
-whether it survives being written.
+A short note putting down what I think is the hidden unification of the research
+program I'm working on. It came out of a conversation and I'm writing it here
+partly to see whether it survives being written.
+
+Causal structure is not produced by a model's correct answers; it is what
+remains after competing explanations have been eliminated.
 
 We usually frame *learning a causal structure* as the productive direction: data
 goes in, structure comes out. The picture comes prepackaged with supervised
@@ -56,10 +59,10 @@ should be reporting is not an opaque parameter vector that happened to fit, but 
 
 ## Why this fits this research program
 
-Looking back at the projects on this site, every one of them is an instance of
-elimination:
+Looking back at the research program on this site, the core sequence and its
+extensions are all instances of elimination:
 
-- [**SC certification**](/research/sc-certification) is a single structured
+- [**Stable Is Not Grounded**](/research/sc-certification) is a single structured
   falsifier. The `do`-intervention takes a candidate hypothesis — *this
   particular shortcut is the load-bearing structure* — and either kills it or
   fails to kill it. The matched negative control is what rules out "any
@@ -67,17 +70,16 @@ elimination:
 - [**Isotrace**](/research/isotrace) is a sequence of behavioral falsifiers, one
   per hop, on the hypothesis that compositional reasoning is licensing this
   answer. Where the falsifier fires localizes where the substitution happens.
-- [**Mini causal models**](/research/mini-causal-models) is the eliminative
-  process in its purest form: a synthetic sandbox where the ground-truth
-  structure is planted, training data is generated from it, and the goal is to
-  recover the minimal structure from behavior alone — scored against a planted
-  truth.
 - [**CIY**](/research/ciy) is the graded relaxation of elimination: not
   *rule the structure in or out* but *how much of the licensing structure has
   actually been used*.
+- [**Mini Causal Models**](/research/mini-causal-models) is the eliminative
+  process in sandbox form: a synthetic environment where the ground-truth
+  structure is planted, training data is generated from it, and recovery can be
+  scored against a known target.
 
-I had not previously framed these as four faces of the same operation. I think
-they are.
+I had not previously framed these as one operation with a core sequence and
+supporting infrastructure. I think that is the right shape.
 
 ## Four pressures the framing has to survive
 
@@ -120,7 +122,7 @@ equivalence class — not the single planted structure.
 
 ## A concrete next step
 
-The [mini causal models](/research/mini-causal-models) sandbox is the natural
+The [Mini Causal Models](/research/mini-causal-models) sandbox is the natural
 test bed. The experiment is to implement a training loop that explicitly logs
 hypothesis-space cuts per example: at step *t*, the model's behavior is
 compatible with hypothesis set *H<sub>t</sub> ⊆ H<sub>t-1</sub>*. Two things have
@@ -136,9 +138,9 @@ this research line — taking a methodological intuition and putting it on a
 sandbox where it can be evaluated against a planted answer, before it has to
 survive contact with a real model.
 
-If the result holds, the unification is real and the four projects on this site
-are not four projects but four faces of one — which is, I think, the right
-shape for a doctoral research program to have.
+If the result holds, the unification is real: the work is not a bundle of
+parallel projects, but one causal-licensing program with a core sequence,
+supporting sandbox, and extensions.
 
 ---
 

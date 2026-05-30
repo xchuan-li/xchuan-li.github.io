@@ -5,35 +5,124 @@ import IsotraceFigure from "../../components/IsotraceFigure.astro";
 
 <Base
   title="Isotrace · Xiaochuan Li"
-  description="Fictional concept names with path-encoded naming locate where compositional reasoning gives way to surface patterns — hop by hop, without opening the model."
+  description="Behavioral path tracing in LLMs via synthetic concept labeling."
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Paper · in progress
+      Paper 2 · conceptual and early methodological stage
     </div>
-    <h1>Isotrace — behavioral tracing of multi-hop reasoning</h1>
+    <h1>Isotrace</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      Locating where shortcut substitution replaces compositional reasoning — without opening the model.
+      Behavioral path tracing in LLMs via synthetic concept labeling.
+    </p>
+
+    <h2>Problem</h2>
+    <p>
+      Multi-hop benchmarks tell us whether a model got the final answer right, but not which
+      reasoning path it used. A correct answer may come from executing the full chain, or from a
+      shortcut that happens to point to the same answer.
     </p>
 
     <p>
-      <em>Detail page coming. The short version:</em> we use fictional concept names
-      (<code>Zorb</code>, <code>Veln</code>, <code>Quasp</code>) whose naming conventions encode the
-      multi-hop reasoning path. By comparing model outputs across an adversarial contrast — same
-      surface names, different underlying facts — we can localize the hop at which the model stops
-      reasoning compositionally and starts riding the naming pattern.
+      Isotrace is a <strong>behavioral path-tracing protocol</strong>. It does not directly observe
+      internal reasoning. Instead, it designs tasks where distinct hypothesized paths produce
+      distinct observable labels.
+    </p>
+
+    <h2>Core idea</h2>
+    <p>
+      Encode path information into the output itself. Use fictional concepts and path-encoding
+      naming rules, so that the final output name records which reasoning hops were executed.
+    </p>
+
+    <h2>Isotope analogy</h2>
+    <p>
+      In chemistry, isotope tracing labels molecules and observes where the label ends up, without
+      opening the reaction vessel. Isotrace does the same for LLM reasoning: the concept name acts
+      as the label, reasoning hops transform the label, and the final output reveals the path.
     </p>
 
     <IsotraceFigure />
 
+    <h2>Core mechanism</h2>
+    <h3>Synthetic concepts</h3>
     <p>
-      The complementarity to <a href="/research/sc-certification">SC certification</a> is the point:
-      that work asks <em>whether</em> a model's stable-correct behavior is grounded; Isotrace asks
-      <em>where</em> the shortcut fires, hop by hop. Behavioral tracing and mechanistic
-      interpretability as mutual validation.
+      Use fictional names such as <code>Zorb</code>, <code>Veln</code>, and <code>Quasp</code> to
+      reduce contamination from prior world knowledge.
+    </p>
+
+    <h3>Path-encoding naming rules</h3>
+    <pre><code>Rule 1: A Zorb that satisfies condition X is called Zorb-α.
+Rule 2: A Zorb-α that satisfies condition Y is called Zorb-α-prime.
+Rule 3: A Zorb-α-prime that satisfies condition Z is called Zorb-α-prime-Ω.</code></pre>
+
+    <h3>Output interpretation</h3>
+    <pre><code>Zorb                 -> no hop executed / chain broken at hop 1
+Zorb-α               -> hop 1 completed, chain broke before hop 2
+Zorb-α-prime         -> hops 1-2 completed, chain broke before hop 3
+Zorb-α-prime-Ω       -> full chain executed</code></pre>
+
+    <h2>Hop-level interventions</h2>
+    <ul>
+      <li><strong>Hop deletion:</strong> remove rule <code>k</code> to test whether hop <code>k</code> is genuinely load-bearing or whether the model bridges over it.</li>
+      <li><strong>Shortcut injection:</strong> introduce a spurious cue at hop <code>k</code> to test whether the model shortcut-replaces that hop.</li>
+      <li><strong>Order scrambling:</strong> present rules out of order to distinguish logical structure use from positional heuristics.</li>
+      <li><strong>Label perturbation:</strong> keep the logical structure fixed but swap the surface labels, to distinguish genuine path-following from surface instruction-following.</li>
+    </ul>
+
+    <h2>Relationship to the core sequence</h2>
+    <ul>
+      <li><strong>Paper 1 — Stable Is Not Grounded:</strong> binary certification. Is the licensing structure counterfactually load-bearing?</li>
+      <li><strong>Paper 2 — Isotrace:</strong> path-level localization. Which hop was used, bypassed, or shortcut-replaced?</li>
+      <li><strong>Paper 3 — Causal Inferential Yield:</strong> quantitative grading. How much causal structure does the model reliably extract?</li>
+    </ul>
+
+    <h2>Key methodological risk</h2>
+    <p>
+      The central confound is instruction-following or rule-copying. A model may output the correct
+      transformed name not because it verified the condition for that hop, but because it copied the
+      naming pattern from the prompt. For example, if the prompt says "a Zorb satisfying X is called
+      Zorb-α," the model might output <code>Zorb-α</code> without checking whether this particular
+      Zorb satisfies X.
+    </p>
+
+    <h2>Diagnostic fix</h2>
+    <p>
+      Use adversarial contrast pairs with the same naming rules but different underlying facts.
+    </p>
+
+    <pre><code>Prompt A:
+Same rules.
+This Zorb satisfies X.
+Correct output: Zorb-α.
+
+Prompt B:
+Same rules.
+This Zorb does not satisfy X.
+Correct output: Zorb.</code></pre>
+
+    <p>
+      A rule-copying model will tend to output the same transformed name in both prompts. A model
+      that actually applies the rule should output different names. This contrast is central: it
+      turns the main weakness of the method into a falsifiable test.
+    </p>
+
+    <h2>Status</h2>
+    <ul>
+      <li>Conceptual and early methodological stage.</li>
+      <li>Core analogy established.</li>
+      <li>Basic mechanism designed.</li>
+      <li>Relationship to Paper 1 and Paper 3 defined.</li>
+      <li>Next milestone: a 3-hop pilot experiment with clean chain, hop deletion, shortcut-at-hop-k, order scrambling, label perturbation, and adversarial rule-copying controls.</li>
+    </ul>
+
+    <p>
+      The claim is intentionally modest. Isotrace does not claim to trace the model's real reasoning
+      process directly. It gives a behavioral design in which competing path hypotheses have
+      different observable consequences.
     </p>
 
     <hr/>
-    <p class="!text-sm !text-[var(--color-text-muted)]">An interactive demo will live here once the writeup is further along.</p>
+    <p class="!text-sm !text-[var(--color-text-muted)]">An interactive path-label pilot will live here once the experiment is stable.</p>
   </article>
 </Base>

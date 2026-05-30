@@ -4,32 +4,60 @@ import CIYFigure from "../../components/CIYFigure.astro";
 ---
 
 <Base
-  title="CIY · Xiaochuan Li"
+  title="Causal Inferential Yield · Xiaochuan Li"
   description="A graded, falsifiable measure of how much of the licensing structure a model actually uses — built so it cannot quietly collapse back into accuracy."
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Paper · draft
+      Paper 3 · quantitative grading
     </div>
-    <h1>CIY — causal inferential yield</h1>
+    <h1>Causal Inferential Yield</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      A graded measure over SC-grounded items, designed to be falsifiable.
+      How much causal structure does the model reliably extract?
     </p>
 
     <p>
-      <em>Detail page coming.</em> CIY is a graded measure defined over the items that
-      <a href="/research/sc-certification">SC certification</a> has already cleared as grounded. It
-      asks not just whether the model is reading the licensing structure, but how much of the
-      structure's inferential weight it is actually using.
+      Causal Inferential Yield (CIY) asks not merely whether the licensing structure is used, or
+      where it is used, but how much causal structure the model reliably extracts. It is Paper 3 in
+      the core sequence: <a href="/research/sc-certification">Stable Is Not Grounded</a> gives
+      binary certification, <a href="/research/isotrace">Isotrace</a> gives path localization, and
+      CIY aims at quantitative grading.
     </p>
 
     <CIYFigure />
 
+    <h2>Measurement domain</h2>
     <p>
-      The design constraint is falsifiability. If we cannot construct two models matched on accuracy
-      and on grounding but with opposing CIY, CIY is not a real measurement — it has collapsed into
-      accuracy repackaging. The instantiation protocol is designed precisely to expose that
-      collapse, not paper over it.
+      CIY should be defined on items whose grounding status is already certified or controlled, not
+      on arbitrary benchmark accuracy. Otherwise the measure risks grading whatever signal happens
+      to correlate with the answer, rather than the causal structure that should license it.
+    </p>
+
+    <p>
+      In the cleanest case, the item graph is stipulated and the relevant interventions are
+      auditable. In the sandbox case, the generating structure is planted. Those are the regimes in
+      which a yield measure has a target to be wrong about.
+    </p>
+
+    <h2>Falsifiability criterion</h2>
+    <p>
+      The design constraint is falsifiability. If CIY cannot distinguish accuracy-matched and
+      grounding-matched models, then it collapses into a repackaging of accuracy and should not be
+      treated as a new measure. The instantiation protocol is designed to expose that collapse, not
+      paper over it.
+    </p>
+
+    <h2>Role in the program</h2>
+    <ul>
+      <li><strong>Paper 1:</strong> binary certification — is the licensing structure load-bearing?</li>
+      <li><strong>Paper 2:</strong> path localization — which hop was used, bypassed, or shortcut-replaced?</li>
+      <li><strong>Paper 3:</strong> quantitative grading — how much of the certified or controlled structure is reliably extracted?</li>
+    </ul>
+
+    <p>
+      Mini Causal Models are the supporting sandbox for this step: because the ground-truth graph is
+      planted, CIY-style grading can be tested against a known target before being applied to less
+      controlled settings.
     </p>
 
     <hr/>

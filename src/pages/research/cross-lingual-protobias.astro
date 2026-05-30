@@ -4,24 +4,31 @@ import Base from "../../layouts/Base.astro";
 
 <Base
   title="Cross-lingual ProtoBias · Xiaochuan Li"
-  description="A multilingual ProtoBias study of prototypicality bias in multimodal AI evaluation."
+  description="An applied multilingual/multimodal stress test of semantic grounding versus language- and culture-specific prototype shortcuts."
   showProgress={true}
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Project · in progress
+      Extension · applied stress test
     </div>
-    <h1>Cross-lingual prototypicality bias in multimodal AI evaluation</h1>
+    <h1>Cross-lingual ProtoBias</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      A semantic-grounding stress test for multimodal evaluators under language variation.
+      Semantic grounding versus prototype shortcuts under language variation.
     </p>
 
     <p>
-      This project extends my main grounding question into multimodal evaluation. If a model says
-      an image matches a prompt, is it tracking the semantic content of the description, or is it
-      leaning on a prototype that happens to feel more typical? The ambiguity is structurally close
-      to the one in <a href="/research/sc-certification">SC certification</a>: a judgment can be
-      stable and plausible while still being carried by the wrong feature.
+      Cross-lingual ProtoBias applies the same semantic-vs-shortcut ambiguity to multilingual and
+      multimodal evaluation: does an evaluator track the semantic content of an image-text pair, or
+      does it lean on language- and culture-specific prototypes?
+    </p>
+
+    <p>
+      This is an applied stress test of the central framework, not a separate thesis spine. If a
+      model says an image matches a prompt, the causal-licensing question is familiar: is the
+      judgment carried by semantic content, or by a prototype that happens to feel more typical? The
+      ambiguity is structurally close to the one in
+      <a href="/research/sc-certification">Stable Is Not Grounded</a>: a judgment can be stable and
+      plausible while still being carried by the wrong feature.
     </p>
 
     <p>
