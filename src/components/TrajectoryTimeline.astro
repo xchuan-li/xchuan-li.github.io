@@ -81,7 +81,9 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
                 </div>
               )}
 
-              <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
+              <a class="spine-node-link" href={it.href} aria-label={it.title ?? it.label}>
+                <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
+              </a>
 
               {(it.kind === "paper" || it.kind === "sandbox") && (
                 <div class="spine-below">
@@ -213,10 +215,18 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
   }
 
   /* ---- nodes ---- */
+  .spine-node-link {
+    grid-row: 2;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    /* widen the hit target a little beyond the dot itself */
+    padding: 6px;
+    margin: -6px;
+  }
   .spine-node {
     position: relative;
     z-index: 2;
-    grid-row: 2;
     display: block;
     border-radius: 50%;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
@@ -390,10 +400,13 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
   .ss-above {
     top: 50%;
     transform: translate(-50%, calc(-100% - var(--ss-gap)));
+    /* clear space below the text so the dot/stem don't sit on the last line */
+    padding-bottom: 0.85rem;
   }
   .ss-below {
     top: 50%;
     transform: translate(-50%, var(--ss-gap));
+    padding-top: 0.85rem;
   }
 
   /* stems — simple vertical lines from card to axis */
