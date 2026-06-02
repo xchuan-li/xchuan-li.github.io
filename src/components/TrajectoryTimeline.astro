@@ -2,9 +2,8 @@
 // ResearchSpine — a structured roadmap for the homepage.
 // One thick main axis runs left to right and converges on the thesis result (CIY).
 // Each project is a single node on the axis; the idea(s) that motivate it sit
-// stacked directly above it, chained by short lines (one idea = one tick; two
-// ideas = stacked, one above the other). Two side studies branch off the axis as
-// thin linear forks before the capstone, feeding into it.
+// stacked directly above it, chained by short lines. Two side studies branch
+// straight off the axis — one above, one below — with simple vertical stems.
 interface Idea {
   label: string;
   href: string;
@@ -13,16 +12,12 @@ interface Idea {
 interface SpineItem {
   kind: "idea" | "paper" | "sandbox";
   href: string;
-  // origin idea node
   label?: string;
-  // project node
   n?: string;
   title?: string;
   color?: string;
   capstone?: boolean;
-  // ideas stacked above a project
   ideas?: Idea[];
-  // ideas stacked below a project (between node and label)
   ideasBelow?: Idea[];
 }
 
@@ -42,91 +37,93 @@ interface Props {
 
 const { spine, extensions } = Astro.props;
 const cols = spine.length;
-// Each extension branches from its own anchor on the main axis.
-// Card is offset horizontally so two cards don't overlap.
-const extMeta = extensions.map((ext, i) => {
-  const anchorPct = ((ext.anchor - 0.5) / cols) * 100;
-  const cardPct = anchorPct + (i === 0 ? -8 : 8); // first left, second right
-  return { ...ext, anchorPct, cardPct };
-});
+// extensions[0] → above axis (Latent), extensions[1] → below axis (Cross)
+const above = extensions[0];
+const below = extensions[1];
+const abovePct = ((above.anchor - 0.5) / cols) * 100;
+const belowPct = ((below.anchor - 0.5) / cols) * 100;
 ---
 
 <div class="spine-scroll">
   <div class="spine-map" style={`--cols: ${cols};`}>
     <div class="spine-track-label">Main research spine</div>
 
-    <ol class="spine-main">
-      {
-        spine.map((it) => (
-          <li
-            class={`spine-item spine-${it.kind}${it.capstone ? " spine-capstone" : ""}`}
-            style={it.color ? `--c: ${it.color};` : undefined}
-          >
-            {it.kind === "idea" && (
-              <a class="spine-ideas spine-ideas-origin" href={it.href}>
-                <span class="spine-idea-tag">
-                  <span class="spine-kicker">Idea</span>
-                  <span class="spine-label spine-label-idea">{it.label}</span>
-                </span>
-                <span class="spine-idea-stem" aria-hidden="true" />
-              </a>
-            )}
-
-            {it.ideas && (
-              <div class="spine-ideas">
-                {it.ideas.map((idea, i) => (
-                  <>
-                    {i > 0 && <span class="spine-idea-stem spine-idea-stem-mid" aria-hidden="true" />}
-                    <a class="spine-idea-tag" href={idea.href}>
-                      <span class="spine-kicker">Idea</span>
-                      <span class="spine-label spine-label-idea">{idea.label}</span>
-                    </a>
-                  </>
-                ))}
-                <span class="spine-idea-stem" aria-hidden="true" />
-              </div>
-            )}
-
-            <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
-
-            {(it.kind === "paper" || it.kind === "sandbox") && (
-              <div class="spine-below">
-                {it.ideasBelow?.map((idea) => (
-                  <>
-                    <a class="spine-below-idea" href={idea.href}>
-                      <span class="spine-kicker">Idea</span>
-                      <span class="spine-label spine-label-idea">{idea.label}</span>
-                    </a>
-                    <span class="spine-idea-stem" aria-hidden="true" />
-                  </>
-                ))}
-                <a class="spine-tag" href={it.href}>
-                  <span class="spine-num">{it.n}</span>
-                  <span class="spine-label spine-label-paper">{it.title}</span>
+    <div class="spine-axis">
+      <ol class="spine-main">
+        {
+          spine.map((it) => (
+            <li
+              class={`spine-item spine-${it.kind}${it.capstone ? " spine-capstone" : ""}`}
+              style={it.color ? `--c: ${it.color};` : undefined}
+            >
+              {it.kind === "idea" && (
+                <a class="spine-ideas spine-ideas-origin" href={it.href}>
+                  <span class="spine-idea-tag">
+                    <span class="spine-kicker">Idea</span>
+                    <span class="spine-label spine-label-idea">{it.label}</span>
+                  </span>
+                  <span class="spine-idea-stem" aria-hidden="true" />
                 </a>
-              </div>
-            )}
-          </li>
-        ))
-      }
-    </ol>
+              )}
 
-    <div class="spine-branches">
-      <svg class="branch-fork" viewBox="0 0 100 64" preserveAspectRatio="none" aria-hidden="true">
-        {extMeta.map((ext) => (
-          <path d={`M ${ext.anchorPct} -77 L ${ext.anchorPct} 16 L ${ext.cardPct} 56`} />
-        ))}
-      </svg>
-      {
-        extMeta.map((ext) => (
-          <a class="side-study" href={ext.href} style={`--c: ${ext.color}; --x: ${ext.cardPct}%;`}>
-            <span class="side-study-dot" aria-hidden="true" />
-            <span class="branch-kicker">{ext.kicker}</span>
-            <span class="branch-title">{ext.title}</span>
-            <span class="branch-desc">{ext.desc}</span>
-          </a>
-        ))
-      }
+              {it.ideas && (
+                <div class="spine-ideas">
+                  {it.ideas.map((idea, i) => (
+                    <>
+                      {i > 0 && <span class="spine-idea-stem spine-idea-stem-mid" aria-hidden="true" />}
+                      <a class="spine-idea-tag" href={idea.href}>
+                        <span class="spine-kicker">Idea</span>
+                        <span class="spine-label spine-label-idea">{idea.label}</span>
+                      </a>
+                    </>
+                  ))}
+                  <span class="spine-idea-stem" aria-hidden="true" />
+                </div>
+              )}
+
+              <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
+
+              {(it.kind === "paper" || it.kind === "sandbox") && (
+                <div class="spine-below">
+                  {it.ideasBelow?.map((idea) => (
+                    <>
+                      <a class="spine-below-idea" href={idea.href}>
+                        <span class="spine-kicker">Idea</span>
+                        <span class="spine-label spine-label-idea">{idea.label}</span>
+                      </a>
+                      <span class="spine-idea-stem" aria-hidden="true" />
+                    </>
+                  ))}
+                  <a class="spine-tag" href={it.href}>
+                    <span class="spine-num">{it.n}</span>
+                    <span class="spine-label spine-label-paper">{it.title}</span>
+                  </a>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- Side study: above axis -->
+      <a class="ss-card ss-above" href={above.href}
+         style={`--c: ${above.color}; --x: ${abovePct}%;`}>
+        <span class="ss-stem ss-stem-up" aria-hidden="true" />
+        <span class="ss-dot ss-dot-edge-bottom" aria-hidden="true" />
+        <span class="branch-kicker">{above.kicker}</span>
+        <span class="branch-title">{above.title}</span>
+        <span class="branch-desc">{above.desc}</span>
+      </a>
+
+      <!-- Side study: below axis -->
+      <a class="ss-card ss-below" href={below.href}
+         style={`--c: ${below.color}; --x: ${belowPct}%;`}>
+        <span class="ss-stem ss-stem-down" aria-hidden="true" />
+        <span class="ss-dot ss-dot-edge-top" aria-hidden="true" />
+        <span class="branch-kicker">{below.kicker}</span>
+        <span class="branch-title">{below.title}</span>
+        <span class="branch-desc">{below.desc}</span>
+      </a>
     </div>
   </div>
   <div class="spine-hint" aria-hidden="true">scroll</div>
@@ -165,23 +162,19 @@ const extMeta = extensions.map((ext, i) => {
     color: var(--color-text-dim);
   }
 
-  .spine-main {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  /* ---- axis wrapper ---- */
+  .spine-axis {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(var(--cols), minmax(150px, 1fr));
-    align-items: stretch;
-    height: 236px;
+    padding: 136px 0 142px; /* room for side-study cards above and below */
+    overflow: visible;
   }
-  /* main axis — thicker line, strengthening toward the capstone on the right */
-  .spine-main::before {
+  .spine-axis::before {
+    /* horizontal axis line */
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: 137px;
+    top: 50%;
     height: 2px;
     border-radius: 2px;
     background: linear-gradient(
@@ -196,10 +189,21 @@ const extMeta = extensions.map((ext, i) => {
     z-index: 0;
   }
 
+  /* ---- main spine grid ---- */
+  .spine-main {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(150px, 1fr));
+    align-items: stretch;
+    height: 240px;
+  }
+
   .spine-item {
     position: relative;
     display: grid;
-    grid-template-rows: 130px auto minmax(66px, auto);
+    grid-template-rows: 1fr auto 1fr;
     align-items: center;
     justify-items: center;
     padding: 0 0.45rem;
@@ -227,7 +231,6 @@ const extMeta = extensions.map((ext, i) => {
     background: var(--c, var(--color-accent));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
   }
-  /* sandbox node — a rounded square marks tooling, not a paper */
   .spine-node-sandbox {
     width: 16px;
     height: 16px;
@@ -235,8 +238,6 @@ const extMeta = extensions.map((ext, i) => {
     background: var(--c, var(--accent-slate));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
   }
-
-  /* capstone (CIY) — emphasized convergence target */
   .spine-capstone .spine-node-paper {
     width: 19px;
     height: 19px;
@@ -370,40 +371,42 @@ const extMeta = extensions.map((ext, i) => {
   .spine-paper:hover .spine-label-paper,
   .spine-sandbox:hover .spine-label-paper { color: var(--c, var(--color-accent)); }
 
-  /* ---- side studies: thin linear branches off the axis, before the capstone ---- */
-  .spine-branches {
-    position: relative;
-    height: 184px;
-    margin-top: 0;
-  }
-  .branch-fork {
-    position: absolute;
-    inset: 0 0 auto 0;
-    width: 100%;
-    height: 64px;
-    overflow: visible;
-  }
-  .branch-fork path {
-    fill: none;
-    stroke: color-mix(in srgb, var(--accent-amber) 36%, var(--color-border-strong));
-    stroke-width: 1;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .side-study {
+  /* ---- side studies: straight vertical stems off the axis ---- */
+  .ss-card {
     position: absolute;
     left: var(--x);
-    top: 60px;
     transform: translateX(-50%);
     width: 218px;
-    padding-top: 0.9rem;
     text-align: center;
     text-decoration: none;
     color: inherit;
   }
-  .side-study-dot {
+  .ss-above {
+    top: 4px;
+  }
+  .ss-below {
+    bottom: 4px;
+  }
+
+  /* stems — simple vertical lines from card to axis */
+  .ss-stem {
     position: absolute;
-    top: -4px;
+    left: 50%;
+    width: 1px;
+    background: color-mix(in srgb, var(--c) 42%, var(--color-border-strong));
+  }
+  .ss-stem-up {
+    top: 100%;
+    height: 24px;
+  }
+  .ss-stem-down {
+    bottom: 100%;
+    height: 24px;
+  }
+
+  /* dots — at the card edge closest to the axis */
+  .ss-dot {
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 9px;
@@ -413,10 +416,17 @@ const extMeta = extensions.map((ext, i) => {
     box-shadow: 0 0 0 4px var(--color-bg);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .side-study:hover .side-study-dot {
+  .ss-dot-edge-bottom {
+    bottom: -4px;
+  }
+  .ss-dot-edge-top {
+    top: -4px;
+  }
+  .ss-card:hover .ss-dot {
     transform: translateX(-50%) scale(1.18);
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 7px color-mix(in srgb, var(--c) 26%, transparent);
   }
+
   .branch-kicker {
     color: var(--c);
     margin-bottom: 0.4rem;
@@ -430,7 +440,7 @@ const extMeta = extensions.map((ext, i) => {
     margin-bottom: 0.4rem;
     transition: color 0.2s ease;
   }
-  .side-study:hover .branch-title { color: var(--c); }
+  .ss-card:hover .branch-title { color: var(--c); }
   .branch-desc {
     display: block;
     font-size: 12px;
