@@ -11,16 +11,13 @@ const researchSpine = [
     href: "/writing/from-leibniz",
   },
   {
-    kind: "idea",
-    label: "Stable ≠ grounded",
-    href: "/writing/decidability-boundary",
-  },
-  {
+    // Single project node; the motivating idea sits stacked above it.
     kind: "paper",
     n: "01",
     title: "Stable Is Not Grounded",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
+    ideas: [{ label: "Is stability enough?", href: "/writing/decidability-boundary" }],
   },
   {
     kind: "paper",
@@ -30,9 +27,18 @@ const researchSpine = [
     href: "/research/isotrace",
   },
   {
-    kind: "idea",
-    label: "Minimum licensing structure",
-    href: "/writing/inferential-productivity",
+    // Sandbox on the main axis, with one inspiring idea above and one below.
+    kind: "sandbox",
+    n: "Sandbox",
+    title: "Mini Causal Models",
+    color: "var(--accent-slate)",
+    href: "/research/mini-causal-models",
+    ideas: [
+      { label: "Minimum licensing structure", href: "/writing/inferential-productivity" },
+    ],
+    ideasBelow: [
+      { label: "Causal residue", href: "/writing/causal-residue" },
+    ],
   },
   {
     kind: "paper",
@@ -40,23 +46,12 @@ const researchSpine = [
     title: "Causal Inferential Yield",
     color: "var(--accent-purple)",
     href: "/research/ciy",
-  },
-  {
-    kind: "idea",
-    label: "Causal residue",
-    href: "/writing/causal-residue",
+    capstone: true,
   },
 ];
 
-const researchSandbox = {
-  kicker: "Supporting sandbox",
-  title: "Mini Causal Models",
-  desc: "Planted causal structures for testing recovery and CIY against a known target.",
-  href: "/research/mini-causal-models",
-  color: "var(--accent-slate)",
-  anchor: 6,
-};
-
+// Two completed side studies that branch off before CIY and feed into the thesis.
+// Latent branches from before 02 (Isotrace); Cross branches from after 02.
 const researchExtensions = [
   {
     kicker: "Mechanistic bridge",
@@ -64,7 +59,7 @@ const researchExtensions = [
     desc: "Do behavioral control states correspond to activation-space states or directions?",
     href: "/research/latent-control-states",
     color: "var(--accent-amber)",
-    anchor: 5,
+    anchor: 1.5, // before Isotrace (index 2)
   },
   {
     kicker: "Applied stress test",
@@ -72,6 +67,7 @@ const researchExtensions = [
     desc: "Semantic content versus language- and culture-specific prototype shortcuts.",
     href: "/research/cross-lingual-protobias",
     color: "var(--accent-indigo)",
+    anchor: 2.5, // after Isotrace (index 2), before sandbox (index 3)
   },
 ];
 
@@ -116,8 +112,8 @@ const projects = [
     color: "var(--accent-slate)",
     tint: "rgba(116, 180, 206, 0.10)",
     glyph: "mcm",
-    tags: ["Sandbox", "Planted structure"],
-    desc: "A controlled planted-ground-truth environment for testing causal-structure recovery, Isotrace-style localization, and CIY-style grading against a known target.",
+    tags: ["Sandbox", "On the spine"],
+    desc: "A controlled planted-ground-truth environment — inspired by the minimum-licensing and causal-residue notes — for testing causal-structure recovery, Isotrace-style localization, and CIY-style grading against a known target before the thesis trusts them.",
     group: "support",
   },
   {
@@ -127,7 +123,7 @@ const projects = [
     color: "var(--accent-amber)",
     tint: "rgba(239, 159, 39, 0.10)",
     glyph: "latent",
-    tags: ["Extension", "Mechanistic"],
+    tags: ["Side study", "Mechanistic"],
     desc: "Asks whether behavioral causal control states have corresponding states or directions in activation space, without making mechanism the main thesis spine.",
     group: "extension",
   },
@@ -138,7 +134,7 @@ const projects = [
     color: "var(--accent-indigo)",
     tint: "rgba(123, 155, 209, 0.10)",
     glyph: "protobias",
-    tags: ["Extension", "Applied stress test"],
+    tags: ["Side study", "Applied stress test"],
     desc: "Applies the same semantic-versus-shortcut ambiguity to multilingual and multimodal evaluation: semantic content or language- and culture-specific prototype shortcuts?",
     group: "extension",
   },
@@ -148,19 +144,19 @@ const programSections = [
   {
     label: "Core sequence",
     title: "Hierarchical Causal Evidence",
-    desc: "The main sequence moves from binary certification, to hop-level localization, to quantitative grading of causal structure use.",
+    desc: "The main spine moves from binary certification, to hop-level localization, to quantitative grading of causal structure use — converging on the thesis result, Causal Inferential Yield.",
     projects: projects.filter((p) => p.group === "core"),
   },
   {
-    label: "Supporting sandbox",
-    title: "Controlled planted structure",
-    desc: "Mini Causal Models provide the known-target environment where recovery and grading methods can be tested before being trusted elsewhere.",
+    label: "On the spine",
+    title: "Planted-structure sandbox",
+    desc: "Mini Causal Models sit on the main spine between Isotrace and CIY: a known-target environment, inspired by the minimum-licensing and causal-residue notes, where recovery and grading are tested before the thesis trusts them.",
     projects: projects.filter((p) => p.group === "support"),
   },
   {
-    label: "Extensions",
-    title: "Mechanistic and applied stress tests",
-    desc: "These projects extend the same causal-licensing question into activation-space mechanism and multilingual/multimodal evaluation.",
+    label: "Side studies",
+    title: "Feeding the thesis",
+    desc: "Two studies that branch off before the thesis and feed into it — one a mechanistic bridge into activation space, the other an applied multilingual/multimodal stress test.",
     projects: projects.filter((p) => p.group === "extension"),
   },
 ];
@@ -175,8 +171,8 @@ const now = [
     text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
   },
   {
-    label: "Extensions",
-    text: "Exploring Latent Control States as a mechanistic bridge, and Cross-lingual ProtoBias as an applied multilingual/multimodal stress test.",
+    label: "Side studies",
+    text: "Folding Latent Control States and Cross-lingual ProtoBias — a mechanistic bridge and an applied multilingual/multimodal stress test — back into the thesis as supporting evidence.",
   },
 ];
 
@@ -207,8 +203,8 @@ const areas = [
   { label: "Binary certification", status: "Paper 1", color: "var(--accent-coral)" },
   { label: "Behavioral path tracing", status: "Paper 2", color: "var(--accent-teal)" },
   { label: "Causal structure grading", status: "Paper 3", color: "var(--accent-purple)" },
-  { label: "Planted-structure sandbox", status: "Support", color: "var(--accent-slate)" },
-  { label: "Mechanistic / applied tests", status: "Extensions", color: "var(--accent-amber)" },
+  { label: "Planted-structure sandbox", status: "On the spine", color: "var(--accent-slate)" },
+  { label: "Mechanistic / applied tests", status: "Side studies", color: "var(--accent-amber)" },
   { label: "Philosophy of inference", status: "Background", color: "var(--accent-deep-purple)" },
 ];
 ---
@@ -398,12 +394,13 @@ const areas = [
         <h2 class="section-heading fade-in-up fade-delay-100">From idea to experiment.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
           One question — when is a model's behavior licensed by the structure we think it has? —
-          traced from where it started to a core sequence, a controlled sandbox, and two extensions.
+          traced from a first philosophical prompt, through ideas that each land as a paper and a
+          planted-structure sandbox, with two completed side studies converging on the thesis result.
           Open marks are ideas; filled nodes are the projects that implement them.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">
-        <ResearchSpine spine={researchSpine} sandbox={researchSandbox} extensions={researchExtensions} />
+        <ResearchSpine spine={researchSpine} extensions={researchExtensions} />
       </div>
     </div>
   </section>
@@ -434,11 +431,11 @@ const areas = [
       <div class="divider-line"></div>
       <div class="section-head">
         <p class="section-label fade-in-up">Research</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">One research spine, with extensions.</h2>
+        <h2 class="section-heading fade-in-up fade-delay-100">One spine, converging on a thesis.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
           When can a model's behavior be reduced to the minimum causal structure that should support
-          it? The roadmap is a core sequence in hierarchical causal evidence, supported by a planted
-          sandbox and extended into mechanism and applied evaluation.
+          it? The roadmap is a core sequence in hierarchical causal evidence — with a planted-structure
+          sandbox on the spine and two side studies feeding in — all converging on the thesis result.
         </p>
       </div>
 

@@ -1,14 +1,29 @@
 ---
 // ResearchSpine — a structured roadmap for the homepage.
-// The main lane carries ideas and the three-paper sequence; lighter branches
-// show the supporting sandbox and the two extensions.
-interface SpineItem {
-  kind: "idea" | "paper";
-  label?: string;
-  title?: string;
-  n?: string;
-  color?: string;
+// One thick main axis runs left to right and converges on the thesis result (CIY).
+// Each project is a single node on the axis; the idea(s) that motivate it sit
+// stacked directly above it, chained by short lines (one idea = one tick; two
+// ideas = stacked, one above the other). Two side studies branch off the axis as
+// thin linear forks before the capstone, feeding into it.
+interface Idea {
+  label: string;
   href: string;
+}
+
+interface SpineItem {
+  kind: "idea" | "paper" | "sandbox";
+  href: string;
+  // origin idea node
+  label?: string;
+  // project node
+  n?: string;
+  title?: string;
+  color?: string;
+  capstone?: boolean;
+  // ideas stacked above a project
+  ideas?: Idea[];
+  // ideas stacked below a project (between node and label)
+  ideasBelow?: Idea[];
 }
 
 interface BranchItem {
@@ -17,48 +32,79 @@ interface BranchItem {
   desc: string;
   href: string;
   color: string;
-  anchor?: number;
+  anchor: number;
 }
 
 interface Props {
   spine: SpineItem[];
-  sandbox: BranchItem;
   extensions: BranchItem[];
 }
 
-const { spine, sandbox, extensions } = Astro.props;
+const { spine, extensions } = Astro.props;
 const cols = spine.length;
-const sandboxAnchor = sandbox.anchor ?? Math.max(1, cols - 1);
-const extensionAnchor = extensions[0]?.anchor ?? Math.max(1, cols - 2);
-const sandboxLeft = `${((sandboxAnchor - 0.5) / cols) * 100}%`;
-const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
+// Each extension branches from its own anchor on the main axis.
+// Card is offset horizontally so two cards don't overlap.
+const extMeta = extensions.map((ext, i) => {
+  const anchorPct = ((ext.anchor - 0.5) / cols) * 100;
+  const cardPct = anchorPct + (i === 0 ? -8 : 8); // first left, second right
+  return { ...ext, anchorPct, cardPct };
+});
 ---
 
 <div class="spine-scroll">
-  <div class="spine-map" style={`--cols: ${cols}; --sandbox-anchor: ${sandboxAnchor}; --extension-anchor: ${extensionAnchor};`}>
+  <div class="spine-map" style={`--cols: ${cols};`}>
     <div class="spine-track-label">Main research spine</div>
 
     <ol class="spine-main">
       {
         spine.map((it) => (
           <li
-            class={`spine-item spine-${it.kind}`}
-            style={it.kind === "paper" && it.color ? `--c: ${it.color};` : undefined}
+            class={`spine-item spine-${it.kind}${it.capstone ? " spine-capstone" : ""}`}
+            style={it.color ? `--c: ${it.color};` : undefined}
           >
             {it.kind === "idea" && (
-              <a class="spine-tag spine-tag-above" href={it.href}>
-                <span class="spine-kicker">Idea</span>
-                <span class="spine-label spine-label-idea">{it.label}</span>
+              <a class="spine-ideas spine-ideas-origin" href={it.href}>
+                <span class="spine-idea-tag">
+                  <span class="spine-kicker">Idea</span>
+                  <span class="spine-label spine-label-idea">{it.label}</span>
+                </span>
+                <span class="spine-idea-stem" aria-hidden="true" />
               </a>
             )}
 
-            <span class="spine-node" aria-hidden="true"></span>
+            {it.ideas && (
+              <div class="spine-ideas">
+                {it.ideas.map((idea, i) => (
+                  <>
+                    {i > 0 && <span class="spine-idea-stem spine-idea-stem-mid" aria-hidden="true" />}
+                    <a class="spine-idea-tag" href={idea.href}>
+                      <span class="spine-kicker">Idea</span>
+                      <span class="spine-label spine-label-idea">{idea.label}</span>
+                    </a>
+                  </>
+                ))}
+                <span class="spine-idea-stem" aria-hidden="true" />
+              </div>
+            )}
 
-            {it.kind === "paper" && (
-              <a class="spine-tag spine-tag-below" href={it.href}>
-                <span class="spine-num">{it.n}</span>
-                <span class="spine-label spine-label-paper">{it.title}</span>
-              </a>
+            <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
+
+            {(it.kind === "paper" || it.kind === "sandbox") && (
+              <div class="spine-below">
+                {it.ideasBelow?.map((idea) => (
+                  <>
+                    <a class="spine-below-idea" href={idea.href}>
+                      <span class="spine-kicker">Idea</span>
+                      <span class="spine-label spine-label-idea">{idea.label}</span>
+                    </a>
+                    <span class="spine-idea-stem" aria-hidden="true" />
+                  </>
+                ))}
+                <a class="spine-tag" href={it.href}>
+                  <span class="spine-num">{it.n}</span>
+                  <span class="spine-label spine-label-paper">{it.title}</span>
+                </a>
+              </div>
             )}
           </li>
         ))
@@ -66,34 +112,21 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
     </ol>
 
     <div class="spine-branches">
-      <a
-        class="branch-card branch-sandbox"
-        href={sandbox.href}
-        style={`--c: ${sandbox.color}; --branch-left: ${sandboxLeft};`}
-      >
-        <span class="branch-kicker">{sandbox.kicker}</span>
-        <span class="branch-title">{sandbox.title}</span>
-        <span class="branch-desc">{sandbox.desc}</span>
-      </a>
-
-      <div class="extension-group" style={`--branch-left: ${extensionLeft};`}>
-        <div class="extension-heading">
-          <span class="branch-kicker">Extensions</span>
-          <span>Mechanistic and applied side lines</span>
-        </div>
-        <div class="extension-cards">
-          {
-            extensions.map((it) => (
-              <a class="branch-card branch-extension" href={it.href} style={`--c: ${it.color};`}>
-                <span class="branch-dot" aria-hidden="true"></span>
-                <span class="branch-kicker">{it.kicker}</span>
-                <span class="branch-title">{it.title}</span>
-                <span class="branch-desc">{it.desc}</span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
+      <svg class="branch-fork" viewBox="0 0 100 64" preserveAspectRatio="none" aria-hidden="true">
+        {extMeta.map((ext) => (
+          <path d={`M ${ext.anchorPct} -77 L ${ext.anchorPct} 16 L ${ext.cardPct} 56`} />
+        ))}
+      </svg>
+      {
+        extMeta.map((ext) => (
+          <a class="side-study" href={ext.href} style={`--c: ${ext.color}; --x: ${ext.cardPct}%;`}>
+            <span class="side-study-dot" aria-hidden="true" />
+            <span class="branch-kicker">{ext.kicker}</span>
+            <span class="branch-title">{ext.title}</span>
+            <span class="branch-desc">{ext.desc}</span>
+          </a>
+        ))
+      }
     </div>
   </div>
   <div class="spine-hint" aria-hidden="true">scroll</div>
@@ -117,7 +150,7 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
 
   .spine-map {
     position: relative;
-    min-width: 1120px;
+    min-width: 1080px;
     padding-top: 1.75rem;
   }
 
@@ -138,38 +171,41 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
     padding: 0;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(var(--cols), minmax(136px, 1fr));
+    grid-template-columns: repeat(var(--cols), minmax(150px, 1fr));
     align-items: stretch;
-    height: 260px;
+    height: 236px;
   }
+  /* main axis — thicker line, strengthening toward the capstone on the right */
   .spine-main::before {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    height: 1px;
+    top: 137px;
+    height: 2px;
+    border-radius: 2px;
     background: linear-gradient(
       90deg,
       transparent,
-      var(--color-border-strong) 5%,
-      var(--color-border-strong) 84%,
-      color-mix(in srgb, var(--color-border-strong) 40%, transparent),
+      color-mix(in srgb, var(--color-border-strong) 60%, transparent) 6%,
+      var(--color-border-strong) 55%,
+      color-mix(in srgb, var(--accent-purple) 70%, var(--color-border-strong)) 93%,
       transparent
     );
-    transform: translateY(-0.5px);
+    transform: translateY(-1px);
     z-index: 0;
   }
 
   .spine-item {
     position: relative;
     display: grid;
-    grid-template-rows: 1fr auto 1fr;
+    grid-template-rows: 130px auto minmax(66px, auto);
     align-items: center;
     justify-items: center;
     padding: 0 0.45rem;
   }
 
+  /* ---- nodes ---- */
   .spine-node {
     position: relative;
     z-index: 2;
@@ -178,55 +214,122 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
     border-radius: 50%;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
-  .spine-idea .spine-node {
+  .spine-node-idea {
     width: 14px;
     height: 14px;
     background: var(--color-bg);
     border: 1.5px solid var(--accent-deep-purple);
     box-shadow: 0 0 0 4px var(--color-bg);
   }
-  .spine-paper .spine-node {
+  .spine-node-paper {
     width: 17px;
     height: 17px;
     background: var(--c, var(--color-accent));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
   }
-  .spine-item:hover .spine-node { transform: scale(1.16); }
-  .spine-paper:hover .spine-node {
+  /* sandbox node — a rounded square marks tooling, not a paper */
+  .spine-node-sandbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: var(--c, var(--accent-slate));
+    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
+  }
+
+  /* capstone (CIY) — emphasized convergence target */
+  .spine-capstone .spine-node-paper {
+    width: 19px;
+    height: 19px;
+    box-shadow:
+      0 0 0 4px var(--color-bg),
+      0 0 0 7px color-mix(in srgb, var(--c) 22%, transparent),
+      0 0 0 8px color-mix(in srgb, var(--c) 45%, transparent);
+  }
+
+  .spine-idea:hover .spine-node-idea,
+  .spine-sandbox:hover .spine-node-sandbox,
+  .spine-paper:hover .spine-node { transform: scale(1.16); }
+  .spine-paper:hover .spine-node-paper {
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 7px color-mix(in srgb, var(--c) 28%, transparent);
   }
 
-  .spine-tag {
+  /* ---- stacked ideas above a project ---- */
+  .spine-ideas {
+    grid-row: 1;
+    align-self: stretch;
+    width: 100%;
+    max-width: 178px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.32rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .spine-idea-tag {
     text-decoration: none;
     color: inherit;
     text-align: center;
-    width: 100%;
-    max-width: 148px;
     display: block;
-    padding: 0 0.25rem;
-    transition: color 0.2s ease, transform 0.25s ease;
+    transition: color 0.2s ease;
   }
-  .spine-tag-above {
-    grid-row: 1;
-    align-self: end;
-    padding-bottom: 1.1rem;
+  a.spine-idea-tag:hover .spine-label-idea,
+  .spine-ideas-origin:hover .spine-label-idea,
+  .spine-below-idea:hover .spine-label-idea { color: var(--accent-deep-purple); }
+  .spine-idea-stem {
+    width: 1px;
+    height: 13px;
+    flex: none;
+    background: var(--color-border-strong);
   }
-  .spine-tag-below {
+  .spine-idea-stem-mid { height: 12px; }
+
+  /* ---- text tags below the node ---- */
+  .spine-below {
     grid-row: 3;
     align-self: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 156px;
+    margin: 0 auto;
     padding-top: 1.1rem;
+    text-align: center;
   }
-  .spine-tag-above::after,
-  .spine-tag-below::before {
+  .spine-below::before {
     content: "";
     display: block;
     width: 1px;
     height: 14px;
-    margin: 0 auto;
+    margin-bottom: 0.5rem;
     background: var(--color-border-strong);
   }
-  .spine-tag-above::after { margin-top: 0.5rem; }
-  .spine-tag-below::before { margin-bottom: 0.5rem; }
+  .spine-below .spine-tag {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 0 0.25rem;
+    transition: color 0.2s ease;
+  }
+  .spine-below .spine-below-idea {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    display: block;
+    transition: color 0.2s ease;
+  }
+  .spine-below .spine-idea-stem {
+    width: 1px;
+    height: 13px;
+    flex: none;
+    background: var(--color-border-strong);
+    margin: 0.28rem 0;
+  }
 
   .spine-kicker,
   .spine-num,
@@ -240,7 +343,7 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
   }
   .spine-kicker {
     color: var(--accent-deep-purple);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
     opacity: 0.85;
   }
   .spine-num {
@@ -254,7 +357,7 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
   .spine-label-idea {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--color-text);
   }
   .spine-label-paper {
@@ -264,67 +367,59 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
     color: var(--color-text);
     letter-spacing: 0;
   }
-  .spine-idea:hover .spine-label-idea { color: var(--accent-deep-purple); }
-  .spine-paper:hover .spine-label-paper { color: var(--c, var(--color-accent)); }
+  .spine-paper:hover .spine-label-paper,
+  .spine-sandbox:hover .spine-label-paper { color: var(--c, var(--color-accent)); }
 
+  /* ---- side studies: thin linear branches off the axis, before the capstone ---- */
   .spine-branches {
     position: relative;
-    height: 285px;
-    margin-top: -2.1rem;
+    height: 184px;
+    margin-top: 0;
   }
-
-  .branch-card,
-  .extension-group {
+  .branch-fork {
     position: absolute;
-    left: var(--branch-left);
-    transform: translateX(-50%);
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: 64px;
+    overflow: visible;
+  }
+  .branch-fork path {
+    fill: none;
+    stroke: color-mix(in srgb, var(--accent-amber) 36%, var(--color-border-strong));
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
   }
 
-  .branch-card {
-    display: block;
-    width: 258px;
-    padding: 1rem 1rem 1.05rem;
-    border: 1px solid color-mix(in srgb, var(--c) 32%, var(--card-border));
-    background:
-      linear-gradient(180deg, color-mix(in srgb, var(--c) 9%, transparent), transparent 70%),
-      var(--card-bg);
-    border-radius: 8px;
+  .side-study {
+    position: absolute;
+    left: var(--x);
+    top: 60px;
+    transform: translateX(-50%);
+    width: 218px;
+    padding-top: 0.9rem;
+    text-align: center;
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.2s ease, background 0.2s ease, transform 0.25s ease;
   }
-  .branch-card:hover {
-    border-color: color-mix(in srgb, var(--c) 58%, var(--card-hover-border));
-    transform: translateX(-50%) translateY(-2px);
-  }
-  .branch-card::before {
-    content: "";
+  .side-study-dot {
     position: absolute;
-    left: 50%;
-    top: -34px;
-    width: 1px;
-    height: 34px;
-    background: linear-gradient(180deg, var(--color-border-strong), color-mix(in srgb, var(--c) 48%, transparent));
-  }
-  .branch-card::after {
-    content: "";
-    position: absolute;
-    left: calc(50% - 4px);
     top: -4px;
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
     background: var(--c);
     box-shadow: 0 0 0 4px var(--color-bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .branch-sandbox {
-    top: 0;
-    --c: var(--accent-slate);
+  .side-study:hover .side-study-dot {
+    transform: translateX(-50%) scale(1.18);
+    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 7px color-mix(in srgb, var(--c) 26%, transparent);
   }
-  .branch-sandbox:hover { transform: translateX(-50%) translateY(-2px); }
   .branch-kicker {
     color: var(--c);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.4rem;
   }
   .branch-title {
     display: block;
@@ -332,80 +427,17 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
     font-weight: 600;
     line-height: 1.25;
     color: var(--color-text);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.4rem;
+    transition: color 0.2s ease;
   }
+  .side-study:hover .branch-title { color: var(--c); }
   .branch-desc {
     display: block;
     font-size: 12px;
     line-height: 1.55;
     color: var(--color-text-muted);
-  }
-
-  .extension-group {
-    top: 124px;
-    width: 560px;
-    padding-top: 1.6rem;
-  }
-  .extension-group::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -28px;
-    width: 1px;
-    height: 42px;
-    background: linear-gradient(180deg, var(--color-border-strong), color-mix(in srgb, var(--accent-amber) 28%, transparent));
-  }
-  .extension-group::after {
-    content: "";
-    position: absolute;
-    left: 12%;
-    right: 12%;
-    top: 13px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-border), var(--color-border), transparent);
-  }
-  .extension-heading {
-    position: relative;
-    z-index: 1;
-    width: max-content;
-    margin: 0 auto 0.85rem;
-    padding: 0 0.8rem;
-    background: var(--color-bg);
-    text-align: center;
-    color: var(--color-text-muted);
-    font-size: 12px;
-    line-height: 1.3;
-  }
-  .extension-heading .branch-kicker {
-    color: var(--color-text-dim);
-    margin-bottom: 0.2rem;
-  }
-  .extension-cards {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.8rem;
-  }
-  .branch-extension {
-    position: relative;
-    left: auto;
-    transform: none;
-    width: auto;
-    min-height: 128px;
-    padding-left: 2.1rem;
-  }
-  .branch-extension:hover { transform: translateY(-2px); }
-  .branch-extension::before,
-  .branch-extension::after {
-    display: none;
-  }
-  .branch-dot {
-    position: absolute;
-    left: 1rem;
-    top: 1.13rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--c);
+    max-width: 16rem;
+    margin: 0 auto;
   }
 
   .spine-hint {
@@ -420,8 +452,7 @@ const extensionLeft = `${((extensionAnchor - 0.5) / cols) * 100}%`;
   }
 
   @media (max-width: 880px) {
-    .spine-map { min-width: 1060px; }
-    .spine-main { height: 250px; }
+    .spine-map { min-width: 1040px; }
     .spine-hint { display: block; }
   }
 </style>
