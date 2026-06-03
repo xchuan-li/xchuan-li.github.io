@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title = "Xiaochuan Li",
-  description = "Causal foundations of interpretability — research, writing, and demos.",
+  description = "Causal interpretability — when model behavior is licensed by the structure that should support it — and, increasingly, how that question looks across languages.",
   showProgress = false,
   wide = false,
   ogImage = "/og.png",
@@ -36,6 +36,8 @@ const personLd = {
     "Causal inference",
     "Interpretability",
     "Mechanistic interpretability",
+    "Multilingual NLP",
+    "Linguistic typology",
     "Machine learning",
   ],
   sameAs: [
@@ -91,7 +93,7 @@ const path = Astro.url.pathname;
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Xiaochuan Li — causal inference × interpretability" />
+    <meta property="og:image:alt" content="Xiaochuan Li — causal interpretability × language" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

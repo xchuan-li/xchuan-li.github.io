@@ -1,0 +1,90 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base
+  title="Typological Grounding · Xiaochuan Li"
+  description="An emerging direction: the grounding question carried across typologically different languages, where typology offers a ready-made ground truth."
+  showProgress={true}
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Emerging direction · cross-lingual
+    </div>
+    <h1>Typological Grounding</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      The same grounding question, where typology supplies the ground truth.
+    </p>
+
+    <p>
+      This is an early direction, still taking shape — not a settled thesis line. It carries the
+      question that runs through the rest of my work — <em>is a model's behaviour licensed by the
+      genuine structure, or by a surface proxy that correlates with it?</em> — into a domain where
+      the structure itself varies from language to language.
+    </p>
+
+    <h2>The idea</h2>
+    <p>
+      Languages split the work of encoding meaning across <strong>morphology</strong>,
+      <strong>word order</strong>, and <strong>context</strong> in very different proportions. A
+      meaning that German marks in the verb's inflection, English fixes by position, and Chinese —
+      largely isolating — leaves to context, marking tense, number, and even part of speech by the
+      surrounding sentence rather than by form. If a model handles all three, is it tracking the
+      same underlying meaning, or three different surface cues that happen to correlate with it?
+    </p>
+
+    <p>
+      What makes this worth pursuing is that <strong>language typology comes with a ground truth
+      already attached</strong>. Establishing the structure a model <em>should</em> be using is
+      usually the hard part of causal-grounding work. But here it is settled in advance: we know
+      Chinese has no tense morphology, that German is verb-second with a discontinuous sentence
+      bracket, that a Chinese character is roughly one morpheme while a German compound fragments
+      into many subwords. Typology hands over the kind of stipulated structure that the
+      <a href="/research/mini-causal-models">Mini Causal Models</a> sandbox otherwise has to build
+      by hand.
+    </p>
+
+    <h2>Candidate probes</h2>
+    <ul>
+      <li>
+        <strong>Tense without morphology.</strong> Where is tense represented for Chinese, which has
+        no verb inflection — and is it a genuine tense representation, or a shortcut on surface
+        markers like 了 or temporal adverbs?
+      </li>
+      <li>
+        <strong>Tokenization as a confound.</strong> The token is not a cross-linguistically constant
+        unit: a Chinese character ≈ a morpheme, while a German morpheme can be split across subwords
+        or separated discontinuously. Probing "at a token position" compares different things across
+        languages.
+      </li>
+      <li>
+        <strong>Word order as a shortcut diagnostic.</strong> If a model handles German verb-final or
+        verb-second structure with the order scrambled and still succeeds, it is leaning on lexical
+        cues, not genuine syntax — a falsification test in the spirit of Paper 1.
+      </li>
+      <li>
+        <strong>Category minimal pairs.</strong> Chinese lets the same form be noun or verb with no
+        surface change (研究 = research / to research). Holding the form constant and flipping the
+        category by context gives a controlled probe for whether the model reads genuine syntactic
+        role or a surface cue.
+      </li>
+    </ul>
+
+    <h2>Relation to the rest of the work</h2>
+    <p>
+      The method is the same toolkit used elsewhere — controls, disaggregation, and causal
+      intervention — which is what keeps this from being a descriptive catalogue of cross-lingual
+      differences. The link to the
+      <a href="/research/sc-certification">grounding question</a> is direct: fluent surface use of a
+      structure is not evidence that the structure is load-bearing. It also sits close to questions
+      of implicitness and ambiguity in language understanding, where what one language leaves
+      implicit is often exactly where misunderstanding begins.
+    </p>
+
+    <p class="text-sm text-[var(--color-text-dim)]">
+      Status: early-stage. Observations are being collected and stress-tested against existing work
+      on multilingual interpretability, morphology-aware tokenization, and word-order sensitivity
+      before any broader claims.
+    </p>
+  </article>
+</Base>
