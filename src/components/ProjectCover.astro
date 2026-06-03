@@ -5,7 +5,7 @@
 // Boxless; the cell background provides the project tint. `color` sets
 // `currentColor` for the project accent.
 interface Props {
-  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias";
+  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling";
   color?: string;
 }
 const { kind, color = "var(--color-accent)" } = Astro.props;
@@ -16,6 +16,7 @@ const labels: Record<Props["kind"], string> = {
   ciy: "A yield gauge beside two models matched on accuracy but opposed on CIY — the falsifiability test",
   latent: "An activation manifold with two control states linked by a steer arrow under different prompt framings",
   protobias: "A central input fans to three languages; one path lands on meaning, another drifts to a cultural prototype",
+  xling: "One meaning fans to three languages, encoded at different granularity — a single morpheme, subwords, a fragmented compound",
 };
 ---
 
@@ -287,6 +288,44 @@ const labels: Record<Props["kind"], string> = {
       <polygon class="pc-dim" points="180,142 192,152 180,162 168,152" />
       <text class="pc-axis pc-axis-dim" x="226" y="156">cultural prototype</text>
       <text class="pc-cap-tick pc-cap-tick-dim" x="220" y="186" text-anchor="end">drift on language switch</text>
+    </g>
+  )}
+
+  {kind === "xling" && (
+    <g>
+      <text class="pc-cap" x="22" y="26">cross-lingual encoding · structure vs surface</text>
+
+      <!-- Meaning node -->
+      <circle class="pc-acc-soft" cx="44" cy="104" r="13" />
+      <circle class="pc-acc-f" cx="44" cy="104" r="7.5" />
+      <text class="pc-axis" x="44" y="132" text-anchor="middle">meaning</text>
+
+      <!-- Three language branches -->
+      <line class="pc-acc pc-w" x1="56" y1="98" x2="150" y2="62" marker-end={`url(#pc-${kind}-a)`} />
+      <line class="pc-acc pc-w" x1="58" y1="104" x2="150" y2="108" marker-end={`url(#pc-${kind}-a)`} />
+      <path class="pc-acc pc-w pc-dash" d="M 56 112 C 100 140, 138 150, 150 152" marker-end={`url(#pc-${kind}-d)`} />
+
+      <!-- Language tags -->
+      <text class="pc-lang" x="118" y="54" text-anchor="middle">ZH</text>
+      <text class="pc-lang" x="118" y="100" text-anchor="middle">EN</text>
+      <text class="pc-lang pc-lang-dim" x="122" y="146" text-anchor="middle">DE</text>
+
+      <!-- ZH: a single unit (morpheme = character) -->
+      <rect class="pc-acc-f" x="166" y="52" width="20" height="20" rx="3" />
+      <text class="pc-axis" x="196" y="66">1 morpheme</text>
+
+      <!-- EN: two subwords -->
+      <rect class="pc-acc" x="166" y="99" width="13" height="18" rx="2.5" />
+      <rect class="pc-acc" x="183" y="99" width="13" height="18" rx="2.5" />
+      <text class="pc-axis" x="206" y="112">subwords</text>
+
+      <!-- DE: fragmented compound (three pieces, dim) -->
+      <rect class="pc-dim" x="166" y="143" width="9" height="16" rx="2" />
+      <rect class="pc-dim" x="178" y="143" width="9" height="16" rx="2" />
+      <rect class="pc-dim" x="190" y="143" width="9" height="16" rx="2" />
+      <text class="pc-axis pc-axis-dim" x="206" y="156">fragmented</text>
+
+      <text class="pc-cap-tick" x="160" y="190" text-anchor="middle">same meaning · different granularity — genuine or surface?</text>
     </g>
   )}
 </svg>

@@ -137,6 +137,17 @@ const projects = [
     desc: "Applies the same semantic-versus-shortcut ambiguity to multilingual and multimodal evaluation: semantic content or language- and culture-specific prototype shortcuts?",
     group: "extension",
   },
+  {
+    n: "E3",
+    title: "Cross-lingual Interpretability",
+    href: "/research/cross-lingual-interpretability",
+    color: "var(--accent-deep-purple)",
+    tint: "rgba(176, 156, 219, 0.10)",
+    glyph: "xling",
+    tags: ["Emerging direction", "Typological encoding"],
+    desc: "Languages divide the labour of encoding meaning across morphology, word order, and context. Does a model represent the genuine structure under each strategy, or a surface proxy? The same grounding question, where typology supplies the ground truth.",
+    group: "emerging",
+  },
 ];
 
 const programSections = [
@@ -158,6 +169,12 @@ const programSections = [
     desc: "Two studies that branch off before the thesis and feed into it — one a mechanistic bridge into activation space, the other an applied multilingual/multimodal stress test.",
     projects: projects.filter((p) => p.group === "extension"),
   },
+  {
+    label: "Emerging direction",
+    title: "Cross-lingual interpretability",
+    desc: "An early direction taking shape: carrying the same grounding question — genuine structure or surface proxy? — across typologically different languages, where typology supplies a natural ground truth that pure causal work struggles to obtain.",
+    projects: projects.filter((p) => p.group === "emerging"),
+  },
 ];
 
 const now = [
@@ -172,6 +189,10 @@ const now = [
   {
     label: "Side studies",
     text: "Folding Latent Control States and Cross-lingual ProtoBias — a mechanistic bridge and an applied multilingual/multimodal stress test — back into the thesis as supporting evidence.",
+  },
+  {
+    label: "Exploring",
+    text: "An emerging interest in cross-lingual interpretability: how models represent meaning that one language marks morphologically and another leaves to context — the grounding question, with typology as the ground truth.",
   },
 ];
 
@@ -204,7 +225,8 @@ const areas = [
   { label: "Causal structure grading", status: "Paper 3", color: "var(--accent-purple)" },
   { label: "Planted-structure sandbox", status: "On the spine", color: "var(--accent-slate)" },
   { label: "Mechanistic / applied tests", status: "Side studies", color: "var(--accent-amber)" },
-  { label: "Philosophy of inference", status: "Background", color: "var(--accent-deep-purple)" },
+  { label: "Cross-lingual interpretability", status: "Emerging", color: "var(--accent-deep-purple)" },
+  { label: "Philosophy of inference", status: "Background", color: "var(--accent-indigo)" },
 ];
 ---
 
@@ -281,9 +303,10 @@ const areas = [
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
         <p class="hero-desc fade-in-up fade-delay-200">
-          I study when a model's stable behavior is actually licensed by the causal structure we
-          think it is using. My work asks when model behavior can be causally reduced to the minimum
-          structure that licenses it.
+          I study when a model's stable, correct behavior is actually licensed by the structure we
+          think it is using — not just correlated with it. Lately I follow the same question across
+          languages that encode meaning in very different ways, where linguistic typology offers a
+          rare kind of ground truth.
         </p>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
           Stability is necessary but not sufficient for grounding.
@@ -361,7 +384,10 @@ const areas = [
               the work?
             </p>
             <p>
-              I'm preparing PhD applications for fall 2027 on causal foundations of interpretability.
+              I'm preparing PhD applications for fall 2027 at the intersection of causal
+              interpretability and language — how models represent meaning that different languages
+              make explicit or leave implicit, and whether that representation is genuine or a
+              surface proxy.
             </p>
           </div>
 
@@ -434,7 +460,8 @@ const areas = [
         <p class="section-sub fade-in-up fade-delay-200">
           When can a model's behavior be reduced to the minimum causal structure that should support
           it? The roadmap is a core sequence in hierarchical causal evidence — with a planted-structure
-          sandbox on the spine and two side studies feeding in — all converging on the thesis result.
+          sandbox on the spine and two side studies feeding in — converging on the thesis result, and
+          an emerging cross-lingual direction that carries the same question into language.
         </p>
       </div>
 

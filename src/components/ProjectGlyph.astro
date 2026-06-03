@@ -8,8 +8,9 @@
 //   ciy       — a ticked yield gauge beside a column of realized / unrealized slots
 //   latent    — an activation cloud on a manifold, two causal states linked by a steer
 //   protobias — a meaning fans to language tokens; one branch drifts to a prototype
+//   xling     — one meaning encoded as a single unit in one language, fragmented in another
 interface Props {
-  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias";
+  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling";
   color?: string;
 }
 const { kind, color = "var(--color-accent)" } = Astro.props;
@@ -20,6 +21,7 @@ const labels: Record<Props["kind"], string> = {
   ciy: "a graded yield gauge beside realized and unrealized slots",
   latent: "two causal states linked on an activation manifold",
   protobias: "meaning fans to language tokens; one drifts to a prototype",
+  xling: "one meaning encoded as a single unit in one language, fragmented in another",
 };
 ---
 
@@ -149,6 +151,30 @@ const labels: Record<Props["kind"], string> = {
         <rect class="gl-dim" x="72" y="11" width="9" height="9" rx="1.5" />
         <rect class="gl-acc" x="72" y="26" width="9" height="9" rx="1.5" />
         <polygon class="gl-dim" points="71,46 78,52 71,58 64,52" />
+      </g>
+    )
+  }
+  {
+    kind === "xling" && (
+      <g>
+        <marker id="g-xl-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead" />
+        </marker>
+        <marker id="g-xl-d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead-dim" />
+        </marker>
+        {/* meaning node */}
+        <circle class="gl-acc" cx="15" cy="30" r="5" />
+        {/* branch to a single-unit encoding (one morpheme) */}
+        <line class="gl-acc gl-w" x1="20" y1="27" x2="55" y2="17" marker-end="url(#g-xl-a)" />
+        {/* branch to a fragmented encoding (subwords) */}
+        <path class="gl-dim gl-dash" d="M 20 33 C 36 47, 46 48, 55 45" marker-end="url(#g-xl-d)" />
+        {/* single block */}
+        <rect class="gl-acc-f" x="60" y="11" width="12" height="12" rx="1.6" />
+        {/* fragmented blocks */}
+        <rect class="gl-dim" x="59" y="40" width="6" height="9" rx="1.2" />
+        <rect class="gl-dim" x="67" y="40" width="6" height="9" rx="1.2" />
+        <rect class="gl-dim" x="75" y="40" width="6" height="9" rx="1.2" />
       </g>
     )
   }
