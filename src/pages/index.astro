@@ -4,6 +4,10 @@ import ProjectCover from "../components/ProjectCover.astro";
 import LanguageGroundingFigure from "../components/LanguageGroundingFigure.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
 
+// The main axis is the argument, not the chronology: a motivating question,
+// the three method contributions (certify -> localize -> quantify), and the
+// language frontier. The validation sandbox and the two extensions are NOT on
+// the axis — they branch off as support (see researchExtensions).
 const researchSpine = [
   {
     kind: "idea",
@@ -11,9 +15,8 @@ const researchSpine = [
     href: "/writing/from-leibniz",
   },
   {
-    // Single project node; the motivating idea sits stacked above it.
     kind: "paper",
-    n: "01",
+    n: "01 · Certify",
     title: "Stable Is Not Grounded",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
@@ -21,27 +24,14 @@ const researchSpine = [
   },
   {
     kind: "paper",
-    n: "02",
+    n: "02 · Localize",
     title: "Isotrace",
     color: "var(--accent-teal)",
     href: "/research/isotrace",
   },
   {
-    // Sandbox on the main axis. Same rhythm as the papers: one motivating
-    // idea above, title below. (The "Causal residue" note still lives in
-    // /writing — it's just no longer pinned to the spine node.)
-    kind: "sandbox",
-    n: "Sandbox",
-    title: "Mini Causal Models",
-    color: "var(--accent-slate)",
-    href: "/research/mini-causal-models",
-    ideas: [
-      { label: "Minimum licensing structure", href: "/writing/inferential-productivity" },
-    ],
-  },
-  {
     kind: "paper",
-    n: "03",
+    n: "03 · Quantify",
     title: "Causal Inferential Yield",
     color: "var(--accent-purple)",
     href: "/research/ciy",
@@ -49,8 +39,7 @@ const researchSpine = [
   },
   {
     // Frontier node: the spine's deep end points past the delivered program
-    // into language. Emerging (dashed), not a delivered capstone. The idea
-    // above it echoes Leibniz's universal character — meaning beneath language.
+    // into language. Emerging (dashed), not a delivered capstone.
     kind: "frontier",
     n: "Frontier",
     title: "Typological Grounding",
@@ -60,24 +49,35 @@ const researchSpine = [
   },
 ];
 
-// Two completed side studies that branch off before CIY and feed into the thesis.
-// Latent branches from before 02 (Isotrace); Cross branches from after 02.
+// Support that branches off the axis — a validation sandbox and two extensions.
+// `side` places each above or below the axis; `anchor` is its column position.
 const researchExtensions = [
   {
-    kicker: "Mechanistic bridge",
+    kicker: "Mechanistic extension",
     title: "Latent Control States",
-    desc: "Do behavioral control states correspond to activation-space states or directions?",
+    desc: "Does a linguistic distinction have an activation-space direction?",
     href: "/research/latent-control-states",
     color: "var(--accent-amber)",
-    anchor: 1.5, // before Isotrace (index 2)
+    side: "above",
+    anchor: 2,
   },
   {
-    kicker: "Applied stress test",
+    kicker: "Validation sandbox",
+    title: "Mini Causal Models",
+    desc: "Planted ground truth — the methods checked against a known linguistic target.",
+    href: "/research/mini-causal-models",
+    color: "var(--accent-slate)",
+    side: "below",
+    anchor: 3,
+  },
+  {
+    kicker: "Applied extension",
     title: "Cross-lingual ProtoBias",
     desc: "Semantic content versus language- and culture-specific prototype shortcuts.",
     href: "/research/cross-lingual-protobias",
     color: "var(--accent-indigo)",
-    anchor: 5.5, // late on the axis — the applied precursor that feeds the language frontier
+    side: "below",
+    anchor: 4.4,
   },
 ];
 
@@ -394,11 +394,12 @@ const posts = [
         <p class="section-label fade-in-up">Trajectory</p>
         <h2 class="section-heading fade-in-up fade-delay-100">From idea to experiment.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
-          One question — when is a model's behavior licensed by the structure we think it has? —
-          traced from a first philosophical prompt, through ideas that each land as a paper and a
-          planted-structure sandbox, converging on the thesis result and then pointing past it to an
-          emerging language frontier. Open marks are ideas, filled nodes are delivered projects, the
-          dashed node is the frontier still taking shape; two side studies branch off.
+          One question — is a model's behavior licensed by the genuine structure, or by a surface
+          correlate? — traced from a first philosophical prompt through the three method
+          contributions (certify, localize, quantify), then pointing past the thesis result to the
+          language frontier. Open marks are ideas, filled nodes are the methods, the dashed node is
+          the frontier still taking shape; a validation sandbox and two extensions branch off in
+          support.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">

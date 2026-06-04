@@ -27,6 +27,7 @@ interface BranchItem {
   desc: string;
   href: string;
   color: string;
+  side: "above" | "below";
   anchor: number;
 }
 
@@ -37,11 +38,10 @@ interface Props {
 
 const { spine, extensions } = Astro.props;
 const cols = spine.length;
-// extensions[0] → above axis (Latent), extensions[1] → below axis (Cross)
-const above = extensions[0];
-const below = extensions[1];
-const abovePct = ((above.anchor - 0.5) / cols) * 100;
-const belowPct = ((below.anchor - 0.5) / cols) * 100;
+const pct = (anchor: number) => ((anchor - 0.5) / cols) * 100;
+// Support branches off the axis; any number, placed above or below by `side`.
+const above = extensions.filter((e) => e.side === "above");
+const below = extensions.filter((e) => e.side === "below");
 ---
 
 <div class="spine-scroll">
@@ -107,25 +107,29 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
         }
       </ol>
 
-      <!-- Side study: above axis -->
-      <a class="ss-card ss-above" href={above.href}
-         style={`--c: ${above.color}; --x: ${abovePct}%;`}>
-        <span class="ss-stem ss-stem-up" aria-hidden="true" />
-        <span class="ss-dot ss-dot-edge-bottom" aria-hidden="true" />
-        <span class="branch-kicker">{above.kicker}</span>
-        <span class="branch-title">{above.title}</span>
-        <span class="branch-desc">{above.desc}</span>
-      </a>
+      <!-- Support branches: above the axis -->
+      {above.map((b) => (
+        <a class="ss-card ss-above" href={b.href}
+           style={`--c: ${b.color}; --x: ${pct(b.anchor)}%;`}>
+          <span class="ss-stem ss-stem-up" aria-hidden="true" />
+          <span class="ss-dot ss-dot-edge-bottom" aria-hidden="true" />
+          <span class="branch-kicker">{b.kicker}</span>
+          <span class="branch-title">{b.title}</span>
+          <span class="branch-desc">{b.desc}</span>
+        </a>
+      ))}
 
-      <!-- Side study: below axis -->
-      <a class="ss-card ss-below" href={below.href}
-         style={`--c: ${below.color}; --x: ${belowPct}%;`}>
-        <span class="ss-stem ss-stem-down" aria-hidden="true" />
-        <span class="ss-dot ss-dot-edge-top" aria-hidden="true" />
-        <span class="branch-kicker">{below.kicker}</span>
-        <span class="branch-title">{below.title}</span>
-        <span class="branch-desc">{below.desc}</span>
-      </a>
+      <!-- Support branches: below the axis -->
+      {below.map((b) => (
+        <a class="ss-card ss-below" href={b.href}
+           style={`--c: ${b.color}; --x: ${pct(b.anchor)}%;`}>
+          <span class="ss-stem ss-stem-down" aria-hidden="true" />
+          <span class="ss-dot ss-dot-edge-top" aria-hidden="true" />
+          <span class="branch-kicker">{b.kicker}</span>
+          <span class="branch-title">{b.title}</span>
+          <span class="branch-desc">{b.desc}</span>
+        </a>
+      ))}
     </div>
   </div>
   <div class="spine-hint" aria-hidden="true">scroll</div>
