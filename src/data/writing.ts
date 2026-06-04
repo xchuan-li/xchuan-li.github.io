@@ -33,7 +33,7 @@ export const posts: Post[] = [
   },
   {
     slug: "from-leibniz",
-    title: "From Leibniz to do(class-3) — what philosophy gave me that ML didn't",
+    title: "Three Threads from Leibniz — what philosophy gave me that ML didn't",
     date: "May 2026",
     pubDate: "2026-05-23",
     excerpt:

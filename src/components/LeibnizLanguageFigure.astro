@@ -1,0 +1,53 @@
+---
+// LeibnizLanguageFigure — the language-independence thread.
+// Leibniz's universal character / Frege's thought bet on a content beneath the
+// languages; a multilingual model lets you ask whether the model represents
+// that structure or only each surface. Two aligned tracks, as in the reduction
+// figure, so the three threads read as a set.
+---
+<figure class="essay-fig">
+  <svg viewBox="0 0 660 200" role="img" aria-label="Two parallel tracks: surface languages map to a content beneath (Leibniz, Frege), and surface encodings map to a structure beneath (a multilingual model)">
+    <defs>
+      <marker id="ll-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+      </marker>
+    </defs>
+
+    <text class="track-lbl" x="16" y="28">Leibniz's character · Frege's thought</text>
+    <text class="track-lbl track-lbl-accent" x="16" y="192">a multilingual model</text>
+
+    <!-- top track: surfaces → a content beneath -->
+    <rect class="box" x="16" y="46" width="300" height="40" rx="7" />
+    <text class="box-lbl" x="166" y="70" text-anchor="middle">Latin · German · Chinese</text>
+    <rect class="box" x="392" y="46" width="252" height="40" rx="7" />
+    <text class="box-lbl" x="518" y="70" text-anchor="middle">one content beneath?</text>
+    <line class="seq" x1="316" y1="66" x2="390" y2="66" marker-end="url(#ll-arrow)" />
+
+    <!-- analogy connectors -->
+    <line class="conn" x1="166" y1="86" x2="166" y2="116" />
+    <line class="conn" x1="518" y1="86" x2="518" y2="116" />
+
+    <!-- bottom track: encodings → a structure beneath -->
+    <rect class="box" x="16" y="116" width="300" height="40" rx="7" />
+    <text class="box-lbl box-lbl-accent" x="166" y="140" text-anchor="middle">morphology · order · context</text>
+    <rect class="box" x="392" y="116" width="252" height="40" rx="7" />
+    <text class="box-lbl box-lbl-accent" x="518" y="140" text-anchor="middle">a structure beneath?</text>
+    <line class="seq" x1="316" y1="136" x2="390" y2="136" marker-end="url(#ll-arrow)" />
+  </svg>
+  <figcaption>
+    Leibniz's universal character and Frege's thought both bet on a content beneath the languages.
+    A multilingual model lets you ask whether the model represents that structure — or, as Quine
+    suspected, only the surface of each language.
+  </figcaption>
+</figure>
+
+<style>
+  .essay-fig svg { color: var(--color-text-dim); max-height: 220px; }
+  .box { fill: var(--color-bg); stroke: var(--color-text-dim); stroke-width: 1; }
+  .box-lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text-muted); }
+  .box-lbl-accent { fill: var(--color-accent); }
+  .seq { stroke: var(--color-text-dim); color: var(--color-text-dim); stroke-width: 1; }
+  .conn { stroke: var(--color-text-dim); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+  .track-lbl { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--color-text-dim); }
+  .track-lbl-accent { fill: var(--color-accent); }
+</style>

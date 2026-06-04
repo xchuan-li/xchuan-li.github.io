@@ -1,0 +1,61 @@
+---
+// LeibnizFreedomFigure — the determinism / compatibilist-freedom thread.
+// Behaviour is always determined; the question is by what. Leibniz's free act
+// is determined by one's own nature, not an external accident — grounded
+// behaviour is determined by the structure, not a shortcut.
+//   amber = the genuine determiner (grounded / "free")
+//   coral = the external determiner (spurious / "unfree")
+---
+<figure class="essay-fig">
+  <svg viewBox="0 0 660 196" role="img" aria-label="Two determiners feed the model's answer: the genuine structure (grounded, free) by a solid edge, and a surface shortcut (spurious, unfree) by a dashed, severed edge">
+    <defs>
+      <marker id="lf-arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" class="lf-fill-a" />
+      </marker>
+      <marker id="lf-arr-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" class="lf-fill-c" />
+      </marker>
+    </defs>
+
+    <text class="track-lbl" x="16" y="26">determined — but by what?</text>
+
+    <!-- the two determiners -->
+    <rect class="box box-free" x="16" y="44" width="236" height="38" rx="7" />
+    <text class="box-lbl box-lbl-amber" x="134" y="67" text-anchor="middle">the genuine structure</text>
+    <rect class="box box-spur" x="16" y="120" width="236" height="38" rx="7" />
+    <text class="box-lbl box-lbl-coral" x="134" y="143" text-anchor="middle">a surface shortcut</text>
+
+    <!-- the outcome -->
+    <rect class="box" x="436" y="82" width="208" height="38" rx="7" />
+    <text class="box-lbl" x="540" y="105" text-anchor="middle">the model's answer</text>
+
+    <!-- edges: genuine (solid) vs surface (dashed) -->
+    <line class="e-a" x1="252" y1="63" x2="436" y2="95" marker-end="url(#lf-arr-a)" />
+    <text class="edge-lbl edge-amber" x="300" y="70">grounded · &#8220;free&#8221;</text>
+    <line class="e-c" x1="252" y1="139" x2="436" y2="107" marker-end="url(#lf-arr-c)" />
+    <text class="edge-lbl edge-coral" x="298" y="150">spurious · &#8220;unfree&#8221;</text>
+  </svg>
+  <figcaption>
+    For Leibniz you are free when your act is determined by your own nature, not by an external
+    accident. Grounded behaviour is the same move: determined by the structure that should govern
+    it, not by a shortcut that merely correlates.
+  </figcaption>
+</figure>
+
+<style>
+  .essay-fig svg { color: var(--color-text-dim); max-height: 210px; }
+  .box { fill: var(--color-bg); stroke: var(--color-text-dim); stroke-width: 1; }
+  .box-free { stroke: var(--accent-amber); }
+  .box-spur { stroke: var(--accent-coral); }
+  .box-lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text-muted); }
+  .box-lbl-amber { fill: var(--accent-amber); }
+  .box-lbl-coral { fill: var(--accent-coral); }
+  .e-a { stroke: var(--accent-amber); stroke-width: 1.3; }
+  .e-c { stroke: var(--accent-coral); stroke-width: 1.2; stroke-dasharray: 4 3; }
+  .lf-fill-a { fill: var(--accent-amber); }
+  .lf-fill-c { fill: var(--accent-coral); }
+  .edge-lbl { font-family: var(--font-mono); font-size: 10px; font-style: italic; }
+  .edge-amber { fill: var(--accent-amber); }
+  .edge-coral { fill: var(--accent-coral); }
+  .track-lbl { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--color-text-dim); }
+</style>
