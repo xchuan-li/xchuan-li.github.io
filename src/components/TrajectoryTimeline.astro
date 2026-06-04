@@ -10,7 +10,7 @@ interface Idea {
 }
 
 interface SpineItem {
-  kind: "idea" | "paper" | "sandbox";
+  kind: "idea" | "paper" | "sandbox" | "frontier";
   href: string;
   label?: string;
   n?: string;
@@ -85,7 +85,7 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
                 <span class={`spine-node spine-node-${it.kind}`} aria-hidden="true" />
               </a>
 
-              {(it.kind === "paper" || it.kind === "sandbox") && (
+              {(it.kind === "paper" || it.kind === "sandbox" || it.kind === "frontier") && (
                 <div class="spine-below">
                   {it.ideasBelow?.map((idea) => (
                     <>
@@ -251,6 +251,13 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
     background: var(--c, var(--accent-slate));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
   }
+  .spine-node-frontier {
+    width: 17px;
+    height: 17px;
+    background: var(--color-bg);
+    border: 1.6px dashed var(--c, var(--accent-deep-purple));
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
   .spine-capstone .spine-node-paper {
     width: 19px;
     height: 19px;
@@ -262,6 +269,7 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
 
   .spine-idea:hover .spine-node-idea,
   .spine-sandbox:hover .spine-node-sandbox,
+  .spine-frontier:hover .spine-node,
   .spine-paper:hover .spine-node { transform: scale(1.16); }
   .spine-paper:hover .spine-node-paper {
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 7px color-mix(in srgb, var(--c) 28%, transparent);
@@ -382,7 +390,8 @@ const belowPct = ((below.anchor - 0.5) / cols) * 100;
     letter-spacing: 0;
   }
   .spine-paper:hover .spine-label-paper,
-  .spine-sandbox:hover .spine-label-paper { color: var(--c, var(--color-accent)); }
+  .spine-sandbox:hover .spine-label-paper,
+  .spine-frontier:hover .spine-label-paper { color: var(--c, var(--color-accent)); }
 
   /* ---- side studies: straight vertical stems off the axis ---- */
   .ss-card {

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Base.astro
 title: From Leibniz to do(class-3) — what philosophy gave me that ML didn't
-description: A note on how a senior thesis on Leibniz's universal characteristic became, in retrospect, the same question I'm now asking about causal interpretability.
+description: A note on how a senior thesis on Leibniz's universal characteristic became, in retrospect, the same question I'm now asking about causal interpretability — and, lately, about meaning across languages.
 ---
 
 import LeibnizParallelFigure from "../../components/LeibnizParallelFigure.astro";
@@ -41,6 +41,12 @@ This is, almost exactly, Leibniz's reduction question recast. The "right structu
 But the deeper continuity is in what *cannot* be done. The thing my [first paper](/research/sc-certification) argues, and the thing I think is genuinely interesting, is that the *decidability* of grounding is not a free lunch. It requires what I call two-sided observability: the underlying causal structure has to be stipulated by construction, and the model's training distribution has to be auditable. Outside that regime, the grounding question is not hard — it is *non-identifiable from the available observations*. There is no measurement procedure that returns the right answer, because the quantity being measured is not pinned down by the data.
 
 This is, at root, the same structural lesson Leibniz's project teaches. The reduction is not a universally available operation. There are conditions under which symbols faithfully encode concepts, and conditions under which they do not, and the latter is the generic case. What's hard is not the calculus. What's hard is securing the conditions under which the calculus is doing anything at all.
+
+---
+
+Lately a second recasting has surfaced, and it sits even closer to what Leibniz actually wanted. The *characteristica universalis* was never only a calculus; it was a bet about **language**. Leibniz wanted a *real character* whose symbols mirrored concepts directly, beneath the accidents of Latin, German, or Chinese — a representation of meaning that did not depend on which natural language you happened to think in. Frege later gave this a sharp form: the *thought* a sentence expresses is meant to be the same whatever language carries it. Wittgenstein and Quine pushed the other way — meaning is use, and translation is indeterminate; perhaps there is no language-independent content to recover, only the surface practices of each particular tongue. This is the part of analytic philosophy of language I spent the most time in, and at the time it felt like a closed historical debate.
+
+A multilingual model turns that four-century argument into something I can actually probe. The same meaning is carried by German morphology, English word order, and Chinese context; the question is whether the model represents a structure *beneath* those forms — a Leibnizian character, a Fregean thought — or whether it is, as Quine suspected, riding the surface of each language. That is exactly the [typological grounding](/research/typological-grounding) question, and it is the reduction question once more, one layer over: is there a language-independent structure the behavior is licensed by — and, just as before, when is that even decidable?
 
 ---
 
