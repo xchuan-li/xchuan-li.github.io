@@ -1,0 +1,41 @@
+---
+layout: ../../layouts/Base.astro
+title: Is there meaning beneath the language?
+description: The motivating question behind the typological-grounding line — whether a model represents a meaning beneath the particular forms a language uses, or just the forms.
+---
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Note · June 2026
+</div>
+
+# Is there meaning beneath the language?
+
+## The question the typological-grounding line is built to ask
+
+The same thing can be said three ways. German puts much of it in the shape of the word — case, tense, agreement folded into morphology. English fixes it by position: who did what to whom is mostly word order. Chinese leaves more of it to context — tense, number, even part of speech are often not marked on the word at all, and the surrounding sentence carries them.
+
+We say, casually, that these are *the same meaning in different languages*. That phrase smuggles in a strong assumption: that there is a meaning, sitting beneath the particular surface each language happens to use, which the forms are all encoding.
+
+---
+
+When a model handles all three, the question I care about is whether it represents that thing beneath — or three separate surface habits that each happen to work. A model can be right in German because it learned the morphology, right in English because it learned the order, and right in Chinese because it learned the contextual cue, without anything in it corresponding to the meaning the three share. Fluent in each, grounded in none.
+
+This is the [grounding question](/research/sc-certification) again — is the behavior carried by the structure, or by a correlate of it? — but with a piece supplied that the abstract version never has. The abstract version is hard to make decidable precisely because you rarely hold the structure in hand. Language hands it to you. Typology is a catalogue of the same content deliberately re-encoded by different grammars: a minimal-pair generator for meaning-versus-form, built over millennia, for free.
+
+---
+
+It also suggests the shape of the test. If the model has the meaning beneath, its grip on a sentence should survive a change of form: re-encode the same content in another language's strategy, and the representation — and the behavior it licenses — should hold. If it only has the surface, the grip should break exactly when the form changes. Stability across forms is the signature of structure; breaking across forms is the signature of surface.
+
+---
+
+I should be honest that *meaning beneath the language* is a hypothesis, not a given. There is a long argument in the philosophy of language about whether there is any language-independent content to find at all. I don't need to settle that. I need the weaker, workable version: for a meaning we can hold fixed, a controlled way to ask whether the model tracks it or its surface — and an honest account of when that question is decidable and when it is not.
+
+That weaker question is enough to build on, and it is the one the [typological grounding](/research/typological-grounding) line is built to ask.
+
+---
+
+*Early-stage. The question, before the experiments.*
+
+</div>

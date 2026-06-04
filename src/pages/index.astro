@@ -56,7 +56,7 @@ const researchSpine = [
     title: "Typological Grounding",
     color: "var(--accent-deep-purple)",
     href: "/research/typological-grounding",
-    ideas: [{ label: "Meaning beneath the language?", href: "/writing/from-leibniz" }],
+    ideas: [{ label: "Meaning beneath the language?", href: "/writing/meaning-beneath-language" }],
   },
 ];
 
@@ -101,7 +101,7 @@ const projects = [
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
     tags: ["Paper 2", "Path localization"],
-    desc: "A behavioral path-tracing protocol that makes distinct hypothesized reasoning paths produce distinct observable labels, locating which hop was used, bypassed, or shortcut-replaced.",
+    desc: "A behavioral path-tracing protocol: make competing reasoning routes produce distinct observable labels, so you can see which hop was used or bypassed. In language: which cue — morphology, syntax, or context — a model's reasoning actually leans on.",
     group: "core",
   },
   {
@@ -112,7 +112,7 @@ const projects = [
     tint: "rgba(175, 169, 236, 0.10)",
     glyph: "ciy",
     tags: ["Paper 3", "Quantification"],
-    desc: "Grades how much causal structure the model reliably extracts, defined on certified or controlled items rather than arbitrary benchmark accuracy.",
+    desc: "Grades how much structure a model reliably extracts — not how often it lands the answer. In language: how much genuine linguistic structure it uses, measured on controlled, typologically-varied items.",
     group: "core",
   },
   {
@@ -123,7 +123,7 @@ const projects = [
     tint: "rgba(116, 180, 206, 0.10)",
     glyph: "mcm",
     tags: ["Sandbox", "On the spine"],
-    desc: "A controlled planted-ground-truth environment — inspired by the minimum-licensing and causal-residue notes — for testing causal-structure recovery, Isotrace-style localization, and CIY-style grading against a known target before the thesis trusts them.",
+    desc: "A controlled environment with planted ground truth. In language: let the target be linguistic — a known morpheme, a fixed word-order rule — so recovery, localization, and grading can be checked against an answer we actually know.",
     group: "support",
   },
   {
@@ -134,7 +134,7 @@ const projects = [
     tint: "rgba(239, 159, 39, 0.10)",
     glyph: "latent",
     tags: ["Side study", "Mechanistic"],
-    desc: "Asks whether behavioral causal control states have corresponding states or directions in activation space, without making mechanism the main thesis spine.",
+    desc: "Asks whether a behavioral control state has a corresponding direction in activation space. In language: does a distinction like tense — morphological in one language, contextual in another — have one direction, and does it survive a change of form?",
     group: "extension",
   },
   {
@@ -208,6 +208,11 @@ const now = [
 ];
 
 const posts = [
+  {
+    slug: "meaning-beneath-language",
+    title: "Is there meaning beneath the language?",
+    meta: "Note · June 2026",
+  },
   {
     slug: "causal-residue",
     title: "Causal structure as residue — training as elimination",

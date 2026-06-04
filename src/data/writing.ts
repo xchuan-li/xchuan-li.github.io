@@ -14,6 +14,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "meaning-beneath-language",
+    title: "Is there meaning beneath the language?",
+    date: "June 2026",
+    pubDate: "2026-06-04",
+    excerpt:
+      "The same content is carried by German morphology, English word order, and Chinese context. When a model handles all three, does it represent the meaning beneath the forms — or three separate surface habits that each happen to work? The motivating question behind the typological-grounding line.",
+    status: "note",
+  },
+  {
     slug: "causal-residue",
     title: "Causal structure as residue — training as elimination",
     date: "May 2026",
