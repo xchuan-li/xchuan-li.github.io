@@ -1,53 +1,60 @@
 ---
-// LeibnizLanguageFigure — the language-independence thread.
-// Leibniz's universal character / Frege's thought bet on a content beneath the
-// languages; a multilingual model lets you ask whether the model represents
-// that structure or only each surface. Two aligned tracks, as in the reduction
-// figure, so the three threads read as a set.
+// LeibnizLanguageFigure — the language-independence thread, made concrete.
+// One meaning ("a cat is sleeping") in three languages, each marking it a
+// different way (German morphology, English word order, Chinese context),
+// converging on the shared content — does the model represent that, or only
+// each surface? Highlighted token = where each language carries the marking.
 ---
 <figure class="essay-fig">
-  <svg viewBox="0 0 660 200" role="img" aria-label="Two parallel tracks: surface languages map to a content beneath (Leibniz, Frege), and surface encodings map to a structure beneath (a multilingual model)">
+  <svg viewBox="0 0 660 220" role="img" aria-label="The same meaning — a cat is sleeping — in German (Die Katze schlaeft, marked by morphology), English (The cat sleeps, by word order), and Chinese (cat-sleep, by context), converging on one shared content">
     <defs>
       <marker id="ll-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
         <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
       </marker>
     </defs>
 
-    <text class="track-lbl" x="16" y="28">Leibniz's character · Frege's thought</text>
-    <text class="track-lbl track-lbl-accent" x="16" y="192">a multilingual model</text>
+    <text class="track-lbl" x="16" y="22">one meaning · three surfaces</text>
 
-    <!-- top track: surfaces → a content beneath -->
-    <rect class="box" x="16" y="46" width="300" height="40" rx="7" />
-    <text class="box-lbl" x="166" y="70" text-anchor="middle">Latin · German · Chinese</text>
-    <rect class="box" x="392" y="46" width="252" height="40" rx="7" />
-    <text class="box-lbl" x="518" y="70" text-anchor="middle">one content beneath?</text>
-    <line class="seq" x1="316" y1="66" x2="390" y2="66" marker-end="url(#ll-arrow)" />
+    <!-- DE: morphology -->
+    <text class="tag" x="18" y="44">DE · morphology</text>
+    <rect class="box" x="16" y="50" width="252" height="34" rx="6" />
+    <text class="sent" x="30" y="72">Die Katze <tspan class="mark">schläft</tspan></text>
 
-    <!-- analogy connectors -->
-    <line class="conn" x1="166" y1="86" x2="166" y2="116" />
-    <line class="conn" x1="518" y1="86" x2="518" y2="116" />
+    <!-- EN: word order -->
+    <text class="tag" x="18" y="100">EN · word order</text>
+    <rect class="box" x="16" y="106" width="252" height="34" rx="6" />
+    <text class="sent" x="30" y="128"><tspan class="mark">The cat</tspan> sleeps</text>
 
-    <!-- bottom track: encodings → a structure beneath -->
-    <rect class="box" x="16" y="116" width="300" height="40" rx="7" />
-    <text class="box-lbl box-lbl-accent" x="166" y="140" text-anchor="middle">morphology · order · context</text>
-    <rect class="box" x="392" y="116" width="252" height="40" rx="7" />
-    <text class="box-lbl box-lbl-accent" x="518" y="140" text-anchor="middle">a structure beneath?</text>
-    <line class="seq" x1="316" y1="136" x2="390" y2="136" marker-end="url(#ll-arrow)" />
+    <!-- ZH: context -->
+    <text class="tag" x="18" y="156">ZH · context</text>
+    <rect class="box" x="16" y="162" width="252" height="34" rx="6" />
+    <text class="sent" x="30" y="184"><tspan class="mark">猫睡觉</tspan> <tspan class="sent-dim">— bare</tspan></text>
+
+    <!-- converge to the shared meaning -->
+    <line class="seq" x1="268" y1="67" x2="400" y2="116" marker-end="url(#ll-arrow)" />
+    <line class="seq" x1="268" y1="123" x2="400" y2="122" marker-end="url(#ll-arrow)" />
+    <line class="seq" x1="268" y1="179" x2="400" y2="128" marker-end="url(#ll-arrow)" />
+
+    <rect class="meaning-box" x="402" y="98" width="242" height="50" rx="8" />
+    <text class="meaning-lbl" x="523" y="120" text-anchor="middle">a cat is sleeping</text>
+    <text class="meaning-sub" x="523" y="137" text-anchor="middle">present · singular</text>
   </svg>
   <figcaption>
-    Leibniz's universal character and Frege's thought both bet on a content beneath the languages.
-    A multilingual model lets you ask whether the model represents that structure — or, as Quine
-    suspected, only the surface of each language.
+    The same content sits in German morphology, English word order, and Chinese context. Does the
+    model represent the meaning beneath — or, as Quine suspected, only the surface of each language?
   </figcaption>
 </figure>
 
 <style>
-  .essay-fig svg { color: var(--color-text-dim); max-height: 220px; }
+  .essay-fig svg { color: var(--color-text-dim); max-height: 232px; }
   .box { fill: var(--color-bg); stroke: var(--color-text-dim); stroke-width: 1; }
-  .box-lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text-muted); }
-  .box-lbl-accent { fill: var(--color-accent); }
+  .meaning-box { fill: var(--color-bg); stroke: var(--color-accent); stroke-width: 1.2; }
+  .tag { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.08em; fill: var(--color-accent); }
+  .sent { font-family: var(--font-mono); font-size: 13px; fill: var(--color-text-muted); }
+  .sent-dim { fill: var(--color-text-dim); font-style: italic; }
+  .mark { fill: var(--color-accent); font-weight: 600; }
+  .meaning-lbl { font-family: var(--font-mono); font-size: 12.5px; fill: var(--color-text); }
+  .meaning-sub { font-family: var(--font-mono); font-size: 9.5px; fill: var(--color-text-dim); font-style: italic; }
   .seq { stroke: var(--color-text-dim); color: var(--color-text-dim); stroke-width: 1; }
-  .conn { stroke: var(--color-text-dim); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
   .track-lbl { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; fill: var(--color-text-dim); }
-  .track-lbl-accent { fill: var(--color-accent); }
 </style>
