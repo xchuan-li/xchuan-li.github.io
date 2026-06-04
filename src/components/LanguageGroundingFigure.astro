@@ -1,121 +1,104 @@
 ---
 // LanguageGroundingFigure — concept illustration for the homepage About section.
-// The main line, in one picture: one meaning is realized in three different
-// linguistic surfaces (German morphology, English word order, Chinese context),
-// and the question is what carries the model's answer — the meaning (structure →
-// grounded, so it stays stable as the form changes) or the surface (spurious →
-// it breaks when the form changes).
-// Visual language continues the rest of the site:
-//   amber  = the meaning / genuine structure / grounded
-//   coral  = surface / spurious (x'd, as in the SC figure)
-//   deep-purple = language / linguistic form (the typological accent)
+// A small causal DAG over a sentence's constituents. Agreement attraction:
+// "The key [to the cabinets] ___" — the verb should agree with the structural
+// head ("key"), not the linearly nearest noun ("cabinets"). A do()-intervention
+// on the surface cue tests which one the model's answer is actually licensed by.
+//   amber  = structural dependency / grounded   (the head -> the verb)
+//   coral  = surface correlation / spurious      (the nearest noun -> the verb)
+// Right-angle (Manhattan) routing, theme-aware, no card chrome.
 ---
 
-<figure class="lg-fig" aria-label="One meaning realized in three linguistic surfaces — German morphology, English word order, Chinese context — and the question of what carries the model's answer: the meaning (grounded, stable as the form changes) or the surface (spurious, breaks when the form changes).">
-  <svg viewBox="0 0 400 360" width="400" height="360" preserveAspectRatio="xMidYMid meet">
-    <!-- ONE MEANING (the language-independent content) -->
-    <text class="lg-tag lg-tag-amber" x="200" y="26" text-anchor="middle">ONE MEANING</text>
-    <circle class="lg-halo" cx="200" cy="64" r="21" />
-    <circle class="lg-meaning" cx="200" cy="64" r="11" />
+<figure class="ag-fig" aria-label="A causal diagram over a sentence's constituents. In 'The key to the cabinets ___', a solid structural edge runs from the head 'key' to the verb's agreement, and a dashed surface edge runs from the nearest noun 'cabinets' to the verb; a do-intervention severs the surface edge. Grounded behavior tracks the head; spurious behavior tracks the nearest noun.">
+  <svg viewBox="0 0 440 360" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="ag-m-a" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path class="ag-mh-a" d="M0 0 L10 5 L0 10 z" />
+      </marker>
+      <marker id="ag-m-c" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path class="ag-mh-c" d="M0 0 L10 5 L0 10 z" />
+      </marker>
+    </defs>
 
-    <!-- fan: the one meaning, carried by three different surfaces (ends just above each form) -->
-    <line class="lg-fan" x1="200" y1="77" x2="82" y2="138" />
-    <line class="lg-fan" x1="200" y1="77" x2="200" y2="138" />
-    <line class="lg-fan" x1="200" y1="77" x2="318" y2="138" />
+    <!-- legend -->
+    <line class="ag-e-a" x1="30" y1="30" x2="50" y2="30" />
+    <text class="ag-leg ag-amber" x="56" y="33.5">structural dependency</text>
+    <line class="ag-e-c" x1="30" y1="46" x2="50" y2="46" />
+    <text class="ag-leg ag-muted" x="56" y="49.5">surface correlation</text>
 
-    <!-- DE — morphology (a suffix on the stem carries it) -->
-    <rect class="lg-form" x="52" y="146" width="56" height="20" rx="10" />
-    <line class="lg-form-div" x1="88" y1="146" x2="88" y2="166" />
-    <rect class="lg-form-fill" x="89" y="147.5" width="17" height="17" rx="7" />
-    <text class="lg-word" x="80" y="192" text-anchor="middle"><tspan class="lg-langp">DE</tspan> · morphology</text>
+    <!-- sentence -->
+    <text class="ag-sent" x="220" y="86" text-anchor="middle"><tspan class="ag-muted">The </tspan><tspan class="ag-amber ag-b">key</tspan><tspan class="ag-dim"> [to the </tspan><tspan class="ag-coral ag-b">cabinets</tspan><tspan class="ag-dim">]</tspan><tspan class="ag-muted"> ___</tspan></text>
+    <line class="ag-rule" x1="44" y1="100" x2="396" y2="100" />
 
-    <!-- EN — word order (a slot/position carries it) -->
-    <rect class="lg-form" x="172" y="146" width="14" height="18" rx="2" />
-    <rect class="lg-form-fill" x="193" y="146" width="14" height="18" rx="2" />
-    <rect class="lg-form" x="214" y="146" width="14" height="18" rx="2" />
-    <text class="lg-word" x="200" y="192" text-anchor="middle"><tspan class="lg-langp">EN</tspan> · word order</text>
+    <!-- constituent nodes -->
+    <text class="ag-word ag-amber" x="95" y="150" text-anchor="middle">key</text>
+    <text class="ag-role" x="95" y="164" text-anchor="middle">head · subject</text>
+    <circle class="ag-node ag-node-a" cx="95" cy="184" r="4" />
 
-    <!-- ZH — context (the surrounding context carries it) -->
-    <rect class="lg-form" x="312" y="146" width="16" height="18" rx="2" />
-    <ellipse class="lg-ring" cx="320" cy="155" rx="28" ry="18" />
-    <text class="lg-word" x="320" y="192" text-anchor="middle"><tspan class="lg-langp">ZH</tspan> · context</text>
+    <text class="ag-word ag-muted" x="220" y="150" text-anchor="middle">to the cabinets</text>
+    <text class="ag-role" x="220" y="164" text-anchor="middle">modifier · intervenes</text>
+    <circle class="ag-node ag-node-b" cx="220" cy="184" r="4" />
 
-    <!-- divider + the grounding question -->
-    <line class="lg-rule" x1="64" y1="224" x2="336" y2="224" />
-    <text class="lg-q" x="200" y="252" text-anchor="middle">what carries the model's answer?</text>
+    <text class="ag-word ag-coral" x="355" y="150" text-anchor="middle">cabinets</text>
+    <text class="ag-role" x="355" y="164" text-anchor="middle">nearest noun</text>
+    <circle class="ag-node ag-node-c" cx="355" cy="184" r="4" />
 
-    <!-- two tidy outcomes -->
-    <circle class="lg-dot-grounded" cx="72" cy="288" r="6" />
-    <text class="lg-out" x="88" y="292">
-      <tspan class="lg-out-amber">the meaning</tspan><tspan class="lg-out-dim"> — grounded, stable across forms</tspan>
-    </text>
+    <!-- answer node -->
+    <circle class="ag-halo" cx="220" cy="300" r="10" />
+    <circle class="ag-ans-dot" cx="220" cy="300" r="4.5" />
+    <text class="ag-ans" x="220" y="326" text-anchor="middle">VERB AGREEMENT</text>
 
-    <circle class="lg-dot-spurious" cx="72" cy="322" r="6" />
-    <g class="lg-x" transform="translate(72,322)">
-      <line x1="-3.4" y1="-3.4" x2="3.4" y2="3.4" />
-      <line x1="3.4" y1="-3.4" x2="-3.4" y2="3.4" />
+    <!-- structural edge: head -> verb (solid, long-range dependency) -->
+    <path class="ag-e-a" d="M 95 188 V 256 H 214 V 286" marker-end="url(#ag-m-a)" />
+    <text class="ag-edgelbl ag-amber" x="100" y="250">syntactic dependency</text>
+
+    <!-- surface edge: nearest noun -> verb (dashed, short/linear), severed by do() -->
+    <path class="ag-e-c" d="M 355 188 V 266 H 226 V 286" marker-end="url(#ag-m-c)" />
+    <g class="ag-cut" transform="translate(355,222)">
+      <line x1="-5" y1="-5" x2="5" y2="5" />
+      <line x1="5" y1="-5" x2="-5" y2="5" />
     </g>
-    <text class="lg-out" x="88" y="326">
-      <tspan class="lg-out-coral">the surface</tspan><tspan class="lg-out-dim"> — spurious, breaks across forms</tspan>
-    </text>
+    <text class="ag-dolbl" x="366" y="226">do(cue)</text>
+
+    <!-- caption -->
+    <text class="ag-cap" x="220" y="348" text-anchor="middle">grounded tracks the head — spurious tracks the nearest noun</text>
   </svg>
 </figure>
 
 <style>
-  .lg-fig { margin: 0; padding: 0; }
-  .lg-fig svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; }
+  .ag-fig { margin: 0; padding: 0; }
+  .ag-fig svg { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; font-family: var(--font-mono); }
 
-  .lg-tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    fill: var(--color-text-muted);
-  }
-  .lg-tag-amber { fill: var(--accent-amber); }
+  /* color helpers */
+  .ag-amber { fill: var(--accent-amber); }
+  .ag-coral { fill: var(--accent-coral); }
+  .ag-muted { fill: var(--color-text-muted); }
+  .ag-dim { fill: var(--color-text-dim); }
+  .ag-b { font-weight: 600; }
 
-  .lg-halo { fill: var(--accent-amber); opacity: 0.14; }
-  .lg-meaning { fill: var(--accent-amber); }
+  .ag-leg { font-size: 9.5px; letter-spacing: 0.02em; }
+  .ag-sent { font-size: 13px; }
+  .ag-role { font-size: 9px; letter-spacing: 0.05em; fill: var(--color-text-dim); }
+  .ag-word { font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
+  .ag-ans { font-size: 9.5px; letter-spacing: 0.14em; fill: var(--color-text-muted); }
+  .ag-edgelbl { font-size: 9px; font-style: italic; }
+  .ag-dolbl { font-size: 9.5px; font-style: italic; fill: var(--accent-coral); }
+  .ag-cap { font-size: 9.5px; font-style: italic; fill: var(--color-text-dim); letter-spacing: 0.02em; }
 
-  .lg-fan { stroke: var(--color-border-strong); stroke-width: 1; }
+  .ag-rule { stroke: var(--color-border-strong); stroke-width: 0.5; }
 
-  .lg-form { fill: none; stroke: var(--accent-deep-purple); stroke-width: 1.2; stroke-opacity: 0.75; }
-  .lg-form-div { stroke: var(--accent-deep-purple); stroke-width: 1; stroke-opacity: 0.55; }
-  .lg-form-fill { fill: var(--accent-deep-purple); opacity: 0.8; }
-  .lg-ring {
-    fill: none;
-    stroke: var(--accent-deep-purple);
-    stroke-width: 1;
-    stroke-opacity: 0.6;
-    stroke-dasharray: 3 3;
-  }
-  .lg-word {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.02em;
-    fill: var(--color-text-muted);
-    font-style: italic;
-  }
-  .lg-langp {
-    fill: var(--accent-deep-purple);
-    font-style: normal;
-    letter-spacing: 0.12em;
-  }
+  .ag-node { fill: var(--color-bg); stroke-width: 1.2; }
+  .ag-node-a { stroke: var(--accent-amber); }
+  .ag-node-b { stroke: var(--color-text-dim); }
+  .ag-node-c { stroke: var(--accent-coral); }
 
-  .lg-rule { stroke: var(--color-border-strong); stroke-width: 1; stroke-opacity: 0.6; }
-  .lg-q {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    fill: var(--color-text-muted);
-    font-style: italic;
-  }
+  .ag-halo { fill: var(--accent-amber); opacity: 0.14; }
+  .ag-ans-dot { fill: var(--accent-amber); }
 
-  .lg-dot-grounded { fill: var(--accent-amber); }
-  .lg-dot-spurious { fill: var(--accent-coral); }
-  .lg-x line { stroke: var(--color-bg); stroke-width: 1.3; stroke-linecap: round; }
+  .ag-e-a { stroke: var(--accent-amber); stroke-width: 1.3; fill: none; }
+  .ag-e-c { stroke: var(--accent-coral); stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+  .ag-mh-a { fill: var(--accent-amber); }
+  .ag-mh-c { fill: var(--accent-coral); }
 
-  .lg-out { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.01em; }
-  .lg-out-amber { fill: var(--accent-amber); }
-  .lg-out-coral { fill: var(--accent-coral); }
-  .lg-out-dim { fill: var(--color-text-dim); }
+  .ag-cut line { stroke: var(--accent-coral); stroke-width: 1.6; stroke-linecap: round; }
 </style>
