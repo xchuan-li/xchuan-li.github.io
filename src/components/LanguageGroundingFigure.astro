@@ -4,8 +4,7 @@
 // linguistic surfaces (German morphology, English word order, Chinese context),
 // and the question is what carries the model's answer — the meaning (structure →
 // grounded, so it stays stable as the form changes) or the surface (spurious →
-// it breaks when the form changes). This is "stable reasoning within a language",
-// "across languages", and "its relation to language structure" in one figure.
+// it breaks when the form changes).
 // Visual language continues the rest of the site:
 //   amber  = the meaning / genuine structure / grounded
 //   coral  = surface / spurious (x'd, as in the SC figure)
@@ -13,53 +12,50 @@
 ---
 
 <figure class="lg-fig" aria-label="One meaning realized in three linguistic surfaces — German morphology, English word order, Chinese context — and the question of what carries the model's answer: the meaning (grounded, stable as the form changes) or the surface (spurious, breaks when the form changes).">
-  <svg viewBox="0 0 400 372" width="400" height="372" preserveAspectRatio="xMidYMid meet">
+  <svg viewBox="0 0 400 360" width="400" height="360" preserveAspectRatio="xMidYMid meet">
     <!-- ONE MEANING (the language-independent content) -->
-    <text class="lg-tag lg-tag-amber" x="200" y="28" text-anchor="middle">ONE MEANING</text>
-    <circle class="lg-halo" cx="200" cy="68" r="21" />
-    <circle class="lg-meaning" cx="200" cy="68" r="11" />
+    <text class="lg-tag lg-tag-amber" x="200" y="26" text-anchor="middle">ONE MEANING</text>
+    <circle class="lg-halo" cx="200" cy="64" r="21" />
+    <circle class="lg-meaning" cx="200" cy="64" r="11" />
 
-    <!-- fan: the one meaning, carried by three different surfaces -->
-    <line class="lg-fan" x1="200" y1="81" x2="80" y2="142" />
-    <line class="lg-fan" x1="200" y1="81" x2="200" y2="142" />
-    <line class="lg-fan" x1="200" y1="81" x2="320" y2="142" />
+    <!-- fan: the one meaning, carried by three different surfaces (ends just above each form) -->
+    <line class="lg-fan" x1="200" y1="77" x2="82" y2="138" />
+    <line class="lg-fan" x1="200" y1="77" x2="200" y2="138" />
+    <line class="lg-fan" x1="200" y1="77" x2="318" y2="138" />
 
     <!-- DE — morphology (a suffix on the stem carries it) -->
-    <text class="lg-lang" x="80" y="138" text-anchor="middle">DE</text>
-    <rect class="lg-form" x="52" y="154" width="56" height="20" rx="10" />
-    <line class="lg-form-div" x1="88" y1="154" x2="88" y2="174" />
-    <rect class="lg-form-fill" x="89" y="155.5" width="17" height="17" rx="7" />
-    <text class="lg-word" x="80" y="198" text-anchor="middle">morphology</text>
+    <rect class="lg-form" x="52" y="146" width="56" height="20" rx="10" />
+    <line class="lg-form-div" x1="88" y1="146" x2="88" y2="166" />
+    <rect class="lg-form-fill" x="89" y="147.5" width="17" height="17" rx="7" />
+    <text class="lg-word" x="80" y="192" text-anchor="middle"><tspan class="lg-langp">DE</tspan> · morphology</text>
 
     <!-- EN — word order (a slot/position carries it) -->
-    <text class="lg-lang" x="200" y="138" text-anchor="middle">EN</text>
-    <rect class="lg-form" x="172" y="154" width="14" height="18" rx="2" />
-    <rect class="lg-form-fill" x="193" y="154" width="14" height="18" rx="2" />
-    <rect class="lg-form" x="214" y="154" width="14" height="18" rx="2" />
-    <text class="lg-word" x="200" y="198" text-anchor="middle">word order</text>
+    <rect class="lg-form" x="172" y="146" width="14" height="18" rx="2" />
+    <rect class="lg-form-fill" x="193" y="146" width="14" height="18" rx="2" />
+    <rect class="lg-form" x="214" y="146" width="14" height="18" rx="2" />
+    <text class="lg-word" x="200" y="192" text-anchor="middle"><tspan class="lg-langp">EN</tspan> · word order</text>
 
     <!-- ZH — context (the surrounding context carries it) -->
-    <text class="lg-lang" x="320" y="138" text-anchor="middle">ZH</text>
-    <rect class="lg-form" x="312" y="154" width="16" height="18" rx="2" />
-    <ellipse class="lg-ring" cx="320" cy="163" rx="28" ry="18" />
-    <text class="lg-word" x="320" y="198" text-anchor="middle">context</text>
+    <rect class="lg-form" x="312" y="146" width="16" height="18" rx="2" />
+    <ellipse class="lg-ring" cx="320" cy="155" rx="28" ry="18" />
+    <text class="lg-word" x="320" y="192" text-anchor="middle"><tspan class="lg-langp">ZH</tspan> · context</text>
 
     <!-- divider + the grounding question -->
-    <line class="lg-rule" x1="64" y1="234" x2="336" y2="234" />
-    <text class="lg-q" x="200" y="262" text-anchor="middle">what carries the model's answer?</text>
+    <line class="lg-rule" x1="64" y1="224" x2="336" y2="224" />
+    <text class="lg-q" x="200" y="252" text-anchor="middle">what carries the model's answer?</text>
 
     <!-- two tidy outcomes -->
-    <circle class="lg-dot-grounded" cx="72" cy="298" r="6" />
-    <text class="lg-out" x="88" y="302">
+    <circle class="lg-dot-grounded" cx="72" cy="288" r="6" />
+    <text class="lg-out" x="88" y="292">
       <tspan class="lg-out-amber">the meaning</tspan><tspan class="lg-out-dim"> — grounded, stable across forms</tspan>
     </text>
 
-    <circle class="lg-dot-spurious" cx="72" cy="332" r="6" />
-    <g class="lg-x" transform="translate(72,332)">
+    <circle class="lg-dot-spurious" cx="72" cy="322" r="6" />
+    <g class="lg-x" transform="translate(72,322)">
       <line x1="-3.4" y1="-3.4" x2="3.4" y2="3.4" />
       <line x1="3.4" y1="-3.4" x2="-3.4" y2="3.4" />
     </g>
-    <text class="lg-out" x="88" y="336">
+    <text class="lg-out" x="88" y="326">
       <tspan class="lg-out-coral">the surface</tspan><tspan class="lg-out-dim"> — spurious, breaks across forms</tspan>
     </text>
   </svg>
@@ -82,12 +78,6 @@
 
   .lg-fan { stroke: var(--color-border-strong); stroke-width: 1; }
 
-  .lg-lang {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-    fill: var(--accent-deep-purple);
-  }
   .lg-form { fill: none; stroke: var(--accent-deep-purple); stroke-width: 1.2; stroke-opacity: 0.75; }
   .lg-form-div { stroke: var(--accent-deep-purple); stroke-width: 1; stroke-opacity: 0.55; }
   .lg-form-fill { fill: var(--accent-deep-purple); opacity: 0.8; }
@@ -104,6 +94,11 @@
     letter-spacing: 0.02em;
     fill: var(--color-text-muted);
     font-style: italic;
+  }
+  .lg-langp {
+    fill: var(--accent-deep-purple);
+    font-style: normal;
+    letter-spacing: 0.12em;
   }
 
   .lg-rule { stroke: var(--color-border-strong); stroke-width: 1; stroke-opacity: 0.6; }
