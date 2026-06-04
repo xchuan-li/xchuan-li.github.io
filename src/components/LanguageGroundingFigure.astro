@@ -1,0 +1,169 @@
+---
+// LanguageGroundingFigure — concept illustration for the homepage About section.
+// Brings the grounding question down onto language: ONE meaning, realized in
+// three different linguistic surfaces (German morphology, English word order,
+// Chinese context), and the question of whether a model tracks the meaning
+// (structure → grounded) or rides one of the surfaces (surface → spurious).
+// Visual language continues the rest of the site:
+//   amber  = genuine structure / grounded
+//   coral  = surface / spurious (x'd, as in the SC figure)
+//   deep-purple = language / linguistic form (the typological accent)
+// Boxless, theme-aware, no card chrome.
+---
+
+<figure class="lg-fig" aria-label="One meaning realized in three linguistic surfaces — German morphology, English word order, Chinese context — and a probe asking whether a model tracks the underlying structure or rides the surface form.">
+  <svg viewBox="0 0 400 440" width="400" height="440" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="lg-arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </marker>
+    </defs>
+
+    <!-- ONE MEANING (the language-independent content) -->
+    <text class="lg-tag lg-tag-amber" x="200" y="30" text-anchor="middle">ONE MEANING</text>
+    <circle class="lg-halo" cx="200" cy="72" r="22" />
+    <circle class="lg-meaning" cx="200" cy="72" r="12" />
+
+    <!-- fan: the one meaning, carried by three different surfaces -->
+    <line class="lg-fan" x1="200" y1="86" x2="80" y2="150" />
+    <line class="lg-fan" x1="200" y1="86" x2="200" y2="150" />
+    <line class="lg-fan" x1="200" y1="86" x2="320" y2="150" />
+
+    <!-- DE — morphology (a suffix on the stem carries it) -->
+    <text class="lg-lang" x="80" y="144" text-anchor="middle">DE</text>
+    <rect class="lg-form" x="52" y="162" width="56" height="20" rx="10" />
+    <line class="lg-form-div" x1="88" y1="162" x2="88" y2="182" />
+    <rect class="lg-form-fill" x="89" y="163.5" width="17" height="17" rx="7" />
+    <text class="lg-word" x="80" y="206" text-anchor="middle">morphology</text>
+
+    <!-- EN — word order (a slot/position carries it) -->
+    <text class="lg-lang" x="200" y="144" text-anchor="middle">EN</text>
+    <rect class="lg-form" x="172" y="162" width="14" height="18" rx="2" />
+    <rect class="lg-form-fill" x="193" y="162" width="14" height="18" rx="2" />
+    <rect class="lg-form" x="214" y="162" width="14" height="18" rx="2" />
+    <text class="lg-word" x="200" y="206" text-anchor="middle">word order</text>
+
+    <!-- ZH — context (the surrounding context carries it) -->
+    <text class="lg-lang" x="320" y="144" text-anchor="middle">ZH</text>
+    <rect class="lg-form" x="312" y="162" width="16" height="18" rx="2" />
+    <ellipse class="lg-ring" cx="320" cy="171" rx="28" ry="19" />
+    <text class="lg-word" x="320" y="206" text-anchor="middle">context</text>
+
+    <!-- converge to a single probe -->
+    <line class="lg-converge" x1="80" y1="222" x2="195" y2="274" />
+    <line class="lg-converge" x1="200" y1="222" x2="200" y2="274" />
+    <line class="lg-converge" x1="320" y1="222" x2="205" y2="274" />
+
+    <!-- the probe: structure, or surface? -->
+    <circle class="lg-probe" cx="200" cy="282" r="7" />
+    <text class="lg-probe-label" x="218" y="286">tracks…?</text>
+
+    <!-- two outcomes -->
+    <g class="lg-callout">
+      <line class="lg-arrow" x1="196" y1="290" x2="156" y2="350" marker-end="url(#lg-arr)" />
+      <line class="lg-arrow" x1="204" y1="290" x2="244" y2="350" marker-end="url(#lg-arr)" />
+    </g>
+
+    <!-- grounded: tracks the structure -->
+    <circle class="lg-dot-grounded" cx="150" cy="360" r="6" />
+    <text class="lg-outcome lg-outcome-amber" x="150" y="384" text-anchor="middle">structure</text>
+
+    <!-- spurious: rides the surface -->
+    <circle class="lg-dot-spurious" cx="250" cy="360" r="6" />
+    <g class="lg-x" transform="translate(250,360)">
+      <line x1="-3.4" y1="-3.4" x2="3.4" y2="3.4" />
+      <line x1="3.4" y1="-3.4" x2="-3.4" y2="3.4" />
+    </g>
+    <text class="lg-outcome lg-outcome-coral" x="250" y="384" text-anchor="middle">surface</text>
+
+    <text class="lg-caption" x="200" y="420" text-anchor="middle">same meaning · different surface · which does it track?</text>
+  </svg>
+</figure>
+
+<style>
+  .lg-fig { margin: 0; padding: 0; }
+  .lg-fig svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; }
+
+  .lg-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    fill: var(--color-text-muted);
+  }
+  .lg-tag-amber { fill: var(--accent-amber); }
+
+  .lg-halo { fill: var(--accent-amber); opacity: 0.14; }
+  .lg-meaning { fill: var(--accent-amber); }
+
+  .lg-fan { stroke: var(--color-border-strong); stroke-width: 1; }
+
+  .lg-lang {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    fill: var(--accent-deep-purple);
+  }
+  .lg-form { fill: none; stroke: var(--accent-deep-purple); stroke-width: 1.2; stroke-opacity: 0.75; }
+  .lg-form-div { stroke: var(--accent-deep-purple); stroke-width: 1; stroke-opacity: 0.55; }
+  .lg-form-fill { fill: var(--accent-deep-purple); opacity: 0.8; }
+  .lg-ring {
+    fill: none;
+    stroke: var(--accent-deep-purple);
+    stroke-width: 1;
+    stroke-opacity: 0.6;
+    stroke-dasharray: 3 3;
+  }
+  .lg-word {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.02em;
+    fill: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .lg-converge {
+    stroke: var(--color-border-strong);
+    stroke-width: 1;
+    stroke-dasharray: 3 2.5;
+  }
+  .lg-probe {
+    fill: var(--color-bg);
+    stroke: var(--color-text-muted);
+    stroke-width: 1.3;
+  }
+  .lg-probe-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--color-text-muted);
+    font-style: italic;
+    letter-spacing: 0.03em;
+  }
+
+  .lg-callout { color: var(--color-text-muted); }
+  .lg-arrow {
+    stroke: var(--color-text-muted);
+    stroke-width: 1;
+    stroke-dasharray: 3 2;
+    fill: none;
+  }
+
+  .lg-dot-grounded { fill: var(--accent-amber); }
+  .lg-dot-spurious { fill: var(--accent-coral); }
+  .lg-x line { stroke: var(--color-bg); stroke-width: 1.3; stroke-linecap: round; }
+
+  .lg-outcome {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+  }
+  .lg-outcome-amber { fill: var(--accent-amber); }
+  .lg-outcome-coral { fill: var(--accent-coral); }
+
+  .lg-caption {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    fill: var(--color-text-dim);
+    font-style: italic;
+  }
+</style>
