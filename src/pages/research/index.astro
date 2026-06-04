@@ -6,7 +6,7 @@ const coreProjects = [
   {
     title: "Stable Is Not Grounded",
     href: "/research/sc-certification",
-    status: "Paper 1 · binary certification",
+    status: "Paper 1 · certification",
     color: "var(--accent-coral)",
     glyph: "sc",
     one_line: "Binary certification: is the licensing structure counterfactually load-bearing at all?",
@@ -15,7 +15,7 @@ const coreProjects = [
   {
     title: "Isotrace",
     href: "/research/isotrace",
-    status: "Paper 2 · path localization",
+    status: "Paper 2 · localization",
     color: "var(--accent-teal)",
     glyph: "isotrace",
     one_line: "Path localization — and, in language, which cue a model leans on: morphology, syntax, or context?",
@@ -30,89 +30,79 @@ const coreProjects = [
   },
 ];
 
-const sandboxProjects = [
+const frontierProjects = [
   {
-    title: "Mini Causal Models",
-    href: "/research/mini-causal-models",
-    status: "supporting sandbox",
-    color: "var(--accent-slate)",
-    glyph: "mcm",
-    one_line: "A planted-ground-truth environment where the target is linguistic — a known morpheme or rule — so the methods can be checked against an answer we know.",
+    title: "Typological Grounding",
+    href: "/research/typological-grounding",
+    status: "application frontier",
+    color: "var(--accent-deep-purple)",
+    glyph: "xling",
+    one_line: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and whether a model tracks the structure or the surface.",
   },
 ];
 
-const extensionProjects = [
+const supportProjects = [
+  {
+    title: "Mini Causal Models",
+    href: "/research/mini-causal-models",
+    status: "validation sandbox",
+    color: "var(--accent-slate)",
+    glyph: "mcm",
+    one_line: "A planted-ground-truth environment where the target is linguistic, so the methods can be checked against an answer we know.",
+  },
   {
     title: "Latent Control States",
     href: "/research/latent-control-states",
-    status: "mechanistic extension",
+    status: "extension · mechanistic",
     color: "var(--accent-amber)",
     glyph: "latent",
-    one_line: "Mechanistic bridge: does a linguistic distinction (e.g. tense) have an activation-space direction, and is it the same one across forms?",
+    one_line: "Does a linguistic distinction such as tense have an activation-space direction, and is it the same one across forms?",
   },
   {
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
-    status: "applied extension",
+    status: "extension · applied",
     color: "var(--accent-indigo)",
     glyph: "protobias",
-    one_line: "Applied multilingual/multimodal stress test of semantic grounding versus language- and culture-specific prototype shortcuts.",
-  },
-];
-
-const emergingProjects = [
-  {
-    title: "Typological Grounding",
-    href: "/research/typological-grounding",
-    status: "emerging direction",
-    color: "var(--accent-deep-purple)",
-    glyph: "xling",
-    one_line: "The structure-versus-surface question across languages that encode meaning very differently — through morphology, word order, or context.",
+    one_line: "An applied multimodal stress test of semantic grounding versus language- and culture-specific prototype shortcuts.",
   },
 ];
 
 const sections = [
   {
-    eyebrow: "Core Research Program",
-    title: "Hierarchical Causal Evidence",
+    eyebrow: "The thesis · three method contributions",
+    title: "Certify · localize · quantify",
     description:
-      "The core sequence moves from binary certification, to path-level localization, to quantitative grading of causal structure use.",
+      "One program, not a list of ideas: certify whether behavior is licensed by genuine structure, localize where that structure is used, and quantify how much of it the model relies on — developed and tested through linguistic structure.",
     projects: coreProjects,
   },
   {
-    eyebrow: "Supporting Sandbox",
-    title: "Mini Causal Models",
-    description:
-      "Mini Causal Models are infrastructure for the core program, not a fourth equal core paper.",
-    projects: sandboxProjects,
-  },
-  {
-    eyebrow: "Extensions",
-    title: "Mechanistic and applied extensions",
-    description:
-      "These projects keep the same causal-licensing question visible while moving it into activation-space mechanism and multilingual/multimodal evaluation.",
-    projects: extensionProjects,
-  },
-  {
-    eyebrow: "Emerging direction",
+    eyebrow: "Application frontier",
     title: "Typological grounding",
     description:
-      "An early direction taking shape. Languages differ in how much meaning they put into grammar versus leave to context — and that variation is a ready-made testbed for whether a model tracks structure or surface form.",
-    projects: emergingProjects,
+      "Where the three methods converge on linguistic typology — the same meaning re-encoded by each language's grammar, a ready-made test of structure versus surface.",
+    projects: frontierProjects,
+  },
+  {
+    eyebrow: "Support",
+    title: "Validation & extensions",
+    description:
+      "Infrastructure and side studies the program leans on — a validation sandbox and two extensions — not separate research directions.",
+    projects: supportProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="One research spine on causal grounding, with mechanistic and applied extensions and an emerging line on language: when is a model's behavior licensed by the structure that should support it?"
+  description="Causal interpretability through linguistic structure: three method contributions — certify, localize, quantify whether a model's behavior is licensed by genuine structure — with a validation sandbox and extensions in support."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-10 max-w-prose">
-    My work is organized around one question: <em>when is a model's behavior licensed by the
-    minimum causal structure that should support it?</em> The roadmap is a core sequence, with a
-    supporting sandbox, two extensions, and an emerging line that carries the same question into
-    language.
+    My work is one program, not a list of ideas: <em>is a model's behavior licensed by the genuine
+    structure, or by a surface cue that merely correlates with it?</em> Three method contributions —
+    certify, localize, quantify — developed through linguistic structure, with a validation sandbox
+    and two extensions in support.
   </p>
 
   <div class="space-y-12">

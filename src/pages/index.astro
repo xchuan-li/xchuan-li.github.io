@@ -89,8 +89,8 @@ const projects = [
     color: "var(--accent-coral)",
     tint: "rgba(240, 153, 123, 0.10)",
     glyph: "sc",
-    tags: ["Paper 1", "Binary certification"],
-    desc: "Tests whether the licensing structure is counterfactually load-bearing at all: stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
+    tags: ["Paper 1", "Certification"],
+    desc: "Certification — is the behavior licensed by the genuine structure at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
     group: "core",
   },
   {
@@ -100,8 +100,8 @@ const projects = [
     color: "var(--accent-teal)",
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
-    tags: ["Paper 2", "Path localization"],
-    desc: "A behavioral path-tracing protocol: make competing reasoning routes produce distinct observable labels, so you can see which hop was used or bypassed. In language: which cue — morphology, syntax, or context — a model's reasoning actually leans on.",
+    tags: ["Paper 2", "Localization"],
+    desc: "Localization — which part of the structure does the work? Competing routes are made to produce distinct labels; in language, which cue (morphology, syntax, context) a model's reasoning actually leans on.",
     group: "core",
   },
   {
@@ -112,79 +112,62 @@ const projects = [
     tint: "rgba(175, 169, 236, 0.10)",
     glyph: "ciy",
     tags: ["Paper 3", "Quantification"],
-    desc: "Grades how much structure a model reliably extracts — not how often it lands the answer. In language: how much genuine linguistic structure it uses, measured on controlled, typologically-varied items.",
+    desc: "Quantification — how much genuine structure does the model reliably use, beyond surface cues? Graded on controlled, typologically-varied items rather than on benchmark accuracy.",
     group: "core",
   },
   {
-    n: "S",
-    title: "Mini Causal Models",
-    href: "/research/mini-causal-models",
-    color: "var(--accent-slate)",
-    tint: "rgba(116, 180, 206, 0.10)",
-    glyph: "mcm",
-    tags: ["Sandbox", "On the spine"],
-    desc: "A controlled environment with planted ground truth. In language: let the target be linguistic — a known morpheme, a fixed word-order rule — so recovery, localization, and grading can be checked against an answer we actually know.",
-    group: "support",
-  },
-  {
-    n: "E1",
-    title: "Latent Control States",
-    href: "/research/latent-control-states",
-    color: "var(--accent-amber)",
-    tint: "rgba(239, 159, 39, 0.10)",
-    glyph: "latent",
-    tags: ["Side study", "Mechanistic"],
-    desc: "Asks whether a behavioral control state has a corresponding direction in activation space. In language: does a distinction like tense — morphological in one language, contextual in another — have one direction, and does it survive a change of form?",
-    group: "extension",
-  },
-  {
-    n: "E2",
-    title: "Cross-lingual ProtoBias",
-    href: "/research/cross-lingual-protobias",
-    color: "var(--accent-indigo)",
-    tint: "rgba(123, 155, 209, 0.10)",
-    glyph: "protobias",
-    tags: ["Side study", "Applied stress test"],
-    desc: "Applies the same semantic-versus-shortcut ambiguity to multilingual and multimodal evaluation: semantic content or language- and culture-specific prototype shortcuts?",
-    group: "extension",
-  },
-  {
-    n: "E3",
+    n: "→",
     title: "Typological Grounding",
     href: "/research/typological-grounding",
     color: "var(--accent-deep-purple)",
     tint: "rgba(176, 156, 219, 0.10)",
     glyph: "xling",
-    tags: ["Emerging direction", "Cross-lingual"],
-    desc: "Languages split the work of encoding meaning across morphology, word order, and context. When the same meaning is grammar in one language and context in another, does the model track the structure or the surface? Typology makes that testable.",
-    group: "emerging",
+    tags: ["Application frontier", "Cross-lingual"],
+    desc: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
+    group: "frontier",
+  },
+  {
+    title: "Mini Causal Models",
+    href: "/research/mini-causal-models",
+    tags: ["Validation sandbox"],
+    short: "A planted-ground-truth environment — the three methods checked against a known linguistic target before they're trusted.",
+    group: "support",
+  },
+  {
+    title: "Latent Control States",
+    href: "/research/latent-control-states",
+    tags: ["Extension · mechanistic"],
+    short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form?",
+    group: "support",
+  },
+  {
+    title: "Cross-lingual ProtoBias",
+    href: "/research/cross-lingual-protobias",
+    tags: ["Extension · applied"],
+    short: "An applied multimodal stress test: semantic content versus language- and culture-specific prototype shortcuts.",
+    group: "support",
   },
 ];
 
 const programSections = [
   {
-    label: "Core sequence",
-    title: "Hierarchical Causal Evidence",
-    desc: "The main spine moves from binary certification, to hop-level localization, to quantitative grading of causal structure use — converging on the thesis result, Causal Inferential Yield.",
+    label: "The thesis · three method contributions",
+    title: "Certify · localize · quantify",
+    desc: "One program, not a list of ideas: a method to certify whether behavior is licensed by genuine structure, to localize where that structure is used, and to quantify how much of it the model relies on — developed and tested through linguistic structure.",
     projects: projects.filter((p) => p.group === "core"),
   },
   {
-    label: "On the spine",
-    title: "Planted-structure sandbox",
-    desc: "Mini Causal Models sit on the main spine between Isotrace and CIY: a known-target environment, inspired by the minimum-licensing and causal-residue notes, where recovery and grading are tested before the thesis trusts them.",
+    label: "Application frontier",
+    title: "Where the methods land",
+    desc: "The three methods converge on linguistic typology — the same meaning re-encoded by each language's grammar, a ready-made test of structure versus surface.",
+    projects: projects.filter((p) => p.group === "frontier"),
+  },
+  {
+    label: "Support",
+    title: "Validation & extensions",
+    desc: "Infrastructure and side studies the program leans on — a validation sandbox and two extensions — not separate research directions.",
     projects: projects.filter((p) => p.group === "support"),
-  },
-  {
-    label: "Side studies",
-    title: "Feeding the thesis",
-    desc: "Two studies that branch off before the thesis and feed into it — one a mechanistic bridge into activation space, the other an applied multilingual/multimodal stress test.",
-    projects: projects.filter((p) => p.group === "extension"),
-  },
-  {
-    label: "Emerging direction",
-    title: "Typological grounding",
-    desc: "An early direction taking shape. Languages differ in how much meaning they put into grammar versus leave to context — a ready-made testbed for whether a model tracks structure or surface form.",
-    projects: projects.filter((p) => p.group === "emerging"),
+    compact: true,
   },
 ];
 
@@ -198,8 +181,8 @@ const now = [
     text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
   },
   {
-    label: "Side studies",
-    text: "Folding Latent Control States and Cross-lingual ProtoBias — a mechanistic bridge and an applied multilingual/multimodal stress test — back into the thesis as supporting evidence.",
+    label: "Support",
+    text: "Keeping Latent Control States and Cross-lingual ProtoBias as supporting extensions — a mechanistic bridge and an applied stress test — feeding the main line rather than competing with it.",
   },
   {
     label: "Exploring",
@@ -310,10 +293,10 @@ const posts = [
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
         <p class="hero-desc fade-in-up fade-delay-200">
-          I study when a model's stable, correct behavior is actually licensed by the genuine
-          structure — not a surface proxy that merely correlates with it. To make that abstract
-          question testable, I bring it down to language, where structure is something you can
-          actually pin down: morphology, syntax, the way meaning gets encoded.
+          I do causal interpretability through linguistic structure. I test whether a model's stable,
+          correct behavior is licensed by the genuine structure of a sentence — the head that governs
+          agreement, the dependency that carries an inference — or by a surface cue that only
+          correlates with the answer.
         </p>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
           Structure, or surface? Language is where you can tell.
@@ -385,16 +368,17 @@ const posts = [
             </p>
             <p>
               I'm currently in the M.Sc. in <strong>Human and AI</strong> at the University of
-              Technology Nuremberg (UTN), where I ask that question of models: when a model's stable,
-              correct behavior looks justified, is it really licensed by the structure — or is
-              something merely correlated with the answer doing the work? Increasingly I put that
-              question to language, where the structure is concrete enough to test.
+              Technology Nuremberg (UTN), where I work that question with the tools of causal
+              interpretability — and run it through <strong>linguistic structure</strong>: when a
+              model's stable, correct answer looks justified, is it licensed by the structure of the
+              sentence — the head, the dependency, the constituent that should govern it — or by a
+              surface cue that merely correlates?
             </p>
             <p>
-              I'm preparing PhD applications for fall 2027 at the intersection of causal
-              interpretability and language — using linguistic structure, where the same meaning can
-              live in a word's morphology, its position, or the surrounding context, as the concrete
-              ground for testing whether a model tracks the structure or just its surface.
+              I'm preparing PhD applications for fall 2027 on <strong>causal interpretability through
+              linguistic structure</strong> — using the way languages encode meaning (morphology, word
+              order, context) as the ground on which to test whether a model tracks the structure or
+              just its surface.
             </p>
           </div>
         </div>
@@ -449,12 +433,13 @@ const posts = [
       <div class="divider-line"></div>
       <div class="section-head">
         <p class="section-label fade-in-up">Research</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">One question, followed down to language.</h2>
+        <h2 class="section-heading fade-in-up fade-delay-100">One program, through linguistic structure.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
-          What lets a model reason stably within a language — for the right reason, licensed by the
-          structure rather than a surface proxy? How do we measure it? Does that stability hold across
-          languages? And how does it depend on the structure of language itself? The spine works
-          through these in order.
+          Three method contributions — certify, localize, quantify whether behavior is licensed by
+          genuine structure — developed and tested through linguistic structure, where typology
+          supplies the ground truth. The questions, in order: what makes a model's reasoning stable
+          for the right reason, how to measure it, whether it holds across languages, and how it
+          depends on the structure of language itself.
         </p>
       </div>
 
@@ -469,38 +454,52 @@ const posts = [
                 <h3 class="text-xl font-medium tracking-tight mb-2">{section.title}</h3>
                 <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{section.desc}</p>
               </div>
-              <div class="proj-grid">
-                {
-                  section.projects.map((p, i) => (
-                    <a
-                      href={p.href}
-                      class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
-                      style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
-                    >
-                      <div class="proj-grid-visual">
-                        <ProjectCover kind={p.glyph} color={p.color} />
-                        <div class="proj-grid-overlay">
-                          <span>View project →</span>
+              {section.compact ? (
+                <ul class="support-list">
+                  {section.projects.map((p) => (
+                    <li>
+                      <a href={p.href} class="support-row group">
+                        <span class="support-row-title">{p.title}</span>
+                        <span class="support-row-tag">{p.tags[0]}</span>
+                        <span class="support-row-desc">{p.short}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div class="proj-grid">
+                  {
+                    section.projects.map((p, i) => (
+                      <a
+                        href={p.href}
+                        class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
+                        style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
+                      >
+                        <div class="proj-grid-visual">
+                          <ProjectCover kind={p.glyph} color={p.color} />
+                          <div class="proj-grid-overlay">
+                            <span>View project →</span>
+                          </div>
                         </div>
-                      </div>
-                      <div class="proj-grid-body">
-                        <div class="proj-grid-tags">
-                          <span>{p.n}</span>
-                          <span class="sep">·</span>
-                          {p.tags.map((t, ti) => (
-                            <>
-                              <span>{t}</span>
-                              {ti < p.tags.length - 1 && <span class="sep">·</span>}
-                            </>
-                          ))}
+                        <div class="proj-grid-body">
+                          <div class="proj-grid-tags">
+                            <span>{p.n}</span>
+                            <span class="sep">·</span>
+                            {p.tags.map((t, ti) => (
+                              <>
+                                <span>{t}</span>
+                                {ti < p.tags.length - 1 && <span class="sep">·</span>}
+                              </>
+                            ))}
+                          </div>
+                          <h3 class="proj-grid-title">{p.title}</h3>
+                          <p class="proj-grid-desc">{p.desc}</p>
                         </div>
-                        <h3 class="proj-grid-title">{p.title}</h3>
-                        <p class="proj-grid-desc">{p.desc}</p>
-                      </div>
-                    </a>
-                  ))
-                }
-              </div>
+                      </a>
+                    ))
+                  }
+                </div>
+              )}
             </div>
           ))
         }
