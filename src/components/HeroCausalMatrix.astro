@@ -49,7 +49,13 @@ const cells = (words: string[]) =>
         <stop offset="0" stop-color="var(--color-bg)" stop-opacity="0" />
         <stop offset="1" stop-color="var(--color-bg)" stop-opacity="1" />
       </linearGradient>
-      <path id="hm-flow" d="M 168 234 Q 327 256 486 234" fill="none" stroke="none" />
+      <path id="hm-flow" d="M 168 241 V 252 H 486 V 241" fill="none" stroke="none" />
+      <marker id="hm-arr-a" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+        <path class="hm-arr-a" d="M1 1 L7 4 L1 7 z" />
+      </marker>
+      <marker id="hm-arr-m" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="4.6" markerHeight="4.6" orient="auto">
+        <path class="hm-arr-m" d="M1 1 L7 4 L1 7 z" />
+      </marker>
     </defs>
 
     <!-- column guides (lock-wheel separators) -->
@@ -57,11 +63,9 @@ const cells = (words: string[]) =>
       {cols.map((c) => <line x1={c.x} y1="150" x2={c.x} y2="300" />)}
     </g>
 
-    <!-- read-line + glow behind the load-bearing positions -->
-    <ellipse class="hm-glow" cx="168" cy={Y_CENTER} rx="38" ry="20" />
-    <ellipse class="hm-glow" cx="486" cy={Y_CENTER} rx="42" ry="20" />
-    <line class="hm-readline" x1="30" y1="203" x2="512" y2="203" />
-    <line class="hm-readline" x1="30" y1="247" x2="512" y2="247" />
+    <!-- square glow behind the load-bearing positions (subject + verb) -->
+    <rect class="hm-glow" x="128" y="207" width="80" height="36" rx="4" />
+    <rect class="hm-glow" x="446" y="207" width="80" height="36" rx="4" />
 
     <!-- the five scrolling reels -->
     <g clip-path="url(#hm-band)">
@@ -84,25 +88,29 @@ const cells = (words: string[]) =>
     <g class="hm-role">
       {cols.filter((c) => c.role).map((c) => <text x={c.x} y="142" text-anchor="middle">{c.role}</text>)}
     </g>
-    <!-- the nearest noun is the tempting surface cue -->
-    <circle class="hm-lure" cx="392" cy="266" r="3.2" />
+    <!-- local dependencies (dashed, right-angled): article -> subject noun and
+         preposition -> object noun. The nouns are causal targets too — bound by
+         the words in their own phrase. -->
+    <path class="hm-dep" d="M 58 211 V 199 H 168 V 209" marker-end="url(#hm-arr-m)" />
+    <path class="hm-dep" d="M 288 211 V 199 H 392 V 209" marker-end="url(#hm-arr-m)" />
 
-    <!-- causal flow along the read-line: subject -> verb -->
-    <path class="hm-flow-line" d="M 168 234 Q 327 256 486 234" />
-    <circle class="hm-end" cx="168" cy="234" r="2.6" />
-    <circle class="hm-pulse" r="3.6" filter="url(#hm-glow)">
-      <animateMotion dur="4.4s" begin="0s" repeatCount="indefinite" rotate="auto">
+    <!-- long-range agreement (solid, right-angled): the subject governs the verb's
+         form across the surface words between them. Carries the travelling pulse. -->
+    <path class="hm-agree" d="M 168 241 V 252 H 486 V 241" marker-end="url(#hm-arr-a)" />
+    <circle class="hm-pulse" r="3.4" filter="url(#hm-glow)">
+      <animateMotion dur="4.6s" begin="0s" repeatCount="indefinite" rotate="auto">
         <mpath href="#hm-flow" />
       </animateMotion>
-      <animate attributeName="opacity" dur="4.4s" begin="0s" repeatCount="indefinite"
-               values="0;1;1;0" keyTimes="0;0.12;0.82;1" />
+      <animate attributeName="opacity" dur="4.6s" begin="0s" repeatCount="indefinite"
+               values="0;1;1;0" keyTimes="0;0.1;0.84;1" />
     </circle>
   </svg>
 
   <figcaption class="hero-matrix-cap">
-    Word choices spin like a combination lock. The behaviour locks onto the
-    <span class="cap-lit">structural positions</span> — subject governs verb — not the
-    surface tokens (<em>trees</em>) between them.
+    Word choices spin like a combination lock. Dashed links are local — article and
+    preposition bind their nouns; the <span class="cap-lit">solid line</span> is the
+    long-range one that matters: the subject governs the verb, across the surface
+    tokens (<em>trees</em>) between them.
   </figcaption>
 </figure>
 
@@ -118,7 +126,6 @@ const cells = (words: string[]) =>
   }
 
   .hm-guide line { stroke: var(--color-border); stroke-width: 1; }
-  .hm-readline { stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 1 5; opacity: 0.45; }
 
   .hm-role text { font-size: 8px; letter-spacing: 0.13em; fill: var(--color-text-ghost); }
 
@@ -126,11 +133,15 @@ const cells = (words: string[]) =>
   .hm-reel-mute .hm-cell { fill: var(--color-text-muted); }
   .hm-reel-key  .hm-cell { fill: var(--color-accent); font-weight: 600; }
 
-  .hm-glow { fill: var(--color-accent); opacity: 0.16; }
-  .hm-lure { fill: none; stroke: var(--color-text-muted); stroke-width: 1.2; opacity: 0.8; }
+  .hm-glow { fill: var(--color-accent); opacity: 0.13; }
 
-  .hm-flow-line { fill: none; stroke: var(--color-accent); stroke-width: 1.4; opacity: 0.85; }
-  .hm-end { fill: var(--color-accent); }
+  /* local within-phrase dependencies — dashed, secondary */
+  .hm-dep { fill: none; stroke: var(--color-text-dim); stroke-width: 1; stroke-dasharray: 2.5 2.5; opacity: 0.75; }
+  .hm-arr-m { fill: var(--color-text-dim); }
+
+  /* long-range agreement — solid accent */
+  .hm-agree { fill: none; stroke: var(--color-accent); stroke-width: 1.5; }
+  .hm-arr-a { fill: var(--color-accent); }
   .hm-pulse { fill: var(--color-accent); }
 
   .hm-reel { animation-name: hm-scroll; animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
