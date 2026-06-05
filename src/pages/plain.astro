@@ -1,0 +1,253 @@
+---
+import Base from "../layouts/Base.astro";
+import { projects, now } from "../data/research";
+import { posts } from "../data/writing";
+
+// A deliberately plain alternative to the homepage: name, one-line affiliation,
+// a short research statement, and an honest, status-tagged list of the work.
+// No hero, no figures, no animation, no call-to-action buttons. This is the link
+// meant for a CV — content first, design out of the way. The rich homepage
+// stays at "/".
+
+const core = projects.filter((p) => p.group === "core");
+const frontier = projects.filter((p) => p.group === "frontier");
+const support = projects.filter((p) => p.group === "support");
+
+const groups = [
+  { label: "Method program — certify · localize · quantify", items: core },
+  { label: "Application frontier", items: frontier },
+  { label: "Support — validation & extensions", items: support },
+];
+
+const recentPosts = posts.slice(0, 5);
+---
+
+<Base
+  title="Xiaochuan Li — research"
+  description="Xiaochuan Li — causal interpretability through linguistic structure. A plain, content-first overview of the research program."
+>
+  <article class="plain">
+    <header class="plain-head">
+      <h1 class="plain-name">Xiaochuan Li</h1>
+      <p class="plain-affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
+      <p class="plain-stmt">
+        I work on <strong>causal interpretability through linguistic structure</strong>: testing
+        whether a model's stable, correct behavior is licensed by the genuine structure of a
+        sentence — the head that governs agreement, the dependency that carries an inference — or by
+        a surface cue that merely correlates. I run that question through typologically diverse
+        languages, where the same meaning is encoded by morphology, word order, or context.
+      </p>
+      <p class="plain-links">
+        <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
+        <span class="sep">·</span>
+        <a href="/cv">CV</a>
+        <span class="sep">·</span>
+        <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
+        <span class="sep">·</span>
+        <a href="/">full site →</a>
+      </p>
+    </header>
+
+    <section class="plain-section">
+      <h2 class="plain-h2">Research</h2>
+      <p class="plain-lede">
+        One program — certify, localize, then quantify whether behavior is licensed by genuine
+        structure, developed and tested through linguistic structure. The status on each line is
+        where the work actually stands, not where it is headed.
+      </p>
+
+      {
+        groups.map((g) => (
+          <div class="plain-group">
+            <p class="plain-group-label">{g.label}</p>
+            <ul class="plain-work">
+              {g.items.map((p) => (
+                <li class="plain-work-item">
+                  <div class="plain-work-top">
+                    <a class="plain-work-title" href={p.href}>{p.title}</a>
+                    <span class={`plain-status plain-status-${p.status.toLowerCase().replace(/\s+/g, "-")}`}>
+                      {p.status}
+                    </span>
+                  </div>
+                  <p class="plain-work-desc">{p.desc ?? p.short}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="plain-section">
+      <h2 class="plain-h2">Currently</h2>
+      <ul class="plain-now">
+        {now.map((item) => (
+          <li><span class="plain-now-label">{item.label}</span> {item.text}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="plain-section">
+      <h2 class="plain-h2">Writing</h2>
+      <ul class="plain-writing">
+        {recentPosts.map((p) => (
+          <li>
+            <a href={`/writing/${p.slug}`}>{p.title}</a>
+            <span class="plain-writing-date">{p.date}{p.status === "draft" ? " · draft" : ""}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="plain-more"><a href="/writing">All writing →</a></p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .plain { max-width: 42rem; }
+  .plain a { color: var(--color-accent); text-decoration: none; }
+  .plain a:hover { text-decoration: underline; }
+
+  /* header */
+  .plain-head { margin-bottom: 3.25rem; }
+  .plain-name {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.35rem;
+    color: var(--color-text);
+  }
+  .plain-affil {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1.5rem;
+  }
+  .plain-stmt {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+  }
+  .plain-stmt strong { font-weight: 600; }
+  .plain-links {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.9;
+  }
+  .plain-links .sep { color: var(--color-text-ghost); margin: 0 0.5rem; }
+
+  /* sections */
+  .plain-section { margin-top: 3rem; }
+  .plain-h2 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .plain-lede {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin: 0 0 1.75rem;
+    max-width: 38rem;
+  }
+
+  /* work list */
+  .plain-group { margin-bottom: 1.9rem; }
+  .plain-group:last-child { margin-bottom: 0; }
+  .plain-group-label {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin: 0 0 0.85rem;
+  }
+  .plain-work { list-style: none; margin: 0; padding: 0; }
+  .plain-work-item { margin-bottom: 1.15rem; }
+  .plain-work-item:last-child { margin-bottom: 0; }
+  .plain-work-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.3rem;
+  }
+  .plain-work-title {
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--color-text) !important;
+  }
+  .plain-work-title:hover { color: var(--color-accent) !important; text-decoration: none; }
+  .plain-status {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-text-dim);
+    white-space: nowrap;
+  }
+  /* the furthest-along piece reads in the accent; everything else stays neutral */
+  .plain-status-drafting {
+    color: var(--color-accent);
+    border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+  .plain-work-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 38rem;
+  }
+
+  /* currently */
+  .plain-now { list-style: none; margin: 0; padding: 0; }
+  .plain-now li {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+    max-width: 40rem;
+  }
+  .plain-now li:last-child { margin-bottom: 0; }
+  .plain-now-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-right: 0.5rem;
+  }
+
+  /* writing */
+  .plain-writing { list-style: none; margin: 0; padding: 0; }
+  .plain-writing li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .plain-writing li:first-child { border-top: 1px solid var(--color-border); }
+  .plain-writing a { color: var(--color-text) !important; font-size: 0.95rem; }
+  .plain-writing a:hover { color: var(--color-accent) !important; text-decoration: none; }
+  .plain-writing-date {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--color-text-dim);
+    white-space: nowrap;
+  }
+  .plain-more { margin: 1.1rem 0 0; font-size: 0.9rem; }
+</style>

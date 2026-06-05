@@ -54,6 +54,12 @@ const nav = [
 ];
 
 const path = Astro.url.pathname;
+
+// Plain ⇄ rich view switch (sits next to the theme toggle). On the plain page it
+// points back to the rich homepage; everywhere else it points to the plain page.
+const isPlain = path === "/plain" || path === "/plain/";
+const viewToggleHref = isPlain ? "/" : "/plain";
+const viewToggleLabel = isPlain ? "Switch to the full version" : "Switch to the plain version";
 ---
 
 <!doctype html>
@@ -144,6 +150,27 @@ const path = Astro.url.pathname;
         </div>
 
         <div class="nav-actions">
+          <a
+            class="theme-toggle view-toggle"
+            href={viewToggleHref}
+            aria-label={viewToggleLabel}
+            title={viewToggleLabel}
+          >
+            {isPlain ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="6.5" height="6.5" rx="1.4"></rect>
+                <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"></rect>
+                <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"></rect>
+                <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.4"></rect>
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="7" x2="19" y2="7"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <line x1="5" y1="17" x2="13" y2="17"></line>
+              </svg>
+            )}
+          </a>
           <button
             id="theme-toggle"
             class="theme-toggle"

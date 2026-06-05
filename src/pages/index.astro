@@ -4,6 +4,7 @@ import ProjectCover from "../components/ProjectCover.astro";
 import LanguageGroundingFigure from "../components/LanguageGroundingFigure.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
+import { projects, now } from "../data/research";
 
 // The main axis is the argument, not the chronology: a motivating question,
 // the three method contributions (certify -> localize -> quantify), and the
@@ -87,74 +88,6 @@ const researchExtensions = [
   },
 ];
 
-const projects = [
-  {
-    n: "01",
-    title: "Stable Is Not Grounded",
-    href: "/research/sc-certification",
-    color: "var(--accent-coral)",
-    tint: "rgba(240, 153, 123, 0.10)",
-    glyph: "sc",
-    tags: ["Paper 1", "Certification"],
-    desc: "Certification — is the behavior licensed by the genuine structure at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
-    group: "core",
-  },
-  {
-    n: "02",
-    title: "Isotrace",
-    href: "/research/isotrace",
-    color: "var(--accent-teal)",
-    tint: "rgba(93, 202, 165, 0.10)",
-    glyph: "isotrace",
-    tags: ["Paper 2", "Localization"],
-    desc: "Localization — which part of the structure does the work? Competing routes are made to produce distinct labels; in language, which cue (morphology, syntax, context) a model's reasoning actually leans on.",
-    group: "core",
-  },
-  {
-    n: "03",
-    title: "Causal Inferential Yield",
-    href: "/research/ciy",
-    color: "var(--accent-purple)",
-    tint: "rgba(175, 169, 236, 0.10)",
-    glyph: "ciy",
-    tags: ["Paper 3", "Quantification"],
-    desc: "Quantification — how much genuine structure does the model reliably use, beyond surface cues? Graded on controlled, typologically-varied items rather than on benchmark accuracy.",
-    group: "core",
-  },
-  {
-    n: "→",
-    title: "Typological Grounding",
-    href: "/research/typological-grounding",
-    color: "var(--accent-deep-purple)",
-    tint: "rgba(176, 156, 219, 0.10)",
-    glyph: "xling",
-    tags: ["Application frontier", "Cross-lingual"],
-    desc: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
-    group: "frontier",
-  },
-  {
-    title: "Mini Causal Models",
-    href: "/research/mini-causal-models",
-    tags: ["Validation sandbox"],
-    short: "A planted-ground-truth environment — the three methods checked against a known linguistic target before they're trusted.",
-    group: "support",
-  },
-  {
-    title: "Latent Control States",
-    href: "/research/latent-control-states",
-    tags: ["Extension · mechanistic"],
-    short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form?",
-    group: "support",
-  },
-  {
-    title: "Cross-lingual ProtoBias",
-    href: "/research/cross-lingual-protobias",
-    tags: ["Extension · applied"],
-    short: "An applied multimodal stress test: semantic content versus language- and culture-specific prototype shortcuts.",
-    group: "support",
-  },
-];
-
 const programSections = [
   {
     label: "The thesis · three method contributions",
@@ -174,25 +107,6 @@ const programSections = [
     desc: "Infrastructure and side studies the program leans on — a validation sandbox and two extensions — not separate research directions.",
     projects: projects.filter((p) => p.group === "support"),
     compact: true,
-  },
-];
-
-const now = [
-  {
-    label: "Primary",
-    text: "Writing Stable Is Not Grounded as a workshop-targeted paper on why stability is not sufficient for grounding.",
-  },
-  {
-    label: "Next",
-    text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
-  },
-  {
-    label: "Support",
-    text: "Keeping Latent Control States and Cross-lingual ProtoBias as supporting extensions — a mechanistic bridge and an applied stress test — feeding the main line rather than competing with it.",
-  },
-  {
-    label: "Exploring",
-    text: "Sketching a direction on typological grounding — what the structure-versus-surface question looks like when the same meaning is marked in grammar in one language and left to context in another.",
   },
 ];
 

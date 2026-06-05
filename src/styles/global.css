@@ -188,6 +188,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   transition: color 0.2s ease, background 0.2s ease;
 }
 .theme-toggle:hover { color: var(--color-text); background: rgba(127, 127, 127, 0.08); }
+.view-toggle { text-decoration: none; }
 .theme-icon-sun { display: none; }
 .theme-icon-moon { display: block; }
 :root.light .theme-icon-sun { display: block; }
