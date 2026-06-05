@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ProjectCover from "../components/ProjectCover.astro";
 import LanguageGroundingFigure from "../components/LanguageGroundingFigure.astro";
+import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
 
 // The main axis is the argument, not the chronology: a motivating question,
@@ -223,69 +224,7 @@ const posts = [
 <Base wide={true}>
   <!-- =========== HERO =========== -->
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <filter id="hb-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.6" result="b" />
-            <feMerge>
-              <feMergeNode in="b" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        <g class="hb-edges" stroke="currentColor" stroke-opacity="0.10" fill="none" stroke-width="1">
-          <path d="M 780 120 L 940 200" />
-          <path d="M 940 200 L 1080 160" />
-          <path d="M 940 200 L 1020 320" />
-          <path d="M 780 120 L 700 280" />
-          <path d="M 700 280 L 840 360" />
-          <path d="M 840 360 L 1020 320" />
-          <path d="M 1020 320 L 1100 460" />
-          <path d="M 840 360 L 920 520" />
-          <path d="M 920 520 L 1100 460" />
-          <path d="M 700 280 L 620 460" />
-          <path d="M 620 460 L 920 520" />
-        </g>
-
-        <!-- invisible multi-edge routes traced by the two drifting signals -->
-        <path id="hb-route-a" d="M 780 120 L 940 200 L 1020 320 L 1100 460" fill="none" stroke="none" />
-        <path id="hb-route-b" d="M 780 120 L 700 280 L 840 360 L 920 520" fill="none" stroke="none" />
-
-        <g fill="currentColor" fill-opacity="0.20">
-          <circle cx="780" cy="120" r="2.6" />
-          <circle cx="940" cy="200" r="3.2" />
-          <circle cx="1080" cy="160" r="2.4" />
-          <circle cx="700" cy="280" r="2.6" />
-          <circle cx="1020" cy="320" r="2.8" />
-          <circle cx="840" cy="360" r="3.0" />
-          <circle cx="1100" cy="460" r="2.4" />
-          <circle cx="620" cy="460" r="2.6" />
-          <circle cx="920" cy="520" r="2.8" />
-        </g>
-        <circle cx="940" cy="200" r="6.5" fill="var(--color-accent)" fill-opacity="0.55" />
-
-        <g class="hb-particles" filter="url(#hb-glow)" fill="var(--color-accent)">
-          <circle r="2" opacity="0">
-            <animateMotion dur="9s" begin="0s" repeatCount="indefinite">
-              <mpath href="#hb-route-a" />
-            </animateMotion>
-            <animate attributeName="opacity" dur="9s" begin="0s" repeatCount="indefinite"
-                     values="0;1;1;0" keyTimes="0;0.12;0.85;1" />
-          </circle>
-          <circle r="2" opacity="0">
-            <animateMotion dur="11s" begin="4.5s" repeatCount="indefinite">
-              <mpath href="#hb-route-b" />
-            </animateMotion>
-            <animate attributeName="opacity" dur="11s" begin="4.5s" repeatCount="indefinite"
-                     values="0;1;1;0" keyTimes="0;0.12;0.85;1" />
-          </circle>
-        </g>
-      </svg>
-    </div>
-
-    <div class="hero-inner">
+    <div class="hero-inner hero-grid">
       <div class="hero-content">
         <p class="hero-tagline fade-in">Master's student · Human and AI · UTN Nürnberg</p>
         <h1 class="hero-heading fade-in-up">
@@ -336,13 +275,34 @@ const posts = [
           </a>
         </div>
       </div>
+
+      <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
+        <HeroCausalMatrix />
+      </div>
     </div>
 
-    <a href="#about" class="scroll-indicator" aria-label="Scroll to about">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-      </svg>
-    </a>
+  </section>
+
+  <!-- =========== TRAJECTORY =========== -->
+  <section id="trajectory" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Research arc</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">From one question to a program.</h2>
+        <p class="section-sub fade-in-up fade-delay-200">
+          One question — is a model's behavior licensed by the genuine structure, or by a surface
+          correlate? — traced from a first philosophical prompt through the three method
+          contributions (certify, localize, quantify), then pointing past the thesis result to the
+          language frontier. Open marks are ideas, filled nodes are the methods, the dashed node is
+          the frontier still taking shape; a validation sandbox and two extensions branch off in
+          support.
+        </p>
+      </div>
+      <div class="fade-in-up fade-delay-300">
+        <ResearchSpine spine={researchSpine} extensions={researchExtensions} />
+      </div>
+    </div>
   </section>
 
   <!-- =========== ABOUT =========== -->
@@ -388,28 +348,6 @@ const posts = [
             </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========== TRAJECTORY =========== -->
-  <section id="trajectory" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Trajectory</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">From idea to experiment.</h2>
-        <p class="section-sub fade-in-up fade-delay-200">
-          One question — is a model's behavior licensed by the genuine structure, or by a surface
-          correlate? — traced from a first philosophical prompt through the three method
-          contributions (certify, localize, quantify), then pointing past the thesis result to the
-          language frontier. Open marks are ideas, filled nodes are the methods, the dashed node is
-          the frontier still taking shape; a validation sandbox and two extensions branch off in
-          support.
-        </p>
-      </div>
-      <div class="fade-in-up fade-delay-300">
-        <ResearchSpine spine={researchSpine} extensions={researchExtensions} />
       </div>
     </div>
   </section>

@@ -1,0 +1,157 @@
+---
+// HeroCausalMatrix — the homepage hero emblem.
+// Five word positions, each a combination-lock reel scrolling vertically: the
+// centre row is the current token, the neighbours above/below peek through and
+// fade. At rest the five wheels read "The path through the trees was".
+//
+// Only the structural positions glow — SUBJECT (path) and VERB — and a causal
+// pulse flows between them along the read-line: the verb's form is licensed by
+// the subject, not by the linearly nearest noun (trees) between them. The verb
+// column carries a do()-intervention reading (its form is the variable).
+//
+//   accent + glow = causally load-bearing position
+//   muted         = surface material the behaviour is NOT licensed by
+//
+// Boxless, theme-aware, reduced-motion safe (wheels rest on the sentence).
+const PITCH = 46;
+const Y_CENTER = 225;
+const Y_START = Y_CENTER - 2 * PITCH; // idx 2 sits on the read-line at rest
+
+// idx 2 of each list is the resting sentence word
+const cols = [
+  { x: 58,  role: null,              accent: false, dur: 9,  words: ["A", "This", "The", "Each", "Some"] },
+  { x: 168, role: "SUBJECT · head",  accent: true,  dur: 11, words: ["key", "route", "path", "trail", "bridge"] },
+  { x: 288, role: null,              accent: false, dur: 8,  words: ["near", "beyond", "through", "along", "past"] },
+  { x: 392, role: "NEAREST NOUN",    accent: false, dur: 10, words: ["tree", "woods", "trees", "cabin", "fence"] },
+  { x: 486, role: "VERB · do(form)", accent: true,  dur: 12, words: ["were", "is", "was", "are", "stays"] },
+];
+// two stacked copies → seamless loop over one set height (5 * PITCH)
+const cells = (words: string[]) =>
+  Array.from({ length: 10 }, (_, i) => ({ y: Y_START + i * PITCH, w: words[i % words.length] }));
+---
+
+<figure
+  class="hero-matrix"
+  aria-label="Five word positions shown as combination-lock reels scrolling vertically. At rest they read 'The path through the trees was'. The subject 'path' and the verb glow as the causally load-bearing positions, joined by a pulse along the read-line; the verb agrees with the subject, not the nearer noun 'trees'."
+>
+  <svg viewBox="0 0 540 360" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
+    <defs>
+      <filter id="hm-glow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="3" result="b" />
+        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+      <clipPath id="hm-band"><rect x="24" y="156" width="496" height="138" /></clipPath>
+      <linearGradient id="hm-fade-top" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--color-bg)" stop-opacity="1" />
+        <stop offset="1" stop-color="var(--color-bg)" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="hm-fade-bot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--color-bg)" stop-opacity="0" />
+        <stop offset="1" stop-color="var(--color-bg)" stop-opacity="1" />
+      </linearGradient>
+      <path id="hm-flow" d="M 168 234 Q 327 256 486 234" fill="none" stroke="none" />
+    </defs>
+
+    <!-- column guides (lock-wheel separators) -->
+    <g class="hm-guide">
+      {cols.map((c) => <line x1={c.x} y1="150" x2={c.x} y2="300" />)}
+    </g>
+
+    <!-- read-line + glow behind the load-bearing positions -->
+    <ellipse class="hm-glow" cx="168" cy={Y_CENTER} rx="38" ry="20" />
+    <ellipse class="hm-glow" cx="486" cy={Y_CENTER} rx="42" ry="20" />
+    <line class="hm-readline" x1="30" y1="203" x2="512" y2="203" />
+    <line class="hm-readline" x1="30" y1="247" x2="512" y2="247" />
+
+    <!-- the five scrolling reels -->
+    <g clip-path="url(#hm-band)">
+      {
+        cols.map((c) => (
+          <g class={`hm-reel ${c.accent ? "hm-reel-key" : "hm-reel-mute"}`} style={`animation-duration:${c.dur}s`}>
+            {cells(c.words).map((cell) => (
+              <text class="hm-cell" x={c.x} y={cell.y} text-anchor="middle">{cell.w}</text>
+            ))}
+          </g>
+        ))
+      }
+    </g>
+
+    <!-- top / bottom fades give the padlock peek -->
+    <rect class="hm-fade" x="24" y="156" width="496" height="44" fill="url(#hm-fade-top)" />
+    <rect class="hm-fade" x="24" y="250" width="496" height="44" fill="url(#hm-fade-bot)" />
+
+    <!-- column role labels -->
+    <g class="hm-role">
+      {cols.filter((c) => c.role).map((c) => <text x={c.x} y="142" text-anchor="middle">{c.role}</text>)}
+    </g>
+    <!-- the nearest noun is the tempting surface cue -->
+    <circle class="hm-lure" cx="392" cy="266" r="3.2" />
+
+    <!-- causal flow along the read-line: subject -> verb -->
+    <path class="hm-flow-line" d="M 168 234 Q 327 256 486 234" />
+    <circle class="hm-end" cx="168" cy="234" r="2.6" />
+    <circle class="hm-pulse" r="3.6" filter="url(#hm-glow)">
+      <animateMotion dur="4.4s" begin="0s" repeatCount="indefinite" rotate="auto">
+        <mpath href="#hm-flow" />
+      </animateMotion>
+      <animate attributeName="opacity" dur="4.4s" begin="0s" repeatCount="indefinite"
+               values="0;1;1;0" keyTimes="0;0.12;0.82;1" />
+    </circle>
+  </svg>
+
+  <figcaption class="hero-matrix-cap">
+    Word choices spin like a combination lock. The behaviour locks onto the
+    <span class="cap-lit">structural positions</span> — subject governs verb — not the
+    surface tokens (<em>trees</em>) between them.
+  </figcaption>
+</figure>
+
+<style>
+  .hero-matrix { margin: 0; padding: 0; }
+  .hero-matrix svg {
+    width: 100%;
+    max-width: 540px;
+    height: auto;
+    display: block;
+    font-family: var(--font-mono);
+    overflow: visible;
+  }
+
+  .hm-guide line { stroke: var(--color-border); stroke-width: 1; }
+  .hm-readline { stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 1 5; opacity: 0.45; }
+
+  .hm-role text { font-size: 8px; letter-spacing: 0.13em; fill: var(--color-text-ghost); }
+
+  .hm-cell { font-size: 15px; letter-spacing: 0.01em; }
+  .hm-reel-mute .hm-cell { fill: var(--color-text-muted); }
+  .hm-reel-key  .hm-cell { fill: var(--color-accent); font-weight: 600; }
+
+  .hm-glow { fill: var(--color-accent); opacity: 0.16; }
+  .hm-lure { fill: none; stroke: var(--color-text-muted); stroke-width: 1.2; opacity: 0.8; }
+
+  .hm-flow-line { fill: none; stroke: var(--color-accent); stroke-width: 1.4; opacity: 0.85; }
+  .hm-end { fill: var(--color-accent); }
+  .hm-pulse { fill: var(--color-accent); }
+
+  .hm-reel { animation-name: hm-scroll; animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
+  @keyframes hm-scroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-230px); }
+  }
+
+  .hero-matrix-cap {
+    margin-top: 1.1rem;
+    font-size: 11.5px;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--color-text-dim);
+    max-width: 31rem;
+  }
+  .hero-matrix-cap em { font-style: normal; font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-muted); }
+  .hero-matrix-cap .cap-lit { font-style: normal; color: var(--color-accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hm-reel { animation: none; }
+    .hm-pulse { display: none; }
+  }
+</style>
