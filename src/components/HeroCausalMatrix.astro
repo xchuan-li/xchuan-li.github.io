@@ -107,10 +107,10 @@ const cells = (words: string[]) =>
   </svg>
 
   <figcaption class="hero-matrix-cap">
-    Word choices spin like a combination lock. Dashed links are local — article and
-    preposition bind their nouns; the <span class="cap-lit">solid line</span> is the
-    long-range one that matters: the subject governs the verb, across the surface
-    tokens (<em>trees</em>) between them.
+    Word choices spin like a combination lock. The thin ties are local — article and
+    preposition bind their nouns; the <span class="cap-lit">long line</span> is the one
+    that matters: the subject governs the verb, across the surface tokens
+    (<em>trees</em>) between them.
   </figcaption>
 </figure>
 
@@ -135,9 +135,9 @@ const cells = (words: string[]) =>
 
   .hm-glow { fill: var(--color-accent); opacity: 0.13; }
 
-  /* local within-phrase dependencies — dashed, secondary */
-  .hm-dep { fill: none; stroke: var(--color-text-dim); stroke-width: 1; stroke-dasharray: 2.5 2.5; opacity: 0.75; }
-  .hm-arr-m { fill: var(--color-text-dim); }
+  /* local within-phrase dependencies — thin solid, secondary */
+  .hm-dep { fill: none; stroke: var(--color-text-muted); stroke-width: 1; opacity: 0.7; }
+  .hm-arr-m { fill: var(--color-text-muted); opacity: 0.8; }
 
   /* long-range agreement — solid accent */
   .hm-agree { fill: none; stroke: var(--color-accent); stroke-width: 1.5; }
