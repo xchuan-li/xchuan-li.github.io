@@ -49,7 +49,6 @@ const cells = (words: string[]) =>
         <stop offset="0" stop-color="var(--color-bg)" stop-opacity="0" />
         <stop offset="1" stop-color="var(--color-bg)" stop-opacity="1" />
       </linearGradient>
-      <path id="hm-flow" d="M 168 241 V 252 H 486 V 241" fill="none" stroke="none" />
       <marker id="hm-arr-a" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="5" markerHeight="5" orient="auto">
         <path class="hm-arr-a" d="M1 1 L7 4 L1 7 z" />
       </marker>
@@ -88,22 +87,17 @@ const cells = (words: string[]) =>
     <g class="hm-role">
       {cols.filter((c) => c.role).map((c) => <text x={c.x} y="142" text-anchor="middle">{c.role}</text>)}
     </g>
-    <!-- local dependencies (dashed, right-angled): article -> subject noun and
-         preposition -> object noun. The nouns are causal targets too — bound by
-         the words in their own phrase. -->
+    <!-- local dependencies: article -> subject noun, preposition -> object noun.
+         A faint base wire with a slow current flowing toward the noun. -->
     <path class="hm-dep" d="M 58 211 V 199 H 168 V 209" marker-end="url(#hm-arr-m)" />
     <path class="hm-dep" d="M 288 211 V 199 H 392 V 209" marker-end="url(#hm-arr-m)" />
+    <path class="hm-dep-flow" d="M 58 211 V 199 H 168 V 209" />
+    <path class="hm-dep-flow" d="M 288 211 V 199 H 392 V 209" />
 
-    <!-- long-range agreement (solid, right-angled): the subject governs the verb's
-         form across the surface words between them. Carries the travelling pulse. -->
+    <!-- long-range agreement: the subject governs the verb's form across the surface
+         words. Faint base wire with a bright current flowing toward the verb. -->
     <path class="hm-agree" d="M 168 241 V 252 H 486 V 241" marker-end="url(#hm-arr-a)" />
-    <circle class="hm-pulse" r="3.4" filter="url(#hm-glow)">
-      <animateMotion dur="4.6s" begin="0s" repeatCount="indefinite" rotate="auto">
-        <mpath href="#hm-flow" />
-      </animateMotion>
-      <animate attributeName="opacity" dur="4.6s" begin="0s" repeatCount="indefinite"
-               values="0;1;1;0" keyTimes="0;0.1;0.84;1" />
-    </circle>
+    <path class="hm-agree-flow" d="M 168 241 V 252 H 486 V 241" filter="url(#hm-glow)" />
   </svg>
 
   <figcaption class="hero-matrix-cap">
@@ -135,14 +129,33 @@ const cells = (words: string[]) =>
 
   .hm-glow { fill: var(--color-accent); opacity: 0.13; }
 
-  /* local within-phrase dependencies — thin solid, secondary */
-  .hm-dep { fill: none; stroke: var(--color-text-muted); stroke-width: 1; opacity: 0.7; }
-  .hm-arr-m { fill: var(--color-text-muted); opacity: 0.8; }
+  /* local within-phrase dependencies — faint base wire + slow flowing current */
+  .hm-dep { fill: none; stroke: var(--color-text-muted); stroke-width: 1; opacity: 0.32; }
+  .hm-arr-m { fill: var(--color-text-muted); opacity: 0.55; }
+  .hm-dep-flow {
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-dasharray: 2 14;
+    animation: hm-flow-dep 2.6s linear infinite;
+  }
 
-  /* long-range agreement — solid accent */
-  .hm-agree { fill: none; stroke: var(--color-accent); stroke-width: 1.5; }
+  /* long-range agreement — faint base wire + bright flowing current toward the verb */
+  .hm-agree { fill: none; stroke: var(--color-accent); stroke-width: 1.2; opacity: 0.38; }
   .hm-arr-a { fill: var(--color-accent); }
-  .hm-pulse { fill: var(--color-accent); }
+  .hm-agree-flow {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 3 17;
+    animation: hm-flow-agree 1.3s linear infinite;
+  }
+
+  /* dash period must equal dash+gap for a seamless loop */
+  @keyframes hm-flow-agree { to { stroke-dashoffset: -20; } }
+  @keyframes hm-flow-dep   { to { stroke-dashoffset: -16; } }
 
   .hm-reel { animation-name: hm-scroll; animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
   @keyframes hm-scroll {
@@ -163,6 +176,8 @@ const cells = (words: string[]) =>
 
   @media (prefers-reduced-motion: reduce) {
     .hm-reel { animation: none; }
-    .hm-pulse { display: none; }
+    .hm-dep-flow, .hm-agree-flow { display: none; }
+    .hm-dep { opacity: 0.7; }
+    .hm-agree { opacity: 0.9; }
   }
 </style>
