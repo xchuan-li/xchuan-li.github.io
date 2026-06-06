@@ -17,18 +17,20 @@ const Y_CENTER = 225;
 const Y0 = Y_CENTER + 5; // baseline of cell 0 at translateY(0)
 const N = 10;
 
-// n: "s" singular · "p" plural · "n" number-neutral · "x" irrelevant
+// n: "s" singular · "p" plural · "x" irrelevant. Skewed so the article, subject
+// and verb only rarely share number — the connected (grounded) combo is uncommon
+// (~1 in 6). Cell 0 of every column is grounded (the reduced-motion still frame).
 const cols = [
-  { x: 58,  role: null,              key: false, speed: 34, dir: 1,
-    words: [["The","n"],["A","s"],["This","s"],["Each","s"],["Every","s"],["These","p"],["Many","p"],["Most","p"],["Several","p"],["Our","n"]] },
-  { x: 168, role: "SUBJECT · head",  key: true,  speed: 41, dir: -1,
-    words: [["signal","s"],["key","s"],["river","s"],["bridge","s"],["root","s"],["keys","p"],["rivers","p"],["roots","p"],["signals","p"],["gates","p"]] },
-  { x: 288, role: null,              key: false, speed: 29, dir: 1,
+  { x: 58,  role: null,              key: false, speed: 15, dir: 1,
+    words: [["A","s"],["This","s"],["Each","s"],["These","p"],["Many","p"],["Most","p"],["Several","p"],["Few","p"],["Both","p"],["All","p"]] },
+  { x: 168, role: "SUBJECT · head",  key: true,  speed: 18, dir: -1,
+    words: [["signal","s"],["key","s"],["river","s"],["bridge","s"],["root","s"],["claim","s"],["gate","s"],["sign","s"],["keys","p"],["roots","p"]] },
+  { x: 288, role: null,              key: false, speed: 13, dir: 1,
     words: [["through","x"],["near","x"],["beyond","x"],["under","x"],["across","x"],["along","x"],["past","x"],["behind","x"],["within","x"],["beside","x"]] },
-  { x: 392, role: "NEAREST NOUN",    key: false, speed: 45, dir: -1,
+  { x: 392, role: "NEAREST NOUN",    key: false, speed: 20, dir: -1,
     words: [["trees","p"],["walls","p"],["gates","p"],["fields","p"],["rivers","p"],["doors","p"],["hills","p"],["panels","p"],["layers","p"],["tokens","p"]] },
-  { x: 486, role: "VERB · do(form)", key: true,  speed: 37, dir: 1,
-    words: [["is","s"],["was","s"],["holds","s"],["stays","s"],["has","s"],["are","p"],["were","p"],["hold","p"],["stay","p"],["have","p"]] },
+  { x: 486, role: "VERB · do(form)", key: true,  speed: 16, dir: 1,
+    words: [["is","s"],["was","s"],["has","s"],["are","p"],["were","p"],["have","p"],["hold","p"],["stay","p"],["remain","p"],["persist","p"]] },
 ];
 const cells = (words: string[][]) =>
   Array.from({ length: 2 * N }, (_, i) => ({ y: Y0 + i * PITCH, w: words[i % N][0] }));
