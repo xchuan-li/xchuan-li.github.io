@@ -1,44 +1,44 @@
 ---
-// HeroCausalMatrix — the homepage hero emblem.
-// Five word positions, each a combination-lock reel scrolling vertically: the
-// centre row is the current token, the neighbours above/below peek through and
-// fade. At rest the five wheels read "The path through the trees was".
+// HeroCausalMatrix — the homepage hero emblem: a grounding combination lock.
 //
-// Only the structural positions glow — SUBJECT (path) and VERB — and a causal
-// pulse flows between them along the read-line: the verb's form is licensed by
-// the subject, not by the linearly nearest noun (trees) between them. The verb
-// column carries a do()-intervention reading (its form is the variable).
+// Five word-wheels step vertically through candidate sentences (like a padlock's
+// dials clicking). The lock on the right opens — green — only when the verb
+// AGREES with the subject across the intervening surface noun; turn to a
+// mismatch (the verb lured by the nearer plural noun) and it stays shut — red.
+// Grammar + agreement hold ⇒ the structural relation is grounded ⇒ the lock opens.
 //
-//   accent + glow = causally load-bearing position
-//   muted         = surface material the behaviour is NOT licensed by
+// Motion is one coherent thing now: the wheels step vertically, and the verdict
+// is a STATE change (colour / open / shut), not a perpendicular horizontal flow.
 //
-// Boxless, theme-aware, reduced-motion safe (wheels rest on the sentence).
+// Four synchronized rows (all wheels share one stepped timeline):
+//   row 0  The  path   through trees  was   — sg + sg  ✓ grounded (lock open)
+//   row 1  The  path   through trees  were  — sg + pl  ✗ lured by "trees" (shut)
+//   row 2  These paths along  woods  were  — pl + pl  ✓ grounded (lock open)
+//   row 3  These paths along  woods  was   — pl + sg  ✗ mismatch (shut)
 const PITCH = 46;
 const Y_CENTER = 225;
-const Y_START = Y_CENTER - 2 * PITCH; // idx 2 sits on the read-line at rest
+const Y0 = Y_CENTER + 5; // baseline of row 0 when the strip is at translateY(0)
 
-// idx 2 of each list is the resting sentence word
 const cols = [
-  { x: 58,  role: null,              accent: false, dur: 9,  words: ["A", "This", "The", "Each", "Some"] },
-  { x: 168, role: "SUBJECT · head",  accent: true,  dur: 11, words: ["key", "route", "path", "trail", "bridge"] },
-  { x: 288, role: null,              accent: false, dur: 8,  words: ["near", "beyond", "through", "along", "past"] },
-  { x: 392, role: "NEAREST NOUN",    accent: false, dur: 10, words: ["tree", "woods", "trees", "cabin", "fence"] },
-  { x: 486, role: "VERB · do(form)", accent: true,  dur: 12, words: ["were", "is", "was", "are", "stays"] },
+  { x: 58,  role: null,              key: false, words: ["The", "The", "These", "These"] },
+  { x: 168, role: "SUBJECT · head",  key: true,  words: ["path", "path", "paths", "paths"] },
+  { x: 288, role: null,              key: false, words: ["through", "through", "along", "along"] },
+  { x: 392, role: "NEAREST NOUN",    key: false, words: ["trees", "trees", "woods", "woods"] },
+  { x: 486, role: "VERB · do(form)", key: true,  words: ["was", "were", "were", "was"] },
 ];
-// two stacked copies → seamless loop over one set height (5 * PITCH)
+// two stacked copies → seamless loop after stepping through the four rows
 const cells = (words: string[]) =>
-  Array.from({ length: 10 }, (_, i) => ({ y: Y_START + i * PITCH, w: words[i % words.length] }));
+  Array.from({ length: 8 }, (_, i) => ({ y: Y0 + i * PITCH, w: words[i % 4] }));
 ---
 
 <figure
   class="hero-matrix"
-  aria-label="Five word positions shown as combination-lock reels scrolling vertically. At rest they read 'The path through the trees was'. The subject 'path' and the verb glow as the causally load-bearing positions, joined by a pulse along the read-line; the verb agrees with the subject, not the nearer noun 'trees'."
+  aria-label="A combination lock over a sentence. Five word-wheels step through candidate sentences; a padlock on the right opens green only when the verb agrees with the subject across the intervening noun (the structure is grounded), and stays shut red on a mismatch such as 'path ... were'."
 >
-  <svg viewBox="0 0 540 360" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
+  <svg viewBox="0 0 620 360" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
     <defs>
-      <filter id="hm-glow" x="-80%" y="-80%" width="260%" height="260%">
-        <feGaussianBlur stdDeviation="3" result="b" />
-        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      <filter id="hm-soft" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="3.4" />
       </filter>
       <clipPath id="hm-band"><rect x="24" y="156" width="496" height="138" /></clipPath>
       <linearGradient id="hm-fade-top" x1="0" y1="0" x2="0" y2="1">
@@ -49,37 +49,36 @@ const cells = (words: string[]) =>
         <stop offset="0" stop-color="var(--color-bg)" stop-opacity="0" />
         <stop offset="1" stop-color="var(--color-bg)" stop-opacity="1" />
       </linearGradient>
-      <marker id="hm-arr-a" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="5" markerHeight="5" orient="auto">
-        <path class="hm-arr-a" d="M1 1 L7 4 L1 7 z" />
-      </marker>
-      <marker id="hm-arr-m" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="4.6" markerHeight="4.6" orient="auto">
-        <path class="hm-arr-m" d="M1 1 L7 4 L1 7 z" />
+      <marker id="hm-arr" viewBox="0 0 8 8" refX="4.2" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+        <path class="hm-arr-h" d="M1 1 L7 4 L1 7 z" />
       </marker>
     </defs>
 
-    <!-- column guides (lock-wheel separators) -->
+    <!-- column guides (dial separators) -->
     <g class="hm-guide">
       {cols.map((c) => <line x1={c.x} y1="150" x2={c.x} y2="300" />)}
     </g>
 
-    <!-- square glow behind the load-bearing positions (subject + verb) -->
-    <rect class="hm-glow" x="128" y="207" width="80" height="36" rx="4" />
-    <rect class="hm-glow" x="446" y="207" width="80" height="36" rx="4" />
+    <!-- neutral slot boxes behind the two load-bearing dials -->
+    <rect class="hm-slot" x="128" y="207" width="80" height="36" rx="4" />
+    <rect class="hm-slot" x="446" y="207" width="80" height="36" rx="4" />
 
-    <!-- the five scrolling reels -->
+    <!-- the five stepping wheels (one shared timeline → rows stay aligned) -->
     <g clip-path="url(#hm-band)">
       {
         cols.map((c) => (
-          <g class={`hm-reel ${c.accent ? "hm-reel-key" : "hm-reel-mute"}`} style={`animation-duration:${c.dur}s`}>
+          <g class="hm-reel">
             {cells(c.words).map((cell) => (
-              <text class="hm-cell" x={c.x} y={cell.y} text-anchor="middle">{cell.w}</text>
+              <text class={`hm-cell ${c.key ? "hm-cell-key" : "hm-cell-mute"}`} x={c.x} y={cell.y} text-anchor="middle">
+                {cell.w}
+              </text>
             ))}
           </g>
         ))
       }
     </g>
 
-    <!-- top / bottom fades give the padlock peek -->
+    <!-- top / bottom fades give the dial peek -->
     <rect class="hm-fade" x="24" y="156" width="496" height="44" fill="url(#hm-fade-top)" />
     <rect class="hm-fade" x="24" y="250" width="496" height="44" fill="url(#hm-fade-bot)" />
 
@@ -87,24 +86,48 @@ const cells = (words: string[]) =>
     <g class="hm-role">
       {cols.filter((c) => c.role).map((c) => <text x={c.x} y="142" text-anchor="middle">{c.role}</text>)}
     </g>
-    <!-- local dependencies: article -> subject noun, preposition -> object noun.
-         A faint base wire with a slow current flowing toward the noun. -->
-    <path class="hm-dep" d="M 58 211 V 199 H 168 V 209" marker-end="url(#hm-arr-m)" />
-    <path class="hm-dep" d="M 288 211 V 199 H 392 V 209" marker-end="url(#hm-arr-m)" />
-    <path class="hm-dep-flow" d="M 58 211 V 199 H 168 V 209" />
-    <path class="hm-dep-flow" d="M 288 211 V 199 H 392 V 209" />
 
-    <!-- long-range agreement: the subject governs the verb's form across the surface
-         words. Faint base wire with a bright current flowing toward the verb. -->
-    <path class="hm-agree" d="M 168 241 V 252 H 486 V 241" marker-end="url(#hm-arr-a)" />
-    <path class="hm-agree-flow" d="M 168 241 V 252 H 486 V 241" filter="url(#hm-glow)" />
+    <!-- the agreement being checked: subject -> verb, across the surface noun -->
+    <path class="hm-agree" d="M 168 241 V 252 H 486 V 241" marker-end="url(#hm-arr)" />
+
+    <!-- VERDICT — grounded (green): boxes, link to the lock, open padlock -->
+    <g class="hm-verdict hm-ok">
+      <rect class="hm-box-ok" x="128" y="207" width="80" height="36" rx="4" />
+      <rect class="hm-box-ok" x="446" y="207" width="80" height="36" rx="4" />
+      <line class="hm-link-ok" x1="528" y1="225" x2="548" y2="225" />
+      <circle class="hm-halo-ok" cx="566" cy="223" r="17" filter="url(#hm-soft)" />
+      <g class="hm-lock-ok">
+        <g transform="rotate(-24 575 222)">
+          <path d="M 557 222 V 215 A 9 9 0 0 1 575 215 V 222" />
+        </g>
+        <rect x="552" y="222" width="28" height="20" rx="3.5" />
+        <circle cx="566" cy="231" r="2" />
+        <line x1="566" y1="231" x2="566" y2="236" />
+      </g>
+      <text class="hm-verdict-label hm-label-ok" x="566" y="262" text-anchor="middle">grounded</text>
+    </g>
+
+    <!-- VERDICT — shortcut (red): boxes, link, shut padlock -->
+    <g class="hm-verdict hm-bad">
+      <rect class="hm-box-bad" x="128" y="207" width="80" height="36" rx="4" />
+      <rect class="hm-box-bad" x="446" y="207" width="80" height="36" rx="4" />
+      <line class="hm-link-bad" x1="528" y1="225" x2="548" y2="225" />
+      <circle class="hm-halo-bad" cx="566" cy="223" r="17" filter="url(#hm-soft)" />
+      <g class="hm-lock-bad">
+        <path d="M 557 222 V 215 A 9 9 0 0 1 575 215 V 222" />
+        <rect x="552" y="222" width="28" height="20" rx="3.5" />
+        <circle cx="566" cy="231" r="2" />
+        <line x1="566" y1="231" x2="566" y2="236" />
+      </g>
+      <text class="hm-verdict-label hm-label-bad" x="566" y="262" text-anchor="middle">shortcut</text>
+    </g>
   </svg>
 
   <figcaption class="hero-matrix-cap">
-    Word choices spin like a combination lock. The thin ties are local — article and
-    preposition bind their nouns; the <span class="cap-lit">long line</span> is the one
-    that matters: the subject governs the verb, across the surface tokens
-    (<em>trees</em>) between them.
+    A combination lock. The wheels click through word choices; it opens —
+    <span class="cap-ok">green</span> — only when the verb agrees with the subject
+    across the surface noun. Fall for the nearer <em>trees</em> and it stays
+    <span class="cap-bad">shut</span>: grammar holds, so the structure is grounded.
   </figcaption>
 </figure>
 
@@ -112,55 +135,73 @@ const cells = (words: string[]) =>
   .hero-matrix { margin: 0; padding: 0; }
   .hero-matrix svg {
     width: 100%;
-    max-width: 540px;
+    max-width: 580px;
     height: auto;
     display: block;
     font-family: var(--font-mono);
     overflow: visible;
+    --hm-ok: var(--accent-teal);
+    --hm-bad: #db5048;
   }
 
   .hm-guide line { stroke: var(--color-border); stroke-width: 1; }
+  .hm-slot { fill: none; stroke: var(--color-border-strong); stroke-width: 1; opacity: 0.5; }
 
   .hm-role text { font-size: 8px; letter-spacing: 0.13em; fill: var(--color-text-ghost); }
 
   .hm-cell { font-size: 15px; letter-spacing: 0.01em; }
-  .hm-reel-mute .hm-cell { fill: var(--color-text-muted); }
-  .hm-reel-key  .hm-cell { fill: var(--color-accent); font-weight: 600; }
+  .hm-cell-mute { fill: var(--color-text-muted); }
+  .hm-cell-key  { fill: var(--color-text); font-weight: 600; }
 
-  .hm-glow { fill: var(--color-accent); opacity: 0.13; }
+  /* the relation under test — quiet structural connector */
+  .hm-agree { fill: none; stroke: var(--color-text-dim); stroke-width: 1.2; opacity: 0.5; }
+  .hm-arr-h { fill: var(--color-text-dim); opacity: 0.6; }
 
-  /* local within-phrase dependencies — faint base wire + slow flowing current */
-  .hm-dep { fill: none; stroke: var(--color-text-muted); stroke-width: 1; opacity: 0.32; }
-  .hm-arr-m { fill: var(--color-text-muted); opacity: 0.55; }
-  .hm-dep-flow {
-    fill: none;
-    stroke: var(--color-text-muted);
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-dasharray: 2 14;
-    animation: hm-flow-dep 2.6s linear infinite;
+  /* ---- verdict groups (green = grounded, red = shortcut), opacity-synced ---- */
+  .hm-box-ok  { fill: var(--hm-ok);  fill-opacity: 0.14; stroke: var(--hm-ok);  stroke-opacity: 0.8; stroke-width: 1.4; }
+  .hm-box-bad { fill: var(--hm-bad); fill-opacity: 0.14; stroke: var(--hm-bad); stroke-opacity: 0.8; stroke-width: 1.4; }
+  .hm-link-ok  { stroke: var(--hm-ok);  stroke-width: 1.6; }
+  .hm-link-bad { stroke: var(--hm-bad); stroke-width: 1.6; }
+  .hm-halo-ok  { fill: var(--hm-ok);  opacity: 0.28; }
+  .hm-halo-bad { fill: var(--hm-bad); opacity: 0.26; }
+
+  .hm-lock-ok  path, .hm-lock-ok  rect, .hm-lock-ok  line { fill: none; stroke: var(--hm-ok);  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .hm-lock-ok  rect { fill: var(--hm-ok); fill-opacity: 0.16; }
+  .hm-lock-bad path, .hm-lock-bad rect, .hm-lock-bad line { fill: none; stroke: var(--hm-bad); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .hm-lock-bad rect { fill: var(--hm-bad); fill-opacity: 0.16; }
+
+  .hm-verdict-label { font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .hm-label-ok  { fill: var(--hm-ok); }
+  .hm-label-bad { fill: var(--hm-bad); }
+
+  /* ---- one shared stepped timeline: wheels + verdicts ---- */
+  /* equal values across a span = a hold; the gaps between are quick eased clicks */
+  .hm-reel { animation: hm-step 12s cubic-bezier(0.7, 0, 0.3, 1) infinite; }
+  @keyframes hm-step {
+    0%, 18%   { transform: translateY(0); }
+    25%, 43%  { transform: translateY(-46px); }
+    50%, 68%  { transform: translateY(-92px); }
+    75%, 93%  { transform: translateY(-138px); }
+    100%      { transform: translateY(-184px); }
   }
 
-  /* long-range agreement — faint base wire + bright flowing current toward the verb */
-  .hm-agree { fill: none; stroke: var(--color-accent); stroke-width: 1.2; opacity: 0.38; }
-  .hm-arr-a { fill: var(--color-accent); }
-  .hm-agree-flow {
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-dasharray: 3 17;
-    animation: hm-flow-agree 1.3s linear infinite;
+  .hm-verdict { will-change: opacity; }
+  .hm-ok  { animation: hm-show-ok  12s linear infinite; }
+  .hm-bad { animation: hm-show-bad 12s linear infinite; }
+  /* grounded rows: 0 (0–18%) and 2 (50–68%) */
+  @keyframes hm-show-ok {
+    0%, 18%   { opacity: 1; }
+    22%, 47%  { opacity: 0; }
+    50%, 68%  { opacity: 1; }
+    72%, 100% { opacity: 0; }
   }
-
-  /* dash period must equal dash+gap for a seamless loop */
-  @keyframes hm-flow-agree { to { stroke-dashoffset: -20; } }
-  @keyframes hm-flow-dep   { to { stroke-dashoffset: -16; } }
-
-  .hm-reel { animation-name: hm-scroll; animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
-  @keyframes hm-scroll {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-230px); }
+  /* shortcut rows: 1 (25–43%) and 3 (75–93%) */
+  @keyframes hm-show-bad {
+    0%, 20%   { opacity: 0; }
+    25%, 43%  { opacity: 1; }
+    48%, 72%  { opacity: 0; }
+    75%, 93%  { opacity: 1; }
+    97%, 100% { opacity: 0; }
   }
 
   .hero-matrix-cap {
@@ -169,15 +210,16 @@ const cells = (words: string[]) =>
     line-height: 1.6;
     font-style: italic;
     color: var(--color-text-dim);
-    max-width: 31rem;
+    max-width: 32rem;
   }
   .hero-matrix-cap em { font-style: normal; font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-muted); }
-  .hero-matrix-cap .cap-lit { font-style: normal; color: var(--color-accent); }
+  .hero-matrix-cap .cap-ok  { font-style: normal; color: var(--accent-teal); }
+  .hero-matrix-cap .cap-bad { font-style: normal; color: #db5048; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hm-reel { animation: none; }
-    .hm-dep-flow, .hm-agree-flow { display: none; }
-    .hm-dep { opacity: 0.7; }
-    .hm-agree { opacity: 0.9; }
+    /* rest on row 0 (grounded): wheels still, lock open */
+    .hm-reel { animation: none; transform: translateY(0); }
+    .hm-bad { animation: none; opacity: 0; }
+    .hm-ok  { animation: none; opacity: 1; }
   }
 </style>
