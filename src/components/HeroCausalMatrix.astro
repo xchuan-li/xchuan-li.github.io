@@ -153,7 +153,7 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
       return (d === "n" || d === s) && s === v;
     };
     const draw = () => {
-      for (const r of reels) r.el.setAttribute("transform", `translate(0 ${-wrap(r.phase)})`);
+      for (const r of reels) r.el.setAttribute("transform", `translate(0 ${-r.phase})`);
     };
     let open = null;
     const apply = () => {
@@ -168,26 +168,38 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
       return;
     }
 
-    const HOLD = 780; // ms: pause on a grounded combo — the "click into place"
-    const snap = () => { for (const r of reels) r.phase = wrap(Math.round(r.phase / PITCH) * PITCH); };
-    let last = performance.now(), raf = 0, holdUntil = 0, armed = true;
+    // Spin → (on a grounded combo) decelerate into alignment → dwell → spin back up.
+    const SETTLE = 420, HOLD = 560, SPINUP = 460; // ms
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    let last = performance.now(), raf = 0, armed = true;
+    let mode = "spin", tMark = 0, from = [], to = [];
     const frame = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      if (now >= holdUntil) {
+      if (mode === "spin") {
         for (const r of reels) r.phase = wrap(r.phase + r.speed * r.dir * dt);
         const g = grounded();
         if (g && armed) {
-          snap();                 // click the dials into alignment
-          armed = false;
-          holdUntil = now + HOLD; // and dwell on it
+          from = reels.map((r) => r.phase);
+          to = reels.map((r) => Math.round(r.phase / PITCH) * PITCH);
+          mode = "settle"; tMark = now; armed = false;
         } else if (!g) {
-          armed = true;           // re-arm once the combination breaks
+          armed = true;
         }
+      } else if (mode === "settle") {
+        const e = easeOut(Math.min(1, (now - tMark) / SETTLE));
+        reels.forEach((r, i) => (r.phase = from[i] + (to[i] - from[i]) * e));
+        if (now - tMark >= SETTLE) { reels.forEach((r, i) => (r.phase = wrap(to[i]))); mode = "hold"; tMark = now; }
+      } else if (mode === "hold") {
+        if (now - tMark >= HOLD) { mode = "spinup"; tMark = now; }
+      } else {
+        const t = Math.min(1, (now - tMark) / SPINUP);
+        for (const r of reels) r.phase = wrap(r.phase + r.speed * r.dir * dt * t * t);
+        if (t >= 1) mode = "spin";
       }
       draw();
       apply();
-      fig.classList.toggle("clicking", now < holdUntil);
+      fig.classList.toggle("clicking", mode === "hold");
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
