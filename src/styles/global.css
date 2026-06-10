@@ -256,23 +256,26 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 .hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
+  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  gap: 3.5rem;
+  gap: 3rem;
 }
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
 }
 .hero-content { max-width: 40rem; }
 .hero-figure-col { width: 100%; min-width: 0; }
+.hero-figure-col .hero-matrix svg { margin-left: auto; }
 .hero-figure-col .hero-flow svg { margin-left: auto; }
 @media (max-width: 900px) {
+  .hero-figure-col { padding-top: 0; }
+  .hero-figure-col .hero-matrix svg { margin: 0; }
   .hero-figure-col .hero-flow svg { margin: 0; }
 }
 .hero-tagline {

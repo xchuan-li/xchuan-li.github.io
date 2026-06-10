@@ -1,19 +1,17 @@
 ---
-// HeroCausalMatrix — the homepage hero emblem: a grounding circuit.
+// HeroCausalMatrix — the homepage hero emblem: a causal agreement test rig.
 //
-// Five word-wheels spin independently (each its own speed and direction), drawing
-// from a rich vocabulary. Most instants are an ungrammatical jumble. A tiny check
-// reads whatever is currently centred and asks: does the verb agree with the
-// subject (and the article with the subject) across the intervening noun? When it
-// does — rarely — the channel on the right CONNECTS (green, a path to the model's
-// behaviour). When it doesn't, an ✕ blocks it (red). Structure grounded ⇒ the
-// circuit closes; surface jumble ⇒ blocked.
+// Five word-wheels spin independently, but the visual hierarchy is intentionally
+// uneven: the head and verb are the load-bearing structure, while the nearest noun
+// is the tempting surface shortcut. A live check asks whether behaviour follows
+// the causal head or the distractor. Structure grounded ⇒ the licensed path closes;
+// surface cue ⇒ blocked.
 //
 // Motion is one coherent thing (each wheel turns vertically); the verdict is a
 // STATE (connected / blocked), checked live in the browser — not a perpendicular
 // flow.
-const PITCH = 46;
-const Y_CENTER = 225;
+const PITCH = 52;
+const Y_CENTER = 226;
 const Y0 = Y_CENTER + 5; // baseline of cell 0 at translateY(0)
 const N = 10;
 
@@ -21,15 +19,15 @@ const N = 10;
 // and verb only rarely share number — the connected (grounded) combo is uncommon
 // (~1 in 6). Cell 0 of every column is grounded (the reduced-motion still frame).
 const cols = [
-  { x: 58,  role: null,              key: false, speed: 15, dir: 1,
+  { x: 62,  role: "CONTEXT",       key: false, trap: false, speed: 15, dir: 1,
     words: [["A","s"],["This","s"],["Each","s"],["These","p"],["Many","p"],["Most","p"],["Several","p"],["Few","p"],["Both","p"],["All","p"]] },
-  { x: 168, role: "SUBJECT · head",  key: true,  speed: 18, dir: -1,
+  { x: 185, role: "CAUSAL HEAD",   key: true,  trap: false, speed: 18, dir: -1,
     words: [["signal","s"],["key","s"],["river","s"],["bridge","s"],["root","s"],["claim","s"],["gate","s"],["sign","s"],["keys","p"],["roots","p"]] },
-  { x: 288, role: null,              key: false, speed: 13, dir: 1,
+  { x: 302, role: "DEPENDENCY",    key: false, trap: false, speed: 13, dir: 1,
     words: [["through","x"],["near","x"],["beyond","x"],["under","x"],["across","x"],["along","x"],["past","x"],["behind","x"],["within","x"],["beside","x"]] },
-  { x: 392, role: "NEAREST NOUN",    key: false, speed: 20, dir: -1,
+  { x: 426, role: "SURFACE NOUN",  key: false, trap: true,  speed: 20, dir: -1,
     words: [["trees","p"],["walls","p"],["gates","p"],["fields","p"],["rivers","p"],["doors","p"],["hills","p"],["panels","p"],["layers","p"],["tokens","p"]] },
-  { x: 486, role: "VERB · do(form)", key: true,  speed: 16, dir: 1,
+  { x: 552, role: "VERB FORM",     key: true,  trap: false, speed: 16, dir: 1,
     words: [["is","s"],["was","s"],["has","s"],["are","p"],["were","p"],["have","p"],["hold","p"],["stay","p"],["remain","p"],["persist","p"]] },
 ];
 const cells = (words: string[][]) =>
@@ -41,14 +39,14 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
 
 <figure
   class="hero-matrix is-open"
-  aria-label="A grounding circuit. Five word-wheels spin independently through a rich vocabulary; a check reads the centred words and connects a green channel to the model's behaviour only when the verb agrees with the subject across the intervening noun — otherwise an ✕ blocks it."
+  aria-label="A causal agreement test rig. Word wheels spin independently; a check connects the behavior only when the verb follows the causal head rather than the nearest surface noun."
 >
-  <svg viewBox="0 0 640 360" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
+  <svg viewBox="0 0 700 390" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
     <defs>
       <filter id="hm-soft" x="-80%" y="-80%" width="260%" height="260%">
         <feGaussianBlur stdDeviation="3.2" />
       </filter>
-      <clipPath id="hm-band"><rect x="24" y="156" width="496" height="138" /></clipPath>
+      <clipPath id="hm-band"><rect x="18" y="136" width="585" height="178" /></clipPath>
       <linearGradient id="hm-fade-top" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="var(--color-bg)" stop-opacity="1" />
         <stop offset="1" stop-color="var(--color-bg)" stop-opacity="0" />
@@ -61,15 +59,17 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
 
     <!-- dial separators -->
     <g class="hm-guide">
-      {cols.map((c) => <line x1={c.x} y1="150" x2={c.x} y2="300" />)}
+      {cols.map((c) => <line x1={c.x} y1="132" x2={c.x} y2="314" />)}
     </g>
 
-    <!-- neutral slots behind the load-bearing dials -->
-    <rect class="hm-slot" x="128" y="207" width="80" height="36" rx="4" />
-    <rect class="hm-slot" x="446" y="207" width="80" height="36" rx="4" />
+    <!-- neutral readout band and slots -->
+    <rect class="hm-readout" x="18" y="202" width="585" height="48" rx="5" />
+    <rect class="hm-slot" x="132" y="202" width="106" height="48" rx="5" />
+    <rect class="hm-slot hm-slot-trap" x="373" y="202" width="106" height="48" rx="5" />
+    <rect class="hm-slot" x="499" y="202" width="106" height="48" rx="5" />
     <!-- green when the structure is grounded -->
-    <rect class="hm-box-ok" x="128" y="207" width="80" height="36" rx="4" />
-    <rect class="hm-box-ok" x="446" y="207" width="80" height="36" rx="4" />
+    <rect class="hm-box-ok" x="132" y="202" width="106" height="48" rx="5" />
+    <rect class="hm-box-ok" x="499" y="202" width="106" height="48" rx="5" />
 
     <!-- the spinning wheels (driven independently in the browser) -->
     <g clip-path="url(#hm-band)">
@@ -77,7 +77,7 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
         cols.map((c, i) => (
           <g class="hm-reel" data-reel={i} transform="translate(0 0)">
             {cells(c.words).map((cell) => (
-              <text class={`hm-cell ${c.key ? "hm-cell-key" : "hm-cell-mute"}`} x={c.x} y={cell.y} text-anchor="middle">
+              <text class={`hm-cell ${c.key ? "hm-cell-key" : c.trap ? "hm-cell-trap" : "hm-cell-mute"}`} x={c.x} y={cell.y} text-anchor="middle">
                 {cell.w}
               </text>
             ))}
@@ -87,43 +87,45 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
     </g>
 
     <!-- dial peek -->
-    <rect class="hm-fade" x="24" y="156" width="496" height="44" fill="url(#hm-fade-top)" />
-    <rect class="hm-fade" x="24" y="250" width="496" height="44" fill="url(#hm-fade-bot)" />
+    <rect class="hm-fade" x="18" y="136" width="585" height="54" fill="url(#hm-fade-top)" />
+    <rect class="hm-fade" x="18" y="260" width="585" height="54" fill="url(#hm-fade-bot)" />
 
     <!-- role labels -->
     <g class="hm-role">
-      {cols.filter((c) => c.role).map((c) => <text x={c.x} y="142" text-anchor="middle">{c.role}</text>)}
-      <text x="592" y="196" text-anchor="middle">BEHAVIOR</text>
+      {cols.filter((c) => c.role).map((c) => <text x={c.x} y="122" text-anchor="middle">{c.role}</text>)}
+      <text x="652" y="194" text-anchor="middle">BEHAVIOR Y</text>
     </g>
 
-    <!-- the relation under test: subject -> verb, across the nearest noun -->
-    <path class="hm-agree" d="M 168 241 V 252 H 486 V 241" />
+    <!-- the relation under test: causal head -> verb, across the nearest noun -->
+    <path class="hm-agree" d="M 185 250 V 268 H 552 V 250" />
+    <path class="hm-shortcut" d="M 426 250 C 494 318 590 306 642 229" />
+    <text class="hm-path-label hm-path-licensed" x="292" y="287" text-anchor="middle">licensed structure</text>
+    <text class="hm-path-label hm-path-shortcut" x="548" y="316" text-anchor="middle">surface shortcut</text>
 
     <!-- output node = the model's behaviour Y -->
-    <rect class="hm-out" x="584" y="217" width="16" height="16" rx="2" />
+    <rect class="hm-out" x="642" y="217" width="20" height="20" rx="3" />
 
     <!-- CONNECTED (green): the grounded path closes through to the behaviour -->
     <g class="hm-gate-open">
-      <path class="hm-go-line" d="M 168 241 V 252 H 486 V 241" />
-      <line class="hm-go-link" x1="526" y1="225" x2="584" y2="225" />
-      <circle class="hm-go-halo" cx="592" cy="225" r="15" filter="url(#hm-soft)" />
-      <rect class="hm-go-node" x="584" y="217" width="16" height="16" rx="2" />
-      <text class="hm-go-label" x="555" y="258" text-anchor="middle">grounded</text>
+      <path class="hm-go-line" d="M 185 250 V 268 H 552 V 250" />
+      <line class="hm-go-link" x1="605" y1="226" x2="642" y2="226" />
+      <circle class="hm-go-halo" cx="652" cy="227" r="18" filter="url(#hm-soft)" />
+      <rect class="hm-go-node" x="642" y="217" width="20" height="20" rx="3" />
+      <text class="hm-go-label" x="623" y="263" text-anchor="middle">grounded</text>
     </g>
 
     <!-- BLOCKED (red): ✕ across the channel, behaviour not licensed -->
     <g class="hm-gate-block">
-      <line class="hm-x" x1="544" y1="219" x2="556" y2="231" />
-      <line class="hm-x" x1="556" y1="219" x2="544" y2="231" />
-      <text class="hm-block-label" x="550" y="258" text-anchor="middle">blocked</text>
+      <line class="hm-x" x1="617" y1="219" x2="631" y2="233" />
+      <line class="hm-x" x1="631" y1="219" x2="617" y2="233" />
+      <text class="hm-block-label" x="624" y="263" text-anchor="middle">blocked</text>
     </g>
   </svg>
 
   <figcaption class="hero-matrix-cap">
-    Five dials spin through real words. Almost every combination is a jumble — the
-    channel stays <span class="cap-bad">✕ blocked</span>. Only when the verb agrees
-    with the subject across the surface noun does it
-    <span class="cap-ok">connect</span>: structure grounded, behaviour licensed.
+    Same answer, different reason: behaviour is grounded only when the verb follows
+    the <span class="cap-ok">causal head</span>, not the nearest
+    <span class="cap-bad">surface noun</span>.
   </figcaption>
 </figure>
 
@@ -217,7 +219,7 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
   .hero-matrix { margin: 0; padding: 0; }
   .hero-matrix svg {
     width: 100%;
-    max-width: 600px;
+    max-width: 740px;
     height: auto;
     display: block;
     font-family: var(--font-mono);
@@ -227,16 +229,33 @@ const cfg = { N, PITCH, YC: Y_CENTER, Y0, idx: { det: 0, subj: 1, verb: 4 } };
   }
 
   .hm-guide line { stroke: var(--color-border); stroke-width: 1; }
+  .hm-readout { fill: color-mix(in srgb, var(--color-bg) 88%, var(--color-text) 12%); opacity: 0.45; }
   .hm-slot { fill: none; stroke: var(--color-border-strong); stroke-width: 1; opacity: 0.5; }
+  .hm-slot-trap { stroke: var(--hm-bad); opacity: 0.34; }
 
-  .hm-role text { font-size: 8px; letter-spacing: 0.13em; fill: var(--color-text-ghost); }
+  .hm-role text { font-size: 9px; letter-spacing: 0.13em; fill: var(--color-text-ghost); }
 
-  .hm-cell { font-size: 15px; letter-spacing: 0.01em; }
+  .hm-cell { font-size: 17px; letter-spacing: 0; }
   .hm-cell-mute { fill: var(--color-text-muted); }
-  .hm-cell-key  { fill: var(--color-text); font-weight: 600; }
+  .hm-cell-key  { fill: var(--color-text); font-size: 19px; font-weight: 650; }
+  .hm-cell-trap { fill: color-mix(in srgb, var(--hm-bad) 72%, var(--color-text-muted)); font-weight: 560; }
 
   /* the relation under test — quiet structural connector */
   .hm-agree { fill: none; stroke: var(--color-text-dim); stroke-width: 1.2; opacity: 0.45; }
+  .hm-shortcut {
+    fill: none;
+    stroke: var(--hm-bad);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 6;
+    opacity: 0.34;
+  }
+  .hm-path-label {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .hm-path-licensed { fill: var(--color-text-ghost); }
+  .hm-path-shortcut { fill: var(--hm-bad); opacity: 0.72; }
 
   /* output node (model behaviour) */
   .hm-out { fill: none; stroke: var(--color-text-dim); stroke-width: 1.2; opacity: 0.6; }

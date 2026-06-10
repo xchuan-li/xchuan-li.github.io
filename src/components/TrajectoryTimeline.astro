@@ -1,11 +1,10 @@
 ---
 // ResearchSpine — "Option A": the research arc as a layered argument.
 // Reading top to bottom: one question (a brace over the three) → the main line
-// 01·Certify → 02·Localize → 03·Quantify (Whether / Where / How much) → the
-// workbench all three run on → and, off the spine, two collaborative group
-// projects. The origin (Leibniz) and the language frontier are faint bookends on
-// the beam. Weight, size and position carry the hierarchy: the beam is heaviest,
-// the workbench sits beneath as a foundation, the group projects are lightest.
+// 01·Certify → 02·Localize → 03·Quantify (Whether / Where / How much), with a
+// language frontier at the right edge. MiniCausalLang remains the foundation
+// beneath the method line; the two collaborative projects are explicit satellite
+// branches, not extra main-line nodes.
 interface Origin {
   label: string;
   href: string;
@@ -33,6 +32,7 @@ interface Group {
   title: string;
   kind: string;
   href: string;
+  desc?: string;
 }
 interface Props {
   question: string;
@@ -44,6 +44,7 @@ interface Props {
 }
 
 const { question, origin, stations, frontier, workbench, groups } = Astro.props;
+const [latentBranch, protoBranch] = groups;
 ---
 
 <div class="spine">
@@ -66,7 +67,7 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
       <span class="sp-beam" aria-hidden="true"></span>
 
       <a class="sp-cap sp-cap-origin" href={origin.href} aria-label={origin.label}>
-        <span class="sp-dot sp-dot-origin"></span>
+        <span class="sp-glyph sp-glyph-origin">?</span>
       </a>
       {stations.map((s, i) => (
         <a
@@ -88,21 +89,33 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
       ))}
       <span class="sp-caplabel sp-caplabel-frontier">{frontier.label}</span>
 
+      {latentBranch && (
+        <>
+          <a class="sp-branch sp-branch-latent" href={latentBranch.href}>
+            <span class="sp-branch-dot" aria-hidden="true"></span>
+            <span class="sp-branch-kicker">Mechanistic branch</span>
+            <span class="sp-branch-title">{latentBranch.title}</span>
+            {latentBranch.desc && <span class="sp-branch-desc">{latentBranch.desc}</span>}
+          </a>
+        </>
+      )}
+
+      {protoBranch && (
+        <>
+          <a class="sp-branch sp-branch-proto" href={protoBranch.href}>
+            <span class="sp-branch-dot" aria-hidden="true"></span>
+            <span class="sp-branch-kicker">Cross-lingual branch</span>
+            <span class="sp-branch-title">{protoBranch.title}</span>
+            {protoBranch.desc && <span class="sp-branch-desc">{protoBranch.desc}</span>}
+          </a>
+        </>
+      )}
+
       <a class="sp-workbench" href={workbench.href}>
         <span class="sp-wb-kicker">Workbench · foundation</span>
         <span class="sp-wb-title">{workbench.title}</span>
         <span class="sp-wb-desc">{workbench.desc}</span>
       </a>
-
-      <p class="sp-offspine">
-        <span class="sp-offspine-label">Off the spine · collaborative, in progress</span>
-        {groups.map((g, i) => (
-          <>
-            <span class="sp-offspine-sep">{i === 0 ? "—" : "·"}</span>
-            <a href={g.href}>{g.title}</a>
-          </>
-        ))}
-      </p>
     </div>
   </div>
 </div>
@@ -129,10 +142,10 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
   /* origin | 01 | 02 | 03 | frontier */
   .spine-grid {
     position: relative;
-    min-width: 820px;
+    min-width: 900px;
     display: grid;
     grid-template-columns: 0.85fr 1fr 1fr 1fr 0.85fr;
-    grid-template-rows: auto auto auto auto 30px 34px auto auto;
+    grid-template-rows: auto auto auto auto 30px 34px auto minmax(68px, auto);
     align-items: center;
     justify-items: center;
     column-gap: 0.5rem;
@@ -246,12 +259,6 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
     box-shadow: 0 0 0 4px var(--color-bg);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
   }
-  .sp-dot-origin {
-    width: 12px;
-    height: 12px;
-    background: var(--color-bg);
-    border: 1.5px solid var(--accent-deep-purple);
-  }
   .sp-dot-station {
     width: 16px;
     height: 16px;
@@ -275,7 +282,29 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
   .sp-node:hover .sp-dot-station { transform: scale(1.16); }
   .sp-cap:hover .sp-dot { transform: scale(1.14); }
 
-  /* ---- bookend labels + up-ticks to the workbench ---- */
+  /* ---- origin as a question mark — "Leibniz's question" ---- */
+  .sp-glyph {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--color-bg);
+    transition: transform 0.22s ease;
+  }
+  .sp-glyph-origin {
+    width: 18px;
+    height: 18px;
+    background: var(--color-bg);
+    border: 1.5px solid var(--accent-deep-purple);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--accent-deep-purple);
+  }
+  .sp-cap:hover .sp-glyph { transform: scale(1.14); }
+
+  /* ---- bookend labels + down-ticks ---- */
   .sp-caplabel {
     grid-row: 6;
     align-self: start;
@@ -301,6 +330,90 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
     opacity: 0.45;
   }
 
+  /* ---- collaborative branches: visible, but not promoted to the main line ---- */
+  .sp-branch {
+    grid-row: 8;
+    align-self: start;
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.18rem;
+    min-width: 12rem;
+    margin-top: 1.1rem;
+    padding: 0.65rem 0.9rem 0.72rem;
+    border: 1px solid color-mix(in srgb, var(--branch-c) 48%, var(--color-border));
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-bg) 82%, var(--branch-c) 18%);
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 0 0 3px var(--color-bg), 0 2px 8px color-mix(in srgb, var(--branch-c) 10%, transparent);
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    z-index: 2;
+  }
+  .sp-branch:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--branch-c) 68%, var(--color-border));
+    background: color-mix(in srgb, var(--color-bg) 76%, var(--branch-c) 24%);
+    box-shadow: 0 0 0 3px var(--color-bg), 0 4px 14px color-mix(in srgb, var(--branch-c) 18%, transparent);
+  }
+  .sp-branch-latent {
+    grid-column: 2;
+    --branch-c: var(--accent-teal);
+    justify-self: center;
+  }
+  .sp-branch-proto {
+    grid-column: 4;
+    --branch-c: var(--accent-deep-purple);
+    justify-self: center;
+  }
+  .sp-branch-dot {
+    position: absolute;
+    top: -5px;
+    left: calc(50% - 5px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--branch-c);
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+  /* a single straight dashed line dropping from the beam to each card */
+  .sp-branch-dot::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 8.9rem;
+    border-left: 1.4px dashed var(--branch-c);
+    opacity: 0.62;
+  }
+  .sp-branch-kicker {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--branch-c) 72%, var(--color-text-muted));
+  }
+  .sp-branch-title {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .sp-branch-desc {
+    margin-top: 0.1rem;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--color-text-dim);
+    max-width: 14rem;
+    text-wrap: balance;
+  }
+  .sp-branch:hover .sp-branch-title { color: var(--color-text); }
+
   /* ---- the workbench: a quiet foundation note beneath the three (no card) ---- */
   .sp-workbench {
     grid-column: 2 / 5;
@@ -314,8 +427,12 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
     align-items: center;
     text-align: center;
     gap: 0.12rem;
-    padding: 0.1rem 0.5rem 0;
+    padding: 0.25rem 0.7rem 0.15rem;
     text-decoration: none;
+    position: relative;
+    z-index: 2;
+    border-radius: 6px;
+    background: var(--color-bg);
   }
   .sp-wb-kicker {
     font-family: var(--font-mono);
@@ -340,33 +457,4 @@ const { question, origin, stations, frontier, workbench, groups } = Astro.props;
     max-width: 26rem;
     text-wrap: balance;
   }
-
-  /* ---- off-spine, collaborative work: a quiet one-line note, not boxes ---- */
-  .sp-offspine {
-    grid-column: 2 / 5;
-    grid-row: 8;
-    align-self: start;
-    margin: 1rem 0 0;
-    text-align: center;
-    font-size: 11.5px;
-    line-height: 1.7;
-    color: var(--color-text-dim);
-    text-wrap: balance;
-  }
-  .sp-offspine-label {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .sp-offspine-sep {
-    margin: 0 0.4rem;
-    color: var(--color-text-ghost);
-  }
-  .sp-offspine a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .sp-offspine a:hover { color: var(--color-text); text-decoration: underline; }
 </style>
