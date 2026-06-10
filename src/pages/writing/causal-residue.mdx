@@ -73,7 +73,7 @@ extensions are all instances of elimination:
 - [**CIY**](/research/ciy) is the graded relaxation of elimination: not
   *rule the structure in or out* but *how much of the licensing structure has
   actually been used*.
-- [**Mini Causal Models**](/research/mini-causal-models) is the eliminative
+- [**MiniCausalLang**](/research/mini-causal-models) is the eliminative
   process in sandbox form: a synthetic environment where the ground-truth
   structure is planted, training data is generated from it, and recovery can be
   scored against a known target.
@@ -122,7 +122,7 @@ equivalence class — not the single planted structure.
 
 ## A concrete next step
 
-The [Mini Causal Models](/research/mini-causal-models) sandbox is the natural
+The [MiniCausalLang](/research/mini-causal-models) sandbox is the natural
 test bed. The experiment is to implement a training loop that explicitly logs
 hypothesis-space cuts per example: at step *t*, the model's behavior is
 compatible with hypothesis set *H<sub>t</sub> ⊆ H<sub>t-1</sub>*. Two things have

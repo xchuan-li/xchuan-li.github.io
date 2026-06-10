@@ -3,20 +3,22 @@ import Base from "../layouts/Base.astro";
 import { projects, now } from "../data/research";
 import { posts } from "../data/writing";
 
-// A deliberately plain alternative to the homepage: name, one-line affiliation,
-// a short research statement, and an honest, status-tagged list of the work.
-// No hero, no figures, no animation, no call-to-action buttons. This is the link
-// meant for a CV — content first, design out of the way. The rich homepage
-// stays at "/".
+// A plain, content-first alternative to the homepage — name, one-line
+// affiliation, a short research statement that states the theoretical
+// architecture, and an honest list of the work tiered by what is actually
+// getting done and when. No hero, no figures, no animation: the link meant for a
+// CV. The rich, illustrated homepage lives at "/".
 
-const core = projects.filter((p) => p.group === "core");
-const frontier = projects.filter((p) => p.group === "frontier");
-const support = projects.filter((p) => p.group === "support");
+// Tiered by commitment, not by argument: a reader should see at a glance what is
+// committed near-term vs. thesis-horizon vs. uncertain group work.
+const nowWork = projects.filter((p) => p.tier === "now");
+const thesisWork = projects.filter((p) => p.tier === "thesis");
+const groupWork = projects.filter((p) => p.tier === "group");
 
 const groups = [
-  { label: "Method program — certify · localize · quantify", items: core },
-  { label: "Application frontier", items: frontier },
-  { label: "Support — validation & extensions", items: support },
+  { label: "Underway now — targeted before PhD applications", items: nowWork },
+  { label: "Master's-thesis horizon", items: thesisWork },
+  { label: "Group projects — in progress, completion not guaranteed", items: groupWork },
 ];
 
 const recentPosts = posts.slice(0, 5);
@@ -45,17 +47,24 @@ const recentPosts = posts.slice(0, 5);
         <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
         <span class="sep">·</span>
         <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
-        <span class="sep">·</span>
-        <a href="/">full site →</a>
+      </p>
+      <p class="plain-cta">
+        <a href="/">
+          See the full, illustrated version
+          <span class="arrow">→</span>
+        </a>
       </p>
     </header>
 
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One program — certify, localize, then quantify whether behavior is licensed by genuine
-        structure, developed and tested through linguistic structure. The status on each line is
-        where the work actually stands, not where it is headed.
+        One program: a method to <strong>certify</strong> whether behavior is licensed by genuine
+        linguistic structure, to <strong>localize</strong> which level of structure carries it, and
+        to <strong>quantify</strong> how much the model relies on it. Certification and localization
+        — with a planted-ground-truth sandbox to check them — are what I'm building now;
+        quantification and the cross-linguistic application are the master's-thesis horizon. Each
+        line shows where the work actually stands.
       </p>
 
       {
@@ -138,6 +147,27 @@ const recentPosts = posts.slice(0, 5);
     line-height: 1.9;
   }
   .plain-links .sep { color: var(--color-text-ghost); margin: 0 0.5rem; }
+
+  /* a restrained switch to the rich, illustrated homepage */
+  .plain-cta { margin: 1.4rem 0 0; }
+  .plain-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted) !important;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 999px;
+    padding: 0.4rem 0.95rem;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .plain-cta a:hover {
+    color: var(--color-accent) !important;
+    border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
+    text-decoration: none;
+  }
+  .plain-cta .arrow { transition: transform 0.2s ease; }
+  .plain-cta a:hover .arrow { transform: translateX(3px); }
 
   /* sections */
   .plain-section { margin-top: 3rem; }

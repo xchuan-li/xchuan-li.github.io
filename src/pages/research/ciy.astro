@@ -9,19 +9,24 @@ import CIYFigure from "../../components/CIYFigure.astro";
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Paper 3 · quantitative grading
+      Paper 3 · inferential yield · master's-thesis horizon
     </div>
     <h1>Causal Inferential Yield</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      How much causal structure does the model reliably extract?
+      Given the structure it uses, how much of the licensed inference does the model actually produce?
     </p>
 
     <p>
-      Causal Inferential Yield (CIY) asks not merely whether the licensing structure is used, or
-      where it is used, but how much causal structure the model reliably extracts. It is Paper 3 in
-      the core sequence: <a href="/research/sc-certification">Stable Is Not Grounded</a> gives
-      binary certification, <a href="/research/isotrace">Isotrace</a> gives path localization, and
-      CIY aims at quantitative grading.
+      Causal Inferential Yield (CIY) asks not merely <em>whether</em> the licensing structure is
+      used, or <em>where</em>, but how <strong>productively</strong> the model uses it: given the
+      structure it actually relies on (as measured by <a href="/research/isotrace">Isotrace</a>), how
+      much of the inference that structure <em>licenses</em> does it correctly produce? It is a
+      <strong>yield</strong>, not an amount of structure. Reasoning is generative — one structure
+      licenses a whole space of conclusions — so a grounded model should cover that space, while a
+      shortcut model covers only the slice it memorized. CIY is Paper 3 in the core sequence:
+      <a href="/research/sc-certification">Stable Is Not Grounded</a> certifies that the structure is
+      load-bearing, Isotrace localizes and measures how much of it is used, and CIY grades the
+      inference produced per unit of structure used.
     </p>
 
     <CIYFigure />
@@ -37,6 +42,16 @@ import CIYFigure from "../../components/CIYFigure.astro";
       In the cleanest case, the item graph is stipulated and the relevant interventions are
       auditable. In the sandbox case, the generating structure is planted. Those are the regimes in
       which a yield measure has a target to be wrong about.
+    </p>
+
+    <p>
+      The yield needs a denominator: the full set of conclusions the used structure
+      <em>licenses</em>. That set is only enumerable when the generating graph is known — which is
+      exactly what <a href="/research/mini-causal-models">MiniCausalLang</a> provides. CIY is then
+      the share of that licensed set the model correctly produces, normalized by how much of the
+      structure <a href="/research/isotrace">Isotrace</a> shows it actually used. This is why the
+      program is a chain, not three parallel ideas: CIY consumes both Paper 1's certification and
+      Paper 2's measurement.
     </p>
 
     <h2>Falsifiability criterion</h2>
@@ -55,7 +70,7 @@ import CIYFigure from "../../components/CIYFigure.astro";
     </ul>
 
     <p>
-      Mini Causal Models are the supporting sandbox for this step: because the ground-truth graph is
+      MiniCausalLang is the supporting sandbox for this step: because the ground-truth graph is
       planted, CIY-style grading can be tested against a known target before being applied to less
       controlled settings.
     </p>

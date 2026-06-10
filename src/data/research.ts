@@ -3,7 +3,17 @@
 // Keeping the data here means a change to a project or its status updates both
 // presentations at once.
 
+// The argument structure of the program — what each piece IS. Drives the rich
+// homepage's sections.
 export type ProjectGroup = "core" | "frontier" | "support";
+
+// The commitment/timeline tier — what is actually getting done, and when. Drives
+// the plain homepage so a reader never mistakes a thesis-horizon plan or an
+// uncertain group project for committed near-term work.
+//   now    — solo work I'm building, targeted before PhD applications
+//   thesis — the master's-thesis horizon, later
+//   group  — collaborative projects in progress, completion not guaranteed
+export type ProjectTier = "now" | "thesis" | "group";
 
 // Honest delivery state, surfaced verbatim on the plain page so planned work is
 // never mistaken for finished work.
@@ -25,6 +35,7 @@ export interface Project {
   desc?: string;
   short?: string;
   group: ProjectGroup;
+  tier: ProjectTier;
   status: ProjectStatus;
 }
 
@@ -39,6 +50,7 @@ export const projects: Project[] = [
     tags: ["Paper 1", "Certification"],
     desc: "Certification — is the behavior licensed by the genuine structure at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
     group: "core",
+    tier: "now",
     status: "Drafting",
   },
   {
@@ -49,8 +61,9 @@ export const projects: Project[] = [
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
     tags: ["Paper 2", "Localization"],
-    desc: "Localization — which part of the structure does the work? Competing routes are made to produce distinct labels; in language, which cue (morphology, syntax, context) a model's reasoning actually leans on.",
+    desc: "Localization — which part of the structure does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
     group: "core",
+    tier: "now",
     status: "In design",
   },
   {
@@ -61,8 +74,9 @@ export const projects: Project[] = [
     tint: "rgba(175, 169, 236, 0.10)",
     glyph: "ciy",
     tags: ["Paper 3", "Quantification"],
-    desc: "Quantification — how much genuine structure does the model reliably use, beyond surface cues? Graded on controlled, typologically-varied items rather than on benchmark accuracy.",
+    desc: "Quantification — given the structure a model actually uses (measured by Isotrace), how much of the inference that structure licenses does it productively produce? A yield, not an accuracy.",
     group: "core",
+    tier: "thesis",
     status: "Planned",
   },
   {
@@ -75,31 +89,35 @@ export const projects: Project[] = [
     tags: ["Application frontier", "Cross-lingual"],
     desc: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
     group: "frontier",
+    tier: "thesis",
     status: "Exploratory",
   },
   {
-    title: "Mini Causal Models",
+    title: "MiniCausalLang",
     href: "/research/mini-causal-models",
     tags: ["Validation sandbox"],
-    short: "A planted-ground-truth environment — the three methods checked against a known linguistic target before they're trusted.",
+    short: "A planted-ground-truth sandbox for testing whether linguistic behavior is structurally grounded or surface-driven.",
     group: "support",
+    tier: "now",
     status: "Ongoing",
   },
   {
     title: "Latent Control States",
     href: "/research/latent-control-states",
     tags: ["Extension · mechanistic"],
-    short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form?",
+    short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form? A collaborative project, in progress.",
     group: "support",
-    status: "Planned",
+    tier: "group",
+    status: "Ongoing",
   },
   {
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
     tags: ["Extension · applied"],
-    short: "An applied multimodal stress test: semantic content versus language- and culture-specific prototype shortcuts.",
+    short: "An applied multimodal stress test: semantic content versus language- and culture-specific prototype shortcuts. A collaborative project, in progress.",
     group: "support",
-    status: "Planned",
+    tier: "group",
+    status: "Ongoing",
   },
 ];
 
@@ -118,8 +136,8 @@ export const now: NowItem[] = [
     text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
   },
   {
-    label: "Support",
-    text: "Keeping Latent Control States and Cross-lingual ProtoBias as supporting extensions — a mechanistic bridge and an applied stress test — feeding the main line rather than competing with it.",
+    label: "Alongside",
+    text: "Contributing to two collaborative projects in progress — Latent Control States (a mechanistic bridge) and Cross-lingual ProtoBias (an applied stress test) — which feed the main line; group work, so I don't claim their outcome as my own.",
   },
   {
     label: "Exploring",

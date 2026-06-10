@@ -1,98 +1,75 @@
 ---
 import Base from "../layouts/Base.astro";
 import ProjectCover from "../components/ProjectCover.astro";
-import LanguageGroundingFigure from "../components/LanguageGroundingFigure.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
 import { projects, now } from "../data/research";
 
-// The main axis is the argument, not the chronology: a motivating question,
-// the three method contributions (certify -> localize -> quantify), and the
-// language frontier. The validation sandbox and the two extensions are NOT on
-// the axis — they branch off as support (see researchExtensions).
-const researchSpine = [
+// The research arc as a layered argument (rendered by TrajectoryTimeline as
+// "Option A"): one question over three method contributions — the main line —
+// which all run on a shared workbench. The origin and the language frontier are
+// faint bookends; the two collaborative group projects sit OFF the spine.
+const spineQuestion = "Is the behavior licensed by genuine structure — or by a surface correlate?";
+
+const spineOrigin = {
+  label: "Leibniz's question",
+  href: "/writing/from-leibniz",
+};
+
+// The three method contributions, sharpening the one question in three steps:
+// whether structure is used at all, where it is used, how much it is relied on.
+const spineStations = [
   {
-    kind: "idea",
-    label: "Leibniz's question",
-    href: "/writing/from-leibniz",
-    desc: "A characteristica universalis — which structures are minimally licensed by which behaviors?",
-  },
-  {
-    kind: "paper",
-    n: "01 · Certify",
+    n: "01",
+    method: "Certify",
+    qword: "Whether",
     title: "Stable Is Not Grounded",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
-    ideas: [{ label: "Is stability enough?", href: "/writing/decidability-boundary" }],
-    desc: "Within a single language and task, can structural dependence be told apart from surface dependence?",
   },
   {
-    kind: "paper",
-    n: "02 · Localize",
+    n: "02",
+    method: "Localize",
+    qword: "Where",
     title: "Isotrace",
     color: "var(--accent-teal)",
     href: "/research/isotrace",
-    desc: "Which linguistic level — morphology, syntax, semantics — drives the model's reasoning path?",
   },
   {
-    kind: "paper",
-    n: "03 · Quantify",
+    n: "03",
+    method: "Quantify",
+    qword: "How much",
     title: "Causal Inferential Yield",
     color: "var(--accent-purple)",
     href: "/research/ciy",
     capstone: true,
-    desc: "How far does structural dependence hold across item types — entailment, negation, quantification?",
-  },
-  {
-    // Frontier node: the spine's deep end points past the delivered program
-    // into language. Emerging (dashed), not a delivered capstone.
-    kind: "frontier",
-    n: "Frontier",
-    title: "Typological Grounding",
-    color: "var(--accent-deep-purple)",
-    href: "/research/typological-grounding",
-    ideas: [{ label: "Meaning beneath the language?", href: "/writing/meaning-beneath-language" }],
-    desc: "When one proposition takes very different surface forms across languages, does structural dependence transfer?",
   },
 ];
 
-// Support that branches off the axis — a validation sandbox and two extensions.
-// `side` places each above or below the axis; `anchor` is its column position.
-const researchExtensions = [
-  {
-    kicker: "Mechanistic extension",
-    title: "Latent Control States",
-    desc: "Does a linguistic distinction have an activation-space direction?",
-    href: "/research/latent-control-states",
-    color: "var(--accent-amber)",
-    side: "above",
-    anchor: 3.5, // gap between Isotrace and CIY — stem lands clear of any node/label
-  },
-  {
-    kicker: "Validation sandbox",
-    title: "Mini Causal Models",
-    desc: "Planted ground truth — the methods checked against a known linguistic target.",
-    href: "/research/mini-causal-models",
-    color: "var(--accent-slate)",
-    side: "below",
-    anchor: 2.5, // gap between SC and Isotrace
-  },
-  {
-    kicker: "Applied extension",
-    title: "Cross-lingual ProtoBias",
-    desc: "Semantic content versus language- and culture-specific prototype shortcuts.",
-    href: "/research/cross-lingual-protobias",
-    color: "var(--accent-indigo)",
-    side: "below",
-    anchor: 4.5, // gap between CIY and the frontier
-  },
+const spineFrontier = {
+  label: "Frontier",
+  title: "Typological Grounding",
+  href: "/research/typological-grounding",
+};
+
+// The workbench the three methods run on — and are validated against.
+const spineWorkbench = {
+  title: "MiniCausalLang",
+  href: "/research/mini-causal-models",
+  desc: "A planted-ground-truth sandbox for testing whether linguistic behavior is structurally grounded or surface-driven.",
+};
+
+// Off the spine: collaborative projects, in progress, not claimed as the main line.
+const spineGroups = [
+  { title: "Latent Control States", kind: "Mechanistic extension", href: "/research/latent-control-states" },
+  { title: "Cross-lingual ProtoBias", kind: "Applied extension", href: "/research/cross-lingual-protobias" },
 ];
 
 const programSections = [
   {
     label: "The thesis · three method contributions",
     title: "Certify · localize · quantify",
-    desc: "One program, not a list of ideas: a method to certify whether behavior is licensed by genuine structure, to localize where that structure is used, and to quantify how much of it the model relies on — developed and tested through linguistic structure.",
+    desc: "One program, not a list of ideas: certify whether behavior is licensed by genuine structure, localize where that structure is used, and quantify the inferential yield it produces — all run on MiniCausalLang, which compiles linguistic structure into a known causal graph.",
     projects: projects.filter((p) => p.group === "core"),
   },
   {
@@ -102,9 +79,9 @@ const programSections = [
     projects: projects.filter((p) => p.group === "frontier"),
   },
   {
-    label: "Support",
-    title: "Validation & extensions",
-    desc: "Infrastructure and side studies the program leans on — a validation sandbox and two extensions — not separate research directions.",
+    label: "Foundation & off-spine work",
+    title: "The workbench, and two group projects",
+    desc: "MiniCausalLang is the workbench the three methods run on — it compiles linguistic structure into causal variables and gives the program its ground truth. Latent Control States and Cross-lingual ProtoBias are collaborative projects, in progress, that branch off the spine rather than belong to it.",
     projects: projects.filter((p) => p.group === "support"),
     compact: true,
   },
@@ -150,12 +127,27 @@ const posts = [
           <span>Hi, I am</span>
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
-        <p class="hero-desc fade-in-up fade-delay-200">
-          I do causal interpretability through linguistic structure. I test whether a model's stable,
-          correct behavior is licensed by the genuine structure of a sentence — the head that governs
-          agreement, the dependency that carries an inference — or by a surface cue that only
-          correlates with the answer.
-        </p>
+        <div class="hero-bio fade-in-up fade-delay-200">
+          <p>
+            I do <strong>causal interpretability through linguistic structure</strong> — testing
+            whether a model's stable, correct answer is licensed by the genuine structure of a
+            sentence (the head that governs agreement, the dependency that carries an inference) or
+            by a surface cue that only correlates with the answer.
+          </p>
+          <p>
+            After an undergraduate Philosophy thesis on Leibniz's <em>characteristica universalis</em>,
+            I'm now in the M.Sc. in <strong>Human and AI</strong> at the University of Technology
+            Nuremberg (UTN). It helps that I think across very different languages — Chinese, German,
+            and English, with Japanese underway — which pack meaning into grammar in sharply
+            different ways; moving between them trains an eye for structure a single language can hide.
+          </p>
+          <p>
+            I'm preparing PhD applications for fall 2027 on causal interpretability through
+            linguistic structure — using the way languages encode meaning (morphology, word order,
+            context) as the ground on which to test whether a model tracks the structure or just its
+            surface.
+          </p>
+        </div>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
           Structure, or surface? Language is where you can tell.
         </blockquote>
@@ -211,62 +203,22 @@ const posts = [
         <h2 class="section-heading fade-in-up fade-delay-100">From one question to a program.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
           One question — is a model's behavior licensed by the genuine structure, or by a surface
-          correlate? — traced from a first philosophical prompt through the three method
-          contributions (certify, localize, quantify), then pointing past the thesis result to the
-          language frontier. Open marks are ideas, filled nodes are the methods, the dashed node is
-          the frontier still taking shape; a validation sandbox and two extensions branch off in
-          support.
+          correlate? — sharpened in three steps: <em>whether</em> structure is used at all (certify),
+          <em>where</em> it is used (localize), and <em>how much</em> the model relies on it
+          (quantify). The three are the main line; they run on a shared workbench that turns
+          linguistic structure into causal variables. The origin and the language frontier sit at the
+          ends, and two collaborative group projects branch off the spine.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">
-        <ResearchSpine spine={researchSpine} extensions={researchExtensions} />
-      </div>
-    </div>
-  </section>
-
-  <!-- =========== ABOUT =========== -->
-  <section id="about" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="about-grid">
-        <div class="about-fig fade-in-up">
-          <LanguageGroundingFigure />
-        </div>
-
-        <div>
-          <p class="section-label fade-in-up">About</p>
-          <h2 class="section-heading fade-in-up fade-delay-100">
-            One question, traced backward.
-          </h2>
-          <div class="about-bio fade-in-up fade-delay-200">
-            <p>
-              I read undergraduate Philosophy at <strong>Shenzhen University</strong>, finishing a
-              senior thesis on Leibniz's <em>characteristica universalis</em> — about which
-              structures are minimally licensed by which behaviors. That question quietly survived
-              the move into machine learning.
-            </p>
-            <p>
-              I'm currently in the M.Sc. in <strong>Human and AI</strong> at the University of
-              Technology Nuremberg (UTN), where I work that question with the tools of causal
-              interpretability — and run it through <strong>linguistic structure</strong>: when a
-              model's stable, correct answer looks justified, is it licensed by the structure of the
-              sentence — the head, the dependency, the constituent that should govern it — or by a
-              surface cue that merely correlates?
-            </p>
-            <p>
-              It helps that I think across very different languages — Chinese, German, and English,
-              with Japanese underway — which pack meaning into grammar in sharply different ways
-              (isolating, fusional, analytic, agglutinative). Moving between them trains an eye for
-              linguistic structure that a single language can hide.
-            </p>
-            <p>
-              I'm preparing PhD applications for fall 2027 on <strong>causal interpretability through
-              linguistic structure</strong> — using the way languages encode meaning (morphology, word
-              order, context) as the ground on which to test whether a model tracks the structure or
-              just its surface.
-            </p>
-          </div>
-        </div>
+        <ResearchSpine
+          question={spineQuestion}
+          origin={spineOrigin}
+          stations={spineStations}
+          frontier={spineFrontier}
+          workbench={spineWorkbench}
+          groups={spineGroups}
+        />
       </div>
     </div>
   </section>
