@@ -38,6 +38,9 @@ src/
 │   │                               # Props-configurable so paper revs swap numbers without code changes.
 │   ├── HeroFigure.astro            # Static SVG for paper1: two parallel small DAGs
 │   │                               # (SC-grounded vs SC-spurious).
+│   ├── ProgressTimeline.astro      # Reusable vertical milestone timeline for project pages.
+│   │                               # Dated nodes (done/active/planned); "done" nodes link to
+│   │                               # their own report subpage. See README "Adding a project page".
 │   ├── SCHierarchyFigure.astro     # Homepage About section concept figure — three concentric
 │   │                               # rounded panels (accuracy ⊋ stable-correct ⊋ grounded) with
 │   │                               # populations of dots in each band; do(C) callout arrow.
@@ -127,6 +130,7 @@ Extensions:
 - **All colored text on colored backgrounds must use the dark stop from the same color family** (see global.css palette comments)
 - **The SC demo's numbers come from paper1 §6.1**; if a different model row is needed (DistilBERT Δ +.429, Qwen LoRA Δ +.501), pass via `regimeB` prop rather than editing the component
 - **Reading-progress bar is opt-in** per page via `showProgress={true}` on the Base layout — only use it on long-form research/writing detail pages
+- **Project main pages follow one template:** a few-sentence intro → `## Roadmap` (a `ProgressTimeline`) → `## Latest progress` (the most recent milestone, inline), with everything else below. Each `done` milestone gets its own report subpage under the project's path. Full recipe in README "Adding / updating a project page"
 - **Don't use HTML `<form>` tags** in React islands (Astro/Tailwind gotcha)
 
 ## How updates happen
