@@ -1,0 +1,163 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+
+<Base
+  title="ProtoBias · Report 1 — The bias follows the attribute, not the language"
+  description="Progress Report 1 of Cross-lingual ProtoBias: a multilingual stress test showing that an MLLM judge's prototypicality bias is attribute-specific and largely language-invariant."
+  showProgress={true}
+>
+  <article class="prose">
+    <p class="!mb-6">
+      <a href="/research/cross-lingual-protobias" class="!no-underline text-[var(--color-text-muted)]">← Cross-lingual ProtoBias</a>
+    </p>
+
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Progress Report 1 · Experiment 1 · 8 June 2026
+    </div>
+    <h1>The bias follows the attribute, not the language</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-6">
+      A multilingual prototypicality-bias probe on an MLLM judge — what we found, and what we are
+      not yet entitled to claim.
+    </p>
+    <p class="text-[var(--color-text-muted)] !text-base !mb-8">
+      Xiaochuan Li · Rishav Chandra &nbsp;·&nbsp; mentor: Subhadeep Roy
+    </p>
+
+    <h2>The setup</h2>
+    <p>
+      Automatic metrics and MLLM judges increasingly stand in for humans when evaluating
+      text-to-image models. Their failure mode is that they reward images that <em>look</em>
+      prototypical even when the image is semantically wrong for the prompt. ProtoBias makes that
+      measurable: each prompt is shown with two images — a <strong>semantically-correct</strong> but
+      non-prototypical image (SC), and a <strong>prototypical but wrong</strong> adversarial image
+      (PA). We ask the judge, in the target language, which image matches the description, with
+      left/right position randomized to control for position bias.
+    </p>
+    <p>
+      The metric is the <strong>error rate</strong>: the fraction of times the judge picks the
+      prototypical-but-wrong image. <code>0.50</code> is chance; anything above is bias.
+    </p>
+    <ul>
+      <li><strong>Judge:</strong> Qwen2.5-VL-7B-Instruct.</li>
+      <li><strong>Scale:</strong> 300 rows/domain × 3 domains × 4 languages = <strong>3,600 judgments</strong>.</li>
+      <li><strong>Domains:</strong> Animals · Objects · Demography.</li>
+      <li><strong>Languages:</strong> English · Chinese · Arabic · Hindi.</li>
+      <li><strong>Translation:</strong> Google (deep-translator); Chinese human-verified, Arabic/Hindi not yet validated.</li>
+      <li><strong>Compute:</strong> NHR@FAU Alex, 1× A40 GPU.</li>
+    </ul>
+
+    <h2>First pass: it looked like nothing</h2>
+    <p>
+      Aggregated by domain × language, every cell hugs 0.50. Cross-language gaps are about 0.05 with
+      overlapping confidence intervals; both research questions looked flat at this granularity.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Domain</th><th>English</th><th>Chinese</th><th>Arabic</th><th>Hindi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Animals</td><td>.523</td><td>.575</td><td>.570</td><td>.573</td></tr>
+        <tr><td>Demography</td><td>.560</td><td>.577</td><td>.573</td><td>.553</td></tr>
+        <tr><td>Objects</td><td>.467</td><td>.470</td><td>.463</td><td>.553</td></tr>
+      </tbody>
+    </table>
+    <p class="text-[var(--color-text-muted)] !text-base">
+      If we had stopped here, the story would have been "nothing."
+    </p>
+
+    <h2>The key move: split by social attribute</h2>
+    <p>
+      Each Demography row is tagged with <em>which</em> stereotype it probes — Wealth, Power,
+      Civility, Morality, Intellect — the social-hierarchy axis the dataset was designed around. The
+      default analysis averaged over that label and collapsed Demography to a single number. Once we
+      stop averaging, a flat <strong>.56</strong> Demography mean turns out to hide a <strong>0.30
+      spread</strong>.
+    </p>
+
+    <h2>Headline: the bias is attribute-specific</h2>
+    <p>
+      The judge chases the prototype strongly for social-status attributes, and sits at chance for
+      moral and cognitive ones. Web data seems to encode what wealthy or powerful people look like,
+      while there is no stable visual prototype for "moral" or "intelligent."
+    </p>
+    <table>
+      <thead>
+        <tr><th>Social attribute</th><th>Error rate</th><th>n</th><th>95% CI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Wealth</strong></td><td><strong>.774</strong></td><td>124</td><td>[.69, .84]</td></tr>
+        <tr><td><strong>Power</strong></td><td><strong>.672</strong></td><td>256</td><td>[.61, .73]</td></tr>
+        <tr><td>Civility</td><td>.539</td><td>256</td><td>[.48, .60]</td></tr>
+        <tr><td>Morality</td><td>.487</td><td>372</td><td>[.44, .54]</td></tr>
+        <tr><td>Intellect</td><td>.479</td><td>192</td><td>[.41, .55]</td></tr>
+      </tbody>
+    </table>
+    <p>
+      This answers <strong>RQ2</strong>: prototypicality bias is far stronger for socially sensitive
+      attributes than for neutral domains, where objects sit at chance.
+    </p>
+
+    <h2>And it is largely language-invariant</h2>
+    <p>
+      The same ordering survives in every language. Wealth and Power stay high while Morality and
+      Intellect hover at chance across English, Chinese, Arabic, and Hindi; per-language differences
+      are within noise at current cell sizes.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Attribute</th><th>en</th><th>zh</th><th>ar</th><th>hi</th><th>n / lang</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Wealth</strong></td><td>.774</td><td>.774</td><td>.839</td><td>.710</td><td>31</td></tr>
+        <tr><td><strong>Power</strong></td><td>.703</td><td>.672</td><td>.594</td><td>.719</td><td>64</td></tr>
+        <tr><td>Civility</td><td>.547</td><td>.484</td><td>.547</td><td>.578</td><td>64</td></tr>
+        <tr><td>Morality</td><td>.473</td><td>.559</td><td>.505</td><td>.409</td><td>93</td></tr>
+        <tr><td>Intellect</td><td>.417</td><td>.479</td><td>.542</td><td>.479</td><td>48</td></tr>
+      </tbody>
+    </table>
+    <p>
+      This is the preliminary read on <strong>RQ1</strong>: the bias appears to be baked into the
+      visual representation rather than produced by any one prompt language. A "language doesn't move
+      it" result is itself a valid multilingual finding — if it holds, it strengthens the claim that
+      the failure is structural rather than an artifact of one language's phrasing.
+    </p>
+
+    <h2>One mechanism worth flagging</h2>
+    <p>
+      Drilling into Demography, the effect concentrates where the correct image carries a
+      <em>marked</em> identity cue (for example a visible cultural or group marker) and the
+      adversarial image is the plain, unmarked "default" person. On those items the judge defaults to
+      the unmarked image well above chance. This is a genuine measurement of the model's behavior, but
+      it is confounded: the marked cues are also visually salient, so we cannot yet separate "avoids
+      the marked identity" from "avoids the busier image." We study the stereotype only to measure it,
+      never to endorse it, and Experiment 2 adds the visual-knob control needed to disentangle the two.
+    </p>
+
+    <h2>Caveats</h2>
+    <ul>
+      <li>Effect sizes are small relative to the confidence intervals and underpowered for cross-language contrasts — Wealth has only ~31 items per language.</li>
+      <li>Single model, single seed, single translation backend.</li>
+      <li>Translation quality for Arabic and Hindi is not yet validated — a confound for any language-level claim.</li>
+      <li>Position bias and per-language parse-failure rates are not yet audited.</li>
+      <li>The gender split (male .573, n=648; female .558, n=552) is reported but not yet tested.</li>
+    </ul>
+
+    <h2>Next: Experiment 2</h2>
+    <ol>
+      <li><strong>Confirm statistically.</strong> Mixed-effects logistic regression — <code>picked_adv ~ socio_attr + subcategory + lang + gender + (1|item)</code> — so the attribute effect is tested with item-level random effects rather than read off raw means.</li>
+      <li><strong>Tighten the estimates.</strong> Balance Demography sampling to ≥150 items per cell to narrow the Wealth / Power intervals.</li>
+      <li><strong>Test low-resource directly.</strong> Extend across the resource spectrum to probe the "low-resource = worse" hypothesis.</li>
+      <li><strong>Validate translation.</strong> Back-translation drift plus per-language parse-failure rates.</li>
+    </ol>
+    <p class="text-[var(--color-text-muted)] !text-base">
+      Either outcome is informative: a flat result confirms language-invariance; a low-resource spike
+      recovers the original "the bias worsens in low-resource languages" hypothesis.
+    </p>
+
+    <hr />
+    <p class="!text-base">
+      ← Back to <a href="/research/cross-lingual-protobias">Cross-lingual ProtoBias</a>
+    </p>
+  </article>
+</Base>

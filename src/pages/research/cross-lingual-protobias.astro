@@ -1,5 +1,27 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ProgressTimeline from "../../components/ProgressTimeline.astro";
+
+// Project milestones — each "done" node links to its own standalone report.
+const progress = [
+  {
+    date: "8 Jun 2026",
+    phase: "Experiment 1 · Report 1",
+    title: "The bias follows the attribute, not the language",
+    summary:
+      "First multilingual pipeline — 3,600 judgments on Qwen2.5-VL-7B across English, Chinese, Arabic, and Hindi. A flat .56 Demography average hid a 0.30 spread: the judge chases the prototype for Wealth (.77) and Power (.67) but sits at chance for Morality and Intellect — and the same ordering holds in every language.",
+    href: "/research/cross-lingual-protobias/report-1",
+    status: "done",
+  },
+  {
+    date: "Planned",
+    phase: "Experiment 2",
+    title: "Confirm statistically, then push to low-resource",
+    summary:
+      "A mixed-effects logistic regression to confirm the attribute effect with item-level random effects; balanced Demography sampling to tighten the Wealth / Power intervals; an extension across the resource spectrum to test the “low-resource = worse” hypothesis directly; and a back-translation check on the Arabic / Hindi prompts.",
+    status: "planned",
+  },
+];
 ---
 
 <Base
@@ -61,46 +83,13 @@ import Base from "../../layouts/Base.astro";
       </li>
     </ul>
 
-    <h2>Progress · Report 1 <span class="text-[var(--color-text-dim)] font-normal !text-base">(June 2026, with Rishav Chandra · mentor Subhadeep Roy)</span></h2>
+    <h2>Progress</h2>
     <p>
-      We ran the first multilingual ProtoBias pipeline: <strong>3,600 judgments</strong> from
-      Qwen2.5-VL-7B-Instruct as judge, across four languages — English, Chinese, Arabic, Hindi —
-      over the Animals / Objects / Demography domains. Each item is a 2-alternative forced choice
-      between the semantically-correct image and the prototypical-but-wrong one; the metric is the
-      <em>error rate</em>, the fraction of times the judge picks the prototypical image (0.50 = chance,
-      &gt; 0.50 = bias).
+      The project advances in dated milestones. Each completed node links to its own standalone
+      report; the headline so far is that the judge's prototypicality bias is concentrated on
+      social-status attributes and barely moves with the prompt language.
     </p>
-    <p>
-      The first pass aggregated by domain &times; language and looked like nothing: every cell hugged
-      0.50, with cross-language gaps around 0.05 and overlapping confidence intervals. The result only
-      appeared once we split the Demography domain by the <em>social attribute</em> each item probes —
-      the dimension the dataset was actually designed around.
-    </p>
-    <p>
-      <strong>The bias is attribute-specific.</strong> A flat .56 Demography average hid a 0.30 spread:
-      the judge follows the prototype strongly for social-status attributes — <strong>Wealth .77,
-      Power .67</strong> — but sits at chance for moral and cognitive ones (Civility .54, Morality .49,
-      Intellect .48). Web data seems to encode what wealthy or powerful people look like, while there
-      is no stable visual prototype for "moral" or "intelligent."
-    </p>
-    <p>
-      <strong>And the pattern is largely language-invariant.</strong> Wealth and Power are high while
-      Morality and Intellect stay near chance in <em>all four</em> languages, with per-language
-      differences within noise at current sample sizes. So this preliminary read answers both
-      questions: the bias is concentrated on socially sensitive attributes (<strong>RQ2</strong>), and
-      it is baked into the visual representation rather than produced by any one prompt language
-      (<strong>RQ1</strong>) — a "language doesn't move it" result that, if it holds, strengthens the
-      claim that the failure is structural.
-    </p>
-    <p class="text-[var(--color-text-muted)] !text-base">
-      <strong>Caveats.</strong> Effect sizes are still small relative to confidence intervals and
-      underpowered for cross-language contrasts (Wealth has only ~31 items per language); this is a
-      single model, single seed, single translation backend, and translation quality for Arabic and
-      Hindi is not yet validated. Position bias and per-language parse-failure rates are not yet
-      audited. Experiment 2 will confirm with a mixed-effects logistic regression, balance the
-      sampling, and extend across the resource spectrum to test the "low-resource = worse" hypothesis
-      directly.
-    </p>
+    <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
 
     <h2>AI relation</h2>
     <p>

@@ -1,0 +1,195 @@
+---
+// A vertical progress timeline — the project's milestones as dated nodes on a
+// single line. Each node carries a date, a phase label, a title and a one-line
+// summary; nodes with an `href` link to their own standalone report. Mirrors the
+// homepage research spine, turned on its side for a chronological read.
+interface Item {
+  date: string;
+  phase?: string;
+  title: string;
+  summary: string;
+  href?: string;
+  status?: "done" | "active" | "planned";
+  color?: string;
+}
+interface Props {
+  items: Item[];
+  accent?: string;
+}
+const { items, accent = "var(--accent-deep-purple)" } = Astro.props;
+---
+
+<ol class="ptl" style={`--accent: ${accent};`}>
+  {items.map((it) => {
+    const status = it.status ?? "done";
+    const c = it.color ?? accent;
+    const Tag = it.href ? "a" : "div";
+    return (
+      <li class={`ptl-item ptl-${status}`} style={`--c: ${c};`}>
+        <span class="ptl-marker" aria-hidden="true">
+          <span class="ptl-dot"></span>
+        </span>
+        <Tag class="ptl-body" href={it.href}>
+          <span class="ptl-meta">
+            <span class="ptl-date">{it.date}</span>
+            {it.phase && <span class="ptl-phase">{it.phase}</span>}
+            {status === "planned" && <span class="ptl-tag">Planned</span>}
+            {status === "active" && <span class="ptl-tag ptl-tag-active">In progress</span>}
+          </span>
+          <span class="ptl-title">{it.title}</span>
+          <span class="ptl-summary">{it.summary}</span>
+          {it.href && (
+            <span class="ptl-cta">Read the report <span class="ptl-arrow">→</span></span>
+          )}
+        </Tag>
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .ptl {
+    list-style: none;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    position: relative;
+  }
+  .ptl-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    column-gap: 1rem;
+    padding-bottom: 2rem;
+  }
+  .ptl-item:last-child { padding-bottom: 0; }
+
+  /* the connecting line, running dot-to-dot down the column */
+  .ptl-item::before {
+    content: "";
+    position: absolute;
+    left: 5.25px;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--color-border);
+  }
+  .ptl-item:first-child::before { top: 9px; }
+  .ptl-item:last-child::before { bottom: auto; height: 9px; }
+
+  .ptl-marker {
+    grid-column: 1;
+    justify-self: start;
+    padding-top: 3px;
+  }
+  .ptl-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow:
+      0 0 0 4px var(--color-bg),
+      0 0 0 5px color-mix(in srgb, var(--c) 32%, transparent);
+    transition: transform 0.2s ease;
+  }
+  .ptl-active .ptl-dot {
+    box-shadow:
+      0 0 0 4px var(--color-bg),
+      0 0 0 5px color-mix(in srgb, var(--c) 32%, transparent),
+      0 0 0 9px color-mix(in srgb, var(--c) 15%, transparent);
+  }
+  .ptl-planned .ptl-dot {
+    background: var(--color-bg);
+    border: 1.5px dashed var(--c);
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+
+  .ptl-body {
+    grid-column: 2;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    margin: -0.5rem -0.7rem;
+    padding: 0.5rem 0.7rem;
+    transition: background 0.2s ease;
+  }
+  a.ptl-body:hover {
+    background: color-mix(in srgb, var(--color-bg) 90%, var(--c) 10%);
+  }
+
+  .ptl-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 0.35rem;
+  }
+  .ptl-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--c);
+  }
+  .ptl-phase {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .ptl-tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    border: 0.5px solid var(--color-border);
+    border-radius: 999px;
+    padding: 1.5px 8px;
+  }
+  .ptl-tag-active {
+    color: var(--c);
+    border-color: color-mix(in srgb, var(--c) 45%, var(--color-border));
+  }
+
+  .ptl-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.32;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+  .ptl-summary {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 56ch;
+  }
+  .ptl-planned .ptl-title { color: var(--color-text-muted); }
+  .ptl-planned .ptl-summary { color: var(--color-text-dim); }
+
+  .ptl-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--c);
+  }
+  .ptl-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  a.ptl-body:hover .ptl-title { color: var(--c); }
+  a.ptl-body:hover .ptl-arrow { transform: translateX(3px); }
+</style>
