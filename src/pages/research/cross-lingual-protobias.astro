@@ -9,7 +9,7 @@ const progress = [
     phase: "Experiment 1 · Report 1",
     title: "The bias follows the attribute, not the language",
     summary:
-      "First multilingual pipeline — 3,600 judgments on Qwen2.5-VL-7B across English, Chinese, Arabic, and Hindi. A flat .56 Demography average hid a 0.30 spread: the judge chases the prototype for Wealth (.77) and Power (.67) but sits at chance for Morality and Intellect — and the same ordering holds in every language.",
+      "The first multilingual pipeline: 3,600 judgments from Qwen2.5-VL-7B across English, Chinese, Arabic, and Hindi, with the full domain × language and attribute breakdowns, confidence intervals, and caveats.",
     href: "/research/cross-lingual-protobias/report-1",
     status: "done",
   },
@@ -50,6 +50,23 @@ const progress = [
       test of the central framework, not a separate thesis spine.
     </p>
 
+    <h2>Roadmap</h2>
+    <p>
+      The project advances in dated milestones; each completed node opens its own standalone report.
+    </p>
+    <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
+
+    <h2>Latest progress</h2>
+    <p>
+      The most recent milestone — <strong>Report 1</strong> — ran the first multilingual pipeline:
+      3,600 judgments from Qwen2.5-VL-7B across English, Chinese, Arabic, and Hindi. The headline is
+      that the judge's prototypicality bias is <strong>attribute-specific</strong> — a flat .56
+      Demography average hid a 0.30 spread, with Wealth at .77 and Power at .67 but Morality and
+      Intellect at chance — and the ordering <strong>barely moves across languages</strong>. It is a
+      preliminary, single-model read; the full data tables and caveats are in the
+      <a href="/research/cross-lingual-protobias/report-1">Report 1 writeup →</a>.
+    </p>
+
     <h2>Research questions</h2>
     <ul>
       <li>
@@ -62,14 +79,6 @@ const progress = [
         objects?
       </li>
     </ul>
-
-    <h2>Progress</h2>
-    <p>
-      The project advances in dated milestones. Each completed node links to its own standalone
-      report; the headline so far is that the judge's prototypicality bias is concentrated on
-      social-status attributes and barely moves with the prompt language.
-    </p>
-    <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
 
     <h2>AI relation</h2>
     <p>

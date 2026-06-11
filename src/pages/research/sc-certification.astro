@@ -49,13 +49,24 @@ const roadmap = [
       A strict accuracy–stability–grounding hierarchy, observable only as deep as both sides are transparent.
     </p>
 
-    <HeroFigure />
-
     <p>
-      A model that answers correctly may be doing so for a reason the benchmark never checks.
-      The now-standard response is to perturb the input in meaning-preserving ways and ask whether
-      the answer survives. We take that response seriously and then show it is <strong>one level too shallow</strong>.
+      A model that answers correctly may be doing so for a reason the benchmark never checks. The
+      now-standard fix — perturb the input in meaning-preserving ways and see whether the answer
+      survives — is one level too shallow. This is the <strong>Certification</strong> leg of the
+      program: deciding whether a stable, correct answer is licensed by the structure that grounds the
+      conclusion, or by a surface cue that merely correlates with it.
     </p>
+
+    <h2>Roadmap</h2>
+    <p>
+      The paper reached its current shape through three framings. Each earlier version has its own
+      page; the latest progress is below.
+    </p>
+    <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
+
+    <h2>The current draft</h2>
+
+    <HeroFigure />
 
     <p>
       "Correct" answers decompose strictly — <code>accuracy ⊋ stability ⊋ grounding</code> — with every
@@ -70,7 +81,7 @@ const roadmap = [
       Stability is necessary but not sufficient for grounding.
     </blockquote>
 
-    <h2>A 91%-accurate model that has learned nothing</h2>
+    <h3>A 91%-accurate model that has learned nothing</h3>
 
     <p>
       In a controlled "can X fly?" setting, a classifier reaches <strong>0.912</strong> accuracy and
@@ -90,7 +101,7 @@ const roadmap = [
       This is the <code>SC-spurious</code> bucket.
     </p>
 
-    <h2>The decidability boundary</h2>
+    <h3>The decidability boundary</h3>
 
     <p>
       The deepest cut, <code>SC → {"{grounded, spurious}"}</code>, requires <strong>two-sided observability</strong>:
@@ -113,16 +124,7 @@ const roadmap = [
       an underdetermined one.
     </p>
 
-    <h2>Roadmap</h2>
-
-    <p>
-      The paper reached its current shape through three framings. Each earlier version has its own
-      page; the section above is the current draft.
-    </p>
-
-    <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
-
-    <h2>Status</h2>
+    <h3>Status</h3>
 
     <ul>
       <li><strong>Status:</strong> v2 draft complete and now being reshaped into a workshop paper around the linguistic-structure framing, with a cross-lingual subject–verb agreement witness (CLAMS, EN + DE) added. Controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks are integrated. Current work: the workshop cut, the reproducibility package, and tightening the formal scope statement.</li>
