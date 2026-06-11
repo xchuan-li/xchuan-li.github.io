@@ -8,16 +8,26 @@ interface Props {
   wide?: boolean;
   toc?: boolean;
   ogImage?: string;
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    showProgress?: boolean;
+    wide?: boolean;
+    toc?: boolean;
+    ogImage?: string;
+  };
 }
 
-const {
-  title = "Xiaochuan Li",
-  description = "Causal interpretability through linguistic structure — testing whether a model's behavior is licensed by the genuine structure of a sentence, or by a surface cue that merely correlates.",
-  showProgress = false,
-  wide = false,
-  toc = false,
-  ogImage = "/og.png",
-} = Astro.props;
+const frontmatter = Astro.props.frontmatter ?? {};
+const title = Astro.props.title ?? frontmatter.title ?? "Xiaochuan Li";
+const description =
+  Astro.props.description ??
+  frontmatter.description ??
+  "Causal interpretability through linguistic structure — testing whether a model's behavior is licensed by the genuine structure of a sentence, or by a surface cue that merely correlates.";
+const showProgress = Astro.props.showProgress ?? frontmatter.showProgress ?? false;
+const wide = Astro.props.wide ?? frontmatter.wide ?? false;
+const toc = Astro.props.toc ?? frontmatter.toc ?? false;
+const ogImage = Astro.props.ogImage ?? frontmatter.ogImage ?? "/og.png";
 
 const site = Astro.site ?? new URL("https://xchuan-li.github.io");
 const canonical = new URL(Astro.url.pathname, site).href;

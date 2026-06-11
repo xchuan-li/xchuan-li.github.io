@@ -138,11 +138,27 @@ import MyComponent from '../../components/MyComponent.tsx';
 <MyComponent client:load />
 ```
 
+For long-form writing or research detail pages, enable the reusable section rail:
+
+```yaml
+---
+layout: ../../layouts/Base.astro
+title: Your title
+description: Short description
+toc: true
+---
+```
+
+With `toc: true`, `Base.astro` renders a left "On this page" rail on desktop, builds it from direct
+`h2` and `h3` children inside `.prose`, highlights the active section while scrolling, and collapses
+back to a single centered column on smaller screens. Pages with fewer than two `h2`/`h3` headings
+also fall back to the normal single-column layout.
+
 ## Design notes
 
 - **Restraint over ornament.** Single accent color (warm red-orange), generous whitespace, no decorative gradients or shadows. The visual language is closer to Cosma Shalizi / Lena Voita than to portfolio sites — appropriate for a research audience.
 - **Light by default, dark via `prefers-color-scheme`.** Add a manual toggle if you want — the tokens are already set up for it.
-- **Reading width capped at 65ch in `.prose`.** Long-form text stays comfortable; landing-page-style content uses the full 720px container width.
+- **Reading width capped at 65ch in `.prose`.** Long-form pages with `toc: true` use the documented section-rail layout and widen the reading measure to 70ch; landing-page-style content uses the full 720px container width.
 
 ## Updating the SC demo numbers
 

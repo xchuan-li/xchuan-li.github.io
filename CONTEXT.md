@@ -130,6 +130,7 @@ Extensions:
 - **All colored text on colored backgrounds must use the dark stop from the same color family** (see global.css palette comments)
 - **The SC demo's numbers come from paper1 §6.1**; if a different model row is needed (DistilBERT Δ +.429, Qwen LoRA Δ +.501), pass via `regimeB` prop rather than editing the component
 - **Reading-progress bar is opt-in** per page via `showProgress={true}` on the Base layout — only use it on long-form research/writing detail pages
+- **Section rail is opt-in** per page via `toc={true}` in Astro pages or `toc: true` in MDX frontmatter. Use it for long-form research/writing detail pages with at least two direct `h2`/`h3` headings inside `.prose`; `Base.astro` builds the desktop "On this page" rail automatically, scroll-spies active headings, and falls back to single-column layout on mobile or sparse pages.
 - **Project main pages follow one template:** a few-sentence intro → `## Roadmap` (a `ProgressTimeline`) → `## Latest progress` (the most recent milestone, inline), with everything else below. Each `done` milestone gets its own report subpage under the project's path. Full recipe in README "Adding / updating a project page"
 - **Don't use HTML `<form>` tags** in React islands (Astro/Tailwind gotcha)
 
@@ -170,7 +171,7 @@ The site's visual language is established: dark-default scroll-portfolio chassis
 - New homepage figures should match `SCHierarchyFigure`'s level of concept density — boxless, theme-aware via `var(--color-text-*)` and accent CSS vars, captioned with a small monospace footer if needed.
 - Hero/section heading scale is `clamp(...)`-based; don't hard-code px sizes for the display layer.
 - If you need a new "skills"-shaped block, copy the `.areas-card` pattern (uppercase label + monospace status tag + thin colored hairline). Don't introduce percentages.
-- Inner pages stay narrow (720px) by default via `<Base>`; only the homepage uses `<Base wide={true}>`. Don't widen prose pages.
+- Inner pages stay narrow (720px) by default via `<Base>`; only the homepage uses `<Base wide={true}>`. Long-form detail pages may opt into the documented `toc` layout, which adds a left rail and widens `.prose` to 70ch on desktop.
 - `prefers-reduced-motion` must continue to disable fade-ins and the scroll-indicator animation.
 - Print stylesheet must stay light-themed so `/cv.pdf` exports cleanly regardless of the screen theme.
 
