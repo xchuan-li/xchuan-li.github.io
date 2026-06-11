@@ -61,6 +61,47 @@ import Base from "../../layouts/Base.astro";
       </li>
     </ul>
 
+    <h2>Progress · Report 1 <span class="text-[var(--color-text-dim)] font-normal !text-base">(June 2026, with Rishav Chandra · mentor Subhadeep Roy)</span></h2>
+    <p>
+      We ran the first multilingual ProtoBias pipeline: <strong>3,600 judgments</strong> from
+      Qwen2.5-VL-7B-Instruct as judge, across four languages — English, Chinese, Arabic, Hindi —
+      over the Animals / Objects / Demography domains. Each item is a 2-alternative forced choice
+      between the semantically-correct image and the prototypical-but-wrong one; the metric is the
+      <em>error rate</em>, the fraction of times the judge picks the prototypical image (0.50 = chance,
+      &gt; 0.50 = bias).
+    </p>
+    <p>
+      The first pass aggregated by domain &times; language and looked like nothing: every cell hugged
+      0.50, with cross-language gaps around 0.05 and overlapping confidence intervals. The result only
+      appeared once we split the Demography domain by the <em>social attribute</em> each item probes —
+      the dimension the dataset was actually designed around.
+    </p>
+    <p>
+      <strong>The bias is attribute-specific.</strong> A flat .56 Demography average hid a 0.30 spread:
+      the judge follows the prototype strongly for social-status attributes — <strong>Wealth .77,
+      Power .67</strong> — but sits at chance for moral and cognitive ones (Civility .54, Morality .49,
+      Intellect .48). Web data seems to encode what wealthy or powerful people look like, while there
+      is no stable visual prototype for "moral" or "intelligent."
+    </p>
+    <p>
+      <strong>And the pattern is largely language-invariant.</strong> Wealth and Power are high while
+      Morality and Intellect stay near chance in <em>all four</em> languages, with per-language
+      differences within noise at current sample sizes. So this preliminary read answers both
+      questions: the bias is concentrated on socially sensitive attributes (<strong>RQ2</strong>), and
+      it is baked into the visual representation rather than produced by any one prompt language
+      (<strong>RQ1</strong>) — a "language doesn't move it" result that, if it holds, strengthens the
+      claim that the failure is structural.
+    </p>
+    <p class="text-[var(--color-text-muted)] !text-base">
+      <strong>Caveats.</strong> Effect sizes are still small relative to confidence intervals and
+      underpowered for cross-language contrasts (Wealth has only ~31 items per language); this is a
+      single model, single seed, single translation backend, and translation quality for Arabic and
+      Hindi is not yet validated. Position bias and per-language parse-failure rates are not yet
+      audited. Experiment 2 will confirm with a mixed-effects logistic regression, balance the
+      sampling, and extend across the resource spectrum to test the "low-resource = worse" hypothesis
+      directly.
+    </p>
+
     <h2>AI relation</h2>
     <p>
       The project uses multimodal large language models as evaluators of image-text alignment. The

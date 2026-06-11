@@ -84,9 +84,15 @@ const [latentBranch, protoBranch] = groups;
       </a>
 
       <span class="sp-caplabel sp-caplabel-origin">{origin.label}</span>
-      {stations.map((s, i) => (
-        <span class={`sp-tick sp-col-${i + 1}`} aria-hidden="true"></span>
-      ))}
+      {stations.map((s, i) => {
+        // Suppress the grey down-tick under any station that already has a
+        // coloured branch line dropping from it (col-1 → latent, col-3 → proto),
+        // so the two don't stack into a messy double line.
+        const hasBranchBelow = (i === 0 && latentBranch) || (i === 2 && protoBranch);
+        return hasBranchBelow ? null : (
+          <span class={`sp-tick sp-col-${i + 1}`} aria-hidden="true"></span>
+        );
+      })}
       <span class="sp-caplabel sp-caplabel-frontier">{frontier.label}</span>
 
       {latentBranch && (
