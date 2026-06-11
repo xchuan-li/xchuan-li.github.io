@@ -6,6 +6,7 @@ interface Props {
   description?: string;
   showProgress?: boolean;
   wide?: boolean;
+  toc?: boolean;
   ogImage?: string;
 }
 
@@ -14,6 +15,7 @@ const {
   description = "Causal interpretability through linguistic structure — testing whether a model's behavior is licensed by the genuine structure of a sentence, or by a surface cue that merely correlates.",
   showProgress = false,
   wide = false,
+  toc = false,
   ogImage = "/og.png",
 } = Astro.props;
 
@@ -192,8 +194,20 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
       </div>
     </nav>
 
-    <main class={`page-main ${wide ? "" : ""}`}>
-      {wide ? <slot /> : <div class="container-narrow"><slot /></div>}
+    <main class="page-main">
+      {wide ? (
+        <slot />
+      ) : toc ? (
+        <div class="doc-grid">
+          <nav class="doc-toc" aria-label="On this page">
+            <p class="doc-toc-label">On this page</p>
+            <ul id="page-toc"></ul>
+          </nav>
+          <div class="doc-content"><slot /></div>
+        </div>
+      ) : (
+        <div class="container-narrow"><slot /></div>
+      )}
     </main>
 
     <footer class="site-footer">
@@ -214,6 +228,52 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
           } catch (e) {}
         });
+      })();
+
+      // Build the "On this page" rail from the section headings, with scroll-spy.
+      (function () {
+        var list = document.getElementById('page-toc');
+        var prose = document.querySelector('.doc-content .prose');
+        if (!list || !prose) return;
+        var heads = prose.querySelectorAll(':scope > h2, :scope > h3');
+        if (heads.length < 2) {
+          var grid = document.querySelector('.doc-grid');
+          var rail = document.querySelector('.doc-toc');
+          if (grid) grid.classList.add('no-toc');
+          if (rail) rail.style.display = 'none';
+          return;
+        }
+        var links = [];
+        heads.forEach(function (h, i) {
+          if (!h.id) {
+            h.id = (h.textContent || 'section').toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'section-' + i;
+          }
+          var li = document.createElement('li');
+          li.className = h.tagName === 'H3' ? 'lvl-3' : 'lvl-2';
+          var a = document.createElement('a');
+          a.href = '#' + h.id;
+          a.textContent = h.textContent;
+          li.appendChild(a);
+          list.appendChild(li);
+          links.push(a);
+        });
+        // Scroll-spy: highlight the last heading scrolled past the top band.
+        var ticking = false;
+        function updateSpy() {
+          ticking = false;
+          var idx = 0;
+          for (var i = 0; i < heads.length; i++) {
+            if (heads[i].getBoundingClientRect().top <= 140) idx = i;
+            else break;
+          }
+          links.forEach(function (a, i) { a.classList.toggle('active', i === idx); });
+        }
+        window.addEventListener('scroll', function () {
+          if (!ticking) { ticking = true; requestAnimationFrame(updateSpy); }
+        }, { passive: true });
+        window.addEventListener('resize', updateSpy);
+        updateSpy();
       })();
 
       // Reveal-on-scroll for .fade-in and .fade-in-up.

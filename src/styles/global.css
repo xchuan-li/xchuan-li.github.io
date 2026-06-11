@@ -209,6 +209,83 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 }
 .container-wide { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
+/* Detail pages with a sticky section rail: a left "On this page" nav + a wider
+   reading column. Collapses to a single centered column below 1040px. */
+.doc-grid {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+.doc-content { min-width: 0; }
+.doc-content .prose { max-width: 70ch; }
+.doc-grid.no-toc {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+  gap: 0;
+}
+.doc-toc {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+.doc-toc-label {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+.doc-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--color-border);
+}
+.doc-toc li { margin: 0; }
+.doc-toc a {
+  display: block;
+  padding: 4px 0 4px 0.85rem;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.doc-toc a:hover { color: var(--color-text); }
+.doc-toc a.active {
+  color: var(--color-text);
+  border-left-color: var(--color-accent);
+}
+.doc-toc .lvl-3 a {
+  padding-left: 1.6rem;
+  font-size: 12px;
+  color: var(--color-text-dim);
+}
+.doc-toc .lvl-3 a:hover,
+.doc-toc .lvl-3 a.active { color: var(--color-text); }
+.doc-content .prose h2,
+.doc-content .prose h3 {
+  scroll-margin-top: 96px;
+}
+@media (max-width: 1040px) {
+  .doc-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 760px;
+  }
+  .doc-toc { display: none; }
+}
+
 /* ============================================================
    Buttons
    ============================================================ */
