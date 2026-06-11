@@ -39,35 +39,15 @@ const progress = [
     </p>
 
     <p>
-      Cross-lingual ProtoBias applies the same semantic-vs-shortcut ambiguity to multilingual and
-      multimodal evaluation: does an evaluator track the semantic content of an image-text pair, or
-      does it lean on language- and culture-specific prototypes?
-    </p>
-
-    <p>
-      This is an applied stress test of the central framework, not a separate thesis spine. If a
-      model says an image matches a prompt, the causal-licensing question is familiar: is the
-      judgment carried by semantic content, or by a prototype that happens to feel more typical? The
-      ambiguity is structurally close to the one in
-      <a href="/research/sc-certification">Stable Is Not Grounded</a>: a judgment can be stable and
-      plausible while still being carried by the wrong feature.
-    </p>
-
-    <p>
-      ProtoBias gives a controlled way to probe this. Each prompt is paired with two images: one is
-      semantically correct but less prototypical, and the other is more prototypical but incorrect.
-      For "a doctor treating a patient," for example, the semantically correct image might violate a
-      stereotype, while the more typical image satisfies the stereotype but fails the prompt. The
-      question is whether multimodal systems prefer semantic fit or prototype fit when those come
-      apart.
-    </p>
-
-    <p>
-      The cross-lingual turn makes the test sharper. We hold the image pairs fixed and translate the
-      same prompts into multiple languages. If the model's preference changes across translations,
-      then the evaluator is not simply reading the visual scene against a language-independent
-      meaning. It may be importing language- and culture-specific expectations into what should be a
-      semantic alignment decision.
+      Cross-lingual ProtoBias carries the framework's semantic-vs-shortcut question into multilingual,
+      multimodal evaluation: does an MLLM judge track the meaning of an image–text pair, or lean on a
+      language- and culture-specific prototype? Each prompt is shown with two images — one semantically
+      correct but less prototypical, one more prototypical but wrong — so a judge that prefers the
+      typical-but-wrong image is riding the shortcut, structurally the same failure certified in
+      <a href="/research/sc-certification">Stable Is Not Grounded</a>. The cross-lingual turn holds the
+      image pairs fixed and translates only the prompt: if the verdict moves with the language, the
+      judge is importing expectations a language-independent meaning would not. It is an applied stress
+      test of the central framework, not a separate thesis spine.
     </p>
 
     <h2>Research questions</h2>

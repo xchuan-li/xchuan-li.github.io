@@ -1,0 +1,87 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+
+<Base
+  title="Stable Is Not Grounded · v1 — Non-circular detection of shortcut reliance"
+  description="The first framing of Paper 1: a non-circular procedure for deciding what counts as an irrelevant variable when testing whether correct answers are grounded or shortcut-driven."
+  showProgress={true}
+>
+  <article class="prose">
+    <p class="!mb-6">
+      <a href="/research/sc-certification" class="!no-underline text-[var(--color-text-muted)]">← Stable Is Not Grounded</a>
+    </p>
+
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Paper 1 · Version 1 · May 2026
+    </div>
+    <h1>Non-circular detection of shortcut reliance</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      Separating stipulated causal irrelevance from measured training entanglement.
+    </p>
+
+    <h2>The problem this version set out to solve</h2>
+    <p>
+      Perturbation- and robustness-based evaluations ask whether a correct answer survives a
+      meaning-preserving change. They share an unstated circularity: deciding which perturbations
+      <em>should</em> leave the answer unchanged already presupposes the causal structure being
+      tested. Calling a variable "irrelevant" requires the very knowledge whose use by the model is in
+      question.
+    </p>
+
+    <h2>The move</h2>
+    <p>
+      The circular question — "is variable <code>Z</code> irrelevant to conclusion <code>C</code>?" —
+      conflates two facts of different epistemic status:
+    </p>
+    <ul>
+      <li><strong>Causal irrelevance</strong>, a fact about the task — fixed non-circularly <em>by construction</em>, since we author the synthetic item and stipulate its ground-truth graph.</li>
+      <li><strong>Training entanglement</strong>, a fact about the data — fixed non-circularly <em>by measurement</em>, as a label correlation on an auditable corpus that needs no causal assumption.</li>
+    </ul>
+    <p>
+      A legitimate shortcut-detection target is exactly a variable that is causally irrelevant by
+      construction <strong>and</strong> training-correlated by measurement.
+    </p>
+
+    <h2>The disciplined package</h2>
+    <p>
+      Neither half is individually new; the contribution is the discipline that the split forces:
+    </p>
+    <ul>
+      <li>a <strong>class-1/2/3 taxonomy</strong> of variables that the construction/measurement split implies;</li>
+      <li>a <strong>mandatory class-2 control</strong> (a matched pure-noise intervention) that rules out the trivial reading "any intervention breaks the model";</li>
+      <li>a <strong>boundary discipline</strong> confining the causal machinery to settings where the graph is stipulated and the training data auditable.</li>
+    </ul>
+
+    <h2>What it showed</h2>
+    <p>
+      Across three model classes spanning the main families of learned sequence models — TF-IDF +
+      logistic regression, fine-tuned DistilBERT (66M), and LoRA-fine-tuned Qwen2.5-1.5B — the
+      procedure is <strong>specific</strong> (it does not flag a model that genuinely uses the
+      stipulated structure), <strong>sensitive</strong> (it flags a shortcut-rider), and
+      <strong>non-vacuous</strong> (the pure-noise control stays intact).
+    </p>
+    <p>
+      Under training-seed variance the sensitivity arm is fully stable (5/5). The multi-premise
+      specificity arm did <em>not</em> return a clean pass: it surfaced a premise-use asymmetry — the
+      model leans on one premise more than requiring both. That is a diagnostic the procedure is
+      designed to expose, reported rather than smoothed over. A complementary measurement-only section
+      illustrated, on BoolQ across three zero-shot models, that headline accuracy can substantially
+      overstate the fraction of <em>stably</em>-correct items.
+    </p>
+
+    <h2>Why it became v2</h2>
+    <p>
+      v1 delivered the non-circular procedure but framed it as an evaluation-methodology contribution
+      sitting beside a separate accuracy-vs-stability observation. The next version unified them:
+      the procedure is one cut in a strict hierarchy, and the place where that cut is cleanest is
+      named in advance by grammar.
+    </p>
+
+    <hr />
+    <p class="!text-base">
+      Next: <a href="/research/sc-certification/v2">v2 — Stable Is Not Grounded: the hierarchy</a>
+      &nbsp;·&nbsp; Back to <a href="/research/sc-certification">Paper 1</a>
+    </p>
+  </article>
+</Base>

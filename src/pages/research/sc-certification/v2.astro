@@ -1,0 +1,82 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+
+<Base
+  title="Stable Is Not Grounded · v2 — The accuracy–stability–grounding hierarchy"
+  description="The second framing of Paper 1: a strict accuracy ⊋ stability ⊋ grounding hierarchy and a decidability boundary for the grounded/spurious cut."
+  showProgress={true}
+>
+  <article class="prose">
+    <p class="!mb-6">
+      <a href="/research/sc-certification" class="!no-underline text-[var(--color-text-muted)]">← Stable Is Not Grounded</a>
+    </p>
+
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Paper 1 · Version 2 · June 2026
+    </div>
+    <h1>Stable Is Not Grounded — the hierarchy</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      One cut in a strict hierarchy, observable only as deep as both sides are transparent.
+    </p>
+
+    <h2>What changed from v1</h2>
+    <p>
+      v1 gave a non-circular procedure for deciding what counts as an irrelevant variable. v2 stops
+      treating that as a standalone method beside an accuracy-vs-stability aside and folds both into a
+      single object: a strict three-level hierarchy, with the non-circular cut as its deepest level.
+    </p>
+
+    <h2>The hierarchy</h2>
+    <p>
+      Headline accuracy merges three behaviours that come apart under answer-preserving perturbation —
+      unstable, stable-wrong, stable-correct — and checking stability separates only the first. The
+      residual is reflexive: a stable-correct answer can hold because the model tracks the licensing
+      structure, or because it stably rides a shortcut that also correlates with the answer.
+    </p>
+    <blockquote>accuracy ⊋ stability ⊋ grounding — every containment non-empty.</blockquote>
+    <p>
+      Stability is necessary but not sufficient for grounding.
+    </p>
+
+    <h2>The decidability boundary</h2>
+    <p>
+      The deepest cut, <code>SC → {"{grounded, spurious}"}</code>, requires
+      <strong>two-sided observability</strong>: the item's ground-truth graph must be stipulated by
+      construction (benchmark-side), and the candidate shortcut's training correlation must be
+      auditable (model-side). When both sides are open the cut is decidable; when either goes dark it
+      is non-identifiable from the available observations, and the honest decomposition stops at the
+      stable / stable-wrong split.
+    </p>
+    <p>
+      A <code>do</code>-intervention that severs a variable satisfying both halves, paired with the
+      mandatory pure-noise control, decides grounded vs spurious without reintroducing circularity.
+    </p>
+
+    <h2>The sharp consequence</h2>
+    <p>
+      A stably-correct-but-spurious model and a stably-wrong-by-shortcut model are the
+      <em>same mechanism</em>, split only by evaluation luck — so even the stable-correct /
+      stable-wrong boundary is eval-contingent until the deepest cut is made. On two model classes the
+      same headline accuracy and near-identical stability decompose into opposite grounding verdicts;
+      the verdict reproduces on a third architecture (Qwen-LoRA) and ports to a never-fine-tuned
+      reasoner that ignores even a perfect in-context shortcut. HANS is read as a syntactic-heuristic
+      instance of the same cut.
+    </p>
+
+    <h2>Why it became the workshop reshape</h2>
+    <p>
+      v2's own §7 conceded a gap: it lacked a natural <code>SC-grounded</code> witness, because a
+      single-language shortcut benchmark cannot supply one. The fix was already implicit — grammar
+      stipulates which structure licenses an inference and which surface cue is irrelevant — so the
+      next step re-anchored the paper to linguistic structure and added a cross-lingual agreement
+      witness.
+    </p>
+
+    <hr />
+    <p class="!text-base">
+      Current draft: <a href="/research/sc-certification">Structure or surface — the workshop reshape</a>
+      &nbsp;·&nbsp; Previous: <a href="/research/sc-certification/v1">v1 — Non-circular detection</a>
+    </p>
+  </article>
+</Base>

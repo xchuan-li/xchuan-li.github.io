@@ -2,6 +2,39 @@
 import Base from "../../layouts/Base.astro";
 import HeroFigure from "../../components/HeroFigure.astro";
 import SCDemo from "../../components/SCDemo.tsx";
+import ProgressTimeline from "../../components/ProgressTimeline.astro";
+
+// Version arc of Paper 1. The current page is the latest, complete draft;
+// earlier framings live on their own pages.
+const roadmap = [
+  {
+    date: "May 2026",
+    phase: "v1 · draft",
+    title: "Non-circular detection of shortcut reliance",
+    summary:
+      "The original cut: split “is this variable irrelevant?” into causal irrelevance fixed by construction and training entanglement fixed by measurement — a class taxonomy, a mandatory pure-noise control, and a boundary discipline. Validated as specific, sensitive, and non-vacuous across TF-IDF, DistilBERT, and Qwen-LoRA.",
+    href: "/research/sc-certification/v1",
+    status: "done",
+  },
+  {
+    date: "Jun 2026",
+    phase: "v2 · draft",
+    title: "Stable Is Not Grounded — the hierarchy",
+    summary:
+      "Reframed around a strict hierarchy, accuracy ⊋ stability ⊋ grounding, and a decidability boundary: the grounded/spurious cut needs two-sided observability — a stipulated graph and an auditable training correlation. The same accuracy and stability decompose into opposite grounding verdicts.",
+    href: "/research/sc-certification/v2",
+    status: "done",
+  },
+  {
+    date: "Jun 2026",
+    phase: "Workshop reshape · current",
+    title: "Structure or surface — syntax as the stipulated graph",
+    summary:
+      "Re-anchored to syntactic structure versus surface cue: grammar and typology supply the by-construction graph for free. Adds a cross-lingual subject–verb agreement witness (CLAMS, EN + DE), where linear proximity is irrelevant by grammar rather than by investigator. Targeting BlackboxNLP @ EMNLP 2026 — this page is the current draft.",
+    status: "active",
+    color: "var(--accent-coral)",
+  },
+];
 ---
 
 <Base title="Stable Is Not Grounded · Xiaochuan Li"
@@ -9,7 +42,7 @@ import SCDemo from "../../components/SCDemo.tsx";
        showProgress={true}>
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Paper 1 · v2 draft complete · workshop target
+      Paper 1 · current draft · BlackboxNLP target
     </div>
     <h1>Stable Is Not Grounded</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
@@ -80,10 +113,19 @@ import SCDemo from "../../components/SCDemo.tsx";
       an underdetermined one.
     </p>
 
+    <h2>Roadmap</h2>
+
+    <p>
+      The paper reached its current shape through three framings. Each earlier version has its own
+      page; the section above is the current draft.
+    </p>
+
+    <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
+
     <h2>Status</h2>
 
     <ul>
-      <li><strong>Status:</strong> v2 draft complete. Controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks are integrated. Current work: workshop framing, reproducibility package, and tightening the formal scope statement.</li>
+      <li><strong>Status:</strong> v2 draft complete and now being reshaped into a workshop paper around the linguistic-structure framing, with a cross-lingual subject–verb agreement witness (CLAMS, EN + DE) added. Controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks are integrated. Current work: the workshop cut, the reproducibility package, and tightening the formal scope statement.</li>
       <li><strong>Target:</strong> workshop paper / methodological position paper.</li>
       <li><strong>Role in the program:</strong> Paper 1. Establishes the <code>accuracy ⊋ stability ⊋ grounding</code> hierarchy and gives a binary certification protocol for stable-correct behavior under construction-and-auditability assumptions.</li>
       <li><strong>Scope condition:</strong> level three is licensed only when the item graph is stipulated and the training entanglement is auditable. The method does not solve grounding in the wild.</li>
