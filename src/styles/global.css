@@ -138,11 +138,32 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 }
 .site-brand { display: inline-flex; align-items: center; gap: 0.625rem; text-decoration: none; color: var(--color-text); }
 .site-mark { display: block; flex: none; overflow: visible; }
-.site-mark .sm-edge { stroke: var(--color-text-dim); stroke-width: 1.4; stroke-linecap: round; transition: stroke 0.15s ease; }
-.site-mark .sm-node { fill: none; stroke: var(--color-text-muted); stroke-width: 1.5; }
-.site-mark .sm-target { fill: var(--color-accent); stroke: none; }
+.site-mark .sm-surface {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2.4 2.4;
+}
+.site-mark .sm-surface-line {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-dasharray: 3 3;
+}
+.site-mark .sm-structure {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.site-mark .sm-node { fill: var(--color-accent); stroke: none; }
 .site-brand:hover .wordmark { color: var(--color-accent); }
-.site-brand:hover .sm-edge { stroke: var(--color-accent); }
+.site-brand:hover .sm-surface,
+.site-brand:hover .sm-surface-line { stroke: var(--color-text-dim); }
 .wordmark { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; transition: color 0.15s ease; }
 
 .nav-links {
