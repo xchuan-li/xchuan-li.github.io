@@ -5,7 +5,7 @@
 // Boxless; the cell background provides the project tint. `color` sets
 // `currentColor` for the project accent.
 interface Props {
-  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling";
+  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling" | "hangl";
   color?: string;
 }
 const { kind, color = "var(--color-accent)" } = Astro.props;
@@ -17,6 +17,7 @@ const labels: Record<Props["kind"], string> = {
   latent: "An activation manifold with two control states linked by a steer arrow under different prompt framings",
   protobias: "A central input fans to three languages; one path lands on meaning, another drifts to a cultural prototype",
   xling: "One meaning fans to three languages, encoded at different granularity — a single morpheme, subwords, a fragmented compound",
+  hangl: "The Hangul word 학교 and the Hanja form 學校 share no surface overlap but bind to one latent meaning node; strong models bridge them without the explicit Hanja cue",
 };
 ---
 
@@ -328,6 +329,32 @@ const labels: Record<Props["kind"], string> = {
       <text class="pc-cap-tick" x="160" y="190" text-anchor="middle">same meaning · different granularity — genuine or surface?</text>
     </g>
   )}
+
+  {kind === "hangl" && (
+    <g>
+      <text class="pc-cap" x="22" y="26">Sino-Korean · surface script vs latent Hanja</text>
+
+      {/* two disjoint surface forms — no edge between them (zero character overlap) */}
+      <rect class="pc-dim" x="40" y="56" width="64" height="34" rx="4" />
+      <text class="pc-cjk" x="72" y="79" text-anchor="middle">학교</text>
+      <text class="pc-axis" x="72" y="104" text-anchor="middle">Hangul surface</text>
+
+      <rect class="pc-dim" x="216" y="56" width="64" height="34" rx="4" />
+      <text class="pc-cjk" x="248" y="79" text-anchor="middle">學校</text>
+      <text class="pc-axis" x="248" y="104" text-anchor="middle">Hanja structure</text>
+
+      <text class="pc-neq" x="160" y="78" text-anchor="middle">≠</text>
+
+      {/* both bind to one shared latent meaning node beneath */}
+      <path class="pc-dim pc-dash" d="M 78 90 C 100 118, 132 128, 150 134" marker-end={`url(#pc-${kind}-d)`} />
+      <path class="pc-dim pc-dash" d="M 242 90 C 220 118, 188 128, 170 134" marker-end={`url(#pc-${kind}-d)`} />
+      <circle class="pc-acc-soft" cx="160" cy="142" r="15" />
+      <circle class="pc-acc-f" cx="160" cy="142" r="8" />
+      <text class="pc-axis" x="160" y="170" text-anchor="middle">latent meaning</text>
+
+      <text class="pc-cap-tick" x="160" y="190" text-anchor="middle">strong models bridge them without the explicit Hanja cue</text>
+    </g>
+  )}
 </svg>
 
 <style>
@@ -403,6 +430,17 @@ const labels: Record<Props["kind"], string> = {
     font-weight: 500;
   }
   .pc-lang-dim { fill: var(--color-text-dim); font-style: italic; }
+  .pc-cjk {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    fill: var(--color-text-muted);
+    font-weight: 500;
+  }
+  .pc-neq {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    fill: var(--color-text-dim);
+  }
   .pc-row-label {
     font-family: var(--font-mono);
     font-size: 8.5px;

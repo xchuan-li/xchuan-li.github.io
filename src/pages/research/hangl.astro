@@ -1,0 +1,103 @@
+---
+import Base from "../../layouts/Base.astro";
+import HanGLFigure from "../../components/HanGLFigure.astro";
+---
+
+<Base
+  title="HanGL · Surface Hangul, Latent Hanja · Xiaochuan Li"
+  description="An empirical pilot: do multilingual LLMs ground Korean Sino-Korean words to a latent Hanja/Chinese meaning, or only to surface script? A causal wrong-Hanja intervention shows latent grounding is a function of model capability."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Application frontier · empirical pilot · real LLMs
+    </div>
+    <h1>HanGL — Surface Hangul, Latent Hanja</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      The structure-versus-surface question, run on real models through a natural phenomenon.
+    </p>
+
+    <p>
+      This is the program's central question — <em>is a model's behaviour licensed by the genuine
+      structure, or by a surface proxy that correlates with it?</em> — taken out of the
+      <a href="/research/mini-causal-models">MiniCausalLang</a> sandbox and onto frontier LLMs, using
+      a phenomenon that supplies an unusually clean separation between surface and structure for free.
+    </p>
+
+    <h2>Why Sino-Korean is a clean probe</h2>
+    <p>
+      Modern Korean is written in Hangul, but much of its vocabulary is <strong>Sino-Korean</strong> —
+      words with a Hanja (Chinese-character) origin that is no longer written. The key property:
+      Hangul and Hanja share <strong>zero character overlap</strong> (학교 vs. 學校 / 学校), yet
+      correspond systematically in meaning. So if a model places 학교 near 学校 in representation
+      space, that proximity <em>cannot</em> come from shared surface tokens — it can only come from a
+      latent lexical-semantic structure. Most cross-lingual alignment work is confounded by subword
+      overlap; here the confound is absent by construction. It is the same logic as the
+      <a href="/research/sc-certification">grounding question</a>: fluent surface use is not evidence
+      that the structure is load-bearing.
+    </p>
+
+    <h2>The result</h2>
+    <HanGLFigure />
+    <p>
+      The probe brackets a <strong>correct</strong>, a <strong>wrong</strong>, or a
+      <strong>placebo</strong> Hanja onto the Hangul word — a <code>do</code>-style intervention on the
+      surface cue — and asks whether the model's answer follows the context or the cue. Two effects,
+      measured across models from weak to strong, tell one story:
+    </p>
+    <ul>
+      <li>
+        <strong>Hanja Gain</strong> — how much a <em>correct</em> Hanja helps. For every frontier model
+        it is ≈ 0: they already resolve the word from Hangul alone, so the explicit cue is redundant.
+        For a weak model (Qwen2.5-1.5B) it is <strong>+0.52</strong> — the Hanja triples its accuracy
+        on rare words it does not otherwise know.
+      </li>
+      <li>
+        <strong>Wrong-Hanja Cost</strong> — how much a <em>wrong</em> Hanja misleads. No model is fully
+        immune (all CIs exclude zero), but the weak model <strong>caves</strong> (+0.55, following the
+        false cue 58% of the time) while strong models mostly hold (+0.09–0.21).
+      </li>
+    </ul>
+    <p>
+      So <strong>latent Hanja grounding is a function of model capability</strong>: a strong model has
+      internalised the structure — it neither needs the correct cue nor is led by a false one — while a
+      weak model has not, and is both. Among frontier models, the Chinese-strong one relies on the
+      surface cue the most.
+    </p>
+
+    <h2>Three layers, and a representational echo</h2>
+    <p>
+      The claim is carried by a behavioural probe (the figure above), a causal one (correct vs. wrong
+      vs. placebo Hanja, isolating the cue's content from the bracket itself), and a representational
+      one. The representational side measures Sino-Korean↔Chinese alignment from contextual hidden
+      states — but only after a methodological correction: naive mean-centering leaves a near rank-one
+      space where cosine is meaningless, and a same-template control shows most of the raw similarity is
+      sentence-frame parallelism, not the word. After whitening and that control, the genuine
+      <em>word-level</em> alignment <strong>grows with scale</strong> (1.5B → 7B → 14B → 32B), then
+      plateaus — the representational echo of the same behavioural story: the grounding emerges with
+      capability and then stabilises.
+    </p>
+
+    <h2>Relation to the rest of the work</h2>
+    <p>
+      HanGL is the executed, natural-language companion to two parts of the program. It instantiates the
+      <a href="/research/typological-grounding">typological-grounding</a> question — structure vs.
+      surface across writing systems — on a phenomenon where the ground truth (Hangul ⟂ Hanja in form,
+      ≡ in meaning) is settled in advance, the way the
+      <a href="/research/mini-causal-models">sandbox</a> otherwise has to build it by hand. And its
+      wrong-Hanja test is the <a href="/research/sc-certification">Paper 1</a> intervention logic applied
+      to a surface cue in a real model. The method is the same toolkit — controls, disaggregation,
+      bootstrap confidence intervals, an explicit invalid-rate so a weak model's format slips are never
+      mistaken for failures of understanding — which is what keeps it from being a description of
+      Korean and makes it a grounding measurement.
+    </p>
+
+    <p class="text-sm text-[var(--color-text-dim)]">
+      Status: a pilot, not a finished paper — 60 homophones and 25 low-frequency words; cross-model
+      ordering is robust, absolute values may shift after native-speaker review of the draft items. Code,
+      data, full results with confidence intervals, and the scaling study are open at
+      <a href="https://github.com/xchuan-li/HanGL">github.com/xchuan-li/HanGL</a>.
+    </p>
+  </article>
+</Base>

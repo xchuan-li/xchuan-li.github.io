@@ -9,8 +9,9 @@
 //   latent    — an activation cloud on a manifold, two causal states linked by a steer
 //   protobias — a meaning fans to language tokens; one branch drifts to a prototype
 //   xling     — one meaning encoded as a single unit in one language, fragmented in another
+//   hangl     — two disjoint surface scripts sharing one latent meaning node beneath them
 interface Props {
-  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling";
+  kind: "sc" | "isotrace" | "mcm" | "ciy" | "latent" | "protobias" | "xling" | "hangl";
   color?: string;
 }
 const { kind, color = "var(--color-accent)" } = Astro.props;
@@ -22,6 +23,7 @@ const labels: Record<Props["kind"], string> = {
   latent: "two causal states linked on an activation manifold",
   protobias: "meaning fans to language tokens; one drifts to a prototype",
   xling: "one meaning encoded as a single unit in one language, fragmented in another",
+  hangl: "two disjoint surface scripts share one latent meaning node beneath them",
 };
 ---
 
@@ -175,6 +177,24 @@ const labels: Record<Props["kind"], string> = {
         <rect class="gl-dim" x="59" y="40" width="6" height="9" rx="1.2" />
         <rect class="gl-dim" x="67" y="40" width="6" height="9" rx="1.2" />
         <rect class="gl-dim" x="75" y="40" width="6" height="9" rx="1.2" />
+      </g>
+    )
+  }
+  {
+    kind === "hangl" && (
+      <g>
+        <marker id="g-hg-d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 9 5 L 0 9" class="gl-arrhead-dim" />
+        </marker>
+        {/* two disjoint surface scripts, top — no edge between them (zero overlap) */}
+        <rect class="gl-dim" x="14" y="9" width="13" height="13" rx="1.6" />
+        <rect class="gl-dim" x="69" y="9" width="13" height="13" rx="1.6" />
+        {/* dashed latent edges converging on one shared meaning node beneath */}
+        <path class="gl-dim gl-dash" d="M 22 23 C 30 38, 40 42, 46 44" marker-end="url(#g-hg-d)" />
+        <path class="gl-dim gl-dash" d="M 74 23 C 66 38, 56 42, 50 44" marker-end="url(#g-hg-d)" />
+        {/* shared latent meaning — the accent node the surfaces ground to */}
+        <circle class="gl-acc-soft" cx="48" cy="47" r="9" />
+        <circle class="gl-acc-f" cx="48" cy="47" r="5" />
       </g>
     )
   }
