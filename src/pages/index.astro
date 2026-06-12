@@ -52,6 +52,14 @@ const spineFrontier = {
   href: "/research/typological-grounding",
 };
 
+// The first executed landing at that frontier — a done empirical pilot, not a plan.
+const spineFrontierPilot = {
+  title: "HanGL",
+  kind: "Frontier · pilot",
+  href: "/research/hangl",
+  desc: "Surface Hangul vs latent Hanja — the structure-vs-surface question, run on real LLMs.",
+};
+
 // The workbench the three methods run on — and are validated against.
 const spineWorkbench = {
   title: "MiniCausalLang",
@@ -226,6 +234,7 @@ const posts = [
           origin={spineOrigin}
           stations={spineStations}
           frontier={spineFrontier}
+          frontierPilot={spineFrontierPilot}
           workbench={spineWorkbench}
           groups={spineGroups}
         />

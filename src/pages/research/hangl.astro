@@ -1,6 +1,45 @@
 ---
 import Base from "../../layouts/Base.astro";
 import HanGLFigure from "../../components/HanGLFigure.astro";
+import ProgressTimeline from "../../components/ProgressTimeline.astro";
+
+// The iteration arc of the pilot — each version a methodological sharpening,
+// the way the corrections in the run log accumulated into the current claim.
+const roadmap = [
+  {
+    date: "Jun 2026",
+    phase: "v1 · design",
+    title: "A three-layer probe",
+    summary:
+      "Behavioural, representational, and causal probes of one question — does the model recover latent Hanja, or stop at the Hangul surface? — with a bracketed wrong-Hanja gloss as the causal cut.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "v2 · representation fix",
+    title: "Controls expose a degenerate metric",
+    summary:
+      "A same-template control caught that naive cosine sat in a near rank-one space — mean-centering leaves the rogue dimension. Whitening plus contextual span-pooling recover a real signal, and reveal that most raw similarity is sentence-frame parallelism, not the word.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "v3 · behavioural hardening",
+    title: "Sixty items, variants, intervals",
+    summary:
+      "Scaled to 60 homophones and 25 rare words, three prompt variants, item-clustered bootstrap confidence intervals, a shuffled-option fix for position bias, and an explicit invalid-rate so a weak model's format slips are never mistaken for failures of meaning.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "current",
+    title: "A capability gradient",
+    summary:
+      "Across Qwen2.5-1.5B → 7B → 14B → 32B and three frontier models: both surface-Hanja effects vanish as capability rises, and the word-level representational residual grows then plateaus by ~7B. Latent Hanja grounding is a function of capability.",
+    status: "active" as const,
+    color: "var(--accent-teal-deep)",
+  },
+];
 ---
 
 <Base
@@ -24,6 +63,12 @@ import HanGLFigure from "../../components/HanGLFigure.astro";
       <a href="/research/mini-causal-models">MiniCausalLang</a> sandbox and onto frontier LLMs, using
       a phenomenon that supplies an unusually clean separation between surface and structure for free.
     </p>
+
+    <p>
+      It arrived at its current claim through a short arc of corrections — each version sharpening the
+      method before the result was trusted:
+    </p>
+    <ProgressTimeline items={roadmap} accent="var(--accent-teal-deep)" />
 
     <h2>Why Sino-Korean is a clean probe</h2>
     <p>

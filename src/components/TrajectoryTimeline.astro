@@ -39,11 +39,12 @@ interface Props {
   origin: Origin;
   stations: Station[];
   frontier: Frontier;
+  frontierPilot?: Group;
   workbench: Workbench;
   groups: Group[];
 }
 
-const { question, origin, stations, frontier, workbench, groups } = Astro.props;
+const { question, origin, stations, frontier, frontierPilot, workbench, groups } = Astro.props;
 const [latentBranch, protoBranch] = groups;
 ---
 
@@ -93,7 +94,7 @@ const [latentBranch, protoBranch] = groups;
           <span class={`sp-tick sp-col-${i + 1}`} aria-hidden="true"></span>
         );
       })}
-      <span class="sp-caplabel sp-caplabel-frontier">{frontier.label}</span>
+      {!frontierPilot && <span class="sp-caplabel sp-caplabel-frontier">{frontier.label}</span>}
 
       {latentBranch && (
         <>
@@ -115,6 +116,15 @@ const [latentBranch, protoBranch] = groups;
             {protoBranch.desc && <span class="sp-branch-desc">{protoBranch.desc}</span>}
           </a>
         </>
+      )}
+
+      {frontierPilot && (
+        <a class="sp-branch sp-branch-frontier" href={frontierPilot.href}>
+          <span class="sp-branch-dot" aria-hidden="true"></span>
+          <span class="sp-branch-kicker">{frontierPilot.kind}</span>
+          <span class="sp-branch-title">{frontierPilot.title}</span>
+          {frontierPilot.desc && <span class="sp-branch-desc">{frontierPilot.desc}</span>}
+        </a>
       )}
 
       <a class="sp-workbench" href={workbench.href}>
@@ -372,6 +382,17 @@ const [latentBranch, protoBranch] = groups;
     --branch-c: var(--accent-deep-purple);
     justify-self: center;
   }
+  /* the frontier pilot — an EXECUTED landing at the frontier: solid (not dashed
+     like the in-progress branches), teal-deep, anchored under the frontier cap. */
+  .sp-branch-frontier {
+    grid-column: 5;
+    --branch-c: var(--accent-teal-deep);
+    justify-self: center;
+    min-width: 8.5rem;
+  }
+  .sp-branch-frontier .sp-branch-desc { max-width: 9.5rem; }
+  /* solid drop line — this step is done, not aspirational */
+  .sp-branch-frontier .sp-branch-dot::before { border-left-style: solid; opacity: 0.7; }
   .sp-branch-dot {
     position: absolute;
     top: -5px;
