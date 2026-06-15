@@ -1,11 +1,11 @@
 ---
-// ResearchSpine — one central vertical axis. The personal mainline runs down the
-// RIGHT (Leibniz → 00 MiniCausalLang → 01 Certify → 02 Localize → 03 Quantify →
-// Application); the collaborations branch to the LEFT, inserted between 01 and 02.
-// Mainline nodes are filled circles; collaborations are hollow diamonds.
+// ResearchSpine — one left-anchored vertical line, read top to bottom:
+//   (Leibniz button) the philosophy entrance → 00 MiniCausalLang → 01 Certify →
+//   [collaborations, off the spine] → 02 Localize → 03 Quantify → Application.
+// Mainline nodes are filled circles; the collaborations are hollow diamonds.
 interface Origin { label: string; href: string; hook?: string; }
-interface Station { n: string; method: string; qword: string; q?: string; title: string; color: string; href: string; }
-interface Frontier { label: string; title: string; href: string; }
+interface Station { n: string; method: string; qword?: string; q?: string; title: string; desc?: string; color: string; href: string; }
+interface Frontier { label: string; title: string; href: string; desc?: string; }
 interface Workbench { title: string; href: string; desc: string; }
 interface Group { title: string; kind: string; href: string; desc?: string; }
 interface Props {
@@ -19,148 +19,140 @@ interface Props {
 const { question, origin, stations, frontier, workbench, groups } = Astro.props;
 const portraitSrc = "/images/leibniz-portrait.png";
 
-// MiniCausalLang becomes node 00, ahead of 01.
+// MiniCausalLang is node 00, ahead of 01.
 const node00: Station = {
-  n: "00", method: "Foundation", qword: "Built",
-  q: "the planted ground truth the three methods run on",
-  title: workbench.title, color: "var(--accent-slate)", href: workbench.href,
+  n: "00", method: "Foundation", title: workbench.title,
+  desc: workbench.desc, color: "var(--accent-slate)", href: workbench.href,
 };
 
-// Mainline order with the collaborations spliced in between 01 and 02.
 type Row =
   | { kind: "origin" }
-  | { kind: "station"; side: "right"; s: Station }
-  | { kind: "collab"; side: "left"; g: Group }
-  | { kind: "frontier"; side: "right" };
+  | { kind: "station"; s: Station }
+  | { kind: "collabLabel" }
+  | { kind: "collab"; g: Group }
+  | { kind: "frontier" };
 
 const rows: Row[] = [
   { kind: "origin" },
-  { kind: "station", side: "right", s: node00 },
-  { kind: "station", side: "right", s: stations[0] },
-  ...groups.map((g) => ({ kind: "collab", side: "left", g } as Row)),
-  { kind: "station", side: "right", s: stations[1] },
-  { kind: "station", side: "right", s: stations[2] },
-  { kind: "frontier", side: "right" },
+  { kind: "station", s: node00 },
+  { kind: "station", s: stations[0] },
+  { kind: "collabLabel" },
+  ...groups.map((g) => ({ kind: "collab", g } as Row)),
+  { kind: "station", s: stations[1] },
+  { kind: "station", s: stations[2] },
+  { kind: "frontier" },
 ];
 ---
 
-<ol class="tl">
+<div class="tl">
   {rows.map((row, i) => {
     const first = i === 0;
     const last = i === rows.length - 1;
-    const cls = `tl-row${first ? " tl-first" : ""}${last ? " tl-last" : ""}`;
+    const cls = `tl-row${first ? " tl-first" : ""}${last ? " tl-last" : ""}${row.kind === "collabLabel" ? " tl-collablabel" : ""}`;
 
     if (row.kind === "origin") {
       return (
-        <li class={cls}>
-          <div class="tl-half tl-half-left"></div>
-          <a class="tl-axis" href={origin.href} aria-label={origin.label}>
+        <div class={cls}>
+          <a class="tl-rail" href={origin.href} aria-label={origin.label}>
             <span class="tl-portrait"><img src={portraitSrc} alt="Portrait of Gottfried Wilhelm Leibniz" loading="lazy" decoding="async" /></span>
           </a>
-          <div class="tl-half tl-half-right">
-            <div class="tl-body">
-              <span class="tl-kicker tl-kicker-origin">{origin.label}</span>
-              <p class="tl-hook">{origin.hook ?? question}</p>
-              {origin.hook && <p class="tl-sub">{question}</p>}
-              <a class="tl-mini" href={origin.href}>Read the philosophical bridge <span aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </li>
+          <a class="tl-obtn" href={origin.href}>
+            <span class="tl-kicker tl-kicker-origin">{origin.label}</span>
+            <span class="tl-latin">{origin.hook ?? "Nihil est sine ratione."}</span>
+            <span class="tl-obtn-text">{question}</span>
+            <span class="tl-cta">Read the philosophical bridge <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      );
+    }
+
+    if (row.kind === "collabLabel") {
+      return (
+        <div class={cls}>
+          <div class="tl-rail"></div>
+          <p class="tl-brlabel">Collaborations · off the spine</p>
+        </div>
       );
     }
 
     if (row.kind === "collab") {
       return (
-        <li class={cls}>
-          <div class="tl-half tl-half-left">
-            <a class="tl-body tl-collab" href={row.g.href}>
-              <span class="tl-collab-kind">{row.g.kind}</span>
-              <span class="tl-collab-title">{row.g.title}</span>
-              {row.g.desc && <span class="tl-collab-desc">{row.g.desc}</span>}
-            </a>
-          </div>
-          <div class="tl-axis"><span class="tl-diamond" aria-hidden="true"></span></div>
-          <div class="tl-half tl-half-right"></div>
-        </li>
+        <div class={cls}>
+          <div class="tl-rail"><span class="tl-diamond" aria-hidden="true"></span></div>
+          <a class="tl-collab" href={row.g.href}>
+            <span class="tl-collab-kind">{row.g.kind}</span>
+            <span class="tl-collab-title">{row.g.title}</span>
+            {row.g.desc && <span class="tl-collab-desc">{row.g.desc}</span>}
+          </a>
+        </div>
       );
     }
 
     if (row.kind === "frontier") {
       return (
-        <li class={cls} style="--c: var(--accent-deep-purple);">
-          <div class="tl-half tl-half-left"></div>
-          <a class="tl-axis" href={frontier.href} aria-label={frontier.title}>
+        <div class={cls} style="--c: var(--accent-deep-purple);">
+          <a class="tl-rail" href={frontier.href} aria-label={frontier.title}>
             <span class="tl-dot tl-dot-frontier" aria-hidden="true"></span>
           </a>
-          <div class="tl-half tl-half-right">
-            <a class="tl-body tl-link" href={frontier.href}>
-              <span class="tl-kicker tl-kicker-frontier">Application</span>
-              <span class="tl-title tl-title-muted">{frontier.title}</span>
-              <span class="tl-q">Cross-lingual / typological grounding — the same meaning re-encoded by each language's grammar.</span>
-            </a>
-          </div>
-        </li>
+          <a class="tl-body tl-link" href={frontier.href}>
+            <span class="tl-kicker tl-kicker-frontier">Application</span>
+            <span class="tl-title tl-title-muted">{frontier.title}</span>
+            {frontier.desc && <span class="tl-desc">{frontier.desc}</span>}
+          </a>
+        </div>
       );
     }
 
     const s = row.s;
     return (
-      <li class={cls} style={`--c: ${s.color};`}>
-        <div class="tl-half tl-half-left"></div>
-        <a class="tl-axis" href={s.href} aria-label={s.title}>
+      <div class={cls} style={`--c: ${s.color};`}>
+        <a class="tl-rail" href={s.href} aria-label={s.title}>
           <span class="tl-dot" aria-hidden="true"></span>
         </a>
-        <div class="tl-half tl-half-right">
-          <a class="tl-body tl-link" href={s.href}>
-            <span class="tl-kicker tl-kicker-c">{s.n} · {s.method}</span>
-            {s.q && <span class="tl-q"><span class="tl-qword">{s.qword}</span> — {s.q}</span>}
-            <span class="tl-title">{s.title}</span>
-          </a>
-        </div>
-      </li>
+        <a class="tl-body tl-link" href={s.href}>
+          <span class="tl-kicker tl-kicker-c">{s.n} · {s.method}</span>
+          <span class="tl-title">{s.title}</span>
+          {s.q && <span class="tl-q"><span class="tl-qword">{s.qword}</span> — {s.q}</span>}
+          {s.desc && <span class="tl-desc">{s.desc}</span>}
+        </a>
+      </div>
     );
   })}
-</ol>
+</div>
 
 <style>
-  .tl { list-style: none; max-width: 880px; margin: 2.5rem auto 0; padding: 0; }
+  /* left-anchored single line */
+  .tl { max-width: 44rem; margin: 2.5rem 0 0; }
 
   .tl-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
-    grid-template-areas: "left axis right";
-    align-items: start;
-  }
-  .tl-half-left { grid-area: left; }
-  .tl-axis { grid-area: axis; }
-  .tl-half-right { grid-area: right; }
-
-  /* the central axis line — drawn inside the axis cell so it stays centred in any layout */
-  .tl-axis {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    align-self: stretch;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    column-gap: 1.1rem;
+    padding-bottom: 1.7rem;
   }
-  .tl-axis::before {
+  .tl-collablabel { padding-bottom: 0.55rem; }
+  .tl-last { padding-bottom: 0; }
+
+  .tl-rail { position: relative; display: flex; justify-content: center; text-decoration: none; }
+  .tl-rail::before {
     content: "";
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 0; bottom: 0;
+    top: 0; bottom: -1.7rem;
     width: 2px;
     background: var(--color-border-strong);
     z-index: 0;
   }
-  .tl-first .tl-axis::before { top: 58px; background: linear-gradient(180deg, color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border-strong)), var(--color-border-strong)); }
-  .tl-last .tl-axis::before { bottom: auto; height: 11px; }
-  .tl-axis > * { position: relative; z-index: 1; }
+  .tl-first .tl-rail::before { top: 54px; background: linear-gradient(180deg, color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border-strong)), var(--color-border-strong)); }
+  .tl-collablabel .tl-rail::before { bottom: -0.55rem; }
+  .tl-last .tl-rail::before { display: none; }
+  .tl-rail > * { position: relative; z-index: 1; }
 
   /* nodes */
   .tl-dot {
-    width: 15px; height: 15px; margin-top: 3px;
+    width: 15px; height: 15px; margin-top: 4px;
     border-radius: 50%;
     background: var(--c, var(--color-accent));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 5px color-mix(in srgb, var(--c) 38%, transparent);
@@ -172,90 +164,97 @@ const rows: Row[] = [
     box-shadow: 0 0 0 4px var(--color-bg);
   }
   .tl-diamond {
-    width: 11px; height: 11px; margin-top: 5px;
+    width: 11px; height: 11px; margin-top: 6px;
     background: var(--color-bg);
     border: 1.5px solid var(--color-text-dim);
     transform: rotate(45deg);
     box-shadow: 0 0 0 4px var(--color-bg);
     transition: transform 0.2s ease, border-color 0.2s ease;
   }
-  .tl-axis:hover .tl-dot, .tl-axis:hover .tl-dot-frontier { transform: scale(1.16); }
+  .tl-rail:hover .tl-dot, .tl-rail:hover .tl-dot-frontier { transform: scale(1.16); }
 
   /* origin medallion — transparent engraving, feathered into the page */
   .tl-portrait {
-    width: 54px; height: 66px;
+    width: 46px; height: 56px;
     overflow: hidden;
+    margin-top: 2px;
     -webkit-mask-image: radial-gradient(120% 100% at 50% 34%, #000 60%, transparent 96%);
             mask-image: radial-gradient(120% 100% at 50% 34%, #000 60%, transparent 96%);
-    transition: transform 0.25s ease;
   }
-  .tl-axis:hover .tl-portrait { transform: scale(1.04); }
   .tl-portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 14%; filter: contrast(1.04); }
 
+  /* origin button — the clear entrance to the philosophy essay */
+  .tl-obtn {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border: 1px solid color-mix(in srgb, var(--accent-deep-purple) 22%, var(--color-border));
+    border-radius: 12px;
+    background: var(--color-surface);
+    padding: 0.9rem 1.05rem 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .tl-obtn:hover {
+    border-color: color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border));
+    box-shadow: 0 3px 18px color-mix(in srgb, var(--accent-deep-purple) 10%, transparent);
+  }
+  .tl-latin {
+    margin: 0.25rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--color-text);
+  }
+  .tl-obtn-text { margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--color-text-muted); max-width: 46ch; }
+  .tl-cta {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 0.8rem;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em;
+    color: var(--btn-primary-text);
+    background: var(--accent-deep-purple);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
   /* bodies */
-  .tl-row { padding-bottom: 1.9rem; }
-  .tl-last { padding-bottom: 0; }
-  .tl-body { display: flex; flex-direction: column; gap: 0.22rem; text-decoration: none; min-width: 0; }
+  .tl-body { display: flex; flex-direction: column; gap: 0.18rem; text-decoration: none; min-width: 0; }
   .tl-link { margin: -0.45rem -0.65rem; padding: 0.45rem 0.65rem; border-radius: 9px; transition: background 0.2s ease; }
   .tl-link:hover { background: color-mix(in srgb, var(--color-bg) 88%, var(--c, var(--accent-deep-purple)) 12%); }
 
   .tl-kicker { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; }
   .tl-kicker-origin, .tl-kicker-frontier { color: var(--accent-deep-purple); }
   .tl-kicker-c { color: var(--c, var(--color-text-dim)); }
-
-  .tl-hook { margin: 0.18rem 0 0; font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; font-style: italic; line-height: 1.18; letter-spacing: -0.005em; color: var(--color-text); }
-  .tl-sub { margin: 0.35rem 0 0; font-size: 0.9rem; line-height: 1.55; color: var(--color-text-muted); max-width: 42ch; }
-  .tl-mini { margin-top: 0.5rem; font-family: var(--font-mono); font-size: 11px; color: var(--accent-deep-purple); text-decoration: none; }
-  .tl-mini:hover { opacity: 0.75; }
-
-  .tl-q { font-size: 0.83rem; line-height: 1.45; color: var(--color-text-muted); }
-  .tl-qword { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
   .tl-title { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 500; line-height: 1.25; color: var(--color-text); transition: color 0.2s ease; }
   .tl-title-muted { color: var(--color-text-muted); }
   .tl-link:hover .tl-title { color: var(--c, var(--accent-deep-purple)); }
+  .tl-q { font-size: 0.82rem; line-height: 1.45; color: var(--color-text-muted); }
+  .tl-qword { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
+  .tl-desc { margin-top: 0.18rem; font-size: 0.86rem; line-height: 1.55; color: var(--color-text-muted); max-width: 50ch; }
 
-  /* collaborations — left side, right-aligned, with a short connector to the axis */
-  .tl-half-left { display: flex; justify-content: flex-end; }
+  /* collaborations — off-spine branch, diamond markers */
+  .tl-brlabel { margin: 0.1rem 0 0; font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-dim); }
   .tl-collab {
-    position: relative;
-    text-align: right;
-    align-items: flex-end;
-    max-width: 17rem;
-    margin: -0.1rem 0;
+    display: flex; flex-direction: column; gap: 0.16rem;
+    max-width: 32rem;
+    text-decoration: none;
     padding: 0.6rem 0.8rem;
     border: 1px solid var(--color-border);
     border-radius: 9px;
     background: var(--color-surface);
     transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
   }
-  .tl-collab::after {
-    content: "";
-    position: absolute;
-    top: 1.05rem; right: -1.55rem;
-    width: 1.55rem; height: 1px;
-    background: var(--color-border-strong);
-  }
-  .tl-collab:hover {
-    transform: translateX(-2px);
-    border-color: var(--color-border-strong);
-    background: color-mix(in srgb, var(--color-surface) 82%, var(--color-text) 5%);
-  }
+  .tl-collab:hover { transform: translateX(2px); border-color: var(--color-border-strong); background: color-mix(in srgb, var(--color-surface) 82%, var(--color-text) 5%); }
   .tl-collab-kind { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: 0.11em; text-transform: uppercase; color: var(--color-text-dim); }
   .tl-collab-title { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; line-height: 1.22; color: var(--color-text); }
   .tl-collab-desc { font-size: 11.5px; line-height: 1.45; color: var(--color-text-dim); }
 
-  /* ---- narrow: collapse to a single left rail ---- */
-  @media (max-width: 720px) {
-    .tl-row {
-      grid-template-columns: 52px 1fr;
-      grid-template-areas: "axis content";
-      column-gap: 0.9rem;
-    }
-    .tl-half-left, .tl-half-right { grid-area: content; justify-content: flex-start; }
-    .tl-half:empty { display: none; }
-    .tl-collab { text-align: left; align-items: flex-start; max-width: none; margin: 0; }
-    .tl-collab::after { display: none; }
-    .tl-collab:hover { transform: translateY(-2px); }
-    .tl-hook { font-size: 1.3rem; }
+  @media (max-width: 560px) {
+    .tl-row { grid-template-columns: 40px 1fr; column-gap: 0.85rem; }
+    .tl-latin { font-size: 1.3rem; }
+    .tl-collab { max-width: none; }
   }
 </style>

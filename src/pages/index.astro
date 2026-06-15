@@ -23,6 +23,7 @@ const spineStations = [
     qword: "Whether",
     q: "is the model using the right structure at all?",
     title: "Stable Is Not Grounded",
+    desc: "A non-circular test of whether a stable, correct answer is licensed by the genuine structure — or rides a shortcut that merely correlates with the label. Counterfactual interventions plus a pure-noise control, with a clear scope boundary.",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
   },
@@ -32,6 +33,7 @@ const spineStations = [
     qword: "Where",
     q: "in the model is that structure actually used?",
     title: "Isotrace",
+    desc: "Behavioural path-tracing that upgrades a binary grounding verdict into hop-level diagnosis — making distinct reasoning paths emit distinct labels, traced on typological minimal pairs.",
     color: "var(--accent-teal)",
     href: "/research/isotrace",
   },
@@ -41,6 +43,7 @@ const spineStations = [
     qword: "How much",
     q: "of the inference it licenses does the model produce?",
     title: "Causal Inferential Yield",
+    desc: "Given the structure a model actually uses, how much of the inference that structure licenses does it productively produce — a yield, not an accuracy.",
     color: "var(--accent-purple)",
     href: "/research/ciy",
   },
@@ -50,6 +53,7 @@ const spineFrontier = {
   label: "Frontier",
   title: "Typological Grounding",
   href: "/research/typological-grounding",
+  desc: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context — a ready-made test of whether a model tracks structure or surface.",
 };
 
 // The workbench the three methods run on — and are validated against.
