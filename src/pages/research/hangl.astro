@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import HanGLFigure from "../../components/HanGLFigure.astro";
+import HanGLDemo from "../../components/HanGLDemo.tsx";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
 
 // The iteration arc of the pilot — each version a methodological sharpening,
@@ -110,6 +111,13 @@ const roadmap = [
       weak model has not, and is both. Among frontier models, the Chinese-strong one relies on the
       surface cue the most.
     </p>
+
+    <p>
+      Try the intervention yourself — pick a model capability, then bracket a correct, wrong, or
+      placebo Hanja onto a rare Sino-Korean word and watch what the answer follows:
+    </p>
+
+    <HanGLDemo client:visible />
 
     <h2>Three layers, and a representational echo</h2>
     <p>

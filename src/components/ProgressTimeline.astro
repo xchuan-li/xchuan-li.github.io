@@ -18,12 +18,17 @@ interface Props {
 }
 const { items, accent = "var(--accent-deep-purple)" } = Astro.props;
 
-// Default to showing only the current (active) milestone; older ones collapse
-// behind a toggle so the page leads with where the project is now. If nothing is
-// flagged active, keep the last (most recent) item open.
+// Default to showing only the current milestone; everything else collapses behind
+// a toggle so the page leads with where the project is now. Prefer the item flagged
+// `active`; otherwise the most recent non-planned (done) milestone — never default
+// to a planned, future item.
 const shownIdx = (() => {
   const a = items.findIndex((i) => (i.status ?? "done") === "active");
-  return a === -1 ? items.length - 1 : a;
+  if (a !== -1) return a;
+  for (let i = items.length - 1; i >= 0; i--) {
+    if ((items[i].status ?? "done") !== "planned") return i;
+  }
+  return items.length - 1;
 })();
 const hiddenCount = Math.max(0, items.length - 1);
 ---

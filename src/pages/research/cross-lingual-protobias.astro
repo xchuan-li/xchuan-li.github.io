@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
+import ProtoBiasDemo from "../../components/ProtoBiasDemo.tsx";
 
 // Project milestones — each "done" node links to its own standalone report.
 const progress = [
@@ -67,6 +68,13 @@ const progress = [
       preliminary, single-model read; the full data tables and caveats are in the
       <a href="/research/cross-lingual-protobias/report-1">Report 1 writeup →</a>.
     </p>
+
+    <p>
+      Switch the attribute and the prompt language below — the prototype bias swings sharply by
+      attribute but barely by language:
+    </p>
+
+    <ProtoBiasDemo client:visible />
 
     <h2>Research questions</h2>
     <ul>
