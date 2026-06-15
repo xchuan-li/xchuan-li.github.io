@@ -31,8 +31,8 @@ const hiddenCount = Math.max(0, items.length - 1);
 <div class={`ptl-wrap${hiddenCount > 0 ? " ptl-collapsible" : ""}`} style={`--accent: ${accent};`}>
   {hiddenCount > 0 && (
     <button type="button" class="ptl-toggle" aria-expanded="false">
-      <span class="ptl-toggle-show">Show full version history ({items.length})</span>
-      <span class="ptl-toggle-hide">Hide version history</span>
+      <span class="ptl-toggle-show">Expand all versions ({items.length})</span>
+      <span class="ptl-toggle-hide">Collapse version history</span>
       <span class="ptl-toggle-caret" aria-hidden="true">▾</span>
     </button>
   )}
@@ -96,6 +96,12 @@ const hiddenCount = Math.max(0, items.length - 1);
   .ptl-wrap.is-open .ptl-toggle-caret { transform: rotate(180deg); }
   /* with only the current milestone showing, drop the dangling connector line */
   .ptl-collapsible:not(.is-open) .ptl-item::before { display: none; }
+  .ptl-collapsible:not(.is-open) .ptl-summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   .ptl {
     list-style: none;

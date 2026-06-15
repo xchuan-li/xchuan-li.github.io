@@ -41,7 +41,7 @@ const roadmap = [
     phase: "v5 · current",
     title: "One method, two experiments",
     summary:
-      "Tightened to a single procedure carried by two experiments: a fully-auditable synthetic task (Experiment 1) and a subject–verb agreement portability diagnosis in English + German (Experiment 2), whose headline is a cross-lingual verdict flip on one model. BoolQ, HANS, and multi-seed runs move to the appendix as boundary and robustness checks. Targeting BlackboxNLP @ EMNLP 2026 — this page is the current draft.",
+      "Current v5 draft: one method, two experiments. Experiment 1 is fully auditable; Experiment 2 is an English/German agreement portability diagnosis with a cross-lingual verdict flip. Now tightening scope and the reproducibility package.",
     status: "active",
     color: "var(--accent-coral)",
   },
@@ -60,6 +60,9 @@ const roadmap = [
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
       When is a stable, correct answer <em>grounded</em> — and when is it a shortcut wearing the right answer?
     </p>
+
+    <h2>Roadmap</h2>
+    <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
 
     <p>
       A model that answers correctly may be doing so for a reason the benchmark never checks. The
@@ -202,13 +205,6 @@ const roadmap = [
       decomposition stops one level short, and reporting a "causally grounded" fraction there would be
       underdetermined, not stronger.
     </p>
-
-    <h2>Roadmap</h2>
-    <p>
-      The paper reached its current shape through several framings. The current version is shown; expand
-      for the full history.
-    </p>
-    <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
 
     <h2>Status</h2>
 

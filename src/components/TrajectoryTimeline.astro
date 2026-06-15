@@ -60,15 +60,13 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
       <!-- origin: the philosophy question -->
       <li class="vs-row vs-origin">
         <a class="vs-node vs-node-origin" href={origin.href} aria-label={origin.label}>
-          <LeibnizGlyph size={26} class="vs-leibniz" />
+          <LeibnizGlyph size={34} class="vs-leibniz" />
         </a>
-        <div class="vs-body">
-          <a class="vs-origin-link" href={origin.href}>
-            <span class="vs-kicker vs-kicker-origin">{origin.label}</span>
-          </a>
+        <a class="vs-body vs-origin-body" href={origin.href}>
+          <span class="vs-kicker vs-kicker-origin">{origin.label}</span>
           <p class="vs-origin-hook">{origin.hook ?? question}</p>
           {origin.hook && <p class="vs-origin-sub">{question}</p>}
-        </div>
+        </a>
       </li>
 
       <!-- the three method contributions -->
@@ -152,7 +150,7 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
   .vs-row {
     position: relative;
     display: grid;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 38px 1fr;
     column-gap: 1.1rem;
     padding-bottom: 1.6rem;
   }
@@ -161,7 +159,7 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
   .vs-row::before {
     content: "";
     position: absolute;
-    left: 14px;
+    left: 18px;
     top: 8px;
     bottom: -8px;
     width: 2px;
@@ -179,8 +177,8 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
     z-index: 2;
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
     align-self: start;
     text-decoration: none;
   }
@@ -239,7 +237,15 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
   }
 
   /* origin */
-  .vs-origin-link { text-decoration: none; }
+  .vs-origin-body {
+    margin: -0.45rem -0.7rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+  .vs-origin-body:hover {
+    background: color-mix(in srgb, var(--color-bg) 88%, var(--accent-deep-purple) 12%);
+  }
   .vs-kicker-origin {
     color: var(--accent-deep-purple);
     font-style: normal;
@@ -252,7 +258,9 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
     line-height: 1.25;
     letter-spacing: -0.01em;
     color: var(--color-text);
+    transition: color 0.2s ease;
   }
+  .vs-origin-body:hover .vs-origin-hook { color: var(--accent-deep-purple); }
   .vs-origin-sub {
     margin: 0.3rem 0 0;
     font-size: 0.875rem;
@@ -350,7 +358,7 @@ const { question, origin, stations, frontier, frontierPilot, workbench, groups }
     flex-direction: column;
     gap: 0.2rem;
     margin-top: 1.5rem;
-    margin-left: calc(30px + 1.1rem);
+    margin-left: calc(38px + 1.1rem);
     padding: 0.7rem 0.9rem;
     border: 0.5px dashed var(--color-border-strong);
     border-radius: 8px;
