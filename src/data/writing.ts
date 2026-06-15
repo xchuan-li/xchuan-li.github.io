@@ -33,11 +33,11 @@ export const posts: Post[] = [
   },
   {
     slug: "from-leibniz",
-    title: "Three Threads from Leibniz — what philosophy gave me that ML didn't",
+    title: "From a Sufficient Reason to a Universal Language — what philosophy gave me that ML didn't",
     date: "May 2026",
     pubDate: "2026-05-23",
     excerpt:
-      "My undergraduate thesis was on Leibniz's characteristica universalis. I did not, at the time, think of it as research relevant to AI. The project I'm working on now, two years and a discipline change later, turns out to be the same structural question asked under different constraints.",
+      "My undergraduate thesis was on Leibniz's characteristica universalis. Two years and a discipline change later, that ambition has split into the two poles of my work — the principle of sufficient reason as the question I can put to a model, and the universal character as the goal I can only walk toward.",
     status: "note",
   },
   {
