@@ -68,9 +68,11 @@ const roadmap = [
       A model that answers correctly may be doing so for a reason the benchmark never checks. The
       now-standard fix — perturb the input in meaning-preserving ways and see whether the answer
       survives — is one level too shallow. This is the <strong>Certification</strong> leg of the
-      program: deciding whether a stable, correct answer is licensed by the structure that grounds the
-      conclusion, or by a surface cue that merely correlates with it. Below is the argument as I'd walk
-      through it — the problem, my fix, and the two experiments that test it.
+      program — Leibniz's principle of sufficient reason (<em>nihil est sine ratione</em>) put to a
+      model: does a stable, correct answer have a sufficient <em>grounding</em> reason — the structure
+      that licenses the conclusion — or only a sufficient <em>predictive</em> one, a surface cue that
+      merely correlates with it? Below is the argument as I'd walk through it — the problem, my fix,
+      and the two experiments that test it.
     </p>
 
     <HeroFigure />
@@ -204,6 +206,21 @@ const roadmap = [
       the benchmark side observable; on a real benchmark with an opaque-pretrained model, the honest
       decomposition stops one level short, and reporting a "causally grounded" fraction there would be
       underdetermined, not stronger.
+    </p>
+
+    <h2>The horizon — a universal language</h2>
+
+    <p>
+      Step back, and the goal is the one Leibniz named: a <em>characteristica universalis</em>, a
+      language whose surface transparently carries its structure — where the grounding question could
+      not even arise, because there would be no surface for an answer to ride. Natural language is the
+      opposite: surface and structure come apart, which is exactly what lets a shortcut pass. The
+      fully-auditable tasks here are miniature universal characters — built so the surface-to-structure
+      map is stipulated and the test stays decidable — and
+      <a href="/research/typological-grounding">typological grounding</a> asks how much of that
+      structure a real language already supplies. Certification is the first <em>decidable</em> step
+      toward that horizon; the longer arc is in <a href="/writing/from-leibniz">the philosophical
+      bridge</a>.
     </p>
 
     <h2>Status</h2>
