@@ -48,7 +48,7 @@ export const projects: Project[] = [
     tint: "rgba(240, 153, 123, 0.10)",
     glyph: "sc",
     tags: ["Paper 1", "Certification"],
-    desc: "Certification — is the behavior licensed by the genuine structure at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
+    desc: "Certification — is the linguistic structure that licenses an inference load-bearing for the model at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
     group: "core",
     tier: "now",
     status: "Drafting",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
     tags: ["Paper 2", "Localization"],
-    desc: "Localization — which part of the structure does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
+    desc: "Localization — which linguistic operation or encoding does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
     group: "core",
     tier: "now",
     status: "In design",
@@ -87,7 +87,7 @@ export const projects: Project[] = [
     tint: "rgba(176, 156, 219, 0.10)",
     glyph: "xling",
     tags: ["Application frontier", "Cross-lingual"],
-    desc: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
+    desc: "Where the three methods meet linguistic typology: the same inferential content re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
     group: "frontier",
     tier: "thesis",
     status: "Exploratory",
@@ -108,8 +108,8 @@ export const projects: Project[] = [
   {
     title: "MiniCausalLang",
     href: "/research/mini-causal-models",
-    tags: ["Validation sandbox"],
-    short: "A planted-ground-truth sandbox for testing whether linguistic behavior is structurally grounded or surface-driven.",
+    tags: ["Supporting workbench"],
+    short: "A language-to-causal-graph workbench for testing whether grammatical structure, licensed inference, and interventions line up.",
     group: "support",
     tier: "now",
     status: "Ongoing",
@@ -142,11 +142,11 @@ export interface NowItem {
 export const now: NowItem[] = [
   {
     label: "Primary",
-    text: "Writing Stable Is Not Grounded as a workshop-targeted paper on why stability is not sufficient for grounding.",
+    text: "Writing Stable Is Not Grounded as a workshop-targeted paper on why stable correctness is not enough to show that a model uses the linguistic structure that licenses an inference.",
   },
   {
     label: "Next",
-    text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis.",
+    text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis of which linguistic operation carried the inference.",
   },
   {
     label: "Alongside",
@@ -154,6 +154,6 @@ export const now: NowItem[] = [
   },
   {
     label: "Exploring",
-    text: "Sketching a direction on typological grounding — what the structure-versus-surface question looks like when the same meaning is marked in grammar in one language and left to context in another.",
+    text: "Sketching a direction on typological grounding — what the language-and-reasoning question looks like when the same inference is marked in grammar in one language and left to context in another.",
   },
 ];

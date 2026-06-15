@@ -9,7 +9,7 @@ const coreProjects = [
     status: "Paper 1 · certification",
     color: "var(--accent-coral)",
     glyph: "sc",
-    one_line: "Binary certification: is the licensing structure counterfactually load-bearing at all?",
+    one_line: "Binary certification: is the linguistic structure that licenses the inference counterfactually load-bearing at all?",
     has_demo: true,
   },
   {
@@ -18,7 +18,7 @@ const coreProjects = [
     status: "Paper 2 · localization",
     color: "var(--accent-teal)",
     glyph: "isotrace",
-    one_line: "Path localization — and, in language, which cue a model leans on: morphology, syntax, or context?",
+    one_line: "Path localization — which linguistic operation or encoding carries the inference: morphology, syntax, word order, or context?",
   },
   {
     title: "Causal Inferential Yield",
@@ -26,7 +26,7 @@ const coreProjects = [
     status: "Paper 3 · quantification",
     color: "var(--accent-purple)",
     glyph: "ciy",
-    one_line: "Quantification: how much genuine linguistic structure does a model use, beyond surface cues?",
+    one_line: "Quantification: given a structure the model uses, how much of the inference licensed by that structure does it produce?",
   },
 ];
 
@@ -37,7 +37,7 @@ const frontierProjects = [
     status: "application frontier",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "Where the three methods meet linguistic typology: the same meaning re-encoded by morphology, word order, or context, and whether a model tracks the structure or the surface.",
+    one_line: "Where the three methods meet linguistic typology: the same inferential content re-encoded by morphology, word order, or context, and whether a model tracks the structure or the surface.",
   },
   {
     title: "HanGL · Surface Hangul, Latent Hanja",
@@ -53,10 +53,10 @@ const supportProjects = [
   {
     title: "MiniCausalLang",
     href: "/research/mini-causal-models",
-    status: "validation sandbox",
+    status: "supporting workbench",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    one_line: "A planted-ground-truth sandbox for testing whether linguistic behavior is structurally grounded or surface-driven — the methods checked against an answer we know.",
+    one_line: "A small language-to-causal-graph workbench for making grammatical structure, licensed inference, and interventions observable.",
   },
   {
     title: "Latent Control States",
@@ -81,21 +81,21 @@ const sections = [
     eyebrow: "The thesis · three method contributions",
     title: "Certify · localize · quantify",
     description:
-      "One program, not a list of ideas: certify whether behavior is licensed by genuine structure, localize where that structure is used, and quantify how much of it the model relies on — developed and tested through linguistic structure.",
+      "One program, not a list of ideas: test whether AI systems use the linguistic structures that support inference, localize where those structures are used, and quantify how much licensed inference they yield.",
     projects: coreProjects,
   },
   {
     eyebrow: "Application frontier",
     title: "Typological grounding",
     description:
-      "Where the three methods converge on linguistic typology — the same meaning re-encoded by each language's grammar, a ready-made test of structure versus surface.",
+      "Where the three methods converge on linguistic typology — the same inferential content re-encoded by each language's grammar, a ready-made test of structure versus surface.",
     projects: frontierProjects,
   },
   {
     eyebrow: "Support",
-    title: "Validation & extensions",
+    title: "Workbench & extensions",
     description:
-      "Infrastructure and side studies the program leans on — a validation sandbox and two extensions — not separate research directions.",
+      "Infrastructure and side studies the program leans on — a language-to-causal-graph workbench and two extensions — not separate research directions.",
     projects: supportProjects,
   },
 ];
@@ -103,14 +103,15 @@ const sections = [
 
 <Base
   title="Research · Xiaochuan Li"
-  description="Causal interpretability through linguistic structure: three method contributions — certify, localize, quantify whether a model's behavior is licensed by genuine structure — with a validation sandbox and extensions in support."
+  description="Research on how linguistic structure supports reasoning in AI systems: certify, localize, and quantify whether models use the structure that licenses inference."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-10 max-w-prose">
-    My work is one program, not a list of ideas: <em>is a model's behavior licensed by the genuine
-    structure, or by a surface cue that merely correlates with it?</em> Three method contributions —
-    certify, localize, quantify — developed through linguistic structure, with a validation sandbox
-    and two extensions in support.
+    My work is one program, not a list of ideas: <em>how does linguistic structure support
+    reasoning, and do AI systems actually use that structure?</em> Three method contributions —
+    certify, localize, quantify — use causal-interpretability tools to test whether model behavior
+    is licensed by grammar or carried by surface cues, with a language-to-causal-graph workbench and
+    two extensions in support.
   </p>
 
   <div class="space-y-12">

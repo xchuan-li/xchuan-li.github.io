@@ -4,7 +4,7 @@
 
 ## What this is
 
-A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start) at the intersection of causal inference and interpretability.
+A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start) on language, reasoning, and AI, using causal interpretability as the current methodological route.
 
 Live URL: **https://xchuan-li.github.io**
 Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
@@ -51,10 +51,10 @@ src/
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
 │   ├── contact.astro               # Email, GitHub, location, PhD-application note
 │   ├── research/
-│   │   ├── index.astro             # Research index (core sequence + sandbox + extensions)
+│   │   ├── index.astro             # Research index (core sequence + workbench + extensions)
 │   │   ├── sc-certification.astro  # paper1 walkthrough — embeds three lightweight React islands
 │   │   ├── isotrace.astro          # Expanded method page — behavioral path tracing
-│   │   ├── mini-causal-models.astro # Supporting planted-ground-truth sandbox
+│   │   ├── mini-causal-models.astro # Supporting language-to-causal-graph workbench
 │   │   ├── ciy.astro               # Paper 3 — quantitative grading
 │   │   ├── latent-control-states.astro  # Mechanistic extension (formerly "LiT")
 │   │   └── cross-lingual-protobias.astro
@@ -98,7 +98,7 @@ The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass s
 
 ## The research program (high-level — don't summarize wrong)
 
-Central question: **when is a model's behavior licensed by the minimum causal structure that should support it?** Do not present the roadmap as six equal projects. It is a core sequence, with a supporting sandbox and two extensions.
+Central question: **how does linguistic structure scaffold reasoning in humans and AI, and when do AI systems actually use the structure that licenses an inference?** Do not present the roadmap as six equal projects. It is a core sequence, with a supporting workbench and two extensions.
 
 Core sequence: **Hierarchical Causal Evidence**.
 
@@ -108,9 +108,9 @@ Core sequence: **Hierarchical Causal Evidence**.
 
 3. **Causal Inferential Yield (CIY)** (Paper 3): Quantitative grading. Defined on items whose grounding status is already certified or controlled, not arbitrary benchmark accuracy. The falsifiability test: if CIY cannot distinguish accuracy-matched and grounding-matched models, it collapses into accuracy repackaging.
 
-Supporting sandbox:
+Supporting workbench:
 
-- **Mini Causal Models**: A controlled planted-ground-truth sandbox for the core program. It provides small causal structures whose true generating graph is known, so structure recovery, Isotrace-style path localization, and CIY-style grading can be tested against a known target.
+- **Mini Causal Models / MiniCausalLang**: A language-to-causal-graph workbench for the core program. It provides small grammars whose true generating graph and licensed inference space are known, so structure recovery, Isotrace-style path localization, and CIY-style grading can be tested against a known target.
 
 Extensions:
 
