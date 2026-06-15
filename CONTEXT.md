@@ -41,13 +41,12 @@ src/
 │   ├── SCHierarchyFigure.astro     # Homepage About section concept figure — three concentric
 │   │                               # rounded panels (accuracy ⊋ stable-correct ⊋ grounded) with
 │   │                               # populations of dots in each band; do(C) callout arrow.
-│   ├── TrajectoryTimeline.astro     # Homepage vertical research spine.
-│   ├── LeibnizGlyph.astro           # Minimal line portrait used at the spine origin.
+│   ├── TrajectoryTimeline.astro     # Homepage Apple-style scroll narrative spine.
 │   ├── ProjectGlyph.astro          # Project glyphs reused on the /research index.
 │   └── SectionDivider.astro        # (Legacy) horizontal line + tiny SVG mark; no longer used on
 │                                   # the new homepage but kept for inner pages.
 ├── pages/
-│   ├── index.astro                 # Home: Hero / vertical research spine / Currently / Writing /
+│   ├── index.astro                 # Home: Hero / scroll research spine / Currently / Writing /
 │   │                               # Contact CTA. Uses `<Base wide={true}>`.
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
 │   ├── contact.astro               # Email, GitHub, location, PhD-application note
@@ -92,9 +91,9 @@ The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass s
 - **Cards.** Use cards only for compact repeated items or small tools. The homepage research section is not a card grid; the vertical spine leads alone.
 - **Section rhythm.** Every section opens with: optional `.divider-line` (1px hairline) → `.section-label` (uppercase 0.3em tracking) → `.section-heading` (big bold) → optional `.section-sub`. The pattern is consistent across About / Currently / Research / Writing / Contact.
 - **Homepage figures.**
-  - `TrajectoryTimeline` renders the main program as one vertical spine: Leibniz question → Certify → Localize → Quantify → application frontier.
-  - `LeibnizGlyph` replaces the old origin question mark with a minimal line portrait.
-  - MiniCausalLang is the workbench note beneath the spine; collaborations sit as muted off-axis branches.
+  - `TrajectoryTimeline` renders the main program as an Apple-style scroll narrative: Leibniz portrait/question -> Certify -> Localize -> Quantify -> MiniCausalLang foundation.
+  - The Leibniz origin uses `/public/images/leibniz-portrait.png`, an artistic historical portrait asset generated for the site.
+  - MiniCausalLang is the workbench/foundation; collaborations sit as muted right-side branches.
 - **Research focus card** (replaces the reference site's "skills with percentages"). Rows use uppercase label + monospace status tag + thin colored hairline. No numbers — status tags should reflect the roadmap (`Paper 1`, `Paper 2`, `Paper 3`, `Support`, `Extensions`, `Background`).
 
 ## The research program (high-level — don't summarize wrong)

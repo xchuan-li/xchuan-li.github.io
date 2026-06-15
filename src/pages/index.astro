@@ -4,10 +4,8 @@ import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
 import { now } from "../data/research";
 
-// The research arc as a layered argument (rendered by TrajectoryTimeline as
-// "Option A"): one question over three method contributions — the main line —
-// which all run on a shared workbench. The origin and the language frontier are
-// faint bookends; the two collaborative group projects sit OFF the spine.
+// The research arc as a scroll narrative: Leibniz's question becomes one
+// causal-interpretability mainline. Collaborative projects sit to the right.
 const spineQuestion = "Is the behavior licensed by genuine structure — or by a surface correlate?";
 
 const spineOrigin = {
@@ -55,14 +53,6 @@ const spineFrontier = {
   href: "/research/typological-grounding",
 };
 
-// The first executed landing at that frontier — a done empirical pilot, not a plan.
-const spineFrontierPilot = {
-  title: "HanGL",
-  kind: "Frontier · pilot",
-  href: "/research/hangl",
-  desc: "Surface Hangul vs latent Hanja — the structure-vs-surface question, run on real LLMs.",
-};
-
 // The workbench the three methods run on — and are validated against.
 const spineWorkbench = {
   title: "MiniCausalLang",
@@ -83,6 +73,12 @@ const spineGroups = [
     kind: "Applied extension",
     href: "/research/cross-lingual-protobias",
     desc: "Prototypicality bias in MLLM judges — does the prompt language change the verdict?",
+  },
+  {
+    title: "HanGL",
+    kind: "Application pilot",
+    href: "/research/hangl",
+    desc: "Surface Hangul vs latent Hanja — the structure-vs-surface question, run on real LLMs.",
   },
 ];
 
@@ -205,7 +201,7 @@ const posts = [
           correlate? — sharpened in three steps: <em>whether</em> structure is used at all (certify),
           <em>where</em> it is used (localize), and <em>how much</em> the model relies on it
           (quantify). The three are the main line; they run on a shared workbench that turns
-          linguistic structure into causal variables. Two collaborative projects sit off the spine.
+          linguistic structure into causal variables. A few collaborative projects sit off the spine.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">
@@ -214,7 +210,6 @@ const posts = [
           origin={spineOrigin}
           stations={spineStations}
           frontier={spineFrontier}
-          frontierPilot={spineFrontierPilot}
           workbench={spineWorkbench}
           groups={spineGroups}
         />
