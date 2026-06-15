@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import HeroFigure from "../../components/HeroFigure.astro";
 import SCDemo from "../../components/SCDemo.tsx";
+import AgreementDemo from "../../components/AgreementDemo.tsx";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
 
 // Version arc of Paper 1. The current page is the latest, complete draft;
@@ -27,10 +28,18 @@ const roadmap = [
   },
   {
     date: "Jun 2026",
-    phase: "Workshop reshape · current",
+    phase: "v3–v4 · workshop reshape",
     title: "Structure or surface — syntax as the stipulated graph",
     summary:
-      "Re-anchored to syntactic structure versus surface cue: grammar and typology supply the by-construction graph for free. Adds a cross-lingual subject–verb agreement witness (CLAMS, EN + DE), where linear proximity is irrelevant by grammar rather than by investigator. Targeting BlackboxNLP @ EMNLP 2026 — this page is the current draft.",
+      "Re-anchored to syntactic structure versus surface cue: grammar supplies the by-construction graph for free, so subject–verb agreement instantiates the same cut without the investigator choosing the shortcut. The exploratory step that became Experiment 2.",
+    status: "done",
+  },
+  {
+    date: "Jun 2026",
+    phase: "v5 · current",
+    title: "One method, two experiments",
+    summary:
+      "Tightened to a single procedure carried by two experiments: a fully-auditable synthetic task (Experiment 1) and a subject–verb agreement portability diagnosis in English + German (Experiment 2), whose headline is a cross-lingual verdict flip on one model. BoolQ, HANS, and multi-seed runs move to the appendix as boundary and robustness checks. Targeting BlackboxNLP @ EMNLP 2026 — this page is the current draft.",
     status: "active",
     color: "var(--accent-coral)",
   },
@@ -60,7 +69,7 @@ const roadmap = [
 
     <h2>Roadmap</h2>
     <p>
-      The paper reached its current shape through three framings. Each earlier version has its own
+      The paper reached its current shape through several framings. Each earlier version has its own
       page; the latest progress is below.
     </p>
     <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
@@ -82,11 +91,25 @@ const roadmap = [
       Stability is necessary but not sufficient for grounding.
     </blockquote>
 
-    <h3>A 91%-accurate model that has learned nothing</h3>
+    <p>
+      The paper is one method carried by two experiments. The method splits the question
+      "is this cue irrelevant?" into two parts that must be settled separately: <strong>(a)</strong> is the
+      cue causally irrelevant to the answer — fixed <em>before</em> looking at the model, by how the
+      item is built or by a linguistic rule; and <strong>(b)</strong> is it correlated with the label in
+      training — measured only when the training set is auditable. A cue passing both is a real
+      shortcut candidate. We then change it while holding the real structure fixed, alongside a
+      pure-noise control, so a drop is the shortcut and not fragility to any edit. This is
+      <em>shortcut learning</em> framed as an NLP robustness problem, audited with controls borrowed
+      from linguistics — minimal pairs, counterfactual substitution, and a structural decomposition
+      of the input variables.
+    </p>
+
+    <h3>Experiment 1 — a 91%-accurate model that has learned nothing</h3>
 
     <p>
-      In a controlled "can X fly?" setting, a classifier reaches <strong>0.912</strong> accuracy and
-      is <strong>stable</strong> under every answer-preserving presentation. By current practice it
+      The first experiment runs the full method where everything is auditable. In a controlled
+      "can X fly?" setting, a classifier reaches <strong>0.912</strong> accuracy and is
+      <strong>stable</strong> under every answer-preserving presentation. By current practice it
       clears both the accuracy bar and the robustness check — and would ship. It was never reading
       the animal. It was reading an irrelevant color feature the training set happened to correlate
       with the label (<code>|r| ≈ 0.81</code>). The demo below lets you push the button that reveals this:
@@ -99,8 +122,35 @@ const roadmap = [
       while a matched pure-noise control moves only <strong>.021</strong> — so the collapse is the
       shortcut, not fragility to any change. On a deployment slice where color no longer tracks the
       label, this model is at chance. Accuracy hid this; the stability check <em>endorsed</em> it.
-      This is the <code>SC-spurious</code> bucket.
+      This is the <code>SC-spurious</code> bucket. The same verdict structure survives architecture —
+      a bag-of-words classifier, a 66M encoder, and a 1.5B decoder (on a two-premise chain variant)
+      all collapse under the shortcut sever while the control stays intact.
     </p>
+
+    <h3>Experiment 2 — the same cut, on real grammar</h3>
+
+    <p>
+      The synthetic task proves the procedure works; the second experiment asks whether it survives
+      contact with a naturally occurring structure. In subject–verb agreement the verb agrees with
+      the syntactic <em>subject</em>, not the linearly closest noun — so grammar settles fact
+      <strong>(a)</strong> for free: "linear proximity is irrelevant" holds by construction, not by my
+      choosing. An <strong>attractor</strong> (an intervening noun of the opposite number) is exactly
+      <code>do(class-3)</code>; a same-number intervener is the <code>do(class-2)</code> control. A model
+      that holds on both the aligned and attractor slices tracks the subject (<code>SC-grounded</code>);
+      one that holds on aligned but collapses on the attractor rides proximity (<code>SC-spurious</code>).
+    </p>
+
+    <p>
+      Because these are zero-shot pretrained models, fact <strong>(b)</strong> goes dark — the
+      proximity–label correlation can't be measured in pretraining — so this is a <em>portability
+      diagnosis</em>, not the full certificate Experiment 1 earns. What it buys is a cross-lingual
+      flip: the <em>same</em> model, <code>XGLM-564M</code>, rides proximity in English
+      (gap <strong>.207</strong>, <code>SC-spurious</code>) but tracks the subject in German
+      (gap <strong>.097</strong>, <code>SC-grounded</code>) — the verdict inverts with neither model
+      nor task touched, only the language. Toggle the language and add an intervener below:
+    </p>
+
+    <AgreementDemo client:load />
 
     <h3>The decidability boundary</h3>
 
@@ -128,11 +178,11 @@ const roadmap = [
     <h3>Status</h3>
 
     <ul>
-      <li><strong>Status:</strong> v2 draft complete and now being reshaped into a workshop paper around the linguistic-structure framing, with a cross-lingual subject–verb agreement witness (CLAMS, EN + DE) added. Controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks are integrated. Current work: the workshop cut, the reproducibility package, and tightening the formal scope statement.</li>
-      <li><strong>Target:</strong> workshop paper / methodological position paper.</li>
+      <li><strong>Status:</strong> v5 draft — one method, two experiments. Experiment 1 (fully-auditable synthetic, across TF-IDF, DistilBERT, and a Qwen-1.5B LoRA two-premise arm) and Experiment 2 (subject–verb agreement portability, EN + DE, CLAMS zero-shot) are both run and written. BoolQ (boundary case), HANS (naturalistic shortcut witness), and the multi-seed runs are integrated as appendices. Current work: the reproducibility package and tightening the scope statement.</li>
+      <li><strong>Target:</strong> BlackboxNLP @ EMNLP 2026 — workshop / methodological position paper.</li>
       <li><strong>Role in the program:</strong> Paper 1. Establishes the <code>accuracy ⊋ stability ⊋ grounding</code> hierarchy and gives a binary certification protocol for stable-correct behavior under construction-and-auditability assumptions.</li>
-      <li><strong>Scope condition:</strong> level three is licensed only when the item graph is stipulated and the training entanglement is auditable. The method does not solve grounding in the wild.</li>
-      <li><strong>Future work:</strong> a full identification-theoretic treatment is left to future work; the present paper gives the operational boundary and empirical separation witnesses.</li>
+      <li><strong>Scope condition:</strong> the grounding verdict is licensed only when the item structure is stipulated <em>and</em> the training entanglement is auditable. Experiment 2 is reported honestly as a portability diagnosis because pretraining is opaque; the method does not solve grounding in the wild.</li>
+      <li><strong>Next step:</strong> a <em>fully-licensed</em> agreement experiment — train an agreement model on an auditable corpus so fact (b) becomes measurable, upgrading Experiment 2 from a diagnosis to a full certificate. A complete identification-theoretic treatment is left to future work.</li>
     </ul>
 
     <hr />

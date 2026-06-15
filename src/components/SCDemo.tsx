@@ -1,14 +1,17 @@
 import { useState } from "react";
 
 // ============================================================
-// SCDemo — Interactive Figure for "Stable Is Not Grounded"
+// SCDemo — Interactive Figure for Experiment 1 of "Stable Is Not Grounded"
 //
-// Reproduces §6.1 with three coordinated views:
+// Reproduces the fully-auditable synthetic "can X fly?" task with three
+// coordinated views:
 //  (1) DAG of the data-generating process; do() severs an arrow
 //  (2) Regime A vs B accuracy bars under each intervention
-//  (3) §6.1 three-model Δ table (TF-IDF, DistilBERT, Qwen LoRA)
+//  (3) Architecture table: TF-IDF + DistilBERT on the single-premise task,
+//      and the Qwen-1.5B LoRA two-premise arm (the decoder-only coverage —
+//      v5 has no Qwen single-premise run).
 //
-// All numbers are paper-derived. Override via props if the paper revs.
+// All numbers are paper-derived (v5). Override via props if the paper revs.
 // ============================================================
 
 export interface RegimeData {
@@ -50,9 +53,9 @@ const DEFAULT_B: RegimeData = {
 };
 
 const DEFAULT_TABLE: ModelRow[] = [
-  { name: "TF-IDF + LR",     base_acc: 0.912, d3_delta: 0.408, d2_delta: 0.021 },
-  { name: "DistilBERT (FT)", base_acc: 0.939, d3_delta: 0.429, d2_delta: 0.018 },
-  { name: "Qwen 2 (LoRA)",   base_acc: 0.961, d3_delta: 0.501, d2_delta: 0.024 },
+  { name: "TF-IDF + LR · 1-prem",      base_acc: 0.912, d3_delta: 0.408, d2_delta: 0.021 },
+  { name: "DistilBERT 66M · 1-prem",   base_acc: 0.939, d3_delta: 0.429, d2_delta: 0.018 },
+  { name: "Qwen-1.5B LoRA · 2-prem",   base_acc: 1.000, d3_delta: 0.517, d2_delta: 0.000 },
 ];
 
 const fmt = (x: number) => x.toFixed(3);
@@ -459,7 +462,7 @@ function ModelTable({ rows }: { rows: ModelRow[] }) {
   return (
     <div className="bg-[var(--color-surface)] rounded-md p-4 border border-[var(--color-border)]">
       <div className="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">
-        §6.1 · three architectures, same pattern
+        Experiment 1 · three architectures, same pattern
       </div>
       <table className="w-full text-sm font-mono">
         <thead>
@@ -494,7 +497,7 @@ function ModelTable({ rows }: { rows: ModelRow[] }) {
         </tbody>
       </table>
       <p className="text-[11px] text-[var(--color-text-muted)] mt-3 leading-relaxed">
-        The pattern survives architecture: lexical, BERT-class, and instruction-tuned LLM all collapse under <code className="font-mono">do(class-3)</code> while moving negligibly under the negative control.
+        The pattern survives architecture: a lexical classifier, a 66M encoder, and a 1.5B instruction-tuned decoder (the last on the two-premise chain variant) all collapse under <code className="font-mono">do(class-3)</code> while moving negligibly under the negative control.
       </p>
     </div>
   );
