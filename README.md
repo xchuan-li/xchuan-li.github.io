@@ -8,17 +8,19 @@ A research-focused personal website built with Astro 5, MDX, React (for interact
 src/
 ├── layouts/Base.astro         # shared header / footer / meta tags
 ├── components/
-│   └── SCDemo.tsx             # the SC-grounded vs spurious interactive demo
+│   ├── MzcCards.tsx           # lightweight M/Z/C click-to-reveal module
+│   ├── Exp1Tweety.tsx         # lightweight do(Z)/do(C)/do(M) walkthrough
+│   └── Exp2AgreementTabs.tsx  # agreement aligned/control/attractor module
 ├── pages/
-│   ├── index.astro            # home — research narrative + project list
+│   ├── index.astro            # home — hero + vertical research spine
 │   ├── cv.astro
 │   ├── contact.astro
 │   ├── research/
 │   │   ├── index.astro
-│   │   ├── sc-certification.astro   # paper1 detail page, embeds <SCDemo />
+│   │   ├── sc-certification.astro   # paper1 walkthrough, embeds lightweight React islands
 │   │   ├── isotrace.astro
 │   │   ├── ciy.astro
-│   │   └── lit.astro
+│   │   └── latent-control-states.astro
 │   └── writing/
 │       ├── index.astro
 │       └── decidability-boundary.mdx
@@ -116,7 +118,7 @@ Per-project accent colours match the homepage spine: Stable Is Not Grounded → 
    <MyDemo client:load />
    ```
 
-3. For demos with paper-specific numbers, accept them as props (see `SCDemo.tsx`). When the paper revs, only the props change.
+3. Keep interactive modules small and page-specific unless the same interaction is reused elsewhere.
 
 ## Adding a writing post
 
@@ -160,21 +162,9 @@ also fall back to the normal single-column layout.
 - **Light by default, dark via `prefers-color-scheme`.** Add a manual toggle if you want — the tokens are already set up for it.
 - **Reading width capped at 65ch in `.prose`.** Long-form pages with `toc: true` use the documented section-rail layout and widen the reading measure to 70ch; landing-page-style content uses the full 720px container width.
 
-## Updating the SC demo numbers
+## Updating the Stable walkthrough
 
-The demo defaults to the paper1 §6.1 TF-IDF + LR row (`Δ +.408 / Δ +.021`). To show a different model:
-
-```astro
-<SCDemo
-  client:load
-  modelLabel="DistilBERT (66M, full FT)"
-  regimeB={{
-    desc: "...",
-    base_acc: 0.912, base_stab: 1.0,
-    d3_acc: 0.483,   // Δ +.429
-    d2_acc: 0.891
-  }}
-/>
-```
-
-Or drop multiple demos on the page, one per model.
+The current Paper 1 page uses three lightweight React islands:
+`MzcCards.tsx`, `Exp1Tweety.tsx`, and `Exp2AgreementTabs.tsx`.
+Update the page prose and the small in-component constants together when the
+paper framing or headline numbers change.

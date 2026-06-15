@@ -1,9 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
-import ProjectCover from "../components/ProjectCover.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
-import { projects, now } from "../data/research";
+import { now } from "../data/research";
 
 // The research arc as a layered argument (rendered by TrajectoryTimeline as
 // "Option A"): one question over three method contributions — the main line —
@@ -14,6 +13,7 @@ const spineQuestion = "Is the behavior licensed by genuine structure — or by a
 const spineOrigin = {
   label: "Leibniz's question",
   href: "/writing/from-leibniz",
+  hook: "What is a right reason?",
 };
 
 // The three method contributions, sharpening the one question in three steps:
@@ -23,6 +23,7 @@ const spineStations = [
     n: "01",
     method: "Certify",
     qword: "Whether",
+    q: "is the model using the right structure at all?",
     title: "Stable Is Not Grounded",
     color: "var(--accent-coral)",
     href: "/research/sc-certification",
@@ -31,6 +32,7 @@ const spineStations = [
     n: "02",
     method: "Localize",
     qword: "Where",
+    q: "in the model is that structure actually used?",
     title: "Isotrace",
     color: "var(--accent-teal)",
     href: "/research/isotrace",
@@ -39,6 +41,7 @@ const spineStations = [
     n: "03",
     method: "Quantify",
     qword: "How much",
+    q: "of the inference it licenses does the model produce?",
     title: "Causal Inferential Yield",
     color: "var(--accent-purple)",
     href: "/research/ciy",
@@ -80,28 +83,6 @@ const spineGroups = [
     kind: "Applied extension",
     href: "/research/cross-lingual-protobias",
     desc: "Prototypicality bias in MLLM judges — does the prompt language change the verdict?",
-  },
-];
-
-const programSections = [
-  {
-    label: "The thesis · three method contributions",
-    title: "Certify · localize · quantify",
-    desc: "One program, not a list of ideas: certify whether behavior is licensed by genuine structure, localize where that structure is used, and quantify the inferential yield it produces — all run on MiniCausalLang, which compiles linguistic structure into a known causal graph.",
-    projects: projects.filter((p) => p.group === "core"),
-  },
-  {
-    label: "Application frontier",
-    title: "Where the methods land",
-    desc: "The three methods converge on linguistic typology — the same meaning re-encoded by each language's grammar, a ready-made test of structure versus surface.",
-    projects: projects.filter((p) => p.group === "frontier"),
-  },
-  {
-    label: "Foundation & off-spine work",
-    title: "The workbench, and two group projects",
-    desc: "MiniCausalLang is the workbench the three methods run on — it compiles linguistic structure into causal variables and gives the program its ground truth. Latent Control States and Cross-lingual ProtoBias are collaborative projects, in progress, that branch off the spine rather than belong to it.",
-    projects: projects.filter((p) => p.group === "support"),
-    compact: true,
   },
 ];
 
@@ -212,20 +193,19 @@ const posts = [
 
   </section>
 
-  <!-- =========== TRAJECTORY =========== -->
-  <section id="trajectory" class="section">
+  <!-- =========== RESEARCH SPINE =========== -->
+  <section id="research" class="section">
     <div class="section-inner">
       <div class="divider-line"></div>
       <div class="section-head">
-        <p class="section-label fade-in-up">Research arc</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">From one question to a program.</h2>
+        <p class="section-label fade-in-up">Research</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">One program, not a list of ideas.</h2>
         <p class="section-sub fade-in-up fade-delay-200">
           One question — is a model's behavior licensed by the genuine structure, or by a surface
           correlate? — sharpened in three steps: <em>whether</em> structure is used at all (certify),
           <em>where</em> it is used (localize), and <em>how much</em> the model relies on it
           (quantify). The three are the main line; they run on a shared workbench that turns
-          linguistic structure into causal variables. The origin and the language frontier sit at the
-          ends, and two collaborative group projects branch off the spine.
+          linguistic structure into causal variables. Two collaborative projects sit off the spine.
         </p>
       </div>
       <div class="fade-in-up fade-delay-300">
@@ -259,86 +239,6 @@ const posts = [
           ))
         }
       </ul>
-    </div>
-  </section>
-
-  <!-- =========== RESEARCH GRID =========== -->
-  <section id="research" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Research</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">One program, through linguistic structure.</h2>
-        <p class="section-sub fade-in-up fade-delay-200">
-          Three method contributions — certify, localize, quantify whether behavior is licensed by
-          genuine structure — developed and tested through linguistic structure, where typology
-          supplies the ground truth. The questions, in order: what makes a model's reasoning stable
-          for the right reason, how to measure it, whether it holds across languages, and how it
-          depends on the structure of language itself.
-        </p>
-      </div>
-
-      <div class="space-y-14">
-        {
-          programSections.map((section, si) => (
-            <div class={`fade-in-up fade-delay-${(si % 3) * 100 + 100}`}>
-              <div class="mb-5 max-w-2xl">
-                <p class="text-[11px] uppercase tracking-[0.22em] text-[var(--color-text-dim)] font-medium mb-2">
-                  {section.label}
-                </p>
-                <h3 class="text-xl font-medium tracking-tight mb-2">{section.title}</h3>
-                <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{section.desc}</p>
-              </div>
-              {section.compact ? (
-                <ul class="support-list">
-                  {section.projects.map((p) => (
-                    <li>
-                      <a href={p.href} class="support-row group">
-                        <span class="support-row-title">{p.title}</span>
-                        <span class="support-row-tag">{p.tags[0]}</span>
-                        <span class="support-row-desc">{p.short}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div class="proj-grid">
-                  {
-                    section.projects.map((p, i) => (
-                      <a
-                        href={p.href}
-                        class={`proj-grid-card fade-in-up fade-delay-${(i % 3) * 100 + 100}`}
-                        style={`--proj-color: ${p.color}; --proj-tint: ${p.tint};`}
-                      >
-                        <div class="proj-grid-visual">
-                          <ProjectCover kind={p.glyph} color={p.color} />
-                          <div class="proj-grid-overlay">
-                            <span>View project →</span>
-                          </div>
-                        </div>
-                        <div class="proj-grid-body">
-                          <div class="proj-grid-tags">
-                            <span>{p.n}</span>
-                            <span class="sep">·</span>
-                            {p.tags.map((t, ti) => (
-                              <>
-                                <span>{t}</span>
-                                {ti < p.tags.length - 1 && <span class="sep">·</span>}
-                              </>
-                            ))}
-                          </div>
-                          <h3 class="proj-grid-title">{p.title}</h3>
-                          <p class="proj-grid-desc">{p.desc}</p>
-                        </div>
-                      </a>
-                    ))
-                  }
-                </div>
-              )}
-            </div>
-          ))
-        }
-      </div>
     </div>
   </section>
 

@@ -307,6 +307,48 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   .doc-toc { display: none; }
 }
 
+/* Tufte-style margin notes — inline asides authored in the prose. Default: a small
+   indented aside in the flow. Wide screens (≥1100px): floated into the right gutter
+   of the reading column, staying within the page bounds. */
+.margin-note {
+  display: block;
+  margin: 1.25rem 0;
+  padding: 0.1rem 0 0.1rem 0.85rem;
+  border-left: 2px solid color-mix(in srgb, var(--color-accent) 55%, var(--color-border));
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+.margin-note-label {
+  display: block;
+  margin-bottom: 0.28rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+.margin-note-question {
+  border-left-color: color-mix(in srgb, var(--accent-deep-purple) 60%, var(--color-border));
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+}
+.margin-note-question .margin-note-label {
+  font-family: var(--font-mono);
+  font-style: normal;
+  color: var(--accent-deep-purple);
+}
+@media (min-width: 1100px) {
+  .doc-content .margin-note {
+    float: right;
+    clear: right;
+    width: 8.5rem;
+    margin: 0.2rem -9.5rem 1rem 1rem;
+  }
+}
+
 /* ============================================================
    Buttons
    ============================================================ */
@@ -576,110 +618,6 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 }
 
 /* ============================================================
-   Research project grid
-   ============================================================ */
-.proj-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.75rem;
-}
-@media (max-width: 720px) {
-  .proj-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-}
-
-/* Support — a compact list, deliberately lighter than the project cards */
-.support-list { list-style: none; margin: 0; padding: 0; max-width: 44rem; border-top: 1px solid var(--color-border); }
-.support-list li { border-bottom: 1px solid var(--color-border); }
-.support-row {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.8rem;
-  padding: 0.85rem 0.25rem; text-decoration: none; color: inherit;
-}
-.support-row-title { font-size: 0.9rem; font-weight: 500; color: var(--color-text); transition: color 0.2s ease; }
-.support-row:hover .support-row-title { color: var(--color-accent); }
-.support-row-tag { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-dim); }
-.support-row-desc { flex-basis: 100%; font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.5; }
-
-.proj-grid-card {
-  display: block;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-.proj-grid-card:hover {
-  background: var(--card-hover-bg);
-  border-color: var(--card-hover-border);
-}
-.proj-grid-visual {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  background:
-    radial-gradient(ellipse at center, var(--proj-tint, transparent) 0%, transparent 72%),
-    var(--color-surface);
-  border-bottom: 1px solid var(--card-border);
-  overflow: hidden;
-  display: block;
-}
-.proj-grid-visual .proj-cover,
-.proj-grid-visual .proj-glyph {
-  width: 100%;
-  height: 100%;
-  display: block;
-  color: var(--proj-color, var(--color-accent));
-  transition: transform 0.6s ease;
-}
-.proj-grid-card:hover .proj-grid-visual .proj-cover,
-.proj-grid-card:hover .proj-grid-visual .proj-glyph { transform: scale(1.03); }
-.proj-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.proj-grid-card:hover .proj-grid-overlay { opacity: 1; }
-.proj-grid-overlay span {
-  color: #ffffff;
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.proj-grid-body { padding: 1.5rem 1.75rem 1.75rem; }
-.proj-grid-tags {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 0 0 0.85rem;
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-text-dim);
-}
-.proj-grid-tags .sep { opacity: 0.4; }
-.proj-grid-title {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-text);
-  margin: 0 0 0.55rem;
-  letter-spacing: -0.01em;
-}
-.proj-grid-desc {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-/* ============================================================
    Currently / now list (homepage)
    ============================================================ */
 .now-list { list-style: none; padding: 0; margin: 0; }
@@ -842,7 +780,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 
 /* ============================================================
    Legacy classes kept for inner pages
-   (hero-accent / pull-quote / timeline / proj-card / essay-fig / prose)
+   (hero-accent / pull-quote / proj-card / essay-fig / prose)
    ============================================================ */
 .hero-accent { position: relative; padding-left: 1rem; }
 .hero-accent::before {
@@ -883,70 +821,9 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   max-width: 32rem;
 }
 
-/* Homepage timeline (kept for any future use; new homepage uses .proj-grid) */
-.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 8.5px;
-  top: 8px;
-  bottom: 10px;
-  width: 1.5px;
-  background: var(--color-border-strong);
-}
-.tl-item { position: relative; padding-left: 2.5rem; padding-bottom: 2rem; }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-marker {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--color-bg);
-}
-.tl-idea .tl-marker { border: 1.5px solid var(--accent-deep-purple); }
-.tl-project .tl-marker { background: var(--c, var(--color-accent)); border: 3px solid var(--color-bg); }
-.tl-kicker {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-deep-purple);
-  margin-bottom: 0.3rem;
-}
-.tl-idea-text {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--color-text);
-  margin: 0 0 0.5rem;
-  max-width: 34rem;
-}
-.tl-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.3rem; }
-.tl-num { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--c, var(--color-text-dim)); }
-.tl-title { font-size: 15px; font-weight: 500; margin: 0; color: var(--color-text); }
-.tl-text { font-size: 14px; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.55rem; max-width: 38rem; }
-.tl-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-.tl-link { font-size: 12.5px; color: var(--color-accent); text-decoration: none; }
-.tl-link:hover { text-decoration: underline; }
-.tl-code {
-  font-size: 11px;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  border: 0.5px solid var(--color-border-strong);
-  border-radius: 999px;
-  padding: 1.5px 9px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-.tl-code:hover { color: var(--color-text); border-color: var(--color-text-muted); }
-.tl-body-project { display: flex; align-items: center; gap: 1.25rem; }
-.tl-main { flex: 1 1 auto; min-width: 0; }
-.tl-glyph { flex: 0 0 96px; width: 96px; }
 .proj-glyph-cell { flex: 0 0 100px; width: 100px; }
 @media (max-width: 540px) {
-  .tl-glyph, .proj-glyph-cell { display: none; }
+  .proj-glyph-cell { display: none; }
 }
 
 /* Essay / research figures — no card; the figure sits directly on the page background.

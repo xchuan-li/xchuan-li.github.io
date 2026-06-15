@@ -1,18 +1,25 @@
 ---
-// ResearchSpine — "Option A": the research arc as a layered argument.
-// Reading top to bottom: one question (a brace over the three) → the main line
-// 01·Certify → 02·Localize → 03·Quantify (Whether / Where / How much), with a
-// language frontier at the right edge. MiniCausalLang remains the foundation
-// beneath the method line; the two collaborative projects are explicit satellite
-// branches, not extra main-line nodes.
+// ResearchSpine — the research arc as ONE vertical line, read top to bottom:
+//   ( Leibniz ) the philosophy question
+//        |  01 Certify   · is the model using the right structure?   → Stable Is Not Grounded
+//        |  02 Localize  · where is the structure used?              → Isotrace
+//        |  03 Quantify  · how much inference does the structure support? → Causal Inferential Yield
+//        |  Application  · cross-lingual / typological grounding
+// MiniCausalLang is the workbench the three run on; the two collaborative projects
+// sit OFF the line, in a parallel "side branches" column — beside the spine, never
+// on the same axis.
+import LeibnizGlyph from "./LeibnizGlyph.astro";
+
 interface Origin {
   label: string;
   href: string;
+  hook?: string;
 }
 interface Station {
   n: string;
   method: string;
   qword: string;
+  q?: string;
   title: string;
   color: string;
   href: string;
@@ -45,443 +52,429 @@ interface Props {
 }
 
 const { question, origin, stations, frontier, frontierPilot, workbench, groups } = Astro.props;
-const [latentBranch, protoBranch] = groups;
 ---
 
-<div class="spine">
-  <div class="spine-scroll">
-    <div class="spine-grid">
-      <p class="sp-question">{question}</p>
-      <span class="sp-brace" aria-hidden="true"></span>
-
-      {stations.map((s, i) => (
-        <span class={`sp-qword sp-col-${i + 1}`}>{s.qword}</span>
-      ))}
-
-      {stations.map((s, i) => (
-        <a class={`sp-title sp-col-${i + 1}`} href={s.href} style={`--c: ${s.color};`}>
-          <span class="sp-meta">{s.n} · {s.method}</span>
-          <span class="sp-name">{s.title}</span>
+<div class="vspine">
+  <div class="vs-main">
+    <ol class="vs-line">
+      <!-- origin: the philosophy question -->
+      <li class="vs-row vs-origin">
+        <a class="vs-node vs-node-origin" href={origin.href} aria-label={origin.label}>
+          <LeibnizGlyph size={26} class="vs-leibniz" />
         </a>
-      ))}
-
-      <span class="sp-beam" aria-hidden="true"></span>
-
-      <a class="sp-cap sp-cap-origin" href={origin.href} aria-label={origin.label}>
-        <span class="sp-glyph sp-glyph-origin">?</span>
-      </a>
-      {stations.map((s, i) => (
-        <a
-          class={`sp-node sp-col-${i + 1}`}
-          href={s.href}
-          aria-label={s.title}
-          style={`--c: ${s.color};`}
-        >
-          <span class={`sp-dot sp-dot-station${s.capstone ? " sp-dot-capstone" : ""}`}></span>
-        </a>
-      ))}
-      <a class="sp-cap sp-cap-frontier" href={frontier.href} aria-label={frontier.title}>
-        <span class="sp-dot sp-dot-frontier"></span>
-      </a>
-
-      <span class="sp-caplabel sp-caplabel-origin">{origin.label}</span>
-      {stations.map((s, i) => {
-        // Suppress the grey down-tick under any station that already has a
-        // coloured branch line dropping from it (col-1 → latent, col-3 → proto),
-        // so the two don't stack into a messy double line.
-        const hasBranchBelow = (i === 0 && latentBranch) || (i === 2 && protoBranch);
-        return hasBranchBelow ? null : (
-          <span class={`sp-tick sp-col-${i + 1}`} aria-hidden="true"></span>
-        );
-      })}
-      {!frontierPilot && <span class="sp-caplabel sp-caplabel-frontier">{frontier.label}</span>}
-
-      {latentBranch && (
-        <>
-          <a class="sp-branch sp-branch-latent" href={latentBranch.href}>
-            <span class="sp-branch-dot" aria-hidden="true"></span>
-            <span class="sp-branch-kicker">Mechanistic branch</span>
-            <span class="sp-branch-title">{latentBranch.title}</span>
-            {latentBranch.desc && <span class="sp-branch-desc">{latentBranch.desc}</span>}
+        <div class="vs-body">
+          <a class="vs-origin-link" href={origin.href}>
+            <span class="vs-kicker vs-kicker-origin">{origin.label}</span>
           </a>
-        </>
-      )}
+          <p class="vs-origin-hook">{origin.hook ?? question}</p>
+          {origin.hook && <p class="vs-origin-sub">{question}</p>}
+        </div>
+      </li>
 
-      {protoBranch && (
-        <>
-          <a class="sp-branch sp-branch-proto" href={protoBranch.href}>
-            <span class="sp-branch-dot" aria-hidden="true"></span>
-            <span class="sp-branch-kicker">Cross-lingual branch</span>
-            <span class="sp-branch-title">{protoBranch.title}</span>
-            {protoBranch.desc && <span class="sp-branch-desc">{protoBranch.desc}</span>}
+      <!-- the three method contributions -->
+      {stations.map((s) => (
+        <li class="vs-row vs-station" style={`--c: ${s.color};`}>
+          <a class={`vs-node vs-node-station${s.capstone ? " vs-node-capstone" : ""}`} href={s.href} aria-label={s.title}>
+            <span class="vs-dot"></span>
           </a>
-        </>
-      )}
+          <a class="vs-body vs-station-body" href={s.href}>
+            <span class="vs-kicker vs-kicker-station">{s.n} · {s.method}</span>
+            {s.q && (
+              <span class="vs-q"><span class="vs-qword">{s.qword}</span> — {s.q}</span>
+            )}
+            <span class="vs-title">{s.title}</span>
+          </a>
+        </li>
+      ))}
 
-      {frontierPilot && (
-        <a class="sp-branch sp-branch-frontier" href={frontierPilot.href}>
-          <span class="sp-branch-dot" aria-hidden="true"></span>
-          <span class="sp-branch-kicker">{frontierPilot.kind}</span>
-          <span class="sp-branch-title">{frontierPilot.title}</span>
-          {frontierPilot.desc && <span class="sp-branch-desc">{frontierPilot.desc}</span>}
+      <!-- application frontier -->
+      <li class="vs-row vs-frontier">
+        <a class="vs-node vs-node-frontier" href={frontier.href} aria-label={frontier.title}>
+          <span class="vs-dot vs-dot-frontier"></span>
         </a>
-      )}
+        <div class="vs-body">
+          <a class="vs-frontier-link" href={frontier.href}>
+            <span class="vs-kicker vs-kicker-frontier">{frontier.label}</span>
+            <span class="vs-title vs-title-frontier">{frontier.title}</span>
+          </a>
+          <p class="vs-frontier-sub">Cross-lingual / typological grounding — the same meaning re-encoded by each language's grammar.</p>
+          {frontierPilot && (
+            <a class="vs-pilot" href={frontierPilot.href}>
+              <span class="vs-pilot-kicker">{frontierPilot.kind}</span>
+              <span class="vs-pilot-title">{frontierPilot.title}</span>
+              {frontierPilot.desc && <span class="vs-pilot-desc">{frontierPilot.desc}</span>}
+            </a>
+          )}
+        </div>
+      </li>
+    </ol>
 
-      <a class="sp-workbench" href={workbench.href}>
-        <span class="sp-wb-kicker">Workbench · foundation</span>
-        <span class="sp-wb-title">{workbench.title}</span>
-        <span class="sp-wb-desc">{workbench.desc}</span>
-      </a>
-    </div>
+    <!-- the workbench beneath the three -->
+    <a class="vs-foundation" href={workbench.href}>
+      <span class="vs-foundation-kicker">Workbench · foundation</span>
+      <span class="vs-foundation-row">
+        <span class="vs-foundation-title">{workbench.title}</span>
+        <span class="vs-foundation-desc">{workbench.desc}</span>
+      </span>
+    </a>
   </div>
+
+  <!-- OFF the spine: collaborative projects, in a parallel column -->
+  <aside class="vs-side" aria-label="Side branches and collaborations">
+    <p class="vs-side-head">Side branches · collaborations</p>
+    <p class="vs-side-note">In-progress group projects that feed the main line — not claimed as my own.</p>
+    {groups.map((g) => (
+      <a class="vs-branch" href={g.href}>
+        <span class="vs-branch-dot" aria-hidden="true"></span>
+        <span class="vs-branch-kicker">{g.kind}</span>
+        <span class="vs-branch-title">{g.title}</span>
+        {g.desc && <span class="vs-branch-desc">{g.desc}</span>}
+      </a>
+    ))}
+  </aside>
 </div>
 
 <style>
-  .spine {
-    margin-top: 3rem;
-  }
-  .spine-scroll {
-    margin: 0 -1.5rem;
-    padding: 0 1.5rem 0.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-border-strong) transparent;
-  }
-  .spine-scroll::-webkit-scrollbar { height: 6px; }
-  .spine-scroll::-webkit-scrollbar-thumb {
-    background: var(--color-border-strong);
-    border-radius: 3px;
-  }
-  .spine-scroll::-webkit-scrollbar-track { background: transparent; }
-
-  /* origin | 01 | 02 | 03 | frontier */
-  .spine-grid {
-    position: relative;
-    min-width: 900px;
+  .vspine {
+    margin-top: 2.5rem;
     display: grid;
-    grid-template-columns: 0.85fr 1fr 1fr 1fr 0.85fr;
-    grid-template-rows: auto auto auto auto 30px 34px auto minmax(68px, auto);
-    align-items: center;
-    justify-items: center;
-    column-gap: 0.5rem;
+    grid-template-columns: minmax(0, 1fr) 16.5rem;
+    gap: 2.5rem;
+    align-items: start;
   }
 
-  /* column placement — shared by q-words, titles, nodes and ticks */
-  .sp-col-1 { grid-column: 2; }
-  .sp-col-2 { grid-column: 3; }
-  .sp-col-3 { grid-column: 4; }
-
-  /* ---- one question + brace ---- */
-  .sp-question {
-    grid-column: 2 / 5;
-    grid-row: 1;
-    margin: 0 0 0.1rem;
-    text-align: center;
-    font-family: var(--font-display);
-    font-size: 1.0625rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: var(--color-text);
+  /* ---------- the main vertical line ---------- */
+  .vs-line {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
-  .sp-brace {
-    grid-column: 2 / 5;
-    grid-row: 2;
-    align-self: start;
-    width: 78%;
-    height: 9px;
-    margin-top: 0.15rem;
-    border: 1px solid var(--color-border-strong);
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    opacity: 0.8;
+  .vs-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    column-gap: 1.1rem;
+    padding-bottom: 1.6rem;
   }
-
-  /* ---- progression words ---- */
-  .sp-qword {
-    grid-row: 3;
-    margin-top: 0.9rem;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-
-  /* ---- station label (meta + title), above the beam ---- */
-  .sp-title {
-    grid-row: 4;
-    margin-top: 0.4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.18rem;
-    text-align: center;
-    text-decoration: none;
-    padding: 0 0.3rem;
-  }
-  .sp-meta {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--c, var(--color-text-dim));
-  }
-  .sp-name {
-    font-family: var(--font-display);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.25;
-    color: var(--color-text);
-    transition: color 0.2s ease;
-  }
-  .sp-title:hover .sp-name { color: var(--c, var(--color-accent)); }
-
-  /* ---- the beam + nodes ---- */
-  .sp-beam {
-    grid-row: 5;
-    grid-column: 1 / 6;
-    align-self: center;
-    justify-self: stretch;
-    height: 2px;
+  .vs-row:last-child { padding-bottom: 0; }
+  /* the beam: a line running dot-to-dot down the rail column */
+  .vs-row::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    bottom: -8px;
+    width: 2px;
+    background: var(--color-border-strong);
     border-radius: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-border-strong) 8%,
-      var(--color-border-strong) 60%,
-      color-mix(in srgb, var(--accent-deep-purple) 65%, var(--color-border-strong)) 92%,
-      transparent
-    );
-    z-index: 0;
   }
-  .sp-node,
-  .sp-cap {
-    grid-row: 5;
+  .vs-row:last-child::before { display: none; }
+  .vs-origin::before {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border-strong)), var(--color-border-strong));
+  }
+
+  .vs-node {
+    grid-column: 1;
+    grid-row: 1;
     z-index: 2;
     display: grid;
     place-items: center;
-    padding: 6px;
-    margin: -6px;
+    width: 30px;
+    height: 30px;
+    align-self: start;
+    text-decoration: none;
   }
-  .sp-cap-origin { grid-column: 1; }
-  .sp-cap-frontier { grid-column: 5; }
-
-  .sp-dot {
+  .vs-dot {
     display: block;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--color-bg);
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-  }
-  .sp-dot-station {
-    width: 16px;
-    height: 16px;
     background: var(--c, var(--color-accent));
-    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent);
+    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 5px color-mix(in srgb, var(--c) 38%, transparent);
+    transition: transform 0.2s ease;
   }
-  .sp-dot-capstone {
-    width: 18px;
-    height: 18px;
+  .vs-node-capstone .vs-dot {
+    width: 17px;
+    height: 17px;
     box-shadow:
       0 0 0 4px var(--color-bg),
       0 0 0 7px color-mix(in srgb, var(--c) 20%, transparent),
       0 0 0 8px color-mix(in srgb, var(--c) 42%, transparent);
   }
-  .sp-dot-frontier {
-    width: 16px;
-    height: 16px;
+  .vs-dot-frontier {
     background: var(--color-bg);
-    border: 1.6px dashed var(--accent-deep-purple);
-  }
-  .sp-node:hover .sp-dot-station { transform: scale(1.16); }
-  .sp-cap:hover .sp-dot { transform: scale(1.14); }
-
-  /* ---- origin as a question mark — "Leibniz's question" ---- */
-  .sp-glyph {
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
+    border: 1.7px dashed var(--accent-deep-purple);
     box-shadow: 0 0 0 4px var(--color-bg);
-    transition: transform 0.22s ease;
   }
-  .sp-glyph-origin {
-    width: 18px;
-    height: 18px;
-    background: var(--color-bg);
-    border: 1.5px solid var(--accent-deep-purple);
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 1;
+  .vs-node:hover .vs-dot { transform: scale(1.16); }
+
+  .vs-node-origin {
     color: var(--accent-deep-purple);
-  }
-  .sp-cap:hover .sp-glyph { transform: scale(1.14); }
-
-  /* ---- bookend labels + down-ticks ---- */
-  .sp-caplabel {
-    grid-row: 6;
     align-self: start;
-    margin-top: 0.4rem;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 11.5px;
-    line-height: 1.3;
-    text-align: center;
-    color: var(--color-text-muted);
-    max-width: 110px;
   }
-  .sp-caplabel-origin { grid-column: 1; }
-  .sp-caplabel-frontier { grid-column: 5; }
-
-  .sp-tick {
-    grid-row: 6;
-    width: 1px;
-    height: 100%;
-    justify-self: center;
-    align-self: stretch;
-    background: var(--color-border-strong);
-    opacity: 0.45;
-  }
-
-  /* ---- collaborative branches: visible, but not promoted to the main line ---- */
-  .sp-branch {
-    grid-row: 8;
-    align-self: start;
-    position: relative;
-    display: grid;
-    justify-items: center;
-    gap: 0.18rem;
-    min-width: 12rem;
-    margin-top: 1.1rem;
-    padding: 0.65rem 0.9rem 0.72rem;
-    border: 1px solid color-mix(in srgb, var(--branch-c) 48%, var(--color-border));
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--color-bg) 82%, var(--branch-c) 18%);
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 0 0 3px var(--color-bg), 0 2px 8px color-mix(in srgb, var(--branch-c) 10%, transparent);
-    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    z-index: 2;
-  }
-  .sp-branch:hover {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--branch-c) 68%, var(--color-border));
-    background: color-mix(in srgb, var(--color-bg) 76%, var(--branch-c) 24%);
-    box-shadow: 0 0 0 3px var(--color-bg), 0 4px 14px color-mix(in srgb, var(--branch-c) 18%, transparent);
-  }
-  .sp-branch-latent {
-    grid-column: 2;
-    --branch-c: var(--accent-teal);
-    justify-self: center;
-  }
-  .sp-branch-proto {
-    grid-column: 4;
-    --branch-c: var(--accent-deep-purple);
-    justify-self: center;
-  }
-  /* the frontier pilot — an EXECUTED landing at the frontier: solid (not dashed
-     like the in-progress branches), teal-deep, anchored under the frontier cap. */
-  .sp-branch-frontier {
-    grid-column: 5;
-    --branch-c: var(--accent-teal-deep);
-    justify-self: center;
-    min-width: 8.5rem;
-  }
-  .sp-branch-frontier .sp-branch-desc { max-width: 9.5rem; }
-  /* solid drop line — this step is done, not aspirational */
-  .sp-branch-frontier .sp-branch-dot::before { border-left-style: solid; opacity: 0.7; }
-  .sp-branch-dot {
-    position: absolute;
-    top: -5px;
-    left: calc(50% - 5px);
-    width: 10px;
-    height: 10px;
+  .vs-leibniz {
+    background: var(--color-bg);
     border-radius: 50%;
-    background: var(--branch-c);
     box-shadow: 0 0 0 4px var(--color-bg);
+    transition: transform 0.2s ease;
   }
-  /* a single straight dashed line dropping from the beam to each card */
-  .sp-branch-dot::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 8.9rem;
-    border-left: 1.4px dashed var(--branch-c);
-    opacity: 0.62;
+  .vs-node-origin:hover .vs-leibniz { transform: scale(1.08); }
+
+  /* ---------- row bodies ---------- */
+  .vs-body {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+    text-decoration: none;
+    min-width: 0;
   }
-  .sp-branch-kicker {
+  .vs-kicker {
     font-family: var(--font-mono);
-    font-size: 8.5px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--branch-c) 72%, var(--color-text-muted));
   }
-  .sp-branch-title {
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 500;
-    line-height: 1.22;
-    color: var(--color-text);
-    transition: color 0.2s ease;
-  }
-  .sp-branch-desc {
-    margin-top: 0.1rem;
-    font-size: 10.5px;
-    line-height: 1.45;
-    color: var(--color-text-dim);
-    max-width: 14rem;
-    text-wrap: balance;
-  }
-  .sp-branch:hover .sp-branch-title { color: var(--color-text); }
 
-  /* ---- the workbench: a quiet foundation note beneath the three (no card) ---- */
-  .sp-workbench {
-    grid-column: 2 / 5;
-    grid-row: 7;
-    align-self: start;
-    width: 100%;
-    max-width: 30rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.12rem;
-    padding: 0.25rem 0.7rem 0.15rem;
-    text-decoration: none;
-    position: relative;
-    z-index: 2;
-    border-radius: 6px;
-    background: var(--color-bg);
+  /* origin */
+  .vs-origin-link { text-decoration: none; }
+  .vs-kicker-origin {
+    color: var(--accent-deep-purple);
+    font-style: normal;
   }
-  .sp-wb-kicker {
-    font-family: var(--font-mono);
-    font-size: 9px;
+  .vs-origin-hook {
+    margin: 0.15rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.18rem;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+  .vs-origin-sub {
+    margin: 0.3rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    max-width: 46ch;
+  }
+
+  /* stations */
+  .vs-station-body {
+    margin: -0.4rem -0.6rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+  .vs-station-body:hover {
+    background: color-mix(in srgb, var(--color-bg) 88%, var(--c) 12%);
+  }
+  .vs-kicker-station { color: var(--c, var(--color-text-dim)); }
+  .vs-q {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+  }
+  .vs-qword {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-text-dim);
   }
-  .sp-wb-title {
+  .vs-title {
     font-family: var(--font-display);
-    font-size: 0.8125rem;
+    font-size: 1.0625rem;
     font-weight: 500;
-    color: var(--color-text-muted);
+    line-height: 1.25;
+    color: var(--color-text);
     transition: color 0.2s ease;
   }
-  .sp-workbench:hover .sp-wb-title { color: var(--color-text); }
-  .sp-wb-desc {
+  .vs-station-body:hover .vs-title { color: var(--c); }
+
+  /* frontier */
+  .vs-frontier-link { text-decoration: none; display: flex; flex-direction: column; gap: 0.18rem; }
+  .vs-kicker-frontier { color: var(--accent-deep-purple); }
+  .vs-title-frontier { color: var(--color-text-muted); }
+  .vs-frontier-link:hover .vs-title-frontier { color: var(--color-text); }
+  .vs-frontier-sub {
+    margin: 0.15rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+    max-width: 44ch;
+  }
+  .vs-pilot {
+    margin-top: 0.7rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--accent-teal-deep) 40%, var(--color-border));
+    border-left-width: 2.5px;
+    border-left-color: var(--accent-teal-deep);
+    border-radius: 0 6px 6px 0;
+    background: color-mix(in srgb, var(--color-bg) 84%, var(--accent-teal-deep) 16%);
+    text-decoration: none;
+    align-self: start;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .vs-pilot:hover { transform: translateX(2px); }
+  .vs-pilot-kicker {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-teal-deep);
+  }
+  .vs-pilot-title {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .vs-pilot-desc {
     font-size: 11px;
     line-height: 1.45;
     color: var(--color-text-dim);
-    max-width: 26rem;
-    text-wrap: balance;
+    max-width: 30ch;
+  }
+
+  /* ---------- foundation note ---------- */
+  .vs-foundation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+    margin-left: calc(30px + 1.1rem);
+    padding: 0.7rem 0.9rem;
+    border: 0.5px dashed var(--color-border-strong);
+    border-radius: 8px;
+    background: var(--color-surface);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+  .vs-foundation:hover { border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border-strong)); }
+  .vs-foundation-kicker {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .vs-foundation-row { display: flex; align-items: baseline; gap: 0.55rem; flex-wrap: wrap; }
+  .vs-foundation-title {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .vs-foundation-desc {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- side column: collaborations, off the axis ---------- */
+  .vs-side {
+    position: relative;
+    padding-left: 1.4rem;
+    border-left: 1px dashed var(--color-border-strong);
+    align-self: stretch;
+  }
+  .vs-side-head {
+    margin: 0.3rem 0 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .vs-side-note {
+    margin: 0 0 1rem;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+    font-style: italic;
+    max-width: 22ch;
+  }
+  .vs-branch {
+    position: relative;
+    display: grid;
+    gap: 0.16rem;
+    margin-bottom: 0.9rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 7px;
+    background: var(--color-surface);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  }
+  .vs-branch:last-child { margin-bottom: 0; }
+  .vs-branch::after {
+    content: "";
+    position: absolute;
+    left: -1.4rem;
+    top: 1.1rem;
+    width: 1.4rem;
+    height: 1px;
+    background: var(--color-border-strong);
+  }
+  .vs-branch-dot {
+    position: absolute;
+    left: calc(-1.4rem - 4px);
+    top: calc(1.1rem - 4px);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 1.4px solid var(--color-text-dim);
+  }
+  .vs-branch:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    background: color-mix(in srgb, var(--color-surface) 80%, var(--color-text) 5%);
+  }
+  .vs-branch-kicker {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .vs-branch-title {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.22;
+    color: var(--color-text);
+  }
+  .vs-branch-desc {
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--color-text-dim);
+  }
+
+  /* ---------- responsive: side column drops below the spine ---------- */
+  @media (max-width: 820px) {
+    .vspine {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+    .vs-side {
+      padding-left: 0;
+      border-left: none;
+      border-top: 1px dashed var(--color-border-strong);
+      padding-top: 1.4rem;
+    }
+    .vs-side-note { max-width: none; }
+    .vs-branch::after, .vs-branch-dot { display: none; }
   }
 </style>

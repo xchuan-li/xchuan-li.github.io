@@ -17,40 +17,89 @@ interface Props {
   accent?: string;
 }
 const { items, accent = "var(--accent-deep-purple)" } = Astro.props;
+
+// Default to showing only the current (active) milestone; older ones collapse
+// behind a toggle so the page leads with where the project is now. If nothing is
+// flagged active, keep the last (most recent) item open.
+const shownIdx = (() => {
+  const a = items.findIndex((i) => (i.status ?? "done") === "active");
+  return a === -1 ? items.length - 1 : a;
+})();
+const hiddenCount = Math.max(0, items.length - 1);
 ---
 
-<ol class="ptl" style={`--accent: ${accent};`}>
-  {items.map((it) => {
-    const status = it.status ?? "done";
-    const c = it.color ?? accent;
-    const Tag = it.href ? "a" : "div";
-    return (
-      <li class={`ptl-item ptl-${status}`} style={`--c: ${c};`}>
-        <span class="ptl-marker" aria-hidden="true">
-          <span class="ptl-dot"></span>
-        </span>
-        <Tag class="ptl-body" href={it.href}>
+<div class={`ptl-wrap${hiddenCount > 0 ? " ptl-collapsible" : ""}`} style={`--accent: ${accent};`}>
+  {hiddenCount > 0 && (
+    <button type="button" class="ptl-toggle" aria-expanded="false">
+      <span class="ptl-toggle-show">Show full version history ({items.length})</span>
+      <span class="ptl-toggle-hide">Hide version history</span>
+      <span class="ptl-toggle-caret" aria-hidden="true">▾</span>
+    </button>
+  )}
+  <ol class="ptl">
+    {items.map((it, i) => {
+      const status = it.status ?? "done";
+      const c = it.color ?? accent;
+      const hidden = i !== shownIdx;
+      const body = (
+        <>
           <span class="ptl-meta">
             <span class="ptl-date">{it.date}</span>
             {it.phase && <span class="ptl-phase">{it.phase}</span>}
             {status === "planned" && <span class="ptl-tag">Planned</span>}
-            {status === "active" && <span class="ptl-tag ptl-tag-active">In progress</span>}
+            {status === "active" && <span class="ptl-tag ptl-tag-active">Current</span>}
           </span>
           <span class="ptl-title">{it.title}</span>
           <span class="ptl-summary">{it.summary}</span>
           {it.href && (
             <span class="ptl-cta">Read the report <span class="ptl-arrow">→</span></span>
           )}
-        </Tag>
-      </li>
-    );
-  })}
-</ol>
+        </>
+      );
+      return (
+        <li class={`ptl-item ptl-${status}${hidden ? " ptl-collapsed" : ""}`} style={`--c: ${c};`}>
+          <span class="ptl-marker" aria-hidden="true">
+            <span class="ptl-dot"></span>
+          </span>
+          {it.href ? <a class="ptl-body" href={it.href}>{body}</a> : <div class="ptl-body">{body}</div>}
+        </li>
+      );
+    })}
+  </ol>
+</div>
 
 <style>
+  .ptl-wrap { position: relative; margin: 1.75rem 0 0; }
+  .ptl-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 1.2rem;
+    padding: 5px 12px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .ptl-toggle:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+  .ptl-toggle-hide { display: none; }
+  .ptl-toggle-caret { font-size: 9px; transition: transform 0.2s ease; }
+  .ptl-collapsed { display: none; }
+  .ptl-wrap.is-open .ptl-collapsed { display: grid; }
+  .ptl-wrap.is-open .ptl-toggle-show { display: none; }
+  .ptl-wrap.is-open .ptl-toggle-hide { display: inline; }
+  .ptl-wrap.is-open .ptl-toggle-caret { transform: rotate(180deg); }
+  /* with only the current milestone showing, drop the dangling connector line */
+  .ptl-collapsible:not(.is-open) .ptl-item::before { display: none; }
+
   .ptl {
     list-style: none;
-    margin: 1.75rem 0 0;
+    margin: 0;
     padding: 0;
     position: relative;
   }
@@ -193,3 +242,14 @@ const { items, accent = "var(--accent-deep-purple)" } = Astro.props;
   a.ptl-body:hover .ptl-title { color: var(--c); }
   a.ptl-body:hover .ptl-arrow { transform: translateX(3px); }
 </style>
+
+<script>
+  document.querySelectorAll(".ptl-wrap.ptl-collapsible").forEach((wrap) => {
+    const btn = wrap.querySelector(".ptl-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const open = wrap.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+</script>
