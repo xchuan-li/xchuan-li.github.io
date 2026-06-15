@@ -83,7 +83,7 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#fafaf7" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://rsms.me/" />
@@ -121,18 +121,6 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
     <meta name="twitter:image" content={ogImageUrl} />
 
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
-
-    <script is:inline>
-      // Pre-paint theme resolution. Dark is default; .light is opt-in via localStorage.
-      (function () {
-        try {
-          var theme = localStorage.getItem('theme');
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          }
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
     {showProgress && <div id="reading-progress" class="reading-progress"></div>}
@@ -192,21 +180,6 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
               </svg>
             )}
           </a>
-          <button
-            id="theme-toggle"
-            class="theme-toggle"
-            type="button"
-            aria-label="Toggle color theme"
-            title="Toggle theme"
-          >
-            <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-            </svg>
-            <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-          </button>
         </div>
       </div>
     </nav>
@@ -234,19 +207,6 @@ const viewToggleLabel = isPlain ? "Switch to the full, illustrated homepage" : "
     </footer>
 
     <script is:inline>
-      // Theme toggle: persist user choice in localStorage.
-      (function () {
-        var btn = document.getElementById('theme-toggle');
-        if (!btn) return;
-        btn.addEventListener('click', function () {
-          var root = document.documentElement;
-          var isLight = root.classList.toggle('light');
-          try {
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-          } catch (e) {}
-        });
-      })();
-
       // Build the "On this page" rail from the section headings, with scroll-spy.
       (function () {
         var list = document.getElementById('page-toc');

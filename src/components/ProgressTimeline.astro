@@ -94,8 +94,9 @@ const hiddenCount = Math.max(0, items.length - 1);
   .ptl-toggle:hover { color: var(--color-text); border-color: var(--color-border-strong); }
   .ptl-toggle-hide { display: none; }
   .ptl-toggle-caret { font-size: 9px; transition: transform 0.2s ease; }
-  .ptl-collapsed { display: none; }
-  .ptl-wrap.is-open .ptl-collapsed { display: grid; }
+  /* higher specificity than `.ptl-item { display: grid }` so collapsed items actually hide */
+  .ptl-item.ptl-collapsed { display: none; }
+  .ptl-wrap.is-open .ptl-item.ptl-collapsed { display: grid; }
   .ptl-wrap.is-open .ptl-toggle-show { display: none; }
   .ptl-wrap.is-open .ptl-toggle-hide { display: inline; }
   .ptl-wrap.is-open .ptl-toggle-caret { transform: rotate(180deg); }

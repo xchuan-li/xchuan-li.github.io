@@ -1,14 +1,10 @@
 ---
-// ResearchSpine — one clean vertical line, read top to bottom. No scroll gimmicks:
-//   (Leibniz) what is a right reason?
-//      |  01 Certify   · is the model using the right structure?     → Stable Is Not Grounded
-//      |  02 Localize  · where is that structure used?               → Isotrace
-//      |  03 Quantify  · how much inference does it support?         → Causal Inferential Yield
-//      |  Application  · cross-lingual / typological grounding
-// MiniCausalLang is the workbench beneath the three; the collaborations sit OFF the
-// spine in a labelled row below — beside the line, never on it.
+// ResearchSpine — one central vertical axis. The personal mainline runs down the
+// RIGHT (Leibniz → 00 MiniCausalLang → 01 Certify → 02 Localize → 03 Quantify →
+// Application); the collaborations branch to the LEFT, inserted between 01 and 02.
+// Mainline nodes are filled circles; collaborations are hollow diamonds.
 interface Origin { label: string; href: string; hook?: string; }
-interface Station { n: string; method: string; qword: string; q?: string; title: string; color: string; href: string; capstone?: boolean; }
+interface Station { n: string; method: string; qword: string; q?: string; title: string; color: string; href: string; }
 interface Frontier { label: string; title: string; href: string; }
 interface Workbench { title: string; href: string; desc: string; }
 interface Group { title: string; kind: string; href: string; desc?: string; }
@@ -21,307 +17,245 @@ interface Props {
   groups: Group[];
 }
 const { question, origin, stations, frontier, workbench, groups } = Astro.props;
-const portraitSrc = "/images/leibniz-portrait.jpg";
+const portraitSrc = "/images/leibniz-portrait.png";
+
+// MiniCausalLang becomes node 00, ahead of 01.
+const node00: Station = {
+  n: "00", method: "Foundation", qword: "Built",
+  q: "the planted ground truth the three methods run on",
+  title: workbench.title, color: "var(--accent-slate)", href: workbench.href,
+};
+
+// Mainline order with the collaborations spliced in between 01 and 02.
+type Row =
+  | { kind: "origin" }
+  | { kind: "station"; side: "right"; s: Station }
+  | { kind: "collab"; side: "left"; g: Group }
+  | { kind: "frontier"; side: "right" };
+
+const rows: Row[] = [
+  { kind: "origin" },
+  { kind: "station", side: "right", s: node00 },
+  { kind: "station", side: "right", s: stations[0] },
+  ...groups.map((g) => ({ kind: "collab", side: "left", g } as Row)),
+  { kind: "station", side: "right", s: stations[1] },
+  { kind: "station", side: "right", s: stations[2] },
+  { kind: "frontier", side: "right" },
+];
 ---
 
-<div class="vsp">
-  <ol class="vsp-line">
-    <!-- origin: the philosophy question -->
-    <li class="vsp-row vsp-origin">
-      <a class="vsp-rail" href={origin.href} aria-label={origin.label}>
-        <span class="vsp-portrait"><img src={portraitSrc} alt="Portrait of Gottfried Wilhelm Leibniz" loading="lazy" decoding="async" /></span>
-      </a>
-      <div class="vsp-body">
-        <span class="vsp-kicker vsp-kicker-origin">{origin.label}</span>
-        <p class="vsp-hook">{origin.hook ?? question}</p>
-        {origin.hook && <p class="vsp-sub">{question}</p>}
-        <a class="vsp-mini" href={origin.href}>Read the philosophical bridge <span aria-hidden="true">→</span></a>
-      </div>
-    </li>
+<ol class="tl">
+  {rows.map((row, i) => {
+    const first = i === 0;
+    const last = i === rows.length - 1;
+    const cls = `tl-row${first ? " tl-first" : ""}${last ? " tl-last" : ""}`;
 
-    <!-- the three method contributions -->
-    {stations.map((s) => (
-      <li class="vsp-row" style={`--c: ${s.color};`}>
-        <a class="vsp-rail" href={s.href} aria-label={s.title}>
-          <span class={`vsp-dot${s.capstone ? " vsp-dot-cap" : ""}`}></span>
+    if (row.kind === "origin") {
+      return (
+        <li class={cls}>
+          <div class="tl-half tl-half-left"></div>
+          <a class="tl-axis" href={origin.href} aria-label={origin.label}>
+            <span class="tl-portrait"><img src={portraitSrc} alt="Portrait of Gottfried Wilhelm Leibniz" loading="lazy" decoding="async" /></span>
+          </a>
+          <div class="tl-half tl-half-right">
+            <div class="tl-body">
+              <span class="tl-kicker tl-kicker-origin">{origin.label}</span>
+              <p class="tl-hook">{origin.hook ?? question}</p>
+              {origin.hook && <p class="tl-sub">{question}</p>}
+              <a class="tl-mini" href={origin.href}>Read the philosophical bridge <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+      );
+    }
+
+    if (row.kind === "collab") {
+      return (
+        <li class={cls}>
+          <div class="tl-half tl-half-left">
+            <a class="tl-body tl-collab" href={row.g.href}>
+              <span class="tl-collab-kind">{row.g.kind}</span>
+              <span class="tl-collab-title">{row.g.title}</span>
+              {row.g.desc && <span class="tl-collab-desc">{row.g.desc}</span>}
+            </a>
+          </div>
+          <div class="tl-axis"><span class="tl-diamond" aria-hidden="true"></span></div>
+          <div class="tl-half tl-half-right"></div>
+        </li>
+      );
+    }
+
+    if (row.kind === "frontier") {
+      return (
+        <li class={cls} style="--c: var(--accent-deep-purple);">
+          <div class="tl-half tl-half-left"></div>
+          <a class="tl-axis" href={frontier.href} aria-label={frontier.title}>
+            <span class="tl-dot tl-dot-frontier" aria-hidden="true"></span>
+          </a>
+          <div class="tl-half tl-half-right">
+            <a class="tl-body tl-link" href={frontier.href}>
+              <span class="tl-kicker tl-kicker-frontier">Application</span>
+              <span class="tl-title tl-title-muted">{frontier.title}</span>
+              <span class="tl-q">Cross-lingual / typological grounding — the same meaning re-encoded by each language's grammar.</span>
+            </a>
+          </div>
+        </li>
+      );
+    }
+
+    const s = row.s;
+    return (
+      <li class={cls} style={`--c: ${s.color};`}>
+        <div class="tl-half tl-half-left"></div>
+        <a class="tl-axis" href={s.href} aria-label={s.title}>
+          <span class="tl-dot" aria-hidden="true"></span>
         </a>
-        <a class="vsp-body vsp-link" href={s.href}>
-          <span class="vsp-kicker vsp-kicker-c">{s.n} · {s.method}</span>
-          {s.q && <span class="vsp-q"><span class="vsp-qword">{s.qword}</span> — {s.q}</span>}
-          <span class="vsp-title">{s.title}</span>
-        </a>
+        <div class="tl-half tl-half-right">
+          <a class="tl-body tl-link" href={s.href}>
+            <span class="tl-kicker tl-kicker-c">{s.n} · {s.method}</span>
+            {s.q && <span class="tl-q"><span class="tl-qword">{s.qword}</span> — {s.q}</span>}
+            <span class="tl-title">{s.title}</span>
+          </a>
+        </div>
       </li>
-    ))}
-
-    <!-- application frontier -->
-    <li class="vsp-row vsp-frontier">
-      <a class="vsp-rail" href={frontier.href} aria-label={frontier.title}>
-        <span class="vsp-dot vsp-dot-frontier"></span>
-      </a>
-      <a class="vsp-body vsp-link" href={frontier.href}>
-        <span class="vsp-kicker vsp-kicker-frontier">Application</span>
-        <span class="vsp-title vsp-title-muted">{frontier.title}</span>
-        <span class="vsp-q">Cross-lingual / typological grounding — the same meaning re-encoded by each language's grammar.</span>
-      </a>
-    </li>
-  </ol>
-
-  <!-- the workbench beneath the three -->
-  <a class="vsp-workbench" href={workbench.href}>
-    <span class="vsp-wb-kicker">Workbench · foundation</span>
-    <span class="vsp-wb-row">
-      <span class="vsp-wb-title">{workbench.title}</span>
-      <span class="vsp-wb-desc">{workbench.desc}</span>
-    </span>
-  </a>
-
-  <!-- OFF the spine: collaborations -->
-  <div class="vsp-collabs">
-    <p class="vsp-collabs-head">Side branches · collaborations</p>
-    <div class="vsp-collabs-grid">
-      {groups.map((g) => (
-        <a class="vsp-collab" href={g.href}>
-          <span class="vsp-collab-kind">{g.kind}</span>
-          <span class="vsp-collab-title">{g.title}</span>
-          {g.desc && <span class="vsp-collab-desc">{g.desc}</span>}
-        </a>
-      ))}
-    </div>
-  </div>
-</div>
+    );
+  })}
+</ol>
 
 <style>
-  .vsp { max-width: 660px; margin: 2.5rem auto 0; }
+  .tl { list-style: none; max-width: 880px; margin: 2.5rem auto 0; padding: 0; }
 
-  .vsp-line { list-style: none; margin: 0; padding: 0; }
-  .vsp-row {
-    position: relative;
+  .tl-row {
     display: grid;
-    grid-template-columns: 60px 1fr;
-    column-gap: 1.25rem;
-    padding-bottom: 1.9rem;
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    grid-template-areas: "left axis right";
+    align-items: start;
   }
-  .vsp-row:last-child { padding-bottom: 0; }
-  /* the connecting line, dot-to-dot down the rail */
-  .vsp-row::before {
+  .tl-half-left { grid-area: left; }
+  .tl-axis { grid-area: axis; }
+  .tl-half-right { grid-area: right; }
+
+  /* the central axis line — drawn inside the axis cell so it stays centred in any layout */
+  .tl-axis {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    align-self: stretch;
+  }
+  .tl-axis::before {
     content: "";
     position: absolute;
-    left: 29px;
-    top: 10px;
-    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0; bottom: 0;
     width: 2px;
     background: var(--color-border-strong);
-    border-radius: 2px;
+    z-index: 0;
   }
-  .vsp-row:last-child::before { display: none; }
-  .vsp-origin::before {
-    top: 64px;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border-strong)), var(--color-border-strong));
-  }
-
-  .vsp-rail {
-    grid-column: 1;
-    display: grid;
-    place-items: center;
-    align-self: start;
-    text-decoration: none;
-  }
+  .tl-first .tl-axis::before { top: 58px; background: linear-gradient(180deg, color-mix(in srgb, var(--accent-deep-purple) 55%, var(--color-border-strong)), var(--color-border-strong)); }
+  .tl-last .tl-axis::before { bottom: auto; height: 11px; }
+  .tl-axis > * { position: relative; z-index: 1; }
 
   /* nodes */
-  .vsp-dot {
-    width: 15px;
-    height: 15px;
-    margin-top: 4px;
+  .tl-dot {
+    width: 15px; height: 15px; margin-top: 3px;
     border-radius: 50%;
     background: var(--c, var(--color-accent));
     box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 5px color-mix(in srgb, var(--c) 38%, transparent);
     transition: transform 0.2s ease;
   }
-  .vsp-dot-cap {
-    width: 17px; height: 17px;
-    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 7px color-mix(in srgb, var(--c) 20%, transparent), 0 0 0 8px color-mix(in srgb, var(--c) 42%, transparent);
-  }
-  .vsp-dot-frontier {
-    width: 15px; height: 15px; margin-top: 4px;
+  .tl-dot-frontier {
     background: var(--color-bg);
     border: 1.7px dashed var(--accent-deep-purple);
     box-shadow: 0 0 0 4px var(--color-bg);
   }
-  .vsp-rail:hover .vsp-dot,
-  .vsp-rail:hover .vsp-dot-frontier { transform: scale(1.16); }
+  .tl-diamond {
+    width: 11px; height: 11px; margin-top: 5px;
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-text-dim);
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 4px var(--color-bg);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .tl-axis:hover .tl-dot, .tl-axis:hover .tl-dot-frontier { transform: scale(1.16); }
 
-  /* origin medallion — the engraving, blended into the page (no card, no rectangle) */
-  .vsp-portrait {
-    width: 60px;
-    height: 72px;
-    display: block;
+  /* origin medallion — transparent engraving, feathered into the page */
+  .tl-portrait {
+    width: 54px; height: 66px;
     overflow: hidden;
-    -webkit-mask-image: radial-gradient(115% 96% at 50% 36%, #000 52%, transparent 92%);
-            mask-image: radial-gradient(115% 96% at 50% 36%, #000 52%, transparent 92%);
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 34%, #000 60%, transparent 96%);
+            mask-image: radial-gradient(120% 100% at 50% 34%, #000 60%, transparent 96%);
     transition: transform 0.25s ease;
   }
-  .vsp-rail:hover .vsp-portrait { transform: scale(1.04); }
-  .vsp-portrait img {
-    width: 100%; height: 100%; display: block;
-    object-fit: cover;
-    object-position: 50% 20%;
-    /* dark theme (default): invert to light-on-dark, screen the now-dark bg away */
-    filter: grayscale(1) invert(1) contrast(1.08) brightness(1.05);
-    mix-blend-mode: screen;
-  }
-  :global(html.light) .vsp-portrait img {
-    filter: grayscale(0.25) contrast(1.06);
-    mix-blend-mode: multiply;
-  }
+  .tl-axis:hover .tl-portrait { transform: scale(1.04); }
+  .tl-portrait img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 14%; filter: contrast(1.04); }
 
   /* bodies */
-  .vsp-body {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 0.22rem;
-    min-width: 0;
-    text-decoration: none;
-  }
-  .vsp-link {
-    margin: -0.45rem -0.65rem;
-    padding: 0.45rem 0.65rem;
-    border-radius: 9px;
-    transition: background 0.2s ease;
-  }
-  .vsp-link:hover { background: color-mix(in srgb, var(--color-bg) 88%, var(--c, var(--accent-deep-purple)) 12%); }
+  .tl-row { padding-bottom: 1.9rem; }
+  .tl-last { padding-bottom: 0; }
+  .tl-body { display: flex; flex-direction: column; gap: 0.22rem; text-decoration: none; min-width: 0; }
+  .tl-link { margin: -0.45rem -0.65rem; padding: 0.45rem 0.65rem; border-radius: 9px; transition: background 0.2s ease; }
+  .tl-link:hover { background: color-mix(in srgb, var(--color-bg) 88%, var(--c, var(--accent-deep-purple)) 12%); }
 
-  .vsp-kicker {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-  }
-  .vsp-kicker-origin { color: var(--accent-deep-purple); }
-  .vsp-kicker-c { color: var(--c, var(--color-text-dim)); }
-  .vsp-kicker-frontier { color: var(--accent-deep-purple); }
+  .tl-kicker { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; }
+  .tl-kicker-origin, .tl-kicker-frontier { color: var(--accent-deep-purple); }
+  .tl-kicker-c { color: var(--c, var(--color-text-dim)); }
 
-  .vsp-hook {
-    margin: 0.18rem 0 0;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.18;
-    letter-spacing: -0.015em;
-    color: var(--color-text);
-  }
-  .vsp-sub {
-    margin: 0.35rem 0 0;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--color-text-muted);
-    max-width: 44ch;
-  }
-  .vsp-mini {
-    margin-top: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.02em;
-    color: var(--accent-deep-purple);
-    text-decoration: none;
-  }
-  .vsp-mini:hover { opacity: 0.75; }
+  .tl-hook { margin: 0.18rem 0 0; font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; line-height: 1.18; letter-spacing: -0.015em; color: var(--color-text); }
+  .tl-sub { margin: 0.35rem 0 0; font-size: 0.9rem; line-height: 1.55; color: var(--color-text-muted); max-width: 42ch; }
+  .tl-mini { margin-top: 0.5rem; font-family: var(--font-mono); font-size: 11px; color: var(--accent-deep-purple); text-decoration: none; }
+  .tl-mini:hover { opacity: 0.75; }
 
-  .vsp-q {
-    font-size: 0.83rem;
-    line-height: 1.45;
-    color: var(--color-text-muted);
-  }
-  .vsp-qword {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-  .vsp-title {
-    font-family: var(--font-display);
-    font-size: 1.0625rem;
-    font-weight: 500;
-    line-height: 1.25;
-    color: var(--color-text);
-    transition: color 0.2s ease;
-  }
-  .vsp-title-muted { color: var(--color-text-muted); }
-  .vsp-link:hover .vsp-title { color: var(--c, var(--accent-deep-purple)); }
+  .tl-q { font-size: 0.83rem; line-height: 1.45; color: var(--color-text-muted); }
+  .tl-qword { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
+  .tl-title { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 500; line-height: 1.25; color: var(--color-text); transition: color 0.2s ease; }
+  .tl-title-muted { color: var(--color-text-muted); }
+  .tl-link:hover .tl-title { color: var(--c, var(--accent-deep-purple)); }
 
-  /* workbench: a quiet foundation note under the line */
-  .vsp-workbench {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    margin: 1.4rem 0 0 calc(60px + 1.25rem);
-    padding: 0.7rem 0.9rem;
-    border: 0.5px dashed var(--color-border-strong);
-    border-radius: 9px;
-    background: var(--color-surface);
-    text-decoration: none;
-    transition: border-color 0.2s ease;
-  }
-  .vsp-workbench:hover { border-color: color-mix(in srgb, var(--color-text-muted) 40%, var(--color-border-strong)); }
-  .vsp-wb-kicker {
-    font-family: var(--font-mono);
-    font-size: 9px; font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-  .vsp-wb-row { display: flex; align-items: baseline; gap: 0.55rem; flex-wrap: wrap; }
-  .vsp-wb-title { font-family: var(--font-display); font-size: 0.9375rem; font-weight: 500; color: var(--color-text); }
-  .vsp-wb-desc { font-size: 0.8125rem; line-height: 1.45; color: var(--color-text-muted); }
-
-  /* collaborations — off the spine, in a clearly separated row */
-  .vsp-collabs {
-    margin-top: 2.5rem;
-    padding-top: 1.6rem;
-    border-top: 1px dashed var(--color-border-strong);
-  }
-  .vsp-collabs-head {
-    margin: 0 0 1rem;
-    font-family: var(--font-mono);
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-  .vsp-collabs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.8rem;
-  }
-  .vsp-collab {
-    display: grid;
-    gap: 0.18rem;
-    padding: 0.8rem 0.9rem;
+  /* collaborations — left side, right-aligned, with a short connector to the axis */
+  .tl-half-left { display: flex; justify-content: flex-end; }
+  .tl-collab {
+    position: relative;
+    text-align: right;
+    align-items: flex-end;
+    max-width: 17rem;
+    margin: -0.1rem 0;
+    padding: 0.6rem 0.8rem;
     border: 1px solid var(--color-border);
     border-radius: 9px;
     background: var(--color-surface);
-    text-decoration: none;
     transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
   }
-  .vsp-collab:hover {
-    transform: translateY(-2px);
+  .tl-collab::after {
+    content: "";
+    position: absolute;
+    top: 1.05rem; right: -1.55rem;
+    width: 1.55rem; height: 1px;
+    background: var(--color-border-strong);
+  }
+  .tl-collab:hover {
+    transform: translateX(-2px);
     border-color: var(--color-border-strong);
     background: color-mix(in srgb, var(--color-surface) 82%, var(--color-text) 5%);
   }
-  .vsp-collab-kind {
-    font-family: var(--font-mono);
-    font-size: 9px; font-weight: 500;
-    letter-spacing: 0.11em; text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-  .vsp-collab-title { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--color-text); }
-  .vsp-collab-desc { font-size: 11.5px; line-height: 1.45; color: var(--color-text-dim); }
+  .tl-collab-kind { font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: 0.11em; text-transform: uppercase; color: var(--color-text-dim); }
+  .tl-collab-title { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; line-height: 1.22; color: var(--color-text); }
+  .tl-collab-desc { font-size: 11.5px; line-height: 1.45; color: var(--color-text-dim); }
 
-  @media (max-width: 560px) {
-    .vsp-row { grid-template-columns: 52px 1fr; column-gap: 1rem; }
-    .vsp-row::before { left: 25px; }
-    .vsp-hook { font-size: 1.3rem; }
-    .vsp-workbench { margin-left: 0; }
+  /* ---- narrow: collapse to a single left rail ---- */
+  @media (max-width: 720px) {
+    .tl-row {
+      grid-template-columns: 52px 1fr;
+      grid-template-areas: "axis content";
+      column-gap: 0.9rem;
+    }
+    .tl-half-left, .tl-half-right { grid-area: content; justify-content: flex-start; }
+    .tl-half:empty { display: none; }
+    .tl-collab { text-align: left; align-items: flex-start; max-width: none; margin: 0; }
+    .tl-collab::after { display: none; }
+    .tl-collab:hover { transform: translateY(-2px); }
+    .tl-hook { font-size: 1.3rem; }
   }
 </style>

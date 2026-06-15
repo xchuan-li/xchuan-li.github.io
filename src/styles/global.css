@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Site is light-only: bind Tailwind's `dark:` variant to a `.dark` class that never
+   exists, so leftover dark: utilities never fire on an OS dark-mode preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Crimson Pro", "Iowan Old Style", Georgia, serif;
@@ -8,55 +12,9 @@
 }
 
 /* ============================================================
-   Theme tokens — dark default, .light opt-in via class
-   The class is set pre-paint by an inline script in Base.astro
-   reading localStorage('theme'). Default is dark.
+   Theme tokens — light only (the dark theme was removed).
    ============================================================ */
 :root {
-  --color-bg: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-2: #1a1a1a;
-  --color-text: #ffffff;
-  --color-text-muted: #9ca3af;
-  --color-text-dim: #6b7280;
-  --color-text-ghost: #4b5563;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.20);
-  --color-accent: #e88b5f;
-
-  --nav-bg: rgba(0, 0, 0, 0.55);
-  --nav-border: rgba(255, 255, 255, 0.08);
-
-  --card-bg: #0c0c0c;
-  --card-border: rgba(255, 255, 255, 0.06);
-  --card-hover-bg: #131313;
-  --card-hover-border: rgba(255, 255, 255, 0.18);
-
-  --btn-primary-bg: #ffffff;
-  --btn-primary-text: #0a0a0a;
-  --btn-secondary-text: #ffffff;
-  --btn-secondary-border: rgba(255, 255, 255, 0.25);
-  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.04);
-  --btn-secondary-hover-border: rgba(255, 255, 255, 0.55);
-
-  --accent-coral: #f0997b;
-  --accent-teal: #5dcaa5;
-  --accent-slate: #74b4ce;
-  --accent-purple: #afa9ec;
-  --accent-amber: #ef9f27;
-  --accent-indigo: #7b9bd1;
-  --accent-deep-purple: #b09cdb;
-  --accent-champagne: #d9b576;
-
-  --accent-teal-tint: rgba(8, 80, 65, 0.4);
-  --accent-teal-deep: #5dcaa5;
-  --accent-coral-tint: rgba(113, 43, 19, 0.4);
-  --accent-coral-deep: #f0997b;
-
-  color-scheme: dark;
-}
-
-:root.light {
   --color-bg: #fafaf7;
   --color-surface: #ffffff;
   --color-surface-2: #f3f3ee;
@@ -210,10 +168,6 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 }
 .theme-toggle:hover { color: var(--color-text); background: rgba(127, 127, 127, 0.08); }
 .view-toggle { text-decoration: none; }
-.theme-icon-sun { display: none; }
-.theme-icon-moon { display: block; }
-:root.light .theme-icon-sun { display: block; }
-:root.light .theme-icon-moon { display: none; }
 
 @media (max-width: 720px) {
   .nav-links { display: none; }
