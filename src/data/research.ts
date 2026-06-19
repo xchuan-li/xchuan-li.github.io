@@ -15,6 +15,10 @@ export type ProjectGroup = "core" | "frontier" | "support";
 //   group  — collaborative projects in progress, completion not guaranteed
 export type ProjectTier = "now" | "thesis" | "group";
 
+// Ownership — my own work vs collaborative/group projects. Drives the filter on
+// the homepage "all projects" gallery (All / Personal / Collaborative).
+export type ProjectCategory = "personal" | "collaborative";
+
 // Honest delivery state, surfaced verbatim on the plain page so planned work is
 // never mistaken for finished work.
 export type ProjectStatus =
@@ -36,6 +40,7 @@ export interface Project {
   short?: string;
   group: ProjectGroup;
   tier: ProjectTier;
+  category: ProjectCategory;
   status: ProjectStatus;
 }
 
@@ -51,6 +56,7 @@ export const projects: Project[] = [
     desc: "Certification — is the linguistic structure that licenses an inference load-bearing for the model at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
     group: "core",
     tier: "now",
+    category: "personal",
     status: "Drafting",
   },
   {
@@ -64,6 +70,7 @@ export const projects: Project[] = [
     desc: "Localization — which linguistic operation or encoding does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
     group: "core",
     tier: "now",
+    category: "personal",
     status: "In design",
   },
   {
@@ -77,6 +84,7 @@ export const projects: Project[] = [
     desc: "Quantification — given the structure a model actually uses (measured by Isotrace), how much of the inference that structure licenses does it productively produce? A yield, not an accuracy.",
     group: "core",
     tier: "thesis",
+    category: "personal",
     status: "Planned",
   },
   {
@@ -90,6 +98,7 @@ export const projects: Project[] = [
     desc: "Where the three methods meet linguistic typology: the same inferential content re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
     group: "frontier",
     tier: "thesis",
+    category: "personal",
     status: "Exploratory",
   },
   {
@@ -103,33 +112,43 @@ export const projects: Project[] = [
     desc: "The structure-versus-surface question run on real LLMs through a natural phenomenon: Korean Sino-Korean words, where Hangul shares zero characters with its Hanja origin yet corresponds in meaning. A wrong-Hanja intervention shows latent grounding is a function of capability — strong models neither need the explicit cue nor are misled by it; a weak model is both.",
     group: "frontier",
     tier: "now",
+    category: "collaborative",
     status: "Ongoing",
   },
   {
     title: "MiniCausalLang",
     href: "/research/mini-causal-models",
+    color: "var(--accent-slate)",
+    glyph: "mcm",
     tags: ["Supporting workbench"],
     short: "A language-to-causal-graph workbench for testing whether grammatical structure, licensed inference, and interventions line up.",
     group: "support",
     tier: "now",
+    category: "personal",
     status: "Ongoing",
   },
   {
     title: "Latent Control States",
     href: "/research/latent-control-states",
+    color: "var(--accent-amber)",
+    glyph: "latent",
     tags: ["Extension · mechanistic"],
     short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form? A collaborative project, in progress.",
     group: "support",
     tier: "group",
+    category: "collaborative",
     status: "Ongoing",
   },
   {
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
+    color: "var(--accent-indigo)",
+    glyph: "protobias",
     tags: ["Extension · applied"],
     short: "An applied multimodal stress test: semantic content versus language- and culture-specific prototype shortcuts. A collaborative project, in progress.",
     group: "support",
     tier: "group",
+    category: "collaborative",
     status: "Ongoing",
   },
 ];

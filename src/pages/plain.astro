@@ -9,16 +9,14 @@ import { posts } from "../data/writing";
 // getting done and when. No hero, no figures, no animation: the link meant for a
 // CV. The rich, illustrated homepage lives at "/".
 
-// Tiered by commitment, not by argument: a reader should see at a glance what is
-// committed near-term vs. thesis-horizon vs. uncertain group work.
-const nowWork = projects.filter((p) => p.tier === "now");
-const thesisWork = projects.filter((p) => p.tier === "thesis");
-const groupWork = projects.filter((p) => p.tier === "group");
+// Grouped by ownership to mirror the homepage "all projects" gallery: my own
+// work vs collaborative projects. Each item still shows its delivery status.
+const personalWork = projects.filter((p) => p.category === "personal");
+const collaborativeWork = projects.filter((p) => p.category === "collaborative");
 
 const groups = [
-  { label: "Underway now — targeted before PhD applications", items: nowWork },
-  { label: "Master's-thesis horizon", items: thesisWork },
-  { label: "Group projects — in progress, completion not guaranteed", items: groupWork },
+  { label: "Personal", items: personalWork },
+  { label: "Collaborative — in progress with others", items: collaborativeWork },
 ];
 
 const recentPosts = posts.slice(0, 5);

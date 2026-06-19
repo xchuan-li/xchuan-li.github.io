@@ -5,42 +5,26 @@
 // Mainline nodes are filled circles; the collaborations are hollow diamonds.
 interface Origin { label: string; href: string; hook?: string; }
 interface Station { n: string; method: string; qword?: string; q?: string; title: string; desc?: string; color: string; href: string; }
-interface Frontier { label: string; title: string; href: string; desc?: string; }
-interface Workbench { title: string; href: string; desc: string; }
-interface Group { title: string; kind: string; href: string; desc?: string; }
 interface Props {
   question: string;
   origin: Origin;
   stations: Station[];
-  frontier: Frontier;
-  workbench: Workbench;
-  groups: Group[];
 }
-const { question, origin, stations, frontier, workbench, groups } = Astro.props;
+const { question, origin, stations } = Astro.props;
 const portraitSrc = "/images/leibniz-portrait.png";
-
-// MiniCausalLang is node 00, ahead of 01.
-const node00: Station = {
-  n: "00", method: "Foundation", title: workbench.title,
-  desc: workbench.desc, color: "var(--accent-slate)", href: workbench.href,
-};
 
 type Row =
   | { kind: "origin" }
-  | { kind: "station"; s: Station }
-  | { kind: "collabLabel" }
-  | { kind: "collab"; g: Group }
-  | { kind: "frontier" };
+  | { kind: "station"; s: Station };
 
+// Mainline only: Leibniz entrance → 01 Certify → 02 Localize → 03 Quantify.
+// The workbench, the typological application, and the collaborations now live in
+// the "all projects" gallery further down the page, not on the spine.
 const rows: Row[] = [
   { kind: "origin" },
-  { kind: "station", s: node00 },
   { kind: "station", s: stations[0] },
-  { kind: "collabLabel" },
-  ...groups.map((g) => ({ kind: "collab", g } as Row)),
   { kind: "station", s: stations[1] },
   { kind: "station", s: stations[2] },
-  { kind: "frontier" },
 ];
 ---
 
@@ -48,7 +32,7 @@ const rows: Row[] = [
   {rows.map((row, i) => {
     const first = i === 0;
     const last = i === rows.length - 1;
-    const cls = `tl-row${first ? " tl-first" : ""}${last ? " tl-last" : ""}${row.kind === "collabLabel" ? " tl-collablabel" : ""}`;
+    const cls = `tl-row${first ? " tl-first" : ""}${last ? " tl-last" : ""}`;
 
     if (row.kind === "origin") {
       return (
@@ -61,43 +45,6 @@ const rows: Row[] = [
             <span class="tl-latin">{origin.hook ?? "Nihil est sine ratione."}</span>
             <span class="tl-obtn-text">{question}</span>
             <span class="tl-cta">Read the philosophical bridge <span aria-hidden="true">→</span></span>
-          </a>
-        </div>
-      );
-    }
-
-    if (row.kind === "collabLabel") {
-      return (
-        <div class={cls}>
-          <div class="tl-rail"></div>
-          <p class="tl-brlabel">Collaborations · off the spine</p>
-        </div>
-      );
-    }
-
-    if (row.kind === "collab") {
-      return (
-        <div class={cls}>
-          <div class="tl-rail"><span class="tl-diamond" aria-hidden="true"></span></div>
-          <a class="tl-collab" href={row.g.href}>
-            <span class="tl-collab-kind">{row.g.kind}</span>
-            <span class="tl-collab-title">{row.g.title}</span>
-            {row.g.desc && <span class="tl-collab-desc">{row.g.desc}</span>}
-          </a>
-        </div>
-      );
-    }
-
-    if (row.kind === "frontier") {
-      return (
-        <div class={cls} style="--c: var(--accent-deep-purple);">
-          <a class="tl-rail" href={frontier.href} aria-label={frontier.title}>
-            <span class="tl-dot tl-dot-frontier" aria-hidden="true"></span>
-          </a>
-          <a class="tl-body tl-link" href={frontier.href}>
-            <span class="tl-kicker tl-kicker-frontier">Application</span>
-            <span class="tl-title tl-title-muted">{frontier.title}</span>
-            {frontier.desc && <span class="tl-desc">{frontier.desc}</span>}
           </a>
         </div>
       );
