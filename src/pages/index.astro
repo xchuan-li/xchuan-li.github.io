@@ -1,89 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
-import ResearchSpine from "../components/TrajectoryTimeline.astro";
+import MainlineScrolly from "../components/MainlineScrolly.astro";
+import ProjectGlyph from "../components/ProjectGlyph.astro";
 import { now } from "../data/research";
-
-// The research arc as a scroll narrative: Leibniz's question becomes one
-// causal-interpretability mainline. Collaborative projects sit to the right.
-const spineQuestion = "Language gives reasoning a form: agreement, dependency, scope, morphology, word order, context. I put that form to a model — is its answer backed by the structure that licenses the inference, or only by a surface accident? — and aim at the horizon Leibniz named: a characteristica universalis, where structure and surface no longer come apart.";
-
-const spineOrigin = {
-  label: "From sufficient reason to a universal language",
-  href: "/writing/from-leibniz",
-  hook: "Nihil est sine ratione.",
-};
-
-// The three method contributions, sharpening the one question in three steps:
-// whether structure is used at all, where it is used, how much it is relied on.
-const spineStations = [
-  {
-    n: "01",
-    method: "Certify",
-    qword: "Whether",
-    q: "is the model using the right structure at all?",
-    title: "Stable Is Not Grounded",
-    desc: "A non-circular test of whether a stable, correct answer is licensed by the genuine structure — or rides a shortcut that merely correlates with the label. Counterfactual interventions plus a pure-noise control, with a clear scope boundary.",
-    color: "var(--accent-coral)",
-    href: "/research/sc-certification",
-  },
-  {
-    n: "02",
-    method: "Localize",
-    qword: "Where",
-    q: "in the model is that structure actually used?",
-    title: "Isotrace",
-    desc: "Behavioural path-tracing that upgrades a binary grounding verdict into hop-level diagnosis — making distinct reasoning paths emit distinct labels, traced on typological minimal pairs.",
-    color: "var(--accent-teal)",
-    href: "/research/isotrace",
-  },
-  {
-    n: "03",
-    method: "Quantify",
-    qword: "How much",
-    q: "of the inference it licenses does the model produce?",
-    title: "Causal Inferential Yield",
-    desc: "Given the structure a model actually uses, how much of the inference that structure licenses does it productively produce — a yield, not an accuracy.",
-    color: "var(--accent-purple)",
-    href: "/research/ciy",
-  },
-];
-
-const spineFrontier = {
-  label: "Frontier",
-  title: "Typological Grounding",
-  href: "/research/typological-grounding",
-  desc: "Where the three methods meet linguistic typology: the same inferential content re-encoded by morphology, word order, or context — a ready-made test of whether a model tracks structure or surface.",
-};
-
-// The workbench the three methods run on — and are validated against.
-const spineWorkbench = {
-  title: "MiniCausalLang",
-  href: "/research/mini-causal-models",
-  desc: "A language-to-causal-graph workbench for making grammatical structure, licensed inference, and interventions observable.",
-};
-
-// Off the spine: collaborative projects, in progress, not claimed as the main line.
-const spineGroups = [
-  {
-    title: "Latent Control States",
-    kind: "Mechanistic extension",
-    href: "/research/latent-control-states",
-    desc: "Do structural control features propagate into latent space as discrete, recoverable states?",
-  },
-  {
-    title: "Cross-lingual ProtoBias",
-    kind: "Applied extension",
-    href: "/research/cross-lingual-protobias",
-    desc: "Prototypicality bias in MLLM judges — does the prompt language change the verdict?",
-  },
-  {
-    title: "HanGL",
-    kind: "Application pilot",
-    href: "/research/hangl",
-    desc: "Surface Hangul vs latent Hanja — the structure-vs-surface question, run on real LLMs.",
-  },
-];
 
 const posts = [
   {
@@ -194,35 +114,127 @@ const posts = [
 
   </section>
 
-  <!-- =========== RESEARCH SPINE =========== -->
+  <!-- =========== RESEARCH MAINLINE (scroll narrative) =========== -->
+  <section id="mainline" class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">The through-line</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">From Leibniz's question to the model.</h2>
+        <p class="section-sub fade-in-up fade-delay-200">
+          One line, bookended by Leibniz: his <em>sufficient reason</em> — what licenses a correct
+          answer — put to a model. Scroll the question on the left as the figure splits that reason
+          into a grounded route and a shortcut, traces which one holds, measures its yield, and asks
+          whether the structure survives <em>beneath every language</em> — the
+          <em>characteristica</em> he named.
+        </p>
+      </div>
+    </div>
+    <MainlineScrolly />
+  </section>
+
+  <style>
+    /* the pinned animation already ends on near-empty space; don't add much more */
+    #mainline { padding-bottom: 1.5rem; }
+    #mainline .section-head { margin-bottom: 2rem; }
+  </style>
+
+  <!-- =========== RESEARCH =========== -->
   <section id="research" class="section">
     <div class="section-inner">
       <div class="divider-line"></div>
       <div class="section-head">
         <p class="section-label fade-in-up">Research</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">One program, not a list of ideas.</h2>
-        <p class="section-sub fade-in-up fade-delay-200">
-          One question — how does linguistic structure support inference, and do AI systems actually
-          use that structure? — sharpened in three steps: <em>whether</em> the relevant structure is
-          used at all (certify), <em>where</em> it is used (localize), and <em>how much</em> licensed
-          inference it yields (quantify). The three are the main line, run on a shared workbench that
-          turns grammar into causal variables; the horizon is a <em>characteristica universalis</em>,
-          a language where structure and surface coincide. A few collaborative projects sit off the
-          spine.
+        <p class="research-prose fade-in-up fade-delay-100">
+          One question: how does linguistic structure license inference — and do models use that
+          structure, or only its surface? I make it testable two ways: by turning grammar into causal
+          variables, and by re-encoding the <em>same</em> inference across morphology, word order, and
+          context, so a model that tracks structure and one that rides surface are forced apart. The
+          line runs in three steps — <em>certify</em> whether the structure is used at all,
+          <em>localize</em> where, <em>quantify</em> how much inference it yields — built on one shared
+          workbench. Below is the step that's done; the rest is where it's going.
         </p>
       </div>
-      <div class="fade-in-up fade-delay-300">
-        <ResearchSpine
-          question={spineQuestion}
-          origin={spineOrigin}
-          stations={spineStations}
-          frontier={spineFrontier}
-          workbench={spineWorkbench}
-          groups={spineGroups}
-        />
-      </div>
+
+      <a href="/research/sc-certification" class="anchor-card fade-in-up fade-delay-200">
+        <div class="anchor-card-body">
+          <div class="anchor-card-top">
+            <h3 class="anchor-card-title">Stable Is Not Grounded</h3>
+            <span class="anchor-card-status">experiments complete, writing up</span>
+          </div>
+          <p class="anchor-card-q"><em>Certify</em> — is the structure that licenses an inference load-bearing for the model at all?</p>
+          <p class="anchor-card-desc">
+            A non-circular test: counterfactual interventions on the licensing structure, plus a
+            pure-noise control to rule out "any edit breaks it," with a clear decidability boundary —
+            grounding is identifiable only when the causal structure is stipulated and the training
+            distribution auditable. A stable, correct answer counts as grounded only if the stipulated
+            structure survives shortcut-severing audits.
+          </p>
+          <span class="anchor-card-more">Read the work <span aria-hidden="true">→</span></span>
+        </div>
+        <div class="anchor-card-glyph proj-glyph-cell" aria-hidden="true">
+          <ProjectGlyph kind="sc" color="var(--accent-coral)" />
+        </div>
+      </a>
+
+      <p class="research-aside fade-in-up fade-delay-300">
+        <em>Isotrace (localize)</em> — in design: upgrading the binary grounding verdict into
+        hop-level diagnosis.
+      </p>
+      <p class="research-aside fade-in-up fade-delay-300">
+        Ongoing collaborative work, in progress with others — <em>Latent Control States</em>
+        (a mechanistic bridge) and <em>Cross-lingual ProtoBias</em> (an applied stress test). Group
+        efforts, so I don't claim the outcome as mine; this is where the methods get tested on real
+        models.
+      </p>
     </div>
   </section>
+
+  <style>
+    #research .research-prose {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--color-text);
+      max-width: 44rem;
+      margin: 0;
+    }
+    #research .research-prose em { font-style: italic; }
+    .anchor-card {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      max-width: 760px;
+      margin-top: 2.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-left: 3px solid var(--accent-coral);
+      border-radius: 10px;
+      padding: 1.6rem 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .anchor-card:hover { border-color: var(--card-hover-border); border-left-color: var(--accent-coral); background: var(--card-hover-bg); }
+    .anchor-card-body { min-width: 0; }
+    .anchor-card-top { display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .anchor-card-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.015em; color: var(--color-text); margin: 0; transition: color 0.2s ease; }
+    .anchor-card:hover .anchor-card-title { color: var(--color-accent); }
+    .anchor-card-status { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+    .anchor-card-q { font-family: var(--font-serif); font-style: italic; font-size: 1.0625rem; line-height: 1.5; color: var(--color-text); margin: 0 0 0.7rem; }
+    .anchor-card-q em { font-style: normal; font-weight: 500; }
+    .anchor-card-desc { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.9rem; max-width: 48ch; }
+    .anchor-card-more { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
+    .anchor-card-more span { display: inline-block; transition: transform 0.2s ease; }
+    .anchor-card:hover .anchor-card-more span { transform: translateX(3px); }
+    .anchor-card-glyph { flex: 0 0 96px; }
+    .research-aside { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); max-width: 42rem; margin: 1.5rem 0 0; }
+    .research-aside em { font-style: italic; color: var(--color-text); }
+    @media (max-width: 560px) {
+      .anchor-card { flex-direction: column; }
+      .anchor-card-glyph { display: none; }
+    }
+  </style>
 
   <!-- =========== CURRENTLY =========== -->
   <section id="currently" class="section">

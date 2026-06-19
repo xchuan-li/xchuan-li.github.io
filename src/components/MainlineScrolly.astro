@@ -1,0 +1,241 @@
+---
+// One continuous, scroll-scrubbed story, bookended by Leibniz.
+//
+//   LEFT  — a 3-D rotating card drum: the question-axis folded into a ring. Each
+//           card (title + one line + link) rotates to face you as you scroll.
+//   RIGHT — the figure: one object that transforms the whole way through —
+//           a sufficient reason → grounded vs shortcut → traced → measured →
+//           re-encoded across languages.
+//
+//   Origin (sufficient reason) → Certify → Localize → Quantify → Apply (characteristica)
+//
+// Scroll IS the playhead: every animated element runs a paused CSS @keyframes
+// animation seeked by `animation-delay: calc(var(--p) * -1000ms)`; JS sets the
+// single `--p` (0→1) from scroll. The three collaborative projects stay in the
+// Research section below — this drum is the mainline only.
+//
+// Progressive enhancement: no JS / reduced-motion → a static numbered list.
+import { mainline } from "../data/mainline";
+---
+
+<section class="ms" aria-label="The research arc, bookended by Leibniz, in five moves">
+  <div class="ms-stage">
+    <!-- ===== LEFT: rotating card drum ===== -->
+    <div class="ms-drum">
+      <div class="ms-rotor a-anim">
+        {mainline.map((s, i) => (
+          <article class="ms-card" data-i={i}>
+            <p class="ms-card-eyebrow">{s.n === "·" ? s.method : `${s.n} · ${s.method}`}</p>
+            <h3 class="ms-card-title"><a href={s.href}>{s.title}</a>{s.pending && <span class="ms-card-pending">pending</span>}</h3>
+            <p class="ms-card-q">{s.reelQ}</p>
+            <a class="ms-card-link" href={s.href}>Read <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: the figure ===== -->
+    <div class="ms-figure" aria-hidden="true">
+      <svg class="ms-svg" viewBox="0 0 720 300" role="img">
+        <defs>
+          <marker id="ms-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1 L9 5 L0 9" class="ms-arpath" /></marker>
+          <marker id="ms-ld" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto"><path d="M0 1 L9 5 L0 9" class="ms-ldpath" /></marker>
+        </defs>
+
+        <g class="a-anim a-model">
+          <rect class="ms-box" x="286" y="106" width="150" height="86" rx="11" />
+          <text class="ms-box-l" x="361" y="146" text-anchor="middle">model</text>
+          <text class="ms-box-s" x="361" y="164" text-anchor="middle">black box</text>
+        </g>
+        <g class="a-anim a-answer">
+          <rect class="ms-ans" x="26" y="126" width="130" height="48" rx="10" />
+          <text class="ms-ans-l" x="40" y="148">stable answer</text>
+          <text class="ms-ans-s" x="40" y="164">correct ✓</text>
+        </g>
+        <path class="a-anim a-stem ms-stem" d="M156 150 L300 150" pathLength="100" />
+        <path class="a-anim a-grounded ms-grounded" d="M300 150 Q 418 110 562 104" pathLength="100" marker-end="url(#ms-ar)" />
+        <path class="a-anim a-shortcut ms-shortcut" d="M300 150 Q 418 190 562 196" pathLength="100" marker-end="url(#ms-ar)" />
+        <path class="a-anim a-yield ms-yield" d="M300 150 Q 418 110 562 104" pathLength="100" />
+        <circle class="a-anim a-tracer ms-tracer" r="5" />
+        <text class="a-anim a-reason ms-reason" x="432" y="96" text-anchor="middle">sufficient reason</text>
+        <g class="a-anim a-nihil ms-note"><path class="ms-lead" d="M300 70 L372 122" marker-end="url(#ms-ld)" /><text x="300" y="60" text-anchor="middle">nihil est sine ratione</text></g>
+        <text class="a-anim a-grlabel ms-grlabel" x="500" y="88">grounded</text>
+        <text class="a-anim a-shlabel ms-shlabel" x="500" y="212">shortcut</text>
+        <text class="a-anim a-qmark ms-qmark" x="600" y="158">?</text>
+        <g class="a-anim a-noteS ms-note"><path class="ms-lead" d="M250 232 L300 178" marker-end="url(#ms-ld)" /><text x="240" y="246" text-anchor="middle">same answer, two routes</text></g>
+        <g class="a-anim a-noteI ms-note"><path class="ms-lead" d="M452 62 L430 102" marker-end="url(#ms-ld)" /><text x="452" y="52" text-anchor="middle">follow the route inside</text></g>
+        <g class="a-anim a-gauge">
+          <text class="ms-gauge-l" x="556" y="160">yield</text>
+          <rect class="ms-gauge-tr" x="556" y="166" width="140" height="12" rx="6" />
+          <rect class="a-anim a-gaugefill ms-gauge-fl" x="556" y="166" width="140" height="12" rx="6" />
+        </g>
+        <g class="a-anim a-noteC ms-note"><path class="ms-lead" d="M636 200 L636 182" marker-end="url(#ms-ld)" /><text x="636" y="214" text-anchor="middle">how much it yields</text></g>
+        <g class="a-anim a-lang">
+          <path class="ms-rep" d="M562 104 L614 82" /><text class="ms-rep-l" x="620" y="85">morphology</text>
+          <path class="ms-rep" d="M562 104 L614 104" /><text class="ms-rep-l" x="620" y="107">word order</text>
+          <path class="ms-rep" d="M562 104 L614 126" /><text class="ms-rep-l" x="620" y="129">context</text>
+        </g>
+        <g class="a-anim a-pending">
+          <rect class="ms-pend" x="270" y="234" width="186" height="22" rx="11" />
+          <text class="ms-pend-l" x="363" y="249" text-anchor="middle">coordinate pending verification</text>
+        </g>
+        <g class="a-anim a-noteT ms-note"><path class="ms-lead" d="M636 64 L630 100" marker-end="url(#ms-ld)" /><text x="636" y="54" text-anchor="middle">structure, or surface?</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ms { position: relative; }
+
+  /* ---- card text (shared by static list + drum) ---- */
+  .ms-card-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); margin: 0 0 0.3rem; }
+  .ms-card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.14; margin: 0 0 0.35rem; color: var(--color-text); display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+  .ms-card-title a { color: inherit; text-decoration: none; } .ms-card-title a:hover { color: var(--color-accent); }
+  .ms-card-pending { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-deep-purple); border: 1px dashed color-mix(in srgb, var(--accent-deep-purple) 45%, transparent); border-radius: 999px; padding: 2px 7px; }
+  .ms-card-q { font-family: var(--font-serif); font-style: italic; font-size: 1rem; line-height: 1.4; color: var(--color-text-muted); margin: 0 0 0.45rem; }
+  .ms-card-link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); text-decoration: none; }
+  .ms-card-link span { display: inline-block; transition: transform 0.2s ease; } .ms-card-link:hover span { transform: translateX(3px); }
+
+  /* ---- static default (no JS / reduced motion): a numbered list ---- */
+  .ms-figure { display: none; }
+  .ms-stage { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+  .ms-rotor { display: flex; flex-direction: column; gap: 1.9rem; }
+  .ms-card { padding-left: 1.1rem; border-left: 2px solid var(--color-border); }
+
+  /* ============ enhanced: pinned, drum + figure, scroll-scrubbed ============ */
+  .ms.is-enhanced { height: calc(100vh + 280vh); }
+  .ms.is-enhanced .ms-stage {
+    position: sticky; top: 0; height: 100vh; max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.18fr); gap: 2.4rem; align-items: center;
+  }
+
+  /* the rotating drum */
+  .ms.is-enhanced .ms-drum {
+    position: relative; height: 340px; perspective: 2400px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24%, #000 76%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 24%, #000 76%, transparent 100%);
+  }
+  .ms.is-enhanced .ms-drum::after { content: ""; position: absolute; left: 0; top: calc(50% - 70px); height: 140px; width: 2px; background: var(--color-accent); border-radius: 2px; }
+  .ms.is-enhanced .ms-rotor { position: absolute; inset: 0; transform-style: preserve-3d; display: block; gap: 0; }
+  .ms.is-enhanced .ms-card {
+    position: absolute; top: 50%; left: 0; right: 0; height: 140px; margin-top: -70px;
+    display: flex; flex-direction: column; justify-content: center; padding: 0 0.5rem 0 1.5rem;
+    border-left: none; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  }
+  .ms.is-enhanced .ms-card[data-i="0"] { transform: rotateX(0deg) translateZ(210px); }
+  .ms.is-enhanced .ms-card[data-i="1"] { transform: rotateX(44deg) translateZ(210px); }
+  .ms.is-enhanced .ms-card[data-i="2"] { transform: rotateX(88deg) translateZ(210px); }
+  .ms.is-enhanced .ms-card[data-i="3"] { transform: rotateX(132deg) translateZ(210px); }
+  .ms.is-enhanced .ms-card[data-i="4"] { transform: rotateX(176deg) translateZ(210px); }
+
+  /* right figure */
+  .ms.is-enhanced .ms-figure { display: block; width: 100%; }
+  .ms.is-enhanced .ms-svg { width: 100%; height: auto; max-height: 56vh; display: block; overflow: visible; }
+
+  /* scrub engine */
+  .ms.is-enhanced .a-anim {
+    animation-duration: 1000ms; animation-timing-function: linear; animation-iteration-count: 1;
+    animation-fill-mode: both; animation-play-state: paused; animation-delay: calc(var(--p, 0) * -1000ms);
+  }
+  .ms.is-enhanced .ms-rotor { animation-name: kf-drum; }
+  .ms.is-enhanced .a-answer { animation-name: kf-answer; } .ms.is-enhanced .a-stem { animation-name: kf-stem; }
+  .ms.is-enhanced .a-grounded { animation-name: kf-grounded; } .ms.is-enhanced .a-shortcut { animation-name: kf-shortcut; }
+  .ms.is-enhanced .a-yield { animation-name: kf-yield; } .ms.is-enhanced .a-tracer { animation-name: kf-tracer; }
+  .ms.is-enhanced .a-reason { animation-name: kf-reason; } .ms.is-enhanced .a-nihil { animation-name: kf-reason; }
+  .ms.is-enhanced .a-grlabel { animation-name: kf-grlabel; } .ms.is-enhanced .a-shlabel { animation-name: kf-shlabel; }
+  .ms.is-enhanced .a-qmark { animation-name: kf-qmark; } .ms.is-enhanced .a-model { animation-name: kf-model; }
+  .ms.is-enhanced .a-gauge { animation-name: kf-gauge; } .ms.is-enhanced .a-gaugefill { animation-name: kf-gfill; }
+  .ms.is-enhanced .a-lang { animation-name: kf-lang; } .ms.is-enhanced .a-pending { animation-name: kf-pending; }
+  .ms.is-enhanced .a-noteS { animation-name: kf-noteS; } .ms.is-enhanced .a-noteI { animation-name: kf-noteI; }
+  .ms.is-enhanced .a-noteC { animation-name: kf-noteC; } .ms.is-enhanced .a-noteT { animation-name: kf-noteT; }
+
+  /* ---- figure base ---- */
+  .ms-box { fill: #15151b; stroke: rgba(255,255,255,0.16); stroke-width: 1; }
+  .ms-box-l { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; fill: rgba(255,255,255,0.85); }
+  .ms-box-s { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; fill: rgba(255,255,255,0.4); }
+  .ms-ans { fill: var(--color-surface); stroke: var(--color-border-strong); stroke-width: 1; }
+  .ms-ans-l { font-family: var(--font-mono); font-size: 12px; fill: var(--color-text); }
+  .ms-ans-s { font-family: var(--font-mono); font-size: 10px; fill: var(--accent-teal-deep); }
+  .ms-stem, .ms-grounded, .ms-shortcut, .ms-yield { fill: none; stroke-linecap: round; stroke-dasharray: 100; }
+  .ms-stem { stroke: var(--color-text-dim); stroke-width: 2.4; }
+  .ms-grounded { stroke: var(--accent-teal); stroke-width: 2.6; }
+  .ms-shortcut { stroke: var(--accent-coral); stroke-width: 2.4; stroke-dasharray: 6 5; }
+  .ms-arpath { fill: none; stroke: var(--color-text-dim); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .ms-yield { stroke: var(--accent-teal-deep); stroke-width: 6; }
+  .ms-tracer { fill: var(--accent-teal); offset-path: path("M156 150 L300 150 Q 418 110 562 104"); }
+  .ms-reason { font-family: var(--font-mono); font-size: 11px; fill: var(--accent-teal-deep); text-anchor: middle; }
+  .ms-grlabel { font-family: var(--font-mono); font-size: 11px; fill: var(--accent-teal-deep); text-anchor: middle; }
+  .ms-shlabel { font-family: var(--font-mono); font-size: 11px; fill: var(--accent-coral-deep); text-anchor: middle; }
+  .ms-qmark { font-family: var(--font-serif); font-size: 22px; fill: var(--color-text-muted); text-anchor: middle; }
+  .ms-gauge-l { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; fill: var(--color-text-muted); }
+  .ms-gauge-tr { fill: var(--color-surface-2); stroke: var(--color-border); stroke-width: 1; }
+  .ms-gauge-fl { fill: var(--accent-teal); opacity: 0.85; transform-box: fill-box; transform-origin: left center; }
+  .ms-rep { fill: none; stroke: var(--accent-deep-purple); stroke-width: 1.5; opacity: 0.7; }
+  .ms-rep-l { font-family: var(--font-mono); font-size: 10px; fill: var(--color-text); }
+  .ms-pend { fill: color-mix(in srgb, var(--accent-deep-purple) 8%, var(--color-surface)); stroke: color-mix(in srgb, var(--accent-deep-purple) 45%, transparent); stroke-width: 1; stroke-dasharray: 4 4; }
+  .ms-pend-l { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.04em; fill: var(--accent-deep-purple); }
+  .ms-note text { font-family: var(--font-mono); font-size: 10.5px; fill: var(--color-text-muted); }
+  .ms-lead { fill: none; stroke: var(--color-border-strong); stroke-width: 1; opacity: 0.7; }
+  .ms-ldpath { fill: none; stroke: var(--color-border-strong); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---- keyframes (% = scroll progress; five beats) ---- */
+  @keyframes kf-drum { 0% { transform: rotateX(0deg); } 14% { transform: rotateX(0deg); } 22% { transform: rotateX(-44deg); } 40% { transform: rotateX(-44deg); } 46% { transform: rotateX(-88deg); } 62% { transform: rotateX(-88deg); } 68% { transform: rotateX(-132deg); } 82% { transform: rotateX(-132deg); } 88% { transform: rotateX(-176deg); } 100% { transform: rotateX(-176deg); } }
+
+  @keyframes kf-answer { 0% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes kf-stem { 0% { opacity: 1; stroke-dashoffset: 0; } 100% { opacity: 1; stroke-dashoffset: 0; } }
+  @keyframes kf-grounded { 0% { opacity: 1; stroke-dashoffset: 0; } 100% { opacity: 1; stroke-dashoffset: 0; } }
+  @keyframes kf-reason { 0% { opacity: 1; } 14% { opacity: 1; } 20% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-shortcut { 0% { opacity: 0; } 18% { opacity: 0; } 26% { opacity: 1; } 58% { opacity: 1; } 66% { opacity: 0.1; } 100% { opacity: 0.1; } }
+  @keyframes kf-grlabel { 0% { opacity: 0; } 22% { opacity: 0; } 28% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes kf-shlabel { 0% { opacity: 0; } 22% { opacity: 0; } 28% { opacity: 1; } 58% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-noteS { 0% { opacity: 0; } 26% { opacity: 0; } 30% { opacity: 1; } 40% { opacity: 1; } 45% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-qmark { 0% { opacity: 0; } 34% { opacity: 0; } 38% { opacity: 1; } 44% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-model { 0% { opacity: 0; } 44% { opacity: 0; } 50% { opacity: 1; } 86% { opacity: 1; } 92% { opacity: 0.16; } 100% { opacity: 0.16; } }
+  @keyframes kf-tracer { 0% { opacity: 0; offset-distance: 0%; } 48% { opacity: 0; offset-distance: 0%; } 52% { opacity: 1; } 60% { opacity: 1; offset-distance: 100%; } 64% { opacity: 0; offset-distance: 100%; } 100% { opacity: 0; offset-distance: 100%; } }
+  @keyframes kf-noteI { 0% { opacity: 0; } 50% { opacity: 0; } 54% { opacity: 1; } 62% { opacity: 1; } 66% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-yield { 0% { opacity: 0; stroke-dashoffset: 100; } 66% { opacity: 0; stroke-dashoffset: 100; } 70% { opacity: 0.5; } 82% { opacity: 0.5; stroke-dashoffset: 44; } 88% { opacity: 0; } 100% { opacity: 0; stroke-dashoffset: 44; } }
+  @keyframes kf-gauge { 0% { opacity: 0; } 66% { opacity: 0; } 70% { opacity: 1; } 82% { opacity: 1; } 88% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-gfill { 0% { transform: scaleX(0); } 70% { transform: scaleX(0); } 82% { transform: scaleX(0.56); } 100% { transform: scaleX(0.56); } }
+  @keyframes kf-noteC { 0% { opacity: 0; } 70% { opacity: 0; } 74% { opacity: 1; } 82% { opacity: 1; } 87% { opacity: 0; } 100% { opacity: 0; } }
+  @keyframes kf-lang { 0% { opacity: 0; transform: translateX(-8px); } 86% { opacity: 0; transform: translateX(-8px); } 93% { opacity: 1; transform: translateX(0); } 100% { opacity: 1; } }
+  @keyframes kf-pending { 0% { opacity: 0; } 88% { opacity: 0; } 95% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes kf-noteT { 0% { opacity: 0; } 90% { opacity: 0; } 95% { opacity: 1; } 100% { opacity: 1; } }
+
+  @media (max-width: 900px) {
+    .ms.is-enhanced .ms-stage { grid-template-columns: 1fr; gap: 1rem; justify-items: center; }
+    .ms.is-enhanced .ms-drum { width: 100%; max-width: 440px; height: 270px; }
+    .ms.is-enhanced .ms-card { height: 124px; margin-top: -62px; }
+    .ms.is-enhanced .ms-card[data-i="0"] { transform: rotateX(0deg) translateZ(180px); }
+    .ms.is-enhanced .ms-card[data-i="1"] { transform: rotateX(44deg) translateZ(180px); }
+    .ms.is-enhanced .ms-card[data-i="2"] { transform: rotateX(88deg) translateZ(180px); }
+    .ms.is-enhanced .ms-card[data-i="3"] { transform: rotateX(132deg) translateZ(180px); }
+    .ms.is-enhanced .ms-card[data-i="4"] { transform: rotateX(176deg) translateZ(180px); }
+    .ms.is-enhanced .ms-svg { max-height: 36vh; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ms.is-enhanced .a-anim { animation: none; } }
+</style>
+
+<script>
+  (function () {
+    const ms = document.querySelector<HTMLElement>(".ms");
+    if (!ms) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (ms.querySelectorAll(".ms-card").length < 2) return;
+
+    ms.classList.add("is-enhanced");
+    const stage = ms.querySelector<HTMLElement>(".ms-stage");
+    if (!stage) return;
+
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const total = ms.offsetHeight - stage.offsetHeight;
+      const scrolled = Math.min(Math.max(-ms.getBoundingClientRect().top, 0), total);
+      ms.style.setProperty("--p", String(total > 0 ? scrolled / total : 0));
+    }
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
+  })();
+</script>
