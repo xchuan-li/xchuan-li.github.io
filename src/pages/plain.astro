@@ -1,13 +1,25 @@
 ---
 import Base from "../layouts/Base.astro";
-import { now } from "../data/research";
+import { projects, now } from "../data/research";
 import { posts } from "../data/writing";
-import { mainline } from "../data/mainline";
 
 // A plain, content-first alternative to the homepage — name, one-line
-// affiliation, a short research statement, and the work presented the same way as
-// the homepage: one done anchor, the rest as directions. No hero, no figures, no
-// animation: the link meant for a CV. The rich, illustrated homepage lives at "/".
+// affiliation, a short research statement that states the theoretical
+// architecture, and an honest list of the work tiered by what is actually
+// getting done and when. No hero, no figures, no animation: the link meant for a
+// CV. The rich, illustrated homepage lives at "/".
+
+// Tiered by commitment, not by argument: a reader should see at a glance what is
+// committed near-term vs. thesis-horizon vs. uncertain group work.
+const nowWork = projects.filter((p) => p.tier === "now");
+const thesisWork = projects.filter((p) => p.tier === "thesis");
+const groupWork = projects.filter((p) => p.tier === "group");
+
+const groups = [
+  { label: "Underway now — targeted before PhD applications", items: nowWork },
+  { label: "Master's-thesis horizon", items: thesisWork },
+  { label: "Group projects — in progress, completion not guaranteed", items: groupWork },
+];
 
 const recentPosts = posts.slice(0, 5);
 ---
@@ -49,63 +61,34 @@ const recentPosts = posts.slice(0, 5);
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One question: how does linguistic structure license inference — and do models use that
-        structure, or only its surface? I make it testable two ways: by turning grammar into causal
-        variables, and by re-encoding the <em>same</em> inference across morphology, word order, and
-        context, so a model that tracks structure and one that rides surface are forced apart. The
-        line runs in three steps — <em>certify</em> whether the structure is used at all,
-        <em>localize</em> where, <em>quantify</em> how much inference it yields — built on one shared
-        workbench. Below is the step that's done; the rest is where it's going.
+        One program: a method to <strong>certify</strong> whether a model uses the linguistic
+        structure that licenses an inference, to <strong>localize</strong> which grammatical level
+        carries it, and to <strong>quantify</strong> how much inferential yield that structure
+        produces. Certification and localization — with a language-to-causal-graph workbench to check
+        them — are what I'm building now; quantification and the cross-linguistic application are the
+        master's-thesis horizon. Each line shows where the work actually stands.
       </p>
-      <ul class="plain-work">
-        <li class="plain-work-item">
-          <div class="plain-work-top">
-            <a class="plain-work-title" href="/research/sc-certification">Stable Is Not Grounded</a>
-            <span class="plain-status plain-status-done">experiments complete, writing up</span>
-          </div>
-          <p class="plain-work-desc">
-            A non-circular test of whether a stable, correct answer is licensed by the genuine
-            structure or rides a shortcut: counterfactual interventions plus a pure-noise control,
-            with a decidability boundary — grounding is identifiable only when the causal structure is
-            stipulated and the training distribution auditable.
-          </p>
-        </li>
-      </ul>
-      <p class="plain-work-desc plain-aside">
-        <em>Isotrace (localize)</em> — in design: upgrading the binary grounding verdict into
-        hop-level diagnosis.
-      </p>
-      <p class="plain-work-desc plain-aside">
-        Ongoing collaborative work, in progress with others — <em>Latent Control States</em>
-        (a mechanistic bridge) and <em>Cross-lingual ProtoBias</em> (an applied stress test). Group
-        efforts, so I don't claim the outcome as mine; this is where the methods get tested on real
-        models.
-      </p>
-    </section>
 
-    <section class="plain-section">
-      <h2 class="plain-h2">The mainline</h2>
-      <p class="plain-lede">
-        One line, bookended by Leibniz: his principle of sufficient reason — what licenses a correct
-        answer — becomes a test on a model, sharpened in four moves and reaching toward the
-        characteristica universalis. (The illustrated homepage shows this as a scroll-through
-        animation.)
-      </p>
-      <ol class="plain-mainline">
-        {
-          mainline.map((s) => (
-            <li>
-              <div class="plain-mainline-top">
-                <span class="plain-mainline-method">{s.n} · {s.method}</span>
-                <a class="plain-mainline-title" href={s.href}>{s.title}</a>
-                {s.pending && <span class="plain-status">Pending</span>}
-              </div>
-              <p class="plain-mainline-q">{s.question}</p>
-              <p class="plain-work-desc">{s.blurb}</p>
-            </li>
-          ))
-        }
-      </ol>
+      {
+        groups.map((g) => (
+          <div class="plain-group">
+            <p class="plain-group-label">{g.label}</p>
+            <ul class="plain-work">
+              {g.items.map((p) => (
+                <li class="plain-work-item">
+                  <div class="plain-work-top">
+                    <a class="plain-work-title" href={p.href}>{p.title}</a>
+                    <span class={`plain-status plain-status-${p.status.toLowerCase().replace(/\s+/g, "-")}`}>
+                      {p.status}
+                    </span>
+                  </div>
+                  <p class="plain-work-desc">{p.desc ?? p.short}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </section>
 
     <section class="plain-section">
@@ -247,8 +230,7 @@ const recentPosts = posts.slice(0, 5);
     white-space: nowrap;
   }
   /* the furthest-along piece reads in the accent; everything else stays neutral */
-  .plain-status-drafting,
-  .plain-status-done {
+  .plain-status-drafting {
     color: var(--color-accent);
     border-color: color-mix(in srgb, var(--color-accent) 45%, transparent);
   }
@@ -259,8 +241,6 @@ const recentPosts = posts.slice(0, 5);
     margin: 0;
     max-width: 38rem;
   }
-  .plain-work-desc em { font-style: italic; color: var(--color-text); }
-  .plain-aside { margin-top: 1.1rem; }
 
   /* currently */
   .plain-now { list-style: none; margin: 0; padding: 0; }
@@ -302,22 +282,4 @@ const recentPosts = posts.slice(0, 5);
     white-space: nowrap;
   }
   .plain-more { margin: 1.1rem 0 0; font-size: 0.9rem; }
-
-  /* the mainline (four moves) */
-  .plain-mainline { list-style: none; margin: 0; padding: 0; counter-reset: none; }
-  .plain-mainline li { margin-bottom: 1.5rem; }
-  .plain-mainline li:last-child { margin-bottom: 0; }
-  .plain-mainline-top {
-    display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.3rem;
-  }
-  .plain-mainline-method {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap;
-  }
-  .plain-mainline-title { font-size: 1.02rem; font-weight: 500; color: var(--color-text) !important; }
-  .plain-mainline-title:hover { color: var(--color-accent) !important; text-decoration: none; }
-  .plain-mainline-q {
-    font-family: var(--font-serif); font-style: italic; font-size: 0.95rem;
-    color: var(--color-text); margin: 0 0 0.35rem; max-width: 38rem;
-  }
 </style>
