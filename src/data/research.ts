@@ -3,30 +3,32 @@
 // Keeping the data here means a change to a project or its status updates both
 // presentations at once.
 
-// The argument structure of the program — what each piece IS. Drives the rich
-// homepage's sections.
 export type ProjectGroup = "core" | "frontier" | "support";
 
-// The commitment/timeline tier — what is actually getting done, and when. Drives
-// the plain homepage so a reader never mistakes a thesis-horizon plan or an
-// uncertain group project for committed near-term work.
-//   now    — solo work I'm building, targeted before PhD applications
-//   thesis — the master's-thesis horizon, later
-//   group  — collaborative projects in progress, completion not guaranteed
+// Commitment/timeline tier: now (solo, before applications) / thesis / group.
 export type ProjectTier = "now" | "thesis" | "group";
 
-// Ownership — my own work vs collaborative/group projects. Drives the filter on
-// the homepage "all projects" gallery (All / Personal / Collaborative).
+// Ownership — drives the personal vs collaborative reading on each card.
 export type ProjectCategory = "personal" | "collaborative";
 
-// Honest delivery state, surfaced verbatim on the plain page so planned work is
-// never mistaken for finished work.
 export type ProjectStatus =
   | "Drafting"
   | "In design"
   | "Planned"
   | "Exploratory"
   | "Ongoing";
+
+// Which node of the research mainline a project hangs from.
+//   certify      — behaviour, on the synthetic sandbox
+//   mechanism    — inside real models (activation space)
+//   crosslingual — does it hold across languages
+export type ProjectNode = "certify" | "mechanism" | "crosslingual";
+
+// Maturity, shown as the small status dot on each card.
+//   near    — near-complete / in submission
+//   active  — in progress (a real pilot / build)
+//   concept — concept or planned
+export type ProjectMaturity = "near" | "active" | "concept";
 
 export interface Project {
   n?: string;
@@ -42,6 +44,13 @@ export interface Project {
   tier: ProjectTier;
   category: ProjectCategory;
   status: ProjectStatus;
+  node?: ProjectNode;
+  // When set, the project is a "bridge" card that spans from `node` (its left
+  // column) to `spanTo` (the adjacent column to the right) on the homepage mainline.
+  spanTo?: ProjectNode;
+  maturity?: ProjectMaturity;
+  progress?: string;
+  blurb?: string;
 }
 
 export const projects: Project[] = [
@@ -58,6 +67,10 @@ export const projects: Project[] = [
     tier: "now",
     category: "personal",
     status: "Drafting",
+    node: "certify",
+    maturity: "near",
+    progress: "certify · workshop submission",
+    blurb: "A non-circular test of whether a stable, correct answer is licensed by the real structure — or rides a shortcut.",
   },
   {
     n: "02",
@@ -72,6 +85,11 @@ export const projects: Project[] = [
     tier: "now",
     category: "personal",
     status: "In design",
+    node: "certify",
+    spanTo: "mechanism",
+    maturity: "concept",
+    progress: "localize · in design",
+    blurb: "Behavioural path-tracing: which linguistic operation actually carried the inference.",
   },
   {
     n: "03",
@@ -86,6 +104,9 @@ export const projects: Project[] = [
     tier: "thesis",
     category: "personal",
     status: "Planned",
+    maturity: "concept",
+    progress: "quantify · planned",
+    blurb: "A yield, not an accuracy — how much of the inference a structure licenses does the model actually produce?",
   },
   {
     n: "→",
@@ -100,6 +121,9 @@ export const projects: Project[] = [
     tier: "thesis",
     category: "personal",
     status: "Exploratory",
+    maturity: "concept",
+    progress: "exploratory",
+    blurb: "Does grounding survive when the same inference is re-encoded by each language's grammar?",
   },
   {
     n: "→",
@@ -114,6 +138,11 @@ export const projects: Project[] = [
     tier: "now",
     category: "collaborative",
     status: "Ongoing",
+    node: "mechanism",
+    spanTo: "crosslingual",
+    maturity: "active",
+    progress: "pilot · scaling",
+    blurb: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script?",
   },
   {
     title: "MiniCausalLang",
@@ -126,6 +155,10 @@ export const projects: Project[] = [
     tier: "now",
     category: "personal",
     status: "Ongoing",
+    node: "certify",
+    maturity: "active",
+    progress: "workbench · building",
+    blurb: "A language-to-causal-graph workbench that makes structure, licensed inference, and interventions observable.",
   },
   {
     title: "Latent Control States",
@@ -133,11 +166,15 @@ export const projects: Project[] = [
     color: "var(--accent-amber)",
     glyph: "latent",
     tags: ["Extension · mechanistic"],
-    short: "Does a linguistic distinction such as tense have an activation-space direction, and does it survive a change of form? A collaborative project, in progress.",
+    short: "Does prompt framing — urgency, authority, epistemic positioning — only change an LLM's outputs, or shift a causally relevant latent state? A controlled-data pipeline is built; probing and activation patching come next. A collaborative project, in progress.",
     group: "support",
     tier: "group",
     category: "collaborative",
     status: "Ongoing",
+    node: "mechanism",
+    maturity: "active",
+    progress: "data pipeline built",
+    blurb: "Does prompt framing shift a causally relevant latent state, or only the surface?",
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -150,6 +187,26 @@ export const projects: Project[] = [
     tier: "group",
     category: "collaborative",
     status: "Ongoing",
+    node: "crosslingual",
+    maturity: "active",
+    progress: "v2 complete",
+    blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
+  },
+  {
+    title: "Causal Direction",
+    href: "/research/causal-direction",
+    color: "var(--accent-champagne)",
+    glyph: "latent",
+    tags: ["Extension · mechanistic", "Pilot"],
+    short: "Does a real LLM hold a usable representation of causal direction — which event is the cause? A pilot on Gemma-2-2B finds a steerable, genuinely-causal direction that is nonetheless redundantly distributed. The MSc-thesis pilot.",
+    group: "support",
+    tier: "now",
+    category: "personal",
+    status: "Ongoing",
+    node: "mechanism",
+    maturity: "active",
+    progress: "pilot complete",
+    blurb: "On a real LLM, the cause-direction feature is encoded and steerable — yet redundantly distributed.",
   },
 ];
 

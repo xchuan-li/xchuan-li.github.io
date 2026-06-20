@@ -1,0 +1,147 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProgressTimeline from "../../components/ProgressTimeline.astro";
+import CausalDirectionDemo from "../../components/CausalDirectionDemo.tsx";
+
+// The pilot as a chain of gates — each one cut, with controls, before the next.
+const roadmap = [
+  {
+    date: "Jun 2026",
+    phase: "Gate 0 · behaviour",
+    title: "The model judges causal direction",
+    summary:
+      "Forward vs. reverse causal statements (“the storm caused the flood” and its reverse) separate cleanly — a coherence gap of +6.87 (95% CI [5.3, 8.5]) that holds across four content domains, two markers, and both clause orders, so it is not a connective or word-order artefact.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "Gate 1 · probe",
+    title: "Direction is encoded, and domain-general",
+    summary:
+      "A single linear direction in the residual stream decodes forward from reverse at 0.94 on a held-out domain (chance 0.5), peaking in the middle of the network (layer 12) — an abstract feature, not a memorised collocation.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "Gate 2 · intervention",
+    title: "Efficacious, but redundant",
+    summary:
+      "Steering along the direction moves the judgment monotonically; projecting it out — even across eleven layers, with bootstrap confidence intervals — does not. The direction is used, yet no single site is necessary: it is redundantly distributed.",
+    status: "done" as const,
+  },
+  {
+    date: "Jun 2026",
+    phase: "Gate 3 · rich vs. lean",
+    title: "Causal, not plausibility",
+    summary:
+      "On invented, zero-frequency relations fixed only by an in-context rule, the model still prefers the correct direction — and the direction learned from real data steers those novel judgments. So it tracks causal structure, not which sentence is more frequent.",
+    status: "active" as const,
+    color: "var(--accent-champagne)",
+  },
+  {
+    date: "Planned",
+    phase: "Next",
+    title: "Is the redundancy structured?",
+    summary:
+      "Whether the redundant sites are the same across content domains — and, with the cross-lingual thesis question, across languages that mark causation differently.",
+    status: "planned" as const,
+  },
+];
+---
+
+<Base
+  title="Causal Direction · Xiaochuan Li"
+  description="An MSc-thesis pilot: does a real LLM hold a usable representation of causal direction — which event is the cause — and is it used? On Gemma-2-2B the direction is encoded, steerable, genuinely causal, yet redundantly distributed."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Extension · mechanistic pilot · real LLM
+    </div>
+    <h1>Causal Direction — finding the cause inside the model</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      Does a model hold a representation of which event is the cause, and does it actually use it? An
+      MSc-thesis pilot on Gemma-2-2B.
+    </p>
+
+    <p>
+      This is the program's question — <em>does the model use the structure that licenses an inference,
+      or a surface proxy that merely travels with it?</em> — narrowed to one sharp handle and pushed
+      from behaviour into activation space. The handle is <strong>causal direction</strong>: given two
+      events, which is the cause? Forward and reverse use almost the same words, so telling them apart
+      cannot be lexical. And it is run on a real pretrained model (<strong>Gemma-2-2B</strong>), not the
+      <a href="/research/mini-causal-models">MiniCausalLang</a> sandbox — making it the
+      <a href="/research/sc-certification">Paper 1</a> intervention logic carried to the feature level.
+    </p>
+
+    <p>
+      Following the program's discipline — fix the causal side, audit the model side, and only then
+      claim — the pilot runs four gates and arrives at one compact picture:
+    </p>
+
+    <ProgressTimeline items={roadmap} accent="var(--accent-champagne)" />
+
+    <h2>What the pilot found</h2>
+    <p>One direction in the residual stream, characterised four ways:</p>
+    <ul>
+      <li>
+        <strong>Encoded</strong> — forward vs. reverse is linearly decodable, and it generalises to
+        content domains held out of training (Gate 1).
+      </li>
+      <li>
+        <strong>Efficacious</strong> — steering along it moves the model's judgment monotonically; it is
+        wired to the output, not a bystander (Gate 2).
+      </li>
+      <li>
+        <strong>Genuinely causal, not plausibility</strong> — it still works on invented, zero-frequency
+        relations and transfers there from real data, so it tracks causal structure rather than surface
+        frequency (Gate 3).
+      </li>
+      <li>
+        <strong>Redundant</strong> — yet projecting it out, even across eleven layers, does not remove
+        the behaviour. It is used, but no single copy is load-bearing.
+      </li>
+    </ul>
+    <p>
+      "Used but not cleanly removable" is the empirical face of <strong>superposition</strong>: you can
+      read the direction out, and still not cut it out. That turns a difficulty the program had only
+      flagged in principle into something measured.
+    </p>
+
+    <p>
+      Try it — steer the direction and the judgment moves; ablate it and, even across eleven layers,
+      it barely does:
+    </p>
+    <CausalDirectionDemo client:visible />
+
+    <h2>Method — four gates</h2>
+    <p>
+      Each gate is one cut, with controls: a behavioural readout (does the model prefer the correct
+      direction?), a linear probe with leave-one-domain-out evaluation (is it encoded, and general?),
+      steering plus multi-layer ablation with bootstrap confidence intervals (is it used, and where?),
+      and a frequency-neutral contrast (is it causal, or just plausible?). Forward and reverse are
+      matched same-word minimal pairs; clause order and connective are counterbalanced so that neither
+      can stand in for direction.
+    </p>
+
+    <h2>Relation to the rest of the work</h2>
+    <p>
+      This is the mechanistic step of the program, run on a real model: it takes the behavioural
+      certification of <a href="/research/sc-certification">Stable Is Not Grounded</a> and asks whether
+      the certified causal thing is a <em>used direction</em> in activation space — the same question as
+      <a href="/research/latent-control-states">Latent Control States</a>, on a different handle. Its
+      planned cross-lingual step — does the direction, and its redundancy, survive a change of
+      language? — is where it meets the <a href="/research/typological-grounding">typological-grounding</a>
+      frontier.
+    </p>
+
+    <p class="text-sm text-[var(--color-text-dim)]">
+      Status: a pilot, not a finished paper. Behaviour validated on the instruction-tuned model,
+      mechanism on base Gemma-2-2B; one phenomenon, English, modest sample sizes, single runs (with
+      bootstrap confidence intervals at the ablation stage). The "redundant" reading comes from
+      projecting out a difference-of-means direction across a layer band; a subspace ablation would
+      close it fully. Code, data, and full results — repository link to be added.
+    </p>
+  </article>
+</Base>

@@ -2,8 +2,7 @@
 import Base from "../layouts/Base.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
 import ResearchSpine from "../components/TrajectoryTimeline.astro";
-import ProjectGlyph from "../components/ProjectGlyph.astro";
-import { now, projects } from "../data/research";
+import { projects } from "../data/research";
 
 // The research arc as a scroll narrative: Leibniz's question becomes one
 // causal-interpretability mainline. Collaborative projects sit to the right.
@@ -14,41 +13,6 @@ const spineOrigin = {
   href: "/writing/from-leibniz",
   hook: "Nihil est sine ratione.",
 };
-
-// The three method contributions, sharpening the one question in three steps:
-// whether structure is used at all, where it is used, how much it is relied on.
-const spineStations = [
-  {
-    n: "01",
-    method: "Certify",
-    qword: "Whether",
-    q: "is the model using the right structure at all?",
-    title: "Stable Is Not Grounded",
-    desc: "A non-circular test of whether a stable, correct answer is licensed by the genuine structure — or rides a shortcut that merely correlates with the label. Counterfactual interventions plus a pure-noise control, with a clear scope boundary.",
-    color: "var(--accent-coral)",
-    href: "/research/sc-certification",
-  },
-  {
-    n: "02",
-    method: "Localize",
-    qword: "Where",
-    q: "in the model is that structure actually used?",
-    title: "Isotrace",
-    desc: "Behavioural path-tracing that upgrades a binary grounding verdict into hop-level diagnosis — making distinct reasoning paths emit distinct labels, traced on typological minimal pairs.",
-    color: "var(--accent-teal)",
-    href: "/research/isotrace",
-  },
-  {
-    n: "03",
-    method: "Quantify",
-    qword: "How much",
-    q: "of the inference it licenses does the model produce?",
-    title: "Causal Inferential Yield",
-    desc: "Given the structure a model actually uses, how much of the inference that structure licenses does it productively produce — a yield, not an accuracy.",
-    color: "var(--accent-purple)",
-    href: "/research/ciy",
-  },
-];
 
 const posts = [
   {
@@ -180,126 +144,12 @@ const posts = [
         <ResearchSpine
           question={spineQuestion}
           origin={spineOrigin}
-          stations={spineStations}
+          projects={projects}
         />
       </div>
     </div>
   </section>
 
-  <!-- =========== CURRENTLY =========== -->
-  <section id="currently" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Currently</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">What I'm working on now.</h2>
-      </div>
-      <ul class="now-list fade-in-up fade-delay-200">
-        {
-          now.map((item) => (
-            <li>
-              <strong>{item.label}:</strong> {item.text}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- =========== ALL PROJECTS =========== -->
-  <section id="projects" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Projects</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Everything, in one place.</h2>
-        <p class="section-sub fade-in-up fade-delay-200">
-          The three-step mainline above, plus the workbench it runs on, the cross-lingual
-          application, and collaborative work — filter by who's driving it.
-        </p>
-      </div>
-      <div class="proj-gallery fade-in-up fade-delay-300" data-filter="all">
-        <div class="proj-tabs" role="tablist" aria-label="Filter projects">
-          <button type="button" class="proj-tab is-active" data-cat="all" aria-pressed="true">All</button>
-          <button type="button" class="proj-tab" data-cat="personal" aria-pressed="false">Personal</button>
-          <button type="button" class="proj-tab" data-cat="collaborative" aria-pressed="false">Collaborative</button>
-        </div>
-        <div class="proj-grid">
-          {
-            projects.map((p) => (
-              <a href={p.href} class="proj-tile" data-category={p.category}>
-                <div class="proj-tile-glyph" aria-hidden="true">
-                  {p.glyph && <ProjectGlyph kind={p.glyph} color={p.color ?? "var(--color-text-dim)"} />}
-                </div>
-                <div class="proj-tile-body">
-                  <h3 class="proj-tile-title">{p.title}</h3>
-                  <p class="proj-tile-desc">{p.desc ?? p.short}</p>
-                  <div class="proj-tile-tags">
-                    {p.tags.map((t) => <span class="proj-tile-tag">{t}</span>)}
-                  </div>
-                </div>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .proj-tabs { display: flex; gap: 0.5rem; margin: 2rem 0 1.75rem; flex-wrap: wrap; }
-    .proj-tab {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 7px 16px; border-radius: 999px; border: 1px solid var(--color-border-strong);
-      background: transparent; color: var(--color-text-muted); cursor: pointer;
-      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-    .proj-tab:hover { color: var(--color-text); border-color: var(--color-text-dim); }
-    .proj-tab.is-active { color: var(--btn-primary-text); background: var(--color-text); border-color: var(--color-text); }
-    .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
-    .proj-tile {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: 1.3rem 1.4rem;
-      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px;
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-    .proj-tile:hover { border-color: var(--card-hover-border); background: var(--card-hover-bg); transform: translateY(-2px); }
-    .proj-tile-glyph { flex: 0 0 58px; width: 58px; margin-top: 2px; }
-    .proj-tile-body { min-width: 0; }
-    .proj-tile-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; line-height: 1.2; color: var(--color-text); margin: 0 0 0.4rem; transition: color 0.2s ease; }
-    .proj-tile:hover .proj-tile-title { color: var(--color-accent); }
-    .proj-tile-desc {
-      font-size: 0.875rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 0.7rem;
-      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .proj-tile-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    .proj-tile-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-text-dim); border: 1px solid var(--color-border); border-radius: 999px; padding: 2px 7px; }
-    .proj-gallery[data-filter="personal"] .proj-tile[data-category="collaborative"],
-    .proj-gallery[data-filter="collaborative"] .proj-tile[data-category="personal"] { display: none; }
-    @media (max-width: 720px) {
-      .proj-grid { grid-template-columns: 1fr; }
-      .proj-tile-glyph { display: none; }
-    }
-  </style>
-
-  <script>
-    (function () {
-      const gallery = document.querySelector(".proj-gallery");
-      if (!gallery) return;
-      const tabs = Array.from(gallery.querySelectorAll(".proj-tab"));
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          gallery.setAttribute("data-filter", tab.getAttribute("data-cat") || "all");
-          tabs.forEach((t) => {
-            const on = t === tab;
-            t.classList.toggle("is-active", on);
-            t.setAttribute("aria-pressed", on ? "true" : "false");
-          });
-        });
-      });
-    })();
-  </script>
 
   <!-- =========== WRITING =========== -->
   <section id="writing" class="section">

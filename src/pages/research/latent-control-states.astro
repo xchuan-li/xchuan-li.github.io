@@ -1,38 +1,88 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ProgressTimeline from "../../components/ProgressTimeline.astro";
+
+const roadmap = [
+  {
+    date: "Jun 2026",
+    phase: "Report I · framing + data",
+    title: "Three framing dimensions and a controlled-data pipeline",
+    summary:
+      "Prompt framing is operationalised into three dimensions — urgency, authority, and epistemic positioning — and a two-agent pipeline builds a controlled dataset: a helper extracts a framing-agnostic theme/action/goal from each scenario, then a generator re-renders it under each framing plus a neutral baseline, holding the content fixed so framing is the single manipulated variable, with schema and faithfulness (RAGAS) validation.",
+    status: "active" as const,
+  },
+  {
+    date: "Planned",
+    phase: "Next",
+    title: "Probing and activation patching",
+    summary:
+      "With the controlled dataset in hand, test whether a framing's effect corresponds to a causally relevant direction in activation space — or to surface features that merely travel with the prompt.",
+    status: "planned" as const,
+  },
+];
 ---
 
 <Base
   title="Latent Control States · Xiaochuan Li"
-  description="From behavioral evidence to mechanism: do prompt-framing effects correspond to causally relevant states in activation space, or to surface features that merely travel with the prompt?"
+  description="A collaborative mechanistic extension: does prompt framing — urgency, authority, epistemic positioning — only change an LLM's outputs, or shift causally relevant latent states inside it?"
   toc={true}
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Extension · mechanistic bridge
+      Extension · mechanistic bridge · group project
     </div>
     <h1>Latent Control States under prompt framing</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      A mechanistic extension of the behavioral causal-evidence program.
+      Does prompt framing only change what a model says, or shift causally relevant states inside it?
     </p>
 
     <p>
-      This project is the mechanistic extension of the behavioral program: if a behavioral
-      intervention reveals a causal control state, can we find a corresponding state or direction in
-      activation space?
+      This is the mechanistic extension of the behavioral program: if a behavioral intervention reveals
+      a causal control state, can we find a corresponding direction in activation space? The handle is
+      <strong>prompt framing</strong> — the same underlying request carried under different social
+      pressure — operationalised into three dimensions:
     </p>
+    <ul>
+      <li><strong>Urgency</strong> — compelling rapid decisions under perceived time pressure or moral stakes.</li>
+      <li><strong>Authority</strong> — framing the speaker as holding socially recognised power or expertise.</li>
+      <li>
+        <strong>Epistemic positioning</strong> — how the user frames their own standing relative to the
+        model's judgement: critically engaged, or low-agency and deferring.
+      </li>
+    </ul>
 
     <p>
-      The target is not to replace the core sequence, but to connect its behavioral evidence to
-      mechanism when that is possible. Planned methods include probing, sparse autoencoders,
-      activation patching, and steering; the role of those tools is to test whether a behaviorally
-      identified control state has an internal counterpart, or whether the apparent control travels
-      only with surface prompt features.
+      The first stage builds the ground truth a clean mechanistic test needs — a controlled dataset in
+      which framing, and only framing, varies:
     </p>
 
+    <ProgressTimeline items={roadmap} accent="var(--accent-amber)" />
+
+    <h2>The controlled-data pipeline</h2>
     <p>
-      In the roadmap, Latent Control States sits after the core behavioral sequence as a mechanistic
-      bridge from causal evidence over behavior to activation-space hypotheses.
+      Two agents generate the dataset. A <strong>helper</strong> reads each raw scenario and returns a
+      framing-agnostic <em>theme / action / goal</em> triple. A <strong>generator</strong> then renders
+      that same triple under each framing condition — urgency, authority, epistemic — plus a neutral
+      baseline. Holding theme, action, and goal fixed across conditions isolates framing as the single
+      manipulated variable, which is exactly what later probing and activation patching need in order to
+      attribute an internal difference to framing rather than to content. Generated items pass schema,
+      character, opposite-options, and faithfulness (RAGAS) checks before they enter the set.
+    </p>
+
+    <h2>Relation to the rest of the work</h2>
+    <p>
+      Latent Control States sits after the core behavioral sequence as a mechanistic bridge — from
+      causal evidence over behavior (<a href="/research/sc-certification">Stable Is Not Grounded</a>) to
+      activation-space hypotheses, the same move that <a href="/research/causal-direction">Causal
+      Direction</a> makes on a different handle. The aim is not to replace the core sequence, but to
+      connect its behavioral evidence to mechanism where that is possible.
+    </p>
+
+    <p class="text-sm text-[var(--color-text-dim)]">
+      Status: a collaborative project, in progress — Progress Report I (June 2026) covers the framing
+      definitions and the controlled-data pipeline; tiny-dataset collection, data-quality checks, and
+      the probing / activation-patching stage come next. Group work, so I don't claim its outcome as my
+      own.
     </p>
   </article>
 </Base>
