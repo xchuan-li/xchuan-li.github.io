@@ -185,7 +185,7 @@ bridgePlaced.forEach(({ p, row }) => items.push({ kind: "bridge", p, col: COL[p.
     column-gap: 1.25rem;
     row-gap: 0.6rem;
     padding-top: 1.4rem;
-    align-items: start;
+    align-items: stretch;
   }
   .rm-cols::before {
     content: "";
@@ -213,14 +213,18 @@ bridgePlaced.forEach(({ p, row }) => items.push({ kind: "bridge", p, col: COL[p.
     border: 1px solid var(--card-border);
     border-left: 2.5px solid var(--c);
     border-radius: 8px;
+    min-height: 8.5rem;
     text-decoration: none;
     transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
   }
   .rm-card:hover { border-color: var(--card-hover-border); background: var(--card-hover-bg); transform: translateY(-2px); }
   .rm-card-title { font-family: var(--font-display); font-size: 0.94rem; font-weight: 500; line-height: 1.25; color: var(--color-text); transition: color 0.2s ease; }
   .rm-card:hover .rm-card-title { color: var(--c); }
-  .rm-card-blurb { font-size: 0.8rem; line-height: 1.5; color: var(--color-text-muted); }
-  .rm-card-meta { display: flex; align-items: center; gap: 0.45rem; margin-top: 0.1rem; }
+  .rm-card-blurb {
+    font-size: 0.8rem; line-height: 1.5; color: var(--color-text-muted);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .rm-card-meta { display: flex; align-items: center; gap: 0.45rem; margin-top: auto; padding-top: 0.3rem; }
   .rm-card-prog { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.02em; color: var(--color-text-muted); }
   .rm-card-cat {
     margin-left: auto;
