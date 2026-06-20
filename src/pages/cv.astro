@@ -68,11 +68,6 @@ import Base from "../layouts/Base.astro";
         <p class="text-sm text-[var(--color-text-muted)]">Application frontier</p>
         <p class="text-sm mt-1">Where the three methods meet linguistic typology — the same inferential content re-encoded by each grammar; a test of structure versus surface.</p>
       </div>
-      <div class="break-inside-avoid">
-        <p class="font-medium text-[15px]">MiniCausalLang · Latent Control States · Cross-lingual ProtoBias</p>
-        <p class="text-sm text-[var(--color-text-muted)]">Support</p>
-        <p class="text-sm mt-1">A language-to-causal-graph workbench and two extensions the program leans on — a mechanistic bridge into activation space and an applied multimodal stress test.</p>
-      </div>
     </div>
   </section>
 
@@ -95,23 +90,42 @@ import Base from "../layouts/Base.astro";
   </section>
 
   <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Experience</h2>
-    <div class="space-y-4">
-      <div class="flex justify-between gap-4 break-inside-avoid">
-        <div>
-          <p class="font-medium">IT Student Assistant</p>
-          <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">Hardware maintenance and general IT support for staff and teaching labs.</p>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Projects</h2>
+    <div class="space-y-5">
+      <div class="break-inside-avoid">
+        <div class="flex justify-between gap-4 items-baseline">
+          <p class="font-medium text-[15px]">Causal Direction</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">personal · pilot complete</p>
         </div>
-        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">Apr 2026 — present</p>
+        <p class="text-sm mt-1">A completed mechanistic pilot on a real LLM (Gemma-2-2B). Linear probes, activation steering, and layer-band ablation show the model holds a representation of causal direction — which event is the cause — that is linearly decodable (cross-domain peak ≈ 0.94), causally efficacious under steering, and abstract enough to transfer to fictional, zero-frequency relations, yet redundantly distributed across layers (ablation cannot cleanly remove it). End-to-end interpretability pipeline designed, run, and analyzed on an HPC GPU cluster.</p>
       </div>
-      <div class="flex justify-between gap-4 break-inside-avoid">
-        <div>
-          <p class="font-medium">Editor &amp; public-facing writer</p>
-          <p class="text-sm text-[var(--color-text-muted)]">Student magazine, Shenzhen University · personal essays (WeChat)</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">Deputy editor-in-chief of a student magazine; author of personal philosophy essays (~10,000 reads) on determinism, free will, and causality — the questions that became my research.</p>
+      <div class="break-inside-avoid">
+        <div class="flex justify-between gap-4 items-baseline">
+          <p class="font-medium text-[15px]">HanGL — surface Hangul, latent Hanja</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">collaborative</p>
         </div>
-        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2020 — 2024</p>
+        <p class="text-sm mt-1">The structure-versus-surface question run on real LLMs through a natural phenomenon: Korean Sino-Korean words, where Hangul shares no characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with model capability — strong models neither need the cue nor are misled by it; a weak one is both. Pilot complete; scaling up.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <div class="flex justify-between gap-4 items-baseline">
+          <p class="font-medium text-[15px]">Latent Control States</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">collaborative</p>
+        </div>
+        <p class="text-sm mt-1">Does prompt framing — urgency, authority, epistemic positioning — only change an LLM's outputs, or shift a causally relevant latent state? A controlled two-agent data pipeline is built; linear probing and activation patching come next. A collaborative project carried out with, and advised by, a senior researcher at DFKI (the German Research Center for Artificial Intelligence).</p>
+      </div>
+      <div class="break-inside-avoid">
+        <div class="flex justify-between gap-4 items-baseline">
+          <p class="font-medium text-[15px]">Cross-lingual ProtoBias</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">collaborative</p>
+        </div>
+        <p class="text-sm mt-1">An applied multimodal stress test: does a vision-language model track semantic content, or language- and culture-specific prototype shortcuts? Extends a forthcoming paper from an established NLP research group with a cross-lingual evaluation, now at its second iteration.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <div class="flex justify-between gap-4 items-baseline">
+          <p class="font-medium text-[15px]">MiniCausalLang</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">personal · workbench</p>
+        </div>
+        <p class="text-sm mt-1">A language-to-causal-graph workbench that makes grammatical structure, the inference it licenses, and interventions on it observable — the shared substrate the certify / localize / quantify methods are built and tested on.</p>
       </div>
     </div>
   </section>
