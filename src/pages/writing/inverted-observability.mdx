@@ -1,0 +1,76 @@
+---
+layout: ../../layouts/Base.astro
+title: Inverted Observability — psychology and interpretability as mirror sciences
+description: Developmental psychology and LLM interpretability are mirror images — behavior observable but mechanism opaque on one side, mechanism observable but behavior suspect on the other. Why they can calibrate each other, where the mirror misleads, and why language is the one instrument both can read.
+toc: true
+---
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Note · June 2026
+</div>
+
+# Inverted Observability
+
+## Psychology and interpretability as mirror sciences — and language as the instrument they share
+
+Two fields are asking the same question without knowing they are asking the same question.
+
+Developmental psychology asks: a child passes a task — has she *actually* grasped the concept, or is she getting by on something shallower? Interpretability asks: a model returns the right answer — is it *licensed* by the structure in the sentence that genuinely entails the conclusion, or pushed by a surface shortcut that merely correlates with it?
+
+Strip the vocabulary and it is one question: **behind a system that looks like it "can," what is the format of the representation?** The real structure, or its shadow.
+
+But the two fields stand on opposite sides of that question — opposite sides of a mirror.
+
+### One · The inversion
+
+The difference is not who *has* what. It is who can *trust* what.
+
+On the human side, **behavior is observable and mechanism is not**. You see the child's choice on a false-belief task — clean, repeatable, ecologically valid; you cannot see the representation inside her head. One correction here, because the claim is usually overstated: the brain is not opaque. EEG, fNIRS, and MRI have read human mechanism for decades — which white-matter tract has matured, which time-window lights up — only at *low resolution, by correlation rather than intervention, and almost never by writing to it*. Behavior is the clean window.
+
+On the model side, it is the other way around. **Mechanism is readable and writable**: every activation is laid out in front of you, and you can ablate, steer, patch — the clean causal access neuroscience has always wanted. But **behavior turns cheap and suspect**: the "reasoning" a model emits — is it reasoning, or a correlation copied out of the training data? Its status is unknown.
+
+So the mirror can be put more sharply than "mirror image": **each field trusts what the other cannot see, and is skeptical of what the other anchors on.** Psychology anchors on behavior and treats mechanism as the unknown to be inferred; interpretability anchors on mechanism and treats behavior as the evidence to be doubted.
+
+Developmental neuroscience is the middle rung on the mechanism side of this mirror — it already does "mechanism" on humans, only with the resolution dial turned far down. Interpretability is roughly that dial turned to maximum, with writing allowed.
+
+### Two · What each lends the other
+
+Once the inversion is clear, "the two feed each other" stops being a slogan and becomes a specific methodological trade.
+
+Psychology lends interpretability **a craft, decades in the making, for diagnosing a hidden format from behavior alone**. False belief, the disjunctive syllogism, the minimal-versus-modal designs — every one of them is engineered to decide *which* format a representation has *without being able to see the mechanism*. Interpretability is still clumsily reinventing these: handing a theory-of-mind task to a model and then watching an irrelevant rewording knock the result over is a crude reinvention. At reading format off behavior, developmental psychology is the world champion — and that is exactly what interpretability is short of once its access to mechanism runs out.
+
+Interpretability lends back **a model organism with the mechanism switched on** — a system that can finally be checked against the answer key. A behavioral paradigm asserts "this performance must require some structured representation"; you used to have no way to verify it. Now you can go into the model and look — whether the representation is there, whether it is used, where. It is a ground-truth oracle psychology never had.
+
+### Three · Where the mirror lies
+
+But mirrors deceive, and this is the place to be careful.
+
+The sharpest objection runs: a superposed "causal-direction" feature inside a model — what gives it the right to tell you anything about a child's mind? The objection is correct. Both systems represent "causal direction," but that may be a *convergent solution to the same task* rather than a *shared mechanism* — a bird's wing and an insect's wing both fly without being the same organ.
+
+So the trade has to be graded by layer. At the level of *what to ask, and how to diagnose format from behavior*, it is strong. At the level of *what the mechanism actually is*, it is risky. Treating a model as a model organism is meant in the biologist's sense — it is useful *because* it is manipulable; but the homology has to be *argued*, not *assumed*.
+
+This is the same discipline I keep returning to elsewhere — [claim only where it is identifiable](/research/sc-certification). Cross-system mechanistic sameness: until you can earn it, stop honestly at "convergent," and do not dress it up as "homologous."
+
+### Four · The instrument they share
+
+Between the two sides of the mirror runs one main road, and it is language.
+
+The reason is plain, and I think it is the whole point: language is **the one instrument both sides can read**. Human "reasoning behavior" is largely linguistic — modal words, causal connectives, the false-belief story told out loud; and a language model *is made of* language. Language is therefore the single substrate on which the human side and the model side become *commensurable*: the same causal sentence can be put, unchanged, to a child and to a model.
+
+My [Causal Direction](/research/causal-direction) pilot works for exactly this reason — "the storm caused the flood" and its reverse are *at once* a psychological stimulus and an interpretability probe. That is not a coincidence; it is the nature of the road. It is also why the person best placed to stand on this bridge tends to be one trained in linguistics and philosophy, rather than a specialist of either side alone.
+
+### Five · The bridge's foundation is itself a thing to be tested
+
+Here I am tempted to write the elegant line: **language carries thought, but language is not thought.** It would make the whole bridge look self-evident.
+
+But it is not the bridge's foundation. It is a contested claim with a side. The language-of-thought camp supports it — thought has its own, non-linguistic format, and language only expresses it. Linguistic relativity, and the developmental line on which *language transforms* implicit reasoning into explicit reasoning, push back — language is not a mere carrier; it *restructures* the thought. For a language model the matter is wide open and empirical: in a system that is *only* language, is there any "thought" separable from language at all?
+
+And that is the first thing this bridge lets me *test*. In the pilot, a pure-language model holds a causal direction abstract enough to transfer to *invented*, zero-frequency relations — evidence that even inside a thing made of language, there is some structure that is thought-like and not purely linguistic.
+
+So "language is not thought" is not the floor I stand on. It is the proposition the bridge puts within reach. I do not need to *settle* it from the armchair; I need its *workable* weaker form, and one honest sentence about when the judgment is decidable and when it is not.
+
+The mirror, the mutual lending, the shared road — they are all in service of one thing: moving a question that could only be argued in philosophy for two thousand years to a place where you can read both the behavior and the mechanism, and test it for the first time.
+
+</div>
