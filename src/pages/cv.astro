@@ -72,19 +72,28 @@ import Base from "../layouts/Base.astro";
   </section>
 
   <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers in progress</h2>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers &amp; planned outputs</h2>
     <ul class="space-y-3 text-sm">
       <li class="break-inside-avoid">
-        <span class="font-medium">Stable Is Not Grounded.</span>
-        <span class="text-[var(--color-text-muted)]"> Paper 1: binary certification for whether the licensing structure is load-bearing.</span>
+        <div class="flex justify-between gap-4 items-baseline">
+          <span class="font-medium">Stable Is Not Grounded</span>
+          <span class="text-[var(--color-text-dim)] whitespace-nowrap">workshop paper · in submission</span>
+        </div>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Binary certification for whether the licensing structure is load-bearing — the piece written for publication (BlackboxNLP target).</p>
       </li>
       <li class="break-inside-avoid">
-        <span class="font-medium">Isotrace.</span>
-        <span class="text-[var(--color-text-muted)]"> Paper 2: behavioral path localization via path-encoded fictional names.</span>
+        <div class="flex justify-between gap-4 items-baseline">
+          <span class="font-medium">Isotrace</span>
+          <span class="text-[var(--color-text-dim)] whitespace-nowrap">decision experiment · next</span>
+        </div>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Behavioral path localization via path-encoded fictional names; runs first as a go/no-go on whether it separates genuine multi-hop reasoning from shortcut-copying, and becomes the second paper if it does.</p>
       </li>
       <li class="break-inside-avoid">
-        <span class="font-medium">Causal Inferential Yield (CIY).</span>
-        <span class="text-[var(--color-text-muted)]"> Paper 3: quantitative grading over certified or controlled causal-structure use.</span>
+        <div class="flex justify-between gap-4 items-baseline">
+          <span class="font-medium">Causal Inferential Yield (CIY)</span>
+          <span class="text-[var(--color-text-dim)] whitespace-nowrap">thesis horizon</span>
+        </div>
+        <p class="text-[var(--color-text-muted)] mt-0.5">A graded measure of how much licensed inference a model produces over certified or controlled causal structure; begins as an existence check for a witness model pair before it is a paper.</p>
       </li>
     </ul>
   </section>
@@ -94,7 +103,7 @@ import Base from "../layouts/Base.astro";
     <div class="space-y-5">
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">Causal Direction</p>
+          <p class="font-medium text-[15px]">Arrowhead</p>
           <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">personal · pilot complete</p>
         </div>
         <p class="text-sm mt-1">A completed mechanistic pilot on a real LLM (Gemma-2-2B). Linear probes, activation steering, and layer-band ablation show the model holds a representation of causal direction — which event is the cause — that is linearly decodable (cross-domain peak ≈ 0.94), causally efficacious under steering, and abstract enough to transfer to fictional, zero-frequency relations, yet redundantly distributed across layers (ablation cannot cleanly remove it). End-to-end interpretability pipeline designed, run, and analyzed on an HPC GPU cluster.</p>

@@ -205,8 +205,8 @@ export const projects: Project[] = [
     blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
   },
   {
-    title: "Causal Direction",
-    href: "/research/causal-direction",
+    title: "Arrowhead",
+    href: "/research/arrowhead",
     color: "var(--accent-champagne)",
     glyph: "latent",
     tags: ["Extension · mechanistic", "Pilot"],

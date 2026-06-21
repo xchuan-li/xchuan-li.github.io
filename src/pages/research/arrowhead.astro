@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
-import CausalDirectionDemo from "../../components/CausalDirectionDemo.tsx";
+import ArrowheadDemo from "../../components/ArrowheadDemo.tsx";
 
 // The pilot as a chain of gates — each one cut, with controls, before the next.
 const roadmap = [
@@ -50,8 +50,8 @@ const roadmap = [
 ---
 
 <Base
-  title="Causal Direction · Xiaochuan Li"
-  description="An MSc-thesis pilot: does a real LLM hold a usable representation of causal direction — which event is the cause — and is it used? On Gemma-2-2B the direction is encoded, steerable, genuinely causal, yet redundantly distributed."
+  title="Arrowhead · Xiaochuan Li"
+  description="Arrowhead — an MSc-thesis pilot: does a real LLM hold a usable representation of causal direction, which event is the cause, and is it used? On Gemma-2-2B the direction is encoded, steerable, genuinely causal, yet redundantly distributed."
   showProgress={true}
   toc={true}
 >
@@ -59,7 +59,7 @@ const roadmap = [
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
       Extension · mechanistic pilot · real LLM
     </div>
-    <h1>Causal Direction — finding the cause inside the model</h1>
+    <h1>Arrowhead — finding the cause inside the model</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
       Does a model hold a representation of which event is the cause, and does it actually use it? An
       MSc-thesis pilot on Gemma-2-2B.
@@ -68,10 +68,12 @@ const roadmap = [
     <p>
       This is the program's question — <em>does the model use the structure that licenses an inference,
       or a surface proxy that merely travels with it?</em> — narrowed to one sharp handle and pushed
-      from behaviour into activation space. The handle is <strong>causal direction</strong>: given two
-      events, which is the cause? Forward and reverse use almost the same words, so telling them apart
-      cannot be lexical. And it is run on a real pretrained model (<strong>Gemma-2-2B</strong>), not the
-      <a href="/research/mini-causal-models">MiniCausalLang</a> sandbox — making it the
+      from behaviour into activation space. The handle, and the project's namesake, is
+      <strong>causal direction</strong>: an association is a line, but a cause is a line with an
+      <em>arrowhead</em> on it — and the arrowhead is what we go looking for inside the model. Given
+      two events, which is the cause? Forward and reverse use almost the same words, so telling them
+      apart cannot be lexical. And it is run on a real pretrained model (<strong>Gemma-2-2B</strong>),
+      not the <a href="/research/mini-causal-models">MiniCausalLang</a> sandbox — making it the
       <a href="/research/sc-certification">Paper 1</a> intervention logic carried to the feature level.
     </p>
 
@@ -113,7 +115,7 @@ const roadmap = [
       Try it — steer the direction and the judgment moves; ablate it and, even across eleven layers,
       it barely does:
     </p>
-    <CausalDirectionDemo client:visible />
+    <ArrowheadDemo client:visible />
 
     <h2>Method — four gates</h2>
     <p>
