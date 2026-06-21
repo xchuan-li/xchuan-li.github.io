@@ -50,6 +50,10 @@ export interface Project {
   spanTo?: ProjectNode;
   maturity?: ProjectMaturity;
   progress?: string;
+  // Natural deliverable — what this project actually produces. Not everything
+  // aims at a paper: a project can be a decision experiment, a shared workbench,
+  // a thesis chapter, a through-line, or a contribution to a collaborator's paper.
+  output?: string;
   blurb?: string;
 }
 
@@ -61,7 +65,7 @@ export const projects: Project[] = [
     color: "var(--accent-coral)",
     tint: "rgba(240, 153, 123, 0.10)",
     glyph: "sc",
-    tags: ["Paper 1", "Certification"],
+    tags: ["Workshop paper", "Certification"],
     desc: "Certification — is the linguistic structure that licenses an inference load-bearing for the model at all? Stable-correct behavior is not counted as grounded unless the stipulated structure survives shortcut-severing audits.",
     group: "core",
     tier: "now",
@@ -70,6 +74,7 @@ export const projects: Project[] = [
     node: "certify",
     maturity: "near",
     progress: "certify · workshop submission",
+    output: "Workshop paper",
     blurb: "A non-circular test of whether a stable, correct answer is licensed by the real structure — or rides a shortcut.",
   },
   {
@@ -79,7 +84,7 @@ export const projects: Project[] = [
     color: "var(--accent-teal)",
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
-    tags: ["Paper 2", "Localization"],
+    tags: ["Decision experiment", "Localization"],
     desc: "Localization — which linguistic operation or encoding does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
     group: "core",
     tier: "now",
@@ -89,6 +94,7 @@ export const projects: Project[] = [
     spanTo: "mechanism",
     maturity: "concept",
     progress: "localize · in design",
+    output: "Decision experiment",
     blurb: "Behavioural path-tracing: which linguistic operation actually carried the inference.",
   },
   {
@@ -98,7 +104,7 @@ export const projects: Project[] = [
     color: "var(--accent-purple)",
     tint: "rgba(175, 169, 236, 0.10)",
     glyph: "ciy",
-    tags: ["Paper 3", "Quantification"],
+    tags: ["Existence check", "Quantification"],
     desc: "Quantification — given the structure a model actually uses (measured by Isotrace), how much of the inference that structure licenses does it productively produce? A yield, not an accuracy.",
     group: "core",
     tier: "thesis",
@@ -106,6 +112,7 @@ export const projects: Project[] = [
     status: "Planned",
     maturity: "concept",
     progress: "quantify · planned",
+    output: "Existence check",
     blurb: "A yield, not an accuracy — how much of the inference a structure licenses does the model actually produce?",
   },
   {
@@ -123,6 +130,7 @@ export const projects: Project[] = [
     status: "Exploratory",
     maturity: "concept",
     progress: "exploratory",
+    output: "Through-line",
     blurb: "Does grounding survive when the same inference is re-encoded by each language's grammar?",
   },
   {
@@ -142,6 +150,7 @@ export const projects: Project[] = [
     spanTo: "crosslingual",
     maturity: "active",
     progress: "pilot · scaling",
+    output: "Co-authored paper",
     blurb: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script?",
   },
   {
@@ -158,6 +167,7 @@ export const projects: Project[] = [
     node: "certify",
     maturity: "active",
     progress: "workbench · building",
+    output: "Shared workbench",
     blurb: "A language-to-causal-graph workbench that makes structure, licensed inference, and interventions observable.",
   },
   {
@@ -174,6 +184,7 @@ export const projects: Project[] = [
     node: "mechanism",
     maturity: "active",
     progress: "data pipeline built",
+    output: "Decision experiment",
     blurb: "Does prompt framing shift a causally relevant latent state, or only the surface?",
   },
   {
@@ -189,7 +200,8 @@ export const projects: Project[] = [
     status: "Ongoing",
     node: "crosslingual",
     maturity: "active",
-    progress: "v2 complete",
+    progress: "report 2 · 2 models, 7 langs",
+    output: "Co-authored paper",
     blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
   },
   {
@@ -206,6 +218,7 @@ export const projects: Project[] = [
     node: "mechanism",
     maturity: "active",
     progress: "pilot complete",
+    output: "Thesis chapter",
     blurb: "On a real LLM, the cause-direction feature is encoded and steerable — yet redundantly distributed.",
   },
 ];

@@ -15,12 +15,12 @@ const progress = [
     status: "done",
   },
   {
-    date: "Planned",
-    phase: "Experiment 2",
-    title: "Confirm statistically, then push to low-resource",
+    date: "21 Jun 2026",
+    phase: "Experiment 2 · Report 2",
+    title: "It replicates across models — and language is not flat after all",
     summary:
-      "A mixed-effects logistic regression to confirm the attribute effect with item-level random effects; balanced Demography sampling to tighten the Wealth / Power intervals; an extension across the resource spectrum to test the “low-resource = worse” hypothesis directly; and a back-translation check on the Arabic / Hindi prompts.",
-    status: "planned",
+      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages, adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families; adding the lower-resource and distinct-script prompts surfaces a language effect the first four languages missed — Bengali and Greek elicit measurably more bias than English — and a back-translation check rules out translation quality as the cause.",
+    status: "done",
   },
 ];
 ---
@@ -60,18 +60,23 @@ const progress = [
 
     <h2>Latest progress</h2>
     <p>
-      The most recent milestone — <strong>Report 1</strong> — ran the first multilingual pipeline:
-      3,600 judgments from Qwen2.5-VL-7B across English, Chinese, Arabic, and Hindi. The headline is
-      that the judge's prototypicality bias is <strong>attribute-specific</strong> — a flat .56
-      Demography average hid a 0.30 spread, with Wealth at .77 and Power at .67 but Morality and
-      Intellect at chance — and the ordering <strong>barely moves across languages</strong>. It is a
-      preliminary, single-model read; the full data tables and caveats are in the
-      <a href="/research/cross-lingual-protobias/report-1">Report 1 writeup →</a>.
+      The most recent milestone — <strong>Report 2</strong> — scaled the probe to two model families
+      (Qwen2.5-VL-7B and InternVL3-8B) and seven languages, adding Russian, Bengali, and Greek to span
+      resource levels and scripts. Two results <strong>replicate across both families</strong>: the bias
+      is <strong>attribute-specific</strong> (concentrated on Wealth and social status, near chance for
+      Morality and Intellect), and — once lower-resource, distinct-script prompts are added — a
+      <strong>language effect that the first four languages missed</strong> appears: Bengali and Greek
+      elicit measurably more bias than English. A back-translation check rules out translation quality,
+      and there is no attribute × language interaction, so the attribute <em>pattern</em> is
+      language-invariant while the overall <em>level</em> is not. Report 1's "language barely moves it"
+      now reads as a four-language artifact. Code and figures:
+      <a href="https://github.com/xchuan-li/cross_lingual_protobias">cross_lingual_protobias →</a>.
     </p>
 
     <p>
-      Switch the attribute and the prompt language below — the prototype bias swings sharply by
-      attribute but barely by language:
+      The interactive read below is the original <strong>four-language</strong> picture from Report 1 —
+      the prototype bias swings sharply by attribute, and only mildly by language until the
+      lower-resource prompts of Report 2 are added:
     </p>
 
     <ProtoBiasDemo client:visible />
@@ -105,12 +110,13 @@ const progress = [
     </p>
 
     <h2>Literature</h2>
+    <p class="!text-sm text-[var(--color-text-dim)] !mb-3">Source benchmark and the closest related work.</p>
     <ol>
-      <li><a href="https://aclanthology.org/2025.findings-acl.585/">ACL Findings 2025 paper</a></li>
-      <li><a href="https://aclanthology.org/2024.emnlp-main.474/">EMNLP 2024 paper</a></li>
-      <li><a href="https://aclanthology.org/2022.gebnlp-1.9/">GeBNLP 2022 paper</a></li>
-      <li><a href="https://aclanthology.org/2025.findings-emnlp.783/">EMNLP Findings 2025 paper</a></li>
-      <li><a href="https://arxiv.org/abs/2601.04946">ProtoBias</a></li>
+      <li>Roy, Bhatia &amp; Eger. <a href="https://arxiv.org/abs/2601.04946">ProtoBias</a> — the source benchmark this project extends.</li>
+      <li>Hausladen, Knott, Camerer &amp; Perona. <a href="https://arxiv.org/abs/2408.14435">Social Perception of Faces in a Vision-Language Model</a> (FAccT 2025) — bias concentrates unevenly across social-trait dimensions, paralleling our attribute-specific result.</li>
+      <li>Al Sahili, Patras &amp; Purver. <a href="https://arxiv.org/abs/2505.14160">Breaking Language Barriers or Reinforcing Bias?</a> (IJCNLP-AACL 2025) — multilingual VLMs show stronger bias than English, largest in low-resource languages; the closest mirror of our language effect.</li>
+      <li>Neplenbroek, Bisazza &amp; Fernández. <a href="https://arxiv.org/abs/2406.07243">MBBQ</a> (CoLM 2024) — non-English stereotypes exceed English even after controlling for culture; the text-only precedent, with a control parallel to our back-translation check.</li>
+      <li>Friedrich et&nbsp;al. <a href="https://aclanthology.org/2025.acl-long.966/">Multilingual T2I Generation Magnifies Gender Stereotypes</a> (ACL 2025) — cross-lingual bias variation in image generation; a contrasting modality.</li>
     </ol>
   </article>
 </Base>
