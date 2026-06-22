@@ -9,8 +9,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://xchuan-li.github.io',
   // Project renamed "Causal Direction" -> "Arrowhead"; keep the old URL working.
+  // CIY page removed; send its old URL to the research index.
   redirects: {
     '/research/causal-direction': '/research/arrowhead',
+    '/research/ciy': '/research',
   },
   integrations: [mdx(), react(), sitemap()],
   vite: {
