@@ -19,7 +19,7 @@ const progress = [
     phase: "Experiment 2 · Report 2",
     title: "It replicates across models — and language is not flat after all",
     summary:
-      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages, adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families; adding the lower-resource and distinct-script prompts surfaces a language effect the first four languages missed — Bengali and Greek elicit measurably more bias than English — and a back-translation check rules out translation quality as the cause.",
+      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages — about 12,500 judgments — adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families; adding the lower-resource and distinct-script prompts surfaces a language effect the first four languages missed — Bengali and Greek elicit measurably more bias than English — and a back-translation check rules out translation quality. Deeper checks show the prototype trap is largely item-intrinsic (the same image pairs fool both models, r = 0.68) and not a low-level visual artifact, pointing to a two-factor account of the bias.",
     status: "done",
   },
 ];
@@ -71,6 +71,19 @@ const progress = [
       language-invariant while the overall <em>level</em> is not. Report 1's "language barely moves it"
       now reads as a four-language artifact. Code and figures:
       <a href="https://github.com/xchuan-li/cross_lingual_protobias">cross_lingual_protobias →</a>.
+    </p>
+
+    <p>
+      Two deeper checks make the effect hard to dismiss. First, it is not a low-level visual artifact:
+      the prototypical image always alters one visual feature — count, colour, size, layout — and
+      <strong>colour, the obvious confound, is where the model is least fooled</strong>; the bias is
+      strongest exactly when the discriminating cue is hard to perceive. Second, the two model families
+      fail on largely the <strong>same image pairs</strong> (per-item error correlation r = 0.68), so the
+      prototype trap is mostly an objective property of the image pair, not a quirk of one model. Together
+      these point to a <strong>two-factor account</strong>: the attribute decides whether a visual
+      shortcut exists at all — a prototype for wealth and status, none for morality or intellect — and the
+      weakness of the signal, whether a hard-to-perceive cue or an unfamiliar language, decides how
+      strongly the model takes it.
     </p>
 
     <p>
