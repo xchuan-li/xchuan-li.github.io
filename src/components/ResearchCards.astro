@@ -139,15 +139,15 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
   .rc-rail::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 999px; }
 
   .rc-card {
-    flex: 0 0 min(86vw, 25rem);
+    flex: 0 0 min(89vw, 28.5rem);
     scroll-snap-align: start;
-    display: flex; flex-direction: column; gap: 0.6rem;
-    padding: 1.3rem 1.4rem 1.1rem;
+    display: flex; flex-direction: column; gap: 0.7rem;
+    padding: 1.6rem 1.7rem 1.35rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-top: 3px solid var(--c);
-    border-radius: 12px;
-    min-height: 15rem;
+    border-radius: 13px;
+    min-height: 17.5rem;
     text-decoration: none;
     transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -170,15 +170,15 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
   .rc-tag-kind { color: var(--c); border-color: color-mix(in srgb, var(--c) 45%, var(--color-border)); background: color-mix(in srgb, var(--c) 8%, transparent); }
 
   .rc-card-title {
-    font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+    font-family: var(--font-display); font-size: 1.45rem; font-weight: 600;
     line-height: 1.2; color: var(--color-text); margin: 0.1rem 0 0;
     transition: color 0.2s ease;
   }
   .rc-card:hover .rc-card-title { color: var(--c); }
   .rc-card-desc {
-    font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted);
+    font-size: 0.95rem; line-height: 1.62; color: var(--color-text-muted);
     margin: 0;
-    display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden;
   }
   .rc-card-foot {
     display: flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 0.6rem;
@@ -207,7 +207,7 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
   @media (max-width: 720px) {
     .rc-lead { grid-template-columns: 1fr; row-gap: 1rem; }
     .rc-portrait img { width: 60px; height: 74px; }
-    .rc-card { flex-basis: 86vw; min-height: 14rem; }
+    .rc-card { flex-basis: 89vw; min-height: 16rem; }
     .rc-nav { display: none; }
   }
 </style>
