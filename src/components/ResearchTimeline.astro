@@ -4,6 +4,10 @@
 // timeline with the date on the left and, on the right, large project entries
 // ("Name: one-line"), smaller writing entries interspersed, and small milestone
 // notes. Entries are precomputed (dated, sorted, month-labelled) in index.astro.
+import ProjectGlyph from "./ProjectGlyph.astro";
+import HanGLFigure from "./HanGLFigure.astro";
+import TLFig from "./TLFig.astro";
+
 interface Origin { label: string; href: string; hook?: string; }
 interface Entry {
   type: "project" | "writing" | "milestone";
@@ -14,6 +18,8 @@ interface Entry {
   name?: string;
   blurb?: string;
   intro?: string;
+  glyph?: string;
+  fig?: string;
   color?: string;
   category?: string;
   progress?: string;
@@ -52,18 +58,27 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
           <div class="tl-entry">
             {e.type === "project" && (
               <a class="tl-proj" href={e.href} style={`--c: ${e.color ?? "var(--color-accent)"}`}>
-                <span class="tl-proj-title">
-                  <span class="tl-proj-name">{e.name}</span>
+                <span class="tl-proj-main">
+                  <span class="tl-proj-title">
+                    <span class="tl-proj-name">{e.name}</span>
+                  </span>
+                  {e.intro && <span class="tl-proj-intro">{e.intro}</span>}
+                  <span class="tl-proj-meta">
+                    <span>{e.category === "collaborative" ? "Collaboration" : "Solo"}</span>
+                    {e.kind && <span class="tl-dot">·</span>}
+                    {e.kind && <span>{kindLabel[e.kind] ?? e.kind}</span>}
+                    {e.progress && <span class="tl-dot">·</span>}
+                    {e.progress && <span>{e.progress}</span>}
+                    {e.demo && <span class="tl-demo">interactive demo ↗</span>}
+                  </span>
                 </span>
-                {e.intro && <span class="tl-proj-intro">{e.intro}</span>}
-                <span class="tl-proj-meta">
-                  <span>{e.category === "collaborative" ? "Collaboration" : "Solo"}</span>
-                  {e.kind && <span class="tl-dot">·</span>}
-                  {e.kind && <span>{kindLabel[e.kind] ?? e.kind}</span>}
-                  {e.progress && <span class="tl-dot">·</span>}
-                  {e.progress && <span>{e.progress}</span>}
-                  {e.demo && <span class="tl-demo">interactive demo ↗</span>}
-                </span>
+                {(e.fig || e.glyph) && (
+                  <span class={`tl-proj-fig ${e.fig ? "tl-proj-fig-real" : ""}`} aria-hidden="true">
+                    {e.fig === "hangl" ? <HanGLFigure />
+                      : e.fig ? <TLFig kind={e.fig} color={e.color} />
+                      : <ProjectGlyph kind={e.glyph as any} color={e.color} />}
+                  </span>
+                )}
               </a>
             )}
             {e.type === "writing" && (
@@ -132,10 +147,22 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
 
   /* project entry — the large type */
   .tl-proj {
-    display: block; text-decoration: none; border-radius: 8px;
+    display: flex; gap: 1.75rem; align-items: flex-start; justify-content: space-between;
+    text-decoration: none; border-radius: 8px;
     margin: -0.5rem -0.75rem; padding: 0.5rem 0.75rem; transition: background 0.18s ease;
   }
   .tl-proj:hover { background: var(--color-surface); }
+  .tl-proj-main { flex: 1 1 auto; min-width: 0; display: block; }
+  .tl-proj-fig {
+    flex: 0 0 200px; align-self: center;
+    border: 1px solid var(--color-border); border-radius: 12px;
+    background: #fffdf9;
+    box-shadow: 0 1px 12px color-mix(in srgb, var(--color-text) 5%, transparent);
+    padding: 1.15rem 1.3rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-proj-fig-real { flex-basis: 320px; padding: 0.9rem 1rem; }
+  .tl-proj-fig :global(.proj-glyph) { max-width: 150px; }
   .tl-proj-title {
     display: block; font-family: var(--font-display); font-weight: 600;
     font-size: 1.72rem; line-height: 1.18; letter-spacing: -0.01em; color: var(--color-text);
@@ -195,5 +222,7 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
     .tl-row { grid-template-columns: 1fr; gap: 0.3rem; }
     .tl-date { text-align: left; padding-top: 0; }
     .tl-proj-title { font-size: 1.22rem; }
+    .tl-proj { gap: 1rem; }
+    .tl-proj-fig { display: none; }
   }
 </style>

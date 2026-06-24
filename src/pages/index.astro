@@ -71,6 +71,17 @@ const noteBlurb: Record<string, string> = {
   "inferential-productivity": "Given a system's behaviour, what is the smallest causal structure that has to be there for it to land?",
 };
 
+// Which real per-project figure to show on the right (by href). Projects without
+// a clean static figure fall back to their glyph for now.
+const projectFig: Record<string, string> = {
+  "/research/arrowhead": "arrowhead",
+  "/research/hangl": "hangl",
+  "/research/cross-lingual-protobias": "protobias",
+  "/research/latent-control-states": "latent",
+  "/research/sc-certification": "sc",
+  "/research/mini-causal-models": "mcm",
+};
+
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthLabel = (iso: string) => {
   const [y, m] = iso.split("-");
@@ -92,6 +103,8 @@ const rawEntries = [
       progress: p.progress,
       kind: p.kind,
       demo: p.demo,
+      glyph: p.glyph,
+      fig: projectFig[p.href],
     })),
   ...writingPosts.map((p) => ({
     type: "writing" as const,

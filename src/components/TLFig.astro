@@ -1,0 +1,127 @@
+---
+// TLFig — small, timeline-sized figures for projects that don't have a clean
+// box-friendly figure of their own. One compact, theme-aware SVG per project,
+// drawn from the project's real concept (no invented numbers). viewBox 0 0 300 176.
+interface Props { kind: string; color?: string }
+const { kind, color = "var(--color-accent)" } = Astro.props;
+const accent = `color-mix(in srgb, ${color} 70%, var(--color-text))`;
+---
+<svg class="tf" viewBox="0 0 300 176" role="img" style={`--c: ${accent}`} preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <marker id="tf-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1 L9 5 L0 9" class="tf-h" />
+    </marker>
+    <marker id="tf-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 1 L9 5 L0 9" class="tf-h-c" />
+    </marker>
+  </defs>
+
+  {kind === "arrowhead" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">cause-direction feature · steerable</text>
+      <circle class="tf-node" cx="58" cy="66" r="14" />
+      <text class="tf-nl" x="58" y="70" text-anchor="middle">A</text>
+      <circle class="tf-node-f" cx="206" cy="66" r="14" />
+      <text class="tf-nl-f" x="206" y="70" text-anchor="middle">B</text>
+      <line class="tf-edge" x1="74" y1="66" x2="188" y2="66" marker-end="url(#tf-a)" />
+      <text class="tf-elbl" x="131" y="56" text-anchor="middle">cause → effect</text>
+      <text class="tf-steer" x="255" y="113" text-anchor="middle">steer −</text>
+      <circle class="tf-node-sm" cx="58" cy="120" r="10" />
+      <circle class="tf-node-sm" cx="206" cy="120" r="10" />
+      <line class="tf-edge-c tf-dash" x1="190" y1="120" x2="72" y2="120" marker-end="url(#tf-c)" />
+      <text class="tf-cap" x="150" y="160" text-anchor="middle">steering flips the cause direction</text>
+    </g>
+  )}
+
+  {kind === "protobias" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">meaning vs culture prototype</text>
+      <rect class="tf-img" x="34" y="64" width="34" height="34" rx="4" />
+      <text class="tf-imk" x="51" y="86" text-anchor="middle">img</text>
+      <line class="tf-edge" x1="72" y1="74" x2="176" y2="56" marker-end="url(#tf-a)" />
+      <text class="tf-elbl" x="150" y="48" text-anchor="middle">semantic content ✓</text>
+      <line class="tf-edge-c tf-dash" x1="72" y1="90" x2="176" y2="120" marker-end="url(#tf-c)" />
+      <text class="tf-elbl-c" x="150" y="138" text-anchor="middle">culture prototype ✗</text>
+      <text class="tf-cap" x="150" y="164" text-anchor="middle">tested across 7 languages</text>
+    </g>
+  )}
+
+  {kind === "latent" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">framing → latent state, or surface?</text>
+      <text class="tf-frame" x="20" y="62" text-anchor="start">framing: urgent</text>
+      <text class="tf-frame" x="20" y="92" text-anchor="start">framing: neutral</text>
+      <line class="tf-edge-dim" x1="118" y1="58" x2="156" y2="74" marker-end="url(#tf-a)" />
+      <line class="tf-edge-dim" x1="118" y1="88" x2="156" y2="78" marker-end="url(#tf-a)" />
+      <rect class="tf-box" x="160" y="58" width="42" height="36" rx="6" />
+      <text class="tf-boxl" x="181" y="80" text-anchor="middle">LLM</text>
+      <circle class="tf-node" cx="232" cy="62" r="8" />
+      <circle class="tf-node-f" cx="262" cy="86" r="8" />
+      <line class="tf-edge" x1="239" y1="66" x2="256" y2="81" marker-end="url(#tf-a)" />
+      <text class="tf-elbl" x="248" y="112" text-anchor="middle">state shifts</text>
+      <text class="tf-cap" x="150" y="160" text-anchor="middle">probe · activation patching next</text>
+    </g>
+  )}
+
+  {kind === "sc" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">stable correctness ≠ grounded</text>
+      <circle class="tf-node" cx="60" cy="60" r="13" />
+      <text class="tf-nl" x="60" y="64" text-anchor="middle">M</text>
+      <circle class="tf-node-f" cx="216" cy="80" r="15" />
+      <text class="tf-nl-f" x="216" y="84" text-anchor="middle">Y</text>
+      <line class="tf-edge" x1="74" y1="63" x2="198" y2="76" marker-end="url(#tf-a)" />
+      <text class="tf-elbl" x="132" y="54" text-anchor="middle">structure carries it</text>
+      <circle class="tf-node-sm" cx="60" cy="120" r="11" />
+      <text class="tf-imk" x="60" y="124" text-anchor="middle">c</text>
+      <line class="tf-edge-c tf-dash" x1="72" y1="116" x2="200" y2="90" marker-end="url(#tf-c)" />
+      <line class="tf-cut" x1="130" y1="99" x2="140" y2="109" />
+      <line class="tf-cut" x1="140" y1="99" x2="130" y2="109" />
+      <text class="tf-elbl-c" x="120" y="140" text-anchor="middle">shortcut — severed by do( )</text>
+      <text class="tf-cap" x="150" y="164" text-anchor="middle">a stable answer may ride the shortcut</text>
+    </g>
+  )}
+
+  {kind === "mcm" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">grammar → causal graph</text>
+      <text class="tf-sent" x="150" y="50" text-anchor="middle">"X makes M, and M causes Y"</text>
+      <line class="tf-edge-dim" x1="150" y1="58" x2="150" y2="86" marker-end="url(#tf-a)" />
+      <text class="tf-steer" x="174" y="76" text-anchor="start">compile</text>
+      <circle class="tf-node" cx="68" cy="114" r="12" /><text class="tf-nl" x="68" y="118" text-anchor="middle">X</text>
+      <circle class="tf-node" cx="150" cy="114" r="12" /><text class="tf-nl" x="150" y="118" text-anchor="middle">M</text>
+      <circle class="tf-node-f" cx="232" cy="114" r="12" /><text class="tf-nl-f" x="232" y="118" text-anchor="middle">Y</text>
+      <line class="tf-edge" x1="80" y1="114" x2="136" y2="114" marker-end="url(#tf-a)" />
+      <line class="tf-edge" x1="162" y1="114" x2="218" y2="114" marker-end="url(#tf-a)" />
+      <text class="tf-cap" x="150" y="158" text-anchor="middle">structure &amp; interventions, observable</text>
+    </g>
+  )}
+</svg>
+
+<style>
+  .tf { width: 100%; height: auto; display: block; font-family: var(--font-mono); }
+  .tf-kick { font-size: 11px; fill: var(--color-text-dim); letter-spacing: 0.02em; }
+  .tf-cap { font-size: 10px; font-style: italic; fill: var(--color-text-dim); }
+  .tf-nl { font-size: 12px; font-weight: 600; fill: var(--c); }
+  .tf-nl-f { font-size: 12px; font-weight: 600; fill: var(--btn-primary-text, #fff); }
+  .tf-elbl { font-size: 10px; fill: var(--color-text-muted); }
+  .tf-elbl-c { font-size: 10px; fill: var(--accent-coral); }
+  .tf-steer { font-size: 9.5px; fill: var(--color-text-dim); }
+  .tf-frame { font-size: 11px; fill: var(--color-text-muted); }
+  .tf-sent { font-size: 11px; fill: var(--color-text-muted); }
+  .tf-imk, .tf-boxl { font-size: 9.5px; fill: var(--color-text-muted); }
+
+  .tf-node { fill: var(--color-bg); stroke: var(--c); stroke-width: 1.6; }
+  .tf-node-f { fill: var(--c); stroke: none; }
+  .tf-node-sm { fill: var(--color-bg); stroke: var(--color-text-dim); stroke-width: 1.3; }
+  .tf-img { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1.3; }
+  .tf-box { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1.3; }
+
+  .tf-edge { stroke: var(--c); stroke-width: 1.7; fill: none; stroke-linecap: round; }
+  .tf-edge-c { stroke: var(--accent-coral); stroke-width: 1.7; fill: none; stroke-linecap: round; }
+  .tf-edge-dim { stroke: var(--color-text-dim); stroke-width: 1.3; fill: none; stroke-linecap: round; }
+  .tf-dash { stroke-dasharray: 4 3; }
+  .tf-cut { stroke: var(--accent-coral); stroke-width: 1.6; stroke-linecap: round; }
+  .tf-h { fill: none; stroke: var(--c); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .tf-h-c { fill: none; stroke: var(--accent-coral); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+</style>
