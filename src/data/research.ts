@@ -61,12 +61,14 @@ export interface Project {
   // a thesis chapter, a through-line, or a contribution to a collaborator's paper.
   output?: string;
   blurb?: string;
-  // Homepage showcase cards (src/components/ResearchCards.astro). A project appears
-  // as a big swipeable card ONLY when `kind` is set — i.e. it has real results;
-  // pure-concept projects are intentionally left off. `domain` is the short field
-  // label shown as a tag.
+  // Showcase tags used on the homepage cards and the /research index. `domain` is
+  // the short field label; `kind` is what the project ultimately is. The homepage
+  // cards show only result-bearing projects (maturity !== "concept"); the /research
+  // index shows the full program.
   domain?: string;
   kind?: ProjectKind;
+  // Whether the project page has an interactive demo (shown as a small marker).
+  demo?: boolean;
 }
 
 export const projects: Project[] = [
@@ -90,6 +92,7 @@ export const projects: Project[] = [
     blurb: "A non-circular test of whether a stable, correct answer is licensed by the real structure — or rides a shortcut.",
     domain: "Grounding · certification",
     kind: "paper",
+    demo: true,
   },
   {
     n: "02",
@@ -110,6 +113,8 @@ export const projects: Project[] = [
     progress: "localize · in design",
     output: "Decision experiment",
     blurb: "Behavioural path-tracing: which linguistic operation actually carried the inference.",
+    domain: "Localization · typology",
+    kind: "project",
   },
   {
     n: "→",
@@ -128,6 +133,8 @@ export const projects: Project[] = [
     progress: "exploratory",
     output: "Through-line",
     blurb: "Does grounding survive when the same inference is re-encoded by each language's grammar?",
+    domain: "Cross-lingual · typology",
+    kind: "project",
   },
   {
     n: "→",
@@ -150,6 +157,7 @@ export const projects: Project[] = [
     blurb: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script?",
     domain: "Cross-lingual grounding",
     kind: "paper",
+    demo: true,
   },
   {
     title: "MiniCausalLang",
@@ -207,6 +215,7 @@ export const projects: Project[] = [
     blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
     domain: "Multimodal bias",
     kind: "paper",
+    demo: true,
   },
   {
     title: "Arrowhead",
@@ -226,6 +235,7 @@ export const projects: Project[] = [
     blurb: "On a real LLM, the cause-direction feature is encoded and steerable — yet redundantly distributed.",
     domain: "Causal direction",
     kind: "project",
+    demo: true,
   },
 ];
 

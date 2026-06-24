@@ -1,11 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
 import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
-import ResearchCards from "../components/ResearchCards.astro";
+import ResearchTimeline from "../components/ResearchTimeline.astro";
 import { projects } from "../data/research";
+import { posts as writingPosts } from "../data/writing";
 
 // The research section as a narrative: Leibniz's question (origin) flows into the
-// program, then into a swipeable rail of project cards (ResearchCards).
+// program, then into a reverse-chronological timeline of projects and notes
+// (ResearchTimeline).
 const spineLeadIn = "Leibniz dreamed of a characteristica universalis — a language whose very structure would make valid inference mechanical, so that reasoning and its expression never came apart. Three centuries later, large language models are the first artifacts that almost embody it: systems made entirely of language that nonetheless appear to reason. My program turns that old question back on them — does a model actually use the causal structure language encodes to license an inference, or only a surface correlate of it? Each project below is one way of pinning that down.";
 
 const spineOrigin = {
@@ -14,38 +16,100 @@ const spineOrigin = {
   hook: "Nihil est sine ratione.",
 };
 
-const posts = [
-  {
-    slug: "inverted-observability",
-    title: "Inverted Observability — psychology and interpretability as mirror sciences",
-    meta: "Note · June 2026",
-  },
-  {
-    slug: "meaning-beneath-language",
-    title: "Is there meaning beneath the language?",
-    meta: "Note · June 2026",
-  },
-  {
-    slug: "causal-residue",
-    title: "Causal structure as residue — training as elimination",
-    meta: "Note · May 2026",
-  },
-  {
-    slug: "from-leibniz",
-    title: "From a Sufficient Reason to a Universal Language — what philosophy gave me that ML didn't",
-    meta: "Note · May 2026",
-  },
-  {
-    slug: "decidability-boundary",
-    title: "Why interpretability needs a decidability boundary",
-    meta: "Draft · May 2026",
-  },
-  {
-    slug: "inferential-productivity",
-    title: "Reasoning is generative; grounding needs the other direction",
-    meta: "Note · May 2026",
-  },
-];
+// Homepage timeline (below the Leibniz lead-in), transformer-circuits style: a
+// single reverse-chronological stream. Both project AND note display-dates are a
+// homepage-only narrative, hand-spread so projects and notes interleave (never two
+// notes in a row); the real note pubDates stay on /writing, and /research stays
+// date-free. Only result-bearing projects appear here — pure-concept directions
+// (Isotrace, Typological Grounding) are left off the homepage. Arrowhead is newest.
+const projectDate: Record<string, string> = {
+  "/research/arrowhead": "2026-06-20",
+  "/research/hangl": "2026-06-05",
+  "/research/cross-lingual-protobias": "2026-05-20",
+  "/research/latent-control-states": "2026-05-05",
+  "/research/sc-certification": "2026-04-15",
+  "/research/mini-causal-models": "2026-03-20",
+};
+// Homepage display-dates for the notes, chosen to interleave them among the
+// projects (their real pubDates, several clustered in late May, remain on /writing).
+const noteDate: Record<string, string> = {
+  "inverted-observability": "2026-06-12",
+  "meaning-beneath-language": "2026-05-28",
+  "causal-residue": "2026-05-12",
+  "inferential-productivity": "2026-04-25",
+  "decidability-boundary": "2026-04-02",
+  "from-leibniz": "2026-03-10",
+};
+// A 2–3 sentence introduction per project, condensed from each project's own
+// description in data/research.ts (no new claims) — keyed by href.
+const projectIntro: Record<string, string> = {
+  "/research/sc-certification":
+    "A model can answer a reasoning task correctly and stably and still not be using the structure that supposedly licenses the answer — it may be riding a surface cue that correlates. This builds a non-circular test for that gap: the stipulated structure counts as load-bearing only if the model's behaviour survives audits that sever the shortcuts. It is the entry point of the whole program.",
+  "/research/isotrace":
+    "Certification tells you whether the structure is used, not which part of it carried the inference. Isotrace upgrades that binary verdict into a hop-level diagnosis, using minimal pairs where distinct reasoning paths are forced to produce distinct output labels. It is currently in design, on the synthetic sandbox.",
+  "/research/mini-causal-models":
+    "A shared workbench that compiles small natural-language fragments into explicit causal graphs, so the structure a sentence encodes becomes observable. You can pose the model a question, intervene on the underlying graph, and check whether its answer tracks the structure or a surface accident. It is the bench the other projects run on.",
+  "/research/arrowhead":
+    "The certification work lives on a synthetic sandbox; Arrowhead asks whether it survives inside a real model. A completed pilot on Gemma-2-2B finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It is the first bridge from behaviour into mechanism.",
+  "/research/latent-control-states":
+    "Prompt framing — urgency, authority, an epistemic stance — clearly changes what a model says; this asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
+  "/research/hangl":
+    "Korean Sino-Korean words are a natural experiment in surface versus meaning: the Hangul spelling shares zero characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with capability — a strong model neither needs the cue nor is misled by it, a weak one is both. A collaborative pilot, now scaling across more models.",
+  "/research/cross-lingual-protobias":
+    "The applied, multimodal stress test of the core question: across languages, does a vision-language model track meaning, or lean on language- and culture-specific prototype shortcuts? It pits the two against each other, extending a forthcoming paper from an established NLP group. The current report covers two models across seven languages.",
+  "/research/typological-grounding":
+    "The flagship application the program builds toward. Languages encode the same inference in different devices — morphology, word order, context — and this asks whether a model's grounding survives the re-encoding, or only learned the surface habits of particular languages. Currently exploratory.",
+};
+// One-sentence homepage descriptions for the notes (their fuller excerpts live on
+// /writing) — keyed by slug.
+const noteBlurb: Record<string, string> = {
+  "inverted-observability": "Why developmental psychology and interpretability are the same question seen from opposite sides of a mirror.",
+  "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning — or three surface habits?",
+  "causal-residue": "Every training example is a falsifier; the structure a learner ends up with is the residue of cumulative cutting.",
+  "from-leibniz": "What an undergraduate thesis on Leibniz's universal character became after a change of discipline.",
+  "decidability-boundary": "Past a certain depth, much of what interpretability treats as a hard measurement is in fact an undefined quantity.",
+  "inferential-productivity": "Given a system's behaviour, what is the smallest causal structure that has to be there for it to land?",
+};
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthLabel = (iso: string) => {
+  const [y, m] = iso.split("-");
+  return `${MONTHS[Number(m) - 1]} ${y}`;
+};
+
+const rawEntries = [
+  ...projects
+    .filter((p) => projectDate[p.href])
+    .map((p) => ({
+      type: "project" as const,
+      date: projectDate[p.href],
+      href: p.href,
+      name: p.title.split(" · ")[0],
+      blurb: p.blurb ?? p.short ?? p.desc,
+      intro: projectIntro[p.href],
+      color: p.color,
+      category: p.category,
+      progress: p.progress,
+      kind: p.kind,
+      demo: p.demo,
+    })),
+  ...writingPosts.map((p) => ({
+    type: "writing" as const,
+    date: noteDate[p.slug] ?? p.pubDate,
+    href: `/writing/${p.slug}`,
+    title: p.title,
+    blurb: noteBlurb[p.slug] ?? p.excerpt,
+    status: p.status,
+  })),
+].sort((a, b) => b.date.localeCompare(a.date));
+
+let prevLabel = "";
+const entries = rawEntries.map((e) => {
+  const dateLabel = monthLabel(e.date);
+  const showDate = dateLabel !== prevLabel;
+  prevLabel = dateLabel;
+  return { ...e, dateLabel, showDate };
+});
 
 ---
 
@@ -134,43 +198,15 @@ const posts = [
         </h2>
       </div>
       <div class="fade-in-up fade-delay-200">
-        <ResearchCards
-          projects={projects}
+        <ResearchTimeline
           origin={spineOrigin}
           leadIn={spineLeadIn}
+          entries={entries}
         />
       </div>
     </div>
   </section>
 
-
-  <!-- =========== WRITING =========== -->
-  <section id="writing" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Writing</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Notes &amp; essays.</h2>
-        <p class="section-sub fade-in-up fade-delay-200">
-          Short pieces that sit upstream of the experiments — what the right question is, why the
-          standard fix is one level too shallow, what philosophy gave me that ML didn't.
-        </p>
-      </div>
-      <div class="writing-list fade-in-up fade-delay-300">
-        {
-          posts.map((p) => (
-            <a href={`/writing/${p.slug}`} class="writing-row">
-              <span class="writing-title">{p.title}</span>
-              <span class="writing-meta">{p.meta}</span>
-            </a>
-          ))
-        }
-      </div>
-      <div class="fade-in-up fade-delay-400" style="margin-top: 1.75rem;">
-        <a href="/writing" class="btn btn-secondary">All writing →</a>
-      </div>
-    </div>
-  </section>
 
   <!-- =========== CONTACT CTA =========== -->
   <section id="contact" class="section" style="padding-bottom: 7rem;">
