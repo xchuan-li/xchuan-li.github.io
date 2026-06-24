@@ -1,0 +1,227 @@
+---
+// ResearchCards — the homepage research showcase. A wide Leibniz lead-in (origin →
+// program) flows into a horizontally swipeable rail of big project cards. Only
+// projects with `kind` set (i.e. ones with real results) appear here; pure-concept
+// projects are intentionally excluded. Each card carries three tags: solo/collab,
+// the domain it probes, and what it ultimately is (tool / paper / project).
+// Data: src/data/research.ts.
+interface Origin { label: string; href: string; hook?: string; }
+interface Project {
+  title: string;
+  href: string;
+  color?: string;
+  category?: string;
+  maturity?: string;
+  progress?: string;
+  desc?: string;
+  short?: string;
+  blurb?: string;
+  domain?: string;
+  kind?: string;
+}
+interface Props {
+  projects: Project[];
+  origin: Origin;
+  leadIn: string;
+}
+const { projects, origin, leadIn } = Astro.props;
+const portraitSrc = "/images/leibniz-portrait.png";
+
+const MAT: Record<string, number> = { near: 0, active: 1, concept: 2 };
+// Showcase only the result-bearing projects (those given a `kind`). Order:
+// tools last; otherwise more mature first, personal before collaborative.
+const cards = projects
+  .filter((p) => p.kind)
+  .sort(
+    (a, b) =>
+      (a.kind === "tool" ? 1 : 0) - (b.kind === "tool" ? 1 : 0) ||
+      (MAT[a.maturity ?? "active"] ?? 1) - (MAT[b.maturity ?? "active"] ?? 1) ||
+      (a.category === "collaborative" ? 1 : 0) - (b.category === "collaborative" ? 1 : 0)
+  );
+
+const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", project: "Project" };
+---
+
+<div class="rc">
+  <!-- Leibniz lead-in: origin → program -->
+  <div class="rc-lead">
+    <a class="rc-portrait" href={origin.href} aria-label={origin.label}>
+      <img src={portraitSrc} alt="Portrait of Gottfried Wilhelm Leibniz" loading="lazy" decoding="async" />
+    </a>
+    <div class="rc-lead-text">
+      <span class="rc-kicker">{origin.label}</span>
+      <p class="rc-latin">{origin.hook ?? "Nihil est sine ratione."}</p>
+      <p class="rc-lead-body">{leadIn}</p>
+      <a class="rc-lead-cta" href={origin.href}>Read the philosophical bridge <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <!-- swipeable project rail -->
+  <div class="rc-rail-wrap">
+    <div class="rc-rail">
+      {cards.map((p) => (
+        <a class="rc-card" href={p.href} style={`--c: ${p.color ?? "var(--accent-coral)"}`}>
+          <div class="rc-tags">
+            <span class={`rc-tag rc-tag-${p.category === "collaborative" ? "collab" : "solo"}`}>
+              {p.category === "collaborative" ? "Collab" : "Solo"}
+            </span>
+            {p.domain && <span class="rc-tag rc-tag-domain">{p.domain}</span>}
+            {p.kind && <span class={`rc-tag rc-tag-kind rc-kind-${p.kind}`}>{kindLabel[p.kind] ?? p.kind}</span>}
+          </div>
+          <h3 class="rc-card-title">{p.title}</h3>
+          <p class="rc-card-desc">{p.desc ?? p.short ?? p.blurb}</p>
+          <div class="rc-card-foot">
+            <span class={`rc-mat rc-mat-${p.maturity ?? "active"}`} aria-hidden="true"></span>
+            <span class="rc-prog">{p.progress}</span>
+            <span class="rc-more">Read <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="rc-nav">
+      <button class="rc-arrow rc-prev" type="button" aria-label="Previous projects">←</button>
+      <button class="rc-arrow rc-next" type="button" aria-label="Next projects">→</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .rc { margin: 2.5rem 0 0; }
+
+  /* Leibniz lead-in */
+  .rc-lead {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    column-gap: 1.5rem;
+    align-items: start;
+    max-width: 52rem;
+    margin-bottom: 2.8rem;
+  }
+  .rc-portrait { display: block; text-decoration: none; }
+  .rc-portrait img {
+    width: 72px; height: 88px; object-fit: cover; object-position: 50% 14%;
+    border-radius: 10px; filter: contrast(1.04);
+    -webkit-mask-image: radial-gradient(130% 100% at 50% 30%, #000 62%, transparent 97%);
+            mask-image: radial-gradient(130% 100% at 50% 30%, #000 62%, transparent 97%);
+  }
+  .rc-kicker {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-deep-purple);
+  }
+  .rc-latin {
+    margin: 0.3rem 0 0; font-family: var(--font-display); font-style: italic;
+    font-size: 1.55rem; font-weight: 500; line-height: 1.15; color: var(--color-text);
+  }
+  .rc-lead-body {
+    margin: 0.7rem 0 0; font-size: 0.95rem; line-height: 1.65;
+    color: var(--color-text-muted); max-width: 46rem;
+  }
+  .rc-lead-cta {
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.9rem;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em;
+    color: var(--btn-primary-text); background: var(--accent-deep-purple);
+    padding: 5px 13px; border-radius: 999px; text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .rc-lead-cta:hover { opacity: 0.88; }
+
+  /* rail */
+  .rc-rail-wrap { position: relative; }
+  .rc-rail {
+    display: flex; gap: 1.1rem;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.25rem 0.25rem 1.25rem;
+    margin: 0 -0.25rem;
+    scrollbar-width: thin;
+  }
+  .rc-rail::-webkit-scrollbar { height: 6px; }
+  .rc-rail::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 999px; }
+
+  .rc-card {
+    flex: 0 0 min(86vw, 25rem);
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    padding: 1.3rem 1.4rem 1.1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-top: 3px solid var(--c);
+    border-radius: 12px;
+    min-height: 15rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .rc-card:hover {
+    border-color: var(--card-hover-border); background: var(--card-hover-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 26px color-mix(in srgb, var(--c) 12%, transparent);
+  }
+
+  .rc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .rc-tag {
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px;
+    border: 1px solid var(--color-border); color: var(--color-text-dim);
+  }
+  .rc-tag-solo { color: var(--accent-deep-purple); border-color: color-mix(in srgb, var(--accent-deep-purple) 35%, var(--color-border)); }
+  .rc-tag-collab { color: var(--accent-teal-deep, var(--accent-teal)); border-color: color-mix(in srgb, var(--accent-teal) 40%, var(--color-border)); }
+  .rc-tag-domain { color: var(--color-text-muted); }
+  .rc-tag-kind { color: var(--c); border-color: color-mix(in srgb, var(--c) 45%, var(--color-border)); background: color-mix(in srgb, var(--c) 8%, transparent); }
+
+  .rc-card-title {
+    font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+    line-height: 1.2; color: var(--color-text); margin: 0.1rem 0 0;
+    transition: color 0.2s ease;
+  }
+  .rc-card:hover .rc-card-title { color: var(--c); }
+  .rc-card-desc {
+    font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted);
+    margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .rc-card-foot {
+    display: flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 0.6rem;
+  }
+  .rc-mat { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; background: var(--c); }
+  .rc-mat-near { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 28%, transparent); }
+  .rc-mat-concept { background: transparent; border: 1.5px solid var(--color-text-dim); }
+  .rc-prog { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.02em; color: var(--color-text-muted); }
+  .rc-more {
+    margin-left: auto; font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.04em; color: var(--c); opacity: 0; transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .rc-card:hover .rc-more { opacity: 1; transform: translateX(0); }
+
+  .rc-nav { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.4rem; }
+  .rc-arrow {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text-muted); font-size: 1rem; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+  .rc-arrow:hover { border-color: var(--color-border-strong); color: var(--color-text); background: var(--card-hover-bg); }
+
+  @media (max-width: 720px) {
+    .rc-lead { grid-template-columns: 1fr; row-gap: 1rem; }
+    .rc-portrait img { width: 60px; height: 74px; }
+    .rc-card { flex-basis: 86vw; min-height: 14rem; }
+    .rc-nav { display: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll(".rc-rail-wrap").forEach((wrap) => {
+    const rail = wrap.querySelector(".rc-rail");
+    if (!rail) return;
+    const step = () => Math.min(rail.clientWidth * 0.8, 460);
+    wrap.querySelector(".rc-prev")?.addEventListener("click", () =>
+      rail.scrollBy({ left: -step(), behavior: "smooth" })
+    );
+    wrap.querySelector(".rc-next")?.addEventListener("click", () =>
+      rail.scrollBy({ left: step(), behavior: "smooth" })
+    );
+  });
+</script>

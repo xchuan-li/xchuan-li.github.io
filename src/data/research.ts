@@ -30,6 +30,12 @@ export type ProjectNode = "certify" | "mechanism" | "crosslingual";
 //   concept — concept or planned
 export type ProjectMaturity = "near" | "active" | "concept";
 
+// Homepage showcase: what the project ultimately is.
+//   tool    — a reusable workbench / piece of infrastructure
+//   paper   — targets (or contributes to) a paper
+//   project — a standalone project / decision experiment / thesis chapter
+export type ProjectKind = "tool" | "paper" | "project";
+
 export interface Project {
   n?: string;
   title: string;
@@ -55,6 +61,12 @@ export interface Project {
   // a thesis chapter, a through-line, or a contribution to a collaborator's paper.
   output?: string;
   blurb?: string;
+  // Homepage showcase cards (src/components/ResearchCards.astro). A project appears
+  // as a big swipeable card ONLY when `kind` is set — i.e. it has real results;
+  // pure-concept projects are intentionally left off. `domain` is the short field
+  // label shown as a tag.
+  domain?: string;
+  kind?: ProjectKind;
 }
 
 export const projects: Project[] = [
@@ -76,6 +88,8 @@ export const projects: Project[] = [
     progress: "certify · workshop submission",
     output: "Workshop paper",
     blurb: "A non-circular test of whether a stable, correct answer is licensed by the real structure — or rides a shortcut.",
+    domain: "Grounding · certification",
+    kind: "paper",
   },
   {
     n: "02",
@@ -134,6 +148,8 @@ export const projects: Project[] = [
     progress: "pilot · scaling",
     output: "Co-authored paper",
     blurb: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script?",
+    domain: "Cross-lingual grounding",
+    kind: "paper",
   },
   {
     title: "MiniCausalLang",
@@ -151,6 +167,8 @@ export const projects: Project[] = [
     progress: "workbench · building",
     output: "Shared workbench",
     blurb: "A language-to-causal-graph workbench that makes structure, licensed inference, and interventions observable.",
+    domain: "Eval infrastructure",
+    kind: "tool",
   },
   {
     title: "Latent Control States",
@@ -168,6 +186,8 @@ export const projects: Project[] = [
     progress: "data pipeline built",
     output: "Decision experiment",
     blurb: "Does prompt framing shift a causally relevant latent state, or only the surface?",
+    domain: "Mechanistic interp",
+    kind: "project",
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -185,6 +205,8 @@ export const projects: Project[] = [
     progress: "report 2 · 2 models, 7 langs",
     output: "Co-authored paper",
     blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
+    domain: "Multimodal bias",
+    kind: "paper",
   },
   {
     title: "Arrowhead",
@@ -202,6 +224,8 @@ export const projects: Project[] = [
     progress: "pilot complete",
     output: "Thesis chapter",
     blurb: "On a real LLM, the cause-direction feature is encoded and steerable — yet redundantly distributed.",
+    domain: "Causal direction",
+    kind: "project",
   },
 ];
 
