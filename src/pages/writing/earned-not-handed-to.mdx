@@ -1,0 +1,95 @@
+---
+layout: ../../layouts/Base.astro
+title: Earned, not handed to — language grounding and world-model identifiability
+description: The grounding problem in computational linguistics and the identifiability problem facing world models are the same question — when form licenses a causal inference rather than correlating with one — asked of two systems. Language was only the first testbed.
+---
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Note · June 2026
+</div>
+
+# Earned, not handed to
+
+## One question, before you fix the object
+
+There is a question I keep putting to models about language, and I have started to suspect it was never really about language. The question is: *when does a system's handling of form license an inference about the world, rather than merely correlate with one?*
+
+Set the object to language and it is the grounding problem I work on. Set the object to the state of the world and it is the identifiability problem now facing world models. The same question, on two systems. Language was only the first place I learned to ask it.
+
+---
+
+## The seam: skeleton and flesh
+
+Pull *knowing a language* apart into two layers. There is the **skeleton** — the formalizable, portable, transferable part: syntax, logic, compositional semantics, the distributional shape of words. And there is the **flesh** — the line that runs from a word back to the world through first-person contact: reference, the consequence of an action, what is at stake, what has weight.
+
+The skeleton can be handed over by data; text is its enormous sample. The flesh cannot. Text holds only its *shadow*. The word *burn*, written by people who were burned, settles into the distributional shape of "burn" — but the writing carries none of the causal weight of having been burned. That is the seam, and almost everything below is the same seam shifted to a new place.
+
+---
+
+## Training data is flesh, dried
+
+So training data is not the flesh. It is the flesh dehydrated into text: the grain preserved, the causal line back to the world gone. The evidence is in the failure mode — a model with the calculus but not the nose, deriving cleanly toward a conclusion that anyone with a body would reject on contact. Skeleton intact, flesh absent.
+
+---
+
+## Reasoning straddles the seam
+
+The *mechanism* of inference is skeleton — and it runs smoother, not worse, as grounding thins; the foreign-language effect is the everyday version of this. But the *judgment* — which premises to trust, whether to believe the conclusion, when to stop — is flesh. A pure-skeleton reasoner walks soberly into the absurd. That is not a bug particular to one model; it is what reasoning without the other direction [looks like](/writing/inferential-productivity).
+
+---
+
+## The world constrains but does not carve
+
+A structured world admits many carvings, each faithful to it yet mutually different: how a language frames a motion event, where it cuts the blues, whether it has a word for *Geschwister*. That translation loses something is the proof. Language *legislates* inside the freedom the world leaves open — bound, but not uniquely determined.
+
+And yet for the individual the carving is singular. The native speaker mistakes one contingent carving for the world itself — the fish that cannot see the water. A second language is the instrument that pries that apart; [typology](/research/typological-grounding) is a catalogue of the same content re-carved by different grammars, [built for free over millennia](/research/cross-lingual-protobias). This is why my language work leans on the cross-lingual case: it is the only clean way to separate the structure from the carving.
+
+---
+
+## Carrying it across
+
+Translate *truly knowing* into an engineering problem, and the thing needed is not more text — that only thickens the skeleton — but the **other end**: a lived, causally-fed line from the world. Three routes are on offer.
+
+- **Scaling** supplies skeleton and bets that a sharp enough shadow simply *is* the thing. It is the contemporary form of Leibniz's wager.
+- **Multimodal** pushes word→word out to word→sensory-record. A real step — but a *recorded* world, not a lived one.
+- **Embodiment** is the only route that matches the definition of flesh: action → consequence → correction, the world acting causally back on an agent with something at stake.
+
+I won't pretend the last one is settled. Three gates stand where philosophy is turning into engineering: does *simulated* experience count as experience; do *restartable* stakes count as stakes; and even hard-won grounding is still one carving — the agent, too, will have water it cannot see.
+
+---
+
+## Today's world models split along the seam
+
+As of mid-2026 the field has divided, and the division is the seam tearing along itself.
+
+**Generative** world models (Genie, Sora, Cosmos, Marble) render interactive worlds frame by frame. They sit on the skeleton side — extraordinary machines for fitting the *look* of a world, the shadow, rather than the world acting causally back on an agent. **Understanding** world models — LeCun's JEPA line, Hafner's Dreamer — predict the future in an abstract representation, aimed explicitly at causal prediction and planning. That is the right direction, because the target moved from *predict the next token or pixel* to *predict the consequence of an action*.
+
+The theory has begun to catch up: there are now identifiability results for when a JEPA-style model recovers the world's latent variables at all — and they hold only under conditions (Gaussian latents, stationary additive-noise transitions) that the deployed systems do not meet. Theory still only *brackets* these models; it does not yet *place* them. Placing them is an empirical, mechanistic job — and it is the one I think I am already equipped for.
+
+---
+
+## Earned, not handed to
+
+So this is not linguistics *plus* world models. It is one root, and the root is contact, not data.
+
+A **handed-to** world model — built by us and fed to the system — is a representation *about* the world: skeleton, shadow, with no path to flesh. An **earned** world model — won inside a closed loop of consequential contact — is the flesh end, because it was *shaped by* the world rather than *described to* it. A child does not acquire language and then bolt on a world model; both grow out of one process of contact. Language and world model should each be *earned* from that same lived substrate, and that is why they mesh.
+
+---
+
+## The buckle: two ends that don't meet
+
+Here is the part I find hardest and most honest. The end the world fixes uniquely — the flesh, the burn — is the end language cannot reach. The end language legislates — case, carving — is the end the world does not fix. Leibniz's dream of a perfect correspondence, the world fixed once and the language matched to it once, fails not for want of effort but for want of a seam pinned at both ends at the same time. The world and language each pin down a *different* end. (That is the version of [Leibniz](/writing/from-leibniz) I have ended up with.)
+
+This is the general form of the thing I certify in language under the name [*stable is not grounded*](/research/sc-certification): structurally good is not the same as grounded. In a language model it shows up as a stable shortcut. In a world model it shows up as a latent that predicts well without recovering the world's structure. One proposition, two domains.
+
+---
+
+## Why this is not a turn
+
+I don't think moving toward world models would be a change of subject. The question I have been asking — *when does structure license a causal inference rather than correlate with one* — is precisely the question a world model now has to answer about itself, at the one end, consequence, that language cannot reach. And the tools I have been building for it — causal intervention, mechanistic reading, and a discipline about [when the question is even decidable](/research/sc-certification) — are what that field is short of.
+
+Not a pivot. A recognition that the seam I have been working was never only linguistic.
+
+</div>

@@ -14,6 +14,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "earned-not-handed-to",
+    title: "Earned, not handed to — language grounding and world-model identifiability",
+    date: "June 2026",
+    pubDate: "2026-06-29",
+    excerpt:
+      "The grounding problem in computational linguistics and the identifiability problem facing world models are the same question — when form licenses a causal inference rather than correlating with one — asked of two systems. Skeleton versus flesh, earned versus handed-to, and why studying world models would be a recognition rather than a turn.",
+    status: "note",
+  },
+  {
     slug: "inverted-observability",
     title: "Inverted Observability — psychology and interpretability as mirror sciences",
     date: "June 2026",
