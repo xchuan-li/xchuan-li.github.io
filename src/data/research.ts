@@ -255,7 +255,7 @@ export const now: NowItem[] = [
   },
   {
     label: "Alongside",
-    text: "Contributing to two collaborative projects in progress — Latent Control States (a mechanistic bridge) and Cross-lingual ProtoBias (an applied stress test) — which feed the main line; group work, so I don't claim their outcome as my own.",
+    text: "Contributing to two collaborative projects that feed the main line — group work, so I don't claim their outcome as my own.",
   },
   {
     label: "Exploring",

@@ -20,13 +20,12 @@ const spineOrigin = {
 // single reverse-chronological stream. Both project AND note display-dates are a
 // homepage-only narrative, hand-spread so projects and notes interleave (never two
 // notes in a row); the real note pubDates stay on /writing, and /research stays
-// date-free. Only result-bearing projects appear here — pure-concept directions
-// (Isotrace, Typological Grounding) are left off the homepage. Arrowhead is newest.
+// date-free. Only the personal core line appears here — pure-concept directions
+// (Isotrace, Typological Grounding) and the collaborative extensions (Latent Control
+// States, Cross-lingual ProtoBias) are left off the homepage. Arrowhead is newest.
 const projectDate: Record<string, string> = {
   "/research/arrowhead": "2026-06-20",
   "/research/hangl": "2026-06-05",
-  "/research/cross-lingual-protobias": "2026-05-20",
-  "/research/latent-control-states": "2026-05-05",
   "/research/sc-certification": "2026-04-15",
   "/research/mini-causal-models": "2026-03-20",
 };
@@ -63,6 +62,7 @@ const projectIntro: Record<string, string> = {
 // One-sentence homepage descriptions for the notes (their fuller excerpts live on
 // /writing) — keyed by slug.
 const noteBlurb: Record<string, string> = {
+  "earned-not-handed-to": "The grounding problem in language and the identifiability problem in world models are one question — when form licenses a causal inference, not just correlates.",
   "inverted-observability": "Why developmental psychology and interpretability are the same question seen from opposite sides of a mirror.",
   "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning — or three surface habits?",
   "causal-residue": "Every training example is a falsifier; the structure a learner ends up with is the residue of cumulative cutting.",
@@ -138,10 +138,12 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I study whether AI models actually use the <strong>causal structure that language
-            encodes</strong> — what entails what, which event is the cause — or only a surface
-            correlate of it. My method is <strong>causal interpretability</strong>: reading and
-            intervening on a model's internals, not just scoring its outputs.
+            I study when an AI model actually <strong>uses the structure that licenses an
+            inference</strong> — what entails what, which event is the cause — rather than riding
+            a surface correlate of it. My method is <strong>causal interpretability</strong>:
+            reading and intervening on a model's internals, not just scoring its outputs.
+            Language is where I test this most directly; the same question is beginning to
+            extend to world models.
           </p>
           <p>
             After an undergraduate Philosophy thesis on Leibniz's <em>characteristica universalis</em>,
