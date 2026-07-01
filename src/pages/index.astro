@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz dreamed of a characteristica universalis — a language whose very structure would make valid inference mechanical, so that reasoning and its expression never came apart. Three centuries later, large language models are the first artifacts that almost embody it: systems made entirely of language that nonetheless appear to reason. My program turns that old question back on them — does a model actually use the causal structure language encodes to license an inference, or only a surface correlate of it? Each project below is one way of pinning that down.";
+const spineLeadIn = "Leibniz dreamed of a characteristica universalis — a language whose very structure would make valid inference mechanical, so that reasoning and its expression never came apart. Three centuries later, large language models are the first artifacts that almost embody it: systems made entirely of language that nonetheless appear to reason. My program turns that old question back on them — does a model actually use the structure that licenses an inference, or only a surface correlate of it? I treat this as a question about criteria, not mechanism: formal methods can say what understanding requires, even where we can't yet read it off the network. Nothing can be fully formalized — some inference is intractable to check, and natural language has no complete formal semantics — but a proof is hard to find and cheap to verify. So the working shape is propose-and-verify: the model proposes, a formal criterion selectively checks, and a claim is licensed at the output, not assumed at the start. Certifying when a stable, correct answer is not actually licensed is the first piece of that already running — and each project below is one way of pinning it down.";
 
 const spineOrigin = {
   label: "From sufficient reason to a universal language",
@@ -147,8 +147,10 @@ const entries = rawEntries.map((e) => {
             model actually depends on it under intervention. This draws on formal language theory,
             formal semantics, and my background in philosophy and typology, rather than on
             large-scale circuit discovery.
-            Language is where I test this most directly; the same question is beginning to
-            extend to world models.
+            I'm asking what any system that understands language must satisfy, not how one
+            architecture implements it — so the question outlasts whichever architecture is
+            current: language is where I test it most directly today, and it carries, unchanged,
+            to world models.
           </p>
           <p>
             After an undergraduate Philosophy thesis on Leibniz's <em>characteristica universalis</em>,
