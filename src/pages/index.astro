@@ -22,12 +22,13 @@ const spineOrigin = {
 // notes in a row); the real note pubDates stay on /writing, and /research stays
 // date-free. Only the personal core line appears here — pure-concept directions
 // (Isotrace, Typological Grounding) and the collaborative extensions (Latent Control
-// States, Cross-lingual ProtoBias) are left off the homepage. Arrowhead is newest.
+// States, Cross-lingual ProtoBias) are left off the homepage. Stable Is Not Grounded
+// anchors the top as the flagship; Arrowhead sits last, as a verification case.
 const projectDate: Record<string, string> = {
-  "/research/arrowhead": "2026-06-20",
-  "/research/hangl": "2026-06-05",
-  "/research/sc-certification": "2026-04-15",
-  "/research/mini-causal-models": "2026-03-20",
+  "/research/sc-certification": "2026-06-20",
+  "/research/hangl": "2026-06-01",
+  "/research/mini-causal-models": "2026-05-05",
+  "/research/arrowhead": "2026-03-01",
 };
 // Homepage display-dates for the notes, chosen to interleave them among the
 // projects (their real pubDates, several clustered in late May, remain on /writing).
@@ -49,7 +50,7 @@ const projectIntro: Record<string, string> = {
   "/research/mini-causal-models":
     "A shared workbench that compiles small natural-language fragments into explicit causal graphs, so the structure a sentence encodes becomes observable. You can pose the model a question, intervene on the underlying graph, and check whether its answer tracks the structure or a surface accident. It is the bench the other projects run on.",
   "/research/arrowhead":
-    "The certification work lives on a synthetic sandbox; Arrowhead asks whether it survives inside a real model. A completed pilot on Gemma-2-2B finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It is the first bridge from behaviour into mechanism.",
+    "The certification work lives on a synthetic sandbox; Arrowhead asks whether it survives inside a real model. A completed pilot on Gemma-2-2B finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It is a case where a formal claim about the model is checked against its behaviour under intervention.",
   "/research/latent-control-states":
     "Prompt framing — urgency, authority, an epistemic stance — clearly changes what a model says; this asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
   "/research/hangl":
@@ -140,8 +141,12 @@ const entries = rawEntries.map((e) => {
           <p>
             I study when an AI model actually <strong>uses the structure that licenses an
             inference</strong> — what entails what, which event is the cause — rather than riding
-            a surface correlate of it. My method is <strong>causal interpretability</strong>:
-            reading and intervening on a model's internals, not just scoring its outputs.
+            a surface correlate of it. My approach is <em>formal characterization plus
+            controlled verification</em>: I specify the structure that should license an answer
+            in advance — by grammar, by formal rule, or by construction — then test whether the
+            model actually depends on it under intervention. This draws on formal language theory,
+            formal semantics, and my background in philosophy and typology, rather than on
+            large-scale circuit discovery.
             Language is where I test this most directly; the same question is beginning to
             extend to world models.
           </p>
