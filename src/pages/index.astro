@@ -26,6 +26,12 @@ const spineOrigin = {
 // cross-lingual evidence piece. Stable Is Not Grounded anchors the top as the
 // method's first domain; Arrowhead sits last, as the format pilot; a milestone
 // note marks the thesis turn to modal concepts.
+//
+// Notes are filtered the same way: only the three squarely on the program's line
+// appear here (from-leibniz = the stage-I origin; meaning-beneath-language = the
+// Kratzer/typology stage in prose; inverted-observability = the Leahy & Carey
+// verdict layer). Everything else lives on /writing only.
+const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
 const projectDate: Record<string, string> = {
   "/research/sc-certification": "2026-06-20",
   "/research/hangl": "2026-06-01",
@@ -37,9 +43,6 @@ const projectDate: Record<string, string> = {
 const noteDate: Record<string, string> = {
   "inverted-observability": "2026-06-12",
   "meaning-beneath-language": "2026-05-28",
-  "causal-residue": "2026-05-12",
-  "inferential-productivity": "2026-04-25",
-  "decidability-boundary": "2026-04-02",
   "from-leibniz": "2026-03-10",
 };
 // A 2–3 sentence introduction per project, condensed from each project's own
@@ -65,13 +68,9 @@ const projectIntro: Record<string, string> = {
 // One-sentence homepage descriptions for the notes (their fuller excerpts live on
 // /writing) — keyed by slug.
 const noteBlurb: Record<string, string> = {
-  "earned-not-handed-to": "The grounding problem in language and the identifiability problem in world models are one question — when form licenses a causal inference, not just correlates.",
   "inverted-observability": "Why developmental psychology and interpretability are the same question seen from opposite sides of a mirror.",
   "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning — or three surface habits?",
-  "causal-residue": "Every training example is a falsifier; the structure a learner ends up with is the residue of cumulative cutting.",
   "from-leibniz": "What an undergraduate thesis on Leibniz's universal character became after a change of discipline.",
-  "decidability-boundary": "Past a certain depth, much of what interpretability treats as a hard measurement is in fact an undefined quantity.",
-  "inferential-productivity": "Given a system's behaviour, what is the smallest causal structure that has to be there for it to land?",
 };
 
 // Which real per-project figure to show on the right (by href). Projects without
@@ -120,7 +119,7 @@ const rawEntries = [
       glyph: p.glyph,
       fig: projectFig[p.href],
     })),
-  ...writingPosts.map((p) => ({
+  ...writingPosts.filter((p) => mainlineNotes.has(p.slug)).map((p) => ({
     type: "writing" as const,
     date: noteDate[p.slug] ?? p.pubDate,
     href: `/writing/${p.slug}`,
