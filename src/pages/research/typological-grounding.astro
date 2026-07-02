@@ -4,7 +4,7 @@ import Base from "../../layouts/Base.astro";
 
 <Base
   title="Typological Grounding · Xiaochuan Li"
-  description="An emerging direction: the grounding question carried across typologically different languages, where typology offers a ready-made ground truth."
+  description="An emerging direction: the grounding question carried across typologically different languages, with modality — which languages lexicalize very differently — as the flagship case."
   showProgress={true}
   toc={true}
 >
@@ -21,7 +21,10 @@ import Base from "../../layouts/Base.astro";
       This is an early direction, still taking shape — not a settled thesis line. It carries the
       question that runs through the rest of my work — <em>is a model's behaviour licensed by the
       genuine structure, or by a surface proxy that correlates with it?</em> — into a domain where
-      the structure itself varies from language to language.
+      the structure itself varies from language to language. Within the
+      <a href="/research-program">research program</a>, this is the Kratzer stage made experimental,
+      and <strong>modality is its flagship case</strong>: languages lexicalize possibility and
+      necessity so differently that cross-lingual comparison becomes a natural experiment.
     </p>
 
     <h2>The idea</h2>
@@ -47,6 +50,14 @@ import Base from "../../layouts/Base.astro";
 
     <h2>Candidate probes</h2>
     <ul>
+      <li>
+        <strong>Modality across lexicalizations — the flagship.</strong> English <em>may/must</em>,
+        German <em>können/müssen/dürfen</em>, and Chinese 可能/必须/一定 carve the same modal space
+        differently, and Kratzer's analysis supplies the control knob: modal words are semantically
+        thin, and context supplies the modal base. Hold the modal base fixed by context, swap the
+        language, and test whether the model tracks the quantified world-set or each language's
+        modal words — only the former is evidence of modal structure.
+      </li>
       <li>
         <strong>Tense without morphology.</strong> Where is tense represented for Chinese, which has
         no verb inflection — and is it a genuine tense representation, or a shortcut on surface

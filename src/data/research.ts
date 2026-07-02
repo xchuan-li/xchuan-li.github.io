@@ -70,6 +70,9 @@ export interface Project {
   kind?: ProjectKind;
   // Whether the project page has an interactive demo (shown as a small marker).
   demo?: boolean;
+  // Parked: the page stays up (URL unbroken) but the project is withdrawn from
+  // all mainline narratives (homepage, /research index, /plain).
+  parked?: boolean;
 }
 
 export const projects: Project[] = [
@@ -111,11 +114,12 @@ export const projects: Project[] = [
     node: "certify",
     spanTo: "mechanism",
     maturity: "concept",
-    progress: "localize · design horizon",
+    progress: "localize · parked",
     output: "Decision experiment",
     blurb: "Behavioural path-tracing: which linguistic operation actually carried the inference.",
     domain: "Localization · typology",
     kind: "project",
+    parked: true,
   },
   {
     n: "→",
@@ -124,16 +128,16 @@ export const projects: Project[] = [
     color: "var(--accent-deep-purple)",
     tint: "rgba(176, 156, 219, 0.10)",
     glyph: "xling",
-    tags: ["Application frontier", "Cross-lingual"],
-    desc: "Where the three methods meet linguistic typology: the same inferential content re-encoded by morphology, word order, or context, and the question of whether a model tracks the structure or the surface. The program's flagship application.",
+    tags: ["Application frontier", "Modal typology"],
+    desc: "Where the program meets linguistic typology, with modality as the flagship case: languages lexicalize possibility and necessity differently — English may/must, German können/müssen/dürfen, Chinese 可能/必须/一定 — so the same modal base is carried by different words and different grammar. Hold the content fixed, re-encode it across languages, and ask whether the model tracks the quantified world-set or the surface habits of each language.",
     group: "frontier",
     tier: "thesis",
     category: "personal",
     status: "Exploratory",
     maturity: "concept",
-    progress: "exploratory",
+    progress: "modal typology · exploratory",
     output: "Through-line",
-    blurb: "Does grounding survive when the same inference is re-encoded by each language's grammar?",
+    blurb: "Languages carve modality differently — does a model track the modal base, or each language's surface habits?",
     domain: "Cross-lingual · typology",
     kind: "project",
   },
@@ -224,7 +228,7 @@ export const projects: Project[] = [
     color: "var(--accent-champagne)",
     glyph: "latent",
     tags: ["Extension · mechanistic", "Pilot"],
-    short: "Does a real LLM hold a usable representation of causal direction — which event is the cause? A completed MSc-thesis pilot on Gemma-2-2B finds a steerable, genuinely-causal direction that is nonetheless redundantly distributed. Demonstrated mechanistic range; not the center of the forward program.",
+    short: "Does a real LLM hold a usable representation of causal direction — which event is the cause? A completed thesis pilot on Gemma-2-2B finds a steerable, genuinely-causal direction — it transfers even to invented, zero-frequency relations — yet redundantly distributed. The evidence that representational-format questions are tractable inside real models: the pilot the modal-concepts thesis builds on.",
     group: "support",
     tier: "thesis",
     category: "personal",
@@ -248,18 +252,18 @@ export interface NowItem {
 export const now: NowItem[] = [
   {
     label: "Primary",
-    text: "Writing Stable Is Not Grounded as a workshop-targeted paper on why stable correctness is not enough to show that a model uses the linguistic structure that licenses an inference.",
+    text: "Writing Stable Is Not Grounded — the program's certification method in its first domain, causal structure — for a mid-July workshop deadline.",
   },
   {
     label: "Next",
-    text: "Hardening MiniCausalLang — the language-to-causal-graph workbench — into a small, releasable tool, so the certification cut is decidable by construction and the next experiments have a substrate to run on.",
+    text: "Scoping the Master's thesis, co-supervised across NLP and developmental psychology at UTN: do LMs possess rich modal representations, when in training do modal distinctions emerge, and does the acquisition trajectory resemble the human one?",
   },
   {
     label: "Then",
-    text: "Building out HanGL, where a wrong-Hanja intervention on real LLMs already shows latent grounding scales with model capability — the empirical, cross-lingual second piece.",
+    text: "Hardening MiniCausalLang — the workbench where the space of alternatives is stipulated by construction — into a small, releasable bench; HanGL, the collaborative cross-lingual pilot, keeps scaling alongside.",
   },
   {
     label: "Horizon",
-    text: "Isotrace (localizing which grammatical level carries an inference) and a quantitative inferential-yield measure sit as the horizon the certified base builds toward — not yet running, and not what the applications rest on.",
+    text: "Modal typology: the same modal base lexicalized differently across English, German, and Chinese (可能/必须/一定 does not map onto may/must) — the cross-lingual natural experiment the program builds toward.",
   },
 ];

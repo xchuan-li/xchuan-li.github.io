@@ -1,0 +1,379 @@
+---
+// HeroWorlds — the homepage hero emblem: possibility as quantification, live.
+//
+// Five windows are accessible worlds; each wheel spins through states of
+// affairs. Below the wheels a check row evaluates p(w) = rain per world, and the
+// two claims are quantifier verdicts over that row: ◇ rain holds at w₀ iff SOME
+// check is on; □ rain iff ALL are. The rare all-rain alignment is the jackpot —
+// the wheels settle, the □ lamp clicks open, then everything spins back up.
+// Same mechanic and visual language as the old agreement rig (HeroCausalMatrix,
+// kept in the repo); the content is the program's: the space of alternatives
+// does the licensing, not the word.
+const PITCH = 52;
+const Y_CENTER = 285;
+const Y0 = Y_CENTER + 5; // baseline of cell 0 at translateY(0)
+const N = 10;
+
+// Cell 0 of every wheel is "rain", so the reduced-motion / no-JS still frame
+// shows □ rain licensed. Four rain cells per wheel ⇒ ◇ is common, □ is rare.
+const worlds = [
+  { x: 110, label: "w₁", speed: 15, dir: 1,
+    words: ["rain", "sun", "rain", "fog", "rain", "wind", "snow", "rain", "hail", "calm"] },
+  { x: 230, label: "w₂", speed: 18, dir: -1,
+    words: ["rain", "sun", "fog", "rain", "calm", "rain", "wind", "snow", "rain", "mist"] },
+  { x: 350, label: "w₃", speed: 13, dir: 1,
+    words: ["rain", "fog", "snow", "rain", "sun", "rain", "calm", "rain", "wind", "hail"] },
+  { x: 470, label: "w₄", speed: 20, dir: -1,
+    words: ["rain", "haze", "rain", "sun", "fog", "rain", "snow", "wind", "rain", "gale"] },
+  { x: 590, label: "w₅", speed: 16, dir: 1,
+    words: ["rain", "wind", "sun", "rain", "fog", "rain", "hail", "calm", "rain", "dew"] },
+];
+const cells = (words: string[]) =>
+  Array.from({ length: 2 * N }, (_, i) => ({ y: Y0 + i * PITCH, w: words[i % N] }));
+
+const reelData = worlds.map((w, i) => ({ i, speed: w.speed, dir: w.dir, words: w.words }));
+const cfg = { N, PITCH };
+---
+
+<figure
+  class="hero-worlds is-pos is-nec"
+  aria-label="Possibility as quantification over accessible worlds. Five wheels of possible states spin; a live check row marks the worlds where it rains; the diamond claim (possibly rain) holds when some accessible world shows rain, the box claim (necessarily rain) only when all five do."
+>
+  <svg viewBox="0 0 700 724" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img">
+    <defs>
+      <filter id="hw-soft" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="3.2" />
+      </filter>
+      <clipPath id="hw-band"><rect x="56" y="120" width="588" height="330" /></clipPath>
+      <linearGradient id="hw-fade-top" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--color-bg)" stop-opacity="1" />
+        <stop offset="1" stop-color="var(--color-bg)" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="hw-fade-bot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--color-bg)" stop-opacity="0" />
+        <stop offset="1" stop-color="var(--color-bg)" stop-opacity="1" />
+      </linearGradient>
+      <marker id="hw-arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path class="hw-arrhead" d="M0 0.6 L7.2 4 L0 7.4" />
+      </marker>
+    </defs>
+
+    <!-- the actual world, fanning into its accessible alternatives -->
+    <g class="hw-role">
+      <text x="350" y="14" text-anchor="middle">ACTUAL WORLD</text>
+    </g>
+    <circle class="hw-w0" cx="350" cy="44" r="16" />
+    <text class="hw-w0-name" x="350" y="49" text-anchor="middle">w₀</text>
+    <g class="hw-acc">
+      <path d="M 344 60 C 260 88, 175 84, 116 94" />
+      <path d="M 347 61 C 300 84, 262 82, 234 92" />
+      <path d="M 350 62 V 92" />
+      <path d="M 353 61 C 400 84, 438 82, 466 92" />
+      <path d="M 356 60 C 440 88, 525 84, 584 94" />
+    </g>
+    <text class="hw-rel" x="299" y="80">R</text>
+
+    <!-- world names above the dials -->
+    <g class="hw-wname">
+      {worlds.map((w) => <text x={w.x} y="110" text-anchor="middle">{w.label}</text>)}
+    </g>
+
+    <!-- dial spindles, continued down into the check row -->
+    <g class="hw-guide">
+      {worlds.map((w) => <line x1={w.x} y1="116" x2={w.x} y2="454" />)}
+    </g>
+    <g class="hw-guide2">
+      {worlds.map((w) => <line x1={w.x} y1="460" x2={w.x} y2="492" />)}
+    </g>
+
+    <!-- neutral readout band and world windows -->
+    <rect class="hw-readout" x="56" y="261" width="588" height="48" rx="5" />
+    {worlds.map((w) => <rect class="hw-slot" x={w.x - 50} y="261" width="100" height="48" rx="5" />)}
+    <!-- teal when the □ jackpot lands: rain in every accessible world -->
+    {worlds.map((w) => <rect class="hw-box-ok" x={w.x - 50} y="261" width="100" height="48" rx="5" />)}
+
+    <!-- the spinning wheels (driven independently in the browser) -->
+    <g clip-path="url(#hw-band)">
+      {
+        worlds.map((w, i) => (
+          <g class="hw-reel" data-reel={i} transform="translate(0 0)">
+            {cells(w.words).map((cell) => (
+              <text class={`hw-cell ${cell.w === "rain" ? "hw-cell-rain" : "hw-cell-mute"}`} x={w.x} y={cell.y} text-anchor="middle">
+                {cell.w}
+              </text>
+            ))}
+          </g>
+        ))
+      }
+    </g>
+
+    <!-- dial peek -->
+    <rect class="hw-fade" x="56" y="120" width="588" height="80" fill="url(#hw-fade-top)" />
+    <rect class="hw-fade" x="56" y="370" width="588" height="80" fill="url(#hw-fade-bot)" />
+
+    <g class="hw-role">
+      <text x="350" y="472" text-anchor="middle">ACCESSIBLE WORLDS · STATES OF AFFAIRS</text>
+    </g>
+
+    <!-- live check row: does p hold at each world? -->
+    <text class="hw-check-label" x="26" y="510">p(w)=rain</text>
+    {
+      worlds.map((w, i) => (
+        <g class="hw-check" data-check={i}>
+          <rect class="hw-check-box" x={w.x - 8} y="498" width="16" height="16" rx="3" />
+          <rect class="hw-check-ok" x={w.x - 8} y="498" width="16" height="16" rx="3" />
+          <g class="hw-check-no">
+            <line class="hw-x hw-x-sm" x1={w.x - 4.5} y1="501.5" x2={w.x + 4.5} y2="510.5" />
+            <line class="hw-x hw-x-sm" x1={w.x + 4.5} y1="501.5" x2={w.x - 4.5} y2="510.5" />
+          </g>
+        </g>
+      ))
+    }
+
+    <!-- ◇ rain: holds iff SOME accessible world shows rain (common) -->
+    <g class="hw-claim-row">
+      <text class="hw-claim" x="56" y="576">◇ rain</text>
+      <text class="hw-sub" x="56" y="596">SOME ACCESSIBLE WORLD</text>
+      <path class="hw-leader" d="M 208 570 H 562" />
+      <rect class="hw-lamp" x="580" y="560" width="18" height="18" rx="3" />
+      <g class="hw-pos-yes">
+        <rect class="hw-lamp-ok" x="580" y="560" width="18" height="18" rx="3" />
+        <text class="hw-ok-label" x="589" y="598" text-anchor="middle">holds</text>
+      </g>
+      <g class="hw-pos-no">
+        <line class="hw-x" x1="583.5" y1="563.5" x2="594.5" y2="574.5" />
+        <line class="hw-x" x1="594.5" y1="563.5" x2="583.5" y2="574.5" />
+        <text class="hw-bad-label" x="589" y="598" text-anchor="middle">fails</text>
+      </g>
+    </g>
+
+    <!-- □ rain: holds iff EVERY accessible world shows rain (the rare jackpot) -->
+    <g class="hw-claim-row">
+      <text class="hw-claim" x="56" y="646">□ rain</text>
+      <text class="hw-sub" x="56" y="666">EVERY ACCESSIBLE WORLD</text>
+      <path class="hw-leader" d="M 208 640 H 562" />
+      <rect class="hw-lamp" x="580" y="630" width="18" height="18" rx="3" />
+      <g class="hw-nec-yes">
+        <circle class="hw-halo" cx="589" cy="639" r="17" filter="url(#hw-soft)" />
+        <rect class="hw-lamp-ok" x="580" y="630" width="18" height="18" rx="3" />
+        <text class="hw-ok-label" x="589" y="668" text-anchor="middle">holds</text>
+      </g>
+      <g class="hw-nec-no">
+        <line class="hw-x" x1="583.5" y1="633.5" x2="594.5" y2="644.5" />
+        <line class="hw-x" x1="594.5" y1="633.5" x2="583.5" y2="644.5" />
+        <text class="hw-bad-label" x="589" y="668" text-anchor="middle">fails</text>
+      </g>
+    </g>
+
+    <!-- the semantics, stated once -->
+    <g class="hw-formula">
+      <text x="175" y="708" text-anchor="middle">◇p ⇔ ∃w (w₀ R w ∧ p(w))</text>
+      <text x="525" y="708" text-anchor="middle">□p ⇔ ∀w (w₀ R w → p(w))</text>
+    </g>
+  </svg>
+
+  <figcaption class="hero-worlds-cap">
+    Leibniz's move, run live: <span class="cap-ok">◇ rain</span> holds at w₀ iff rain holds in
+    <em>some</em> accessible world; <span class="cap-ok">□ rain</span> iff in <em>all</em>. The
+    licensing is done by the space of alternatives — not by the word.
+  </figcaption>
+</figure>
+
+<script define:vars={{ reelData, cfg }}>
+  (function () {
+    const fig = document.querySelector(".hero-worlds");
+    if (!fig) return;
+    const { N, PITCH } = cfg;
+    const L = N * PITCH;
+    const reels = reelData.map((r) => ({
+      el: fig.querySelector(`[data-reel="${r.i}"]`),
+      speed: r.speed,
+      dir: r.dir,
+      words: r.words,
+      // stagger the starting positions so the wheels are out of phase
+      phase: (r.i * 137.5) % L,
+    }));
+    const checks = reelData.map((r) => fig.querySelector(`[data-check="${r.i}"]`));
+    const wrap = (v) => ((v % L) + L) % L;
+    const centred = (r) => r.words[Math.round(wrap(r.phase) / PITCH) % N];
+    const rains = () => reels.map((r) => centred(r) === "rain");
+    const draw = () => {
+      for (const r of reels) r.el.setAttribute("transform", `translate(0 ${-r.phase})`);
+    };
+    let pos = null, nec = null;
+    const apply = () => {
+      const rs = rains();
+      rs.forEach((v, i) => checks[i].classList.toggle("on", v));
+      const p = rs.some(Boolean), n = rs.every(Boolean);
+      if (p !== pos) { pos = p; fig.classList.toggle("is-pos", p); }
+      if (n !== nec) { nec = n; fig.classList.toggle("is-nec", n); }
+    };
+
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      reels.forEach((r) => (r.phase = 0)); // cell 0 everywhere is rain: □ licensed
+      draw();
+      apply();
+      return;
+    }
+
+    // Spin → (on an all-rain combo) decelerate into alignment → dwell → spin back
+    // up. If the jackpot doesn't occur naturally for a while, ease each wheel to
+    // its nearest rain cell — necessity should be rare, not mythical.
+    const SETTLE = 420, HOLD = 680, SPINUP = 460, FORCE_AFTER = 18000; // ms
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    let last = performance.now(), raf = 0, armed = true, lastNec = performance.now();
+    let mode = "spin", tMark = 0, from = [], to = [];
+    const alignTo = (r) => {
+      const base = Math.round(r.phase / PITCH);
+      for (let k = 0; k <= N; k++) {
+        for (const s of k === 0 ? [0] : [k, -k]) {
+          if (r.words[(((base + s) % N) + N) % N] === "rain") return (base + s) * PITCH;
+        }
+      }
+      return base * PITCH;
+    };
+    const frame = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (mode === "spin") {
+        for (const r of reels) r.phase = wrap(r.phase + r.speed * r.dir * dt);
+        const n = rains().every(Boolean);
+        if (n && armed) {
+          from = reels.map((r) => r.phase);
+          to = reels.map((r) => Math.round(r.phase / PITCH) * PITCH);
+          mode = "settle"; tMark = now; armed = false;
+        } else if (!n) {
+          armed = true;
+          if (now - lastNec > FORCE_AFTER) {
+            from = reels.map((r) => r.phase);
+            to = reels.map((r) => alignTo(r));
+            mode = "settle"; tMark = now; armed = false;
+          }
+        }
+      } else if (mode === "settle") {
+        const e = easeOut(Math.min(1, (now - tMark) / SETTLE));
+        reels.forEach((r, i) => (r.phase = from[i] + (to[i] - from[i]) * e));
+        if (now - tMark >= SETTLE) {
+          reels.forEach((r, i) => (r.phase = wrap(to[i])));
+          mode = "hold"; tMark = now; lastNec = now;
+        }
+      } else if (mode === "hold") {
+        if (now - tMark >= HOLD) { mode = "spinup"; tMark = now; }
+      } else {
+        const t = Math.min(1, (now - tMark) / SPINUP);
+        for (const r of reels) r.phase = wrap(r.phase + r.speed * r.dir * dt * t * t);
+        if (t >= 1) mode = "spin";
+      }
+      draw();
+      apply();
+      fig.classList.toggle("clicking", mode === "hold");
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+
+    new IntersectionObserver((es) => {
+      for (const e of es) {
+        if (e.isIntersecting && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+        else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+      }
+    }).observe(fig);
+  })();
+</script>
+
+<style>
+  .hero-worlds { margin: 0; padding: 0; }
+  .hero-worlds svg {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: block;
+    font-family: var(--font-mono);
+    overflow: visible;
+    --hw-ok: var(--accent-teal);
+    --hw-bad: #db5048;
+  }
+
+  .hw-guide line { stroke: var(--color-border); stroke-width: 1; }
+  .hw-guide2 line { stroke: var(--color-border); stroke-width: 1; stroke-dasharray: 2 4; }
+  .hw-readout { fill: color-mix(in srgb, var(--color-bg) 88%, var(--color-text) 12%); opacity: 0.45; }
+  .hw-slot { fill: none; stroke: var(--color-border-strong); stroke-width: 1; opacity: 0.5; }
+
+  .hw-role text { font-size: 9px; letter-spacing: 0.13em; fill: #8a8a8a; }
+  .hw-wname text { font-size: 11px; font-weight: 500; fill: var(--color-text-muted); }
+
+  .hw-cell { font-size: 17px; letter-spacing: 0; }
+  .hw-cell-mute { fill: var(--color-text-muted); }
+  .hw-cell-rain { fill: var(--color-text); font-size: 18px; font-weight: 650; }
+
+  /* the actual world and the accessibility relation */
+  .hw-w0 { fill: none; stroke: var(--color-text-dim); stroke-width: 1.3; opacity: 0.75; }
+  .hw-w0-name { font-size: 13px; font-weight: 600; fill: var(--color-text); }
+  .hw-acc path {
+    fill: none;
+    stroke: var(--color-text-dim);
+    stroke-width: 1;
+    opacity: 0.5;
+    marker-end: url(#hw-arr);
+  }
+  .hw-arrhead { fill: none; stroke: var(--color-text-dim); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .hw-rel { font-size: 9px; letter-spacing: 0.13em; fill: #8a8a8a; }
+
+  /* live per-world check row */
+  .hw-check-label { font-size: 9.5px; letter-spacing: 0.05em; fill: var(--color-text-dim); }
+  .hw-check-box { fill: none; stroke: var(--color-text-dim); stroke-width: 1.1; opacity: 0.55; }
+  .hw-check-ok { fill: var(--hw-ok); fill-opacity: 0.2; stroke: var(--hw-ok); stroke-width: 1.4; opacity: 0; transition: opacity 0.2s ease; }
+  .hw-check-no { opacity: 0.8; transition: opacity 0.2s ease; }
+  .hw-check.on .hw-check-ok { opacity: 1; }
+  .hw-check.on .hw-check-no { opacity: 0; }
+
+  /* claims panel */
+  .hw-claim { font-size: 17px; font-weight: 600; fill: var(--color-text); }
+  .hw-sub { font-size: 8px; letter-spacing: 0.14em; fill: #8a8a8a; }
+  .hw-leader { fill: none; stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 2 5; opacity: 0.6; }
+  .hw-lamp { fill: none; stroke: var(--color-text-dim); stroke-width: 1.2; opacity: 0.6; }
+  .hw-lamp-ok { fill: var(--hw-ok); fill-opacity: 0.2; stroke: var(--hw-ok); stroke-width: 1.6; }
+  .hw-halo { fill: var(--hw-ok); opacity: 0.26; }
+  .hw-x { stroke: var(--hw-bad); stroke-width: 2; stroke-linecap: round; }
+  .hw-x-sm { stroke-width: 1.6; }
+  .hw-ok-label { font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; fill: var(--hw-ok); }
+  .hw-bad-label { font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; fill: var(--hw-bad); opacity: 0.85; }
+
+  /* the semantics footer */
+  .hw-formula text { font-size: 10.5px; letter-spacing: 0.02em; fill: var(--color-text-dim); }
+
+  /* ◇ / □ verdicts, toggled live by the wheels */
+  .hw-pos-yes, .hw-pos-no, .hw-nec-yes, .hw-nec-no { transition: opacity 0.25s ease; }
+  .hw-pos-yes { opacity: 0; }
+  .hw-pos-no { opacity: 1; }
+  .hero-worlds.is-pos .hw-pos-yes { opacity: 1; }
+  .hero-worlds.is-pos .hw-pos-no { opacity: 0; }
+  .hw-nec-yes { opacity: 0; }
+  .hw-nec-no { opacity: 1; }
+  .hero-worlds.is-nec .hw-nec-yes { opacity: 1; }
+  .hero-worlds.is-nec .hw-nec-no { opacity: 0; }
+  .hw-box-ok { fill: var(--hw-ok); fill-opacity: 0.13; stroke: var(--hw-ok); stroke-opacity: 0.85; stroke-width: 1.4; opacity: 0; transition: opacity 0.25s ease; }
+  .hero-worlds.is-nec .hw-box-ok { opacity: 1; }
+
+  /* the "click": a quick pop on the □ lamp as the worlds lock into place */
+  @keyframes hw-pop {
+    0%   { transform: scale(0.66); }
+    55%  { transform: scale(1.22); }
+    100% { transform: scale(1); }
+  }
+  .hero-worlds.clicking .hw-nec-yes .hw-lamp-ok,
+  .hero-worlds.clicking .hw-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hw-pop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hero-worlds-cap {
+    margin-top: 1.1rem;
+    font-size: 11.5px;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--color-text-dim);
+    max-width: 40rem;
+  }
+  .hero-worlds-cap .cap-ok { font-style: normal; font-family: var(--font-mono); font-size: 11px; color: var(--accent-teal); }
+</style>

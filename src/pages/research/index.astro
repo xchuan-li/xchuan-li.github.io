@@ -3,12 +3,14 @@ import Base from "../../layouts/Base.astro";
 import ProjectGlyph from "../../components/ProjectGlyph.astro";
 import { projects } from "../../data/research";
 
-// The research page follows the converged main line: computational linguistics,
-// with causal-inference rigor as the method. Two forward bodies — Certify (does the
-// model use the licensing structure at all) and Across languages (the typological
-// application, where the differentiation is) — plus a demoted body of completed and
-// collaborative work that shows range without being the center. Isotrace and a
-// quantitative yield measure are named as horizon, not billed as running.
+// The research page follows the program mainline stated on /research-program:
+// what must a system's representations be like to genuinely grasp possibility and
+// necessity, rather than merely behave as if it does? Three bodies — Certify (the
+// verdict procedure, running in its first domain: causal structure), Toward
+// modality (the flagship: the modal-concepts thesis, its typological application,
+// and the completed format pilot), and Collaborations (off the mainline, kept
+// honestly so). Isotrace is parked: its page stays up, but it is withdrawn from
+// this index and from the now-list.
 //
 // Each card also carries its natural OUTPUT (a paper, a decision experiment, a
 // shared workbench, a thesis chapter, a co-authored paper), pulled from the single
@@ -22,7 +24,7 @@ const certifyProjects = [
     status: "certify · in submission",
     color: "var(--accent-coral)",
     glyph: "sc",
-    one_line: "Certify whether the structure that licenses an inference is load-bearing — stable-correct behavior isn't grounding unless it survives shortcut-severing audits.",
+    one_line: "Certify whether the structure that licenses an inference is load-bearing — stable-correct behavior isn't grounding unless it survives shortcut-severing audits. The program's verdict procedure, in its first domain.",
     has_demo: true,
   },
   {
@@ -31,46 +33,38 @@ const certifyProjects = [
     status: "workbench · building",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    one_line: "The foundation: a language-to-causal-graph workbench that makes grammatical structure, the inference it licenses, and interventions on it observable — so the certification cut is decidable by construction. Built next, after the paper.",
-  },
-  {
-    title: "Isotrace",
-    href: "/research/isotrace",
-    status: "localize · design horizon",
-    color: "var(--accent-teal)",
-    glyph: "isotrace",
-    one_line: "Localize which linguistic operation carries the inference — morphology, word order, or context — via path-encoded minimal pairs. A design-stage horizon, not yet running.",
+    one_line: "The foundation: a language-to-causal-graph workbench that makes grammatical structure, the inference it licenses, and interventions on it observable — a space of alternatives stipulated by construction, so the certification cut is decidable. Built next, after the paper.",
   },
 ];
 
-const crosslingualProjects = [
+const modalProjects = [
+  {
+    title: "Typological Grounding",
+    href: "/research/typological-grounding",
+    status: "modal typology · horizon",
+    color: "var(--accent-deep-purple)",
+    glyph: "xling",
+    one_line: "The flagship application, with modality as the case: English may/must, German können/müssen/dürfen, and Chinese 可能/必须/一定 carve the same modal space differently — hold the modal base fixed, swap the language, and ask whether the model tracks the world-set or the words.",
+  },
+  {
+    title: "Arrowhead",
+    href: "/research/arrowhead",
+    status: "thesis pilot · complete",
+    color: "var(--accent-champagne)",
+    glyph: "latent",
+    one_line: "My completed thesis pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — transferring even to invented zero-frequency relations — yet redundantly distributed across layers. Evidence the format question is tractable, before the thesis asks it of modal concepts.",
+    has_demo: true,
+  },
+];
+
+const collabProjects = [
   {
     title: "HanGL · Surface Hangul, Latent Hanja",
     href: "/research/hangl",
     status: "collaborative · pilot",
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
-    one_line: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script? A wrong-Hanja intervention shows grounding scales with capability — a weak model needs the cue and caves to a wrong one; a strong model does neither. The empirical second piece.",
-    has_demo: true,
-  },
-  {
-    title: "Typological Grounding",
-    href: "/research/typological-grounding",
-    status: "exploratory · horizon",
-    color: "var(--accent-deep-purple)",
-    glyph: "xling",
-    one_line: "The flagship application: the same inference re-encoded by morphology, word order, or context — does grounding survive the re-encoding, or only the surface habits of each language?",
-  },
-];
-
-const otherProjects = [
-  {
-    title: "Arrowhead",
-    href: "/research/arrowhead",
-    status: "MSc thesis · complete",
-    color: "var(--accent-champagne)",
-    glyph: "latent",
-    one_line: "My completed MSc-thesis pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — yet redundantly distributed across layers. Demonstrated mechanistic range, not the center of the forward program.",
+    one_line: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script? A wrong-Hanja intervention shows grounding scales with capability — a weak model needs the cue and caves to a wrong one; a strong model does neither. Off the mainline — lexical grounding, not modality — but the clearest demonstration of the program's cross-lingual intervention method.",
     has_demo: true,
   },
   {
@@ -94,44 +88,43 @@ const otherProjects = [
 
 const sections = [
   {
-    eyebrow: "Behaviour · on a synthetic sandbox",
+    eyebrow: "The method · first domain running",
     title: "Certify",
     description:
-      "Does the model use the linguistic structure that licenses an inference, or only a surface cue? Non-circular behavioral certification, with a workbench that turns grammar into causal variables and interventions to sever the shortcuts.",
+      "Does the model use the structure that licenses an inference, or only a surface cue? Non-circular behavioral certification in the causal-structural domain — the verdict procedure, proven where the licensing structure can be stipulated by construction.",
     projects: certifyProjects,
   },
   {
-    eyebrow: "Cross-lingual · typology",
-    title: "Across languages",
+    eyebrow: "The flagship · modal concepts",
+    title: "Toward modality",
     description:
-      "Where the method meets linguistic typology — the same inference re-encoded by each language's grammar. This is the application the program builds toward, and where my multilingual background does the work.",
-    projects: crosslingualProjects,
+      "The forward center: do LMs possess rich modal representations, and when in training do modal distinctions emerge? The Master's thesis — co-supervised across NLP and developmental psychology at UTN — carries the program here; it gets no card until it has results. Around it: the typological application and the completed format pilot.",
+    projects: modalProjects,
   },
   {
-    eyebrow: "Completed & collaborative",
-    title: "Other work",
+    eyebrow: "Collaborations & range",
+    title: "Collaborations",
     description:
-      "A completed MSc-thesis pilot inside a real model, and collaborative projects that stress-test the same question across mechanism and modality — range and rigor, not the center of the forward program.",
-    projects: otherProjects,
+      "Off the program's mainline, kept honestly so: collaborative projects that stress-test structure-versus-surface in other domains — and demonstrate the cross-lingual and mechanistic range the program draws on.",
+    projects: collabProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="Computational linguistics with causal-inference rigor: certify whether AI models use the linguistic structure that licenses an inference or only a surface correlate, and test whether it holds across languages."
+  description="One research program, from possible worlds to language models: certify whether a model's success is licensed by the stated structure, then carry the question to modal concepts and across languages."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    My work is one program in <strong>computational linguistics</strong>, not a list of ideas:
-    <em>how does linguistic structure support reasoning, and do AI systems actually use that
-    structure — or a surface correlate of it?</em> I test it with causal-inference rigor —
-    controlled interventions and negative controls: first certifying whether the structure that
-    licenses an inference is load-bearing, then carrying that test across languages, where each
-    grammar re-encodes the same inference. Mechanistic tests inside real models are a complement,
-    not the center. It is all part of a broader
-    <a href="/research-program" class="text-[var(--color-accent)] hover:opacity-75">research program</a>,
-    traced from Leibniz's possible worlds to concept attribution in language models.
+    My work is one research program, not a list of ideas: <em>what must a system's representations
+    be like for it to genuinely grasp possibility and necessity — rather than merely behave as if
+    it does?</em> I ask it of language models, with a method inherited down one line — Leibniz's
+    possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
+    possession-versus-performance tests. The discipline: state the licensing structure formally,
+    then test whether success actually depends on it, under intervention and on tasks engineered so
+    that surface correlates must fail. The full lineage is stated on the
+    <a href="/research-program" class="text-[var(--color-accent)] hover:opacity-75">program page</a>.
   </p>
   <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">
     Each project is tagged with its <em>natural output</em> — not everything aims at a paper of its

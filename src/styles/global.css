@@ -366,10 +366,12 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 .hero-content { max-width: 40rem; }
 .hero-figure-col { width: 100%; min-width: 0; }
 .hero-figure-col .hero-matrix svg { margin-left: auto; }
+.hero-figure-col .hero-worlds svg { margin-left: auto; }
 .hero-figure-col .hero-flow svg { margin-left: auto; }
 @media (max-width: 900px) {
   .hero-figure-col { padding-top: 0; }
   .hero-figure-col .hero-matrix svg { margin: 0; }
+  .hero-figure-col .hero-worlds svg { margin: 0; }
   .hero-figure-col .hero-flow svg { margin: 0; }
 }
 .hero-tagline {

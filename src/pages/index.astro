@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroCausalMatrix from "../components/HeroCausalMatrix.astro";
+import HeroWorlds from "../components/HeroWorlds.astro";
 import ResearchTimeline from "../components/ResearchTimeline.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
@@ -8,11 +8,11 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz dreamed of a characteristica universalis — a language whose very structure would make valid inference mechanical, so that reasoning and its expression never came apart. Three centuries later, large language models are the first artifacts that almost embody it: systems made entirely of language that nonetheless appear to reason. My program turns that old question back on them — does a model actually use the structure that licenses an inference, or only a surface correlate of it? I treat this as a question about criteria, not mechanism: formal methods can say what understanding requires, even where we can't yet read it off the network. Nothing can be fully formalized — some inference is intractable to check, and natural language has no complete formal semantics — but a proof is hard to find and cheap to verify. So the working shape is propose-and-verify: the model proposes, a formal criterion selectively checks, and a claim is licensed at the output, not assumed at the start. Certifying when a stable, correct answer is not actually licensed is the first piece of that already running — and each project below is one way of pinning it down.";
+const spineLeadIn = "Leibniz made modality structure — what is necessary holds in all possible worlds, what is possible in some — and dreamed of a language whose form would carry that structure openly. Kripke made the structure mathematics; Kratzer connected it to the modal words of natural language; Leahy & Carey, in developmental psychology, made possession-versus-performance an experimental question: design tasks that a minimal representation must fail. Language models inherit the question in its strangest form yet — systems built entirely from language, with no perception, no action, no world. Do they nonetheless grow something functionally like a space of alternatives? Nothing here can be fully formalized — some inference is intractable to check, and natural language has no complete formal semantics — but a proof is hard to find and cheap to verify, so the working shape is propose-and-verify: the model proposes, a stated formal criterion selectively checks, and a claim is licensed at the output, not assumed at the start. Certifying when a stable, correct answer is not actually licensed by its structure — my current paper, in the causal-structural domain — is the first piece running; the Master's thesis carries the program to modal concepts proper. Each entry below is one piece of that line.";
 
 const spineOrigin = {
-  label: "From sufficient reason to a universal language",
-  href: "/writing/from-leibniz",
+  label: "From possible worlds to language models",
+  href: "/research-program",
   hook: "Nihil est sine ratione.",
 };
 
@@ -20,10 +20,12 @@ const spineOrigin = {
 // single reverse-chronological stream. Both project AND note display-dates are a
 // homepage-only narrative, hand-spread so projects and notes interleave (never two
 // notes in a row); the real note pubDates stay on /writing, and /research stays
-// date-free. Only the personal core line appears here — pure-concept directions
-// (Isotrace, Typological Grounding) and the collaborative extensions (Latent Control
-// States, Cross-lingual ProtoBias) are left off the homepage. Stable Is Not Grounded
-// anchors the top as the flagship; Arrowhead sits last, as a verification case.
+// date-free. Only the program line appears here — the parked direction (Isotrace)
+// and the off-mainline collaborations (Latent Control States, Cross-lingual
+// ProtoBias) are left off; HanGL stays, explicitly labeled a collaboration, as the
+// cross-lingual evidence piece. Stable Is Not Grounded anchors the top as the
+// method's first domain; Arrowhead sits last, as the format pilot; a milestone
+// note marks the thesis turn to modal concepts.
 const projectDate: Record<string, string> = {
   "/research/sc-certification": "2026-06-20",
   "/research/hangl": "2026-06-01",
@@ -44,21 +46,21 @@ const noteDate: Record<string, string> = {
 // description in data/research.ts (no new claims) — keyed by href.
 const projectIntro: Record<string, string> = {
   "/research/sc-certification":
-    "A model can answer a reasoning task correctly and stably and still not be using the structure that supposedly licenses the answer — it may be riding a surface cue that correlates. This builds a non-circular test for that gap: the stipulated structure counts as load-bearing only if the model's behaviour survives audits that sever the shortcuts. It is the entry point of the whole program.",
+    "A model can answer a reasoning task correctly and stably and still not be using the structure that licenses the answer — and, strikingly, the same model can be grounded in one language and spurious in another. This builds the non-circular test for that gap: the stipulated structure counts as load-bearing only if the model's behaviour survives audits that sever the shortcuts. It is the program's verdict procedure, running in its first domain — causal structure.",
   "/research/isotrace":
     "Certification tells you whether the structure is used, not which part of it carried the inference. Isotrace upgrades that binary verdict into a hop-level diagnosis, using minimal pairs where distinct reasoning paths are forced to produce distinct output labels. It is currently in design, on the synthetic sandbox.",
   "/research/mini-causal-models":
-    "A shared workbench that compiles small natural-language fragments into explicit causal graphs, so the structure a sentence encodes becomes observable. You can pose the model a question, intervene on the underlying graph, and check whether its answer tracks the structure or a surface accident. It is the bench the other projects run on.",
+    "A shared workbench that compiles small natural-language fragments into explicit causal graphs — a space of alternatives stipulated by construction, so the licensing structure is decidable rather than guessed. You can pose the model a question, intervene on the underlying graph, and check whether its answer tracks the structure or a surface accident. It is the bench the certification work runs on, and the prototype for a modal-base version.",
   "/research/arrowhead":
-    "The certification work lives on a synthetic sandbox; Arrowhead — my completed MSc-thesis pilot — asks whether it survives inside a real model. On Gemma-2-2B it finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It shows I can do the mechanistic work; it is demonstrated range, not the center of the forward program.",
+    "The format question, piloted inside a real model: does Gemma-2-2B carry a usable representation of causal direction? It does — encoded, steerable, genuinely causal under intervention, transferring even to invented zero-frequency relations — yet redundantly distributed rather than localized. My completed thesis pilot: the evidence that representational-format questions are tractable, before the thesis asks them of modal concepts.",
   "/research/latent-control-states":
     "Prompt framing — urgency, authority, an epistemic stance — clearly changes what a model says; this asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
   "/research/hangl":
-    "Korean Sino-Korean words are a natural experiment in surface versus meaning: the Hangul spelling shares zero characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with capability — a strong model neither needs the cue nor is misled by it, a weak one is both. A collaborative pilot, now scaling across more models.",
+    "Korean Sino-Korean words are a natural experiment in surface versus meaning: the Hangul spelling shares zero characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with capability — a strong model neither needs the cue nor is misled by it, a weak one is both. A collaboration off the program's mainline — lexical grounding, not modality — but the clearest demonstration of the cross-lingual intervention method the modal-typology stage will reuse.",
   "/research/cross-lingual-protobias":
     "The applied, multimodal stress test of the core question: across languages, does a vision-language model track meaning, or lean on language- and culture-specific prototype shortcuts? It pits the two against each other, extending a forthcoming paper from an established NLP group. The current report covers two models across seven languages.",
   "/research/typological-grounding":
-    "The flagship application the program builds toward. Languages encode the same inference in different devices — morphology, word order, context — and this asks whether a model's grounding survives the re-encoding, or only learned the surface habits of particular languages. Currently exploratory.",
+    "The flagship application the program builds toward, with modality as the case: English may/must, German können/müssen/dürfen, and Chinese 可能/必须/一定 carve the same modal space differently. Hold the modal base fixed, swap the language, and ask whether the model tracks the quantified world-set or each language's surface habits. Currently exploratory.",
 };
 // One-sentence homepage descriptions for the notes (their fuller excerpts live on
 // /writing) — keyed by slug.
@@ -89,7 +91,18 @@ const monthLabel = (iso: string) => {
   return `${MONTHS[Number(m) - 1]} ${y}`;
 };
 
+// The thesis has no card (no results yet — program rule); it enters the stream as
+// a milestone note, dated to the day the program statement went up.
+const milestones = [
+  {
+    type: "milestone" as const,
+    date: "2026-07-02",
+    text: "The program's full statement goes up — five inheritances, Leibniz to language models — and the Master's thesis (co-supervised across NLP and developmental psychology at UTN) begins carrying it to modal concepts proper.",
+  },
+];
+
 const rawEntries = [
+  ...milestones,
   ...projects
     .filter((p) => projectDate[p.href])
     .map((p) => ({
@@ -139,33 +152,28 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I work in <strong>computational linguistics</strong>: I study when an AI model actually
-            <strong>uses the linguistic structure that licenses an inference</strong> — what entails
-            what, which noun governs agreement — rather than riding a surface correlate of it. My
-            approach is <em>formal characterization plus controlled verification</em>: I specify the
-            structure that should license an answer in advance — by grammar, by formal rule, or by
-            construction — then test whether the model actually depends on it under intervention,
-            using causal-inference rigor (controlled interventions and negative controls) as the
-            method rather than large-scale circuit discovery. This draws on formal language theory,
-            formal semantics, and my background in philosophy and typology.
-            I'm asking what any system that understands language must satisfy, not how one
-            architecture implements it — so the question outlasts whichever architecture is
-            current: language is where I test it most directly today, and it carries, unchanged,
-            to world models.
+            I study one question, inherited across three and a half centuries:
+            <strong>what must a system's representations be like for it to genuinely grasp
+            possibility and necessity — rather than merely behave as if it does?</strong> I ask it
+            of language models: state the structure that would license the capacity — a space of
+            alternatives, not just the right modal words — then test whether success survives once
+            the surface correlates are severed.
           </p>
           <p>
-            After an undergraduate Philosophy thesis on Leibniz's <em>characteristica universalis</em>,
-            I'm now in the M.Sc. in <strong>Human and AI</strong> at UTN. Philosophy left me caring
-            about what actually makes an answer follow; reading across Chinese, German, and English —
-            Japanese underway — left me attentive to how grammar makes an inference visible in one
-            language and implicit in another.
+            The line is Leibniz → Kripke → Kratzer → Leahy &amp; Carey, and it fixes the
+            discipline: formal methods sit at the criterion layer — what any system that grasps
+            modality must satisfy, not how one architecture implements it. My undergraduate
+            Philosophy thesis was on Leibniz's <em>characteristica universalis</em>; my Master's
+            thesis at UTN — co-supervised across NLP and developmental psychology — carries the
+            question to modal concepts in language models, with Chinese, German, and English
+            (可能/必须/一定 vs. <em>may/must</em>) as the natural experiment.
           </p>
           <p>
             I'm preparing PhD applications for fall 2027 to take this further.
           </p>
         </div>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
-          Language gives reasoning its shape. Models tell us whether they learned the shape or only the shadow.
+          A system that truly represents possibility must carry a space of alternatives — not merely emit the right modal words.
         </blockquote>
         <div class="hero-cta fade-in-up fade-delay-300">
           <a href="#research" class="btn btn-primary">
@@ -204,7 +212,7 @@ const entries = rawEntries.map((e) => {
       </div>
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroCausalMatrix />
+        <HeroWorlds />
       </div>
     </div>
 
@@ -217,7 +225,7 @@ const entries = rawEntries.map((e) => {
       <div class="section-head">
         <p class="section-label fade-in-up">Research</p>
         <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          Does a model use the causal structure that language encodes — or only its surface?
+          Do language models genuinely grasp possibility — or merely behave as if they do?
         </h2>
       </div>
       <div class="fade-in-up fade-delay-200">

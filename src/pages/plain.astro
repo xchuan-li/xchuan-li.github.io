@@ -11,8 +11,9 @@ import { posts } from "../data/writing";
 
 // Grouped by ownership to mirror the homepage "all projects" gallery: my own
 // work vs collaborative projects. Each item still shows its delivery status.
-const personalWork = projects.filter((p) => p.category === "personal");
-const collaborativeWork = projects.filter((p) => p.category === "collaborative");
+// Parked projects (page up, mainline withdrawn) are excluded here too.
+const personalWork = projects.filter((p) => p.category === "personal" && !p.parked);
+const collaborativeWork = projects.filter((p) => p.category === "collaborative" && !p.parked);
 
 const groups = [
   { label: "Personal", items: personalWork },
@@ -24,23 +25,23 @@ const recentPosts = posts.slice(0, 5);
 
 <Base
   title="Xiaochuan Li — research"
-  description="Xiaochuan Li — causal structure, language, and interpretability. A plain, content-first overview of the research program."
+  description="Xiaochuan Li — possibility, necessity, and language models. A plain, content-first overview of the research program."
 >
   <article class="plain">
     <header class="plain-head">
       <h1 class="plain-name">Xiaochuan Li</h1>
       <p class="plain-affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
       <p class="plain-stmt">
-        Working in <strong>computational linguistics</strong>, I study whether AI models actually use
-        the <strong>linguistic structure that licenses an inference</strong> — what entails what,
-        which noun governs agreement — or only a surface correlate, specifying in advance the
-        structure that should license an answer, then testing whether the model actually depends on
-        it under intervention (controlled interventions and negative controls, not circuit
-        discovery). The head that governs agreement, the dependency that carries an inference, the
-        scope that changes what follows: these are where that structure is carried. I run the
-        question through typologically diverse languages, drawing on a philosophy background in
-        reasons and causality and a grammar-sensitive habit of learning across Chinese, German,
-        English, and Japanese.
+        I study one question of language models: <strong>do they genuinely grasp possibility and
+        necessity — or merely behave as if they do?</strong> The method is inherited down one line —
+        Leibniz's possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
+        possession-versus-performance tests: state in advance the structure that would license the
+        capacity (a space of alternatives, not just the right modal words), then test whether the
+        model's success actually depends on it, under intervention and on tasks engineered so that
+        surface correlates must fail. My current paper runs this in the causal-structural domain; my
+        Master's thesis — co-supervised across NLP and developmental psychology at UTN — carries it
+        to modal concepts, and typologically diverse languages (Chinese, German, English; 可能/必须/一定
+        does not map onto <em>may/must</em>) supply the natural experiment.
       </p>
       <p class="plain-links">
         <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
@@ -62,14 +63,13 @@ const recentPosts = posts.slice(0, 5);
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One program: a method to <strong>certify</strong> whether a model uses the linguistic
-        structure that licenses an inference, then to carry that test <strong>across languages</strong>,
-        where each grammar re-encodes the same inference. The paper (Stable Is Not Grounded) and a
-        language-to-causal-graph workbench to make the cut decidable are what I'm building now; the
-        empirical cross-lingual work is the near application. <strong>Localizing</strong> which
-        grammatical level carries an inference and <strong>quantifying</strong> how much inferential
-        yield it produces sit as the horizon, not yet running. Each line shows where the work
-        actually stands.
+        One program: <strong>certify</strong> whether a model's success is licensed by the stated
+        structure, then carry the question to <strong>modal concepts</strong> and
+        <strong>across languages</strong>. The paper (Stable Is Not Grounded) and the workbench that
+        makes the cut decidable are running now; the thesis on modal concepts is the forward center;
+        modal typology is the horizon it builds toward. The full lineage — Leibniz to Kripke to
+        Kratzer to Leahy &amp; Carey — is stated on the
+        <a href="/research-program">program page</a>. Each line shows where the work actually stands.
       </p>
 
       {
