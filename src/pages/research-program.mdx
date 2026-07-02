@@ -1,0 +1,98 @@
+---
+layout: ../layouts/Base.astro
+title: From Possible Worlds to Language Models · Xiaochuan Li
+description: A research program tracing modality from Leibniz's possible worlds through Kripke and Kratzer to concept attribution in language models.
+toc: true
+---
+
+import LineageTimeline from "../components/LineageTimeline.astro";
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Research program
+</div>
+
+# From Possible Worlds to Language Models
+
+<p class="text-xl font-medium tracking-tight text-[var(--color-text-muted)] -mt-2 mb-3">A research program in five inheritances</p>
+
+<p class="text-sm text-[var(--color-text-dim)] mb-8"><em>Xiaochuan Li — working draft for xchuan-li.github.io</em></p>
+
+There is a single question running through this page, inherited across three and a half centuries and four disciplines: **what must a system's representations be like for it to genuinely grasp possibility and necessity — rather than merely behave as if it does?** My research asks this question of language models. But the question itself is much older than machine learning, and the instruments I use to ask it were each forged at a different point along one continuous line.
+
+<LineageTimeline />
+
+## I. Leibniz: possibility as structure (1680s)
+
+Leibniz gave us two ideas that this entire program still runs on. The first is **possible worlds**: necessity and possibility are not primitive mysteries but quantification — what is necessary is what holds in *all* possible worlds; what is possible is what holds in *some*. Modality became structure. The second is the ***characteristica universalis***: the dream of a formal language in which the structure of thought is so faithfully mirrored that reasoning reduces to calculation — *calculemus*. My undergraduate thesis (Shenzhen University, philosophy) was on the characteristica; I did not know then that I would spend the following years asking whether a system trained purely on language could grow the structures Leibniz thought a perfect language would encode.
+
+The two ideas are really one: if modality is quantification over worlds, then a system that truly represents modality must, in some functional sense, *carry a space of alternatives* — not merely emit the right modal words.
+
+## II. Kripke: the structure formalized (1959–1963)
+
+For nearly three centuries, possible worlds remained a philosophical metaphor. Kripke made them mathematics. In Kripke semantics, a modal statement is evaluated against a **frame**: a set of worlds and an accessibility relation between them. □p is true iff p holds at every accessible world; ◇p iff at some. Different constraints on accessibility (reflexivity, transitivity, symmetry) yield different modal logics (T, S4, S5) — modality acquired a model theory, and with it, precision: one could now say exactly what a system commits to when it commits to "possibly."
+
+The lesson I take from this stage is methodological and permanent: **an informal capacity becomes testable only when someone states what structure would license it.** This is the criteria layer of everything I do.
+
+## III. Kratzer: modality meets natural language (1981–2012)
+
+Formal modal logic is clean; natural language is not. English *may* and *must* sprawl across readings that other languages carve apart — epistemic ("he may be in his office"), deontic ("you must submit the assignment"), circumstantial ("she can lift 100 kg"). Kratzer's classic analysis resolved the sprawl: modal words themselves are semantically thin; context supplies a **modal base** (which worlds are quantified over) and an **ordering source** (how those worlds are ranked). The same word quantifies over knowledge-compatible worlds in one sentence and norm-ideal worlds in the next.
+
+For my purposes Kratzer does two things. She connects Kripke's frames to actual sentences — the bridge from logic to linguistic data. And she hands the experimentalist a control knob: **hold the modal word fixed, manipulate the modal base through context, and observe whether a system's behavior tracks the word or the quantified world-set.** Only the latter is evidence of modal structure. The fact that languages lexicalize modality so differently (English *may/must* vs. German *können/müssen/dürfen* vs. Chinese 可能/必须/一定) turns cross-lingual comparison into a natural experiment — one I am unusually positioned to run.
+
+## IV. Leahy & Carey: possession versus performance (2020)
+
+Developmental psychology inherited the question in its hardest empirical form: young children *behave as if* they understand possibility long before it is clear they possess modal concepts. Leahy & Carey's minimal/modal distinction states the problem exactly. A **minimal representation** simulates one outcome at a time; it can pass a surprising range of tasks without ever representing alternatives *as alternatives*. A **rich modal representation** holds multiple possibilities open simultaneously and marks their status. The field's decisive move was not theoretical but experimental: design tasks on which minimal representations *must fail* — where only genuine modal structure licenses the correct response (the two-location paradigms, where hedging across open possibilities is the signature of rich representation).
+
+This is the deepest inheritance in the chain: **a discriminative methodology for concept attribution.** Success on a task does not establish possession of a concept; only success on tasks engineered so that the concept is the sole route to success does. Passing is not possessing.
+
+## V. My research: does language grow world-structure? (now)
+
+Language models are, in Leibnizian terms, an outrageous experiment: systems built entirely from language, with no perception, no action, no world — do they nonetheless develop something functionally like a space of alternatives? My work asks this with the full inherited toolkit:
+
+- From **Leibniz**, the framing: modality as structure, and the question of whether a language-only system can carry it.
+- From **Kripke**, the discipline: state the licensing structure formally before testing for it.
+- From **Kratzer**, the experimental knob: dissociate modal *words* from modal *bases*; exploit cross-lingual variation in how modality is lexicalized.
+- From **Leahy & Carey**, the verdict procedure: minimal-representation-defeating tasks, imported from six decades of developmental methodology.
+
+My current paper (*Stable Is Not Grounded*) establishes the pattern in the causal-structural domain: a model can be behaviorally stable on a construction while relying on surface correlates rather than the licensing structure — and, strikingly, the *same* model can be grounded in one language and spurious in another. My Master's thesis (co-supervised across NLP and developmental psychology at UTN) extends the program to modal concepts proper: do LMs possess rich modal representations, when in training do modal distinctions emerge, and does the acquisition trajectory resemble the human one?
+
+The through-line, stated once: **I study when a system's success is licensed by structure and when it is merely correlated with it.** Leibniz asked it of the perfect language; Kripke asked it of logic; Kratzer of natural language; Carey of children. I ask it of language models.
+
+<div class="mt-12 px-7 pt-5 pb-3 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-[10px] text-[15px] [&>h2:first-child]:mt-2 [&_p]:text-[var(--color-text-muted)] [&_li]:text-[14px] [&_li]:text-[var(--color-text-muted)]">
+
+## Appendix: reading the lineage systematically
+
+A working syllabus, ordered so each stage equips the next. (Personal study plan; folded into the formal-semantics block of my broader curriculum.)
+
+**Stage 1 — Modal logic (the criteria layer)**
+- Hughes & Cresswell, *A New Introduction to Modal Logic* — chapters 1–3 suffice for working fluency (K, T, S4, S5; Kripke frames; correspondence between axioms and frame conditions).
+- Optional depth: Blackburn, de Rijke & Venema, *Modal Logic* (ch. 1) for the model-theoretic view; SEP entry "Modal Logic" as a map.
+
+**Stage 2 — Modality in natural language (the linguistic layer)**
+- Kratzer, "The Notional Category of Modality" (1981; revised in *Modals and Conditionals*, 2012) — the essential text: modal base, ordering source, the thin semantics of modal words.
+- von Fintel, "Modality and Language" (survey) and von Fintel & Heim, *Intensional Semantics* lecture notes — the fastest rigorous entry.
+- Portner, *Modality* (Oxford Surveys in Semantics) — the systematic textbook treatment, including cross-linguistic variation.
+
+**Stage 3 — Modal concepts in development (the verdict layer)**
+- Leahy & Carey, "The Acquisition of Modal Concepts," *TiCS* 2020 — the minimal/modal distinction and the task logic built on it.
+- Carey, *The Origin of Concepts* (2009), ch. 1 & final chapter — the broader theory of conceptual change that the modal work instantiates.
+- Quilty-Dunn, Porot & Mandelbaum, "The Best Game in Town," *BBS* 2023 — the language-of-thought revival; the representational-format debate in its current form.
+
+**Stage 4 — The question posed to language models (the experimental layer)**
+- Linzen, "How Can We Accelerate Progress Towards Human-like Linguistic Generalization?" (ACL 2020) — the evaluation philosophy this program adopts.
+- McCoy, Pavlick & Linzen, "Right for the Wrong Reasons" (ACL 2019) — surface heuristics vs. licensing structure, the NLI case.
+- Warstadt et al., BabyLM Challenge findings (CoNLL 2023) — developmentally-plausible training scales; the bridge back to acquisition.
+- Hu et al. / recent work on modal and epistemic reasoning in LMs — track via the *Semantics with LMs* literature as it develops.
+
+**Historical companions (read for pleasure, cite for lineage)**
+- Leibniz, "On Freedom and Possibility" and the correspondence with Arnauld — possible worlds in their original habitat.
+- Kripke, "Semantical Considerations on Modal Logic" (1963) — shorter and more readable than its reputation.
+- Adams (ed.), *Leibniz: Determinist, Theist, Idealist* — for the deterministic reading of Leibnizian modality (and its unexpected resonance with treating counterfactuals as formal operations within deterministic models — Pearl's do-calculus being the modern descendant).
+
+</div>
+
+<p class="mt-8 text-[13px] leading-relaxed text-[var(--color-text-dim)]"><em>Last revised July 2026. This page states a research program, not a finished result; the thesis and papers it points to carry the evidence.</em></p>
+
+</div>
