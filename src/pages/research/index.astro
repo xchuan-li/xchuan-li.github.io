@@ -3,10 +3,12 @@ import Base from "../../layouts/Base.astro";
 import ProjectGlyph from "../../components/ProjectGlyph.astro";
 import { projects } from "../../data/research";
 
-// The research page mirrors the homepage mainline: one question, sharpened across
-// three bodies — Certify (behaviour, on a synthetic sandbox), Mechanism (inside
-// real models), and Across languages (cross-lingual). Only live and completed work
-// is listed; planned/exploratory directions are kept off this page.
+// The research page follows the converged main line: computational linguistics,
+// with causal-inference rigor as the method. Two forward bodies — Certify (does the
+// model use the licensing structure at all) and Across languages (the typological
+// application, where the differentiation is) — plus a demoted body of completed and
+// collaborative work that shows range without being the center. Isotrace and a
+// quantitative yield measure are named as horizon, not billed as running.
 //
 // Each card also carries its natural OUTPUT (a paper, a decision experiment, a
 // shared workbench, a thesis chapter, a co-authored paper), pulled from the single
@@ -24,40 +26,20 @@ const certifyProjects = [
     has_demo: true,
   },
   {
-    title: "Isotrace",
-    href: "/research/isotrace",
-    status: "localize · in design",
-    color: "var(--accent-teal)",
-    glyph: "isotrace",
-    one_line: "Localize which linguistic operation carries the inference — morphology, word order, or context — via path-encoded minimal pairs.",
-  },
-  {
     title: "MiniCausalLang",
     href: "/research/mini-causal-models",
-    status: "workbench",
+    status: "workbench · building",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    one_line: "A language-to-causal-graph workbench that makes grammatical structure, the inference it licenses, and interventions on it observable.",
-  },
-];
-
-const mechanismProjects = [
-  {
-    title: "Arrowhead",
-    href: "/research/arrowhead",
-    status: "pilot · complete",
-    color: "var(--accent-champagne)",
-    glyph: "latent",
-    one_line: "A completed pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — yet redundantly distributed across layers.",
-    has_demo: true,
+    one_line: "The foundation: a language-to-causal-graph workbench that makes grammatical structure, the inference it licenses, and interventions on it observable — so the certification cut is decidable by construction. Built next, after the paper.",
   },
   {
-    title: "Latent Control States",
-    href: "/research/latent-control-states",
-    status: "collaborative",
-    color: "var(--accent-amber)",
-    glyph: "latent",
-    one_line: "Does prompt framing shift a causally relevant latent state, or only the surface? A collaborative project, advised by a senior researcher at DFKI.",
+    title: "Isotrace",
+    href: "/research/isotrace",
+    status: "localize · design horizon",
+    color: "var(--accent-teal)",
+    glyph: "isotrace",
+    one_line: "Localize which linguistic operation carries the inference — morphology, word order, or context — via path-encoded minimal pairs. A design-stage horizon, not yet running.",
   },
 ];
 
@@ -68,8 +50,36 @@ const crosslingualProjects = [
     status: "collaborative · pilot",
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
-    one_line: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script? A wrong-Hanja intervention shows grounding scales with model capability.",
+    one_line: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script? A wrong-Hanja intervention shows grounding scales with capability — a weak model needs the cue and caves to a wrong one; a strong model does neither. The empirical second piece.",
     has_demo: true,
+  },
+  {
+    title: "Typological Grounding",
+    href: "/research/typological-grounding",
+    status: "exploratory · horizon",
+    color: "var(--accent-deep-purple)",
+    glyph: "xling",
+    one_line: "The flagship application: the same inference re-encoded by morphology, word order, or context — does grounding survive the re-encoding, or only the surface habits of each language?",
+  },
+];
+
+const otherProjects = [
+  {
+    title: "Arrowhead",
+    href: "/research/arrowhead",
+    status: "MSc thesis · complete",
+    color: "var(--accent-champagne)",
+    glyph: "latent",
+    one_line: "My completed MSc-thesis pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — yet redundantly distributed across layers. Demonstrated mechanistic range, not the center of the forward program.",
+    has_demo: true,
+  },
+  {
+    title: "Latent Control States",
+    href: "/research/latent-control-states",
+    status: "collaborative",
+    color: "var(--accent-amber)",
+    glyph: "latent",
+    one_line: "Does prompt framing shift a causally relevant latent state, or only the surface? A collaborative project, advised by a senior researcher at DFKI.",
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -87,37 +97,39 @@ const sections = [
     eyebrow: "Behaviour · on a synthetic sandbox",
     title: "Certify",
     description:
-      "Does the model use the linguistic structure that licenses an inference, or only a surface cue? Behavioral certification and localization, on a workbench that turns grammar into causal variables.",
+      "Does the model use the linguistic structure that licenses an inference, or only a surface cue? Non-circular behavioral certification, with a workbench that turns grammar into causal variables and interventions to sever the shortcuts.",
     projects: certifyProjects,
   },
   {
-    eyebrow: "Cross-lingual",
+    eyebrow: "Cross-lingual · typology",
     title: "Across languages",
     description:
-      "The same question where each language's grammar re-encodes one inference — stress-tested cross-lingually, with collaborators.",
+      "Where the method meets linguistic typology — the same inference re-encoded by each language's grammar. This is the application the program builds toward, and where my multilingual background does the work.",
     projects: crosslingualProjects,
   },
   {
-    eyebrow: "Inside real models",
-    title: "Mechanism",
+    eyebrow: "Completed & collaborative",
+    title: "Other work",
     description:
-      "From behavior into activation space — probing, steering, and ablating the features that carry an inference on real LLMs.",
-    projects: mechanismProjects,
+      "A completed MSc-thesis pilot inside a real model, and collaborative projects that stress-test the same question across mechanism and modality — range and rigor, not the center of the forward program.",
+    projects: otherProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="Research on how linguistic structure supports reasoning in AI systems: certify whether models use the structure that licenses inference, trace it inside real models, and test whether it holds across languages."
+  description="Computational linguistics with causal-inference rigor: certify whether AI models use the linguistic structure that licenses an inference or only a surface correlate, and test whether it holds across languages."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    My work is one program, not a list of ideas: <em>how does linguistic structure support
-    reasoning, and do AI systems actually use that structure?</em> I test it three ways —
-    certifying whether models use the structure that licenses an inference (behavior), tracing the
-    features that carry it inside real models (mechanism), and checking whether it holds across
-    languages.
+    My work is one program in <strong>computational linguistics</strong>, not a list of ideas:
+    <em>how does linguistic structure support reasoning, and do AI systems actually use that
+    structure — or a surface correlate of it?</em> I test it with causal-inference rigor —
+    controlled interventions and negative controls: first certifying whether the structure that
+    licenses an inference is load-bearing, then carrying that test across languages, where each
+    grammar re-encodes the same inference. Mechanistic tests inside real models are a complement,
+    not the center.
   </p>
   <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">
     Each project is tagged with its <em>natural output</em> — not everything aims at a paper of its

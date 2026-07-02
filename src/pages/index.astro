@@ -50,7 +50,7 @@ const projectIntro: Record<string, string> = {
   "/research/mini-causal-models":
     "A shared workbench that compiles small natural-language fragments into explicit causal graphs, so the structure a sentence encodes becomes observable. You can pose the model a question, intervene on the underlying graph, and check whether its answer tracks the structure or a surface accident. It is the bench the other projects run on.",
   "/research/arrowhead":
-    "The certification work lives on a synthetic sandbox; Arrowhead asks whether it survives inside a real model. A completed pilot on Gemma-2-2B finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It is a case where a formal claim about the model is checked against its behaviour under intervention.",
+    "The certification work lives on a synthetic sandbox; Arrowhead — my completed MSc-thesis pilot — asks whether it survives inside a real model. On Gemma-2-2B it finds a causal-direction feature that is encoded, steerable, and genuinely causal under intervention — yet redundantly distributed across the network rather than localized. It shows I can do the mechanistic work; it is demonstrated range, not the center of the forward program.",
   "/research/latent-control-states":
     "Prompt framing — urgency, authority, an epistemic stance — clearly changes what a model says; this asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
   "/research/hangl":
@@ -139,14 +139,15 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I study when an AI model actually <strong>uses the structure that licenses an
-            inference</strong> — what entails what, which event is the cause — rather than riding
-            a surface correlate of it. My approach is <em>formal characterization plus
-            controlled verification</em>: I specify the structure that should license an answer
-            in advance — by grammar, by formal rule, or by construction — then test whether the
-            model actually depends on it under intervention. This draws on formal language theory,
-            formal semantics, and my background in philosophy and typology, rather than on
-            large-scale circuit discovery.
+            I work in <strong>computational linguistics</strong>: I study when an AI model actually
+            <strong>uses the linguistic structure that licenses an inference</strong> — what entails
+            what, which noun governs agreement — rather than riding a surface correlate of it. My
+            approach is <em>formal characterization plus controlled verification</em>: I specify the
+            structure that should license an answer in advance — by grammar, by formal rule, or by
+            construction — then test whether the model actually depends on it under intervention,
+            using causal-inference rigor (controlled interventions and negative controls) as the
+            method rather than large-scale circuit discovery. This draws on formal language theory,
+            formal semantics, and my background in philosophy and typology.
             I'm asking what any system that understands language must satisfy, not how one
             architecture implements it — so the question outlasts whichever architecture is
             current: language is where I test it most directly today, and it carries, unchanged,

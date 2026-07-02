@@ -4,7 +4,7 @@
 
 ## What this is
 
-A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start) on language, reasoning, and AI, using causal interpretability as the current methodological route.
+A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start). Positioning (converged 2026-07): the home discipline is **computational linguistics**; **causal-inference rigor** (controlled do-interventions, negative controls) is the method, and multilingual/typology is the tool — *not* heavy mechanistic interpretability, which is presented as demonstrated range (the completed Arrowhead MSc pilot), not the center. Forward spine: Stable Is Not Grounded (Paper 1, in submission) → MiniCausalLang as a workbench/tool → HanGL (empirical, cross-lingual). Isotrace and a quantitative inferential-yield measure are the horizon, deliberately not billed as running.
 
 Live URL: **https://xchuan-li.github.io**
 Repo: **https://github.com/xchuan-li/xchuan-li.github.io**

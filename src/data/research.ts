@@ -16,7 +16,8 @@ export type ProjectStatus =
   | "In design"
   | "Planned"
   | "Exploratory"
-  | "Ongoing";
+  | "Ongoing"
+  | "Complete";
 
 // Which node of the research mainline a project hangs from.
 //   certify      — behaviour, on the synthetic sandbox
@@ -102,15 +103,15 @@ export const projects: Project[] = [
     tint: "rgba(93, 202, 165, 0.10)",
     glyph: "isotrace",
     tags: ["Decision experiment", "Localization"],
-    desc: "Localization — which linguistic operation or encoding does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context.",
-    group: "core",
-    tier: "now",
+    desc: "Localization — which linguistic operation or encoding does the work? Distinct reasoning paths are made to produce distinct output labels, traced on typological minimal pairs that re-encode one causal graph in morphology, word order, or context. A design-stage horizon the certified base builds toward, not yet running.",
+    group: "frontier",
+    tier: "thesis",
     category: "personal",
     status: "In design",
     node: "certify",
     spanTo: "mechanism",
     maturity: "concept",
-    progress: "localize · in design",
+    progress: "localize · design horizon",
     output: "Decision experiment",
     blurb: "Behavioural path-tracing: which linguistic operation actually carried the inference.",
     domain: "Localization · typology",
@@ -144,8 +145,8 @@ export const projects: Project[] = [
     tint: "rgba(15, 110, 86, 0.10)",
     glyph: "hangl",
     tags: ["Application frontier", "Empirical pilot"],
-    desc: "The structure-versus-surface question run on real LLMs through a natural phenomenon: Korean Sino-Korean words, where Hangul shares zero characters with its Hanja origin yet corresponds in meaning. A wrong-Hanja intervention shows latent grounding is a function of capability — strong models neither need the explicit cue nor are misled by it; a weak model is both.",
-    group: "frontier",
+    desc: "The structure-versus-surface question run on real LLMs through a natural phenomenon: Korean Sino-Korean words, where Hangul shares zero characters with its Hanja origin yet corresponds in meaning. A wrong-Hanja intervention shows latent grounding is a function of capability — a weak model needs the correct Hanja cue (Hanja gain +0.52) and is misled by a wrong one (cost +0.55); a strong model neither needs it (≈0) nor caves to it (+0.09–0.21). Behavioral and representational probes agree.",
+    group: "core",
     tier: "now",
     category: "collaborative",
     status: "Ongoing",
@@ -223,11 +224,11 @@ export const projects: Project[] = [
     color: "var(--accent-champagne)",
     glyph: "latent",
     tags: ["Extension · mechanistic", "Pilot"],
-    short: "Does a real LLM hold a usable representation of causal direction — which event is the cause? A pilot on Gemma-2-2B finds a steerable, genuinely-causal direction that is nonetheless redundantly distributed. The MSc-thesis pilot.",
+    short: "Does a real LLM hold a usable representation of causal direction — which event is the cause? A completed MSc-thesis pilot on Gemma-2-2B finds a steerable, genuinely-causal direction that is nonetheless redundantly distributed. Demonstrated mechanistic range; not the center of the forward program.",
     group: "support",
-    tier: "now",
+    tier: "thesis",
     category: "personal",
-    status: "Ongoing",
+    status: "Complete",
     node: "mechanism",
     maturity: "active",
     progress: "pilot complete",
@@ -251,14 +252,14 @@ export const now: NowItem[] = [
   },
   {
     label: "Next",
-    text: "Designing Isotrace, a behavioral path-tracing method that upgrades binary grounding certification into hop-level diagnosis of which linguistic operation carried the inference.",
+    text: "Hardening MiniCausalLang — the language-to-causal-graph workbench — into a small, releasable tool, so the certification cut is decidable by construction and the next experiments have a substrate to run on.",
   },
   {
-    label: "Alongside",
-    text: "Contributing to two collaborative projects that feed the main line — group work, so I don't claim their outcome as my own.",
+    label: "Then",
+    text: "Building out HanGL, where a wrong-Hanja intervention on real LLMs already shows latent grounding scales with model capability — the empirical, cross-lingual second piece.",
   },
   {
-    label: "Exploring",
-    text: "Sketching a direction on typological grounding — what the language-and-reasoning question looks like when the same inference is marked in grammar in one language and left to context in another.",
+    label: "Horizon",
+    text: "Isotrace (localizing which grammatical level carries an inference) and a quantitative inferential-yield measure sit as the horizon the certified base builds toward — not yet running, and not what the applications rest on.",
   },
 ];
