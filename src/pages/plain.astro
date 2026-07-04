@@ -9,15 +9,17 @@ import { posts } from "../data/writing";
 // getting done and when. No hero, no figures, no animation: the link meant for a
 // CV. The rich, illustrated homepage lives at "/".
 
-// Grouped by ownership to mirror the homepage "all projects" gallery: my own
-// work vs collaborative projects. Each item still shows its delivery status.
-// Parked projects (page up, mainline withdrawn) are excluded here too.
-const personalWork = projects.filter((p) => p.category === "personal" && !p.parked);
-const collaborativeWork = projects.filter((p) => p.category === "collaborative" && !p.parked);
+// Two tiers, mirroring the current focus: the modality mainline (the pieces
+// actively running — Stable Is Not Grounded and the MiniCausalLang workbench, plus
+// the modal-typology through-line) first, then earlier and collaborative work,
+// kept for the record but demoted. Parked projects (page up, mainline withdrawn)
+// are excluded here; archived projects drop to the second tier.
+const mainlineWork = projects.filter((p) => !p.parked && !p.archived);
+const earlierWork = projects.filter((p) => !p.parked && p.archived);
 
 const groups = [
-  { label: "Personal", items: personalWork },
-  { label: "Collaborative — in progress with others", items: collaborativeWork },
+  { label: "Mainline — the modality program", items: mainlineWork },
+  { label: "Earlier & collaborative work", items: earlierWork },
 ];
 
 const recentPosts = posts.slice(0, 5);

@@ -20,12 +20,12 @@ const spineOrigin = {
 // single reverse-chronological stream. Both project AND note display-dates are a
 // homepage-only narrative, hand-spread so projects and notes interleave (never two
 // notes in a row); the real note pubDates stay on /writing, and /research stays
-// date-free. Only the program line appears here — the parked direction (Isotrace)
-// and the off-mainline collaborations (Latent Control States, Cross-lingual
-// ProtoBias) are left off; HanGL stays, explicitly labeled a collaboration, as the
-// cross-lingual evidence piece. Stable Is Not Grounded anchors the top as the
-// method's first domain; Arrowhead sits last, as the format pilot; a milestone
-// note marks the thesis turn to modal concepts.
+// date-free. The homepage now shows only the two projects squarely on the modality
+// mainline — Stable Is Not Grounded (the method's first domain, anchoring the top)
+// and MiniCausalLang (the workbench the cut runs on). The completed pilot
+// (Arrowhead) and the collaborations (HanGL, Latent Control States, Cross-lingual
+// ProtoBias), plus the parked direction (Isotrace), are kept on /research but left
+// off the homepage; a milestone note marks the thesis turn to modal concepts.
 //
 // Notes are filtered the same way: only the three squarely on the program's line
 // appear here (from-leibniz = the stage-I origin; meaning-beneath-language = the
@@ -34,9 +34,7 @@ const spineOrigin = {
 const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
 const projectDate: Record<string, string> = {
   "/research/sc-certification": "2026-06-20",
-  "/research/hangl": "2026-06-01",
   "/research/mini-causal-models": "2026-05-05",
-  "/research/arrowhead": "2026-03-01",
 };
 // Homepage display-dates for the notes, chosen to interleave them among the
 // projects (their real pubDates, several clustered in late May, remain on /writing).
@@ -151,7 +149,9 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I study one question, inherited across three and a half centuries:
+            My work is <strong>formal, linguistically-informed analysis of language models</strong>,
+            and its signature is <strong>the formal semantics of modality</strong>. I study one
+            question, inherited across three and a half centuries:
             <strong>what must a system's representations be like for it to genuinely grasp
             possibility and necessity — rather than merely behave as if it does?</strong> I ask it
             of language models: state the structure that would license the capacity — a space of

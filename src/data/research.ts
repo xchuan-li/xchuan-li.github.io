@@ -73,6 +73,11 @@ export interface Project {
   // Parked: the page stays up (URL unbroken) but the project is withdrawn from
   // all mainline narratives (homepage, /research index, /plain).
   parked?: boolean;
+  // Archived: off the current active focus (only SNG + MiniCausalLang stay on the
+  // mainline). The project page and its record are kept, but the piece is demoted
+  // to a secondary "earlier & collaborative work" tier and dropped from the
+  // homepage — it is neither parked (still listed) nor mainline.
+  archived?: boolean;
 }
 
 export const projects: Project[] = [
@@ -163,6 +168,7 @@ export const projects: Project[] = [
     domain: "Cross-lingual grounding",
     kind: "paper",
     demo: true,
+    archived: true,
   },
   {
     title: "MiniCausalLang",
@@ -201,6 +207,7 @@ export const projects: Project[] = [
     blurb: "Does prompt framing shift a causally relevant latent state, or only the surface?",
     domain: "Mechanistic interp",
     kind: "project",
+    archived: true,
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -221,6 +228,7 @@ export const projects: Project[] = [
     domain: "Multimodal bias",
     kind: "paper",
     demo: true,
+    archived: true,
   },
   {
     title: "Arrowhead",
@@ -241,6 +249,7 @@ export const projects: Project[] = [
     domain: "Causal direction",
     kind: "project",
     demo: true,
+    archived: true,
   },
 ];
 
@@ -260,7 +269,7 @@ export const now: NowItem[] = [
   },
   {
     label: "Then",
-    text: "Hardening MiniCausalLang — the workbench where the space of alternatives is stipulated by construction — into a small, releasable bench; HanGL, the collaborative cross-lingual pilot, keeps scaling alongside.",
+    text: "Hardening MiniCausalLang — the workbench where the space of alternatives is stipulated by construction — into a small, releasable bench, and prototyping its modal-base version for the thesis.",
   },
   {
     label: "Horizon",

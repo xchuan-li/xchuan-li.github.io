@@ -46,18 +46,21 @@ const modalProjects = [
     glyph: "xling",
     one_line: "The flagship application, with modality as the case: English may/must, German können/müssen/dürfen, and Chinese 可能/必须/一定 carve the same modal space differently — hold the modal base fixed, swap the language, and ask whether the model tracks the world-set or the words.",
   },
+];
+
+// Earlier and collaborative work — kept for the record but off the current focus
+// (only Stable Is Not Grounded and MiniCausalLang stay on the active mainline).
+// The completed thesis pilot (Arrowhead) leads, then the collaborations.
+const collabProjects = [
   {
     title: "Arrowhead",
     href: "/research/arrowhead",
     status: "thesis pilot · complete",
     color: "var(--accent-champagne)",
     glyph: "latent",
-    one_line: "My completed thesis pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — transferring even to invented zero-frequency relations — yet redundantly distributed across layers. Evidence the format question is tractable, before the thesis asks it of modal concepts.",
+    one_line: "A completed pilot on a real LLM: a causal-direction feature that is encoded, steerable, and genuinely causal — transferring even to invented zero-frequency relations — yet redundantly distributed across layers. Evidence the representational-format question is tractable inside real models — the groundwork the modal-concepts thesis reuses.",
     has_demo: true,
   },
-];
-
-const collabProjects = [
   {
     title: "HanGL · Surface Hangul, Latent Hanja",
     href: "/research/hangl",
@@ -98,14 +101,14 @@ const sections = [
     eyebrow: "The flagship · modal concepts",
     title: "Toward modality",
     description:
-      "The forward center: do LMs possess rich modal representations, and when in training do modal distinctions emerge? The Master's thesis — co-supervised across NLP and developmental psychology at UTN — carries the program here; it gets no card until it has results. Around it: the typological application and the completed format pilot.",
+      "The forward center: do LMs possess rich modal representations, and when in training do modal distinctions emerge? The Master's thesis — co-supervised across NLP and developmental psychology at UTN — carries the program here; it gets no card until it has results. Around it: the typological application it builds toward.",
     projects: modalProjects,
   },
   {
-    eyebrow: "Collaborations & range",
-    title: "Collaborations",
+    eyebrow: "Earlier & collaborative work · off the current focus",
+    title: "Earlier & collaborative work",
     description:
-      "Off the program's mainline, kept honestly so: collaborative projects that stress-test structure-versus-surface in other domains — and demonstrate the cross-lingual and mechanistic range the program draws on.",
+      "Kept for the record, but off the active mainline — only Stable Is Not Grounded and MiniCausalLang run there now. A completed thesis pilot and collaborative projects that stress-test structure-versus-surface in other domains, and demonstrate the cross-lingual and mechanistic range the program draws on.",
     projects: collabProjects,
   },
 ];
