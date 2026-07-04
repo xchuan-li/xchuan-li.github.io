@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure — what is necessary holds in all possible worlds, what is possible in some — and dreamed of a language whose form would carry that structure openly. Kripke made the structure mathematics; Kratzer connected it to the modal words of natural language; Leahy & Carey, in developmental psychology, made possession-versus-performance an experimental question: design tasks that a minimal representation must fail. Language models inherit the question in its strangest form yet — systems built entirely from language, with no perception, no action, no world. Do they nonetheless grow something functionally like a space of alternatives? Nothing here can be fully formalized — some inference is intractable to check, and natural language has no complete formal semantics — but a proof is hard to find and cheap to verify, so the working shape is propose-and-verify: the model proposes, a stated formal criterion selectively checks, and a claim is licensed at the output, not assumed at the start. Certifying when a stable, correct answer is not actually licensed by its structure — my current paper, in the causal-structural domain — is the first piece running; the Master's thesis carries the program to modal concepts proper. Each entry below is one piece of that line.";
+const spineLeadIn = "Leibniz made modality structure — what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form — systems built entirely from language, with no world: do they nonetheless grow something functionally like a space of alternatives? Each entry below is one piece of that line.";
 
 const spineOrigin = {
   label: "From possible worlds to language models",
@@ -94,7 +94,7 @@ const milestones = [
   {
     type: "milestone" as const,
     date: "2026-07-02",
-    text: "The program's full statement goes up — five inheritances, Leibniz to language models — and the Master's thesis (co-supervised across NLP and developmental psychology at UTN) begins carrying it to modal concepts proper.",
+    text: "The program's full statement goes up — five inheritances, Leibniz to language models — and the Master's thesis at UTN starts taking shape around carrying it toward modal concepts.",
   },
 ];
 
@@ -163,9 +163,9 @@ const entries = rawEntries.map((e) => {
             discipline: formal methods sit at the criterion layer — what any system that grasps
             modality must satisfy, not how one architecture implements it. My undergraduate
             Philosophy thesis was on Leibniz's <em>characteristica universalis</em>; my Master's
-            thesis at UTN — co-supervised across NLP and developmental psychology — carries the
-            question to modal concepts in language models, with Chinese, German, and English
-            (可能/必须/一定 vs. <em>may/must</em>) as the natural experiment.
+            thesis at UTN is taking shape around the next step — modal concepts in language models,
+            where Chinese, German, and English (可能/必须/一定 vs. <em>may/must</em>) offer a natural
+            experiment.
           </p>
           <p>
             I'm preparing PhD applications for fall 2027 to take this further.

@@ -265,7 +265,7 @@ export const now: NowItem[] = [
   },
   {
     label: "Next",
-    text: "Scoping the Master's thesis, co-supervised across NLP and developmental psychology at UTN: do LMs possess rich modal representations, when in training do modal distinctions emerge, and does the acquisition trajectory resemble the human one?",
+    text: "Scoping the Master's thesis at UTN — the planned direction is modal concepts in language models: broadly, whether LMs develop rich modal representations and when modal distinctions emerge in training. Specific questions still being fixed.",
   },
   {
     label: "Then",
