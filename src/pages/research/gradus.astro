@@ -5,7 +5,7 @@ import TLFig from "../../components/TLFig.astro";
 
 <Base
   title="GRADUS · Xiaochuan Li"
-  description="Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface modal word? A causal probe plus a graded epistemic-force dataset."
+  description="Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface word? A causal probe plus a graded epistemic-force dataset."
   toc={true}
 >
   <article class="prose">
@@ -19,12 +19,12 @@ import TLFig from "../../components/TLFig.astro";
     </p>
 
     <p>
-      This is the one project I am actively running, and the first instance of the program: the
+      The one project I am actively running, and the first instance of the program: the
       structure-versus-surface question asked of <strong>modality</strong>, where it takes its
       sharpest, most falsifiable form. "Surface" = the word triggers the right behaviour
       <em>without</em> the concept; "structure" = the word is backed by an internal representation of
-      force. GRADUS is the standalone precursor the Master's thesis builds on — the pilot that
-      validates the instrument, plus the graded dataset that turns it into a resource.
+      force. GRADUS is the standalone precursor the Master's thesis builds on: a pilot that validates
+      the instrument, plus a graded dataset that turns it into a resource.
     </p>
 
     <figure class="essay-fig">
@@ -37,9 +37,9 @@ import TLFig from "../../components/TLFig.astro";
       <strong>world-structure</strong> ("only red balls" vs. "red and blue") changes the base rate of
       red, so any direction estimated from it encodes frequency, not force — and it is
       <em>alethic</em> necessity, the wrong flavor for epistemic <em>must</em>. So the pilot studies
-      <strong>epistemic</strong> modality and operationalises force as evidence-based certainty:
+      <strong>epistemic</strong> modality, operationalising force as evidence-based certainty:
       epistemic <em>must</em> is an evidence-licensed inference (von Fintel &amp; Gillies 2010), not
-      logical necessity. The base-rate reading is kept as a competing control, not the definition.
+      logical necessity. The base-rate reading stays a competing control, not the definition.
     </p>
 
     <h2>The design — a causal test on a fixed model</h2>
@@ -47,17 +47,17 @@ import TLFig from "../../components/TLFig.astro";
       <li><strong>Define a force direction <code>D</code> with no modal word.</strong> Vary only
         evidence, hold the fact fixed: <em>all three sensors report red</em> (certain) vs. <em>one of
         three</em> (unsure). <code>D = mean(strong) − mean(weak)</code> in the residual stream at
-        layer L. No modal word, so <code>D</code> cannot be a reaction to the lexeme; the fact is
+        layer L. No modal word, so <code>D</code> is not a reaction to the lexeme; the fact is
         unchanged, so <code>D</code> is not base rate.</li>
       <li><strong>Sanity check.</strong> Project <em>must</em> / <em>might</em> onto <code>D</code>;
         expect <em>must</em> at the certain end. Near-guaranteed — a check, not evidence.</li>
-      <li><strong>The test.</strong> Ablate <code>D</code> (projection: <code>h ← h − (h·D̂)D̂</code>)
-        while the model answers the certainty question on a <em>might</em> item. If certainty jumps
-        toward the <em>must</em> level, handling <em>might</em> <strong>needed</strong> the force
-        concept — structure. If nothing moves — surface.</li>
+      <li><strong>The test.</strong> Ablate <code>D</code> (<code>h ← h − (h·D̂)D̂</code>) while the
+        model answers the certainty question on a <em>might</em> item. If certainty jumps toward the
+        <em>must</em> level, handling <em>might</em> <strong>needed</strong> the force concept —
+        structure. If nothing moves — surface.</li>
       <li><strong>Competing control <code>D′</code>.</strong> Build the base-rate direction the naive
-        way and ablate it from the same items. Ablating <code>D</code> breaks <em>might</em> but
-        ablating <code>D′</code> does not → the model uses modal force, not base-rate frequency.</li>
+        way and ablate it from the same items. If ablating <code>D</code> breaks <em>might</em> but
+        <code>D′</code> does not → the model uses modal force, not base-rate frequency.</li>
     </ol>
 
     <h2>Pilot — first run (a smoke test, not yet a finding)</h2>
@@ -69,30 +69,30 @@ import TLFig from "../../components/TLFig.astro";
       <li>Readout valid: strong evidence 0.391 &gt; weak 0.174 — certainty tracks evidence.</li>
       <li>Ablating <strong>D</strong> raises <em>might</em>'s certainty 0.307 → 0.459 (<strong>+0.152</strong>);
         ablating the base-rate control <strong>D′</strong> does not (−0.033). The structure signature,
-        with the confound behaving correctly.</li>
+        confound behaving correctly.</li>
     </ul>
     <p class="!text-sm !text-[var(--color-text-muted)]">
-      Honest caveats that keep this a smoke test: ablating D <em>overshoots</em> (might ends above the
-      must level); the must–might baseline gap is small (0.063); and there is no random-direction
-      control yet, so generic disruption is not yet excluded. Next: norm-matched random-direction
-      controls, scale to 1.5B, and 2–3 more evidence families for convergence.
+      Caveats that keep this a smoke test: ablating D <em>overshoots</em> (might ends above the must
+      level); the must–might baseline gap is small (0.063); and with no random-direction control yet,
+      generic disruption is not excluded. Next: norm-matched random-direction controls, scale to 1.5B,
+      and 2–3 more evidence families for convergence.
     </p>
 
     <h2>GRADUS — the graded dataset that makes it a paper</h2>
     <p>
-      The binary probe becomes a <strong>resource + a graded diagnostic</strong> with GRADUS: a
+      GRADUS turns the binary probe into a <strong>resource + a graded diagnostic</strong>: a
       constructed, lightly-normed dataset placing modal / certainty expressions on a graded
       <strong>epistemic-force</strong> scale in matched frames —
       <code>might/could &lt; may/possibly &lt; probably &lt; should &lt; must &lt; certainly</code> —
       each item carrying a force target <code>t ∈ [0,1]</code>. It is the modal analog of Cho's GraSD
-      (constructed and graded), not IWCS-style sense annotation on natural data (entangled, and the
-      reason a read-only probe there yields uninterpretable negatives).
+      (constructed and graded), not IWCS-style sense annotation on natural data — which is entangled,
+      why a read-only probe there yields uninterpretable negatives.
     </p>
     <p>
       The payoff is a <strong>calibration test</strong>: is the model's internal certainty axis
       continuous and monotone in <code>t</code> (Lassiter-style degree semantics), or clustered with a
       gap between possibility and necessity (categorical / threshold)? This turns the pilot's scope
-      caveat — force vs. graded confidence — into an empirical question, and the dataset itself is a
+      caveat — force vs. graded confidence — into an empirical question. The dataset is itself a
       citable resource, and the natural artifact to hand the developmental collaboration.
     </p>
 
@@ -102,23 +102,23 @@ import TLFig from "../../components/TLFig.astro";
       instrument on the <em>learning process</em>: does modal force <strong>emerge during training</strong>
       as the linguistic input shifts — can a learner built from language alone develop it, and what in
       the input drives it (read across Pythia checkpoints, then controlled retraining)? The thesis
-      gets no card here until it has results; GRADUS is the running precursor it reuses.
+      gets no card here until it has results; GRADUS is the precursor it reuses.
     </p>
 
     <h2>Scope &amp; claim discipline</h2>
     <ul>
       <li><strong>Epistemic only</strong> (must / might as evidence-based inference). Deontic and
-        circumstantial are out of scope.</li>
+        circumstantial out of scope.</li>
       <li>Behavioural / representational claim only: <em>the model's handling of the modal word is (not)
         load-bearing on an evidence-based force representation</em> — never "the model understands
         modality".</li>
-      <li>No claim about training-time induction (that is the thesis) and nothing about humans:
-        convergence ≠ homology.</li>
+      <li>No claim about training-time induction (that is the thesis), none about humans: convergence
+        ≠ homology.</li>
     </ul>
 
     <h2>Status</h2>
     <ul>
-      <li>Pilot run (Qwen2.5-0.5B): plumbing valid, structure signature present, honest smoke-test caveats above.</li>
+      <li>Pilot run (Qwen2.5-0.5B): plumbing valid, structure signature present, smoke-test caveats above.</li>
       <li>Next: random-direction control, scale-up, multi-family convergence; then GRADUS norming and the calibration test.</li>
       <li>Deliverable: a released, documented graded epistemic-force dataset paired with its diagnostic use — a resource + diagnostic paper.</li>
     </ul>

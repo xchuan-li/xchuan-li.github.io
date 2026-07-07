@@ -8,7 +8,7 @@ const roadmap = [
     phase: "Report I · framing + data",
     title: "Three framing dimensions and a controlled-data pipeline",
     summary:
-      "Prompt framing is operationalised into three dimensions — urgency, authority, and epistemic positioning — and a two-agent pipeline builds a controlled dataset: a helper extracts a framing-agnostic theme/action/goal from each scenario, then a generator re-renders it under each framing plus a neutral baseline, holding the content fixed so framing is the single manipulated variable, with schema and faithfulness (RAGAS) validation.",
+      "Prompt framing is operationalised into three dimensions — urgency, authority, epistemic positioning. A two-agent pipeline builds a controlled dataset: a helper extracts a framing-agnostic theme/action/goal from each scenario, then a generator re-renders it under each framing plus a neutral baseline, holding content fixed so framing is the single manipulated variable, with schema and faithfulness (RAGAS) validation.",
     status: "active" as const,
   },
   {
@@ -37,23 +37,23 @@ const roadmap = [
     </p>
 
     <p>
-      This is the mechanistic extension of the behavioral program: if a behavioral intervention reveals
-      a causal control state, can we find a corresponding direction in activation space? The handle is
-      <strong>prompt framing</strong> — the same underlying request carried under different social
-      pressure — operationalised into three dimensions:
+      This is the mechanistic extension of the behavioral program: if a behavioral intervention reveals a
+      causal control state, can we find a corresponding direction in activation space? The handle is
+      <strong>prompt framing</strong> — the same request carried under different social pressure —
+      operationalised into three dimensions:
     </p>
     <ul>
       <li><strong>Urgency</strong> — compelling rapid decisions under perceived time pressure or moral stakes.</li>
       <li><strong>Authority</strong> — framing the speaker as holding socially recognised power or expertise.</li>
       <li>
-        <strong>Epistemic positioning</strong> — how the user frames their own standing relative to the
+        <strong>Epistemic positioning</strong> — how the user frames their standing relative to the
         model's judgement: critically engaged, or low-agency and deferring.
       </li>
     </ul>
 
     <p>
       The first stage builds the ground truth a clean mechanistic test needs — a controlled dataset in
-      which framing, and only framing, varies:
+      which only framing varies:
     </p>
 
     <ProgressTimeline items={roadmap} accent="var(--accent-amber)" />
@@ -61,28 +61,27 @@ const roadmap = [
     <h2>The controlled-data pipeline</h2>
     <p>
       Two agents generate the dataset. A <strong>helper</strong> reads each raw scenario and returns a
-      framing-agnostic <em>theme / action / goal</em> triple. A <strong>generator</strong> then renders
-      that same triple under each framing condition — urgency, authority, epistemic — plus a neutral
-      baseline. Holding theme, action, and goal fixed across conditions isolates framing as the single
-      manipulated variable, which is exactly what later probing and activation patching need in order to
-      attribute an internal difference to framing rather than to content. Generated items pass schema,
-      character, opposite-options, and faithfulness (RAGAS) checks before they enter the set.
+      framing-agnostic <em>theme / action / goal</em> triple. A <strong>generator</strong> renders that
+      triple under each framing condition — urgency, authority, epistemic — plus a neutral baseline.
+      Holding the triple fixed isolates framing as the single manipulated variable, which is what later
+      probing and activation patching need to attribute an internal difference to framing rather than
+      content. Items pass schema, character, opposite-options, and faithfulness (RAGAS) checks before
+      entering the set.
     </p>
 
     <h2>Relation to the rest of the work</h2>
     <p>
-      Latent Control States sits after the core behavioral sequence as a mechanistic bridge — from
-      causal evidence over behavior (<a href="/research/sc-certification">Stable Is Not Grounded</a>) to
-      activation-space hypotheses, the same move that <a href="/research/arrowhead">Arrowhead</a>
-      makes on a different handle. The aim is not to replace the core sequence, but to
-      connect its behavioral evidence to mechanism where that is possible.
+      Latent Control States sits after the core behavioral sequence as a mechanistic bridge — from causal
+      evidence over behavior (<a href="/research/sc-certification">Stable Is Not Grounded</a>) to
+      activation-space hypotheses, the same move <a href="/research/arrowhead">Arrowhead</a> makes on a
+      different handle. The aim is to connect that behavioral evidence to mechanism where possible, not to
+      replace the core sequence.
     </p>
 
     <p class="text-sm text-[var(--color-text-dim)]">
-      Status: a collaborative project, in progress — Progress Report I (June 2026) covers the framing
-      definitions and the controlled-data pipeline; tiny-dataset collection, data-quality checks, and
-      the probing / activation-patching stage come next. Group work, so I don't claim its outcome as my
-      own.
+      Status: a collaborative project, in progress. Progress Report I (June 2026) covers the framing
+      definitions and the controlled-data pipeline; tiny-dataset collection, data-quality checks, and the
+      probing / activation-patching stage come next. Group work, so I don't claim its outcome as my own.
     </p>
   </article>
 </Base>
