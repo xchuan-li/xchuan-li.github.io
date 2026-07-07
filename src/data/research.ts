@@ -73,7 +73,7 @@ export interface Project {
   // Parked: the page stays up (URL unbroken) but the project is withdrawn from
   // all mainline narratives (homepage, /research index, /plain).
   parked?: boolean;
-  // Archived: off the current active focus (only SNG + MiniCausalLang stay on the
+  // Archived: off the current active focus (only SNG + CAST stay on the
   // mainline). The project page and its record are kept, but the piece is demoted
   // to a secondary "earlier & collaborative work" tier and dropped from the
   // homepage — it is neither parked (still listed) nor mainline.
@@ -83,6 +83,28 @@ export interface Project {
 export const projects: Project[] = [
   {
     n: "01",
+    title: "GRADUS",
+    href: "/research/gradus",
+    color: "var(--accent-deep-purple)",
+    tint: "rgba(176, 156, 219, 0.10)",
+    glyph: "xling",
+    tags: ["Dataset + diagnostic", "Modal force"],
+    desc: "Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface modal word? A force direction built from evidence alone (no modal word); ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not. GRADUS extends the test into a graded epistemic-force dataset — a calibration diagnostic and a citable resource that the modal-concepts thesis reuses.",
+    group: "core",
+    tier: "now",
+    category: "personal",
+    status: "Ongoing",
+    node: "certify",
+    maturity: "active",
+    progress: "pilot run · building GRADUS",
+    output: "Dataset + diagnostic paper",
+    blurb: "Does a model represent modal force, or ride the modal word? A causal probe plus a graded epistemic-force dataset.",
+    domain: "Modal force · calibration",
+    kind: "paper",
+    demo: false,
+  },
+  {
+    n: "02",
     title: "Stable Is Not Grounded",
     href: "/research/sc-certification",
     color: "var(--accent-coral)",
@@ -102,6 +124,7 @@ export const projects: Project[] = [
     domain: "Grounding · certification",
     kind: "paper",
     demo: true,
+    parked: true,
   },
   {
     n: "02",
@@ -145,6 +168,7 @@ export const projects: Project[] = [
     blurb: "Languages carve modality differently — does a model track the modal base, or each language's surface habits?",
     domain: "Cross-lingual · typology",
     kind: "project",
+    parked: true,
   },
   {
     n: "→",
@@ -171,12 +195,12 @@ export const projects: Project[] = [
     archived: true,
   },
   {
-    title: "MiniCausalLang",
+    title: "CAST",
     href: "/research/mini-causal-models",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    tags: ["Supporting workbench"],
-    short: "A workbench that stipulates a formal-semantic object and projects it to text — so grammatical structure, the inference it licenses, and interventions on it can be tested against a known target. First domain: the causal graph; being generalised into a modal-semantic compiler for the thesis.",
+    tags: ["Supporting workbench", "Modal compiler"],
+    short: "Given a modal state — a set of possible worlds and a ◇/□ constraint — CAST projects it to controlled text in English, German, and Chinese, then grades whether the model's behaviour is isomorphic to the world-set it was compiled from. The logical content is fixed by construction, so any difference across the three languages can only come from linguistic form. The workbench the modal thesis runs on.",
     group: "support",
     tier: "now",
     category: "personal",
@@ -185,7 +209,7 @@ export const projects: Project[] = [
     maturity: "active",
     progress: "workbench · building",
     output: "Shared workbench",
-    blurb: "A workbench that stipulates a formal-semantic object and projects it to text — first a causal graph, next a modal base — so structure, licensed inference, and interventions are observable.",
+    blurb: "Given a modal state, generate controlled language across en/de/zh — then check the model tracks the surviving world-set, not the words.",
     domain: "Eval infrastructure",
     kind: "tool",
   },
@@ -250,6 +274,7 @@ export const projects: Project[] = [
     kind: "project",
     demo: true,
     archived: true,
+    parked: true,
   },
 ];
 
@@ -261,15 +286,15 @@ export interface NowItem {
 export const now: NowItem[] = [
   {
     label: "Primary",
-    text: "Writing Stable Is Not Grounded — the program's certification method in its first domain, causal structure — for a mid-July workshop deadline.",
+    text: "GRADUS — the modal-force pilot (does a model represent necessity vs. possibility, or ride the modal word?) and building its graded epistemic-force dataset. The one project running now, and the precursor the thesis reuses.",
   },
   {
     label: "Next",
-    text: "Scoping the Master's thesis at UTN — the planned direction is modal concepts in language models: broadly, whether LMs develop rich modal representations and when modal distinctions emerge in training. Specific questions still being fixed.",
+    text: "The Master's thesis at UTN — modal concepts in language models: whether a learner built from language alone develops rich modal representations, and when modal distinctions become load-bearing during training (the emergence question). Reuses the GRADUS instrument.",
   },
   {
     label: "Then",
-    text: "Hardening MiniCausalLang — the workbench where the space of alternatives is stipulated by construction — into a small, releasable bench, and prototyping its modal-base version for the thesis.",
+    text: "Hardening CAST — the compiler that projects a modal state to controlled en/de/zh text, so the space of alternatives is stipulated by construction — into a small, releasable bench the thesis runs on.",
   },
   {
     label: "Horizon",

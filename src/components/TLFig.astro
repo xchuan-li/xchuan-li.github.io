@@ -96,6 +96,38 @@ const accent = `color-mix(in srgb, ${color} 70%, var(--color-text))`;
       <text class="tf-cap" x="150" y="158" text-anchor="middle">structure &amp; interventions, observable</text>
     </g>
   )}
+
+  {kind === "gradus" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">epistemic force: might → must</text>
+      <line class="tf-edge" x1="40" y1="114" x2="262" y2="114" marker-end="url(#tf-a)" />
+      <text class="tf-steer" x="258" y="130" text-anchor="end">more certain →</text>
+      <circle class="tf-node" cx="60" cy="114" r="6" /><text class="tf-elbl" x="60" y="134" text-anchor="middle">might</text>
+      <circle class="tf-node-sm" cx="124" cy="114" r="5" /><text class="tf-elbl" x="124" y="134" text-anchor="middle">may</text>
+      <circle class="tf-node-sm" cx="186" cy="114" r="5" /><text class="tf-elbl" x="186" y="134" text-anchor="middle">should</text>
+      <circle class="tf-node-f" cx="240" cy="114" r="7" /><text class="tf-elbl" x="240" y="134" text-anchor="middle">must</text>
+      <path class="tf-edge-c tf-dash" d="M60 102 C 112 64, 198 64, 234 102" fill="none" marker-end="url(#tf-c)" />
+      <text class="tf-elbl-c" x="150" y="58" text-anchor="middle">ablate force direction D</text>
+      <text class="tf-cap" x="150" y="164" text-anchor="middle">remove D → might behaves like must</text>
+    </g>
+  )}
+
+  {kind === "cast" && (
+    <g>
+      <text class="tf-kick" x="150" y="20" text-anchor="middle">one modal state → en · de · zh</text>
+      <rect class="tf-box" x="24" y="50" width="74" height="70" rx="8" />
+      <circle class="tf-node-sm" cx="44" cy="72" r="7" /><circle class="tf-node" cx="80" cy="72" r="7" />
+      <circle class="tf-node-sm" cx="44" cy="100" r="7" /><circle class="tf-node" cx="80" cy="100" r="7" />
+      <line class="tf-cut" x1="39" y1="67" x2="49" y2="77" /><line class="tf-cut" x1="49" y1="67" x2="39" y2="77" />
+      <line class="tf-cut" x1="39" y1="95" x2="49" y2="105" /><line class="tf-cut" x1="49" y1="95" x2="39" y2="105" />
+      <text class="tf-elbl" x="61" y="138" text-anchor="middle">¬◇ · survivors</text>
+      <line class="tf-edge" x1="102" y1="86" x2="146" y2="86" marker-end="url(#tf-a)" />
+      <text class="tf-sent" x="156" y="66" text-anchor="start">EN “cannot possibly”</text>
+      <text class="tf-sent" x="156" y="90" text-anchor="start">DE “kann unmöglich”</text>
+      <text class="tf-sent" x="156" y="114" text-anchor="start">ZH “不可能”</text>
+      <text class="tf-cap" x="150" y="160" text-anchor="middle">logic fixed by construction; surface varies</text>
+    </g>
+  )}
 </svg>
 
 <style>

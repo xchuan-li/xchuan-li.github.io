@@ -4,29 +4,38 @@ import MiniCausalFigure from "../../components/MiniCausalFigure.astro";
 ---
 
 <Base
-  title="MiniCausalLang · Xiaochuan Li"
-  description="A workbench that stipulates a formal-semantic object and projects it to text, so structure recovery can be tested against a known target — causal graphs first, modal semantics next."
+  title="CAST · Xiaochuan Li"
+  description="Given a modal state — a set of possible worlds and a modal constraint — CAST projects it to controlled text in English, German, and Chinese, and grades whether a model tracks the world-set or the words."
   toc={true}
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Supporting workbench · stipulate structure, project to text
+      Supporting workbench · modal compiler (formerly MiniCausalLang)
     </div>
-    <h1>MiniCausalLang — language structure with a known answer</h1>
+    <h1>CAST — one modal state, many languages</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      A workbench for stipulating a formal-semantic object and checking whether a model recovers it.
+      Given a modal state, generate controlled language — then check the model tracks the surviving world-set, not the words.
     </p>
 
     <p>
-      MiniCausalLang makes the program's question decidable rather than guessed: it starts from a
-      <em>known formal-semantic object</em>, projects it to text by template, and asks whether a
-      model's behavior is isomorphic to the object it was compiled from. Because the structure —
-      and the full space of alternatives it licenses — is stipulated by construction, structure
-      recovery can be scored against a known target. Its <strong>first domain is the causal graph</strong>
-      (below); it is being generalised into a <strong>modal-semantic compiler</strong> — a candidate
-      world-set plus a ◇/□ constraint, rendered in English, German, and Chinese, graded for
-      whether the model tracks the surviving worlds — which is the version the modal-concepts thesis
-      runs on.
+      CAST starts from a <em>known modal state</em> — a candidate set of possible worlds
+      <code>W = {"{w₁…w₄}"}</code> plus a ◇/□ constraint — runs the elimination, and
+      <strong>projects the surviving world-set to controlled text</strong> in English, German, and
+      Chinese ("cannot possibly be" / "kann unmöglich … sein" / "不可能是"). Correct behaviour is not
+      picking one world but <em>indifference over exactly the survivors</em>. Because the logical
+      content is fixed by construction, any difference across the three languages can only come from
+      linguistic form — and structure recovery can be scored against a known target rather than
+      guessed. This is the workbench the modal-concepts thesis runs on.
+    </p>
+
+    <p>
+      The general machine is a <strong>compiler from a formal-semantic object to multilingual text</strong>,
+      where "evaluation" means checking the model's behaviour is isomorphic to the pre-compilation
+      object. Its <strong>first domain is the causal graph</strong> (below) — the sandbox that made
+      the certification cut decidable — and the modal-state compiler above is the general form.
+      Minimal pairs are single-variable operations at the formal layer (swap a predicate for an
+      extensionally identical fictional twin; add a retraction), and the surface is always
+      regenerated, never hand-edited.
     </p>
 
     <MiniCausalFigure />
@@ -35,7 +44,7 @@ import MiniCausalFigure from "../../components/MiniCausalFigure.astro";
       The hard direction in my <a href="/writing/inferential-productivity">note on inferential
       productivity</a> is reverse: given a behavior, what is the <em>smallest</em> causal structure
       that has to be there? On a real model, there is usually no ground truth against which to score
-      a recovered structure. MiniCausalLang keeps the bridge explicit before trusting the method
+      a recovered structure. CAST keeps the bridge explicit before trusting the method
       elsewhere: specify the grammar, compile it into a causal graph, enumerate the inferences that
       graph licenses, train or evaluate a model on that data, and test whether behavioral recovery
       returns the structure that was actually planted.
