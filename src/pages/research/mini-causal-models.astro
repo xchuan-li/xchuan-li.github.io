@@ -5,24 +5,28 @@ import MiniCausalFigure from "../../components/MiniCausalFigure.astro";
 
 <Base
   title="MiniCausalLang · Xiaochuan Li"
-  description="A language-to-causal-graph workbench for testing whether grammatical structure, licensed inference, and model behavior line up."
+  description="A workbench that stipulates a formal-semantic object and projects it to text, so structure recovery can be tested against a known target — causal graphs first, modal semantics next."
   toc={true}
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Supporting workbench · language to causal graph
+      Supporting workbench · stipulate structure, project to text
     </div>
     <h1>MiniCausalLang — language structure with a known answer</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      A small workbench for turning grammatical structure into causal variables and licensed inferences.
+      A workbench for stipulating a formal-semantic object and checking whether a model recovers it.
     </p>
 
     <p>
-      MiniCausalLang is the workbench that makes the program's central question operational: how
-      does linguistic structure support inference, and does a model actually use that structure? It
-      gives small grammars whose sentences are generated from a known causal/inferential graph, so
-      structure recovery, <a href="/research/isotrace">Isotrace</a>-style path localization, and
-      CIY-style quantitative grading can be tested against a known target.
+      MiniCausalLang makes the program's question decidable rather than guessed: it starts from a
+      <em>known formal-semantic object</em>, projects it to text by template, and asks whether a
+      model's behavior is isomorphic to the object it was compiled from. Because the structure —
+      and the full space of alternatives it licenses — is stipulated by construction, structure
+      recovery can be scored against a known target. Its <strong>first domain is the causal graph</strong>
+      (below); it is being generalised into a <strong>modal-semantic compiler</strong> — a candidate
+      world-set plus a ◇/□ constraint, rendered in English, German, and Chinese, graded for
+      whether the model tracks the surviving worlds — which is the version the modal-concepts thesis
+      runs on.
     </p>
 
     <MiniCausalFigure />
@@ -38,9 +42,10 @@ import MiniCausalFigure from "../../components/MiniCausalFigure.astro";
     </p>
 
     <p>
-      This is supporting infrastructure, not a fourth equal core paper. It exists to make the link
-      between linguistic form, causal structure, and inferential yield explicit enough to be
-      falsifiable against a known answer.
+      This is supporting infrastructure, not a paper in its own right. It exists to make the link
+      between linguistic form and the formal-semantic structure it encodes — causal structure in the
+      first domain, modal structure in the next — explicit enough to be falsifiable against a known
+      answer.
     </p>
 
     <hr/>

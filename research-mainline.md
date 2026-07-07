@@ -1,6 +1,10 @@
-# 研究主线：从 Leibniz 到 Causal Inferential Yield，以及往后
+# 研究主线（方法细节存档 — 定位见下方 banner）
 
-> **一句话定位**：语言结构如何帮助人类和 AI 推理——当前用因果可解释性作为方法杠杆，检验一个模型"做对了"的行为，到底是由句子里真正许可结论的结构（the *licensing structure*）所**导致**，还是由一个只是与答案相关的表层捷径（*surface shortcut*）所导致。
+> ⚠️ **SUPERSEDED / 存档 (2026-07)。** 本文件是**旧的因果-认证轴**写法（Leibniz → CIY → do-intervention → MiniCausalLang），保留是因为它把**验证方法**（two-sided observability、certification、Isotrace、CIY）讲得最细，仍是方法层的参考。
+>
+> **权威定位已换轴,见 `src/pages/research-program.mdx`。** 当前身份 = **formal, linguistically-informed analysis of language models**,招牌 = **the formal semantics of modality**。谱系 = Leibniz → Kripke → Kratzer → Leahy & Carey,**modality 是第一个 instance**。本文件里的 causal certification / CIY / Isotrace 不是身份,而是 modality 项目所**继承的验证方法**(其第一个 domain = 因果结构)。读本文件时,把 "causal grounding" 当**方法**、把 modality 当**对象**。
+
+> **一句话定位（旧轴，已弃）**：语言结构如何帮助人类和 AI 推理——当前用因果可解释性作为方法杠杆，检验一个模型"做对了"的行为，到底是由句子里真正许可结论的结构（the *licensing structure*）所**导致**，还是由一个只是与答案相关的表层捷径（*surface shortcut*）所导致。
 
 ---
 

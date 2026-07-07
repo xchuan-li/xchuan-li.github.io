@@ -10,18 +10,21 @@ import IsotraceFigure from "../../components/IsotraceFigure.astro";
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Localization · decision experiment → Paper 2 if it passes
+      Localization · parked diagnostic for the modality program
     </div>
     <h1>Isotrace</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      Behavioral path tracing in LLMs via synthetic concept labeling.
+      Behavioral path-tracing: which linguistic operation actually carried the inference.
     </p>
 
     <h2>Problem</h2>
     <p>
-      Multi-hop benchmarks tell us whether a model got the final answer right, but not which
-      reasoning path it used. A correct answer may come from executing the full chain, or from a
-      shortcut that happens to point to the same answer.
+      Certification says <em>whether</em> the licensing structure is load-bearing, not <em>which
+      part</em> of it carried the inference. Multi-hop benchmarks have the same gap: they tell us
+      whether a model got the final answer right, but not which reasoning path it used — a correct
+      answer may come from executing the full chain, or from a shortcut that points to the same
+      answer. Isotrace is the localization diagnostic that closes that gap; on the modality program
+      its target is which linguistic operation (which hop, which encoding) actually did the work.
     </p>
 
     <p>
@@ -71,10 +74,10 @@ Zorb-α-prime-Ω       -> full chain executed</code></pre>
       <li><strong>Label perturbation:</strong> keep the logical structure fixed but swap the surface labels, to distinguish genuine path-following from surface instruction-following.</li>
     </ul>
 
-    <h2>Relationship to the core sequence</h2>
+    <h2>Relationship to the verdict method</h2>
     <ul>
-      <li><strong>Paper 1 — Stable Is Not Grounded:</strong> binary certification. Is the licensing structure counterfactually load-bearing?</li>
-      <li><strong>Paper 2 — Isotrace:</strong> path-level localization. Which hop was used, bypassed, or shortcut-replaced?</li>
+      <li><strong>Stable Is Not Grounded (certify):</strong> binary certification. Is the licensing structure counterfactually load-bearing?</li>
+      <li><strong>Isotrace (localize):</strong> path-level localization. Which hop was used, bypassed, or shortcut-replaced?</li>
     </ul>
 
     <h2>Key methodological risk</h2>
@@ -128,7 +131,7 @@ Correct output: Zorb.</code></pre>
       <li>Conceptual and early methodological stage.</li>
       <li>Core analogy established.</li>
       <li>Basic mechanism designed.</li>
-      <li>Relationship to Paper 1 and Paper 3 defined.</li>
+      <li>Relationship to the certification method and the modality program defined.</li>
       <li>Next milestone: a 3-hop pilot experiment with clean chain, hop deletion, shortcut-at-hop-k, order scrambling, label perturbation, and adversarial rule-copying controls.</li>
     </ul>
 

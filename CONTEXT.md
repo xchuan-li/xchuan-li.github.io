@@ -4,7 +4,11 @@
 
 ## What this is
 
-A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start). Positioning (converged 2026-07): the home discipline is **computational linguistics**; **causal-inference rigor** (controlled do-interventions, negative controls) is the method, and multilingual/typology is the tool — *not* heavy mechanistic interpretability, which is presented as demonstrated range (the completed Arrowhead MSc pilot), not the center. Forward spine: Stable Is Not Grounded (Paper 1, in submission) → MiniCausalLang as a workbench/tool → HanGL (empirical, cross-lingual). Isotrace and a quantitative inferential-yield measure are the horizon, deliberately not billed as running.
+A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start).
+
+**Positioning (converged 2026-07, current).** The identity is **formal, linguistically-informed analysis of language models**, and its signature is **the formal semantics of modality** (Kripke frames; Kratzer's modal base / ordering source; monotonicity of quantification; conditionals). Formal semantics sits at the **criterion layer** — it states what any system that grasps possibility and necessity must satisfy, not how one architecture implements it. Interpretability methods (controlled do-interventions, probing, activation patching, negative controls) are the **measurement layer** — a tool, **not** the identity; heavy mechanistic circuit-discovery is deliberately *not* the center (shown only as demonstrated range, via the completed Arrowhead pilot). The lineage is **Leibniz → Kripke → Kratzer → Leahy & Carey**, and **modality is the program's first instance**. Forward center: the **modal-concepts Master's thesis** (MODUS — does a language-only learner develop rich modal representations, and when do modal distinctions emerge in training). *Stable Is Not Grounded* (a workshop paper) is the inherited **verdict method** in its first domain (causal structure); **MiniCausalLang** is the workbench (being generalised from causal graphs to a modal-semantic compiler). Isotrace / inferential-yield are diagnostics on the horizon, not billed as running.
+
+**Two red lines, from the same convergence — do NOT drift back to them.** (1) Never frame the site *as* "causal inference" / "grounding certification" / "CIY" as the identity — those are methods/diagnostics the modality program *uses*. (2) Never use the too-broad slogan "how linguistic structure scaffolds reasoning in humans and AI" (or "language and reasoning") as the central question — it has no falsifiable criterion and drops the distinctive formal-semantics-of-modality feature. Keep the two-way reading: LMs also tell us which formal structures are load-bearing.
 
 Live URL: **https://xchuan-li.github.io**
 Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
@@ -98,24 +102,25 @@ The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass s
 
 ## The research program (high-level — don't summarize wrong)
 
-Central question: **how does linguistic structure scaffold reasoning in humans and AI, and when do AI systems actually use the structure that licenses an inference?** Do not present the roadmap as six equal projects. It is a core sequence, with a supporting workbench and two extensions.
+Central question: **what must a system's representations be like for it to genuinely grasp possibility and necessity — rather than merely behave as if it does?** Asked of language models, with the formal semantics of modality as the criterion layer. Do not present the roadmap as a list of equal projects, and do not frame it as a causal-inference program — causal/interventional methods are how the question is *measured*, not what it is *about*. It is a modality-centred program with an inherited verdict method, a supporting workbench, and off-mainline collaborations.
 
-Core sequence: **Hierarchical Causal Evidence**.
+**The flagship — modal concepts (the forward center).** The Master's thesis (MODUS) asks whether a learner built from language alone develops rich modal representations (necessity/possibility as quantification over a space of alternatives), and when modal distinctions become load-bearing during training. Modality is where the whole program's structure-vs-surface question gets its sharpest, most falsifiable form (hold the modal word fixed, vary the modal base; sever surface correlates and see whether the capacity survives). Cross-lingual variation (可能/必须/一定 vs. *may/must* vs. *können/müssen/dürfen*) is the natural experiment. The thesis gets **no project card until it has results** — it enters as a milestone note.
 
-1. **Stable Is Not Grounded** (Paper 1): Binary certification. Establishes `accuracy ⊋ stability ⊋ grounding`; the deepest cut `SC → {grounded, spurious}` requires **two-sided observability** (benchmark graph stipulated + training auditable). The §6.1 controlled demo: TF-IDF + LR classifier reaches 0.912 accuracy, fully stable; `do(class-3)` drops it Δ +.408, negative control `do(class-2)` only Δ +.021. The page status says v2 draft complete, with controlled synthetic evidence, HANS, BoolQ, and zero-shot portability checks integrated.
+**The inherited verdict method (first domain: causal structure).**
 
-2. **Isotrace** (Paper 2): Behavioral path tracing in LLMs via synthetic concept labeling. Fictional concept names (Zorb, Veln, Quasp) and path-encoded naming conventions make different hypothesized reasoning paths produce different observable labels. This is behavioral evidence, not direct access to internal reasoning.
+- **Stable Is Not Grounded** (workshop paper, in submission): a non-circular certification test — establishes `accuracy ⊋ stability ⊋ grounding`, where the deepest cut `SC → {grounded, spurious}` needs **two-sided observability** (benchmark structure stipulated + model side auditable). The §6.1 controlled demo: TF-IDF + LR reaches 0.912 accuracy, fully stable; `do(class-3)` drops it Δ +.408, negative control `do(class-2)` only Δ +.021. Present this as **the method the modality work inherits, proven in its first (causal-structural) domain** — not as the program's identity.
+- **Isotrace** (parked diagnostic): behavioral path-tracing — distinct reasoning paths forced to produce distinct output labels. A hop-level upgrade to the binary verdict; kept on the site but withdrawn from the mainline.
 
-3. **Causal Inferential Yield (CIY)** (Paper 3): Quantitative grading. Defined on items whose grounding status is already certified or controlled, not arbitrary benchmark accuracy. The falsifiability test: if CIY cannot distinguish accuracy-matched and grounding-matched models, it collapses into accuracy repackaging.
+**Supporting workbench.**
 
-Supporting workbench:
+- **MiniCausalLang**: a workbench that **stipulates a formal-semantic object and projects it to text**, so structure recovery can be tested against a known target. Its first domain is the causal graph; it is being generalised into a **modal-semantic compiler** (a candidate world-set + a ◇/□ constraint → en/de/zh surfaces → graded for isomorphism to the pre-compilation object). This is what makes the certification cut *decidable* — the space of alternatives is known by construction.
 
-- **Mini Causal Models / MiniCausalLang**: A language-to-causal-graph workbench for the core program. It provides small grammars whose true generating graph and licensed inference space are known, so structure recovery, Isotrace-style path localization, and CIY-style grading can be tested against a known target.
+**Off-mainline collaborations / range (kept honestly as such).**
 
-Extensions:
-
-- **Latent Control States**: Mechanistic extension. If a behavioral intervention reveals a causal control state, can a corresponding state or direction be found in activation space? **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation). Do not foreground collaborators or supervision here.
-- **Cross-lingual ProtoBias**: Applied multilingual/multimodal stress test. Does an evaluator track semantic content of an image-text pair, or lean on language- and culture-specific prototype shortcuts?
+- **Arrowhead** (completed thesis pilot): the mechanistic-tractability proof — a real LLM carries a steerable, genuinely-causal direction. Demonstrated range, not the center.
+- **Latent Control States**: mechanistic extension (does prompt framing shift a causally relevant latent state?). **Never call this "LiT" publicly** — that is the UTN course name (Learning in Transformation). Do not foreground collaborators or supervision here.
+- **Cross-lingual ProtoBias**: applied multilingual/multimodal stress test (semantic content vs. culture-specific prototype shortcuts).
+- **HanGL**: cross-lingual grounding on real LLMs (surface Hangul vs. latent Hanja) — off the modality mainline, but the clearest demonstration of the cross-lingual intervention method the modal-typology stage reuses.
 
 ## Editing rules
 
