@@ -14,15 +14,6 @@ export interface Post {
 
 export const posts: Post[] = [
   {
-    slug: "earned-not-handed-to",
-    title: "Earned, not handed to — language grounding and world-model identifiability",
-    date: "June 2026",
-    pubDate: "2026-06-29",
-    excerpt:
-      "The grounding problem in computational linguistics and the identifiability problem facing world models are the same question — when form licenses a causal inference rather than correlating with one — asked of two systems. Skeleton versus flesh, earned versus handed-to, and why studying world models would be a recognition rather than a turn.",
-    status: "note",
-  },
-  {
     slug: "inverted-observability",
     title: "Inverted Observability — psychology and interpretability as mirror sciences",
     date: "June 2026",
@@ -41,39 +32,12 @@ export const posts: Post[] = [
     status: "note",
   },
   {
-    slug: "causal-residue",
-    title: "Causal structure as residue — training as elimination",
-    date: "May 2026",
-    pubDate: "2026-05-28",
-    excerpt:
-      "Every training example is a falsifier — a behavioral observation compatible with some causal structures and incompatible with others. The structure a learner ends up with is the residue of cumulative cutting. This may be the hidden unification of the core program and its extensions.",
-    status: "note",
-  },
-  {
     slug: "from-leibniz",
     title: "From a Sufficient Reason to a Universal Language — what philosophy gave me that ML didn't",
     date: "May 2026",
     pubDate: "2026-05-23",
     excerpt:
       "My undergraduate thesis was on Leibniz's characteristica universalis. Two years and a discipline change later, that ambition has split into the two poles of my work — the principle of sufficient reason as the question I can put to a model, and the universal character as the goal I can only walk toward.",
-    status: "note",
-  },
-  {
-    slug: "decidability-boundary",
-    title: "Why interpretability needs a decidability boundary",
-    date: "May 2026",
-    pubDate: "2026-05-22",
-    excerpt:
-      "There is a difference between a measurement being hard and a quantity being undefined. Past a certain depth, much of what interpretability treats as a hard measurement is in fact an undefined quantity.",
-    status: "draft",
-  },
-  {
-    slug: "inferential-productivity",
-    title: "Reasoning is generative; grounding needs the other direction",
-    date: "May 2026",
-    pubDate: "2026-05-23",
-    excerpt:
-      "Most conceptual machinery we have for reasoning runs in one direction — premises into conclusions, conclusions into more conclusions. The harder direction, and the one that almost no standard tool measures, is the reverse: given a system's behavior, what is the smallest causal structure that has to be there for the behavior to land?",
     status: "note",
   },
 ];
