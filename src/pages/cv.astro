@@ -28,7 +28,8 @@ import Base from "../layouts/Base.astro";
         <div>
           <p class="font-medium">M.Sc., Human and AI</p>
           <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg (UTN)</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">Focus (formal semantics of modality): do language models hold rich modal representations — possibility and necessity as quantification over alternative worlds, in the line from Kripke through Kratzer to Leahy &amp; Carey — and when in training do modal distinctions emerge? Tested with causal-inference rigor: controlled interventions dissociating modal words from modal bases, negative controls, across typologically diverse languages, not large-scale circuit discovery.</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Research focus.</span> Whether language models build the modal concepts our semantic theories assign — possibility and necessity as quantification over alternative worlds (Kripke → Kratzer → Leahy &amp; Carey), and when in training such distinctions emerge. Tested by dissociating the modal <em>word</em> from the modal <em>base</em> under controlled intervention, with negative controls, across typologically diverse languages: is success licensed by the structure, or only correlated with the surface?</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Coursework.</span> Cognitive psychology (concept learning, development, and human reasoning), interpretability (probing, causal interventions, and mechanistic analysis), deep learning (transformer architectures, training dynamics, and representation), and epistemology.</p>
         </div>
         <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 — 2027</p>
       </div>
@@ -60,24 +61,12 @@ import Base from "../layouts/Base.astro";
     <ul class="space-y-3 text-sm">
       <li class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <span class="font-medium">Stable Is Not Grounded</span>
-          <span class="text-[var(--color-text-dim)] whitespace-nowrap">workshop paper · in submission</span>
+          <span class="font-medium">GRADUS</span>
+          <span class="text-[var(--color-text-dim)] whitespace-nowrap">dataset + diagnostic paper · in progress</span>
         </div>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Binary certification of whether the licensing structure is load-bearing. Written for publication (BlackboxNLP target).</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Does a language model represent epistemic modal force — the necessity in <em>must</em>, the possibility in <em>might</em> — or ride the surface modal word? A causal probe plus a graded epistemic-force dataset: a calibration diagnostic and a citable resource the modal-concepts thesis reuses.</p>
         <p class="text-xs mt-1">
-          <a href="https://xchuan-li.github.io/research/sc-certification" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
-          <span class="text-[var(--color-text-dim)]"> · </span>
-          <a href="https://github.com/xchuan-li/stable_is_not_grounded" class="text-[var(--color-accent)] hover:underline">GitHub ↗</a>
-        </p>
-      </li>
-      <li class="break-inside-avoid">
-        <div class="flex justify-between gap-4 items-baseline">
-          <span class="font-medium">Isotrace</span>
-          <span class="text-[var(--color-text-dim)] whitespace-nowrap">decision experiment · horizon</span>
-        </div>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Behavioral path localization via path-encoded fictional names — a design-stage upgrade of binary certification into hop-level diagnosis. Runs as a go/no-go on whether it separates genuine multi-hop reasoning from shortcut-copying; a paper if it does.</p>
-        <p class="text-xs mt-1">
-          <a href="https://xchuan-li.github.io/research/isotrace" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
+          <a href="https://xchuan-li.github.io/research/gradus" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
         </p>
       </li>
     </ul>
@@ -86,16 +75,6 @@ import Base from "../layouts/Base.astro";
   <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Projects</h2>
     <div class="space-y-5">
-      <div class="break-inside-avoid">
-        <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">Arrowhead</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">personal · pilot complete</p>
-        </div>
-        <p class="text-sm mt-1">A completed mechanistic pilot on a real LLM (Gemma-2-2B). Linear probes, activation steering, and layer-band ablation show the model holds a representation of causal direction — which event is the cause — that is linearly decodable (cross-domain peak ≈ 0.94), causally efficacious under steering, and abstract enough to transfer to fictional zero-frequency relations, yet redundantly distributed across layers (ablation cannot cleanly remove it). End-to-end interpretability pipeline designed, run, and analyzed on an HPC GPU cluster.</p>
-        <p class="text-xs mt-1.5">
-          <a href="https://xchuan-li.github.io/research/arrowhead" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
-        </p>
-      </div>
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
           <p class="font-medium text-[15px]">HanGL — surface Hangul, latent Hanja</p>
@@ -146,8 +125,9 @@ import Base from "../layouts/Base.astro";
   <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Skills</h2>
     <p class="text-sm text-[var(--color-text-muted)] italic mb-4 max-w-prose">
-      Building the stack my research needs: controlled linguistic data generation, transformer model
-      evaluation, intervention-based causal testing, and reproducible experiment pipelines.
+      Both the engineering my research needs — controlled linguistic data generation, transformer
+      model evaluation, intervention-based causal testing, reproducible pipelines — and the
+      foundations it draws on: cognitive psychology, linguistics, and logic.
     </p>
     <div class="space-y-3 text-sm">
       <div class="break-inside-avoid">
@@ -161,6 +141,14 @@ import Base from "../layouts/Base.astro";
       <div class="break-inside-avoid">
         <p class="font-medium">Causal &amp; interpretability methods</p>
         <p class="text-[var(--color-text-muted)]">Controlled do-interventions, causal graphs, and shortcut-severing audits; developing behavioral path-tracing.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <p class="font-medium">Cognitive psychology</p>
+        <p class="text-[var(--color-text-muted)]">Working foundations in concept learning, cognitive development, and human reasoning — including the developmental literature on modal cognition (Leahy &amp; Carey), which grounds the emergence question the thesis asks.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <p class="font-medium">Linguistics &amp; logic</p>
+        <p class="text-[var(--color-text-muted)]">Formal semantics (possible-worlds, modal quantification), modal and predicate logic, and morphology/syntax across isolating, fusional, and agglutinative types; grounded in a philosophy background in logic and philosophy of language.</p>
       </div>
       <div class="break-inside-avoid">
         <p class="font-medium">Linguistic evaluation</p>
