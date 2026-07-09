@@ -8,11 +8,14 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://xchuan-li.github.io',
-  // Project renamed "Causal Direction" -> "Arrowhead"; keep the old URL working.
-  // CIY page removed; send its old URL to the research index.
+  // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace) — send
+  // their old URLs to the research index so external links don't 404.
   redirects: {
-    '/research/causal-direction': '/research/arrowhead',
+    '/research/causal-direction': '/research',
+    '/research/arrowhead': '/research',
     '/research/ciy': '/research',
+    '/research/sc-certification': '/research',
+    '/research/isotrace': '/research',
   },
   integrations: [mdx(), react(), sitemap()],
   vite: {
