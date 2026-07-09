@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroWorlds from "../components/HeroWorlds.astro";
+import HeroSentence from "../components/HeroSentence.astro";
 import ResearchTimeline from "../components/ResearchTimeline.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
@@ -150,20 +150,21 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I turn theories of linguistic meaning into predictions that
-            <strong>evidence can decide</strong> — asking what trace a theory, if it were true, must
-            leave behind. Right now I ask it of language models, starting with modality: do they
-            genuinely <strong>represent</strong> possibility and necessity, or only behave as if they do?
+            <strong>How does a sentence come to mean?</strong> Words carry meaning; grammatical
+            structure makes those meanings react into the meaning of the whole; and that whole becomes
+            a step in reasoning.
           </p>
           <p>
-            The line runs Leibniz → Kripke → Kratzer → Leahy &amp; Carey. My Philosophy thesis was on
-            Leibniz's <em>characteristica universalis</em>; my Master's carries the question into
-            language models, where 可能/必须/一定 vs. <em>may/must</em> is a natural experiment. I'm
-            applying for PhD positions for fall 2027.
+            I ask whether a system has really built that, or only its surface — and I put the question
+            to <strong>language models and human minds</strong>: one I can open up and intervene on,
+            the other where meaning is already real. Modality is where I start.
+          </p>
+          <p>
+            I'm applying for PhD positions for fall 2027.
           </p>
         </div>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
-          A system that truly represents possibility must carry a space of alternatives — not merely emit the right modal words.
+          A sentence means more than its words — it means what structure makes them do.
         </blockquote>
         <div class="hero-cta fade-in-up fade-delay-300">
           <a href="#research" class="btn btn-primary">
@@ -202,7 +203,7 @@ const entries = rawEntries.map((e) => {
       </div>
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroWorlds />
+        <HeroSentence />
       </div>
     </div>
 
