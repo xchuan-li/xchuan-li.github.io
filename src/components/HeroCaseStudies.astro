@@ -7,7 +7,7 @@
 ---
 
 <figure class="hero-cs" aria-label="The example sentence “A schoolteacher must know that birds fly.” Three words are highlighted: schoolteacher (a compound, HanGL), must (a modal, the MODUS thesis), and birds (a generic, ORDO). Hover a word to preview its case study.">
-  <p class="hero-cs-sent">A <a class="cw cw-c" href="/research/hangl" aria-label="schoolteacher, a compound, HanGL"><span class="cw-word">schoolteacher</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Compounds</span><span class="tip-name">HanGL</span><span class="tip-q">Is a word's meaning composed from its morphemes, or memorized as a whole? The morphology case, on Sino-Korean.</span></span></a> <a class="cw cw-m" href="/research/modus" aria-label="must, a modal, the MODUS thesis"><span class="cw-word">must</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Modals</span><span class="tip-name">MODUS, the thesis</span><span class="tip-q">Is modal force a set of possible worlds, or a degree of certainty? And does a model represent it, or ride the word?</span></span></a> know that <a class="cw cw-g" href="/research/ordo" aria-label="birds, a generic, ORDO"><span class="cw-word">birds</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Generics</span><span class="tip-name">ORDO</span><span class="tip-q">“Birds fly”, except penguins. A default-with-exceptions is an inference classical logic cannot state.</span></span></a> fly.</p>
+  <p class="hero-cs-sent"><span class="hcs-quote hcs-quote-open" aria-hidden="true">“</span>A <a class="cw cw-c" href="/research/hangl" aria-label="schoolteacher, a compound, HanGL"><span class="cw-word">schoolteacher</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Compounds</span><span class="tip-name">HanGL</span><span class="tip-q">Is a word's meaning composed from its morphemes, or memorized as a whole? The morphology case, on Sino-Korean.</span></span></a> <a class="cw cw-m" href="/research/modus" aria-label="must, a modal, the MODUS thesis"><span class="cw-word">must</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Modals</span><span class="tip-name">MODUS, the thesis</span><span class="tip-q">Is modal force a set of possible worlds, or a degree of certainty? And does a model represent it, or ride the word?</span></span></a> know that <a class="cw cw-g" href="/research/ordo" aria-label="birds, a generic, ORDO"><span class="cw-word">birds</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Generics</span><span class="tip-name">ORDO</span><span class="tip-q">“Birds fly”, except penguins. A default-with-exceptions is an inference classical logic cannot state.</span></span></a> fly.<span class="hcs-quote hcs-quote-close" aria-hidden="true">”</span></p>
 
   <figcaption class="hero-cs-cap">Three words, three case studies. Hover a word, or click to open it.</figcaption>
 </figure>
@@ -21,6 +21,16 @@
     color: var(--color-text);
     margin: 0;
   }
+
+  /* big decorative quotes framing the example */
+  .hcs-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 2.4em;
+    line-height: 0;
+    color: color-mix(in srgb, var(--color-text-dim) 55%, transparent);
+  }
+  .hcs-quote-open { margin-right: 0.04em; vertical-align: -0.42em; }
+  .hcs-quote-close { margin-left: 0.03em; vertical-align: -0.42em; }
 
   .cw {
     position: relative;

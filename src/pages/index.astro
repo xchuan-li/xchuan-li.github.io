@@ -135,9 +135,10 @@ const entries = rawEntries.map((e) => {
 <Base wide={true}>
   <!-- =========== HERO =========== -->
   <section class="hero">
-    <div class="hero-inner hero-grid">
+    <div class="hero-inner">
+      <a class="hero-imprint fade-in" href="/motivation"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
+      <div class="hero-grid">
       <div class="hero-content">
-        <a class="hero-imprint fade-in" href="/motivation"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
         <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
         <h1 class="hero-heading fade-in-up fade-delay-200">
           <span>Hi, I am</span>
@@ -199,6 +200,7 @@ const entries = rawEntries.map((e) => {
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
         <HeroCaseStudies />
+      </div>
       </div>
     </div>
 
@@ -284,16 +286,18 @@ const entries = rawEntries.map((e) => {
   .hero-imprint {
     display: block;
     white-space: nowrap;
-    overflow-x: auto;
     font-family: var(--font-display, serif);
-    font-size: clamp(1rem, 2.7vw, 1.5rem);
-    line-height: 1.4;
+    font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+    line-height: 1.35;
     font-style: italic;
     color: var(--color-text);
     text-decoration: none;
-    margin: 0 0 1.5rem;
-    padding-left: 0.9rem;
+    margin: 0 0 2.2rem;
+    padding-left: 1rem;
     border-left: 2px solid var(--color-accent);
+  }
+  @media (max-width: 640px) {
+    .hero-imprint { white-space: normal; font-size: 1.15rem; }
   }
   .hero-imprint-q { transition: color 0.2s ease; }
   .hero-imprint-arrow { font-style: normal; color: var(--color-text-dim); transition: color 0.2s ease; }
