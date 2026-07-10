@@ -225,6 +225,32 @@ const entries = rawEntries.map((e) => {
   </section>
 
 
+  <!-- =========== COLLABORATIONS =========== -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Alongside</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">Collaborations</h2>
+      </div>
+      <div class="hp-collab fade-in-up fade-delay-200">
+        <p>
+          <strong>Latent Control States</strong><span class="hp-collab-org"> · DFKI</span><br />
+          Does prompt framing shift a causally relevant latent state, or only the output? My
+          contribution: I designed and built the controlled two-agent data pipeline the probing study
+          runs on.
+        </p>
+        <p>
+          <strong>Cross-lingual ProtoBias</strong><span class="hp-collab-org"> · an established NLP group</span><br />
+          Does a vision-language model track meaning, or culture-specific prototype shortcuts? My
+          contribution: the cross-lingual evaluation across seven languages that extends the group's
+          forthcoming paper.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
   <!-- =========== CONTACT CTA =========== -->
   <section id="contact" class="section" style="padding-bottom: 7rem;">
     <div class="section-inner">
@@ -278,5 +304,20 @@ const entries = rawEntries.map((e) => {
     max-width: 24ch;
     font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
     line-height: 1.2;
+  }
+
+  /* Collaborations: plain two-line credits, no figures. */
+  .hp-collab { max-width: 44rem; }
+  .hp-collab > p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0 0 1.3rem;
+  }
+  .hp-collab > p:last-child { margin-bottom: 0; }
+  .hp-collab > p strong { color: var(--color-text); font-weight: 600; }
+  .hp-collab-org {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-dim);
   }
 </style>

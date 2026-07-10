@@ -58,18 +58,21 @@ const caseStudies = [
   },
 ];
 
-// One collaboration, kept honestly separate from the three case studies.
-const collabProjects = [
+// Collaborations: contributions to others' projects, kept separate from the
+// three case studies. Two sentences each, emphasising what I did. No figures,
+// no dedicated pages.
+const collaborations = [
   {
-    title: "Cross-lingual ProtoBias",
-    subtitle: "meaning, or cultural prototype?",
-    href: "/research/cross-lingual-protobias",
-    output: "Co-authored paper",
-    status: "collaborative",
-    color: "var(--accent-indigo)",
-    glyph: "protobias",
-    has_demo: true,
-    one_line: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? A collaborative project extending an established NLP group's paper.",
+    name: "Latent Control States",
+    org: "DFKI",
+    text: "Does prompt framing (urgency, authority, an epistemic stance) shift a causally relevant latent state, or only the output? My contribution: I designed and built the controlled two-agent data pipeline the probing study runs on.",
+  },
+  {
+    name: "Cross-lingual ProtoBias",
+    org: "an established NLP group",
+    text: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? My contribution: the cross-lingual evaluation across seven languages that extends the group's forthcoming paper.",
+    href: "https://github.com/xchuan-li/cross_lingual_protobias",
+    hrefLabel: "GitHub ↗",
   },
 ];
 
@@ -80,13 +83,6 @@ const sections = [
     description:
       "Each case study is a kind of word where the logic of natural language looks unlike the logic of the logic books: modals (necessity and possibility), compounds (meaning built from parts), and generics (defaults that tolerate exceptions). Same question, same method, three incisions. MODUS is the Master's thesis; the question runs on to conditionals and quantifiers beyond these three.",
     projects: caseStudies,
-  },
-  {
-    eyebrow: "Alongside · collaboration",
-    title: "Collaboration",
-    description:
-      "One collaborative project in another domain, kept honestly separate from the three case studies: multimodal prototype bias, extending an established NLP group's work.",
-    projects: collabProjects,
   },
 ];
 ---
@@ -174,6 +170,36 @@ const sections = [
       ))
     }
   </div>
+
+  <section class="mt-14">
+    <div class="mb-5">
+      <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+        Alongside · collaborations
+      </p>
+      <h2 class="text-xl font-medium tracking-tight mb-2">Collaborations</h2>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
+        Contributions to other groups' projects, kept separate from the three case studies. What I
+        did, in two lines.
+      </p>
+    </div>
+    <ul class="list-none p-0 m-0 space-y-5">
+      {
+        collaborations.map((c) => (
+          <li>
+            <p class="text-[15px] font-medium text-[var(--color-text)]">
+              {c.name}<span class="font-normal text-[var(--color-text-dim)]"> · {c.org}</span>
+            </p>
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mt-1">{c.text}</p>
+            {c.href && (
+              <p class="text-xs mt-1.5">
+                <a href={c.href} class="text-[var(--color-accent)] hover:underline">{c.hrefLabel}</a>
+              </p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Base>
 
 <style>
