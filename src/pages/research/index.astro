@@ -24,51 +24,21 @@ const mainlineProjects = [
     subtitle: "is <em>must</em> a set of worlds, or a degree of certainty?",
     href: "/research/modus",
     output: "Thesis",
-    status: "modal force · thesis flagship · pilot run",
+    status: "modal force · thesis · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "The format of modal force: is necessity/possibility a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. The language model is the instrument here, not the object, and it is also the Master's thesis.",
-  },
-  {
-    title: "GRADUS",
-    subtitle: "a graded ruler for modal force",
-    href: "/research/gradus",
-    output: "Dataset + paper",
-    status: "modal force · building",
-    color: "var(--accent-deep-purple)",
-    glyph: "xling",
-    one_line: "MODUS's instrument: a graded epistemic-force dataset that turns the binary must/might probe into a calibration diagnostic, the citable resource the thesis reuses. A force direction is built from evidence alone; ablate it and might drifts toward must, while a base-rate control does nothing.",
-  },
-  {
-    title: "ORDO",
-    subtitle: "do “birds fly” and “you should pay” run on one machine?",
-    href: "/research/ordo",
-    output: "Paper",
-    status: "ordering source · in design",
-    color: "var(--accent-coral)",
-    glyph: "mcm",
-    one_line: "Generics (birds fly, except penguins) and modals (you should repay, unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design where either outcome is a real finding, built on CAST.",
-  },
-  {
-    title: "CAST",
-    subtitle: "a compiler from meaning to controlled text",
-    href: "/research/mini-causal-models",
-    output: "Workbench",
-    status: "workbench · building",
-    color: "var(--accent-slate)",
-    glyph: "mcm",
-    one_line: "Compiles a formal-semantic object to controlled English/German/Chinese text, then grades the model's behaviour for isomorphism to the object it was compiled from: structure tested against a known target, ground truth by construction. The workbench MODUS and ORDO run on.",
+    one_line: "The Master's thesis, and the program's first case study. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not. The format test and a graded epistemic-force dataset come next.",
   },
 ];
 
-// Collaborations & range — off the modality mainline, kept honestly so.
-const collabProjects = [
+// Other projects, off the thesis line.
+const otherProjects = [
   {
     title: "HanGL",
     subtitle: "composed, or memorized?",
     href: "/research/hangl",
     output: "Paper",
-    status: "Sino-Korean morphology · pilot",
+    status: "Sino-Korean morphology · personal",
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
     has_demo: true,
@@ -85,39 +55,29 @@ const collabProjects = [
     has_demo: true,
     one_line: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? A collaborative project extending an established NLP group's paper.",
   },
-  {
-    title: "Latent Control States",
-    subtitle: "does framing shift a latent state, or only the surface?",
-    href: "/research/latent-control-states",
-    output: "Decision experiment",
-    status: "collaborative · DFKI",
-    color: "var(--accent-amber)",
-    glyph: "latent",
-    one_line: "Does prompt framing (urgency, authority, epistemic positioning) shift a causally relevant latent state, or only the outputs? Data pipeline built; probing and activation patching next. Advised by a senior researcher at DFKI.",
-  },
 ];
 
 const sections = [
   {
-    eyebrow: "The mainline · running now",
+    eyebrow: "The thesis · running now",
     title: "Modality: the first case study",
     description:
-      "The structure-versus-surface question at its sharpest, on the formal semantics of modality. MODUS asks what modal force is made of and GRADUS measures it; ORDO asks whether the ordering source behind generics and modals is one machine or two; CAST is the workbench they run on. MODUS is the Master's thesis.",
+      "The program's question at its sharpest, on the formal semantics of modality: is modal force a set of alternatives or a degree of certainty, and does a model represent it or ride the surface word? This is the Master's thesis. The same question runs on to conditionals, quantifiers, and beyond; modality is the first case study, not the last.",
     projects: mainlineProjects,
   },
   {
-    eyebrow: "Beyond the mainline · range & collaborations",
-    title: "Range & collaborations",
+    eyebrow: "Other projects",
+    title: "Beyond the thesis",
     description:
-      "Off the modality mainline, kept honestly so: the word-level morphology cut (HanGL) and collaborative projects that stress-test structure-versus-surface in other domains, namely writing systems, multimodal bias, and prompt framing.",
-    projects: collabProjects,
+      "Fewer projects, deliberately: the site tracks a program, not a count. A personal project one level below the word (HanGL, on Sino-Korean morphology), and a collaborative one in another domain (multimodal prototype bias).",
+    projects: otherProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="One research program on the formal semantics of modality: MODUS asks what modal force is made of (a set of worlds, or a degree?), GRADUS measures it, ORDO asks whether generics and modals share one ordering source, and CAST is the workbench they run on."
+  description="One research program, studied one case study at a time. The current case study is modality: is modal force a set of possible worlds or a degree of certainty, and does a language model represent it or ride the surface word? MODUS is the Master's thesis."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">

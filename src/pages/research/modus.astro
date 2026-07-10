@@ -80,9 +80,8 @@ import Base from "../../layouts/Base.astro";
       </li>
       <li>
         <strong>GRADUS</strong>: <em>Is the certainty axis threshold or continuous? This is the graded form
-        of the same debate.</em> &nbsp;→ a constructed graded-force ruler + calibration test.
-        <span class="text-sm text-[var(--color-text-muted)]">Its own page:
-        <a href="/research/gradus">GRADUS, a graded ruler for modal force</a>.</span>
+        of the same debate.</em> &nbsp;→ a constructed graded-force ruler and calibration test, and the
+        citable dataset the thesis releases.
       </li>
       <li>
         <strong>Stage 2</strong>: <em>Can modal force be induced by linguistic input alone, and under
@@ -91,12 +90,42 @@ import Base from "../../layouts/Base.astro";
       </li>
     </ul>
 
+    <h2>The pilot, concretely</h2>
+    <p>
+      The pilot asks the question in miniature: when a language model reads <em>must</em> vs.
+      <em>might</em>, is it tracking the underlying modal meaning (necessity vs. possibility), or
+      mainly reacting to the surface words? It builds on two papers. Wagner &amp; Zarrieß (IWCS) is
+      the closest prior work; because it uses natural data and a read-only probe, its negative result
+      is hard to read, so the pilot tries to close that gap with controlled sentences and by
+      intervening, not just decoding. Cho's continuous steering gives the key move: treat the modal
+      signal as a direction one can dial and test causally.
+    </p>
+    <p>The design, on the running example "the ball is red":</p>
+    <ol>
+      <li><strong>Build a certainty direction <code>D</code> with no modal words.</strong> Hold the
+        fact fixed and vary only the evidence: "all three sensors report red" (sure) vs. "one of three
+        reports red" (unsure). The internal difference gives <code>D</code>, evidence-based certainty,
+        with no <em>must</em> / <em>might</em> in it.</li>
+      <li><strong>Check the anchors.</strong> "must be red" and "might be red" should land on the sure
+        and unsure ends of <code>D</code>.</li>
+      <li><strong>The test.</strong> Remove <code>D</code> from a "might be red" sentence. If the model
+        then behaves as if it were <em>must</em> (becomes certain), the word <em>might</em> was
+        genuinely running on the modal concept, not just the surface word.</li>
+      <li><strong>The control.</strong> <code>D</code> could be encoding the evidence description
+        itself (how many sensors report red) rather than certainty. So compare it against a competing
+        <strong>base-rate</strong> direction <code>D′</code>, built by changing how many red balls are
+        in the box instead of the evidence. Removing <code>D</code> should break <em>might</em> while
+        removing <code>D′</code> should not; if so, the effect is about modal force, not surface
+        frequency. This kind of attribution is never fully clean, but that control at least separates
+        the two.</li>
+    </ol>
+
     <h2>Status</h2>
     <p>
       <strong>Pilot, done (a smoke test, not yet a finding).</strong> Qwen2.5-0.5B, one evidence
-      family: a force direction <code>D</code> is built from evidence alone, with no modal word
+      family: the force direction <code>D</code> is built from evidence alone, with no modal word
       present; ablating it while the model answers a <em>might</em> item raises that item's certainty
-      by <strong>+0.152</strong>, while ablating a base-rate control <code>D′</code> does nothing
+      by <strong>+0.152</strong>, while ablating the base-rate control <code>D′</code> does nothing
       (−0.033). That is the predicted structure signature, with the confound behaving correctly.
     </p>
     <p class="!text-sm !text-[var(--color-text-muted)]">

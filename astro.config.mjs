@@ -16,6 +16,11 @@ export default defineConfig({
     '/research/ciy': '/research',
     '/research/sc-certification': '/research',
     '/research/isotrace': '/research',
+    '/research/gradus': '/research/modus',
+    '/research/ordo': '/research',
+    '/research/typological-grounding': '/research',
+    '/research/mini-causal-models': '/research',
+    '/research/latent-control-states': '/research',
   },
   integrations: [mdx(), react(), sitemap()],
   vite: {
