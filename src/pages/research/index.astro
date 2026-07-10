@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ProjectGlyph from "../../components/ProjectGlyph.astro";
+import CaseFigure from "../../components/CaseFigure.astro";
 import { projects } from "../../data/research";
 
 // The research page follows the program mainline stated on /research-program:
@@ -29,6 +30,7 @@ const caseStudies = [
     status: "modals · thesis · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
+    fig: "modus",
     one_line: "Modals, and the Master's thesis. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not.",
   },
   {
@@ -39,6 +41,7 @@ const caseStudies = [
     status: "compounds · Sino-Korean · pilot done",
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
+    fig: "hangl",
     has_demo: true,
     one_line: "Compounds. Is a Sino-Korean word's meaning composed from its morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. The word-level cut of the question, with an existing human-psycholinguistics literature to mirror it against.",
   },
@@ -50,6 +53,7 @@ const caseStudies = [
     status: "generics · in design",
     color: "var(--accent-coral)",
     glyph: "mcm",
+    fig: "ordo",
     one_line: "Generics. “Birds fly” is not “all birds fly”: a penguin does not break it. That default-with-exceptions is an inference classical logic cannot state. Do generics and modals share one ordering-source mechanism for defaults, or two? A layered novelty-of-exception design where either outcome is a real finding.",
   },
 ];
@@ -158,7 +162,7 @@ const sections = [
                         </div>
                       </div>
                       <div class="proj-glyph-cell" aria-hidden="true">
-                        <ProjectGlyph kind={p.glyph} color={p.color} />
+                        {p.fig ? <CaseFigure kind={p.fig} color={p.color} /> : <ProjectGlyph kind={p.glyph} color={p.color} />}
                       </div>
                     </div>
                   </Tag>
