@@ -17,7 +17,6 @@ export default defineConfig({
     '/research/sc-certification': '/research',
     '/research/isotrace': '/research',
     '/research/gradus': '/research/modus',
-    '/research/ordo': '/research',
     '/research/typological-grounding': '/research',
     '/research/mini-causal-models': '/research',
     '/research/latent-control-states': '/research',

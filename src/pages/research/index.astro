@@ -18,32 +18,44 @@ const outputByHref = new Map(projects.map((p) => [p.href, p.output]));
 // Cards render from these curated arrays (not research.ts directly), so the /research
 // spine can be sequenced by hand. `href` omitted → the card is not a link yet
 // (MODUS/ORDO have no dedicated page). `output` is the natural-deliverable pill.
-const mainlineProjects = [
+// The three case studies are the core: one kind of word each, all places where
+// the logic of natural language looks unlike the logic of the logic books.
+const caseStudies = [
   {
     title: "MODUS",
     subtitle: "is <em>must</em> a set of worlds, or a degree of certainty?",
     href: "/research/modus",
     output: "Thesis",
-    status: "modal force · thesis · pilot run",
+    status: "modals · thesis · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "The Master's thesis, and the program's first case study. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not. The format test and a graded epistemic-force dataset come next.",
+    one_line: "Modals, and the Master's thesis. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not.",
   },
-];
-
-// Other projects, off the thesis line.
-const otherProjects = [
   {
     title: "HanGL",
     subtitle: "composed, or memorized?",
     href: "/research/hangl",
     output: "Paper",
-    status: "Sino-Korean morphology · personal",
+    status: "compounds · Sino-Korean · pilot done",
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
     has_demo: true,
-    one_line: "Is a Sino-Korean word's meaning composed from its Hanja morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. This is the word-level cut of the program's question, with an existing human-psycholinguistics literature to mirror it against.",
+    one_line: "Compounds. Is a Sino-Korean word's meaning composed from its morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. The word-level cut of the question, with an existing human-psycholinguistics literature to mirror it against.",
   },
+  {
+    title: "ORDO",
+    subtitle: "do “birds fly” and “you should pay” run on one machine?",
+    href: "/research/ordo",
+    output: "Paper",
+    status: "generics · in design",
+    color: "var(--accent-coral)",
+    glyph: "mcm",
+    one_line: "Generics. “Birds fly” is not “all birds fly”: a penguin does not break it. That default-with-exceptions is an inference classical logic cannot state. Do generics and modals share one ordering-source mechanism for defaults, or two? A layered novelty-of-exception design where either outcome is a real finding.",
+  },
+];
+
+// One collaboration, kept honestly separate from the three case studies.
+const collabProjects = [
   {
     title: "Cross-lingual ProtoBias",
     subtitle: "meaning, or cultural prototype?",
@@ -59,39 +71,39 @@ const otherProjects = [
 
 const sections = [
   {
-    eyebrow: "The thesis · running now",
-    title: "Modality: the first case study",
+    eyebrow: "The core · three kinds of word",
+    title: "Three case studies, one question",
     description:
-      "The program's question at its sharpest, on the formal semantics of modality: is modal force a set of alternatives or a degree of certainty, and does a model represent it or ride the surface word? This is the Master's thesis. The same question runs on to conditionals, quantifiers, and beyond; modality is the first case study, not the last.",
-    projects: mainlineProjects,
+      "Each case study is a kind of word where the logic of natural language looks unlike the logic of the logic books: modals (necessity and possibility), compounds (meaning built from parts), and generics (defaults that tolerate exceptions). Same question, same method, three incisions. MODUS is the Master's thesis; the question runs on to conditionals and quantifiers beyond these three.",
+    projects: caseStudies,
   },
   {
-    eyebrow: "Other projects",
-    title: "Beyond the thesis",
+    eyebrow: "Alongside · collaboration",
+    title: "Collaboration",
     description:
-      "Fewer projects, deliberately: the site tracks a program, not a count. A personal project one level below the word (HanGL, on Sino-Korean morphology), and a collaborative one in another domain (multimodal prototype bias).",
-    projects: otherProjects,
+      "One collaborative project in another domain, kept honestly separate from the three case studies: multimodal prototype bias, extending an established NLP group's work.",
+    projects: collabProjects,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="One research program, studied one case study at a time. The current case study is modality: is modal force a set of possible worlds or a degree of certainty, and does a language model represent it or ride the surface word? MODUS is the Master's thesis."
+  description="One research program on where the logic of natural language departs from the logic of the logic books, studied through three kinds of word: modals (the thesis, MODUS), compounds (HanGL), and generics (ORDO)."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    My work is one research program, studied one case study at a time, not a list of ideas. The
-    method is constant: take a theory of linguistic meaning and ask what observable trace it would
-    have to leave <em>if it were true</em>, then let evidence, not argument, decide. The current case
-    study is modality: <em>what must a system's representations be like for it to genuinely grasp
-    possibility and necessity, rather than merely behave as if it does?</em> I ask it of language
-    models, with a criterion inherited down one line: Leibniz's possible worlds, Kripke's frames,
-    Kratzer's modal bases, Leahy &amp; Carey's possession-versus-performance tests. State the
-    licensing structure formally, then read whether success actually depends on it, today, under
-    intervention and on tasks engineered so that surface correlates must fail. The same question runs
-    on to conditionals, quantifiers, and beyond: modality is the first case study, not the last. The
-    full lineage is on the
+    My work is one research program, not a list of ideas. The question the whole site hangs from:
+    <em>is the logic of natural language the logic of the logicians?</em> The method is constant: take
+    a theory of linguistic meaning and ask what observable trace it would have to leave
+    <em>if it were true</em>, then let evidence, not argument, decide. I test it through three case
+    studies, one per kind of word where natural language's logic looks unlike the textbook's:
+    <strong>modals</strong> (the thesis), <strong>compounds</strong>, and <strong>generics</strong>.
+    The criterion comes down one line: Leibniz's possible worlds, Kripke's frames, Kratzer's modal
+    bases, Leahy &amp; Carey's possession-versus-performance tests. State the licensing structure
+    formally, then read whether success actually depends on it, under intervention and on tasks
+    engineered so that surface correlates must fail. The question runs on to conditionals, quantifiers,
+    and beyond. The full lineage is on the
     <a href="/research-program" class="text-[var(--color-accent)] hover:opacity-75">program page</a>.
   </p>
   <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">

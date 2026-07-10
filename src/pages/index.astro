@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroSentence from "../components/HeroSentence.astro";
+import HeroCaseStudies from "../components/HeroCaseStudies.astro";
 import ResearchTimeline from "../components/ResearchTimeline.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? Each entry below is one piece of the current case, modality. The same question runs on to conditionals, quantifiers, counterfactuals, and beyond: modality is the first case study, not the last.";
+const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? The three case studies below are three kinds of word where natural language's logic looks unlike the textbook's: modals, compounds, and generics. The same question runs on to conditionals, quantifiers, and beyond.";
 
 const spineOrigin = {
   label: "From possible worlds to language models",
@@ -33,6 +33,7 @@ const spineOrigin = {
 const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
 const projectDate: Record<string, string> = {
   "/research/modus": "2026-07-08",
+  "/research/ordo": "2026-06-25",
   "/research/hangl": "2026-06-18",
   "/research/cross-lingual-protobias": "2026-06-05",
 };
@@ -48,6 +49,8 @@ const noteDate: Record<string, string> = {
 const projectIntro: Record<string, string> = {
   "/research/modus":
     "My Master's thesis, and the program's first case study. Is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can, so the language model is the instrument, not the object. A pilot already shows the force direction is load-bearing: ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. The format test and a graded epistemic-force dataset come next.",
+  "/research/ordo":
+    "Generics are the classical-logic misfit: “birds fly” is not “all birds fly” (a penguin does not break it), it is a default that tolerates exceptions. ORDO asks whether generics and modals run on one shared ordering source for defaults, or two. A layered design where a memorized lookup table collapses on never-seen exceptions but a genuine ordering stays flat, so either outcome is a finding. In design.",
   "/research/hangl":
     "One level below the word: is a Sino-Korean word's meaning composed from its Hanja morphemes, or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. A grounding pilot is done (grounding scales with capability); the morphological-decomposition test, with a human-psycholinguistics literature to mirror it against, is the forward step. A personal project, off the thesis line.",
   "/research/cross-lingual-protobias":
@@ -133,26 +136,27 @@ const entries = rawEntries.map((e) => {
           <span>Hi, I am</span>
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
+        <p class="hero-imprint fade-in-up fade-delay-100">
+          Is the logic of natural language the logic of the logicians?
+        </p>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            I study one question: <strong>how linguistic structure becomes representation, and how
-            representation becomes reasoning.</strong> Concretely: how does a sentence come to mean?
-            Words carry meaning, grammatical structure makes those meanings react into the meaning of
-            the whole, and that whole becomes a step in reasoning.
+            That question sits underneath my work. My way into it: I study <strong>how linguistic
+            structure becomes representation, and how representation becomes reasoning.</strong> How
+            does a sentence come to mean? Words carry meaning, grammatical structure makes those
+            meanings react into the meaning of the whole, and that whole becomes a step in reasoning,
+            often a step classical logic would not predict.
           </p>
           <p>
-            I put that question to two systems that answer it differently, a
-            <strong>language model</strong> I can open up and intervene on, and the
-            <strong>human mind</strong> where meaning is already real, and read the answer with the
-            tools of interpretability. Modality is the first case I study it on.
+            I put that to two systems that answer it differently, a <strong>language model</strong> I
+            can open up and intervene on, and the <strong>human mind</strong> where meaning is already
+            real, and read the answer with the tools of interpretability. I test it through three case
+            studies, one per kind of word: <strong>modals, compounds, and generics.</strong>
           </p>
           <p>
             I'm applying for PhD positions for fall 2027.
           </p>
         </div>
-        <blockquote class="hero-pull fade-in-up fade-delay-300">
-          A sentence means more than its words. It means what structure makes them do.
-        </blockquote>
         <div class="hero-cta fade-in-up fade-delay-300">
           <a href="#research" class="btn btn-primary">
             View research
@@ -190,7 +194,7 @@ const entries = rawEntries.map((e) => {
       </div>
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroSentence />
+        <HeroCaseStudies />
       </div>
     </div>
 
@@ -229,9 +233,10 @@ const entries = rawEntries.map((e) => {
           model is checked against.
         </p>
         <p class="program-lenses-foot">
-          The instrument that reads the verdict today is mechanistic interpretation and causal
-          intervention. The instrument will change. The question, and the method of turning a theory
-          into a checkable prediction, will not.
+          Interpretability (probing, ablation, causal intervention) is the instrument that reads the
+          verdict, and the technical training I bring. It is not what the work is about. The instrument
+          will change; the question, and the method of turning a theory into a checkable prediction,
+          will not.
         </p>
       </div>
     </div>
@@ -244,7 +249,7 @@ const entries = rawEntries.map((e) => {
       <div class="section-head">
         <p class="section-label fade-in-up">The research program</p>
         <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          Modality is the first case study, not the boundary.
+          One question, three kinds of word.
         </h2>
       </div>
       <div class="fade-in-up fade-delay-200">
@@ -286,6 +291,19 @@ const entries = rawEntries.map((e) => {
 <style>
   /* The research heading is now the core research question itself — keep it
      readable at a slightly smaller, tighter size than a normal section heading. */
+  /* The site's imprint: the one question the whole program hangs from. */
+  .hero-imprint {
+    font-family: var(--font-display, serif);
+    font-size: clamp(1.35rem, 1rem + 1.4vw, 1.9rem);
+    line-height: 1.32;
+    font-style: italic;
+    color: var(--color-text);
+    max-width: 26ch;
+    margin: 0.6rem 0 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-accent);
+  }
+
   .section-question {
     max-width: 24ch;
     font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
