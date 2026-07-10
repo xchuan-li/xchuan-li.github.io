@@ -83,7 +83,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "MODUS",
-    href: "/research",
+    href: "/research/modus",
     color: "var(--accent-deep-purple)",
     tint: "rgba(176, 156, 219, 0.10)",
     glyph: "xling",
@@ -126,7 +126,7 @@ export const projects: Project[] = [
   },
   {
     title: "ORDO",
-    href: "/research",
+    href: "/research/ordo",
     color: "var(--accent-coral)",
     tint: "rgba(240, 153, 123, 0.10)",
     glyph: "mcm",

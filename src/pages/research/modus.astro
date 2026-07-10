@@ -1,0 +1,121 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base
+  title="MODUS · Xiaochuan Li"
+  description="A linguistics question with a language model for a laboratory: is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? The Master's thesis."
+  toc={true}
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Modal force · thesis flagship · pilot run
+    </div>
+    <h1>MODUS — what is modal force made of?</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      When a system handles <em>must</em> and <em>might</em>, is its representation of modal force a
+      quantification over a <strong>set of possible worlds</strong> (Kratzer), or a single
+      <strong>degree of certainty</strong> (Lassiter)? A linguistics question, with a language model
+      for a laboratory — and my Master's thesis.
+    </p>
+
+    <p>
+      MODUS studies the <strong>semantics of modal force</strong>; the language model is the
+      <strong>instrument</strong>, not the object. The move it turns on is that the competing analyses
+      are <strong>empirically underdetermined by the usual evidence</strong>: Kratzer-style
+      quantification over a world-set and Lassiter-style degree semantics predict the <em>same</em>
+      truth-value judgments and entailment patterns for most sentences. Judgment data cannot separate
+      them — which is exactly the gap a model can fill.
+    </p>
+
+    <h2>Why a language model is a legitimate instrument for a semantic question</h2>
+    <p>Two things the LM offers that neither judgment data nor human subjects can:</p>
+    <ol>
+      <li>
+        <strong>A new kind of evidence — representational <em>format</em> under causal intervention.</strong>
+        In a system that reproduces the modal behaviour, you can ask whether the internal
+        representation carries a <strong>set</strong> (competitor identity, duality geometry, exclusion
+        structure) or only a <strong>scalar</strong> — and <em>ablate</em> it to test whether the
+        behaviour needs it. Judgment data is blind to format; you cannot ablate a representation in a
+        person.
+      </li>
+      <li>
+        <strong>A pure language-only learner.</strong> For the emergence question, the LM isolates the
+        limiting case — a system with <em>only</em> linguistic input — so a result about when force
+        appears is evidence about <em>what language can carry</em>, a claim about language, not about
+        one network.
+      </li>
+    </ol>
+
+    <h2>The honest bridge — what an LM result licenses, and what it does not</h2>
+    <p>
+      A finding in one trained network is not automatically a fact about modality as such. The bridge
+      bounds every stage's claim:
+    </p>
+    <blockquote>
+      MODUS's licensed statements are about <strong>format sufficiency and learnability</strong> — what
+      representational format is <em>enough</em> to support the modal behaviour, and whether it is
+      inducible from language alone — <strong>not</strong> about the human ground-truth semantics of
+      English modals.
+    </blockquote>
+    <p>
+      This is still a <strong>linguistics</strong> contribution: it constrains theories by parsimony
+      and learnability (a theory positing structure the behaviour demonstrably does not need is, as an
+      account of <em>this</em> competence, weaker), and it turns a debate that was underdetermined into
+      one with a new, causal source of evidence. It just does not claim to read human semantics off a
+      model.
+    </p>
+
+    <h2>Four stages, serving one question</h2>
+    <p>Each stage is only well-posed if the one above it passed.</p>
+    <ul>
+      <li>
+        <strong>pilot</strong> — <em>Is modal force representationally real and load-bearing, or an
+        epiphenomenon of surface lexis?</em> &nbsp;→ a force direction <code>D</code> plus causal
+        ablation, with a base-rate control <code>D′</code>.
+      </li>
+      <li>
+        <strong>FORMA</strong> — <em>Is the format sets/worlds (Kratzer) or degrees (Lassiter)?</em>
+        &nbsp;→ competitor-set decodability, duality geometry, exclusion (dis)continuity.
+      </li>
+      <li>
+        <strong>GRADUS</strong> — <em>Is the certainty axis threshold or continuous — the graded form
+        of the same debate?</em> &nbsp;→ a constructed graded-force ruler + calibration test.
+        <span class="text-sm text-[var(--color-text-muted)]">Its own page:
+        <a href="/research/gradus">GRADUS — a graded ruler for modal force</a>.</span>
+      </li>
+      <li>
+        <strong>Stage 2</strong> — <em>Can modal force be induced by linguistic input alone, and under
+        what input?</em> &nbsp;→ the same instrument across training checkpoints / controlled corpora.
+        This is the thesis's forward edge.
+      </li>
+    </ul>
+
+    <h2>Status</h2>
+    <p>
+      <strong>Pilot — done (a smoke test, not yet a finding).</strong> Qwen2.5-0.5B, one evidence
+      family: a force direction <code>D</code> is built from evidence alone, with no modal word
+      present; ablating it while the model answers a <em>might</em> item raises that item's certainty
+      by <strong>+0.152</strong>, while ablating a base-rate control <code>D′</code> does nothing
+      (−0.033) — the predicted structure signature, with the confound behaving correctly.
+    </p>
+    <p class="!text-sm !text-[var(--color-text-muted)]">
+      Honest caveats that keep it a smoke test: the ablation <em>overshoots</em> (might ends above the
+      must level, so "moves toward must" is loose); the must–might baseline gap is small (0.063); and a
+      norm-matched random-direction control is still needed to exclude generic disruption. Next: that
+      control, scale-up, and 2–3 more evidence families for convergence — then <strong>FORMA</strong>,
+      the sets-vs-degrees test.
+    </p>
+
+    <h2>Scope &amp; claim discipline</h2>
+    <ul>
+      <li><strong>Epistemic force only</strong> — <em>must</em> / <em>might</em> as evidence-licensed
+        inference (von Fintel &amp; Gillies 2010), not logical necessity.</li>
+      <li>ML vocabulary stays <strong>instrument</strong> vocabulary; the theoretical claim is about the
+        semantics and learnability of modal force, never "the model understands modality".</li>
+      <li>No claim about humans: convergence ≠ homology. Primary venues are semantics-side (SALT,
+        <em>Semantics &amp; Pragmatics</em>, Sinn und Bedeutung, IWCS); interpretability venues are a
+        secondary, methods-facing outlet.</li>
+    </ul>
+  </article>
+</Base>

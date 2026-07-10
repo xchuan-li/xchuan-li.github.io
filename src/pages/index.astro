@@ -32,6 +32,8 @@ const spineOrigin = {
 // verdict layer). Everything else lives on /writing only.
 const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
 const projectDate: Record<string, string> = {
+  "/research/modus": "2026-07-08",
+  "/research/ordo": "2026-06-28",
   "/research/gradus": "2026-06-20",
   "/research/mini-causal-models": "2026-05-05",
 };
@@ -45,6 +47,10 @@ const noteDate: Record<string, string> = {
 // A 2–3 sentence introduction per project, condensed from each project's own
 // description in data/research.ts (no new claims) — keyed by href.
 const projectIntro: Record<string, string> = {
+  "/research/modus":
+    "My Master's thesis: is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can — so the language model is the instrument, not the object. A pilot already shows the force direction is load-bearing (ablate it and a might sentence's certainty jumps toward must, +0.15). The format test (FORMA) is next; GRADUS is its graded ruler.",
+  "/research/ordo":
+    "Generics (birds fly — except penguins) and modals (you should repay — unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design: a memorized lookup table collapses on never-seen exceptions, a genuine ordering stays flat — and either outcome is a finding. In design, built on CAST.",
   "/research/gradus":
     "Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface modal word? A force direction is built from evidence alone, with no modal word present; ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. GRADUS extends the test into a graded epistemic-force dataset — turning the binary probe into a calibration diagnostic, and the citable ruler MODUS (the modal-force thesis) reuses. This is the one project I am actively running.",
   "/research/mini-causal-models":
