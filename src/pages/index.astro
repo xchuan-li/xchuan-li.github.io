@@ -35,7 +35,6 @@ const projectDate: Record<string, string> = {
   "/research/modus": "2026-07-08",
   "/research/ordo": "2026-06-25",
   "/research/hangl": "2026-06-18",
-  "/research/cross-lingual-protobias": "2026-06-05",
 };
 // Homepage display-dates for the notes, chosen to interleave them among the
 // projects (their real pubDates, several clustered in late May, remain on /writing).
@@ -53,8 +52,6 @@ const projectIntro: Record<string, string> = {
     "Generics are the classical-logic misfit: “birds fly” is not “all birds fly” (a penguin does not break it), it is a default that tolerates exceptions. ORDO asks whether generics and modals run on one shared ordering source for defaults, or two. A layered design where a memorized lookup table collapses on never-seen exceptions but a genuine ordering stays flat, so either outcome is a finding. In design.",
   "/research/hangl":
     "One level below the word: is a Sino-Korean word's meaning composed from its Hanja morphemes, or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. A grounding pilot is done (grounding scales with capability); the morphological-decomposition test, with a human-psycholinguistics literature to mirror it against, is the forward step. A personal project, off the thesis line.",
-  "/research/cross-lingual-protobias":
-    "The applied, multimodal case: across languages, does a vision-language model track meaning, or lean on language- and culture-specific prototype shortcuts? It pits the two against each other, extending a forthcoming paper from an established NLP group. A collaboration; the current report covers two models across seven languages.",
 };
 // One-sentence homepage descriptions for the notes (their fuller excerpts live on
 // /writing) — keyed by slug.
@@ -68,7 +65,6 @@ const noteBlurb: Record<string, string> = {
 // a clean static figure fall back to their glyph for now.
 const projectFig: Record<string, string> = {
   "/research/hangl": "hangl",
-  "/research/cross-lingual-protobias": "protobias",
 };
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -254,7 +250,7 @@ const entries = rawEntries.map((e) => {
     white-space: nowrap;
     overflow-x: auto;
     font-family: var(--font-display, serif);
-    font-size: clamp(0.9rem, 2.3vw, 1.25rem);
+    font-size: clamp(1rem, 2.7vw, 1.5rem);
     line-height: 1.4;
     font-style: italic;
     color: var(--color-text);

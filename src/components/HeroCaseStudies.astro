@@ -24,16 +24,19 @@
 
   .cw {
     position: relative;
-    color: var(--color-text);
     text-decoration: none;
+    font-weight: 600;
     border-radius: 5px;
     padding: 1px 4px;
-    transition: background 0.14s ease, color 0.14s ease;
+    transition: background 0.14s ease;
   }
+  .cw-c { color: var(--accent-teal-deep); }
+  .cw-m { color: var(--accent-deep-purple); }
+  .cw-g { color: var(--accent-coral); }
   .cw:focus-visible { outline: none; }
-  .cw-c:hover, .cw-c:focus-visible { background: color-mix(in srgb, var(--accent-teal-deep) 16%, transparent); color: var(--accent-teal-deep); }
-  .cw-m:hover, .cw-m:focus-visible { background: color-mix(in srgb, var(--accent-deep-purple) 16%, transparent); color: var(--accent-deep-purple); }
-  .cw-g:hover, .cw-g:focus-visible { background: color-mix(in srgb, var(--accent-coral) 16%, transparent); color: var(--accent-coral); }
+  .cw-c:hover, .cw-c:focus-visible { background: color-mix(in srgb, var(--accent-teal-deep) 15%, transparent); }
+  .cw-m:hover, .cw-m:focus-visible { background: color-mix(in srgb, var(--accent-deep-purple) 15%, transparent); }
+  .cw-g:hover, .cw-g:focus-visible { background: color-mix(in srgb, var(--accent-coral) 15%, transparent); }
 
   /* the bubble preview */
   .cw-tip {
