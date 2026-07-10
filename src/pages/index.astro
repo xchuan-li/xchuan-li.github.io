@@ -12,7 +12,7 @@ const spineLeadIn = "Leibniz made modality structure: what is necessary holds in
 
 const spineOrigin = {
   label: "From possible worlds to language models",
-  href: "/research-program",
+  href: "/motivation",
   hook: "Nihil est sine ratione.",
 };
 
@@ -131,14 +131,15 @@ const entries = rawEntries.map((e) => {
   <section class="hero">
     <div class="hero-inner hero-grid">
       <div class="hero-content">
-        <p class="hero-tagline fade-in">Master's student · Human and AI · UTN Nürnberg</p>
-        <h1 class="hero-heading fade-in-up">
+        <a class="hero-imprint fade-in" href="/motivation">
+          <span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span>
+          <span class="hero-imprint-more">Motivation <span aria-hidden="true">→</span></span>
+        </a>
+        <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
+        <h1 class="hero-heading fade-in-up fade-delay-200">
           <span>Hi, I am</span>
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
-        <p class="hero-imprint fade-in-up fade-delay-100">
-          Is the logic of natural language the logic of the logicians?
-        </p>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
             That question sits underneath my work. My way into it: I study <strong>how linguistic
@@ -291,17 +292,32 @@ const entries = rawEntries.map((e) => {
 <style>
   /* The research heading is now the core research question itself — keep it
      readable at a slightly smaller, tighter size than a normal section heading. */
-  /* The site's imprint: the one question the whole program hangs from. */
+  /* The site's imprint: the one question the whole program hangs from. It opens
+     the page and links to the Motivation essay. */
   .hero-imprint {
+    display: block;
     font-family: var(--font-display, serif);
     font-size: clamp(1.35rem, 1rem + 1.4vw, 1.9rem);
     line-height: 1.32;
     font-style: italic;
     color: var(--color-text);
-    max-width: 26ch;
-    margin: 0.6rem 0 1.5rem;
+    text-decoration: none;
+    max-width: 30ch;
+    margin: 0 0 1.75rem;
     padding-left: 1rem;
     border-left: 2px solid var(--color-accent);
+  }
+  .hero-imprint:hover .hero-imprint-more { color: var(--color-accent); }
+  .hero-imprint-more {
+    display: block;
+    margin-top: 0.55rem;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    transition: color 0.2s ease;
   }
 
   .section-question {

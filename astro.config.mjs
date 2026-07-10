@@ -11,6 +11,7 @@ export default defineConfig({
   // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace) — send
   // their old URLs to the research index so external links don't 404.
   redirects: {
+    '/research-program': '/motivation',
     '/research/causal-direction': '/research',
     '/research/arrowhead': '/research',
     '/research/ciy': '/research',

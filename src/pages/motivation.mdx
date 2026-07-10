@@ -1,0 +1,108 @@
+---
+layout: ../layouts/Base.astro
+title: Motivation · Xiaochuan Li
+description: Is the logic of natural language the logic of the logicians? The arc from Aristotle to language models, and why I use models and interpretability to test the competing hypotheses of formal semantics, not to crown one correct.
+toc: true
+---
+
+import LineageTimeline from "../components/LineageTimeline.astro";
+import HeroWorlds from "../components/HeroWorlds.astro";
+
+<div class="prose">
+
+<div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+  Motivation
+</div>
+
+# Motivation
+
+<p class="text-2xl font-medium tracking-tight text-[var(--color-text)] -mt-1 mb-4"><em>Is the logic of natural language the logic of the logicians?</em></p>
+
+The honest answer is not "no." Modern linguistics does not say natural language is illogical. It says something more interesting: classical logic is a *special case* of a larger logic we are still mapping. Here is that arc in five steps, and where I come in.
+
+## 1. One fixed form
+
+Aristotle and the tradition assumed a proposition has a fixed logical form. "All birds fly" is ∀x(Bird(x) → Fly(x)). Add "a penguin is a bird" and you derive "a penguin flies." The inference is valid; if the conclusion is false, some premise was false. The system is clean because every proposition is simply true or false, with nothing in between.
+
+## 2. Then natural language misbehaves
+
+Now take "Birds fly." Classical logic reads it as ∀x(Bird(x) → Fly(x)). But penguins, ostriches, a dead bird, a bird made of plastic. If a single exception made the sentence false, then almost every general sentence we say would be false: "Tigers have stripes" (white tigers exist), "Ducks lay eggs" (males do not), "Mosquitoes carry malaria" (most do not). That is not how the sentences feel to a speaker.
+
+So the real question is not whether "Birds fly" is true. It is: **what is the logical form of "Birds fly" in the first place?** Traditional logic assumed the form was already known. Linguistics answered no: the logical form is itself the object of study. That reversal is one of formal semantics' deepest moves.
+
+## 3. Not less logic, but more
+
+Formal semantics proposes that "Birds fly" is not ∀ but something like **GEN(Bird, Fly)**: a generic operator meaning, roughly, "in normal cases, a bird flies." A penguin no longer falsifies the sentence; it is an exception the operator tolerates.
+
+The same move happens again with modality. "John must be home." *Must* is neither ∀ nor ∃. Kratzer's answer: a **modal base** (which worlds count) and an **ordering source** (how they rank), so that *must* says John is home in the best-ranked worlds still open. Modality gets a logic.
+
+Linguistics never abandoned logic. It kept building new logic: a generic operator, modal operators, focus, presupposition, dynamic context, alternatives. Classical logic turns out to be one special case inside a much larger space.
+
+<LineageTimeline />
+
+The people who built these tools sit on one line. Leibniz made necessity and possibility quantification: the necessary holds in *all* worlds, the possible in *some*. Kripke turned that into mathematics, a frame of worlds and an accessibility relation. Kratzer connected it to the modal words of natural language. And developmental psychology, in Leahy and Carey, turned "does a mind *possess* this structure" into an experiment. My undergraduate thesis was on Leibniz's *characteristica universalis*; the distance from there to here is shorter than it looks.
+
+## 4. Does the mind hold it?
+
+Grant that "Birds fly" is best written GEN. A new question opens at once: does the human mind actually represent GEN, or only an association from *bird* to *flies*? Reading which structure a mind holds, from behaviour alone, without seeing the mechanism, is the craft of cognitive and developmental psychology.
+
+## 5. Which one did the model build?
+
+Now the sharpest version. When a language model reads "Birds fly," what has it built?
+
+- a **universal**: ∀x(Bird(x) → Fly(x));
+- a **generic**: GEN(Bird, Fly);
+- a **prototype**: *bird* leans toward *flies*;
+- a **frequency**: *bird* predicts *flies* with probability 0.93;
+- or **nothing structured at all**: *bird* and *flies* simply co-occur.
+
+Telling these apart, inside the model, is mechanistic interpretability. It is the modal question in another costume: linguistics says *must* is a modal base plus an ordering source, and I ask whether that is in the model; linguistics says "Birds fly" is GEN, and I ask whether that is in the model; linguistics says a counterfactual quantifies over alternative worlds, and I ask the same.
+
+<HeroWorlds />
+
+## An older project, inverted
+
+There is a much older version of this. Leibniz wanted a *characteristica universalis*, a formal language able to express every thought. Frege, Russell, Tarski, and Montague carried the project forward, and their question was always the same: *can natural language be translated into logic?* My question inverts theirs. They designed the logic by hand. A model now learns its own. So the question becomes: **is the logic it learned the same as the logic formal semantics has spent a century proposing?**
+
+## One correction I insist on
+
+It would be easy, and wrong, to phrase this as "did the model learn the *correct* logic that formal semantics proposed." That smuggles in a strong and false assumption: that formal semantics has already delivered the one correct analysis. It has not. Generics alone have several live theories: Krifka's generic operator, Cohen's probabilistic account, Leslie's cognitive-primitive account, and hybrids of these. Modality has more than one formalization; Kratzer's is the most influential, not the only one.
+
+So the honest framing, and the one I hold, is this. **Formal semantics offers a set of explicit, competing hypotheses about the structure of meaning. My interest is not to crown one theory correct. It is to use the language model as an intervenable learning system, and interpretability as the instrument, to test the representational and computational consequences each hypothesis predicts.** The output is not "linguistics was right." It is new evidence, of a kind neither judgment data nor human subjects can give, for formal semantics and for cognitive science.
+
+That is the program. Modality is the case study I am running now; compounds and generics are the next two; the question runs on to conditionals, quantifiers, and counterfactuals. Each is a place where the logic of natural language looks unlike the logic of the logic books, and each is a chance to ask what a model actually built. The current work lives on the [research page](/research).
+
+<div class="mt-12 px-7 pt-5 pb-3 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-[10px] text-[15px] [&>h2:first-child]:mt-2 [&_p]:text-[var(--color-text-muted)] [&_li]:text-[14px] [&_li]:text-[var(--color-text-muted)]">
+
+## Appendix: reading the lineage systematically
+
+A working syllabus, ordered so each stage equips the next. (Personal study plan; folded into the formal-semantics block of my broader curriculum.)
+
+**Stage 1: Modal logic (the criteria layer)**
+- Hughes & Cresswell, *A New Introduction to Modal Logic*: chapters 1 to 3 for working fluency (K, T, S4, S5; Kripke frames; axiom-to-frame correspondence).
+- Optional depth: Blackburn, de Rijke & Venema, *Modal Logic* (ch. 1); SEP entry "Modal Logic" as a map.
+
+**Stage 2: Meaning as structure (the linguistic layer)**
+- Kratzer, "The Notional Category of Modality" (1981; revised in *Modals and Conditionals*, 2012): modal base, ordering source, the thin semantics of modal words.
+- Krifka et al., "Genericity: An Introduction" (*The Generic Book*, 1995): the generic operator and the competing analyses.
+- von Fintel & Heim, *Intensional Semantics*: the fastest rigorous entry.
+
+**Stage 3: Meaning in the mind (the verdict layer)**
+- Leahy & Carey, "The Acquisition of Modal Concepts," *TiCS* 2020: the minimal/modal distinction and the task logic built on it.
+- Leslie, "Generics: Cognition and Acquisition," *Phil. Review* 2008: the cognitive-primitive account of generics.
+- Quilty-Dunn, Porot & Mandelbaum, "The Best Game in Town," *BBS* 2023: the representational-format debate in its current form.
+
+**Stage 4: The question posed to language models (the experimental layer)**
+- Linzen, "How Can We Accelerate Progress Towards Human-like Linguistic Generalization?" (ACL 2020): the evaluation philosophy this program adopts.
+- McCoy, Pavlick & Linzen, "Right for the Wrong Reasons" (ACL 2019): surface heuristics vs. licensing structure.
+- Recent work on modal, generic, and epistemic reasoning in LMs, tracked as the *Semantics with LMs* literature develops.
+
+**Historical companions (read for pleasure, cite for lineage)**
+- Leibniz, "On Freedom and Possibility" and the Arnauld correspondence: possible worlds in their original habitat.
+- Montague, "The Proper Treatment of Quantification in Ordinary English" (1973): natural language as a formal language.
+
+</div>
+
+<p class="mt-8 text-[13px] leading-relaxed text-[var(--color-text-dim)]"><em>Last revised July 2026. This page states a motivation, not a finished result; the research page carries the evidence.</em></p>
+
+</div>
