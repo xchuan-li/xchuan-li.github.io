@@ -83,6 +83,14 @@ const milestones = [
   },
 ];
 
+// Display names for the timeline: codename plus a plain-language phenomenon, so a
+// title reads at a glance. Keyed by href; falls back to the bare title otherwise.
+const caseGloss: Record<string, string> = {
+  "/research/modus": "MODUS: Modality",
+  "/research/ordo": "ORDO: Genericity",
+  "/research/hangl": "HanGL: Morphology",
+};
+
 const rawEntries = [
   ...milestones,
   ...projects
@@ -91,7 +99,7 @@ const rawEntries = [
       type: "project" as const,
       date: projectDate[p.href],
       href: p.href,
-      name: p.title.split(" · ")[0],
+      name: caseGloss[p.href] ?? p.title.split(" · ")[0],
       blurb: p.blurb ?? p.short ?? p.desc,
       intro: projectIntro[p.href],
       color: p.color,
