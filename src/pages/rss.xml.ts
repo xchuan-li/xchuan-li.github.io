@@ -13,7 +13,7 @@ export function GET(context: APIContext) {
     }));
 
   return rss({
-    title: "Xiaochuan Li — Writing",
+    title: "Xiaochuan Li: Writing",
     description:
       "Notes and essays on causal inference, interpretability, and the philosophy of inference.",
     site: context.site ?? "https://xchuan-li.github.io",

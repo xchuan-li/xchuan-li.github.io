@@ -8,7 +8,7 @@ const roadmap = [
     phase: "Report I · framing + data",
     title: "Three framing dimensions and a controlled-data pipeline",
     summary:
-      "Prompt framing is operationalised into three dimensions — urgency, authority, epistemic positioning. A two-agent pipeline builds a controlled dataset: a helper extracts a framing-agnostic theme/action/goal from each scenario, then a generator re-renders it under each framing plus a neutral baseline, holding content fixed so framing is the single manipulated variable, with schema and faithfulness (RAGAS) validation.",
+      "Prompt framing is operationalised into three dimensions: urgency, authority, epistemic positioning. A two-agent pipeline builds a controlled dataset. A helper extracts a framing-agnostic theme/action/goal from each scenario, then a generator re-renders it under each framing plus a neutral baseline, holding content fixed so framing is the single manipulated variable, with schema and faithfulness (RAGAS) validation.",
     status: "active" as const,
   },
   {
@@ -16,7 +16,7 @@ const roadmap = [
     phase: "Next",
     title: "Probing and activation patching",
     summary:
-      "With the controlled dataset in hand, test whether a framing's effect corresponds to a causally relevant direction in activation space — or to surface features that merely travel with the prompt.",
+      "With the controlled dataset in hand, test whether a framing's effect corresponds to a causally relevant direction in activation space, or to surface features that merely travel with the prompt.",
     status: "planned" as const,
   },
 ];
@@ -24,7 +24,7 @@ const roadmap = [
 
 <Base
   title="Latent Control States · Xiaochuan Li"
-  description="A collaborative mechanistic extension: does prompt framing — urgency, authority, epistemic positioning — only change an LLM's outputs, or shift causally relevant latent states inside it?"
+  description="A collaborative mechanistic extension: does prompt framing (urgency, authority, epistemic positioning) only change an LLM's outputs, or shift causally relevant latent states inside it?"
   toc={true}
 >
   <article class="prose">
@@ -39,21 +39,21 @@ const roadmap = [
     <p>
       This is the mechanistic extension of the behavioral program: if a behavioral intervention reveals a
       causal control state, can we find a corresponding direction in activation space? The handle is
-      <strong>prompt framing</strong> — the same request carried under different social pressure —
+      <strong>prompt framing</strong>, the same request carried under different social pressure,
       operationalised into three dimensions:
     </p>
     <ul>
-      <li><strong>Urgency</strong> — compelling rapid decisions under perceived time pressure or moral stakes.</li>
-      <li><strong>Authority</strong> — framing the speaker as holding socially recognised power or expertise.</li>
+      <li><strong>Urgency:</strong> compelling rapid decisions under perceived time pressure or moral stakes.</li>
+      <li><strong>Authority:</strong> framing the speaker as holding socially recognised power or expertise.</li>
       <li>
-        <strong>Epistemic positioning</strong> — how the user frames their standing relative to the
+        <strong>Epistemic positioning:</strong> how the user frames their standing relative to the
         model's judgement: critically engaged, or low-agency and deferring.
       </li>
     </ul>
 
     <p>
-      The first stage builds the ground truth a clean mechanistic test needs — a controlled dataset in
-      which only framing varies:
+      The first stage builds the ground truth a clean mechanistic test needs: a controlled dataset in
+      which only framing varies.
     </p>
 
     <ProgressTimeline items={roadmap} accent="var(--accent-amber)" />
@@ -62,7 +62,7 @@ const roadmap = [
     <p>
       Two agents generate the dataset. A <strong>helper</strong> reads each raw scenario and returns a
       framing-agnostic <em>theme / action / goal</em> triple. A <strong>generator</strong> renders that
-      triple under each framing condition — urgency, authority, epistemic — plus a neutral baseline.
+      triple under each framing condition (urgency, authority, epistemic) plus a neutral baseline.
       Holding the triple fixed isolates framing as the single manipulated variable, which is what later
       probing and activation patching need to attribute an internal difference to framing rather than
       content. Items pass schema, character, opposite-options, and faithfulness (RAGAS) checks before
@@ -71,7 +71,7 @@ const roadmap = [
 
     <h2>Relation to the rest of the work</h2>
     <p>
-      Latent Control States sits after the core behavioral sequence as a mechanistic bridge — from causal
+      Latent Control States sits after the core behavioral sequence as a mechanistic bridge, moving from causal
       evidence over behavior (Stable Is Not Grounded) to
       activation-space hypotheses, the same move Arrowhead makes on a
       different handle. The aim is to connect that behavioral evidence to mechanism where possible, not to

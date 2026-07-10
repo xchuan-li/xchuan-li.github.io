@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
 import ProtoBiasDemo from "../../components/ProtoBiasDemo.tsx";
 
-// Project milestones — each "done" node links to its own standalone report.
+// Project milestones. Each "done" node links to its own standalone report.
 const progress = [
   {
     date: "8 Jun 2026",
@@ -17,9 +17,9 @@ const progress = [
   {
     date: "21 Jun 2026",
     phase: "Experiment 2 · Report 2",
-    title: "It replicates across models — and language is not flat after all",
+    title: "It replicates across models, and language is not flat after all",
     summary:
-      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages — about 12,500 judgments — adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families. The lower-resource, distinct-script prompts surface a language effect the first four languages missed: Bengali and Greek elicit measurably more bias than English, and a back-translation check rules out translation quality. The prototype trap is largely item-intrinsic (the same pairs fool both models, r = 0.68) and not a low-level visual artifact — pointing to a two-factor account.",
+      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages, about 12,500 judgments, adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families. The lower-resource, distinct-script prompts surface a language effect the first four languages missed: Bengali and Greek elicit measurably more bias than English, and a back-translation check rules out translation quality. The prototype trap is largely item-intrinsic (the same pairs fool both models, r = 0.68) and not a low-level visual artifact, pointing to a two-factor account.",
     status: "done",
   },
 ];
@@ -41,11 +41,11 @@ const progress = [
     </p>
 
     <p>
-      Cross-lingual ProtoBias carries the program's structure-versus-surface question — here meaning
-      versus prototype shortcut — into multilingual, multimodal evaluation: does an MLLM judge track the
-      meaning of an image–text pair, or lean on a language- and culture-specific prototype? Each prompt
-      shows two images — one semantically correct but less prototypical, one more prototypical but wrong
-      — so a judge that prefers the typical-but-wrong image is riding the shortcut, the same failure
+      Cross-lingual ProtoBias carries the program's structure-versus-surface question, here meaning
+      versus prototype shortcut, into multilingual, multimodal evaluation: does an MLLM judge track the
+      meaning of an image-text pair, or lean on a language- and culture-specific prototype? Each prompt
+      shows two images, one semantically correct but less prototypical, one more prototypical but wrong,
+      so a judge that prefers the typical-but-wrong image is riding the shortcut, the same failure
       certified in Stable Is Not Grounded. The cross-lingual turn
       holds the image pairs fixed and translates only the prompt: if the verdict moves with the language,
       the judge is importing expectations a language-independent meaning would not. It is an applied
@@ -64,7 +64,7 @@ const progress = [
       and seven languages, adding Russian, Bengali, and Greek to span resource levels and scripts. Two
       results <strong>replicate across both families</strong>: the bias is
       <strong>attribute-specific</strong> (concentrated on Wealth and social status, near chance for
-      Morality and Intellect), and — once lower-resource, distinct-script prompts are added — a
+      Morality and Intellect), and, once lower-resource, distinct-script prompts are added, a
       <strong>language effect the first four languages missed</strong> appears, with Bengali and Greek
       eliciting measurably more bias than English. A back-translation check rules out translation
       quality, and there is no attribute × language interaction: the attribute <em>pattern</em> is
@@ -75,21 +75,21 @@ const progress = [
 
     <p>
       Two deeper checks make the effect hard to dismiss. First, it is not a low-level visual artifact:
-      the prototypical image always alters one feature — count, colour, size, layout — and
+      the prototypical image always alters one feature (count, colour, size, layout) and
       <strong>colour, the obvious confound, is where the model is least fooled</strong>; the bias is
       strongest exactly when the discriminating cue is hard to perceive. Second, the two families fail on
       largely the <strong>same image pairs</strong> (per-item error correlation r = 0.68), so the
       prototype trap is an objective property of the pair, not a quirk of one model. Together these point
       to a <strong>two-factor account</strong>: the attribute decides whether a visual shortcut exists at
-      all — a prototype for wealth and status, none for morality or intellect — and the weakness of the
+      all (a prototype for wealth and status, none for morality or intellect), and the weakness of the
       signal, whether a hard-to-perceive cue or an unfamiliar language, decides how strongly the model
       takes it.
     </p>
 
     <p>
-      The interactive read below is the original <strong>four-language</strong> picture from Report 1 —
+      The interactive read below is the original <strong>four-language</strong> picture from Report 1:
       bias swings sharply by attribute, only mildly by language until Report 2's lower-resource prompts
-      are added:
+      are added.
     </p>
 
     <ProtoBiasDemo client:visible />
@@ -125,11 +125,11 @@ const progress = [
     <h2>Literature</h2>
     <p class="!text-sm text-[var(--color-text-dim)] !mb-3">Source benchmark and the closest related work.</p>
     <ol>
-      <li>Roy, Bhatia &amp; Eger. <a href="https://arxiv.org/abs/2601.04946">ProtoBias</a> — the source benchmark this project extends.</li>
-      <li>Hausladen, Knott, Camerer &amp; Perona. <a href="https://arxiv.org/abs/2408.14435">Social Perception of Faces in a Vision-Language Model</a> (FAccT 2025) — bias concentrates unevenly across social-trait dimensions, paralleling our attribute-specific result.</li>
-      <li>Al Sahili, Patras &amp; Purver. <a href="https://arxiv.org/abs/2505.14160">Breaking Language Barriers or Reinforcing Bias?</a> (IJCNLP-AACL 2025) — multilingual VLMs show stronger bias than English, largest in low-resource languages; the closest mirror of our language effect.</li>
-      <li>Neplenbroek, Bisazza &amp; Fernández. <a href="https://arxiv.org/abs/2406.07243">MBBQ</a> (CoLM 2024) — non-English stereotypes exceed English even after controlling for culture; the text-only precedent, with a control parallel to our back-translation check.</li>
-      <li>Friedrich et&nbsp;al. <a href="https://aclanthology.org/2025.acl-long.966/">Multilingual T2I Generation Magnifies Gender Stereotypes</a> (ACL 2025) — cross-lingual bias variation in image generation; a contrasting modality.</li>
+      <li>Roy, Bhatia &amp; Eger. <a href="https://arxiv.org/abs/2601.04946">ProtoBias</a>: the source benchmark this project extends.</li>
+      <li>Hausladen, Knott, Camerer &amp; Perona. <a href="https://arxiv.org/abs/2408.14435">Social Perception of Faces in a Vision-Language Model</a> (FAccT 2025): bias concentrates unevenly across social-trait dimensions, paralleling our attribute-specific result.</li>
+      <li>Al Sahili, Patras &amp; Purver. <a href="https://arxiv.org/abs/2505.14160">Breaking Language Barriers or Reinforcing Bias?</a> (IJCNLP-AACL 2025): multilingual VLMs show stronger bias than English, largest in low-resource languages; the closest mirror of our language effect.</li>
+      <li>Neplenbroek, Bisazza &amp; Fernández. <a href="https://arxiv.org/abs/2406.07243">MBBQ</a> (CoLM 2024): non-English stereotypes exceed English even after controlling for culture; the text-only precedent, with a control parallel to our back-translation check.</li>
+      <li>Friedrich et&nbsp;al. <a href="https://aclanthology.org/2025.acl-long.966/">Multilingual T2I Generation Magnifies Gender Stereotypes</a> (ACL 2025): cross-lingual bias variation in image generation; a contrasting modality.</li>
     </ol>
   </article>
 </Base>

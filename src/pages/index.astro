@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure — what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form — systems built entirely from language, with no world: do they nonetheless grow something functionally like a space of alternatives? Each entry below is one piece of that line.";
+const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? Each entry below is one piece of that line.";
 
 const spineOrigin = {
   label: "From possible worlds to language models",
@@ -48,17 +48,17 @@ const noteDate: Record<string, string> = {
 // description in data/research.ts (no new claims) — keyed by href.
 const projectIntro: Record<string, string> = {
   "/research/modus":
-    "My Master's thesis: is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can — so the language model is the instrument, not the object. A pilot already shows the force direction is load-bearing (ablate it and a might sentence's certainty jumps toward must, +0.15). The format test (FORMA) is next; GRADUS is its graded ruler.",
+    "My Master's thesis: is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can, so the language model is the instrument, not the object. A pilot already shows the force direction is load-bearing (ablate it and a might sentence's certainty jumps toward must, +0.15). The format test (FORMA) is next; GRADUS is its graded ruler.",
   "/research/ordo":
-    "Generics (birds fly — except penguins) and modals (you should repay — unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design: a memorized lookup table collapses on never-seen exceptions, a genuine ordering stays flat — and either outcome is a finding. In design, built on CAST.",
+    "Generics (birds fly, except penguins) and modals (you should repay, unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design: a memorized lookup table collapses on never-seen exceptions, a genuine ordering stays flat, and either outcome is a finding. In design, built on CAST.",
   "/research/gradus":
-    "Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface modal word? A force direction is built from evidence alone, with no modal word present; ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. GRADUS extends the test into a graded epistemic-force dataset — turning the binary probe into a calibration diagnostic, and the citable ruler MODUS (the modal-force thesis) reuses. This is the one project I am actively running.",
+    "Does a language model represent epistemic modal force (the necessity in must, the possibility in might), or ride the surface modal word? A force direction is built from evidence alone, with no modal word present; ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. GRADUS extends the test into a graded epistemic-force dataset. That turns the binary probe into a calibration diagnostic, and gives MODUS (the modal-force thesis) a citable ruler to reuse. This is the one project I am actively running.",
   "/research/mini-causal-models":
-    "Given a modal state — a set of possible worlds and a ◇/□ constraint — CAST projects it to controlled text in English, German, and Chinese, then grades whether the model's behaviour is isomorphic to the world-set it was compiled from. Because the logical content is fixed by construction, any difference across the three languages can only come from linguistic form, not the facts. It is the workbench the modal thesis runs on — a space of alternatives stipulated in advance, so the question stays decidable rather than guessed.",
+    "Given a modal state (a set of possible worlds and a ◇/□ constraint), CAST projects it to controlled text in English, German, and Chinese, then grades whether the model's behaviour is isomorphic to the world-set it was compiled from. Because the logical content is fixed by construction, any difference across the three languages can only come from linguistic form, not the facts. It is the workbench the modal thesis runs on: a space of alternatives stipulated in advance, so the question stays decidable rather than guessed.",
   "/research/latent-control-states":
-    "Prompt framing — urgency, authority, an epistemic stance — clearly changes what a model says; this asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
+    "Prompt framing (urgency, authority, an epistemic stance) clearly changes what a model says. This asks whether it also shifts a causally relevant latent state, or only the surface. A controlled-data pipeline is built; probing and activation patching come next. A collaboration advised by a senior researcher at DFKI.",
   "/research/hangl":
-    "Korean Sino-Korean words are a natural experiment in surface versus meaning: the Hangul spelling shares zero characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with capability — a strong model neither needs the cue nor is misled by it, a weak one is both. A collaboration off the program's mainline — lexical grounding, not modality — but the clearest demonstration of the cross-lingual intervention method the modal-typology stage will reuse.",
+    "Korean Sino-Korean words are a natural experiment in surface versus meaning: the Hangul spelling shares zero characters with its Hanja origin yet matches it in meaning. A wrong-Hanja intervention shows latent grounding scales with capability: a strong model neither needs the cue nor is misled by it, a weak one is both. A collaboration off the program's mainline (lexical grounding, not modality), but the clearest demonstration of the cross-lingual intervention method the modal-typology stage will reuse.",
   "/research/cross-lingual-protobias":
     "The applied, multimodal stress test of the core question: across languages, does a vision-language model track meaning, or lean on language- and culture-specific prototype shortcuts? It pits the two against each other, extending a forthcoming paper from an established NLP group. The current report covers two models across seven languages.",
   "/research/typological-grounding":
@@ -68,7 +68,7 @@ const projectIntro: Record<string, string> = {
 // /writing) — keyed by slug.
 const noteBlurb: Record<string, string> = {
   "inverted-observability": "Why developmental psychology and interpretability are the same question seen from opposite sides of a mirror.",
-  "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning — or three surface habits?",
+  "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning, or three surface habits?",
   "from-leibniz": "What an undergraduate thesis on Leibniz's universal character became after a change of discipline.",
 };
 
@@ -94,7 +94,7 @@ const milestones = [
   {
     type: "milestone" as const,
     date: "2026-07-02",
-    text: "The program's full statement goes up — the long arc from linguistic structure to language models — and the Master's thesis at UTN, MODUS (on the format of modal force), starts taking shape.",
+    text: "The program's full statement goes up: the long arc from linguistic structure to language models. And the Master's thesis at UTN, MODUS (on the format of modal force), starts taking shape.",
   },
 ];
 
@@ -154,7 +154,7 @@ const entries = rawEntries.map((e) => {
             a step in reasoning.
           </p>
           <p>
-            I ask whether a system has really built that, or only its surface — and I put the question
+            I ask whether a system has really built that, or only its surface, and I put the question
             to <strong>language models and human minds</strong>: one I can open up and intervene on,
             the other where meaning is already real. Modality is where I start.
           </p>
@@ -163,7 +163,7 @@ const entries = rawEntries.map((e) => {
           </p>
         </div>
         <blockquote class="hero-pull fade-in-up fade-delay-300">
-          A sentence means more than its words — it means what structure makes them do.
+          A sentence means more than its words. It means what structure makes them do.
         </blockquote>
         <div class="hero-cta fade-in-up fade-delay-300">
           <a href="#research" class="btn btn-primary">
@@ -237,7 +237,7 @@ const entries = rawEntries.map((e) => {
         <div>
           <h2 class="contact-cta-head">Let's talk.</h2>
           <p class="contact-cta-sub">
-            Best by email — I read everything and reply slowly. If it's about a paper draft or a
+            Best by email. I read everything and reply slowly. If it's about a paper draft or a
             research direction, expect a thoughtful response in a few days rather than an immediate
             one.
           </p>

@@ -27,7 +27,7 @@ const mainlineProjects = [
     status: "modal force · thesis flagship · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "The format of modal force: is necessity/possibility a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. The language model is the instrument, not the object — and the Master's thesis.",
+    one_line: "The format of modal force: is necessity/possibility a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. The language model is the instrument here, not the object, and it is also the Master's thesis.",
   },
   {
     title: "GRADUS",
@@ -37,7 +37,7 @@ const mainlineProjects = [
     status: "modal force · building",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "MODUS's instrument: a graded epistemic-force dataset that turns the binary must/might probe into a calibration diagnostic — the citable resource the thesis reuses. A force direction is built from evidence alone; ablate it and might drifts toward must, while a base-rate control does nothing.",
+    one_line: "MODUS's instrument: a graded epistemic-force dataset that turns the binary must/might probe into a calibration diagnostic, the citable resource the thesis reuses. A force direction is built from evidence alone; ablate it and might drifts toward must, while a base-rate control does nothing.",
   },
   {
     title: "ORDO",
@@ -47,7 +47,7 @@ const mainlineProjects = [
     status: "ordering source · in design",
     color: "var(--accent-coral)",
     glyph: "mcm",
-    one_line: "Generics (birds fly — except penguins) and modals (you should repay — unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design where either outcome is a real finding — built on CAST.",
+    one_line: "Generics (birds fly, except penguins) and modals (you should repay, unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design where either outcome is a real finding, built on CAST.",
   },
   {
     title: "CAST",
@@ -57,7 +57,7 @@ const mainlineProjects = [
     status: "workbench · building",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    one_line: "Compiles a formal-semantic object to controlled English/German/Chinese text, then grades the model's behaviour for isomorphism to the object it was compiled from — structure tested against a known target, ground truth by construction. The workbench MODUS and ORDO run on.",
+    one_line: "Compiles a formal-semantic object to controlled English/German/Chinese text, then grades the model's behaviour for isomorphism to the object it was compiled from: structure tested against a known target, ground truth by construction. The workbench MODUS and ORDO run on.",
   },
 ];
 
@@ -72,7 +72,7 @@ const collabProjects = [
     color: "var(--accent-teal-deep)",
     glyph: "hangl",
     has_demo: true,
-    one_line: "Is a Sino-Korean word's meaning composed from its Hanja morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. The word-level cut of the program's question, with an existing human-psycholinguistics literature to mirror it against.",
+    one_line: "Is a Sino-Korean word's meaning composed from its Hanja morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. This is the word-level cut of the program's question, with an existing human-psycholinguistics literature to mirror it against.",
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -93,14 +93,14 @@ const collabProjects = [
     status: "collaborative · DFKI",
     color: "var(--accent-amber)",
     glyph: "latent",
-    one_line: "Does prompt framing — urgency, authority, epistemic positioning — shift a causally relevant latent state, or only the outputs? Data pipeline built; probing and activation patching next. Advised by a senior researcher at DFKI.",
+    one_line: "Does prompt framing (urgency, authority, epistemic positioning) shift a causally relevant latent state, or only the outputs? Data pipeline built; probing and activation patching next. Advised by a senior researcher at DFKI.",
   },
 ];
 
 const sections = [
   {
     eyebrow: "The mainline · running now",
-    title: "Modality — the program's first instance",
+    title: "Modality: the program's first instance",
     description:
       "The structure-versus-surface question at its sharpest, on the formal semantics of modality. MODUS asks what modal force is made of and GRADUS measures it; ORDO asks whether the ordering source behind generics and modals is one machine or two; CAST is the workbench they run on. MODUS is the Master's thesis.",
     projects: mainlineProjects,
@@ -109,7 +109,7 @@ const sections = [
     eyebrow: "Beyond the mainline · range & collaborations",
     title: "Range & collaborations",
     description:
-      "Off the modality mainline, kept honestly so: the word-level morphology cut (HanGL) and collaborative projects that stress-test structure-versus-surface in other domains — writing systems, multimodal bias, prompt framing.",
+      "Off the modality mainline, kept honestly so: the word-level morphology cut (HanGL) and collaborative projects that stress-test structure-versus-surface in other domains, namely writing systems, multimodal bias, and prompt framing.",
     projects: collabProjects,
   },
 ];
@@ -122,18 +122,18 @@ const sections = [
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
     My work is one research program, not a list of ideas. The method is constant: take a theory of
-    linguistic meaning and ask what observable trace it would have to leave <em>if it were true</em> —
+    linguistic meaning and ask what observable trace it would have to leave <em>if it were true</em>,
     then let evidence, not argument, decide. The current instance is modality: <em>what must a
-    system's representations be like for it to genuinely grasp possibility and necessity — rather than
+    system's representations be like for it to genuinely grasp possibility and necessity, rather than
     merely behave as if it does?</em> I ask it of language models, with a criterion inherited down one
-    line — Leibniz's possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
+    line: Leibniz's possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
     possession-versus-performance tests. State the licensing structure formally, then read whether
-    success actually depends on it — today, under intervention and on tasks engineered so that surface
+    success actually depends on it, today, under intervention and on tasks engineered so that surface
     correlates must fail. The full lineage is on the
     <a href="/research-program" class="text-[var(--color-accent)] hover:opacity-75">program page</a>.
   </p>
   <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">
-    Each project is tagged with its <em>natural output</em> — not everything aims at a paper. Some
+    Each project is tagged with its <em>natural output</em>, and not everything aims at a paper. Some
     are papers; others are a <strong>decision experiment</strong> that earns a paper only if it
     passes a falsifiability test, a <strong>shared workbench</strong> other projects run on, a
     completed pilot that becomes a <strong>thesis chapter</strong>, or a defined contribution to a
