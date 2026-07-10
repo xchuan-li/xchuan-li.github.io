@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? Each entry below is one piece of that line.";
+const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? Each entry below is one piece of the current case, modality. The same question runs on to conditionals, quantifiers, counterfactuals, and beyond: modality is the first case study, not the last.";
 
 const spineOrigin = {
   label: "From possible worlds to language models",
@@ -149,14 +149,16 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            <strong>How does a sentence come to mean?</strong> Words carry meaning; grammatical
-            structure makes those meanings react into the meaning of the whole; and that whole becomes
-            a step in reasoning.
+            I study one question: <strong>how linguistic structure becomes representation, and how
+            representation becomes reasoning.</strong> Concretely: how does a sentence come to mean?
+            Words carry meaning, grammatical structure makes those meanings react into the meaning of
+            the whole, and that whole becomes a step in reasoning.
           </p>
           <p>
-            I ask whether a system has really built that, or only its surface, and I put the question
-            to <strong>language models and human minds</strong>: one I can open up and intervene on,
-            the other where meaning is already real. Modality is where I start.
+            I put that question to two systems that answer it differently, a
+            <strong>language model</strong> I can open up and intervene on, and the
+            <strong>human mind</strong> where meaning is already real, and read the answer with the
+            tools of interpretability. Modality is the first case I study it on.
           </p>
           <p>
             I'm applying for PhD positions for fall 2027.
@@ -208,14 +210,55 @@ const entries = rawEntries.map((e) => {
 
   </section>
 
+  <!-- =========== HOW I STUDY IT (the program's shape) =========== -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">How I study it</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">
+          One question, not three directions.
+        </h2>
+      </div>
+      <div class="program-lenses fade-in-up fade-delay-200">
+        <p>
+          A theory of meaning makes a claim about what a system must represent. I put that claim to
+          two systems that answer it in different currencies, then read the verdict with the tools of
+          interpretability. What can look like three interests are three ways of looking at one
+          question.
+        </p>
+        <p>
+          <strong>Theory — the claim.</strong> Formal semantics and logic state, precisely enough to
+          be wrong, what structure a competent system would need: a modal base, an ordering source,
+          the monotonicity of a quantifier. This is the source of every hypothesis I test.
+        </p>
+        <p>
+          <strong>Language models — the testbed you can open.</strong> A system built from language
+          alone, whose representations you can probe, ablate, and intervene on. It is the experiment
+          you cannot run on a mind.
+        </p>
+        <p>
+          <strong>Human minds — the testbed where meaning is real.</strong> How the same structure is
+          acquired and used, and why behaviour alone never proves a representation. The reference the
+          model is checked against.
+        </p>
+        <p class="program-lenses-foot">
+          The instrument that reads the verdict today is mechanistic interpretation and causal
+          intervention. The instrument will change. The question, and the method of turning a theory
+          into a checkable prediction, will not.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- =========== RESEARCH =========== -->
   <section id="research" class="section">
     <div class="section-inner">
       <div class="divider-line"></div>
       <div class="section-head">
-        <p class="section-label fade-in-up">Research</p>
+        <p class="section-label fade-in-up">The research program</p>
         <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          If a theory of meaning is true, what observable trace must it leave?
+          Modality is the first case study, not the boundary.
         </h2>
       </div>
       <div class="fade-in-up fade-delay-200">
@@ -261,5 +304,29 @@ const entries = rawEntries.map((e) => {
     max-width: 24ch;
     font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
     line-height: 1.2;
+  }
+
+  /* "How I study it" — the program's three ways of looking at one question,
+     as a simple prose block (theory / language models / human minds). */
+  .program-lenses {
+    max-width: 52ch;
+  }
+  .program-lenses > p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0 0 1.15rem;
+  }
+  .program-lenses > p:first-child {
+    color: var(--color-text);
+  }
+  .program-lenses > p strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .program-lenses-foot {
+    margin-top: 1.6rem !important;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.95rem;
   }
 </style>
