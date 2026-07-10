@@ -131,10 +131,7 @@ const entries = rawEntries.map((e) => {
   <section class="hero">
     <div class="hero-inner hero-grid">
       <div class="hero-content">
-        <a class="hero-imprint fade-in" href="/motivation">
-          <span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span>
-          <span class="hero-imprint-more">Motivation <span aria-hidden="true">→</span></span>
-        </a>
+        <a class="hero-imprint fade-in" href="/motivation"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
         <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
         <h1 class="hero-heading fade-in-up fade-delay-200">
           <span>Hi, I am</span>
@@ -201,48 +198,6 @@ const entries = rawEntries.map((e) => {
 
   </section>
 
-  <!-- =========== HOW I STUDY IT (the program's shape) =========== -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">How I study it</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">
-          One question, not three directions.
-        </h2>
-      </div>
-      <div class="program-lenses fade-in-up fade-delay-200">
-        <p>
-          A theory of meaning makes a claim about what a system must represent. I put that claim to
-          two systems that answer it in different currencies, then read the verdict with the tools of
-          interpretability. What can look like three interests are three ways of looking at one
-          question.
-        </p>
-        <p>
-          <strong>Theory: the claim.</strong> Formal semantics and logic state, precisely enough to
-          be wrong, what structure a competent system would need: a modal base, an ordering source,
-          the monotonicity of a quantifier. This is the source of every hypothesis I test.
-        </p>
-        <p>
-          <strong>Language models: the testbed you can open.</strong> A system built from language
-          alone, whose representations you can probe, ablate, and intervene on. It is the experiment
-          you cannot run on a mind.
-        </p>
-        <p>
-          <strong>Human minds: the testbed where meaning is real.</strong> How the same structure is
-          acquired and used, and why behaviour alone never proves a representation. The reference the
-          model is checked against.
-        </p>
-        <p class="program-lenses-foot">
-          Interpretability (probing, ablation, causal intervention) is the instrument that reads the
-          verdict, and the technical training I bring. It is not what the work is about. The instrument
-          will change; the question, and the method of turning a theory into a checkable prediction,
-          will not.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- =========== RESEARCH =========== -->
   <section id="research" class="section">
     <div class="section-inner">
@@ -296,57 +251,26 @@ const entries = rawEntries.map((e) => {
      the page and links to the Motivation essay. */
   .hero-imprint {
     display: block;
+    white-space: nowrap;
+    overflow-x: auto;
     font-family: var(--font-display, serif);
-    font-size: clamp(1.35rem, 1rem + 1.4vw, 1.9rem);
-    line-height: 1.32;
+    font-size: clamp(0.9rem, 2.3vw, 1.25rem);
+    line-height: 1.4;
     font-style: italic;
     color: var(--color-text);
     text-decoration: none;
-    max-width: 30ch;
-    margin: 0 0 1.75rem;
-    padding-left: 1rem;
+    margin: 0 0 1.5rem;
+    padding-left: 0.9rem;
     border-left: 2px solid var(--color-accent);
   }
-  .hero-imprint:hover .hero-imprint-more { color: var(--color-accent); }
-  .hero-imprint-more {
-    display: block;
-    margin-top: 0.55rem;
-    font-family: var(--font-mono);
-    font-style: normal;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-    transition: color 0.2s ease;
-  }
+  .hero-imprint-q { transition: color 0.2s ease; }
+  .hero-imprint-arrow { font-style: normal; color: var(--color-text-dim); transition: color 0.2s ease; }
+  .hero-imprint:hover .hero-imprint-q,
+  .hero-imprint:hover .hero-imprint-arrow { color: var(--color-accent); }
 
   .section-question {
     max-width: 24ch;
     font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
     line-height: 1.2;
-  }
-
-  /* "How I study it" — the program's three ways of looking at one question,
-     as a simple prose block (theory / language models / human minds). */
-  .program-lenses {
-    max-width: 52ch;
-  }
-  .program-lenses > p {
-    color: var(--color-text-muted);
-    line-height: 1.7;
-    margin: 0 0 1.15rem;
-  }
-  .program-lenses > p:first-child {
-    color: var(--color-text);
-  }
-  .program-lenses > p strong {
-    color: var(--color-text);
-    font-weight: 600;
-  }
-  .program-lenses-foot {
-    margin-top: 1.6rem !important;
-    padding-top: 1.15rem;
-    border-top: 1px solid var(--color-border);
-    font-size: 0.95rem;
   }
 </style>

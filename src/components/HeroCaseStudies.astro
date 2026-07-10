@@ -1,132 +1,87 @@
 ---
 // HeroCaseStudies — the homepage centerpiece. One sentence carries the program's
-// three case studies. Hover (or focus) a highlighted word to see the case study
-// it names; click it to open the project. Compounds -> HanGL, modals -> MODUS
-// (the thesis), generics -> ORDO. All three are places where the logic of
-// natural language departs from the logic of the logic books.
-const cases = [
-  {
-    k: "c",
-    href: "/research/hangl",
-    accent: "var(--accent-teal-deep)",
-    cat: "Compounds",
-    name: "HanGL",
-    q: "Is a word's meaning composed from its morphemes, or memorized as a whole? The morphology case, tested on Sino-Korean.",
-  },
-  {
-    k: "m",
-    href: "/research/modus",
-    accent: "var(--accent-deep-purple)",
-    cat: "Modals",
-    name: "MODUS, the thesis",
-    q: "Is modal force a set of possible worlds, or a degree of certainty? And does a model represent it, or ride the word “must”?",
-  },
-  {
-    k: "g",
-    href: "/research/ordo",
-    accent: "var(--accent-coral)",
-    cat: "Generics",
-    name: "ORDO",
-    q: "Birds fly, except penguins. Is that default-with-exceptions the same machinery modals use? A kind of inference classical logic cannot state.",
-  },
-];
+// three case studies. Hover (or focus) a highlighted word: it lights up as a
+// block and a bubble preview of its case study floats in; click to open the
+// project. Compounds -> HanGL, modals -> MODUS (the thesis), generics -> ORDO.
+// Pure CSS, no underlines.
 ---
 
-<figure class="hero-cs" aria-label="The example sentence “A schoolteacher must know that birds fly.” Three words are highlighted: schoolteacher (a compound, studied in HanGL), must (a modal, studied in the MODUS thesis), and birds (a generic, studied in ORDO).">
-  <p class="hero-cs-sent">A <a class="cw cw-c" href="/research/hangl" data-k="c">schoolteacher</a> <a class="cw cw-m" href="/research/modus" data-k="m">must</a> know that <a class="cw cw-g" href="/research/ordo" data-k="g">birds</a> fly.</p>
+<figure class="hero-cs" aria-label="The example sentence “A schoolteacher must know that birds fly.” Three words are highlighted: schoolteacher (a compound, HanGL), must (a modal, the MODUS thesis), and birds (a generic, ORDO). Hover a word to preview its case study.">
+  <p class="hero-cs-sent">A <a class="cw cw-c" href="/research/hangl" aria-label="schoolteacher, a compound, HanGL"><span class="cw-word">schoolteacher</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Compounds</span><span class="tip-name">HanGL</span><span class="tip-q">Is a word's meaning composed from its morphemes, or memorized as a whole? The morphology case, on Sino-Korean.</span></span></a> <a class="cw cw-m" href="/research/modus" aria-label="must, a modal, the MODUS thesis"><span class="cw-word">must</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Modals</span><span class="tip-name">MODUS, the thesis</span><span class="tip-q">Is modal force a set of possible worlds, or a degree of certainty? And does a model represent it, or ride the word?</span></span></a> know that <a class="cw cw-g" href="/research/ordo" aria-label="birds, a generic, ORDO"><span class="cw-word">birds</span><span class="cw-tip" aria-hidden="true"><span class="tip-cat">Generics</span><span class="tip-name">ORDO</span><span class="tip-q">“Birds fly”, except penguins. A default-with-exceptions is an inference classical logic cannot state.</span></span></a> fly.</p>
 
-  <div class="hero-cs-legend" aria-hidden="true">
-    <span><span class="dot dot-c"></span>Compounds</span>
-    <span><span class="dot dot-m"></span>Modals</span>
-    <span><span class="dot dot-g"></span>Generics</span>
-  </div>
-
-  <div class="hero-cs-panel" id="hcs-panel">
-    <p class="cs-hint">Hover a highlighted word to see the case study it names, or click to open it.</p>
-  </div>
-
-  <figcaption class="hero-cs-cap">One sentence, three case studies. Each is a place where the logic of natural language may not be the logic of the logic books.</figcaption>
+  <figcaption class="hero-cs-cap">Three words, three case studies. Hover a word, or click to open it.</figcaption>
 </figure>
 
-<script define:vars={{ cases }}>
-  (function () {
-    const fig = document.querySelector(".hero-cs");
-    if (!fig) return;
-    const panel = fig.querySelector("#hcs-panel");
-    const byK = Object.fromEntries(cases.map((c) => [c.k, c]));
-    const render = (c) => {
-      panel.innerHTML =
-        '<p class="cs-cat" style="color:' + c.accent + '">' + c.cat + "</p>" +
-        '<p class="cs-name">' + c.name + "</p>" +
-        '<p class="cs-q">' + c.q + "</p>";
-    };
-    fig.querySelectorAll(".cw").forEach((a) => {
-      const c = byK[a.dataset.k];
-      ["mouseenter", "focus"].forEach((ev) => a.addEventListener(ev, () => render(c)));
-    });
-  })();
-</script>
-
 <style>
-  .hero-cs { margin: 0; padding: 0; max-width: 30rem; }
+  .hero-cs { margin: 0; padding: 0; max-width: 32rem; }
   .hero-cs-sent {
     font-family: var(--font-display, serif);
-    font-size: clamp(1.7rem, 1.2rem + 2vw, 2.4rem);
-    line-height: 1.5;
+    font-size: clamp(1.7rem, 1.2rem + 2vw, 2.35rem);
+    line-height: 1.65;
     color: var(--color-text);
-    margin: 0 0 1.4rem;
+    margin: 0;
   }
+
   .cw {
+    position: relative;
     color: var(--color-text);
     text-decoration: none;
-    border-bottom: 2px solid;
-    padding: 0 1px;
-    border-radius: 2px;
+    border-radius: 5px;
+    padding: 1px 4px;
     transition: background 0.14s ease, color 0.14s ease;
   }
-  .cw-c { border-bottom-color: var(--accent-teal-deep); }
-  .cw-m { border-bottom-color: var(--accent-deep-purple); }
-  .cw-g { border-bottom-color: var(--accent-coral); }
-  .cw-c:hover, .cw-c:focus-visible { background: color-mix(in srgb, var(--accent-teal-deep) 14%, transparent); }
-  .cw-m:hover, .cw-m:focus-visible { background: color-mix(in srgb, var(--accent-deep-purple) 14%, transparent); }
-  .cw-g:hover, .cw-g:focus-visible { background: color-mix(in srgb, var(--accent-coral) 14%, transparent); }
   .cw:focus-visible { outline: none; }
+  .cw-c:hover, .cw-c:focus-visible { background: color-mix(in srgb, var(--accent-teal-deep) 16%, transparent); color: var(--accent-teal-deep); }
+  .cw-m:hover, .cw-m:focus-visible { background: color-mix(in srgb, var(--accent-deep-purple) 16%, transparent); color: var(--accent-deep-purple); }
+  .cw-g:hover, .cw-g:focus-visible { background: color-mix(in srgb, var(--accent-coral) 16%, transparent); color: var(--accent-coral); }
 
-  .hero-cs-legend {
-    display: flex;
-    gap: 1.15rem;
-    flex-wrap: wrap;
-    margin: 0 0 1.15rem;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--color-text-dim);
-  }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
-  .dot-c { background: var(--accent-teal-deep); }
-  .dot-m { background: var(--accent-deep-purple); }
-  .dot-g { background: var(--accent-coral); }
-
-  .hero-cs-panel {
+  /* the bubble preview */
+  .cw-tip {
+    position: absolute;
+    top: calc(100% + 11px);
+    left: 0;
+    width: max-content;
+    max-width: min(300px, 78vw);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 12px;
-    padding: 1rem 1.15rem;
-    min-height: 108px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.11);
+    padding: 0.8rem 0.95rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+    z-index: 5;
+    font-family: var(--font-sans, sans-serif);
   }
-  .cs-hint { font-size: 0.9rem; color: var(--color-text-dim); margin: 0; line-height: 1.6; }
-  .cs-cat {
+  .cw-g .cw-tip { left: auto; right: 0; }
+  .cw:hover .cw-tip, .cw:focus-within .cw-tip { opacity: 1; visibility: visible; transform: translateY(0); }
+  .cw-tip::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-bottom-color: var(--color-border);
+  }
+  .cw-g .cw-tip::before { left: auto; right: 20px; }
+
+  .tip-cat {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
+    font-size: 10px;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    margin: 0 0 0.4rem;
+    margin: 0 0 4px;
   }
-  .cs-name { font-size: 1rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.4rem; }
-  .cs-q { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+  .cw-c .tip-cat { color: var(--accent-teal-deep); }
+  .cw-m .tip-cat { color: var(--accent-deep-purple); }
+  .cw-g .tip-cat { color: var(--accent-coral); }
+  .tip-name { display: block; font-size: 14px; font-weight: 600; color: var(--color-text); margin: 0 0 5px; }
+  .tip-q { display: block; font-size: 13px; line-height: 1.5; color: var(--color-text-muted); }
 
   .hero-cs-cap {
-    margin-top: 1.1rem;
+    margin-top: 1.4rem;
     font-size: 11.5px;
     line-height: 1.6;
     font-style: italic;
