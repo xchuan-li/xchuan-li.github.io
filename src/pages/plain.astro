@@ -9,10 +9,10 @@ import { posts } from "../data/writing";
 // getting done and when. No hero, no figures, no animation: the link meant for a
 // CV. The rich, illustrated homepage lives at "/".
 
-// Two tiers, mirroring the current focus: the modality mainline (MODUS with its
-// GRADUS ruler, ORDO, and the CAST workbench) first, then earlier and
-// collaborative work, kept for the record but demoted. Parked projects (page up,
-// mainline withdrawn) are excluded here; archived projects drop to the second tier.
+// Two tiers, mirroring the current focus: the three case studies (MODUS, HanGL,
+// ORDO) first, then collaborative work, kept for the record but demoted. Parked
+// projects (page up, mainline withdrawn) are excluded here; archived projects
+// drop to the second tier.
 const mainlineWork = projects.filter((p) => !p.parked && !p.archived);
 const earlierWork = projects.filter((p) => !p.parked && p.archived);
 
@@ -33,12 +33,12 @@ const recentPosts = posts.slice(0, 5);
       <h1 class="plain-name">Xiaochuan Li</h1>
       <p class="plain-affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
       <p class="plain-stmt">
-        I turn theories of linguistic meaning into predictions that <strong>evidence can decide</strong>,
-        asking what trace a theory, if it were true, must leave behind. My current instance is the
-        <strong>formal semantics of modality</strong>: MODUS asks what modal force is made of (a set of
-        worlds, or a degree?), ORDO whether generics and modals share one ordering source. The line runs
-        Leibniz to Kripke to Kratzer to Leahy &amp; Carey; the language model is my instrument, and human
-        minds the mirror.
+        The question my work hangs from: <strong>is the logic of natural language the logic of the
+        logicians?</strong> Formal semantics keeps answering with more logic, not less: a generic
+        operator, a modal base and ordering source. My interest is not to crown one theory correct, but
+        to use a language model as an intervenable learning system, and interpretability as the
+        instrument, to test which of these structures a model actually builds. Three case studies:
+        modality, morphological composition, and genericity.
       </p>
       <p class="plain-links">
         <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
@@ -60,14 +60,12 @@ const recentPosts = posts.slice(0, 5);
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One program, on the <strong>formal semantics of modality</strong>. <strong>MODUS</strong>, the
-        thesis, asks what modal force is made of (a set of worlds, or a degree?), with
-        <strong>GRADUS</strong> as its graded ruler; <strong>ORDO</strong> asks whether the ordering
-        source behind generics and modals is one machine or two; <strong>CAST</strong> is the workbench
-        they run on. Each states a licensing structure formally, then reads whether the model's success
-        depends on it, across languages. The full lineage (Leibniz to Kripke to Kratzer to Leahy
-        &amp; Carey) is on the <a href="/motivation">motivation page</a>. Each line shows where the
-        work actually stands.
+        One program, three case studies, each a kind of word where the logic of natural language looks
+        unlike the logic books: <strong>MODUS</strong> (modals, the thesis), <strong>HanGL</strong>
+        (compounds), and <strong>ORDO</strong> (generics). Each states a formal-semantic structure, then
+        reads whether the model's success depends on it, testing what competing theories predict rather
+        than crowning one correct. The full arc, from Aristotle to language models, is on the
+        <a href="/motivation">motivation page</a>. Each line below shows where the work actually stands.
       </p>
 
       {
