@@ -28,47 +28,47 @@ Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
 
 ```
 src/
-├── layouts/Base.astro              # Shared shell: fixed frosted-glass nav (causal-triad mark +
-│                                   # wordmark + page links + theme toggle), footer,
-│                                   # IntersectionObserver script (.fade-in / .fade-in-up),
-│                                   # pre-paint theme script (localStorage), reading-progress bar.
-│                                   # `wide` prop opts out of the 720px container (homepage uses it).
-├── components/
-│   ├── MzcCards.tsx                # Lightweight M/Z/C variable-type module for Paper 1.
-│   ├── Exp1Tweety.tsx              # Lightweight do(Z)/do(C)/do(M) walkthrough for Paper 1.
-│   ├── Exp2AgreementTabs.tsx       # Lightweight aligned/control/attractor agreement module.
-│   ├── MarginNote.astro            # Tufte-style sidenotes for research prose.
-│   ├── HeroFigure.astro            # Static SVG for paper1: two parallel small DAGs
-│   │                               # (SC-grounded vs SC-spurious).
+├── layouts/Base.astro              # Shared shell: fixed frosted-glass nav (mark + wordmark +
+│                                   # page links + theme toggle), footer, IntersectionObserver
+│                                   # script (.fade-in / .fade-in-up), pre-paint theme script
+│                                   # (localStorage), reading-progress bar, optional "On this page"
+│                                   # TOC rail. `wide` prop opts out of the 720px container (homepage).
+├── components/                     # Astro figures + a few React islands (interactive demos)
+│   ├── HeroCaseStudies.astro       # Homepage hero figure — the three case studies.
+│   ├── ResearchTimeline.astro      # Homepage vertical research spine (Leibniz lead-in + timeline).
 │   ├── ProgressTimeline.astro      # Reusable vertical milestone timeline for project pages.
-│   │                               # Current milestone shown by default; full version history expands.
-│   ├── SCHierarchyFigure.astro     # Homepage About section concept figure — three concentric
-│   │                               # rounded panels (accuracy ⊋ stable-correct ⊋ grounded) with
-│   │                               # populations of dots in each band; do(C) callout arrow.
-│   ├── TrajectoryTimeline.astro     # Homepage Apple-style scroll narrative spine.
+│   │                               # Current milestone shown by default; full history expands.
 │   ├── ProjectGlyph.astro          # Project glyphs reused on the /research index.
-│   └── SectionDivider.astro        # (Legacy) horizontal line + tiny SVG mark; no longer used on
-│                                   # the new homepage but kept for inner pages.
+│   ├── CaseFigure.astro, TLFig.astro          # spine/case sub-figures used by ResearchTimeline.
+│   ├── HeroWorlds.astro, HeroCausalMatrix.astro, LineageTimeline.astro   # /motivation figures.
+│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro                    # /writing/from-leibniz figures.
+│   ├── HanGLFigure.astro, HanGLDemo.tsx        # /research/hangl figure + interactive demo.
+│   └── ProtoBiasDemo.tsx           # /research/cross-lingual-protobias interactive demo.
+├── data/
+│   ├── research.ts                 # Single source of truth for the project list (homepage + /research).
+│   └── writing.ts                  # Single source of truth for writing posts (index + RSS).
 ├── pages/
-│   ├── index.astro                 # Home: Hero / scroll research spine / Currently / Writing /
-│   │                               # Contact CTA. Uses `<Base wide={true}>`.
+│   ├── index.astro                 # Home: Hero / research spine / Collaborations / Contact CTA.
+│   │                               # Uses `<Base wide={true}>`.
+│   ├── plain.astro                 # Plain-text version of the homepage (same data sources).
+│   ├── motivation.mdx              # The program's origin essay (Leibniz → modality).
 │   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
-│   ├── contact.astro               # Email, GitHub, location, PhD-application note
+│   ├── contact.astro               # Email, GitHub, LinkedIn, PhD-application note
+│   ├── 404.astro, rss.xml.ts
 │   ├── research/
-│   │   ├── index.astro             # Research index (core sequence + workbench + extensions)
-│   │   ├── sc-certification.astro  # paper1 walkthrough — embeds three lightweight React islands
-│   │   ├── isotrace.astro          # Expanded method page — behavioral path tracing
-│   │   ├── mini-causal-models.astro # Supporting language-to-causal-graph workbench
-│   │   ├── ciy.astro               # Paper 3 — quantitative grading
-│   │   ├── latent-control-states.astro  # Mechanistic extension (formerly "LiT")
-│   │   └── cross-lingual-protobias.astro
+│   │   ├── index.astro             # Research index (mainline + collaborations)
+│   │   ├── modus.astro             # Thesis — the format of modal force
+│   │   ├── hangl.astro             # Sino-Korean morphology (has demo)
+│   │   ├── ordo.astro              # Generics / defeasibility
+│   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
 │   └── writing/
-│       ├── index.astro             # Writing index (placeholder posts)
-│       └── decidability-boundary.mdx  # Sample MDX post showing how to embed React inline
+│       ├── index.astro
+│       ├── from-leibniz.mdx
+│       ├── inverted-observability.mdx
+│       └── meaning-beneath-language.mdx
 └── styles/global.css               # Design tokens (dark-default, .light override), frosted nav,
-                                    # hero/section/about-grid/areas-card/contact-cta,
-                                    # buttons (.btn-primary/.btn-secondary), fade-in-up,
-                                    # prose, essay-fig, print stylesheet for /cv PDF.
+                                    # hero/section/contact-cta, buttons (.btn-primary/.btn-secondary),
+                                    # fade-in-up, prose, essay-fig, print stylesheet for /cv PDF.
 ```
 
 ## Identity (do not change without asking)
@@ -95,10 +95,10 @@ The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass s
 - **Cards.** Use cards only for compact repeated items or small tools. The homepage research section is not a card grid; the vertical spine leads alone.
 - **Section rhythm.** Every section opens with: optional `.divider-line` (1px hairline) → `.section-label` (uppercase 0.3em tracking) → `.section-heading` (big bold) → optional `.section-sub`. The pattern is consistent across About / Currently / Research / Writing / Contact.
 - **Homepage figures.**
-  - `TrajectoryTimeline` renders the main program as an Apple-style scroll narrative: Leibniz portrait/question -> Certify -> Localize -> Quantify -> MiniCausalLang foundation.
-  - The Leibniz origin uses `/public/images/leibniz-portrait.png`, an artistic historical portrait asset generated for the site.
-  - MiniCausalLang is the workbench/foundation; collaborations sit as muted right-side branches.
-- **Research focus card** (replaces the reference site's "skills with percentages"). Rows use uppercase label + monospace status tag + thin colored hairline. No numbers — status tags should reflect the roadmap (`Paper 1`, `Paper 2`, `Paper 3`, `Support`, `Extensions`, `Background`).
+  - `HeroCaseStudies.astro` is the hero's right-column figure (the three case studies: modals, morphology, generics).
+  - `ResearchTimeline.astro` renders the research program below the hero: the Leibniz lead-in (`spineLeadIn` / `spineOrigin` in `index.astro`) followed by a single reverse-chronological stream of projects and mainline notes, driven by `src/data/research.ts` + `src/data/writing.ts`.
+  - The Leibniz origin (on `/motivation`) uses `/public/images/leibniz-portrait.png`, an artistic historical portrait asset generated for the site.
+- **Project status tags.** Rows use uppercase label + monospace status tag + thin colored hairline. No numbers / no skill-percentage bars. Status tags reflect each project's real state (e.g. `Ongoing`, `In design`, `Complete`) from `research.ts`, not a fixed paper roadmap.
 
 ## The research program (high-level — don't summarize wrong)
 
@@ -129,7 +129,7 @@ Central question: **what must a system's representations be like for it to genui
 - **Never add fake citations or quotes** to writing posts — leave bracketed placeholders if needed
 - **Don't propose Tailwind classes that aren't in v4 base** — no plugins are installed, plain utility classes only
 - **All colored text on colored backgrounds must use the dark stop from the same color family** (see global.css palette comments)
-- **The SC demo's numbers come from paper1 §6.1**; if a different model row is needed (DistilBERT Δ +.429, Qwen LoRA Δ +.501), pass via `regimeB` prop rather than editing the component
+- **Interactive demos (React islands) take their numbers as props** — keep headline figures in the page/data, not hard-coded inside the component, so the page and the demo update together. Current islands: `HanGLDemo.tsx`, `ProtoBiasDemo.tsx`.
 - **Reading-progress bar is opt-in** per page via `showProgress={true}` on the Base layout — only use it on long-form research/writing detail pages
 - **Section rail is opt-in** per page via `toc={true}` in Astro pages or `toc: true` in MDX frontmatter. Use it for long-form research/writing detail pages with at least two direct `h2`/`h3` headings inside `.prose`; `Base.astro` builds the desktop "On this page" rail automatically, scroll-spies active headings, and falls back to single-column layout on mobile or sparse pages.
 - **Project main pages follow one template:** a few-sentence intro → `## Roadmap` (a `ProgressTimeline`) → `## Latest progress` (the most recent milestone, inline), with everything else below. Each `done` milestone gets its own report subpage under the project's path. Full recipe in README "Adding / updating a project page"
@@ -137,7 +137,7 @@ Central question: **what must a system's representations be like for it to genui
 
 ## How updates happen
 
-1. Local edit (VS Code) on `~/Desktop/xchuan-li.github.io/`
+1. Local edit (VS Code) on `~/Desktop/PhD_Application/xchuan-li.github.io/`
 2. `pnpm dev` for local preview at http://localhost:4321
 3. Commit + push via GitHub Desktop
 4. GitHub Actions auto-builds + deploys (workflow takes 2-3 min)

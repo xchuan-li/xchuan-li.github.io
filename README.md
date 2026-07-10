@@ -1,78 +1,76 @@
 # Xiaochuan's personal site
 
-A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4.
+A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
+
+The site presents one research program — *the formal semantics of modality in language models* — through three case studies (modals, morphology, generics), plus writing and a CV. See `CONTEXT.md` for the full positioning and design philosophy before making changes.
 
 ## What's here
 
 ```
 src/
-├── layouts/Base.astro         # shared header / footer / meta tags
-├── components/
-│   ├── MzcCards.tsx           # lightweight M/Z/C click-to-reveal module
-│   ├── Exp1Tweety.tsx         # lightweight do(Z)/do(C)/do(M) walkthrough
-│   └── Exp2AgreementTabs.tsx  # agreement aligned/control/attractor module
+├── layouts/Base.astro          # shared shell: frosted nav, footer, theme toggle,
+│                               # fade-in observer, reading-progress bar, optional TOC rail
+├── components/                 # Astro figures + a few React islands (interactive demos)
+│   ├── HeroCaseStudies.astro   # homepage hero figure (three case studies)
+│   ├── ResearchTimeline.astro  # homepage vertical research spine
+│   ├── ProgressTimeline.astro  # reusable per-project roadmap timeline
+│   ├── ProjectGlyph.astro      # project glyphs on the /research index
+│   ├── CaseFigure.astro / TLFig.astro
+│   ├── HeroWorlds.astro / HeroCausalMatrix.astro / LineageTimeline.astro   # /motivation figures
+│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro                      # /writing/from-leibniz figures
+│   ├── HanGLFigure.astro
+│   ├── HanGLDemo.tsx           # interactive demo — /research/hangl
+│   └── ProtoBiasDemo.tsx       # interactive demo — /research/cross-lingual-protobias
+├── data/
+│   ├── research.ts             # single source of truth for the project list
+│   └── writing.ts              # single source of truth for writing posts
 ├── pages/
-│   ├── index.astro            # home — hero + vertical research spine
-│   ├── cv.astro
-│   ├── contact.astro
+│   ├── index.astro             # home — hero + research spine + collaborations + contact
+│   ├── plain.astro             # plain-text version of the homepage
+│   ├── motivation.mdx          # the program's origin essay (Leibniz → modality)
+│   ├── cv.astro / contact.astro / 404.astro / rss.xml.ts
 │   ├── research/
 │   │   ├── index.astro
-│   │   ├── sc-certification.astro   # paper1 walkthrough, embeds lightweight React islands
-│   │   ├── isotrace.astro
-│   │   ├── ciy.astro
-│   │   └── latent-control-states.astro
+│   │   ├── modus.astro         # thesis — the format of modal force
+│   │   ├── hangl.astro         # Sino-Korean morphology (has demo)
+│   │   ├── ordo.astro          # generics / defeasibility
+│   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
 │   └── writing/
 │       ├── index.astro
-│       └── decidability-boundary.mdx
-└── styles/global.css          # design tokens, dark mode, .prose typography
+│       ├── from-leibniz.mdx
+│       ├── inverted-observability.mdx
+│       └── meaning-beneath-language.mdx
+└── styles/global.css           # design tokens (dark default), frosted nav, prose typography
 ```
 
 ## Run locally
 
 ```bash
-pnpm install     # or npm / yarn
+pnpm install
 pnpm dev         # http://localhost:4321
+pnpm build       # production build → dist/
+pnpm preview     # preview the production build
 ```
 
 ## Deploy
 
-The included GitHub Actions workflow (`.github/workflows/deploy.yml`) auto-deploys to GitHub Pages on every push to `main`. To set up:
+The GitHub Actions workflow (`.github/workflows/deploy.yml`) auto-builds and deploys to GitHub Pages on every push to `main`. The `site` in `astro.config.mjs` is set to `https://xchuan-li.github.io`; Pages source is set to **GitHub Actions** in the repo settings. A push to `main` is all that's needed to publish.
 
-1. Create a GitHub repo, push this code.
-2. Repo settings → Pages → Source: **GitHub Actions**.
-3. Edit `astro.config.mjs` — set `site` to your final URL (e.g. `https://yourname.github.io` or your custom domain).
-4. Push to `main`. Done.
+## Adding / updating a project
 
-For Vercel/Netlify instead: just connect the repo, no config needed (Astro is auto-detected).
+Projects have two touch-points: the data record and the page.
 
-## Editing checklist
-
-Things already filled in:
-
-- [x] Name: **Xiaochuan Li**
-- [x] Email: **xiaochuan.li@utn.de**
-- [x] GitHub: **github.com/xchuan-li**
-
-Still to do before going live:
-
-- [ ] Add a real Google Scholar URL in `src/pages/contact.astro` (currently a generic placeholder)
-- [ ] Buy a domain or use `username.github.io`, then update `site` in `astro.config.mjs` (currently `xiaochuanli.com`)
-- [ ] Drop a real `cv.pdf` into `public/` for the CV download button
-- [ ] Rewrite the `src/pages/index.astro` hero paragraph in your own voice
-- [ ] Keep paper status / dates in `src/pages/research/sc-certification.astro` up to date as paper1 evolves
-
-## Adding / updating a project page
-
-Every project main page (under `src/pages/research/`) follows one template:
+1. **Data record** — add or edit an entry in `src/data/research.ts`. This single source feeds both the rich homepage (`src/pages/index.astro`) and the plain one (`src/pages/plain.astro`), plus the `/research` index. The homepage timeline only shows the projects squarely on the modality mainline; the rest live on `/research`.
+2. **Page** — each project main page under `src/pages/research/` follows one template:
 
 ```
 1. A few-sentence intro      — what the project is, in 3–4 sentences
 2. ## Roadmap                — the milestone timeline (ProgressTimeline)
 3. ## Latest progress        — the most recent milestone's content, inline
-   (everything else — research questions, data, references, demos — follows below)
+   (research questions, data, references, demos follow below)
 ```
 
-The roadmap is a reusable component, `src/components/ProgressTimeline.astro`. Each milestone is a dated node; "done" nodes link to their own standalone report page, "planned"/"active" nodes don't.
+The roadmap is `src/components/ProgressTimeline.astro`. Each milestone is a dated node; `done` nodes may link to their own standalone report page (e.g. `cross-lingual-protobias/report-1.astro`), `active`/`planned` nodes don't.
 
 ```astro
 ---
@@ -80,91 +78,53 @@ import ProgressTimeline from "../../components/ProgressTimeline.astro";
 
 const roadmap = [
   {
-    date: "Jun 2026",                       // shown in the node's accent colour
+    date: "Jun 2026",
     phase: "Experiment 1 · Report 1",       // small mono kicker
     title: "One-line finding or milestone",
     summary: "A sentence or two of what this milestone is.",
     href: "/research/<project>/report-1",   // omit for non-clickable nodes
     status: "done",                          // "done" | "active" | "planned"
-    // color: "var(--accent-coral)",         // optional per-node override
-  },
-  {
-    date: "Planned",
-    phase: "Experiment 2",
-    title: "What comes next",
-    summary: "…",
-    status: "planned",                       // dimmed, hollow dot, not a link
   },
 ];
 ---
-
 <h2>Roadmap</h2>
 <ProgressTimeline items={roadmap} accent="var(--accent-coral)" />
 ```
 
-Per-project accent colours match the homepage spine: Stable Is Not Grounded → `--accent-coral`, Isotrace → `--accent-teal`, CIY → `--accent-purple`, ProtoBias → `--accent-deep-purple`.
-
-**To add a milestone:** push a new object to the `roadmap`/`progress` array, and (for a `done` node) create its report page at `src/pages/research/<project>/<slug>.astro`. Astro allows a `foo.astro` page and a `foo/` directory of subpages to coexist, so the report lives under the project's own path. Report pages reuse `<article class="prose">`, open with a `← <Project>` back-link, and carry their own dated kicker + tables. See `cross-lingual-protobias/report-1.astro` and `sc-certification/v1.astro` as worked examples.
+**To add a milestone:** push a new object to the roadmap array, and (for a `done` node) create its report page at `src/pages/research/<project>/<slug>.astro`. Astro lets a `foo.astro` page and a `foo/` directory of subpages coexist, so the report lives under the project's own path. Report pages reuse `<article class="prose">` and open with a `← <Project>` back-link.
 
 ## Adding a new interactive demo
 
-1. Write the React component in `src/components/`. Use Tailwind classes; pull theme colors from CSS variables (`var(--color-bg)` etc.) so dark mode works.
-2. Import it in any `.astro` page with `client:load` (or `client:visible` for below-the-fold):
+1. Write the React component in `src/components/` (e.g. `HanGLDemo.tsx`, `ProtoBiasDemo.tsx` as worked examples). Use Tailwind classes and pull theme colors from CSS variables (`var(--color-bg)` etc.) so dark mode works. Pass any project-specific numbers as props.
+2. Import it in a page with `client:load` (or `client:visible` for below-the-fold):
 
-   ```astro
-   ---
-   import MyDemo from '../../components/MyDemo.tsx';
-   ---
-   <MyDemo client:load />
-   ```
-
-3. Keep interactive modules small and page-specific unless the same interaction is reused elsewhere.
+```astro
+---
+import MyDemo from '../../components/MyDemo.tsx';
+---
+<MyDemo client:load />
+```
 
 ## Adding a writing post
 
-Drop a `.mdx` file into `src/pages/writing/`. Front-matter:
+Add an entry to `src/data/writing.ts` (so it appears in the index and RSS), then drop a `.mdx` file into `src/pages/writing/`. Front-matter:
 
 ```yaml
 ---
 layout: ../../layouts/Base.astro
 title: Your title
 description: Short description
+toc: true        # optional — adds the "On this page" rail for long-form posts
 ---
 ```
 
-Wrap the body in `<div class="prose">` for typography. You can import and use React components inline:
-
-```mdx
-import MyComponent from '../../components/MyComponent.tsx';
-
-<MyComponent client:load />
-```
-
-For long-form writing or research detail pages, enable the reusable section rail:
-
-```yaml
----
-layout: ../../layouts/Base.astro
-title: Your title
-description: Short description
-toc: true
----
-```
-
-With `toc: true`, `Base.astro` renders a left "On this page" rail on desktop, builds it from direct
-`h2` and `h3` children inside `.prose`, highlights the active section while scrolling, and collapses
-back to a single centered column on smaller screens. Pages with fewer than two `h2`/`h3` headings
-also fall back to the normal single-column layout.
+Wrap the body in `<div class="prose">` for typography; React components can be imported and used inline. With `toc: true`, `Base.astro` builds a left "On this page" rail on desktop from the direct `h2`/`h3` headings inside `.prose`, scroll-spies the active one, and collapses to a single column on mobile or when there are fewer than two headings.
 
 ## Design notes
 
-- **Restraint over ornament.** Single accent color (warm red-orange), generous whitespace, no decorative gradients or shadows. The visual language is closer to Cosma Shalizi / Lena Voita than to portfolio sites — appropriate for a research audience.
-- **Light by default, dark via `prefers-color-scheme`.** Add a manual toggle if you want — the tokens are already set up for it.
-- **Reading width capped at 65ch in `.prose`.** Long-form pages with `toc: true` use the documented section-rail layout and widen the reading measure to 70ch; landing-page-style content uses the full 720px container width.
+See `CONTEXT.md` for the full design philosophy. In short:
 
-## Updating the Stable walkthrough
-
-The current Paper 1 page uses three lightweight React islands:
-`MzcCards.tsx`, `Exp1Tweety.tsx`, and `Exp2AgreementTabs.tsx`.
-Update the page prose and the small in-component constants together when the
-paper framing or headline numbers change.
+- **Dark by default**, with a manual toggle persisted to `localStorage` and applied pre-paint to avoid a flash.
+- **Restraint over ornament.** A single warm accent color, generous whitespace, no decorative gradients — a visual language for a research audience.
+- **Reading width** capped at 65ch in `.prose`; long-form pages with `toc: true` widen to 70ch; the homepage uses the full-width container via `<Base wide={true}>`.
+- **Motion** (`.fade-in` / `.fade-in-up`) is disabled under `prefers-reduced-motion`.
