@@ -5,8 +5,12 @@
 // ("Name: one-line"), smaller writing entries interspersed, and small milestone
 // notes. Entries are precomputed (dated, sorted, month-labelled) in index.astro.
 import ProjectGlyph from "./ProjectGlyph.astro";
-import HanGLFigure from "./HanGLFigure.astro";
 import TLFig from "./TLFig.astro";
+import CaseFigure from "./CaseFigure.astro";
+
+// Case-study figures (sentence-instance) shared with the /research page, so the
+// two stay consistent. Anything else falls back to a static fig or the glyph.
+const caseKinds = ["modus", "hangl", "ordo"];
 
 interface Origin { label: string; href: string; hook?: string; }
 interface Entry {
@@ -73,8 +77,8 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
                   </span>
                 </span>
                 {(e.fig || e.glyph) && (
-                  <span class={`tl-proj-fig ${e.fig ? "tl-proj-fig-real" : ""}`} aria-hidden="true">
-                    {e.fig === "hangl" ? <HanGLFigure />
+                  <span class={`tl-proj-fig ${e.fig && caseKinds.includes(e.fig) ? "tl-proj-fig-case" : e.fig ? "tl-proj-fig-real" : ""}`} aria-hidden="true">
+                    {e.fig && caseKinds.includes(e.fig) ? <CaseFigure kind={e.fig as any} color={e.color} />
                       : e.fig ? <TLFig kind={e.fig} color={e.color} />
                       : <ProjectGlyph kind={e.glyph as any} color={e.color} />}
                   </span>
@@ -162,6 +166,16 @@ const kindLabel: Record<string, string> = { tool: "Tool", paper: "Paper", projec
     display: flex; align-items: center; justify-content: center;
   }
   .tl-proj-fig-real { flex-basis: 320px; padding: 0.9rem 1rem; }
+  /* Sentence-instance case figures: frameless so the text adapts to dark mode,
+     matching how they sit on the /research cards. */
+  .tl-proj-fig-case {
+    flex-basis: 210px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0.25rem 0.5rem;
+    justify-content: flex-start;
+  }
   .tl-proj-fig :global(.proj-glyph) { max-width: 150px; }
   .tl-proj-title {
     display: block; font-family: var(--font-display); font-weight: 600;
