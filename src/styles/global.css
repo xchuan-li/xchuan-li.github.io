@@ -416,7 +416,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   color: var(--color-text);
 }
 .hero-bio p:last-child { margin-bottom: 0; }
-.hero-bio strong { color: var(--color-text); font-weight: 500; }
+.hero-bio strong { color: inherit; font-weight: 500; }
 .hero-bio em { font-style: italic; }
 .hero-pull {
   font-family: var(--font-serif);
