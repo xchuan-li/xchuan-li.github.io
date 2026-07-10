@@ -5,78 +5,110 @@ import { projects } from "../../data/research";
 
 // The research page follows the program mainline stated on /research-program:
 // does a language model represent the structure a theory of meaning assigns, or
-// only its surface? Two bodies — the modality mainline (GRADUS, the modal-force
-// pilot running now, and CAST, the workbench it runs on) and Collaborations (off
-// the mainline, kept honestly so). The Master's thesis is the forward centre and
-// gets no card until it has results.
+// only its surface? The modality mainline is the spine — MODUS (the thesis: what
+// modal force is made of) with GRADUS (its graded ruler), ORDO (one ordering
+// source across generics and modals, or two?), and CAST (the workbench they run
+// on). MODUS and ORDO have no dedicated page yet, so their cards do not link.
+// Then range & collaborations (off the mainline, kept honestly so).
 //
 // Each card also carries its natural OUTPUT (a paper, a decision experiment, a
 // shared workbench, a thesis chapter, a co-authored paper), pulled from the single
 // source of truth in data/research.ts by href so positioning never drifts.
 const outputByHref = new Map(projects.map((p) => [p.href, p.output]));
 
+// Cards render from these curated arrays (not research.ts directly), so the /research
+// spine can be sequenced by hand. `href` omitted → the card is not a link yet
+// (MODUS/ORDO have no dedicated page). `output` is the natural-deliverable pill.
 const mainlineProjects = [
   {
-    title: "GRADUS",
-    href: "/research/gradus",
-    status: "modal force · pilot running",
+    title: "MODUS",
+    subtitle: "is <em>must</em> a set of worlds, or a degree of certainty?",
+    output: "Thesis",
+    status: "modal force · thesis flagship · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
-    one_line: "Does a language model represent epistemic modal force — the necessity in must, the possibility in might — or ride the surface modal word? A force direction built from evidence alone: ablate it and might behaves like must, while a base-rate control does nothing. Now extended into a graded epistemic-force dataset. The one project running now, and the precursor the thesis reuses.",
+    one_line: "The format of modal force: is necessity/possibility a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. The language model is the instrument, not the object — and the Master's thesis.",
+  },
+  {
+    title: "GRADUS",
+    subtitle: "a graded ruler for modal force",
+    href: "/research/gradus",
+    output: "Dataset + paper",
+    status: "modal force · building",
+    color: "var(--accent-deep-purple)",
+    glyph: "xling",
+    one_line: "MODUS's instrument: a graded epistemic-force dataset that turns the binary must/might probe into a calibration diagnostic — the citable resource the thesis reuses. A force direction is built from evidence alone; ablate it and might drifts toward must, while a base-rate control does nothing.",
+  },
+  {
+    title: "ORDO",
+    subtitle: "do “birds fly” and “you should pay” run on one machine?",
+    output: "Paper",
+    status: "ordering source · in design",
+    color: "var(--accent-coral)",
+    glyph: "mcm",
+    one_line: "Generics (birds fly — except penguins) and modals (you should repay — unless…) are both defaults that tolerate exceptions. Do they share one ordering-source mechanism, or two? A layered novelty-of-exception design where either outcome is a real finding — built on CAST.",
   },
   {
     title: "CAST",
+    subtitle: "a compiler from meaning to controlled text",
     href: "/research/mini-causal-models",
+    output: "Workbench",
     status: "workbench · building",
     color: "var(--accent-slate)",
     glyph: "mcm",
-    one_line: "Given a modal state — a set of possible worlds and a ◇/□ constraint — CAST projects it to controlled text in English, German, and Chinese, then grades whether the model tracks the surviving world-set or the words. Logical content is fixed by construction, so any cross-language difference is linguistic form alone. The workbench the modal work runs on.",
+    one_line: "Compiles a formal-semantic object to controlled English/German/Chinese text, then grades the model's behaviour for isomorphism to the object it was compiled from — structure tested against a known target, ground truth by construction. The workbench MODUS and ORDO run on.",
   },
 ];
 
 // Collaborations & range — off the modality mainline, kept honestly so.
 const collabProjects = [
   {
+    title: "HanGL",
+    subtitle: "composed, or memorized?",
+    href: "/research/hangl",
+    output: "Paper",
+    status: "Sino-Korean morphology · pilot",
+    color: "var(--accent-teal-deep)",
+    glyph: "hangl",
+    has_demo: true,
+    one_line: "Is a Sino-Korean word's meaning composed from its Hanja morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. The word-level cut of the program's question, with an existing human-psycholinguistics literature to mirror it against.",
+  },
+  {
     title: "Cross-lingual ProtoBias",
+    subtitle: "meaning, or cultural prototype?",
     href: "/research/cross-lingual-protobias",
+    output: "Co-authored paper",
     status: "collaborative",
     color: "var(--accent-indigo)",
     glyph: "protobias",
+    has_demo: true,
     one_line: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? A collaborative project extending an established NLP group's paper.",
-    has_demo: true,
-  },
-  {
-    title: "HanGL · Surface Hangul, Latent Hanja",
-    href: "/research/hangl",
-    status: "collaborative · pilot",
-    color: "var(--accent-teal-deep)",
-    glyph: "hangl",
-    one_line: "Do LLMs ground Korean words to their latent Hanja meaning, or stop at the surface script? A wrong-Hanja intervention shows grounding scales with capability: a weak model needs the cue and caves to a wrong one; a strong model does neither. Off the mainline — lexical grounding, not modality — but the clearest demonstration of the program's cross-lingual intervention method.",
-    has_demo: true,
   },
   {
     title: "Latent Control States",
+    subtitle: "does framing shift a latent state, or only the surface?",
     href: "/research/latent-control-states",
-    status: "collaborative",
+    output: "Decision experiment",
+    status: "collaborative · DFKI",
     color: "var(--accent-amber)",
     glyph: "latent",
-    one_line: "Does prompt framing shift a causally relevant latent state, or only the surface? A collaborative project, advised by a senior researcher at DFKI.",
+    one_line: "Does prompt framing — urgency, authority, epistemic positioning — shift a causally relevant latent state, or only the outputs? Data pipeline built; probing and activation patching next. Advised by a senior researcher at DFKI.",
   },
 ];
 
 const sections = [
   {
     eyebrow: "The mainline · running now",
-    title: "Modality — the first instance",
+    title: "Modality — the program's first instance",
     description:
-      "The structure-versus-surface question at its sharpest: does a language model represent modal force and a space of alternatives, or the surface modal words? GRADUS is the pilot and dataset running now; CAST is the workbench it runs on. The Master's thesis — modal-concept emergence during training — is the forward center, and gets no card until it has results.",
+      "The structure-versus-surface question at its sharpest, on the formal semantics of modality. MODUS asks what modal force is made of and GRADUS measures it; ORDO asks whether the ordering source behind generics and modals is one machine or two; CAST is the workbench they run on. MODUS is the Master's thesis.",
     projects: mainlineProjects,
   },
   {
-    eyebrow: "Collaborations & range · off the mainline",
-    title: "Collaborations & range",
+    eyebrow: "Beyond the mainline · range & collaborations",
+    title: "Range & collaborations",
     description:
-      "Off the modality mainline, kept honestly so: collaborative projects that stress-test structure-versus-surface in other domains — writing systems, prompt framing, multimodal bias — and show the cross-lingual and mechanistic range the program draws on.",
+      "Off the modality mainline, kept honestly so: the word-level morphology cut (HanGL) and collaborative projects that stress-test structure-versus-surface in other domains — writing systems, multimodal bias, prompt framing.",
     projects: collabProjects,
   },
 ];
@@ -84,7 +116,7 @@ const sections = [
 
 <Base
   title="Research · Xiaochuan Li"
-  description="One research program, from possible worlds to language models: does a model's success depend on the structure a theory of meaning assigns, or only its surface? Modality is the first instance — GRADUS and CAST run it now."
+  description="One research program on the formal semantics of modality: MODUS asks what modal force is made of (a set of worlds, or a degree?), GRADUS measures it, ORDO asks whether generics and modals share one ordering source, and CAST is the workbench they run on."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
@@ -123,32 +155,40 @@ const sections = [
 
           <div class="divide-y divide-[var(--color-border)]">
             {
-              section.projects.map((p) => (
-                <a href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-                  <div class="flex items-center gap-5">
-                    <div class="flex-1 min-w-0">
-                      <div class="flex justify-between items-baseline gap-3 mb-2">
-                        <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h3>
-                        {outputByHref.get(p.href) && (
-                          <span class="proj-output" style={`--pc: ${p.color}`}>{outputByHref.get(p.href)}</span>
-                        )}
+              section.projects.map((p) => {
+                const Tag = p.href ? "a" : "div";
+                const output = p.output ?? outputByHref.get(p.href);
+                return (
+                  <Tag href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+                    <div class="flex items-center gap-5">
+                      <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-baseline gap-3 mb-1">
+                          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">
+                            {p.title}
+                            {!p.href && <span class="proj-soon">page soon</span>}
+                          </h3>
+                          {output && (
+                            <span class="proj-output" style={`--pc: ${p.color}`}>{output}</span>
+                          )}
+                        </div>
+                        {p.subtitle && <p class="proj-subtitle" set:html={p.subtitle} />}
+                        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1.5">{p.one_line}</p>
+                        <div class="mt-2.5 flex items-center gap-3 flex-wrap">
+                          <span class="proj-state">{p.status}</span>
+                          {p.has_demo && (
+                            <span class="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-[#c8ece0] text-[#07533e] dark:bg-[#0e4c3d] dark:text-[#74d6b4]">
+                              interactive demo ↗
+                            </span>
+                          )}
+                        </div>
                       </div>
-                      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.one_line}</p>
-                      <div class="mt-2.5 flex items-center gap-3 flex-wrap">
-                        <span class="proj-state">{p.status}</span>
-                        {p.has_demo && (
-                          <span class="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-[#c8ece0] text-[#07533e] dark:bg-[#0e4c3d] dark:text-[#74d6b4]">
-                            interactive demo ↗
-                          </span>
-                        )}
+                      <div class="proj-glyph-cell" aria-hidden="true">
+                        <ProjectGlyph kind={p.glyph} color={p.color} />
                       </div>
                     </div>
-                    <div class="proj-glyph-cell" aria-hidden="true">
-                      <ProjectGlyph kind={p.glyph} color={p.color} />
-                    </div>
-                  </div>
-                </a>
-              ))
+                  </Tag>
+                );
+              })
             }
           </div>
         </section>
@@ -180,5 +220,29 @@ const sections = [
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-dim);
+  }
+  /* The plain-language subtitle under each codename — tells MODUS from ORDO at a glance. */
+  .proj-subtitle {
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--color-text);
+    opacity: 0.82;
+    line-height: 1.4;
+  }
+  .proj-subtitle em { font-style: normal; }
+  /* Marks a card whose dedicated page is not written yet (MODUS/ORDO). */
+  .proj-soon {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 1px 6px;
+    vertical-align: middle;
+    white-space: nowrap;
   }
 </style>

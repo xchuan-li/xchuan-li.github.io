@@ -9,11 +9,10 @@ import { posts } from "../data/writing";
 // getting done and when. No hero, no figures, no animation: the link meant for a
 // CV. The rich, illustrated homepage lives at "/".
 
-// Two tiers, mirroring the current focus: the modality mainline (the pieces
-// actively running — Stable Is Not Grounded and the CAST workbench, plus
-// the modal-typology through-line) first, then earlier and collaborative work,
-// kept for the record but demoted. Parked projects (page up, mainline withdrawn)
-// are excluded here; archived projects drop to the second tier.
+// Two tiers, mirroring the current focus: the modality mainline (MODUS with its
+// GRADUS ruler, ORDO, and the CAST workbench) first, then earlier and
+// collaborative work, kept for the record but demoted. Parked projects (page up,
+// mainline withdrawn) are excluded here; archived projects drop to the second tier.
 const mainlineWork = projects.filter((p) => !p.parked && !p.archived);
 const earlierWork = projects.filter((p) => !p.parked && p.archived);
 
@@ -34,12 +33,12 @@ const recentPosts = posts.slice(0, 5);
       <h1 class="plain-name">Xiaochuan Li</h1>
       <p class="plain-affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
       <p class="plain-stmt">
-        I study one question of language models: <strong>do they genuinely represent possibility and
-        necessity — or only behave as if they do?</strong> I state the structure that would license
-        the capacity — a space of alternatives, not just the right modal words — then test whether
-        success survives once the surface cues are cut. The line is Leibniz → Kripke → Kratzer →
-        Leahy &amp; Carey. My current project probes modal force; my Master's thesis carries it toward
-        modal concepts, where 可能/必须/一定 vs. <em>may/must</em> is a natural experiment.
+        I turn theories of linguistic meaning into predictions that <strong>evidence can decide</strong>
+        — asking what trace a theory, if it were true, must leave behind. My current instance is the
+        <strong>formal semantics of modality</strong>: MODUS asks what modal force is made of (a set of
+        worlds, or a degree?), ORDO whether generics and modals share one ordering source. The line is
+        Leibniz → Kripke → Kratzer → Leahy &amp; Carey; the language model is my instrument, and human
+        minds the mirror.
       </p>
       <p class="plain-links">
         <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
@@ -61,15 +60,14 @@ const recentPosts = posts.slice(0, 5);
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One program, centred on <strong>modal concepts</strong>: do language models genuinely
-        represent possibility and necessity — quantification over a space of alternatives — and when
-        do those distinctions become load-bearing in training? State the licensing structure
-        formally, then <strong>certify</strong> whether success actually depends on it,
-        <strong>across languages</strong>. The pilot and dataset (GRADUS) and the CAST workbench that
-        makes the cut decidable are running now; the modal-concepts thesis is the forward center;
-        modal typology is the horizon it builds toward. The full lineage — Leibniz to Kripke to
-        Kratzer to Leahy &amp; Carey — is on the <a href="/research-program">program page</a>. Each
-        line shows where the work actually stands.
+        One program, on the <strong>formal semantics of modality</strong>. <strong>MODUS</strong> — the
+        thesis — asks what modal force is made of (a set of worlds, or a degree?), with
+        <strong>GRADUS</strong> as its graded ruler; <strong>ORDO</strong> asks whether the ordering
+        source behind generics and modals is one machine or two; <strong>CAST</strong> is the workbench
+        they run on. Each states a licensing structure formally, then reads whether the model's success
+        depends on it — across languages. The full lineage — Leibniz to Kripke to Kratzer to Leahy
+        &amp; Carey — is on the <a href="/research-program">program page</a>. Each line shows where the
+        work actually stands.
       </p>
 
       {
