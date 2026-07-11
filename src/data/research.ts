@@ -149,7 +149,7 @@ export const projects: Project[] = [
     color: "var(--accent-amber)",
     glyph: "latent",
     tags: ["Collaboration", "Mechanistic"],
-    short: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: I designed and built the controlled two-agent data pipeline the probing study runs on. A collaboration with DFKI.",
+    short: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure. A collaboration with DFKI.",
     group: "support",
     tier: "group",
     category: "collaborative",
