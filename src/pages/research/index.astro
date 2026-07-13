@@ -4,12 +4,12 @@ import ProjectGlyph from "../../components/ProjectGlyph.astro";
 import CaseFigure from "../../components/CaseFigure.astro";
 import { projects } from "../../data/research";
 
-// The research page follows the program mainline stated on /research-program:
-// does a language model represent the structure a theory of meaning assigns, or
-// only its surface? The modality mainline is the spine — MODUS (the thesis: what
-// modal force is made of) with GRADUS (its graded ruler), ORDO (one ordering
-// source across generics and modals, or two?), and CAST (the workbench they run
-// on). Then range & collaborations (off the mainline, kept honestly so).
+// The research page states the modality program: how linguistic modality
+// structures the space of possibilities for inference. The spine is the thesis in
+// two arms — MODUS (the language-model arm: what modal force is made of, read
+// under intervention) and the human arm (the same theory, adjudicated in the mind
+// through a shared paradigm). Then earlier & methodological collaborations (off
+// the mainline, kept honestly so).
 //
 // Each card also carries its natural OUTPUT (a paper, a decision experiment, a
 // shared workbench, a thesis chapter, a co-authored paper), pulled from the single
@@ -18,48 +18,34 @@ const outputByHref = new Map(projects.map((p) => [p.href, p.output]));
 
 // Cards render from these curated arrays (not research.ts directly), so the /research
 // spine can be sequenced by hand. `href` omitted → the card is not a link yet
-// (MODUS/ORDO have no dedicated page). `output` is the natural-deliverable pill.
-// The three case studies are the core: one kind of word each, all places where
-// the logic of natural language looks unlike the logic of the logic books.
-const caseStudies = [
+// (the human arm has no dedicated page). `output` is the natural-deliverable pill.
+// The thesis is the core: one theory of modal force, one set of predictions,
+// adjudicated in two systems — a language model and the human mind.
+const arms = [
   {
-    title: "MODUS: Modality",
+    title: "MODUS: the language-model arm",
     subtitle: "is <em>must</em> a set of worlds, or a degree of certainty?",
     href: "/research/modus",
     output: "Thesis",
-    status: "modals · thesis · pilot run",
+    status: "modal force · LM arm · pilot run",
     color: "var(--accent-deep-purple)",
     glyph: "xling",
     fig: "modus",
-    one_line: "Modals, and the Master's thesis. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not.",
+    one_line: "The Master's thesis, on a system I can open up. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not.",
   },
   {
-    title: "HanGL: Morphology",
-    subtitle: "composed, or memorized?",
-    href: "/research/hangl",
-    output: "Paper",
-    status: "compounds · Sino-Korean · pilot done",
-    color: "var(--accent-teal-deep)",
-    glyph: "hangl",
-    fig: "hangl",
-    has_demo: true,
-    one_line: "Compounds. Is a Sino-Korean word's meaning composed from its morphemes (學 + 校 → school) or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. The word-level cut of the question, with an existing human-psycholinguistics literature to mirror it against.",
-  },
-  {
-    title: "ORDO: Genericity",
-    subtitle: "do “birds fly” and “you should pay” run on one machine?",
-    href: "/research/ordo",
-    output: "Paper",
-    status: "generics · in design",
-    color: "var(--accent-coral)",
-    glyph: "mcm",
-    fig: "ordo",
-    one_line: "Generics. “Birds fly” is not “all birds fly”: a penguin does not break it. That default-with-exceptions is an inference classical logic cannot state. Do generics and modals share one ordering-source mechanism for defaults, or two? A layered novelty-of-exception design where either outcome is a real finding.",
+    title: "The human arm",
+    subtitle: "the same modal contrast, put to people",
+    output: "Thesis",
+    status: "human arm · shared paradigm · in planning",
+    color: "var(--accent-slate)",
+    glyph: "latent",
+    one_line: "The same theory, adjudicated in the mind. The very modal contrast the model turns on — evidence-driven force, worlds versus degree — put to people through a shared behavioural paradigm, drawing on the developmental literature on modal cognition (Leahy & Carey). Where the two systems agree, and where the model departs from the mind, both constrain the theory. In planning, co-designed from the cognitive-developmental side.",
   },
 ];
 
 // Collaborations: contributions to others' projects, kept separate from the
-// three case studies. Two sentences each, emphasising what I did. No figures,
+// the thesis. Two sentences each, emphasising what I did. No figures,
 // no dedicated pages.
 const collaborations = [
   {
@@ -78,32 +64,31 @@ const collaborations = [
 
 const sections = [
   {
-    eyebrow: "The core · three kinds of word",
-    title: "Three case studies, one question",
+    eyebrow: "The thesis · two arms",
+    title: "One theory of modality, two systems",
     description:
-      "Each case study is a kind of word where the logic of natural language looks unlike the logic of the logic books: modals (necessity and possibility), compounds (meaning built from parts), and generics (defaults that tolerate exceptions). Same question, same method, three incisions. MODUS is the Master's thesis; the question runs on to conditionals and quantifiers beyond these three.",
-    projects: caseStudies,
+      "The Master's thesis takes one question about modal force — a set of possible worlds, or a degree of certainty? — and derives a single set of predictions from it, then adjudicates them in two systems at once: a language model, opened up under intervention, and the human mind, through a shared behavioural paradigm. Neither settles it alone; together they constrain the theory. Modality is where I build depth — the same method runs on to conditionals, counterfactuals, and quantifiers.",
+    projects: arms,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="One research program on where the logic of natural language departs from the logic of the logic books, studied through three kinds of word: modals (the thesis, MODUS), compounds (HanGL), and generics (ORDO)."
+  description="The experimental and computational semantics of modal reasoning: how linguistic modality structures the space of possibilities for inference, with one set of predictions from formal semantics tested in both the human mind and language models."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    My work is one research program, not a list of ideas. The question the whole site hangs from:
-    <em>is the logic of natural language the logic of the logicians?</em> The method is constant: take
-    a theory of linguistic meaning and ask what observable trace it would have to leave
-    <em>if it were true</em>, then let evidence, not argument, decide. I test it through three case
-    studies, one per kind of word where natural language's logic looks unlike the textbook's:
-    <strong>modals</strong> (the thesis), <strong>compounds</strong>, and <strong>generics</strong>.
-    The criterion comes down one line: Leibniz's possible worlds, Kripke's frames, Kratzer's modal
-    bases, Leahy &amp; Carey's possession-versus-performance tests. State the licensing structure
-    formally, then read whether success actually depends on it, under intervention and on tasks
-    engineered so that surface correlates must fail. The question runs on to conditionals, quantifiers,
-    and beyond. The full lineage is on the
+    My work is one research program, not a list of ideas: the <strong>experimental and computational
+    semantics of modal reasoning</strong> — how linguistic modality (<em>may</em>, <em>must</em>,
+    <em>might</em>) structures the space of possibilities we reason over. The method is constant: take
+    a theory of modal meaning and ask what observable trace it would have to leave <em>if it were
+    true</em>, then let evidence, not argument, decide. The criterion comes down one line: Leibniz's
+    possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
+    possession-versus-performance tests. State the licensing structure formally, then read whether
+    success actually depends on it — in <strong>two systems at once</strong>, a language model under
+    intervention and the human mind through a shared paradigm. Modality is where I build depth; the
+    same method runs on to conditionals, counterfactuals, and quantifiers. The full lineage is on the
     <a href="/motivation" class="text-[var(--color-accent)] hover:opacity-75">motivation page</a>.
   </p>
   <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">
@@ -174,12 +159,13 @@ const sections = [
   <section class="mt-14">
     <div class="mb-5">
       <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-        Alongside · collaborations
+        Alongside · methodological training
       </p>
-      <h2 class="text-xl font-medium tracking-tight mb-2">Collaborations</h2>
+      <h2 class="text-xl font-medium tracking-tight mb-2">Earlier &amp; methodological work</h2>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-        Contributions to other groups' projects, kept separate from the three case studies. What I
-        did, in two lines.
+        Two collaborations that gave me the engineering the modality program runs on — controlled
+        evaluation, intervention inside a model, and the analysis to read the result. Methodological
+        training, not the identity. What I did, in two lines.
       </p>
     </div>
     <ul class="list-none p-0 m-0 space-y-5">
@@ -226,7 +212,7 @@ const sections = [
     text-transform: uppercase;
     color: var(--color-text-dim);
   }
-  /* The plain-language subtitle under each codename — tells MODUS from ORDO at a glance. */
+  /* The plain-language subtitle under each codename — tells the arms apart at a glance. */
   .proj-subtitle {
     font-size: 13.5px;
     font-style: italic;
@@ -235,7 +221,7 @@ const sections = [
     line-height: 1.4;
   }
   .proj-subtitle em { font-style: normal; }
-  /* Marks a card whose dedicated page is not written yet (MODUS/ORDO). */
+  /* Marks a card whose dedicated page is not written yet (the human arm). */
   .proj-soon {
     margin-left: 0.5rem;
     font-family: var(--font-mono);

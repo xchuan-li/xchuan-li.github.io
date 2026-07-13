@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 
 <Base
   title="CV · Xiaochuan Li"
-  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. I test which semantic structures formal linguistics proposes that language models actually build, across three case studies: modals, compounds, and generics."
+  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. I study the experimental and computational semantics of modal reasoning: how linguistic modality structures possibilities for inference, with predictions from formal semantics tested in both the human mind and language models."
 >
   <header class="mb-10">
     <div class="flex items-baseline justify-between gap-4">
@@ -28,8 +28,8 @@ import Base from "../layouts/Base.astro";
         <div>
           <p class="font-medium">M.Sc., Human and AI</p>
           <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg (UTN)</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Research focus.</span> Whether language models build the semantic structures formal linguistics proposes (modal force, morphological composition, genericity), or only their surface. I turn each theory's claim into a prediction that controlled intervention and interpretability can decide, testing what competing theories predict rather than crowning one correct.</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Coursework.</span> Cognitive psychology · interpretability · deep learning · epistemology.</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Research focus.</span> The experimental and computational semantics of modal reasoning: how linguistic modality structures the space of possibilities for inference. I derive one set of predictions from a formal-semantic theory of modal force and adjudicate them in two systems — a language model under controlled intervention, and the human mind through a shared behavioural paradigm — testing what competing theories predict rather than crowning one correct.</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Coursework.</span> Cognitive psychology · experimental design &amp; statistics · interpretability · deep learning · epistemology.</p>
         </div>
         <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 to 2027</p>
       </div>
@@ -57,12 +57,12 @@ import Base from "../layouts/Base.astro";
   </section>
 
   <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research: three case studies</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">One question, three kinds of word where natural language's logic looks unlike the textbook's. Each turns a formal-semantic hypothesis into a causal test read with interpretability.</p>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research: modal reasoning across humans and language models</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">One theory of modal force, one set of predictions from formal semantics, adjudicated in two systems at once — a language model under intervention and the human mind through a shared paradigm — with a working paper stating the theory the two arms derive from.</p>
     <div class="space-y-5">
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">MODUS: modality</p>
+          <p class="font-medium text-[15px]">MODUS — the language-model arm</p>
           <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">Master's thesis · pilot run</p>
         </div>
         <p class="text-sm mt-1">Is modal force a set of possible worlds (Kratzer) or a degree of certainty (Lassiter)? A pilot builds a certainty direction from evidence alone, with no modal word; ablating it on a <em>might</em> sentence pushes its certainty toward <em>must</em> (+0.15), while a base-rate control does not. GRADUS, a graded epistemic-force dataset, turns the probe into a calibration diagnostic.</p>
@@ -72,31 +72,24 @@ import Base from "../layouts/Base.astro";
       </div>
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">HanGL: morphological composition</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">personal · pilot done</p>
+          <p class="font-medium text-[15px]">The human arm</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">Master's thesis · in planning</p>
         </div>
-        <p class="text-sm mt-1">Is a Sino-Korean word's meaning composed from its Hanja morphemes or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. A wrong-Hanja intervention shows latent grounding scales with model capability; the forward step tests morphological decomposition against the human psycholinguistics of Sino-Korean.</p>
-        <p class="text-xs mt-1.5">
-          <a href="https://xchuan-li.github.io/research/hangl" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
-          <span class="text-[var(--color-text-dim)]"> · </span>
-          <a href="https://github.com/xchuan-li/HanGL" class="text-[var(--color-accent)] hover:underline">GitHub ↗</a>
-        </p>
+        <p class="text-sm mt-1">The same modal contrast the model turns on — evidence-driven force, worlds versus degree — put to people through a shared behavioural paradigm, drawing on the developmental literature on modal cognition (Leahy &amp; Carey). Where the two systems agree, and where the model departs from the mind, both constrain the theory. Co-designed from the cognitive-developmental side.</p>
       </div>
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">ORDO: genericity</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">in design</p>
+          <p class="font-medium text-[15px]">Formal-semantics working paper on modality</p>
+          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">in preparation</p>
         </div>
-        <p class="text-sm mt-1">"Birds fly" is not "all birds fly": a penguin does not falsify it. That default-with-exceptions is an inference classical logic cannot state. Do generics and modals share one ordering-source mechanism for defaults, or two? A layered novelty-of-exception design where either outcome is a real finding.</p>
-        <p class="text-xs mt-1.5">
-          <a href="https://xchuan-li.github.io/research/ordo" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
-        </p>
+        <p class="text-sm mt-1">A theoretical paper on the structure of modal force — the spine the two experimental arms derive their predictions from. States the competing analyses, the reading each licenses, and the traces they must leave in behaviour and representation.</p>
       </div>
     </div>
   </section>
 
   <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Collaborations</h2>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Earlier &amp; methodological work</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">Two collaborations that gave me the engineering the modality program runs on: controlled multilingual evaluation, intervention inside a model, and the analysis to read the result.</p>
     <div class="space-y-4 text-sm">
       <div class="break-inside-avoid">
         <p class="font-medium text-[15px]">Latent Control States <span class="font-normal text-[var(--color-text-dim)]">· DFKI</span></p>
@@ -114,8 +107,9 @@ import Base from "../layouts/Base.astro";
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Skills</h2>
     <p class="text-sm text-[var(--color-text-muted)] italic mb-4 max-w-prose">
       Both the engineering my research needs (controlled linguistic data generation, transformer
-      model evaluation, intervention-based causal testing, reproducible pipelines) and the
-      foundations it draws on: cognitive psychology, linguistics, and logic.
+      model evaluation, intervention-based causal testing, human-behavioural experiment design and
+      statistics, reproducible pipelines) and the foundations it draws on: cognitive psychology,
+      linguistics, and logic.
     </p>
     <div class="space-y-3 text-sm">
       <div class="break-inside-avoid">
@@ -129,6 +123,10 @@ import Base from "../layouts/Base.astro";
       <div class="break-inside-avoid">
         <p class="font-medium">Causal &amp; interpretability methods</p>
         <p class="text-[var(--color-text-muted)]">Controlled do-interventions, causal graphs, and shortcut-severing audits; developing behavioral path-tracing.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <p class="font-medium">Experimental design &amp; statistics</p>
+        <p class="text-[var(--color-text-muted)]">Foundations in controlled behavioural design (minimal pairs, pre-registration) and mixed-effects analysis, building toward the shared paradigm that reads one prediction in both people and models.</p>
       </div>
       <div class="break-inside-avoid">
         <p class="font-medium">Cognitive psychology</p>

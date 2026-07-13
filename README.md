@@ -2,7 +2,7 @@
 
 A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
 
-The site presents one research program — *the formal semantics of modality in language models* — through three case studies (modals, morphology, generics), plus writing and a CV. See `CONTEXT.md` for the full positioning and design philosophy before making changes.
+The site presents one research program — *the experimental and computational semantics of modal reasoning* — as a Master's thesis in two arms (a language-model arm, MODUS; and a human-experiment arm), plus writing and a CV. Modality is the whole focus for the MSc stage; earlier morphology/generics case studies (HanGL, ORDO) have been taken off the site and their pages orphaned. See `CONTEXT.md` for the full positioning and design philosophy before making changes.
 
 ## What's here
 
@@ -11,7 +11,8 @@ src/
 ├── layouts/Base.astro          # shared shell: frosted nav, footer, theme toggle,
 │                               # fade-in observer, reading-progress bar, optional TOC rail
 ├── components/                 # Astro figures + a few React islands (interactive demos)
-│   ├── HeroCaseStudies.astro   # homepage hero figure (three case studies)
+│   ├── HeroModality.astro      # homepage hero figure (modal force: worlds vs degree, mind & model)
+│   ├── HeroCaseStudies.astro   # (orphaned) former three-case-study hero
 │   ├── ResearchTimeline.astro  # homepage vertical research spine
 │   ├── ProgressTimeline.astro  # reusable per-project roadmap timeline
 │   ├── ProjectGlyph.astro      # project glyphs on the /research index

@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroCaseStudies from "../components/HeroCaseStudies.astro";
+import HeroModality from "../components/HeroModality.astro";
 import ResearchTimeline from "../components/ResearchTimeline.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
@@ -8,7 +8,7 @@ import { posts as writingPosts } from "../data/writing";
 // The research section as a narrative: Leibniz's question (origin) flows into the
 // program, then into a reverse-chronological timeline of projects and notes
 // (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. Language models inherit it in its strangest form. They are built entirely from language, with no world, so do they still grow something functionally like a space of alternatives? The three case studies below are three kinds of word where natural language's logic looks unlike the textbook's: modals, compounds, and generics. The same question runs on to conditionals, quantifiers, and beyond.";
+const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. That lineage gives a theory of what modal force is — and a theory of meaning, if true, has to leave an observable trace. So I derive one set of predictions from it and read them off in two systems at once: the human mind, where meaning is already real, and a language model, which I can open up and intervene on. Modality is where I build depth; the same method runs on to conditionals, counterfactuals, and quantifiers.";
 
 const spineOrigin = {
   label: "From possible worlds to language models",
@@ -20,11 +20,11 @@ const spineOrigin = {
 // single reverse-chronological stream. Both project AND note display-dates are a
 // homepage-only narrative, hand-spread so projects and notes interleave (never two
 // notes in a row); the real note pubDates stay on /writing, and /research stays
-// date-free. The homepage shows only the two projects squarely on the modality
-// mainline — GRADUS (the modal-force pilot running now, anchoring the top) and
-// CAST (the workbench it runs on). The collaborations (HanGL, Latent Control
-// States, Cross-lingual ProtoBias) are kept on /research but left off the
-// homepage; a milestone note marks the thesis turn to modal concepts.
+// date-free. The homepage timeline is modality-only: MODUS (the thesis — its
+// language-model arm runs a pilot now) anchors the top, and the human arm is
+// folded into the MODUS intro plus the milestone (no card without results). The
+// earlier/methodological collaborations (Latent Control States, Cross-lingual
+// ProtoBias) are kept on /research but left off the homepage timeline.
 //
 // Notes are filtered the same way: only the three squarely on the program's line
 // appear here (from-leibniz = the stage-I origin; meaning-beneath-language = the
@@ -33,8 +33,6 @@ const spineOrigin = {
 const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
 const projectDate: Record<string, string> = {
   "/research/modus": "2026-07-08",
-  "/research/ordo": "2026-06-25",
-  "/research/hangl": "2026-06-18",
 };
 // Homepage display-dates for the notes, chosen to interleave them among the
 // projects (their real pubDates, several clustered in late May, remain on /writing).
@@ -47,11 +45,7 @@ const noteDate: Record<string, string> = {
 // description in data/research.ts (no new claims) — keyed by href.
 const projectIntro: Record<string, string> = {
   "/research/modus":
-    "My Master's thesis, and the program's first case study. Is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can, so the language model is the instrument, not the object. A pilot already shows the force direction is load-bearing: ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. The format test and a graded epistemic-force dataset come next.",
-  "/research/ordo":
-    "Generics are the classical-logic misfit: “birds fly” is not “all birds fly” (a penguin does not break it), it is a default that tolerates exceptions. ORDO asks whether generics and modals run on one shared ordering source for defaults, or two. A layered design where a memorized lookup table collapses on never-seen exceptions but a genuine ordering stays flat, so either outcome is a finding. In design.",
-  "/research/hangl":
-    "One level below the word: is a Sino-Korean word's meaning composed from its Hanja morphemes, or memorized whole? Hangul hides the morphemes; Hanja is the answer key the model never sees. A grounding pilot is done (grounding scales with capability); the morphological-decomposition test, with a human-psycholinguistics literature to mirror it against, is the forward step. A personal project, off the thesis line.",
+    "My Master's thesis. Is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a system's representational format under intervention can. The thesis derives one set of predictions from that question and reads them in two systems: a language model I can open up and intervene on, and — through a shared behavioural paradigm now in planning — the human mind. The model arm's pilot already shows the force direction is load-bearing: ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. The format test, a graded epistemic-force dataset, and the human counterpart come next.",
 };
 // One-sentence homepage descriptions for the notes (their fuller excerpts live on
 // /writing) — keyed by slug.
@@ -65,8 +59,6 @@ const noteBlurb: Record<string, string> = {
 // a clean static figure fall back to their glyph for now.
 const projectFig: Record<string, string> = {
   "/research/modus": "modus",
-  "/research/ordo": "ordo",
-  "/research/hangl": "hangl",
 };
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -81,16 +73,14 @@ const milestones = [
   {
     type: "milestone" as const,
     date: "2026-07-02",
-    text: "The program's full statement goes up: the long arc from linguistic structure to language models. And the Master's thesis at UTN, MODUS (on the format of modal force), starts taking shape.",
+    text: "The program settles on its spine: the experimental and computational semantics of modal reasoning. The Master's thesis at UTN, MODUS, takes shape as one modal theory tested in two systems — the language model (a pilot already running) and, through a shared paradigm now in planning, the human mind.",
   },
 ];
 
 // Display names for the timeline: codename plus a plain-language phenomenon, so a
 // title reads at a glance. Keyed by href; falls back to the bare title otherwise.
 const caseGloss: Record<string, string> = {
-  "/research/modus": "MODUS: Modality",
-  "/research/ordo": "ORDO: Genericity",
-  "/research/hangl": "HanGL: Morphology",
+  "/research/modus": "MODUS: Modal force",
 };
 
 const rawEntries = [
@@ -146,17 +136,18 @@ const entries = rawEntries.map((e) => {
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
           <p>
-            That question sits underneath my work. My way into it: I study <strong>how linguistic
-            structure becomes representation, and how representation becomes reasoning.</strong> How
-            does a sentence come to mean? Words carry meaning, grammatical structure makes those
-            meanings react into the meaning of the whole, and that whole becomes a step in reasoning,
-            often a step classical logic would not predict.
+            That question sits underneath my work, and my way into it is one kind of word: the
+            <strong>modal</strong>. I study <strong>how linguistic modality — may, must, might —
+            structures the space of possibilities we reason over.</strong> Formal semantics gives a
+            precise theory of what modal force is, and a theory of meaning, if it is true, has to
+            leave an observable trace.
           </p>
           <p>
-            I put that to two systems that answer it differently, a <strong>language model</strong> I
-            can open up and intervene on, and the <strong>human mind</strong> where meaning is already
-            real, and read the answer with the tools of interpretability. I test it through three case
-            studies, one per kind of word: <strong>modals, compounds, and generics.</strong>
+            So I derive one set of predictions from that theory and read them off in <strong>two
+            systems at once</strong>: the <strong>human mind</strong>, where meaning is already real,
+            and a <strong>language model</strong> I can open up and intervene on. Where they agree,
+            and where the model departs from the mind, both constrain the theory. Modality is where I
+            build depth; the same method runs on to conditionals, counterfactuals, and quantifiers.
           </p>
           <p>
             I'm applying for PhD positions for fall 2027.
@@ -199,7 +190,7 @@ const entries = rawEntries.map((e) => {
       </div>
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroCaseStudies />
+        <HeroModality />
       </div>
       </div>
     </div>
@@ -213,7 +204,7 @@ const entries = rawEntries.map((e) => {
       <div class="section-head">
         <p class="section-label fade-in-up">The research program</p>
         <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          One question, three kinds of word.
+          One theory of modality, two systems that answer it.
         </h2>
       </div>
       <div class="fade-in-up fade-delay-200">
@@ -233,20 +224,25 @@ const entries = rawEntries.map((e) => {
       <div class="divider-line"></div>
       <div class="section-head">
         <p class="section-label fade-in-up">Alongside</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Collaborations</h2>
+        <h2 class="section-heading fade-in-up fade-delay-100">Earlier &amp; methodological work</h2>
       </div>
       <div class="hp-collab fade-in-up fade-delay-200">
+        <p class="hp-collab-lead">
+          The engineering the modality program runs on came from two collaborations — where I learned
+          to build controlled evaluations, intervene inside a model, and analyse the results. They are
+          my methodological training, not the identity.
+        </p>
         <p>
           <strong>Latent Control States</strong><span class="hp-collab-org"> · DFKI</span><br />
-          Does prompt framing shift a causally relevant latent state, or only the output? My
-          contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing —
-          testing whether the choice tracks the real stakes or only surface pressure.
+          Mechanistic interpretation. Does prompt framing shift a causally relevant latent state, or
+          only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size ×
+          framing — testing whether the choice tracks the real stakes or only surface pressure.
         </p>
         <p>
           <strong>Cross-lingual ProtoBias</strong><span class="hp-collab-org"> · an established NLP group</span><br />
-          Does a vision-language model track meaning, or culture-specific prototype shortcuts? My
-          contribution: the cross-lingual evaluation across seven languages that extends the group's
-          forthcoming paper.
+          Multilingual model evaluation. Does a vision-language model track meaning, or culture-specific
+          prototype shortcuts? My contribution: the cross-lingual evaluation across seven languages that
+          extends the group's forthcoming paper.
         </p>
       </div>
     </div>
@@ -319,6 +315,7 @@ const entries = rawEntries.map((e) => {
   }
   .hp-collab > p:last-child { margin-bottom: 0; }
   .hp-collab > p strong { color: var(--color-text); font-weight: 600; }
+  .hp-collab-lead { font-style: italic; margin-bottom: 1.8rem !important; }
   .hp-collab-org {
     font-family: var(--font-mono);
     font-size: 12px;

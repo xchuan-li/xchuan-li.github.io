@@ -9,16 +9,17 @@ import { posts } from "../data/writing";
 // getting done and when. No hero, no figures, no animation: the link meant for a
 // CV. The rich, illustrated homepage lives at "/".
 
-// Two tiers, mirroring the current focus: the three case studies (MODUS, HanGL,
-// ORDO) first, then collaborative work, kept for the record but demoted. Parked
-// projects (page up, mainline withdrawn) are excluded here; archived projects
-// drop to the second tier.
+// Two tiers, mirroring the current focus: the modality thesis in its two arms
+// (MODUS, the language-model arm; and the human arm) first, then earlier &
+// methodological collaborations, kept for the record but demoted. Parked projects
+// (page up, mainline withdrawn) are excluded here; archived projects drop to the
+// second tier.
 const mainlineWork = projects.filter((p) => !p.parked && !p.archived);
 const earlierWork = projects.filter((p) => !p.parked && p.archived);
 
 const groups = [
-  { label: "Mainline: the modality program", items: mainlineWork },
-  { label: "Earlier & collaborative work", items: earlierWork },
+  { label: "Mainline: modal reasoning, two arms", items: mainlineWork },
+  { label: "Earlier & methodological work", items: earlierWork },
 ];
 
 const recentPosts = posts.slice(0, 5);
@@ -26,19 +27,19 @@ const recentPosts = posts.slice(0, 5);
 
 <Base
   title="Xiaochuan Li: research"
-  description="Xiaochuan Li: possibility, necessity, and language models. A plain, content-first overview of the research program."
+  description="Xiaochuan Li: the experimental and computational semantics of modal reasoning. A plain, content-first overview of the research program."
 >
   <article class="plain">
     <header class="plain-head">
       <h1 class="plain-name">Xiaochuan Li</h1>
       <p class="plain-affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
       <p class="plain-stmt">
-        The question my work hangs from: <strong>is the logic of natural language the logic of the
-        logicians?</strong> Formal semantics keeps answering with more logic, not less: a generic
-        operator, a modal base and ordering source. My interest is not to crown one theory correct, but
-        to use a language model as an intervenable learning system, and interpretability as the
-        instrument, to test which of these structures a model actually builds. Three case studies:
-        modality, morphological composition, and genericity.
+        I study the <strong>experimental and computational semantics of modal reasoning</strong>: how
+        linguistic modality — <em>may</em>, <em>must</em>, <em>might</em> — structures the space of
+        possibilities we reason over. Formal semantics gives a precise theory of what modal force is; a
+        theory of meaning, if true, has to leave an observable trace. So I derive one set of predictions
+        from it and read them off in two systems at once: the human mind, where meaning is already real,
+        and a language model I can open up and intervene on.
       </p>
       <p class="plain-links">
         <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
@@ -60,12 +61,13 @@ const recentPosts = posts.slice(0, 5);
     <section class="plain-section">
       <h2 class="plain-h2">Research</h2>
       <p class="plain-lede">
-        One program, three case studies, each a kind of word where the logic of natural language looks
-        unlike the logic books: <strong>MODUS</strong> (modals, the thesis), <strong>HanGL</strong>
-        (compounds), and <strong>ORDO</strong> (generics). Each states a formal-semantic structure, then
-        reads whether the model's success depends on it, testing what competing theories predict rather
-        than crowning one correct. The full arc, from Aristotle to language models, is on the
-        <a href="/motivation">motivation page</a>. Each line below shows where the work actually stands.
+        One program: the modality thesis in two arms. <strong>MODUS</strong> is the language-model arm
+        (is modal force a set of possible worlds, or a degree of certainty?); the <strong>human
+        arm</strong> puts the same contrast to people through a shared paradigm. One formal-semantic
+        theory, one set of predictions, adjudicated in two systems — testing what competing theories
+        predict rather than crowning one correct. The full arc, from Aristotle to language models, is on
+        the <a href="/motivation">motivation page</a>. Each line below shows where the work actually
+        stands.
       </p>
 
       {
