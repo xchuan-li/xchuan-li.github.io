@@ -1,0 +1,198 @@
+---
+// HeroAlternatives — the homepage centerpiece. One epistemic sentence and the
+// binary contrast the current work turns on: does `might` merely signal
+// uncertainty, or does it also keep the marked possibility available as a live
+// alternative for subsequent reasoning? Deliberately binary — the operational
+// criteria (content-specific / persistent / evidence-sensitive) live in the
+// "Current case" section below the fold, not in this figure.
+// The `star` example is the one that carries over to occlusion-style tasks and
+// evidence updating. Pure CSS, no JS. Accent: --accent-deep-purple (modality).
+// `HeroModality.astro` is the orphaned former figure (the Kratzer-vs-Lassiter
+// fork), kept in the repo for a one-line revert.
+---
+
+<figure
+  class="hero-alt"
+  aria-label="The sentence “It might be a star.” Two readings are contrasted: that the modal merely signals uncertainty, or that it also keeps the star available as a live alternative for subsequent reasoning."
+>
+  <p class="hero-alt-sent">
+    <span class="ha-quote ha-quote-open" aria-hidden="true">“</span>It
+    <a class="ha-word" href="/research/modus" aria-label="might — the epistemic possibility expression">
+      <span class="ha-word-text">might</span>
+      <span class="ha-tip" aria-hidden="true">
+        <span class="ha-tip-cat">Epistemic modality</span>
+        <span class="ha-tip-name">The current case</span>
+        <span class="ha-tip-q">Does an epistemic possibility expression merely weaken commitment — or also keep a content-specific alternative available for subsequent evidence updating?</span>
+      </span>
+    </a>
+    be a star.<span class="ha-quote ha-quote-close" aria-hidden="true">”</span>
+  </p>
+
+  <div class="ha-fork">
+    <div class="ha-read">
+      <span class="ha-read-n" aria-hidden="true">1</span>
+      <span class="ha-read-body">
+        <span class="ha-read-what">Does this <strong>merely signal uncertainty</strong>?</span>
+      </span>
+    </div>
+    <span class="ha-or" aria-hidden="true">or</span>
+    <div class="ha-read ha-read-alt">
+      <span class="ha-read-n" aria-hidden="true">2</span>
+      <span class="ha-read-body">
+        <span class="ha-read-what">Or does it keep <em>the star</em> available as a <strong>live alternative</strong>?</span>
+      </span>
+    </div>
+  </div>
+
+  <figcaption class="hero-alt-cap">The question the current work asks. Hover <em>might</em>, or click through for the criteria that would tell the two apart.</figcaption>
+</figure>
+
+<style>
+  .hero-alt { margin: 0; padding: 0; max-width: 32rem; }
+
+  .hero-alt-sent {
+    font-family: var(--font-display, serif);
+    font-size: clamp(1.7rem, 1.2rem + 2vw, 2.35rem);
+    line-height: 1.55;
+    color: var(--color-text);
+    margin: 0 0 2rem;
+  }
+
+  /* big decorative quotes framing the example */
+  .ha-quote {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 2.4em;
+    line-height: 0;
+    color: color-mix(in srgb, var(--color-text-dim) 55%, transparent);
+  }
+  .ha-quote-open { margin-right: 0.04em; vertical-align: -0.42em; }
+  .ha-quote-close { margin-left: 0.03em; vertical-align: -0.42em; }
+
+  .ha-word {
+    position: relative;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--accent-deep-purple);
+    border-radius: 5px;
+    padding: 1px 5px;
+    transition: background 0.14s ease;
+  }
+  .ha-word:focus-visible { outline: none; }
+  .ha-word:hover,
+  .ha-word:focus-visible {
+    background: color-mix(in srgb, var(--accent-deep-purple) 15%, transparent);
+  }
+
+  /* the bubble preview on `might` */
+  .ha-tip {
+    position: absolute;
+    top: calc(100% + 11px);
+    left: 0;
+    width: max-content;
+    max-width: min(310px, 78vw);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.11);
+    padding: 0.8rem 0.95rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+    z-index: 5;
+    font-family: var(--font-sans, sans-serif);
+  }
+  .ha-word:hover .ha-tip,
+  .ha-word:focus-within .ha-tip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .ha-tip::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 22px;
+    border: 6px solid transparent;
+    border-bottom-color: var(--color-border);
+  }
+  .ha-tip-cat {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent-deep-purple);
+    margin: 0 0 4px;
+  }
+  .ha-tip-name { display: block; font-size: 14px; font-weight: 600; color: var(--color-text); margin: 0 0 5px; }
+  .ha-tip-q { display: block; font-size: 13px; line-height: 1.5; color: var(--color-text-muted); }
+  .ha-tip-q em { font-style: italic; }
+
+  /* the binary contrast — two readings, nothing else */
+  .ha-fork {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .ha-read {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+  /* the second reading is the hypothesis — carries the accent */
+  .ha-read-alt {
+    border-color: color-mix(in srgb, var(--accent-deep-purple) 34%, var(--color-border));
+    background: color-mix(in srgb, var(--accent-deep-purple) 5%, transparent);
+  }
+  .ha-read-n {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.05rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-text-dim);
+    border: 1px solid var(--color-border);
+  }
+  .ha-read-alt .ha-read-n {
+    color: var(--accent-deep-purple);
+    border-color: color-mix(in srgb, var(--accent-deep-purple) 40%, transparent);
+    background: color-mix(in srgb, var(--accent-deep-purple) 10%, transparent);
+  }
+  .ha-read-body { min-width: 0; }
+  .ha-read-what {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+  .ha-read-what strong { color: var(--color-text); font-weight: 600; }
+  .ha-read-what em { font-style: normal; font-weight: 600; color: var(--accent-deep-purple); }
+  .ha-read-alt .ha-read-what strong { color: var(--color-text); }
+
+  .ha-or {
+    align-self: center;
+    font-family: var(--font-display, serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+  }
+
+  .hero-alt-cap {
+    margin-top: 1.5rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 11.5px;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--color-text-dim);
+  }
+  .hero-alt-cap em { font-style: normal; color: var(--accent-deep-purple); font-weight: 600; }
+</style>

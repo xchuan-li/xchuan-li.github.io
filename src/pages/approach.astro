@@ -1,0 +1,111 @@
+---
+import Base from "../layouts/Base.astro";
+import { approach, criteria, foundation, identityLong, questions } from "../data/program";
+
+// The Research Approach page — short by design. It explains the language-first
+// paradigm and nothing else.
+//
+// This page REPLACES the old long `/motivation` essay in the nav. That essay (the
+// Aristotle → Leibniz → Kripke → Kratzer lineage) moved to
+// `/writing/logic-of-natural-language`, where a personal research-motivation
+// piece belongs; `/motivation` now redirects there.
+//
+// Do not reintroduce here: "one theory, two systems", "human arm" / "LM arm",
+// or the claim that a model's internal geometry adjudicates Kratzer versus
+// Lassiter. See data/program.ts for the vocabulary rules.
+---
+
+<Base
+  title="Approach · Xiaochuan Li"
+  description="How I work: start from a linguistic question, translate it into testable questions for cognitive science and language models, and use the resulting evidence to refine the original linguistic account."
+>
+  <article class="prose">
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Research approach
+    </div>
+    <h1>Language first</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
+      {approach}
+    </p>
+
+    <p>{identityLong}</p>
+    <p>
+      The order matters, and it is the part I would defend hardest. The question comes from the
+      language, not from the tools. I am not looking for a phenomenon that would suit an
+      interpretability method, or for a benchmark a model is failing. I start with something about
+      linguistic meaning that is genuinely unsettled, and the work is finished when it has said
+      something back about that.
+    </p>
+
+    <h2>Why the question has to be made testable twice</h2>
+    <p>
+      A claim about what a linguistic expression <em>does</em> is a claim about a function — and a
+      function has to become available to someone, and be realized in something. Those are two
+      different questions, and neither one alone answers the linguistic one:
+    </p>
+    <div class="not-prose my-7 grid gap-4 sm:grid-cols-2">
+      {questions.map((q) => (
+        <div class="rounded-[10px] border border-[var(--color-border)] p-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] mb-2">
+            {q.label}
+          </p>
+          <p class="text-[var(--color-text)] leading-relaxed mb-2">{q.text}</p>
+          <p class="font-mono text-[10.5px] text-[var(--accent-deep-purple)] m-0">{q.term}</p>
+        </div>
+      ))}
+    </div>
+    <p>
+      The comparison is not "does the model resemble a mind". A language model is interesting here
+      for a specific and limited reason: it is a system whose entire input is linguistic, so it puts
+      a bound on what linguistic distribution alone can deliver — and unlike a person, it can be
+      measured and intervened on directly. That makes it a good instrument for the computational
+      question and a bad one for the developmental question. Evidence from either side goes back to
+      the same place: the linguistic account.
+    </p>
+    <p>{foundation}</p>
+
+    <h2>What makes a claim like this falsifiable</h2>
+    <p>
+      The current case is epistemic modality: does <em>“It might be a star”</em> merely signal
+      uncertainty, or does it also help maintain <em>the star</em> as a live alternative for
+      subsequent reasoning? Stated loosely, almost anything satisfies it — mentioning the
+      proposition, priming on the modal word, or simply making the sentence memorable. So the effect
+      has to be pinned down in advance. A genuine alternative-maintenance effect should be:
+    </p>
+    <ul>
+      {criteria.map((c) => (
+        <li><strong>{c.name}</strong> — {c.text}.</li>
+      ))}
+    </ul>
+    <p>
+      The third is the one that does the real work. Without evidence-sensitivity, "the alternative is
+      still active" is indistinguishable from a representation that is simply stuck. The same logic
+      governs the design: holding the available information constant and varying only the linguistic
+      framing, so that a modal is compared against expressed ignorance, an explicit disjunction, and
+      a neutral description — and any effect of comprehension is measured rather than assumed.
+    </p>
+
+    <h2>Why modality, and what comes after</h2>
+    <p>
+      Epistemic modality is the current case, not the boundary. It is a good first case because the
+      semantics literature has analysed <em>might</em> in terms of alternatives and keeping
+      possibilities open, and developmental work has studied both nonverbal modal reasoning and the
+      acquisition of modal language — but the two have largely stayed separate. The same question
+      runs on to propositional attitudes, evidentials, conditionals, negation, and counterfactuals:
+      each is a place where a linguistic expression appears to organize the possibilities a system
+      reasons over.
+    </p>
+    <p>
+      The long-term aim is upstream of model engineering, not opposed to it. Understanding what a
+      linguistic function is, how it is acquired, and whether it is learnable from linguistic input
+      is what tells you where a model's gaps actually are — and a benchmark score, on its own, does
+      not.
+    </p>
+
+    <p class="!text-sm !text-[var(--color-text-dim)] !mt-10">
+      Where this came from — the arc from Aristotle to language models — is a longer story, told in
+      <a href="/writing/logic-of-natural-language">Is the logic of natural language the logic of the logicians?</a>
+      The current work is on the <a href="/research">research page</a>.
+    </p>
+  </article>
+</Base>

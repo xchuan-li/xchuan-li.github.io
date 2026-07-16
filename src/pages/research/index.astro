@@ -1,196 +1,186 @@
 ---
 import Base from "../../layouts/Base.astro";
-import ProjectGlyph from "../../components/ProjectGlyph.astro";
-import CaseFigure from "../../components/CaseFigure.astro";
 import { projects } from "../../data/research";
+import { approach, criteria, foundation, identityLong, questions } from "../../data/program";
 
-// The research page states the modality program: how linguistic modality
-// structures the space of possibilities for inference. The spine is the thesis in
-// two arms — MODUS (the language-model arm: what modal force is made of, read
-// under intervention) and the human arm (the same theory, adjudicated in the mind
-// through a shared paradigm). Then earlier & methodological collaborations (off
-// the mainline, kept honestly so).
+// The research page, in the order a reader needs it:
+//   the program → the current case → the linguistic hypothesis (+ criteria)
+//   → the developmental question → the LM question → methods & existing work.
 //
-// Each card also carries its natural OUTPUT (a paper, a decision experiment, a
-// shared workbench, a thesis chapter, a co-authored paper), pulled from the single
-// source of truth in data/research.ts by href so positioning never drifts.
-const outputByHref = new Map(projects.map((p) => [p.href, p.output]));
+// It must stay honest about status, which means keeping these distinct:
+//   - a current theoretical question (being worked out),
+//   - an exploratory LM pilot (built, smoke-test only),
+//   - a developmental component (being scoped — NOT a running experiment, no
+//     collaborator or institution named),
+//   - completed methodological work (the collaborations).
+//
+// Do NOT reintroduce: "human arm" / "LM arm", "one theory two systems", or any
+// claim that internal geometry adjudicates Kratzer vs. Lassiter. Positioning
+// copy comes from data/program.ts. See CONTEXT.md for the red lines.
+const modus = projects.find((p) => p.href === "/research/modus");
 
-// Cards render from these curated arrays (not research.ts directly), so the /research
-// spine can be sequenced by hand. `href` omitted → the card is not a link yet
-// (the human arm has no dedicated page). `output` is the natural-deliverable pill.
-// The thesis is the core: one theory of modal force, one set of predictions,
-// adjudicated in two systems — a language model and the human mind.
-const arms = [
-  {
-    title: "MODUS: the language-model arm",
-    subtitle: "is <em>must</em> a set of worlds, or a degree of certainty?",
-    href: "/research/modus",
-    output: "Thesis",
-    status: "modal force · LM arm · pilot run",
-    color: "var(--accent-deep-purple)",
-    glyph: "xling",
-    fig: "modus",
-    one_line: "The Master's thesis, on a system I can open up. Is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a model's representational format under intervention can. A pilot already reads a force direction built from evidence alone, with no modal word present: ablate it on a might sentence and its certainty jumps toward must, while a base-rate control does not.",
-  },
-  {
-    title: "The human arm",
-    subtitle: "the same modal contrast, put to people",
-    output: "Thesis",
-    status: "human arm · shared paradigm · in planning",
-    color: "var(--accent-slate)",
-    glyph: "latent",
-    one_line: "The same theory, adjudicated in the mind. The very modal contrast the model turns on — evidence-driven force, worlds versus degree — put to people through a shared behavioural paradigm, drawing on the developmental literature on modal cognition (Leahy & Carey). Where the two systems agree, and where the model departs from the mind, both constrain the theory. In planning, co-designed from the cognitive-developmental side.",
-  },
-];
-
-// Collaborations: contributions to others' projects, kept separate from the
-// the thesis. Two sentences each, emphasising what I did. No figures,
-// no dedicated pages.
 const collaborations = [
   {
     name: "Latent Control States",
     org: "DFKI",
-    text: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure.",
+    text: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure. Where the interpretability technique came from.",
   },
   {
     name: "Cross-lingual ProtoBias",
     org: "an established NLP group",
-    text: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? My contribution: the cross-lingual evaluation across seven languages that extends the group's forthcoming paper.",
+    text: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? My contribution: the cross-lingual behavioural evaluation across seven languages that extends the group's forthcoming paper.",
     href: "https://github.com/xchuan-li/cross_lingual_protobias",
     hrefLabel: "GitHub ↗",
-  },
-];
-
-const sections = [
-  {
-    eyebrow: "The thesis · two arms",
-    title: "One theory of modality, two systems",
-    description:
-      "The Master's thesis takes one question about modal force — a set of possible worlds, or a degree of certainty? — and derives a single set of predictions from it, then adjudicates them in two systems at once: a language model, opened up under intervention, and the human mind, through a shared behavioural paradigm. Neither settles it alone; together they constrain the theory. Modality is where I build depth — the same method runs on to conditionals, counterfactuals, and quantifiers.",
-    projects: arms,
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="The experimental and computational semantics of modal reasoning: how linguistic modality structures the space of possibilities for inference, with one set of predictions from formal semantics tested in both the human mind and language models."
+  description="Experimental and computational semantics: whether epistemic possibility expressions merely weaken commitment, or also keep content-specific alternatives available for subsequent evidence updating — and how that question becomes testable for cognitive science and language models."
 >
   <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
   <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    My work is one research program, not a list of ideas: the <strong>experimental and computational
-    semantics of modal reasoning</strong> — how linguistic modality (<em>may</em>, <em>must</em>,
-    <em>might</em>) structures the space of possibilities we reason over. The method is constant: take
-    a theory of modal meaning and ask what observable trace it would have to leave <em>if it were
-    true</em>, then let evidence, not argument, decide. The criterion comes down one line: Leibniz's
-    possible worlds, Kripke's frames, Kratzer's modal bases, Leahy &amp; Carey's
-    possession-versus-performance tests. State the licensing structure formally, then read whether
-    success actually depends on it — in <strong>two systems at once</strong>, a language model under
-    intervention and the human mind through a shared paradigm. Modality is where I build depth; the
-    same method runs on to conditionals, counterfactuals, and quantifiers. The full lineage is on the
-    <a href="/motivation" class="text-[var(--color-accent)] hover:opacity-75">motivation page</a>.
-  </p>
-  <p class="text-sm text-[var(--color-text-dim)] mb-10 max-w-prose leading-relaxed">
-    Each project is tagged with its <em>natural output</em>, and not everything aims at a paper. Some
-    are papers; others are a <strong>decision experiment</strong> that earns a paper only if it
-    passes a falsifiability test, a <strong>shared workbench</strong> other projects run on, a
-    completed pilot that becomes a <strong>thesis chapter</strong>, or a defined contribution to a
-    collaborator's paper.
+    {identityLong} The work is one program rather than a list of projects, and it runs in one
+    direction: <strong>{approach.charAt(0).toLowerCase() + approach.slice(1)}</strong> How that works
+    in general is on the <a href="/approach" class="text-[var(--color-accent)] hover:opacity-75">approach page</a>.
+    This page is the current case.
   </p>
 
-  <div class="space-y-12">
-    {
-      sections.map((section) => (
-        <section>
-          <div class="mb-5">
-            <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-              {section.eyebrow}
-            </p>
-            <h2 class="text-xl font-medium tracking-tight mb-2">{section.title}</h2>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-              {section.description}
-            </p>
-          </div>
+  <!-- ============ CURRENT CASE ============ -->
+  <section class="mt-12">
+    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Current case
+    </p>
+    <h2 class="text-xl font-medium tracking-tight mb-3">Epistemic modality</h2>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-3">
+      Someone says <em>“It might be a star.”</em> Does that expression merely signal uncertainty — or
+      does it also help maintain <em>the star</em> as a live alternative for subsequent reasoning?
+      {foundation}
+    </p>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
+      The semantics literature has analysed <em>might</em> in terms of alternatives and keeping
+      possibilities open. Developmental work has studied nonverbal modal reasoning, and separately the
+      acquisition of modal language. Recent work suggests language models are sensitive to epistemic
+      language but inconsistent in modal reasoning. What I have not found is a study that holds the
+      available information constant and asks whether linguistic modality selectively maintains a
+      <em>particular</em> alternative.
+    </p>
+  </section>
 
-          <div class="divide-y divide-[var(--color-border)]">
-            {
-              section.projects.map((p) => {
-                const Tag = p.href ? "a" : "div";
-                const output = p.output ?? outputByHref.get(p.href);
-                return (
-                  <Tag href={p.href} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-                    <div class="flex items-center gap-5">
-                      <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-baseline gap-3 mb-1">
-                          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">
-                            {p.title}
-                            {!p.href && <span class="proj-soon">page soon</span>}
-                          </h3>
-                          {output && (
-                            <span class="proj-output" style={`--pc: ${p.color}`}>{output}</span>
-                          )}
-                        </div>
-                        {p.subtitle && <p class="proj-subtitle" set:html={p.subtitle} />}
-                        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1.5">{p.one_line}</p>
-                        <div class="mt-2.5 flex items-center gap-3 flex-wrap">
-                          <span class="proj-state">{p.status}</span>
-                          {p.has_demo && (
-                            <span class="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full bg-[#c8ece0] text-[#07533e] dark:bg-[#0e4c3d] dark:text-[#74d6b4]">
-                              interactive demo ↗
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div class="proj-glyph-cell" aria-hidden="true">
-                        {p.fig ? <CaseFigure kind={p.fig} color={p.color} /> : <ProjectGlyph kind={p.glyph} color={p.color} />}
-                      </div>
-                    </div>
-                  </Tag>
-                );
-              })
-            }
-          </div>
-        </section>
-      ))
-    }
-  </div>
-
-  <section class="mt-14">
-    <div class="mb-5">
-      <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-        Alongside · methodological training
-      </p>
-      <h2 class="text-xl font-medium tracking-tight mb-2">Earlier &amp; methodological work</h2>
-      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-        Two collaborations that gave me the engineering the modality program runs on — controlled
-        evaluation, intervention inside a model, and the analysis to read the result. Methodological
-        training, not the identity. What I did, in two lines.
-      </p>
-    </div>
-    <ul class="list-none p-0 m-0 space-y-5">
-      {
-        collaborations.map((c) => (
-          <li>
-            <p class="text-[15px] font-medium text-[var(--color-text)]">
-              {c.name}<span class="font-normal text-[var(--color-text-dim)]"> · {c.org}</span>
-            </p>
-            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mt-1">{c.text}</p>
-            {c.href && (
-              <p class="text-xs mt-1.5">
-                <a href={c.href} class="text-[var(--color-accent)] hover:underline">{c.hrefLabel}</a>
-              </p>
-            )}
-          </li>
-        ))
-      }
+  <!-- ============ THE HYPOTHESIS ============ -->
+  <section class="mt-11">
+    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      The linguistic hypothesis
+    </p>
+    <h2 class="text-xl font-medium tracking-tight mb-3">What would make this a real effect</h2>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-4">
+      "Keeping an alternative available" is too easy to satisfy as stated: mentioning the
+      proposition, priming on the modal word, finding the sentence memorable, being generally
+      unsure, or fixating on a first answer would all produce something that looks like it. So the
+      effect has to be pinned down in advance. A genuine alternative-maintenance effect should be:
+    </p>
+    <ul class="list-none p-0 m-0 mb-4 border-t border-[var(--color-border)] max-w-prose">
+      {criteria.map((c) => (
+        <li class="flex items-baseline gap-2 flex-wrap py-2.5 border-b border-[var(--color-border)] text-sm">
+          <span class="font-mono text-[11.5px] tracking-[0.06em] text-[var(--accent-deep-purple)] whitespace-nowrap">
+            {c.name}
+          </span>
+          <span class="text-[var(--color-text-ghost)]" aria-hidden="true">—</span>
+          <span class="flex-1 min-w-[16rem] text-[var(--color-text-muted)] leading-relaxed">{c.text}</span>
+        </li>
+      ))}
     </ul>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
+      Evidence-sensitivity carries the argument. Without it, "the alternative is still active" cannot
+      be told apart from a representation that is merely stuck. The design follows from the same
+      logic: hold the available information constant and vary only the linguistic framing, so that a
+      modal is compared against expressed ignorance, an explicit disjunction, and a neutral
+      description — with comprehension of the expression measured, not assumed.
+    </p>
+  </section>
+
+  <!-- ============ THE TWO QUESTIONS ============ -->
+  <section class="mt-11">
+    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Two questions, one account
+    </p>
+    <h2 class="text-xl font-medium tracking-tight mb-3">Where the evidence would come from</h2>
+    <div class="grid gap-4 sm:grid-cols-2 mb-4">
+      {questions.map((q) => (
+        <div class="rounded-[10px] border border-[var(--color-border)] p-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] mb-2">
+            {q.label}
+          </p>
+          <p class="text-sm text-[var(--color-text)] leading-relaxed mb-2">{q.text}</p>
+          <p class="font-mono text-[10.5px] text-[var(--accent-deep-purple)] m-0">{q.term}</p>
+        </div>
+      ))}
+    </div>
+    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
+      <span class="font-medium text-[var(--color-text)]">Status, honestly.</span> The developmental
+      side is <strong>being scoped</strong> — against the existing literature, and as a question, not
+      a running experiment. The computational side has an exploratory pilot, below. Neither is a
+      result yet, and the evidence from either goes back to the linguistic account rather than to a
+      comparison between minds and models.
+    </p>
+  </section>
+
+  <!-- ============ EXISTING WORK ============ -->
+  <section class="mt-11">
+    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Methods &amp; existing work
+    </p>
+    <h2 class="text-xl font-medium tracking-tight mb-4">What is built</h2>
+
+    {modus && (
+      <a href={modus.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors border-t border-[var(--color-border)]">
+        <div class="flex justify-between items-baseline gap-3 mb-1">
+          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{modus.title}</h3>
+          <span class="proj-output" style={`--pc: ${modus.color}`}>{modus.output}</span>
+        </div>
+        <p class="proj-subtitle">separating modal function from modal vocabulary</p>
+        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1.5 max-w-prose">
+          {modus.desc}
+        </p>
+        <div class="mt-2.5">
+          <span class="proj-state">{modus.progress}</span>
+        </div>
+      </a>
+    )}
+
+    <div class="mt-9">
+      <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+        Earlier &amp; methodological work
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-4">
+        Two collaborations that gave me the engineering this runs on — controlled evaluation,
+        intervention inside a model, and the analysis to read the result. Methodological training,
+        not the identity. What I did, in two lines.
+      </p>
+      <ul class="list-none p-0 m-0 space-y-5">
+        {
+          collaborations.map((c) => (
+            <li>
+              <p class="text-[15px] font-medium text-[var(--color-text)]">
+                {c.name}<span class="font-normal text-[var(--color-text-dim)]"> · {c.org}</span>
+              </p>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mt-1">{c.text}</p>
+              {c.href && (
+                <p class="text-xs mt-1.5">
+                  <a href={c.href} class="text-[var(--color-accent)] hover:underline">{c.hrefLabel}</a>
+                </p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </section>
 </Base>
 
 <style>
-  /* Natural-output pill (positioning) + state line, per project. The pill is
-     tinted with each project's accent so it reads with its glyph. */
+  /* Natural-output pill + state line. The pill is tinted with the project accent. */
   .proj-output {
     flex: none;
     font-family: var(--font-mono);
@@ -212,28 +202,11 @@ const sections = [
     text-transform: uppercase;
     color: var(--color-text-dim);
   }
-  /* The plain-language subtitle under each codename — tells the arms apart at a glance. */
   .proj-subtitle {
     font-size: 13.5px;
     font-style: italic;
     color: var(--color-text);
     opacity: 0.82;
     line-height: 1.4;
-  }
-  .proj-subtitle em { font-style: normal; }
-  /* Marks a card whose dedicated page is not written yet (the human arm). */
-  .proj-soon {
-    margin-left: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 1px 6px;
-    vertical-align: middle;
-    white-space: nowrap;
   }
 </style>

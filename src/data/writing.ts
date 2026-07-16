@@ -14,6 +14,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "logic-of-natural-language",
+    title: "Is the logic of natural language the logic of the logicians?",
+    date: "July 2026",
+    pubDate: "2026-07-16",
+    excerpt:
+      "The arc from Aristotle to language models, told through modality. Classical logic turns out to be a special case of a larger logic linguistics is still mapping — and Leibniz's question, whether natural language can be translated into logic, has quietly inverted now that a model learns its own. Why I came to linguistics from philosophy.",
+    status: "note",
+  },
+  {
     slug: "inverted-observability",
     title: "Inverted Observability — psychology and interpretability as mirror sciences",
     date: "June 2026",

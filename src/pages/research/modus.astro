@@ -1,106 +1,50 @@
 ---
 import Base from "../../layouts/Base.astro";
+
+// MODUS is an EXPLORATORY METHODS PILOT. It is not the thesis, not a flagship,
+// and not a result about modal semantics.
+//
+// Removed from this page on 2026-07-16, do not reintroduce:
+//   - "judgment data cannot separate Kratzer from Lassiter; a model's
+//     representational format under intervention can" — the internal geometry
+//     does not adjudicate that;
+//   - competitor-set decodability / duality geometry / exclusion continuity as a
+//     sets-vs-degrees test (the old FORMA stage);
+//   - GRADUS and training-checkpoint stages presented as thesis stages;
+//   - "the predicted structure signature".
+// What the pilot honestly supports, and what it does not, are stated below and
+// should stay stated.
 ---
 
 <Base
   title="MODUS · Xiaochuan Li"
-  description="A linguistics question with a language model for a laboratory: is modal force a quantification over a set of possible worlds (Kratzer) or a single degree of certainty (Lassiter)? This is the Master's thesis."
+  description="An exploratory language-model pilot developing methods to separate modal function from modal vocabulary: controlled experiments on modal force, lexical form, evidence, and causal intervention."
   toc={true}
 >
   <article class="prose">
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Modal force · thesis flagship · pilot run
+      Exploratory · methods pilot
     </div>
-    <h1>MODUS: what is modal force made of?</h1>
+    <h1>MODUS: separating modal function from modal vocabulary</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      When a system handles <em>must</em> and <em>might</em>, is its representation of modal force a
-      quantification over a <strong>set of possible worlds</strong> (Kratzer), or a single
-      <strong>degree of certainty</strong> (Lassiter)? A linguistics question, with a language model
-      for a laboratory. It is my Master's thesis.
+      An exploratory language-model pilot developing methods for one narrow problem: when a model
+      handles <em>must</em> and <em>might</em>, how would you tell whether anything is running on the
+      modal <strong>function</strong> rather than on the modal <strong>word</strong>? Controlled
+      experiments on modal force, lexical form, evidence, and causal intervention.
     </p>
 
     <p>
-      MODUS studies the <strong>semantics of modal force</strong>; the language model is the
-      <strong>instrument</strong>, not the object. The move it turns on is that the competing analyses
-      are <strong>empirically underdetermined by the usual evidence</strong>: Kratzer-style
-      quantification over a world-set and Lassiter-style degree semantics predict the <em>same</em>
-      truth-value judgments and entailment patterns for most sentences. Judgment data cannot separate
-      them, which is exactly the gap a model can fill.
+      MODUS is <strong>methods groundwork</strong>, not a finding. It exists because the question I
+      actually care about —
+      <a href="/research">whether an epistemic possibility expression keeps a content-specific
+      alternative available for subsequent reasoning</a> — needs an instrument that can hold the
+      information constant and vary only the linguistic form, and needs that instrument to survive
+      the obvious confounds before any of its outputs mean anything. This page is that instrument
+      being built and stress-tested.
     </p>
 
-    <h2>Why a language model is a legitimate instrument for a semantic question</h2>
-    <p>Two things the LM offers that neither judgment data nor human subjects can:</p>
-    <ol>
-      <li>
-        <strong>A new kind of evidence: representational <em>format</em> under causal intervention.</strong>
-        In a system that reproduces the modal behaviour, you can ask whether the internal
-        representation carries a <strong>set</strong> (competitor identity, duality geometry, exclusion
-        structure) or only a <strong>scalar</strong>, and then <em>ablate</em> it to test whether the
-        behaviour needs it. Judgment data is blind to format; you cannot ablate a representation in a
-        person.
-      </li>
-      <li>
-        <strong>A pure language-only learner.</strong> For the emergence question, the LM isolates the
-        limiting case, a system with <em>only</em> linguistic input, so a result about when force
-        appears is evidence about <em>what language can carry</em>, a claim about language, not about
-        one network.
-      </li>
-    </ol>
-
-    <h2>The honest bridge: what an LM result licenses, and what it does not</h2>
-    <p>
-      A finding in one trained network is not automatically a fact about modality as such. The bridge
-      bounds every stage's claim:
-    </p>
-    <blockquote>
-      MODUS's licensed statements are about <strong>format sufficiency and learnability</strong>: what
-      representational format is <em>enough</em> to support the modal behaviour, and whether it is
-      inducible from language alone. They are <strong>not</strong> about the human ground-truth semantics of
-      English modals.
-    </blockquote>
-    <p>
-      This is still a <strong>linguistics</strong> contribution: it constrains theories by parsimony
-      and learnability (a theory positing structure the behaviour demonstrably does not need is, as an
-      account of <em>this</em> competence, weaker), and it turns a debate that was underdetermined into
-      one with a new, causal source of evidence. It just does not claim to read human semantics off a
-      model.
-    </p>
-
-    <h2>Four stages, serving one question</h2>
-    <p>Each stage is only well-posed if the one above it passed.</p>
-    <ul>
-      <li>
-        <strong>pilot</strong>: <em>Is modal force representationally real and load-bearing, or an
-        epiphenomenon of surface lexis?</em> &nbsp;→ a force direction <code>D</code> plus causal
-        ablation, with a base-rate control <code>D′</code>.
-      </li>
-      <li>
-        <strong>FORMA</strong>: <em>Is the format sets/worlds (Kratzer) or degrees (Lassiter)?</em>
-        &nbsp;→ competitor-set decodability, duality geometry, exclusion (dis)continuity.
-      </li>
-      <li>
-        <strong>GRADUS</strong>: <em>Is the certainty axis threshold or continuous? This is the graded form
-        of the same debate.</em> &nbsp;→ a constructed graded-force ruler and calibration test, and the
-        citable dataset the thesis releases.
-      </li>
-      <li>
-        <strong>Stage 2</strong>: <em>Can modal force be induced by linguistic input alone, and under
-        what input?</em> &nbsp;→ the same instrument across training checkpoints / controlled corpora.
-        This is the thesis's forward edge.
-      </li>
-    </ul>
-
-    <h2>The pilot, concretely</h2>
-    <p>
-      The pilot asks the question in miniature: when a language model reads <em>must</em> vs.
-      <em>might</em>, is it tracking the underlying modal meaning (necessity vs. possibility), or
-      mainly reacting to the surface words? It builds on two papers. Wagner &amp; Zarrieß (IWCS) is
-      the closest prior work; because it uses natural data and a read-only probe, its negative result
-      is hard to read, so the pilot tries to close that gap with controlled sentences and by
-      intervening, not just decoding. Cho's continuous steering gives the key move: treat the modal
-      signal as a direction one can dial and test causally.
-    </p>
-    <p>The design, on the running example "the ball is red":</p>
+    <h2>What the pilot does</h2>
+    <p>On the running example "the ball is red":</p>
     <ol>
       <li><strong>Build a certainty direction <code>D</code> with no modal words.</strong> Hold the
         fact fixed and vary only the evidence: "all three sensors report red" (sure) vs. "one of three
@@ -108,43 +52,86 @@ import Base from "../../layouts/Base.astro";
         with no <em>must</em> / <em>might</em> in it.</li>
       <li><strong>Check the anchors.</strong> "must be red" and "might be red" should land on the sure
         and unsure ends of <code>D</code>.</li>
-      <li><strong>The test.</strong> Remove <code>D</code> from a "might be red" sentence. If the model
-        then behaves as if it were <em>must</em> (becomes certain), the word <em>might</em> was
-        genuinely running on the modal concept, not just the surface word.</li>
-      <li><strong>The control.</strong> <code>D</code> could be encoding the evidence description
-        itself (how many sensors report red) rather than certainty. So compare it against a competing
+      <li><strong>Intervene.</strong> Remove <code>D</code> from a "might be red" sentence and see
+        whether the model's certainty-related behaviour moves.</li>
+      <li><strong>Control.</strong> <code>D</code> could be encoding the evidence description itself
+        (how many sensors report red) rather than certainty. So compare it against a competing
         <strong>base-rate</strong> direction <code>D′</code>, built by changing how many red balls are
-        in the box instead of the evidence. Removing <code>D</code> should break <em>might</em> while
-        removing <code>D′</code> should not; if so, the effect is about modal force, not surface
-        frequency. This kind of attribution is never fully clean, but that control at least separates
-        the two.</li>
+        in the box instead of the evidence. Removing <code>D</code> should move <em>might</em> while
+        removing <code>D′</code> should not.</li>
     </ol>
+    <p>
+      It builds on two papers. Wagner &amp; Zarrieß (IWCS) is the closest prior work; because it uses
+      natural data and a read-only probe, its negative result is hard to read, so the pilot tries to
+      close that gap with controlled sentences and by intervening, not just decoding. Cho's continuous
+      steering gives the key move: treat the modal signal as a direction one can dial and test
+      causally.
+    </p>
 
     <h2>Status</h2>
     <p>
-      <strong>Pilot, done (a smoke test, not yet a finding).</strong> Qwen2.5-0.5B, one evidence
-      family: the force direction <code>D</code> is built from evidence alone, with no modal word
-      present; ablating it while the model answers a <em>might</em> item raises that item's certainty
-      by <strong>+0.152</strong>, while ablating the base-rate control <code>D′</code> does nothing
-      (−0.033). That is the predicted structure signature, with the confound behaving correctly.
+      <strong>Pilot, done — a smoke test.</strong> Qwen2.5-0.5B, one evidence family: the direction
+      <code>D</code> is built from evidence alone, with no modal word present; ablating it while the
+      model answers a <em>might</em> item raises that item's certainty by <strong>+0.152</strong>,
+      while ablating the base-rate control <code>D′</code> does nothing (−0.033).
     </p>
     <p class="!text-sm !text-[var(--color-text-muted)]">
-      Honest caveats that keep it a smoke test: the ablation <em>overshoots</em> (might ends above the
-      must level, so "moves toward must" is loose); the must/might baseline gap is small (0.063); and a
-      norm-matched random-direction control is still needed to exclude generic disruption. Next: that
-      control, scale-up, and 2 to 3 more evidence families for convergence, then <strong>FORMA</strong>,
-      the sets-vs-degrees test.
+      Caveats that keep it a smoke test, and they are not incidental: the ablation
+      <em>overshoots</em> (might ends above the must level, so "moves toward must" is loose); the
+      must/might baseline gap is small (0.063); and a norm-matched random-direction control is still
+      needed to exclude generic disruption. Until that control exists, generic disruption is a live
+      explanation of the whole effect. It is one model, one evidence family, one run.
+    </p>
+
+    <h2>What this can and cannot support</h2>
+    <p>Worth stating flatly, because each of these has a tempting overstatement one step away.</p>
+    <p><strong>It can support:</strong></p>
+    <ul>
+      <li>that a direction can be constructed from evidence contrasts containing no modal words;</li>
+      <li>that <em>must</em> and <em>might</em> associate with that direction;</li>
+      <li>a preliminary test of whether intervening on it changes certainty-related behaviour;</li>
+      <li>that the lexical, base-rate, and generic-disruption confounds are real and testable, and
+        what it takes to separate them;</li>
+      <li>a methodological basis for the alternative-maintenance experiments this is groundwork for.</li>
+    </ul>
+    <p><strong>It cannot support:</strong></p>
+    <ul>
+      <li>that the model implements Kratzer-style worlds — or any claim that internal geometry
+        adjudicates between competing semantic theories;</li>
+      <li>that the model maintains live alternatives (the pilot does not test maintenance at all);</li>
+      <li>that humans and language models share a modal representation;</li>
+      <li>that the direction is a stable causal finding — one run, one model, one family, and a
+        missing control.</li>
+    </ul>
+
+    <h2>Why the geometry does not settle the semantics</h2>
+    <p>
+      An earlier version of this project was built the other way round: read the internal
+      representation, decide whether it is a set of alternatives (Kratzer) or a scalar degree
+      (Lassiter), and treat that as evidence about modal semantics. I have retired that framing. A
+      linear direction that correlates with certainty is a linear direction that correlates with
+      certainty; naming it a world-set is a decision made outside the data. Those two analyses are
+      still the competing explanations that make the topic worth working on — but they have to be
+      separated by what a modal <em>does</em>, downstream, that a certainty-matched non-modal does
+      not. Behaviour first; representation only if the behaviour is there; intervention only to test
+      what the representation is carrying.
+    </p>
+    <p>
+      That reordering is what demoted this project from a thesis flagship to what it should always
+      have been: a methods pilot that makes the real experiments possible.
     </p>
 
     <h2>Scope &amp; claim discipline</h2>
     <ul>
       <li><strong>Epistemic force only</strong>: <em>must</em> / <em>might</em> as evidence-licensed
         inference (von Fintel &amp; Gillies 2010), not logical necessity.</li>
-      <li>ML vocabulary stays <strong>instrument</strong> vocabulary; the theoretical claim is about the
-        semantics and learnability of modal force, never "the model understands modality".</li>
-      <li>No claim about humans: convergence ≠ homology. Primary venues are semantics-side (SALT,
-        <em>Semantics &amp; Pragmatics</em>, Sinn und Bedeutung, IWCS); interpretability venues are a
-        secondary, methods-facing outlet.</li>
+      <li>ML vocabulary stays <strong>instrument</strong> vocabulary. The model is a system whose
+        input is entirely linguistic, which makes it a good probe of what linguistic distribution can
+        deliver — never a claim that "the model understands modality".</li>
+      <li>No claim about people. Convergence ≠ homology, and a model result is not evidence about a
+        mind.</li>
+      <li>Primary venues are semantics-side (SALT, <em>Semantics &amp; Pragmatics</em>, Sinn und
+        Bedeutung, IWCS); interpretability venues are a secondary, methods-facing outlet.</li>
     </ul>
   </article>
 </Base>

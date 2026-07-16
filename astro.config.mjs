@@ -11,7 +11,10 @@ export default defineConfig({
   // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace) — send
   // their old URLs to the research index so external links don't 404.
   redirects: {
-    '/research-program': '/motivation',
+    // The long "Motivation" essay moved into Writing (2026-07-16); `/approach`
+    // now carries the short research-approach statement in the nav.
+    '/motivation': '/writing/logic-of-natural-language',
+    '/research-program': '/approach',
     '/research/causal-direction': '/research',
     '/research/arrowhead': '/research',
     '/research/ciy': '/research',

@@ -1,132 +1,38 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroModality from "../components/HeroModality.astro";
-import ResearchTimeline from "../components/ResearchTimeline.astro";
+import HeroAlternatives from "../components/HeroAlternatives.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
+import { approach, criteria, currentQuestionHtml, foundation, identityLongHtml, questions } from "../data/program";
 
-// The research section as a narrative: Leibniz's question (origin) flows into the
-// program, then into a reverse-chronological timeline of projects and notes
-// (ResearchTimeline).
-const spineLeadIn = "Leibniz made modality structure: what is necessary holds in all possible worlds, what is possible in some. Kripke turned that into mathematics, Kratzer connected it to the modal words of natural language, and Leahy & Carey made possession-versus-performance an experimental question. That lineage gives a theory of what modal force is — and a theory of meaning, if true, has to leave an observable trace. So I derive one set of predictions from it and read them off in two systems at once: the human mind, where meaning is already real, and a language model, which I can open up and intervene on. Modality is where I build depth; the same method runs on to conditionals, counterfactuals, and quantifiers.";
-
-const spineOrigin = {
-  label: "From possible worlds to language models",
-  href: "/motivation",
-  hook: "Nihil est sine ratione.",
-};
-
-// Homepage timeline (below the Leibniz lead-in), transformer-circuits style: a
-// single reverse-chronological stream. Both project AND note display-dates are a
-// homepage-only narrative, hand-spread so projects and notes interleave (never two
-// notes in a row); the real note pubDates stay on /writing, and /research stays
-// date-free. The homepage timeline is modality-only: MODUS (the thesis — its
-// language-model arm runs a pilot now) anchors the top, and the human arm is
-// folded into the MODUS intro plus the milestone (no card without results). The
-// earlier/methodological collaborations (Latent Control States, Cross-lingual
-// ProtoBias) are kept on /research but left off the homepage timeline.
+// The homepage states the program in one pass, in this order:
+//   identity → current case (question + the criteria that make it falsifiable)
+//   → approach (a linguistic question translated into two testable questions)
+//   → selected work → writing → contact.
 //
-// Notes are filtered the same way: only the three squarely on the program's line
-// appear here (from-leibniz = the stage-I origin; meaning-beneath-language = the
-// Kratzer/typology stage in prose; inverted-observability = the Leahy & Carey
-// verdict layer). Everything else lives on /writing only.
-const mainlineNotes = new Set(["from-leibniz", "meaning-beneath-language", "inverted-observability"]);
-const projectDate: Record<string, string> = {
-  "/research/modus": "2026-07-08",
-};
-// Homepage display-dates for the notes, chosen to interleave them among the
-// projects (their real pubDates, several clustered in late May, remain on /writing).
-const noteDate: Record<string, string> = {
-  "inverted-observability": "2026-06-12",
-  "meaning-beneath-language": "2026-05-28",
-  "from-leibniz": "2026-03-10",
-};
-// A 2–3 sentence introduction per project, condensed from each project's own
-// description in data/research.ts (no new claims) — keyed by href.
-const projectIntro: Record<string, string> = {
-  "/research/modus":
-    "My Master's thesis. Is modal force a quantification over a set of possible worlds (Kratzer), or a single degree of certainty (Lassiter)? Judgment data cannot separate the two; a system's representational format under intervention can. The thesis derives one set of predictions from that question and reads them in two systems: a language model I can open up and intervene on, and — through a shared behavioural paradigm now in planning — the human mind. The model arm's pilot already shows the force direction is load-bearing: ablate it on a might sentence and its certainty jumps toward must (+0.15), while a base-rate control does nothing. The format test, a graded epistemic-force dataset, and the human counterpart come next.",
-};
-// One-sentence homepage descriptions for the notes (their fuller excerpts live on
-// /writing) — keyed by slug.
-const noteBlurb: Record<string, string> = {
-  "inverted-observability": "Why developmental psychology and interpretability are the same question seen from opposite sides of a mirror.",
-  "meaning-beneath-language": "When one content is carried by German morphology, English word order, and Chinese context, does a model represent the meaning, or three surface habits?",
-  "from-leibniz": "What an undergraduate thesis on Leibniz's universal character became after a change of discipline.",
-};
+// Deliberately NOT here any more (see data/program.ts for the vocabulary rules):
+//   - "one theory, two systems" / "human arm" / "LM arm" — the developmental
+//     side is being scoped, not run, and must not read as a running experiment;
+//   - the milestone timeline — it presented a program where there is a question
+//     and a pilot;
+//   - Kratzer-worlds vs. Lassiter-degree as the headline — the geometry does not
+//     adjudicate that, and the hero should show the phenomenon, not the theory
+//     I hope explains it.
+// All positioning copy comes from data/program.ts so /plain cannot drift.
 
-// Which real per-project figure to show on the right (by href). Projects without
-// a clean static figure fall back to their glyph for now.
-const projectFig: Record<string, string> = {
-  "/research/modus": "modus",
-};
+// Selected work: the exploratory pilot first, then the completed methodological
+// collaborations that supply the engineering. `archived` marks the latter.
+const pilot = projects.filter((p) => !p.parked && !p.archived);
+const methodological = projects.filter((p) => !p.parked && p.archived);
 
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const monthLabel = (iso: string) => {
-  const [y, m] = iso.split("-");
-  return `${MONTHS[Number(m) - 1]} ${y}`;
-};
-
-// The thesis has no card (no results yet — program rule); it enters the stream as
-// a milestone note, dated to the day the program statement went up.
-const milestones = [
-  {
-    type: "milestone" as const,
-    date: "2026-07-02",
-    text: "The program settles on its spine: the experimental and computational semantics of modal reasoning. The Master's thesis at UTN, MODUS, takes shape as one modal theory tested in two systems — the language model (a pilot already running) and, through a shared paradigm now in planning, the human mind.",
-  },
-];
-
-// Display names for the timeline: codename plus a plain-language phenomenon, so a
-// title reads at a glance. Keyed by href; falls back to the bare title otherwise.
-const caseGloss: Record<string, string> = {
-  "/research/modus": "MODUS: Modal force",
-};
-
-const rawEntries = [
-  ...milestones,
-  ...projects
-    .filter((p) => projectDate[p.href])
-    .map((p) => ({
-      type: "project" as const,
-      date: projectDate[p.href],
-      href: p.href,
-      name: caseGloss[p.href] ?? p.title.split(" · ")[0],
-      blurb: p.blurb ?? p.short ?? p.desc,
-      intro: projectIntro[p.href],
-      color: p.color,
-      category: p.category,
-      progress: p.progress,
-      kind: p.kind,
-      demo: p.demo,
-      glyph: p.glyph,
-      fig: projectFig[p.href],
-    })),
-  ...writingPosts.filter((p) => mainlineNotes.has(p.slug)).map((p) => ({
-    type: "writing" as const,
-    date: noteDate[p.slug] ?? p.pubDate,
-    href: `/writing/${p.slug}`,
-    title: p.title,
-    blurb: noteBlurb[p.slug] ?? p.excerpt,
-    status: p.status,
-  })),
-].sort((a, b) => b.date.localeCompare(a.date));
-
-let prevLabel = "";
-const entries = rawEntries.map((e) => {
-  const dateLabel = monthLabel(e.date);
-  const showDate = dateLabel !== prevLabel;
-  prevLabel = dateLabel;
-  return { ...e, dateLabel, showDate };
-});
-
+const recentPosts = writingPosts.slice(0, 3);
 ---
 
 <Base wide={true}>
   <!-- =========== HERO =========== -->
   <section class="hero">
     <div class="hero-inner">
-      <a class="hero-imprint fade-in" href="/motivation"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
+      <a class="hero-imprint fade-in" href="/writing/logic-of-natural-language"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
       <div class="hero-grid">
       <div class="hero-content">
         <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
@@ -135,27 +41,15 @@ const entries = rawEntries.map((e) => {
           <span class="line-2">Xiaochuan Li.</span>
         </h1>
         <div class="hero-bio fade-in-up fade-delay-200">
-          <p>
-            That question sits underneath my work, and my way into it is one kind of word: the
-            <strong>modal</strong>. I study <strong>how linguistic modality — may, must, might —
-            structures the space of possibilities we reason over.</strong> Formal semantics gives a
-            precise theory of what modal force is, and a theory of meaning, if it is true, has to
-            leave an observable trace.
-          </p>
-          <p>
-            So I derive one set of predictions from that theory and read them off in <strong>two
-            systems at once</strong>: the <strong>human mind</strong>, where meaning is already real,
-            and a <strong>language model</strong> I can open up and intervene on. Where they agree,
-            and where the model departs from the mind, both constrain the theory. Modality is where I
-            build depth; the same method runs on to conditionals, counterfactuals, and quantifiers.
-          </p>
+          <p set:html={identityLongHtml} />
+          <p set:html={currentQuestionHtml} />
           <p>
             I'm applying for PhD positions for fall 2027.
           </p>
         </div>
         <div class="hero-cta fade-in-up fade-delay-300">
-          <a href="#research" class="btn btn-primary">
-            View research
+          <a href="#case" class="btn btn-primary">
+            The current question
             <span class="btn-arrow">↓</span>
           </a>
           <a href="#contact" class="btn btn-secondary">Get in touch</a>
@@ -190,64 +84,134 @@ const entries = rawEntries.map((e) => {
       </div>
 
       <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroModality />
+        <HeroAlternatives />
       </div>
       </div>
     </div>
 
   </section>
 
-  <!-- =========== RESEARCH =========== -->
-  <section id="research" class="section">
+  <!-- =========== CURRENT CASE =========== -->
+  <section id="case" class="section">
     <div class="section-inner">
       <div class="divider-line"></div>
       <div class="section-head">
-        <p class="section-label fade-in-up">The research program</p>
+        <p class="section-label fade-in-up">Current case · epistemic modality</p>
         <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          One theory of modality, two systems that answer it.
+          Does <em>might</em> only weaken a claim, or does it hold a possibility open?
         </h2>
       </div>
-      <div class="fade-in-up fade-delay-200">
-        <ResearchTimeline
-          origin={spineOrigin}
-          leadIn={spineLeadIn}
-          entries={entries}
-        />
+      <div class="case-body fade-in-up fade-delay-200">
+        <p class="case-lead">
+          Someone says <em>“It might be a star.”</em> The question I am working on is whether that
+          expression merely signals uncertainty, or whether it also helps maintain <em>the star</em>
+          as a live alternative for the reasoning that follows. {foundation}
+        </p>
+        <p class="case-crit-lead">
+          Stated that way it is still too easy to satisfy — mentioning <em>star</em> at all, priming
+          on the modal word, or simply finding the sentence memorable would all count. So a genuine
+          alternative-maintenance effect should be:
+        </p>
+        <ul class="case-crit">
+          {criteria.map((c) => (
+            <li>
+              <span class="case-crit-name">{c.name}</span>
+              <span class="case-crit-dash" aria-hidden="true">—</span>
+              <span class="case-crit-text">{c.text}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="case-foot">
+          Those three are what turn the question into one that evidence can answer.
+          <a href="/research">The research page</a> works them through.
+        </p>
       </div>
     </div>
   </section>
 
-
-  <!-- =========== COLLABORATIONS =========== -->
+  <!-- =========== APPROACH =========== -->
   <section class="section">
     <div class="section-inner">
       <div class="divider-line"></div>
       <div class="section-head">
-        <p class="section-label fade-in-up">Alongside</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Earlier &amp; methodological work</h2>
+        <p class="section-label fade-in-up">Approach</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">A linguistic question, made testable twice</h2>
       </div>
-      <div class="hp-collab fade-in-up fade-delay-200">
-        <p class="hp-collab-lead">
-          The engineering the modality program runs on came from two collaborations — where I learned
-          to build controlled evaluations, intervene inside a model, and analyse the results. They are
-          my methodological training, not the identity.
-        </p>
-        <p>
-          <strong>Latent Control States</strong><span class="hp-collab-org"> · DFKI</span><br />
-          Mechanistic interpretation. Does prompt framing shift a causally relevant latent state, or
-          only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size ×
-          framing — testing whether the choice tracks the real stakes or only surface pressure.
-        </p>
-        <p>
-          <strong>Cross-lingual ProtoBias</strong><span class="hp-collab-org"> · an established NLP group</span><br />
-          Multilingual model evaluation. Does a vision-language model track meaning, or culture-specific
-          prototype shortcuts? My contribution: the cross-lingual evaluation across seven languages that
-          extends the group's forthcoming paper.
+      <div class="hp-approach fade-in-up fade-delay-200">
+        <p class="hp-approach-lead">{approach}</p>
+        <div class="hp-qs">
+          {questions.map((q) => (
+            <div class="hp-q">
+              <p class="hp-q-label">{q.label}</p>
+              <p class="hp-q-text">{q.text}</p>
+              <p class="hp-q-term">{q.term}</p>
+            </div>
+          ))}
+        </div>
+        <p class="hp-approach-foot">
+          The point of the second is not that a model resembles a mind. The two answer different
+          questions about the same linguistic function, and the evidence goes back to the linguistic
+          account. <a href="/approach">More on the approach →</a>
         </p>
       </div>
     </div>
   </section>
 
+  <!-- =========== SELECTED WORK =========== -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Selected work</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">What is actually built</h2>
+      </div>
+      <div class="hp-work fade-in-up fade-delay-200">
+        {pilot.map((p) => (
+          <div class="hp-work-item">
+            <p class="hp-work-top">
+              <a class="hp-work-title" href={p.href}>{p.title}</a>
+              <span class="hp-work-state">{p.progress}</span>
+            </p>
+            <p class="hp-work-desc">{p.blurb}</p>
+          </div>
+        ))}
+        <p class="hp-work-label">Earlier &amp; methodological work</p>
+        <p class="hp-work-lead">
+          The engineering this runs on came from two collaborations — where I learned to build
+          controlled evaluations, intervene inside a model, and analyse the results. Methodological
+          training, not the identity.
+        </p>
+        {methodological.map((p) => (
+          <div class="hp-work-item">
+            <p class="hp-work-top">
+              <span class="hp-work-title-plain">{p.title}</span>
+            </p>
+            <p class="hp-work-desc">{p.short}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== WRITING =========== -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="divider-line"></div>
+      <div class="section-head">
+        <p class="section-label fade-in-up">Writing</p>
+        <h2 class="section-heading fade-in-up fade-delay-100">Notes</h2>
+      </div>
+      <ul class="hp-writing fade-in-up fade-delay-200">
+        {recentPosts.map((p) => (
+          <li>
+            <a href={`/writing/${p.slug}`}>{p.title}</a>
+            <span class="hp-writing-date">{p.date}{p.status === "draft" ? " · draft" : ""}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="hp-writing-more fade-in-up fade-delay-200"><a href="/writing">All writing →</a></p>
+    </div>
+  </section>
 
   <!-- =========== CONTACT CTA =========== -->
   <section id="contact" class="section" style="padding-bottom: 7rem;">
@@ -275,10 +239,8 @@ const entries = rawEntries.map((e) => {
 </Base>
 
 <style>
-  /* The research heading is now the core research question itself — keep it
-     readable at a slightly smaller, tighter size than a normal section heading. */
   /* The site's imprint: the one question the whole program hangs from. It opens
-     the page and links to the Motivation essay. */
+     the page and links to the research-motivation essay. */
   .hero-imprint {
     display: block;
     white-space: nowrap;
@@ -301,24 +263,164 @@ const entries = rawEntries.map((e) => {
   .hero-imprint:hover .hero-imprint-arrow { color: var(--color-accent); }
 
   .section-question {
-    max-width: 24ch;
+    max-width: 26ch;
     font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
     line-height: 1.2;
   }
+  .section-question em { font-style: italic; color: var(--accent-deep-purple); }
 
-  /* Collaborations: plain two-line credits, no figures. */
-  .hp-collab { max-width: 44rem; }
-  .hp-collab > p {
+  /* ---- Current case ---- */
+  .case-body { max-width: 44rem; }
+  .case-lead {
     color: var(--color-text-muted);
     line-height: 1.7;
-    margin: 0 0 1.3rem;
+    margin: 0 0 1.8rem;
   }
-  .hp-collab > p:last-child { margin-bottom: 0; }
-  .hp-collab > p strong { color: var(--color-text); font-weight: 600; }
-  .hp-collab-lead { font-style: italic; margin-bottom: 1.8rem !important; }
-  .hp-collab-org {
+  .case-lead em { color: var(--color-text); font-style: italic; }
+  .case-crit-lead {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0 0 1.1rem;
+  }
+  .case-crit-lead em { font-style: italic; }
+  .case-crit { list-style: none; margin: 0; padding: 0; }
+  .case-crit li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--color-border);
+    line-height: 1.6;
+  }
+  .case-crit li:last-child { border-bottom: 1px solid var(--color-border); }
+  .case-crit-name {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--accent-deep-purple);
+    white-space: nowrap;
+  }
+  .case-crit-dash { color: var(--color-text-ghost); }
+  .case-crit-text { color: var(--color-text-muted); flex: 1 1 18rem; }
+  .case-foot {
+    margin: 1.5rem 0 0;
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    line-height: 1.7;
+  }
+  .case-foot a { color: var(--color-accent); text-decoration: none; }
+  .case-foot a:hover { text-decoration: underline; }
+
+  /* ---- Approach ---- */
+  .hp-approach { max-width: 44rem; }
+  .hp-approach-lead {
+    font-family: var(--font-display, serif);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0 0 2rem;
+  }
+  .hp-qs { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .hp-q {
+    flex: 1 1 16rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+  .hp-q-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin: 0 0 0.5rem;
+  }
+  .hp-q-text {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0 0 0.6rem;
+  }
+  .hp-q-term {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--accent-deep-purple);
+    margin: 0;
+  }
+  .hp-approach-foot {
+    margin: 1.7rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
     color: var(--color-text-dim);
   }
+  .hp-approach-foot a { color: var(--color-accent); text-decoration: none; }
+  .hp-approach-foot a:hover { text-decoration: underline; }
+
+  /* ---- Selected work ---- */
+  .hp-work { max-width: 44rem; }
+  .hp-work-item { padding: 0.9rem 0; border-top: 1px solid var(--color-border); }
+  .hp-work-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0 0 0.35rem;
+  }
+  .hp-work-title {
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .hp-work-title:hover { color: var(--color-accent); }
+  .hp-work-title-plain { font-size: 1.02rem; font-weight: 500; color: var(--color-text); }
+  .hp-work-state {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    white-space: nowrap;
+  }
+  .hp-work-desc { margin: 0; color: var(--color-text-muted); line-height: 1.65; }
+  .hp-work-label {
+    margin: 2.6rem 0 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .hp-work-lead {
+    margin: 0 0 0.6rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  /* ---- Writing ---- */
+  .hp-writing { list-style: none; margin: 0; padding: 0; max-width: 44rem; }
+  .hp-writing li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hp-writing li:first-child { border-top: 1px solid var(--color-border); }
+  .hp-writing a { color: var(--color-text); text-decoration: none; }
+  .hp-writing a:hover { color: var(--color-accent); }
+  .hp-writing-date {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--color-text-dim);
+    white-space: nowrap;
+  }
+  .hp-writing-more { margin: 1.1rem 0 0; font-size: 0.9rem; }
+  .hp-writing-more a { color: var(--color-accent); text-decoration: none; }
+  .hp-writing-more a:hover { text-decoration: underline; }
 </style>

@@ -2,7 +2,9 @@
 
 A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
 
-The site presents one research program — *the experimental and computational semantics of modal reasoning* — as a Master's thesis in two arms (a language-model arm, MODUS; and a human-experiment arm), plus writing and a CV. Modality is the whole focus for the MSc stage; earlier morphology/generics case studies (HanGL, ORDO) have been taken off the site and their pages orphaned. See `CONTEXT.md` for the full positioning and design philosophy before making changes.
+The site presents one research program — *experimental and computational semantics: how linguistic expressions structure reasoning* — organised as identity → current case (epistemic modality) → approach → selected work, plus writing and a CV. The current question is whether epistemic possibility expressions merely weaken commitment or also keep content-specific alternatives available for subsequent evidence updating.
+
+**Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). **All positioning copy lives in `src/data/program.ts`** and is imported everywhere; never hand-write it into a page.
 
 ## What's here
 
@@ -11,33 +13,39 @@ src/
 ├── layouts/Base.astro          # shared shell: frosted nav, footer, theme toggle,
 │                               # fade-in observer, reading-progress bar, optional TOC rail
 ├── components/                 # Astro figures + a few React islands (interactive demos)
-│   ├── HeroModality.astro      # homepage hero figure (modal force: worlds vs degree, mind & model)
+│   ├── HeroAlternatives.astro  # homepage hero figure — the binary: merely signal
+│   │                           # uncertainty? / keep the star as a live alternative?
+│   ├── HeroModality.astro      # (orphaned) former hero — the worlds-vs-degree fork
 │   ├── HeroCaseStudies.astro   # (orphaned) former three-case-study hero
-│   ├── ResearchTimeline.astro  # homepage vertical research spine
+│   ├── ResearchTimeline.astro  # (unused) former homepage research spine
 │   ├── ProgressTimeline.astro  # reusable per-project roadmap timeline
-│   ├── ProjectGlyph.astro      # project glyphs on the /research index
-│   ├── CaseFigure.astro / TLFig.astro
-│   ├── HeroWorlds.astro / HeroCausalMatrix.astro / LineageTimeline.astro   # /motivation figures
-│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro                      # /writing/from-leibniz figures
+│   ├── ProjectGlyph.astro / CaseFigure.astro / TLFig.astro
+│   ├── HeroWorlds.astro / LineageTimeline.astro   # /writing/logic-of-natural-language figures
+│   ├── HeroCausalMatrix.astro  # (orphaned)
+│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro   # /writing/from-leibniz figures
 │   ├── HanGLFigure.astro
-│   ├── HanGLDemo.tsx           # interactive demo — /research/hangl
+│   ├── HanGLDemo.tsx           # interactive demo — /research/hangl (orphaned)
 │   └── ProtoBiasDemo.tsx       # interactive demo — /research/cross-lingual-protobias
 ├── data/
+│   ├── program.ts              # SINGLE SOURCE OF TRUTH for positioning copy —
+│   │                           # identity, current question, criteria, approach,
+│   │                           # the two questions, meta description
 │   ├── research.ts             # single source of truth for the project list
 │   └── writing.ts              # single source of truth for writing posts
 ├── pages/
-│   ├── index.astro             # home — hero + research spine + collaborations + contact
-│   ├── plain.astro             # plain-text version of the homepage
-│   ├── motivation.mdx          # the program's origin essay (Leibniz → modality)
+│   ├── index.astro             # home — hero / current case / approach / work / writing / contact
+│   ├── plain.astro             # plain version of the homepage (same data sources)
+│   ├── approach.astro          # the research approach, short (nav slot; was /motivation)
 │   ├── cv.astro / contact.astro / 404.astro / rss.xml.ts
 │   ├── research/
-│   │   ├── index.astro
-│   │   ├── modus.astro         # thesis — the format of modal force
-│   │   ├── hangl.astro         # Sino-Korean morphology (has demo)
-│   │   ├── ordo.astro          # generics / defeasibility
+│   │   ├── index.astro         # current case → hypothesis → two questions → work
+│   │   ├── modus.astro         # exploratory LM methods pilot
+│   │   ├── hangl.astro         # (orphaned) Sino-Korean morphology
+│   │   ├── ordo.astro          # (orphaned) generics / defeasibility
 │   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
 │   └── writing/
 │       ├── index.astro
+│       ├── logic-of-natural-language.mdx   # the motivation essay (was /motivation)
 │       ├── from-leibniz.mdx
 │       ├── inverted-observability.mdx
 │       └── meaning-beneath-language.mdx

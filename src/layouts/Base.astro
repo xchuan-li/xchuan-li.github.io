@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { metaDescription } from "../data/program";
 
 interface Props {
   title?: string;
@@ -21,9 +22,7 @@ interface Props {
 const frontmatter = Astro.props.frontmatter ?? {};
 const title = Astro.props.title ?? frontmatter.title ?? "Xiaochuan Li";
 const description =
-  Astro.props.description ??
-  frontmatter.description ??
-  "The experimental and computational semantics of modal reasoning: how linguistic modality structures possibilities for inference, with predictions from formal semantics tested in both the human mind and language models.";
+  Astro.props.description ?? frontmatter.description ?? metaDescription;
 const showProgress = Astro.props.showProgress ?? frontmatter.showProgress ?? false;
 const wide = Astro.props.wide ?? frontmatter.wide ?? false;
 const toc = Astro.props.toc ?? frontmatter.toc ?? false;
@@ -63,7 +62,7 @@ const personLd = {
 
 const nav = [
   { href: "/research", label: "Research" },
-  { href: "/motivation", label: "Motivation" },
+  { href: "/approach", label: "Approach" },
   { href: "/writing", label: "Writing" },
   { href: "/cv", label: "CV" },
   { href: "/contact", label: "Contact" },
