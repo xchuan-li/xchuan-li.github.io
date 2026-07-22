@@ -1,0 +1,293 @@
+---
+// ResearchMap — how the disciplines relate in the program, as the visual of the
+// "made testable twice" approach. Linguistics is the origin (the spec sheet):
+// it defines the function F and poses the question. The model side (BabyLM +
+// basic interp) and the human side (developmental psychology) are the ways of
+// answering it; the evidence goes back and refines the linguistic account.
+//
+// Themed + interactive, no JS: hover any role to lift it and reveal what it
+// answers; the two model-side roles link through to the MODUS pilot, the spine
+// links to the research page. Colours come from the site tokens — deep-purple
+// for the linguistic spine (the modality accent), teal for the model side,
+// amber for the human side — so it adapts to light/dark automatically.
+---
+
+<figure
+  class="rmap"
+  aria-label="How the disciplines relate. Linguistic theory is the spec sheet: it defines the function F, with the criteria content-specific, persistent, and evidence-sensitive, and poses the question of whether F is learnable from realistic input and how it is realized. The model side answers it with BabyLM (a model organism, testing learnability) and basic interpretability (probing, patching, steering, testing realization). The human side is developmental psychology, a comparison species that sets the realistic input and calibrates what emerges — a mirror, not a blueprint. Evidence from both sides refines the linguistic account."
+>
+  <!-- spine: linguistics defines F and poses the question -->
+  <a class="rmap-spine" href="/research">
+    <span class="rmap-spine-role">Linguistic theory · the spec sheet</span>
+    <span class="rmap-spine-lead">defines the function <strong>F</strong> — and the criteria for having it</span>
+    <span class="rmap-crit">
+      <span>content-specific</span><span>persistent</span><span>evidence-sensitive</span>
+    </span>
+  </a>
+
+  <p class="rmap-poses">
+    <span class="rmap-poses-arrow" aria-hidden="true">↓</span>
+    poses the question — <em>is F learnable from realistic input? how is it realized?</em>
+  </p>
+
+  <!-- band: two ways of answering -->
+  <div class="rmap-band">
+    <div class="rmap-side">
+      <p class="rmap-side-label rmap-lm-label">The model side</p>
+      <a class="rmap-card rmap-lm" href="/research/modus">
+        <span class="rmap-card-head">
+          <span class="rmap-card-title">BabyLM</span>
+          <span class="rmap-card-role">a model organism</span>
+        </span>
+        <span class="rmap-card-desc">Grown on a controlled, developmentally-realistic diet — so the real object of study is <em>diet → structure</em>.</span>
+        <span class="rmap-card-ans">is F <strong>learnable</strong>?</span>
+      </a>
+      <a class="rmap-card rmap-lm" href="/research/modus">
+        <span class="rmap-card-head">
+          <span class="rmap-card-title">Basic interp</span>
+          <span class="rmap-card-role">scan + scalpel</span>
+        </span>
+        <span class="rmap-card-desc">Probing reads the structure; patching · steering · ablation cut to test what is causal.</span>
+        <span class="rmap-card-ans">how is F <strong>realized</strong>?</span>
+      </a>
+    </div>
+
+    <div class="rmap-mid" aria-hidden="true">
+      <span class="rmap-mid-line"></span>
+      <span class="rmap-mid-text">same F<br />compare,<br />don't copy</span>
+      <span class="rmap-mid-line"></span>
+    </div>
+
+    <div class="rmap-side">
+      <p class="rmap-side-label rmap-hu-label">The human side</p>
+      <div class="rmap-card rmap-hu rmap-card-static">
+        <span class="rmap-card-head">
+          <span class="rmap-card-title">Developmental psychology</span>
+          <span class="rmap-card-role">a comparison species</span>
+        </span>
+        <span class="rmap-card-desc">What is known about how humans acquire F — it sets the realistic diet, and calibrates what emerges.</span>
+        <span class="rmap-card-ans rmap-mirror">a mirror, not a blueprint</span>
+      </div>
+    </div>
+  </div>
+
+  <figcaption class="rmap-cap">
+    Linguistics is the origin, not a fourth peer. Evidence from both sides feeds back and refines the account.
+  </figcaption>
+</figure>
+
+<style>
+  .rmap {
+    margin: 2.4rem 0 0;
+    max-width: 46rem;
+  }
+
+  /* ---- spine ---- */
+  .rmap-spine {
+    display: block;
+    text-decoration: none;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--accent-deep-purple);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--accent-deep-purple) 5%, transparent);
+    transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
+  }
+  .rmap-spine:hover {
+    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--accent-deep-purple) 9%, transparent);
+    border-left-color: var(--accent-deep-purple);
+    border-color: color-mix(in srgb, var(--accent-deep-purple) 30%, var(--color-border));
+  }
+  .rmap-spine-role {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent-deep-purple);
+    margin-bottom: 0.4rem;
+  }
+  .rmap-spine-lead {
+    display: block;
+    font-family: var(--font-display, serif);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+  .rmap-spine-lead strong { color: var(--accent-deep-purple); font-weight: 700; }
+  .rmap-crit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.7rem;
+  }
+  .rmap-crit span {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.02em;
+    color: var(--color-text-muted);
+    padding: 2px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+  }
+
+  /* ---- poses the question ---- */
+  .rmap-poses {
+    margin: 0.85rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+  }
+  .rmap-poses em { font-style: italic; color: var(--color-text-muted); }
+  .rmap-poses-arrow {
+    display: block;
+    color: var(--accent-deep-purple);
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  /* ---- band ---- */
+  .rmap-band {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .rmap-side { display: flex; flex-direction: column; gap: 0.5rem; }
+  .rmap-side-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.1rem;
+  }
+  .rmap-lm-label { color: var(--accent-teal-deep); }
+  .rmap-hu-label { color: var(--accent-amber); }
+
+  .rmap-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+  }
+  .rmap-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .rmap-card-title { font-size: 1rem; font-weight: 600; color: var(--color-text); }
+  .rmap-card-role {
+    font-family: var(--font-display, serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .rmap-card-desc { font-size: 13px; line-height: 1.55; color: var(--color-text-muted); }
+  .rmap-card-desc em { font-style: italic; color: var(--color-text); }
+
+  /* the "answers" line — hidden until hover/focus, the reveal on interaction */
+  .rmap-card-ans {
+    margin-top: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--color-text-dim);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-3px);
+    transition: max-height 0.2s ease, opacity 0.18s ease, transform 0.18s ease;
+  }
+  .rmap-card-ans strong { font-weight: 700; }
+  .rmap-card:hover .rmap-card-ans,
+  .rmap-card:focus-visible .rmap-card-ans,
+  .rmap-card-static:hover .rmap-card-ans {
+    max-height: 3rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* the mirror line always shows for the human card (its signature) */
+  .rmap-mirror {
+    max-height: 3rem;
+    opacity: 1;
+    transform: none;
+    font-style: italic;
+    font-family: var(--font-display, serif);
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  /* model side — teal */
+  .rmap-lm:hover, .rmap-lm:focus-visible {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent-teal-deep) 45%, var(--color-border));
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent-teal-deep) 14%, transparent);
+    outline: none;
+  }
+  .rmap-lm .rmap-card-role { color: var(--accent-teal-deep); }
+  .rmap-lm:hover .rmap-card-ans, .rmap-lm:focus-visible .rmap-card-ans { color: var(--accent-teal-deep); }
+
+  /* human side — amber */
+  .rmap-hu {
+    border-color: color-mix(in srgb, var(--accent-amber) 26%, var(--color-border));
+    background: color-mix(in srgb, var(--accent-amber) 4%, var(--color-surface));
+    justify-content: flex-start;
+  }
+  .rmap-hu:hover { transform: translateY(-2px); box-shadow: 0 8px 22px color-mix(in srgb, var(--accent-amber) 13%, transparent); }
+  .rmap-hu .rmap-card-role { color: var(--accent-amber); }
+  .rmap-mirror { color: var(--accent-amber); }
+
+  /* ---- middle connector ---- */
+  .rmap-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0 0.15rem;
+    align-self: center;
+  }
+  .rmap-mid-line {
+    width: 1px;
+    flex: 1;
+    min-height: 1.1rem;
+    background: repeating-linear-gradient(to bottom, var(--color-border-strong) 0 4px, transparent 4px 8px);
+  }
+  .rmap-mid-text {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    line-height: 1.35;
+    letter-spacing: 0.03em;
+    text-align: center;
+    color: var(--color-text-dim);
+    white-space: nowrap;
+  }
+
+  .rmap-cap {
+    margin-top: 1.3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 11.5px;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--color-text-dim);
+  }
+
+  /* ---- responsive: stack the two sides ---- */
+  @media (max-width: 640px) {
+    .rmap-band { grid-template-columns: 1fr; }
+    .rmap-mid { flex-direction: row; padding: 0.2rem 0; }
+    .rmap-mid-line { width: auto; height: 1px; min-height: 0; flex: 1; background: repeating-linear-gradient(to right, var(--color-border-strong) 0 4px, transparent 4px 8px); }
+    .rmap-mid-text { white-space: normal; }
+    .rmap-card-ans { max-height: 3rem; opacity: 1; transform: none; }
+  }
+</style>

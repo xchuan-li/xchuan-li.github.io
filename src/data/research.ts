@@ -97,7 +97,7 @@ export const projects: Project[] = [
     maturity: "active",
     progress: "exploratory · methods pilot",
     output: "Methods pilot",
-    blurb: "Controlled LM experiments on modal force, lexical form, evidence, and causal intervention — methods groundwork, not a verdict.",
+    blurb: "Controlled LM experiments on modal force, lexical form, evidence, and targeted intervention — methods groundwork, not a verdict.",
     domain: "Epistemic modality · language models",
     kind: "project",
     demo: false,

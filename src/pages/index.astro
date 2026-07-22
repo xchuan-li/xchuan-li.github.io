@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import HeroAlternatives from "../components/HeroAlternatives.astro";
+import ResearchMap from "../components/ResearchMap.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
 import { approach, criteria, currentQuestionHtml, foundation, identityLongHtml, questions } from "../data/program";
@@ -153,6 +154,7 @@ const recentPosts = writingPosts.slice(0, 3);
           questions about the same linguistic function, and the evidence goes back to the linguistic
           account. <a href="/approach">More on the approach →</a>
         </p>
+        <ResearchMap />
       </div>
     </div>
   </section>

@@ -8,8 +8,8 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://xchuan-li.github.io',
-  // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace) — send
-  // their old URLs to the research index so external links don't 404.
+  // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace, ORDO,
+  // HanGL) — send their old URLs to the research index so external links don't 404.
   redirects: {
     // The long "Motivation" essay moved into Writing (2026-07-16); `/approach`
     // now carries the short research-approach statement in the nav.
@@ -24,6 +24,8 @@ export default defineConfig({
     '/research/typological-grounding': '/research',
     '/research/mini-causal-models': '/research',
     '/research/latent-control-states': '/research',
+    '/research/ordo': '/research',
+    '/research/hangl': '/research',
   },
   integrations: [mdx(), react(), sitemap()],
   vite: {
