@@ -1,0 +1,174 @@
+---
+// DecryptedText — characters sit scrambled, then resolve into the real text.
+//
+// The effect is React Bits' `DecryptedText`
+// (reactbits.dev/text-animations/decrypted-text, MIT), reimplemented in plain
+// JS because the homepage ships zero JavaScript and the React island version
+// would have put the whole React runtime on it for a text effect. Prop names
+// follow upstream so the two stay comparable.
+//
+// The server renders the real text as a single text node — readable without
+// JS, with kerning intact, and nothing odd for crawlers. Only the script
+// splits it into per-character spans, and it puts the text back as one node
+// once the reveal settles. `prefers-reduced-motion` leaves it alone entirely.
+//
+// Used only where "undetermined → resolved" carries meaning: the imprint
+// question in the hero, and the three criteria that would settle the current
+// case. Not as decoration — see the note in index.astro.
+
+interface Props {
+  text: string;
+  /** Milliseconds per character. */
+  speed?: number;
+  /** Resolve left to right, from the end, or outwards from the middle. */
+  revealDirection?: "start" | "end" | "center";
+  /** Scramble using only the characters the text itself contains, so the
+      unresolved state still looks like language rather than line noise. */
+  useOriginalCharsOnly?: boolean;
+  characters?: string;
+  /** Milliseconds to wait after triggering — for staggering siblings. */
+  delay?: number;
+  animateOn?: "view" | "hover";
+  /** Applied to the wrapping span. */
+  class?: string;
+  /** Applied to characters that have not resolved yet. */
+  encryptedClass?: string;
+}
+
+const {
+  text,
+  speed = 30,
+  revealDirection = "start",
+  useOriginalCharsOnly = false,
+  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+",
+  delay = 0,
+  animateOn = "view",
+  class: className,
+  encryptedClass = "dt-ghost",
+} = Astro.props;
+
+const pool = useOriginalCharsOnly
+  ? [...new Set(text.replace(/\s/g, "").split(""))].join("")
+  : characters;
+---
+
+<span
+  class={className}
+  data-decrypt
+  data-text={text}
+  data-pool={pool}
+  data-speed={speed}
+  data-direction={revealDirection}
+  data-delay={delay}
+  data-trigger={animateOn}
+  data-encrypted={encryptedClass}
+><span class="sr-only">{text}</span><span data-decrypt-body aria-hidden="true">{text}</span></span>
+
+<script>
+  // One listener set for every instance on the page.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /** The order indices resolve in, for the three reveal directions. */
+  function revealOrder(len: number, direction: string): number[] {
+    if (direction === "end") {
+      return Array.from({ length: len }, (_, i) => len - 1 - i);
+    }
+    if (direction === "center") {
+      const middle = Math.floor(len / 2);
+      const out: number[] = [];
+      for (let offset = 0; out.length < len; offset++) {
+        const i = offset % 2 === 0 ? middle + offset / 2 : middle - Math.ceil(offset / 2);
+        if (i >= 0 && i < len) out.push(i);
+      }
+      return out;
+    }
+    return Array.from({ length: len }, (_, i) => i);
+  }
+
+  function setup(el: HTMLElement) {
+    const body = el.querySelector<HTMLElement>("[data-decrypt-body]");
+    const text = el.dataset.text;
+    if (!body || !text) return;
+
+    const pool = el.dataset.pool ?? "";
+    const speed = Number(el.dataset.speed) || 30;
+    const delay = Number(el.dataset.delay) || 0;
+    const encrypted = el.dataset.encrypted ?? "";
+    const sequence = revealOrder(text.length, el.dataset.direction ?? "start");
+
+    let spans: HTMLElement[] = [];
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let interval: ReturnType<typeof setInterval> | undefined;
+
+    /** Swap the single text node for one span per character. */
+    const split = () => {
+      spans = text.split("").map(() => document.createElement("span"));
+      body.replaceChildren(...spans);
+    };
+
+    /** Render the frame where the first `resolved` characters are settled. */
+    const paint = (resolved: number) => {
+      const done = new Set(sequence.slice(0, resolved));
+      spans.forEach((span, i) => {
+        if (text[i] === " ") {
+          span.textContent = " ";
+          return;
+        }
+        const settled = done.has(i);
+        span.textContent = settled ? text[i] : pool[Math.floor(Math.random() * pool.length)];
+        span.className = settled ? "" : encrypted;
+      });
+    };
+
+    const stop = () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
+
+    // Back to a single text node, so kerning and font features come back.
+    const settle = () => {
+      stop();
+      body.textContent = text;
+    };
+
+    const run = () => {
+      stop();
+      split();
+      paint(0);
+      timer = setTimeout(() => {
+        let resolved = 0;
+        interval = setInterval(() => {
+          resolved += 1;
+          if (resolved > sequence.length) settle();
+          else paint(resolved);
+        }, speed);
+      }, delay);
+    };
+
+    if (el.dataset.trigger === "hover") {
+      el.addEventListener("mouseenter", run);
+      el.addEventListener("mouseleave", settle);
+      return;
+    }
+
+    // Hold it scrambled from now until it comes into view, so the reveal is
+    // never something the reader already read a moment earlier.
+    split();
+    paint(0);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.disconnect();
+          run();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+  }
+
+  if (!reduced) {
+    document.querySelectorAll<HTMLElement>("[data-decrypt]").forEach(setup);
+  }
+</script>

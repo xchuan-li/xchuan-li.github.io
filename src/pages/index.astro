@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import HeroAlternatives from "../components/HeroAlternatives.astro";
 import ResearchMap from "../components/ResearchMap.astro";
+import DecryptedText from "../components/DecryptedText.astro";
 import { projects } from "../data/research";
 import { posts as writingPosts } from "../data/writing";
 import { approach, criteria, currentQuestionHtml, foundation, identityLongHtml, questions } from "../data/program";
@@ -20,6 +21,12 @@ import { approach, criteria, currentQuestionHtml, foundation, identityLongHtml, 
 //     adjudicate that, and the hero should show the phenomenon, not the theory
 //     I hope explains it.
 // All positioning copy comes from data/program.ts so /plain cannot drift.
+//
+// The two DecryptedText spans are on the page for one reason: the effect's
+// grammar is "undetermined → resolved", which is the thing this program is
+// about. So it goes on the imprint question, and on the three criteria that
+// would settle the current case — nowhere else. Not on the name, not on body
+// prose. If it starts reading as decoration rather than argument, cut it.
 
 // Selected work: the exploratory pilot first, then the completed methodological
 // collaborations that supply the engineering. `archived` marks the latter.
@@ -33,7 +40,13 @@ const recentPosts = writingPosts.slice(0, 3);
   <!-- =========== HERO =========== -->
   <section class="hero">
     <div class="hero-inner">
-      <a class="hero-imprint fade-in" href="/writing/logic-of-natural-language"><span class="hero-imprint-q">Is the logic of natural language the logic of the logicians?</span><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
+      <a class="hero-imprint fade-in" href="/writing/logic-of-natural-language"><DecryptedText
+        class="hero-imprint-q"
+        text="Is the logic of natural language the logic of the logicians?"
+        useOriginalCharsOnly
+        speed={22}
+        delay={520}
+      /><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
       <div class="hero-grid">
       <div class="hero-content">
         <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
@@ -114,9 +127,16 @@ const recentPosts = writingPosts.slice(0, 3);
           alternative-maintenance effect should be:
         </p>
         <ul class="case-crit">
-          {criteria.map((c) => (
+          {criteria.map((c, i) => (
             <li>
-              <span class="case-crit-name">{c.name}</span>
+              <DecryptedText
+                class="case-crit-name"
+                text={c.name}
+                characters="abcdefghijklmnopqrstuvwxyz-"
+                encryptedClass="dt-ghost-accent"
+                speed={26}
+                delay={300 + i * 170}
+              />
               <span class="case-crit-dash" aria-hidden="true">—</span>
               <span class="case-crit-text">{c.text}</span>
             </li>
