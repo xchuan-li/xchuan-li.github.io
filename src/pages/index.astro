@@ -1,98 +1,137 @@
 ---
 import Base from "../layouts/Base.astro";
-import { projects, now } from "../data/research";
+import { projects } from "../data/research";
 import { posts } from "../data/writing";
-import { criteria, currentQuestionHtml, identityLongHtml } from "../data/program";
+import { identityLong } from "../data/program";
 
-// The homepage is a plain, single-column academic page: a header (photo + name +
-// affiliation + a two-sentence research statement + links), then the research
-// question and the criteria that make it falsifiable, the work with concrete
-// output, a short "currently", and recent writing. No hero, no scroll animation,
-// no CTA buttons — the register a formal-semantics / cognitive-science reader
-// expects. All positioning copy comes from data/program.ts; project records from
-// data/research.ts.
+// Homepage — a wider, modular academic page in the "researcher personal site"
+// idiom (cf. karpathy.ai): a photo + one-line self-description header, a
+// reverse-chronological CV timeline (what I did / what it gave me, with an
+// institution logo per entry), then projects and writing. Positioning copy that
+// states what the work IS comes from data/program.ts; project records from
+// data/research.ts; the timeline (a CV, page-specific) is defined here.
 //
-// (This replaced the scroll-portfolio hero in 2026-09. The plain mirror that used
-// to live at /plain was merged in here; /plain now redirects to /.)
+// PHOTO: public/images/headshot.jpg — painted as a background, so a missing file
+// shows a clean empty frame, never a broken image.
 //
-// PHOTO SLOT: drop a headshot at `public/images/headshot.jpg` (square, ~400×400+)
-// and it appears in the header automatically — the `.headshot` box paints it as a
-// background, so a missing file just shows a clean empty avatar frame, never a
-// broken image. To use a different filename/format, change the url() in the
-// `.headshot` rule below.
+// LOGOS: each timeline entry shows a monogram tile as a placeholder. To use a real
+// logo, drop a square-ish file at public/images/logos/<key>.png and, in the
+// `.tl-logo` markup, replace the monogram text with
+// `<img src="/images/logos/<key>.png" alt="" />` (there is a `.tl-logo img` rule
+// ready for it). Keys: utn, marburg, szu, dfki.
 
-const built = projects.filter((p) => !p.parked);
-const recentPosts = posts.slice(0, 5);
+const current = {
+  title: "Epistemic modality & the maintenance of alternatives",
+  tag: "M.Sc. thesis · construct stage",
+  href: "/research",
+  desc:
+    "Does an epistemic possibility expression merely weaken a claim, or does it keep a content-specific alternative available for the reasoning that follows — and can that function be learned from linguistic input alone? The construct brief that fixes the target and its diagnostics is under review by a formal semanticist, before any model or behavioural study.",
+};
+
+const builtProjects = projects.filter((p) => !p.parked);
+
+const timeline = [
+  {
+    period: "2025 – present",
+    mono: "UTN",
+    org: "University of Technology Nuremberg (UTN)",
+    role: "M.Sc. Human and Artificial Intelligence",
+    did: "Turned a philosophy question into a computational research programme — whether epistemic modal language keeps a possibility open for later reasoning, and whether that is learnable from language alone. Built the toolkit it runs on (controlled linguistic stimuli, model intervention and probing, mixed-effects analysis) and an ongoing interpretability collaboration with DFKI.",
+    gained:
+      "A defined research identity — experimental & computational semantics — and the projects below.",
+  },
+  {
+    period: "2024 – 2025",
+    mono: "UMR",
+    org: "University of Marburg",
+    role: "German language program · graduate preparation",
+    did: "Intensive German to study and do research in Germany.",
+    gained: "German at C1, and the move into the German research system.",
+  },
+  {
+    period: "2020 – 2024",
+    mono: "SZU",
+    org: "Shenzhen University",
+    role: "B.A. Philosophy",
+    did: "Logic, philosophy of language, and analytic philosophy; senior thesis on Leibniz's characteristica universalis.",
+    gained:
+      "The question that still drives the work: can reasoning be formalized, and is there stable structure beneath natural language?",
+  },
+];
+
+const recentPosts = posts.slice(0, 4);
 ---
 
-<Base>
-  <article class="home">
-    <header class="lede">
-      <div class="lede-top">
-        <div class="headshot" role="img" aria-label="Portrait of Xiaochuan Li"></div>
-        <div class="lede-id">
-          <h1 class="name">Xiaochuan Li</h1>
-          <p class="affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
-          <p class="links">
-            <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
-            <span class="sep">·</span>
-            <a href="/cv">CV</a>
-            <span class="sep">·</span>
-            <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
-            <span class="sep">·</span>
-            <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
-          </p>
-        </div>
+<Base wide={true}>
+  <div class="wrap">
+    <!-- ===== header ===== -->
+    <header class="hd">
+      <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
+      <div class="hd-main">
+        <h1 class="hd-name">Xiaochuan Li</h1>
+        <p class="hd-tag">{identityLong}</p>
+        <p class="hd-affil">
+          M.Sc. Human and AI · University of Technology Nuremberg · applying for PhD positions for fall 2027
+        </p>
+        <p class="hd-links">
+          <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
+          <span class="sep">·</span>
+          <a href="/cv">CV</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
+          <span class="sep">·</span>
+          <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
+        </p>
       </div>
-      <p class="stmt" set:html={identityLongHtml} />
-      <p class="stmt" set:html={currentQuestionHtml} />
-      <p class="stmt-note">Applying for PhD positions for fall 2027.</p>
     </header>
 
-    <section class="block">
-      <h2 class="h2">Research</h2>
-      <p class="para">
-        Someone says <em>“It might be a star.”</em> Does that merely signal uncertainty, or does it
-        also help maintain <em>the star</em> as a live alternative for the reasoning that follows? For
-        that to be a real effect rather than mention, priming, or generic uncertainty, it should be
-        {criteria.map((c, i) => (
-          <>{i === criteria.length - 1 ? ", and " : i > 0 ? ", " : " "}<strong>{c.name}</strong> ({c.text})</>
-        ))}. Right now the construct brief — the target and these diagnostics — is under review by a
-        formal semanticist, before any model or behavioural study. The full case is on the <a href="/research">research page</a>; how a linguistic question becomes evidence is on the <a href="/approach">approach page</a>.
-      </p>
-    </section>
-
-    <section class="block">
-      <h2 class="h2">Selected work</h2>
-      <p class="block-note">
-        The concrete output behind the current question, and where the engineering came from — a
-        first-author paper, a DFKI collaboration, and the earlier pilot that built the methods. Not the
-        research identity; the evidence that it can be executed.
-      </p>
-      <ul class="work">
-        {built.map((p) => (
-          <li class="work-item">
-            <div class="work-top">
-              <a class="work-title" href={p.href}>{p.title}</a>
-              <span class="work-tag">{p.output}</span>
+    <!-- ===== timeline / CV ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Timeline</h2>
+      <div class="tl">
+        {timeline.map((t) => (
+          <div class="tl-item">
+            <div class="tl-aside">
+              <div class="tl-logo" aria-hidden="true">{t.mono}</div>
+              <div class="tl-period">{t.period}</div>
             </div>
-            <p class="work-desc">{p.short ?? p.blurb}</p>
-          </li>
+            <div class="tl-body">
+              <h3 class="tl-org">{t.org}</h3>
+              <p class="tl-role">{t.role}</p>
+              <p class="tl-did">{t.did}</p>
+              <p class="tl-gain"><span class="tl-gain-label">Gave me</span> {t.gained}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
 
-    <section class="block">
-      <h2 class="h2">Currently</h2>
-      <ul class="now">
-        {now.map((item) => (
-          <li><span class="now-label">{item.label}</span> {item.text}</li>
+    <!-- ===== projects ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Projects</h2>
+      <div class="proj-list">
+        <div class="proj proj-current">
+          <div class="proj-top">
+            <a class="proj-title" href={current.href}>{current.title}</a>
+            <span class="proj-tag">{current.tag}</span>
+          </div>
+          <p class="proj-desc">{current.desc}</p>
+        </div>
+        {builtProjects.map((p) => (
+          <div class="proj">
+            <div class="proj-top">
+              <a class="proj-title" href={p.href}>{p.title}</a>
+              <span class="proj-tag">{p.output}</span>
+            </div>
+            <p class="proj-desc">{p.short ?? p.blurb}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
 
-    <section class="block">
-      <h2 class="h2">Writing</h2>
+    <!-- ===== writing ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Writing</h2>
       <ul class="writing">
         {recentPosts.map((p) => (
           <li>
@@ -103,25 +142,24 @@ const recentPosts = posts.slice(0, 5);
       </ul>
       <p class="more"><a href="/writing">All writing →</a></p>
     </section>
-  </article>
+  </div>
 </Base>
 
 <style>
-  .home { max-width: 42rem; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; }
 
-  /* ---- header ---- */
-  .lede { margin-bottom: 1rem; }
-  .lede-top {
+  /* ===== header ===== */
+  .hd {
     display: flex;
     align-items: center;
-    gap: 1.4rem;
-    margin-bottom: 1.6rem;
+    gap: 2.25rem;
+    margin-bottom: 1rem;
   }
-  .headshot {
+  .hd-photo {
     flex: none;
-    width: 112px;
-    height: 112px;
-    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    border-radius: 14px;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface-2);
     background-image: url("/images/headshot.jpg");
@@ -129,84 +167,118 @@ const recentPosts = posts.slice(0, 5);
     background-position: center;
     background-repeat: no-repeat;
   }
-  .name {
+  .hd-main { min-width: 0; }
+  .hd-name {
     font-family: var(--font-display);
-    font-size: 1.9rem;
+    font-size: 2.5rem;
     font-weight: 600;
-    letter-spacing: -0.015em;
-    margin: 0 0 0.3rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.6rem;
     color: var(--color-text);
+    line-height: 1.05;
   }
-  .affil { font-size: 0.9rem; color: var(--color-text-muted); margin: 0 0 0.65rem; }
-  .links { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; line-height: 1.85; }
-  .links a { color: var(--color-accent); text-decoration: none; }
-  .links a:hover { text-decoration: underline; }
-  .links .sep { color: var(--color-text-ghost); margin: 0 0.5rem; }
-
-  .stmt {
-    font-size: 1.0625rem;
-    line-height: 1.7;
+  .hd-tag {
+    font-size: 1.15rem;
+    line-height: 1.5;
     color: var(--color-text);
-    margin: 0 0 1.1rem;
+    margin: 0 0 0.9rem;
+    max-width: 34rem;
   }
-  .stmt strong { font-weight: 600; }
-  .stmt em { font-style: italic; }
-  .stmt-note { font-size: 0.9rem; color: var(--color-text-muted); margin: 0.3rem 0 0; }
+  .hd-affil {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0 0 0.8rem;
+    line-height: 1.5;
+  }
+  .hd-links { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
+  .hd-links a { color: var(--color-accent); text-decoration: none; }
+  .hd-links a:hover { text-decoration: underline; }
+  .hd-links .sep { color: var(--color-text-ghost); margin: 0 0.45rem; }
 
-  @media (max-width: 520px) {
-    .lede-top { gap: 1.1rem; }
-    .headshot { width: 88px; height: 88px; }
-    .name { font-size: 1.65rem; }
+  @media (max-width: 620px) {
+    .hd { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+    .hd-photo { width: 148px; height: 148px; }
+    .hd-name { font-size: 2rem; }
+    .hd-tag { font-size: 1.05rem; }
   }
 
-  /* ---- sections ---- */
-  .block { margin-top: 3rem; }
-  .h2 {
+  /* ===== section frame ===== */
+  .sec { margin-top: 3.6rem; }
+  .sec-h {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-text-dim);
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.6rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--color-border);
   }
-  .para {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    margin: 0;
+
+  /* ===== timeline ===== */
+  .tl { display: flex; flex-direction: column; gap: 2rem; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 1.75rem;
   }
-  .para em { font-style: italic; color: var(--color-text); }
-  .para strong { color: var(--color-text); font-weight: 600; }
-  .para a { color: var(--color-accent); text-decoration: none; }
-  .para a:hover { text-decoration: underline; }
-  .block-note {
-    font-size: 0.92rem;
-    line-height: 1.65;
+  .tl-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .tl-logo {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     color: var(--color-text-muted);
-    font-style: italic;
-    margin: 0 0 1.4rem;
+    overflow: hidden;
+  }
+  .tl-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .tl-period {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--color-text-dim);
+  }
+  .tl-org { font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
+  .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
+  .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.55rem; }
+  .tl-gain { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+  .tl-gain-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-right: 0.45rem;
   }
 
-  /* ---- work ---- */
-  .work { list-style: none; margin: 0; padding: 0; }
-  .work-item {
-    padding: 1.05rem 0;
-    border-bottom: 1px solid var(--color-border);
+  @media (max-width: 620px) {
+    .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
+    .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }
   }
-  .work-item:first-child { border-top: 1px solid var(--color-border); }
-  .work-top {
+
+  /* ===== projects ===== */
+  .proj-list { display: flex; flex-direction: column; }
+  .proj { padding: 1.15rem 0; border-bottom: 1px solid var(--color-border); }
+  .proj:first-child { border-top: 1px solid var(--color-border); }
+  .proj-top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
     margin-bottom: 0.4rem;
   }
-  .work-title { font-size: 1.02rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
-  .work-title:hover { color: var(--color-accent); }
-  .work-tag {
+  .proj-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .proj-title:hover { color: var(--color-accent); }
+  .proj-tag {
     flex: none;
     font-family: var(--font-mono);
     font-size: 10px;
@@ -215,34 +287,17 @@ const recentPosts = posts.slice(0, 5);
     color: var(--color-text-dim);
     white-space: nowrap;
   }
-  .work-desc { font-size: 0.9rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
+  .proj-current .proj-tag { color: var(--color-accent); }
+  .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 62ch; }
 
-  /* ---- currently ---- */
-  .now { list-style: none; margin: 0; padding: 0; }
-  .now li {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    margin-bottom: 0.85rem;
-  }
-  .now li:last-child { margin-bottom: 0; }
-  .now-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text);
-    margin-right: 0.5rem;
-  }
-
-  /* ---- writing ---- */
+  /* ===== writing ===== */
   .writing { list-style: none; margin: 0; padding: 0; }
   .writing li {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: 0.7rem 0;
+    padding: 0.72rem 0;
     border-bottom: 1px solid var(--color-border);
   }
   .writing li:first-child { border-top: 1px solid var(--color-border); }
