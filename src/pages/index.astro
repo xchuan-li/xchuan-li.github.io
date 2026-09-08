@@ -1,34 +1,49 @@
 ---
 import Base from "../layouts/Base.astro";
-import { projects } from "../data/research";
 import { posts } from "../data/writing";
 import { identityLong } from "../data/program";
 
-// Homepage — a wider, modular academic page in the "researcher personal site"
-// idiom (cf. karpathy.ai): a photo + one-line self-description header, a
-// reverse-chronological CV timeline (what I did / what it gave me, with an
-// institution logo per entry), then projects and writing. Positioning copy that
-// states what the work IS comes from data/program.ts; project records from
-// data/research.ts; the timeline (a CV, page-specific) is defined here.
+// Homepage — a wider, modular "researcher personal site" (cf. karpathy.ai): a photo
+// header, a reverse-chronological CV timeline (what I did, then its influence, with
+// an institution logo per entry), the current projects, a personal "playground",
+// and writing. The identity line comes from data/program.ts; the timeline, projects,
+// and playground are page-specific and defined in this file.
 //
-// PHOTO: public/images/headshot.jpg — painted as a background, so a missing file
+// PHOTO: public/images/headshot.jpg — painted as a CSS background, so a missing file
 // shows a clean empty frame, never a broken image.
 //
-// LOGOS: each timeline entry shows a monogram tile as a placeholder. To use a real
-// logo, drop a square-ish file at public/images/logos/<key>.png and, in the
-// `.tl-logo` markup, replace the monogram text with
-// `<img src="/images/logos/<key>.png" alt="" />` (there is a `.tl-logo img` rule
-// ready for it). Keys: utn, marburg, szu, dfki.
+// LOGOS: public/images/logos/{utn,marburg,szu}.svg, rendered in .tl-logo. Circular
+// emblems (`emblem: true`) are sized up so they match the UTN wordmark's weight.
 
-const current = {
-  title: "Epistemic modality & the maintenance of alternatives",
-  tag: "M.Sc. thesis · construct stage",
-  href: "/research",
-  desc:
-    "Does an epistemic possibility expression merely weaken a claim, or does it keep a content-specific alternative available for the reasoning that follows — and can that function be learned from linguistic input alone? The construct brief that fixes the target and its diagnostics is under review by a formal semanticist, before any model or behavioural study.",
-};
-
-const builtProjects = projects.filter((p) => !p.parked);
+// The four current projects (B1–B4). Defined here on the homepage; the /research
+// page keeps its own fuller records. Ordered mainline-first.
+const projects = [
+  {
+    title: "Three Ways of Leaving p Unsettled",
+    tag: "Formal semantics · in progress",
+    href: "/research",
+    current: true,
+    desc: "A formal-semantics and pragmatics paper on three things everyday talk files under “uncertainty”: saying something might be so, saying it might or might not be, and saying you don’t know whether it is. Each leaves a different question open and licenses a different reply — the paper pins the distinction down. Currently under review by a formal semanticist.",
+  },
+  {
+    title: "Master’s thesis — is meaning like this learnable?",
+    tag: "Thesis · in design",
+    href: "/research",
+    desc: "Takes that distinction and asks a learnability question: trained on realistic input, does a small language model come to hold a possibility open and reason about it — and what in the input does that take? Formal analysis sets the target; a controlled corpus-and-training experiment tests it.",
+  },
+  {
+    title: "Cross-lingual ProtoBias",
+    tag: "First-author paper",
+    href: "/research/cross-lingual-protobias",
+    desc: "A first-author paper: a controlled cross-lingual audit — hold the image pair fixed, vary only the prompt language, and test whether vision-language judges track meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two model families; public code, arXiv in preparation.",
+  },
+  {
+    title: "Latent Control States",
+    tag: "Collaboration · DFKI",
+    href: "/research",
+    desc: "With DFKI: does prompt framing shift a causally relevant latent state, or only the output? My part is a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the model’s choice tracks the real stakes or just surface pressure.",
+  },
+];
 
 const timeline = [
   {
@@ -37,9 +52,9 @@ const timeline = [
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    did: "Turned a philosophy question into a computational research programme — whether epistemic modal language keeps a possibility open for later reasoning, and whether that is learnable from language alone — and built the toolkit it runs on: controlled linguistic stimuli, model intervention and probing, mixed-effects analysis, with an ongoing interpretability collaboration at DFKI.",
+    did: "Arrived from philosophy and learned how language models actually work — and, more to the point, how to use them as instruments for computational linguistics: designing controlled experiments that ask what a model has really acquired about meaning, not just whether it performs well.",
     impact:
-      "This is where a scattered set of interests became one research identity — experimental and computational semantics — and produced the projects below.",
+      "It's here that my research interest took its current shape — how linguistic structure encodes information (which possibilities stay open, which are ruled out, what can still be picked up and reasoned about later), and how much of that structure a language model, or a person, actually grasps. That question, more than any single thesis topic, is the throughline I want to keep pulling on.",
   },
   {
     period: "2024 – 2025",
@@ -47,10 +62,10 @@ const timeline = [
     logo: "/images/logos/marburg.svg",
     emblem: true,
     org: "University of Marburg",
-    role: "German language program · graduate preparation",
-    did: "Reached C1 German over an intensive year — and, with Chinese and English already in hand, spent it living inside a third language rather than only studying one.",
+    role: "German language program",
+    did: "A year living inside German — more than a language course, a close look at how another grammar organizes meaning: its cases, its word order, the architecture of the clause.",
     impact:
-      "The real gain was comparative: holding Chinese, English, and German side by side, I could watch how each builds the same meaning by different means — context, word order, morphology — and read those contrasts from a non-native, philosophy-of-language angle. That cross-linguistic vantage point is now part of how I think about what a language actually encodes.",
+      "Set beside Chinese and English, it turned reading a language as a system of structural choices into an instinct.",
   },
   {
     period: "2020 – 2024",
@@ -59,9 +74,9 @@ const timeline = [
     emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
-    did: "Logic, philosophy of language, and analytic philosophy; senior thesis on Leibniz's characteristica universalis.",
+    did: "Studied philosophy with a focus on philosophy of language, analytic philosophy, and logic, and wrote my senior thesis on Leibniz's characteristica universalis — his idea of a universal notation whose very form would mirror the structure of thought.",
     impact:
-      "It left me the question that still drives the work: can reasoning be formalized, and is there stable structure beneath natural language?",
+      "That idea is where my interest in linguistic structure began: if reasoning has a shape, how much of it is already carried by the language we reason in? I have been chasing versions of that question ever since.",
   },
 ];
 
@@ -118,22 +133,37 @@ const recentPosts = posts.slice(0, 4);
     <section class="sec">
       <h2 class="sec-h">Projects</h2>
       <div class="proj-list">
-        <div class="proj proj-current">
-          <div class="proj-top">
-            <a class="proj-title" href={current.href}>{current.title}</a>
-            <span class="proj-tag">{current.tag}</span>
-          </div>
-          <p class="proj-desc">{current.desc}</p>
-        </div>
-        {builtProjects.map((p) => (
-          <div class="proj">
+        {projects.map((p) => (
+          <div class={`proj${p.current ? " proj-current" : ""}`}>
             <div class="proj-top">
               <a class="proj-title" href={p.href}>{p.title}</a>
-              <span class="proj-tag">{p.output}</span>
+              <span class="proj-tag">{p.tag}</span>
             </div>
-            <p class="proj-desc">{p.short ?? p.blurb}</p>
+            <p class="proj-desc">{p.desc}</p>
           </div>
         ))}
+      </div>
+    </section>
+
+    <!-- ===== playground ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Playground</h2>
+      <p class="block-note">Language isn’t only what I study — it’s what I tinker with. Two long-running side projects, for their own sake.</p>
+      <div class="proj-list">
+        <div class="proj">
+          <div class="proj-top">
+            <span class="proj-title-plain">Information Machines — a made-up language</span>
+            <span class="proj-tag">Conlang · ongoing</span>
+          </div>
+          <p class="proj-desc">I’m building a small language as an experiment in how information can be introduced, connected, revised, and transmitted — the same thing I chase in research, here as pure play. It has a grammar, a changelog, and a test suite, and it is never finished.</p>
+        </div>
+        <div class="proj">
+          <div class="proj-top">
+            <span class="proj-title-plain">RELAY — a language-puzzle game</span>
+            <span class="proj-tag">Game demo · prototype</span>
+          </div>
+          <p class="proj-desc">A puzzle game where you meet an invented language the way a field linguist would: watch a few scene-and-phrase pairs, work out the pieces and the order, then build a sentence you’ve never seen and test whether it transmits. A small authored thing, not a language-learning app.</p>
+        </div>
       </div>
     </section>
 
@@ -233,15 +263,15 @@ const recentPosts = posts.slice(0, 4);
     gap: 1.75rem;
   }
   .tl-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
-  .tl-logo { min-height: 42px; display: flex; align-items: center; }
+  .tl-logo { min-height: 48px; display: flex; align-items: center; }
   .tl-logo img {
-    height: 42px;
+    height: 36px;
     width: auto;
-    max-width: 148px;
+    max-width: 124px;
     display: block;
   }
   /* circular emblems read smaller than a wordmark at the same height — size them up to match */
-  .tl-logo.emblem img { height: 62px; }
+  .tl-logo.emblem img { height: 78px; }
   /* monogram fallback (only used if an entry has no logo file) */
   .tl-logo span {
     width: 52px;
@@ -287,6 +317,7 @@ const recentPosts = posts.slice(0, 4);
   }
   .proj-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
   .proj-title:hover { color: var(--color-accent); }
+  .proj-title-plain { font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
   .proj-tag {
     flex: none;
     font-family: var(--font-mono);
