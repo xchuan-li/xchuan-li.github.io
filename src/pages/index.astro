@@ -36,17 +36,18 @@ const timeline = [
     mono: "UTN",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    did: "Turned a philosophy question into a computational research programme — whether epistemic modal language keeps a possibility open for later reasoning, and whether that is learnable from language alone. Built the toolkit it runs on (controlled linguistic stimuli, model intervention and probing, mixed-effects analysis) and an ongoing interpretability collaboration with DFKI.",
-    gained:
-      "A defined research identity — experimental & computational semantics — and the projects below.",
+    did: "Turned a philosophy question into a computational research programme — whether epistemic modal language keeps a possibility open for later reasoning, and whether that is learnable from language alone — and built the toolkit it runs on: controlled linguistic stimuli, model intervention and probing, mixed-effects analysis, with an ongoing interpretability collaboration at DFKI.",
+    impact:
+      "This is where a scattered set of interests became one research identity — experimental and computational semantics — and produced the projects below.",
   },
   {
     period: "2024 – 2025",
     mono: "UMR",
     org: "University of Marburg",
     role: "German language program · graduate preparation",
-    did: "Intensive German to study and do research in Germany.",
-    gained: "German at C1, and the move into the German research system.",
+    did: "Reached C1 German over an intensive year — and, with Chinese and English already in hand, spent it living inside a third language rather than only studying one.",
+    impact:
+      "The real gain was comparative: holding Chinese, English, and German side by side, I could watch how each builds the same meaning by different means — context, word order, morphology — and read those contrasts from a non-native, philosophy-of-language angle. That cross-linguistic vantage point is now part of how I think about what a language actually encodes.",
   },
   {
     period: "2020 – 2024",
@@ -54,8 +55,8 @@ const timeline = [
     org: "Shenzhen University",
     role: "B.A. Philosophy",
     did: "Logic, philosophy of language, and analytic philosophy; senior thesis on Leibniz's characteristica universalis.",
-    gained:
-      "The question that still drives the work: can reasoning be formalized, and is there stable structure beneath natural language?",
+    impact:
+      "It left me the question that still drives the work: can reasoning be formalized, and is there stable structure beneath natural language?",
   },
 ];
 
@@ -99,7 +100,7 @@ const recentPosts = posts.slice(0, 4);
               <h3 class="tl-org">{t.org}</h3>
               <p class="tl-role">{t.role}</p>
               <p class="tl-did">{t.did}</p>
-              <p class="tl-gain"><span class="tl-gain-label">Gave me</span> {t.gained}</p>
+              <p class="tl-impact">{t.impact}</p>
             </div>
           </div>
         ))}
@@ -249,16 +250,8 @@ const recentPosts = posts.slice(0, 4);
   }
   .tl-org { font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
   .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
-  .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.55rem; }
-  .tl-gain { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
-  .tl-gain-label {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-right: 0.45rem;
-  }
+  .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
+  .tl-impact { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
 
   @media (max-width: 620px) {
     .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
