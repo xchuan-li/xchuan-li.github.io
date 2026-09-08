@@ -1,403 +1,212 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroAlternatives from "../components/HeroAlternatives.astro";
-import ResearchMap from "../components/ResearchMap.astro";
-import DecryptedText from "../components/DecryptedText.astro";
-import { projects } from "../data/research";
-import { posts as writingPosts } from "../data/writing";
-import { approach, criteria, currentQuestionHtml, foundation, identityLongHtml, questions } from "../data/program";
+import { projects, now } from "../data/research";
+import { posts } from "../data/writing";
+import { criteria, currentQuestionHtml, identityLongHtml } from "../data/program";
 
-// The homepage states the program in one pass, in this order:
-//   identity → current case (question + the criteria that make it falsifiable)
-//   → approach (a linguistic question translated into two testable questions)
-//   → selected work → writing → contact.
+// The homepage is a plain, single-column academic page: a header (photo + name +
+// affiliation + a two-sentence research statement + links), then the research
+// question and the criteria that make it falsifiable, the work with concrete
+// output, a short "currently", and recent writing. No hero, no scroll animation,
+// no CTA buttons — the register a formal-semantics / cognitive-science reader
+// expects. All positioning copy comes from data/program.ts; project records from
+// data/research.ts.
 //
-// Deliberately NOT here any more (see data/program.ts for the vocabulary rules):
-//   - "one theory, two systems" / "human arm" / "LM arm" — the developmental
-//     side is being scoped, not run, and must not read as a running experiment;
-//   - the milestone timeline — it presented a program where there is a question
-//     and a pilot;
-//   - Kratzer-worlds vs. Lassiter-degree as the headline — the geometry does not
-//     adjudicate that, and the hero should show the phenomenon, not the theory
-//     I hope explains it.
-// All positioning copy comes from data/program.ts so /plain cannot drift.
+// (This replaced the scroll-portfolio hero in 2026-09. The plain mirror that used
+// to live at /plain was merged in here; /plain now redirects to /.)
 //
-// The two DecryptedText spans are on the page for one reason: the effect's
-// grammar is "undetermined → resolved", which is the thing this program is
-// about. So it goes on the imprint question, and on the three criteria that
-// would settle the current case — nowhere else. Not on the name, not on body
-// prose. If it starts reading as decoration rather than argument, cut it.
+// PHOTO SLOT: drop a headshot at `public/images/headshot.jpg` (square, ~400×400+)
+// and it appears in the header automatically — the `.headshot` box paints it as a
+// background, so a missing file just shows a clean empty avatar frame, never a
+// broken image. To use a different filename/format, change the url() in the
+// `.headshot` rule below.
 
-// Selected work: the exploratory pilot first, then the completed methodological
-// collaborations that supply the engineering. `archived` marks the latter.
-const pilot = projects.filter((p) => !p.parked && !p.archived);
-const methodological = projects.filter((p) => !p.parked && p.archived);
-
-const recentPosts = writingPosts.slice(0, 3);
+const built = projects.filter((p) => !p.parked);
+const recentPosts = posts.slice(0, 5);
 ---
 
-<Base wide={true}>
-  <!-- =========== HERO =========== -->
-  <section class="hero">
-    <div class="hero-inner">
-      <a class="hero-imprint fade-in" href="/writing/logic-of-natural-language"><DecryptedText
-        class="hero-imprint-q"
-        text="Is the logic of natural language the logic of the logicians?"
-        useOriginalCharsOnly
-        speed={22}
-        delay={520}
-      /><span class="hero-imprint-arrow" aria-hidden="true"> →</span></a>
-      <div class="hero-grid">
-      <div class="hero-content">
-        <p class="hero-tagline fade-in fade-delay-100">Master's student · Human and AI · UTN Nürnberg</p>
-        <h1 class="hero-heading fade-in-up fade-delay-200">
-          <span>Hi, I am</span>
-          <span class="line-2">Xiaochuan Li.</span>
-        </h1>
-        <div class="hero-bio fade-in-up fade-delay-200">
-          <p set:html={identityLongHtml} />
-          <p set:html={currentQuestionHtml} />
-          <p>
-            I'm applying for PhD positions for fall 2027.
+<Base>
+  <article class="home">
+    <header class="lede">
+      <div class="lede-top">
+        <div class="headshot" role="img" aria-label="Portrait of Xiaochuan Li"></div>
+        <div class="lede-id">
+          <h1 class="name">Xiaochuan Li</h1>
+          <p class="affil">M.Sc. Human and AI · University of Technology Nuremberg (UTN)</p>
+          <p class="links">
+            <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
+            <span class="sep">·</span>
+            <a href="/cv">CV</a>
+            <span class="sep">·</span>
+            <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
+            <span class="sep">·</span>
+            <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
           </p>
         </div>
-        <div class="hero-cta fade-in-up fade-delay-300">
-          <a href="#case" class="btn btn-primary">
-            The current question
-            <span class="btn-arrow">↓</span>
-          </a>
-          <a href="#contact" class="btn btn-secondary">Get in touch</a>
-        </div>
-        <div class="hero-social fade-in-up fade-delay-400">
-          <span class="hero-social-label">Reach me</span>
-          <a class="hero-social-link" href="mailto:xiaochuan.li@utn.de" aria-label="Email">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-              <path d="M3 7l9 6 9-6"></path>
-            </svg>
-          </a>
-          <a class="hero-social-link" href="https://github.com/xchuan-li" aria-label="GitHub" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-          </a>
-          <a class="hero-social-link" href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" aria-label="LinkedIn" rel="noopener" target="_blank">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
-            </svg>
-          </a>
-          <a class="hero-social-link" href="/cv.pdf" aria-label="Download CV (PDF)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <path d="M14 2v6h6" />
-              <path d="M12 18v-6" />
-              <path d="M9 15l3 3 3-3" />
-            </svg>
-          </a>
-        </div>
       </div>
+      <p class="stmt" set:html={identityLongHtml} />
+      <p class="stmt" set:html={currentQuestionHtml} />
+      <p class="stmt-note">Applying for PhD positions for fall 2027.</p>
+    </header>
 
-      <div class="hero-figure-col fade-in fade-delay-300" aria-hidden="false">
-        <HeroAlternatives />
-      </div>
-      </div>
-    </div>
+    <section class="block">
+      <h2 class="h2">Research</h2>
+      <p class="para">
+        Someone says <em>“It might be a star.”</em> Does that merely signal uncertainty, or does it
+        also help maintain <em>the star</em> as a live alternative for the reasoning that follows? For
+        that to be a real effect rather than mention, priming, or generic uncertainty, it should be
+        {criteria.map((c, i) => (
+          <>{i === criteria.length - 1 ? ", and " : i > 0 ? ", " : " "}<strong>{c.name}</strong> ({c.text})</>
+        ))}. Right now the construct brief — the target and these diagnostics — is under review by a
+        formal semanticist, before any model or behavioural study. The full case is on the <a href="/research">research page</a>; how a linguistic question becomes evidence is on the <a href="/approach">approach page</a>.
+      </p>
+    </section>
 
-  </section>
-
-  <!-- =========== CURRENT CASE =========== -->
-  <section id="case" class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Current case · epistemic modality</p>
-        <h2 class="section-heading section-question fade-in-up fade-delay-100">
-          Does <em>might</em> only weaken a claim, or does it hold a possibility open?
-        </h2>
-      </div>
-      <div class="case-body fade-in-up fade-delay-200">
-        <p class="case-lead">
-          Someone says <em>“It might be a star.”</em> The question I am working on is whether that
-          expression merely signals uncertainty, or whether it also helps maintain <em>the star</em>
-          as a live alternative for the reasoning that follows. {foundation}
-        </p>
-        <p class="case-crit-lead">
-          Stated that way it is still too easy to satisfy — mentioning <em>star</em> at all, priming
-          on the modal word, or simply finding the sentence memorable would all count. So a genuine
-          alternative-maintenance effect should be:
-        </p>
-        <ul class="case-crit">
-          {criteria.map((c, i) => (
-            <li>
-              <DecryptedText
-                class="case-crit-name"
-                text={c.name}
-                characters="abcdefghijklmnopqrstuvwxyz-"
-                encryptedClass="dt-ghost-accent"
-                speed={26}
-                delay={300 + i * 170}
-              />
-              <span class="case-crit-dash" aria-hidden="true">—</span>
-              <span class="case-crit-text">{c.text}</span>
-            </li>
-          ))}
-        </ul>
-        <p class="case-foot">
-          Those three are what turn the question into one that evidence can answer.
-          <a href="/research">The research page</a> works them through.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =========== APPROACH =========== -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Approach</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">A linguistic question, made testable twice</h2>
-      </div>
-      <div class="hp-approach fade-in-up fade-delay-200">
-        <p class="hp-approach-lead">{approach}</p>
-        <div class="hp-qs">
-          {questions.map((q) => (
-            <div class="hp-q">
-              <p class="hp-q-label">{q.label}</p>
-              <p class="hp-q-text">{q.text}</p>
-              <p class="hp-q-term">{q.term}</p>
+    <section class="block">
+      <h2 class="h2">Selected work</h2>
+      <p class="block-note">
+        The concrete output behind the current question, and where the engineering came from — a
+        first-author paper, a DFKI collaboration, and the earlier pilot that built the methods. Not the
+        research identity; the evidence that it can be executed.
+      </p>
+      <ul class="work">
+        {built.map((p) => (
+          <li class="work-item">
+            <div class="work-top">
+              <a class="work-title" href={p.href}>{p.title}</a>
+              <span class="work-tag">{p.output}</span>
             </div>
-          ))}
-        </div>
-        <p class="hp-approach-foot">
-          The point of the second is not that a model resembles a mind. The two answer different
-          questions about the same linguistic function, and the evidence goes back to the linguistic
-          account. <a href="/approach">More on the approach →</a>
-        </p>
-        <ResearchMap />
-      </div>
-    </div>
-  </section>
-
-  <!-- =========== SELECTED WORK =========== -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Selected work</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">What is actually built</h2>
-      </div>
-      <div class="hp-work fade-in-up fade-delay-200">
-        {pilot.map((p) => (
-          <div class="hp-work-item">
-            <p class="hp-work-top">
-              <a class="hp-work-title" href={p.href}>{p.title}</a>
-              <span class="hp-work-state">{p.progress}</span>
-            </p>
-            <p class="hp-work-desc">{p.blurb}</p>
-          </div>
-        ))}
-        <p class="hp-work-label">Earlier &amp; methodological work</p>
-        <p class="hp-work-lead">
-          The engineering this runs on came from two collaborations — where I learned to build
-          controlled evaluations, intervene inside a model, and analyse the results. Methodological
-          training, not the identity.
-        </p>
-        {methodological.map((p) => (
-          <div class="hp-work-item">
-            <p class="hp-work-top">
-              <span class="hp-work-title-plain">{p.title}</span>
-            </p>
-            <p class="hp-work-desc">{p.short}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- =========== WRITING =========== -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="section-head">
-        <p class="section-label fade-in-up">Writing</p>
-        <h2 class="section-heading fade-in-up fade-delay-100">Notes</h2>
-      </div>
-      <ul class="hp-writing fade-in-up fade-delay-200">
-        {recentPosts.map((p) => (
-          <li>
-            <a href={`/writing/${p.slug}`}>{p.title}</a>
-            <span class="hp-writing-date">{p.date}{p.status === "draft" ? " · draft" : ""}</span>
+            <p class="work-desc">{p.short ?? p.blurb}</p>
           </li>
         ))}
       </ul>
-      <p class="hp-writing-more fade-in-up fade-delay-200"><a href="/writing">All writing →</a></p>
-    </div>
-  </section>
+    </section>
 
-  <!-- =========== CONTACT CTA =========== -->
-  <section id="contact" class="section" style="padding-bottom: 7rem;">
-    <div class="section-inner">
-      <div class="divider-line"></div>
-      <div class="contact-cta fade-in-up">
-        <div>
-          <h2 class="contact-cta-head">Let's talk.</h2>
-          <p class="contact-cta-sub">
-            Best by email. I read everything and reply slowly. If it's about a paper draft or a
-            research direction, expect a thoughtful response in a few days rather than an immediate
-            one.
-          </p>
-        </div>
-        <div class="hero-cta" style="margin: 0;">
-          <a class="btn btn-primary" href="mailto:xiaochuan.li@utn.de">
-            Email me
-            <span class="btn-arrow">↗</span>
-          </a>
-          <a class="btn btn-secondary" href="/contact">More ways</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section class="block">
+      <h2 class="h2">Currently</h2>
+      <ul class="now">
+        {now.map((item) => (
+          <li><span class="now-label">{item.label}</span> {item.text}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2 class="h2">Writing</h2>
+      <ul class="writing">
+        {recentPosts.map((p) => (
+          <li>
+            <a href={`/writing/${p.slug}`}>{p.title}</a>
+            <span class="writing-date">{p.date}{p.status === "draft" ? " · draft" : ""}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="more"><a href="/writing">All writing →</a></p>
+    </section>
+  </article>
 </Base>
 
 <style>
-  /* The site's imprint: the one question the whole program hangs from. It opens
-     the page and links to the research-motivation essay. */
-  .hero-imprint {
-    display: block;
-    white-space: nowrap;
-    font-family: var(--font-display, serif);
-    font-size: clamp(1.1rem, 2.4vw, 1.7rem);
-    line-height: 1.35;
-    font-style: italic;
+  .home { max-width: 42rem; }
+
+  /* ---- header ---- */
+  .lede { margin-bottom: 1rem; }
+  .lede-top {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    margin-bottom: 1.6rem;
+  }
+  .headshot {
+    flex: none;
+    width: 112px;
+    height: 112px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-2);
+    background-image: url("/images/headshot.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .name {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.3rem;
     color: var(--color-text);
-    text-decoration: none;
-    margin: 0 0 2.2rem;
-    padding-left: 1rem;
-    border-left: 2px solid var(--color-accent);
   }
-  @media (max-width: 640px) {
-    .hero-imprint { white-space: normal; font-size: 1.15rem; }
-  }
-  .hero-imprint-q { transition: color 0.2s ease; }
-  .hero-imprint-arrow { font-style: normal; color: var(--color-text-dim); transition: color 0.2s ease; }
-  .hero-imprint:hover .hero-imprint-q,
-  .hero-imprint:hover .hero-imprint-arrow { color: var(--color-accent); }
+  .affil { font-size: 0.9rem; color: var(--color-text-muted); margin: 0 0 0.65rem; }
+  .links { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; line-height: 1.85; }
+  .links a { color: var(--color-accent); text-decoration: none; }
+  .links a:hover { text-decoration: underline; }
+  .links .sep { color: var(--color-text-ghost); margin: 0 0.5rem; }
 
-  .section-question {
-    max-width: 26ch;
-    font-size: clamp(1.55rem, 1.1rem + 1.7vw, 2.4rem);
-    line-height: 1.2;
-  }
-  .section-question em { font-style: italic; color: var(--accent-deep-purple); }
-
-  /* ---- Current case ---- */
-  .case-body { max-width: 44rem; }
-  .case-lead {
-    color: var(--color-text-muted);
+  .stmt {
+    font-size: 1.0625rem;
     line-height: 1.7;
-    margin: 0 0 1.8rem;
-  }
-  .case-lead em { color: var(--color-text); font-style: italic; }
-  .case-crit-lead {
-    color: var(--color-text-muted);
-    line-height: 1.7;
+    color: var(--color-text);
     margin: 0 0 1.1rem;
   }
-  .case-crit-lead em { font-style: italic; }
-  .case-crit { list-style: none; margin: 0; padding: 0; }
-  .case-crit li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    padding: 0.7rem 0;
-    border-top: 1px solid var(--color-border);
-    line-height: 1.6;
-  }
-  .case-crit li:last-child { border-bottom: 1px solid var(--color-border); }
-  .case-crit-name {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    letter-spacing: 0.06em;
-    color: var(--accent-deep-purple);
-    white-space: nowrap;
-  }
-  .case-crit-dash { color: var(--color-text-ghost); }
-  .case-crit-text { color: var(--color-text-muted); flex: 1 1 18rem; }
-  .case-foot {
-    margin: 1.5rem 0 0;
-    font-size: 0.9rem;
-    color: var(--color-text-dim);
-    line-height: 1.7;
-  }
-  .case-foot a { color: var(--color-accent); text-decoration: none; }
-  .case-foot a:hover { text-decoration: underline; }
+  .stmt strong { font-weight: 600; }
+  .stmt em { font-style: italic; }
+  .stmt-note { font-size: 0.9rem; color: var(--color-text-muted); margin: 0.3rem 0 0; }
 
-  /* ---- Approach ---- */
-  .hp-approach { max-width: 44rem; }
-  .hp-approach-lead {
-    font-family: var(--font-display, serif);
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: var(--color-text);
-    margin: 0 0 2rem;
+  @media (max-width: 520px) {
+    .lede-top { gap: 1.1rem; }
+    .headshot { width: 88px; height: 88px; }
+    .name { font-size: 1.65rem; }
   }
-  .hp-qs { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .hp-q {
-    flex: 1 1 16rem;
-    padding: 1.1rem 1.2rem;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-  }
-  .hp-q-label {
+
+  /* ---- sections ---- */
+  .block { margin-top: 3rem; }
+  .h2 {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.13em;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-text-dim);
-    margin: 0 0 0.5rem;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-border);
   }
-  .hp-q-text {
-    color: var(--color-text);
-    line-height: 1.6;
-    margin: 0 0 0.6rem;
-  }
-  .hp-q-term {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.04em;
-    color: var(--accent-deep-purple);
+  .para {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
     margin: 0;
   }
-  .hp-approach-foot {
-    margin: 1.7rem 0 0;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-text-dim);
+  .para em { font-style: italic; color: var(--color-text); }
+  .para strong { color: var(--color-text); font-weight: 600; }
+  .para a { color: var(--color-accent); text-decoration: none; }
+  .para a:hover { text-decoration: underline; }
+  .block-note {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0 0 1.4rem;
   }
-  .hp-approach-foot a { color: var(--color-accent); text-decoration: none; }
-  .hp-approach-foot a:hover { text-decoration: underline; }
 
-  /* ---- Selected work ---- */
-  .hp-work { max-width: 44rem; }
-  .hp-work-item { padding: 0.9rem 0; border-top: 1px solid var(--color-border); }
-  .hp-work-top {
+  /* ---- work ---- */
+  .work { list-style: none; margin: 0; padding: 0; }
+  .work-item {
+    padding: 1.05rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .work-item:first-child { border-top: 1px solid var(--color-border); }
+  .work-top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    margin: 0 0 0.35rem;
+    margin-bottom: 0.4rem;
   }
-  .hp-work-title {
-    font-size: 1.02rem;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-  }
-  .hp-work-title:hover { color: var(--color-accent); }
-  .hp-work-title-plain { font-size: 1.02rem; font-weight: 500; color: var(--color-text); }
-  .hp-work-state {
+  .work-title { font-size: 1.02rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .work-title:hover { color: var(--color-accent); }
+  .work-tag {
     flex: none;
     font-family: var(--font-mono);
     font-size: 10px;
@@ -406,25 +215,29 @@ const recentPosts = writingPosts.slice(0, 3);
     color: var(--color-text-dim);
     white-space: nowrap;
   }
-  .hp-work-desc { margin: 0; color: var(--color-text-muted); line-height: 1.65; }
-  .hp-work-label {
-    margin: 2.6rem 0 0.6rem;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-  }
-  .hp-work-lead {
-    margin: 0 0 0.6rem;
-    font-style: italic;
+  .work-desc { font-size: 0.9rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
+
+  /* ---- currently ---- */
+  .now { list-style: none; margin: 0; padding: 0; }
+  .now li {
+    font-size: 0.95rem;
+    line-height: 1.65;
     color: var(--color-text-muted);
-    line-height: 1.7;
+    margin-bottom: 0.85rem;
+  }
+  .now li:last-child { margin-bottom: 0; }
+  .now-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-right: 0.5rem;
   }
 
-  /* ---- Writing ---- */
-  .hp-writing { list-style: none; margin: 0; padding: 0; max-width: 44rem; }
-  .hp-writing li {
+  /* ---- writing ---- */
+  .writing { list-style: none; margin: 0; padding: 0; }
+  .writing li {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -432,17 +245,17 @@ const recentPosts = writingPosts.slice(0, 3);
     padding: 0.7rem 0;
     border-bottom: 1px solid var(--color-border);
   }
-  .hp-writing li:first-child { border-top: 1px solid var(--color-border); }
-  .hp-writing a { color: var(--color-text); text-decoration: none; }
-  .hp-writing a:hover { color: var(--color-accent); }
-  .hp-writing-date {
+  .writing li:first-child { border-top: 1px solid var(--color-border); }
+  .writing a { color: var(--color-text); text-decoration: none; font-size: 0.98rem; }
+  .writing a:hover { color: var(--color-accent); }
+  .writing-date {
     flex: none;
     font-family: var(--font-mono);
     font-size: 10.5px;
     color: var(--color-text-dim);
     white-space: nowrap;
   }
-  .hp-writing-more { margin: 1.1rem 0 0; font-size: 0.9rem; }
-  .hp-writing-more a { color: var(--color-accent); text-decoration: none; }
-  .hp-writing-more a:hover { text-decoration: underline; }
+  .more { margin: 1.1rem 0 0; font-size: 0.9rem; }
+  .more a { color: var(--color-accent); text-decoration: none; }
+  .more a:hover { text-decoration: underline; }
 </style>

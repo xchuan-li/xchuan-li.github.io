@@ -17,20 +17,21 @@ import { approach, criteria, foundation, identityLong, questions } from "../../d
 // Do NOT reintroduce: "human arm" / "LM arm", "one theory two systems", or any
 // claim that internal geometry adjudicates Kratzer vs. Lassiter. Positioning
 // copy comes from data/program.ts. See CONTEXT.md for the red lines.
-const modus = projects.find((p) => p.href === "/research/modus");
+const protobias = projects.find((p) => p.href === "/research/cross-lingual-protobias");
 
-const collaborations = [
+// Earlier & collaborative work, shown as compact credits below the headline paper.
+const earlier = [
   {
     name: "Latent Control States",
     org: "DFKI",
-    text: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure. Where the interpretability technique came from.",
+    text: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure. An ongoing collaboration.",
   },
   {
-    name: "Cross-lingual ProtoBias",
-    org: "an established NLP group",
-    text: "Does a vision-language model track meaning, or language- and culture-specific prototype shortcuts? My contribution: the cross-lingual behavioural evaluation across seven languages that extends the group's forthcoming paper.",
-    href: "https://github.com/xchuan-li/cross_lingual_protobias",
-    hrefLabel: "GitHub ↗",
+    name: "MODUS",
+    org: "earlier methods pilot",
+    text: "An exploratory language-model pilot that built the methods for separating modal function from modal vocabulary, and stress-tested the confounds any such claim has to survive. Groundwork for the current construct, not a result about modal semantics.",
+    href: "/research/modus",
+    hrefLabel: "Project page →",
   },
 ];
 ---
@@ -118,49 +119,50 @@ const collaborations = [
       ))}
     </div>
     <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-      <span class="font-medium text-[var(--color-text)]">Status, honestly.</span> The developmental
-      side is <strong>being scoped</strong> — against the existing literature, and as a question, not
-      a running experiment. The computational side has an exploratory pilot, below. Neither is a
-      result yet, and the evidence from either goes back to the linguistic account rather than to a
-      comparison between minds and models.
+      <span class="font-medium text-[var(--color-text)]">Status, honestly.</span> This is at the
+      <strong>construct stage</strong>: the brief that fixes the target and the diagnostics is under
+      review by a formal semanticist, before any model or behavioural study. The developmental side is
+      <strong>being scoped</strong> — against the existing literature, and as a question, not a running
+      experiment. Neither is a result yet, and the evidence from either goes back to the linguistic
+      account rather than to a comparison between minds and models.
     </p>
   </section>
 
   <!-- ============ EXISTING WORK ============ -->
   <section class="mt-11">
     <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Methods &amp; existing work
+      Papers &amp; existing work
     </p>
     <h2 class="text-xl font-medium tracking-tight mb-4">What is built</h2>
 
-    {modus && (
-      <a href={modus.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors border-t border-[var(--color-border)]">
+    {protobias && (
+      <a href={protobias.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors border-t border-[var(--color-border)]">
         <div class="flex justify-between items-baseline gap-3 mb-1">
-          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{modus.title}</h3>
-          <span class="proj-output" style={`--pc: ${modus.color}`}>{modus.output}</span>
+          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{protobias.title}</h3>
+          <span class="proj-output" style={`--pc: ${protobias.color}`}>{protobias.output}</span>
         </div>
-        <p class="proj-subtitle">separating modal function from modal vocabulary</p>
+        <p class="proj-subtitle">a controlled cross-lingual audit — meaning versus culture-specific prototype</p>
         <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1.5 max-w-prose">
-          {modus.desc}
+          {protobias.short}
         </p>
         <div class="mt-2.5">
-          <span class="proj-state">{modus.progress}</span>
+          <span class="proj-state">{protobias.progress}</span>
         </div>
       </a>
     )}
 
     <div class="mt-9">
       <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-        Earlier &amp; methodological work
+        Earlier &amp; collaborative work
       </p>
       <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-4">
-        Two collaborations that gave me the engineering this runs on — controlled evaluation,
+        A collaboration and an earlier pilot — where the engineering came from: controlled evaluation,
         intervention inside a model, and the analysis to read the result. Methodological training,
         not the identity. What I did, in two lines.
       </p>
       <ul class="list-none p-0 m-0 space-y-5">
         {
-          collaborations.map((c) => (
+          earlier.map((c) => (
             <li>
               <p class="text-[15px] font-medium text-[var(--color-text)]">
                 {c.name}<span class="font-normal text-[var(--color-text-dim)]"> · {c.org}</span>

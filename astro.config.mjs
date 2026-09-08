@@ -11,6 +11,9 @@ export default defineConfig({
   // Removed project pages (Arrowhead/Causal Direction, CIY, SNG, Isotrace, ORDO,
   // HanGL) — send their old URLs to the research index so external links don't 404.
   redirects: {
+    // The homepage became the plain, single-column academic page (2026-09), so the
+    // old plain mirror is merged into "/".
+    '/plain': '/',
     // The long "Motivation" essay moved into Writing (2026-07-16); `/approach`
     // now carries the short research-approach statement in the nav.
     '/motivation': '/writing/logic-of-natural-language',

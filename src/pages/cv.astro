@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 
 <Base
   title="CV · Xiaochuan Li"
-  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. I study the experimental and computational semantics of modal reasoning: what epistemic modal language does to the reasoning that follows, and how that function is acquired by children and computed by language models."
+  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. I work in experimental and computational semantics: what epistemic modal language does to the reasoning that follows, whether that function can be learned from linguistic input, and how it becomes available in human cognition."
 >
   <header class="mb-10">
     <div class="flex items-baseline justify-between gap-4">
@@ -58,18 +58,18 @@ import Base from "../layouts/Base.astro";
 
   <section class="mb-9">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research: epistemic modality and the maintenance of alternatives</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">One linguistic question — does an epistemic possibility expression merely signal uncertainty, or does it also help maintain a content-specific alternative for subsequent reasoning? — made testable as a learnability question: whether the function can be acquired from developmentally-realistic input (a controlled BabyLM setting) and how it is realized in the resulting representations, calibrated against what the developmental literature knows about how children acquire it.</p>
+    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">One linguistic question — does an epistemic possibility expression merely signal uncertainty, or does it also help maintain a content-specific alternative for subsequent reasoning? — made testable as a learnability question: whether the function can be acquired from developmentally-realistic linguistic input, and what evidence in that input it requires, calibrated against what the developmental literature knows about how it emerges in human cognition.</p>
     <div class="space-y-5">
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
           <p class="font-medium text-[15px]">Working paper on epistemic modality</p>
           <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">in preparation</p>
         </div>
-        <p class="text-sm mt-1">The linguistic account: speaker commitment, discourse update, and the maintenance of alternatives. States the competing analyses, what each predicts about the reasoning that follows an utterance, and the criteria — content-specificity, persistence, evidence-sensitivity — that separate a real maintenance effect from mention, priming, or generic uncertainty.</p>
+        <p class="text-sm mt-1">The linguistic account: speaker commitment, discourse update, and the maintenance of alternatives. States the competing analyses, what each predicts about the reasoning that follows an utterance, and the criteria — content-specificity, persistence, evidence-sensitivity — that separate a real maintenance effect from mention, priming, or generic uncertainty. The construct brief is currently under review by a formal semanticist, before any model or behavioural study.</p>
       </div>
       <div class="break-inside-avoid">
         <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">MODUS — exploratory language-model pilot</p>
+          <p class="font-medium text-[15px]">MODUS — earlier language-model pilot</p>
           <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">methods pilot</p>
         </div>
         <p class="text-sm mt-1">Controlled experiments on modal force, lexical form, evidence, and targeted intervention, developing methods to separate modal function from modal vocabulary: a direction built from evidence contrasts containing no modal words, tested by intervention against a base-rate control, with the lexical and generic-disruption confounds made explicit. Methodological groundwork for the alternative-maintenance experiments, not a result about modal semantics.</p>
@@ -88,17 +88,17 @@ import Base from "../layouts/Base.astro";
   </section>
 
   <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Earlier &amp; methodological work</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">Two collaborations that gave me the engineering the modality program runs on: controlled multilingual evaluation, intervention inside a model, and the analysis to read the result.</p>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers &amp; collaborations</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">A first-author paper, and a collaboration — the concrete output behind the program, and where the engineering came from: controlled multilingual evaluation, intervention inside a model, and the analysis to read the result.</p>
     <div class="space-y-4 text-sm">
+      <div class="break-inside-avoid">
+        <p class="font-medium text-[15px]">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges <span class="font-normal text-[var(--color-text-dim)]">· first-author paper</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">A controlled cross-lingual audit of VLM judges and evaluation metrics: hold the image pair fixed, vary only the prompt language, and test whether the judge tracks meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two VLM families; item-clustered robust regression, a 90-item human control, and a translation-cache integrity fault I found, re-ran in full, and reported. The same design logic the thesis applies to modal semantics: structure versus surface. Public code; revised version in preparation for arXiv.
+          <a href="https://github.com/xchuan-li/cross_lingual_protobias" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">GitHub ↗</a></p>
+      </div>
       <div class="break-inside-avoid">
         <p class="font-medium text-[15px]">Latent Control States <span class="font-normal text-[var(--color-text-dim)]">· DFKI</span></p>
         <p class="text-[var(--color-text-muted)] mt-0.5">Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <p class="font-medium text-[15px]">Cross-lingual ProtoBias <span class="font-normal text-[var(--color-text-dim)]">· an established NLP group</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Does a vision-language model track meaning, or culture-specific prototype shortcuts? My contribution: the cross-lingual evaluation across seven languages that extends the group's forthcoming paper.
-          <a href="https://github.com/xchuan-li/cross_lingual_protobias" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">GitHub ↗</a></p>
       </div>
     </div>
   </section>

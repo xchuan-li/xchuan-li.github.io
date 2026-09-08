@@ -98,7 +98,7 @@ export default function ProtoBiasDemo() {
       {/* verdict */}
       <div className="rounded-md p-3 text-sm leading-relaxed" style={{ background: "var(--color-surface)", borderLeft: `3px solid ${tint}`, color: "var(--color-text-muted)" }}>
         {rides
-          ? <><strong style={{ color: "var(--color-text)" }}>Rides the prototype.</strong> On {attr.toLowerCase()}, the judge prefers the typical-but-wrong image well above chance — the shortcut Stable Is Not Grounded certifies, in a multimodal judge.</>
+          ? <><strong style={{ color: "var(--color-text)" }}>Rides the prototype.</strong> On {attr.toLowerCase()}, the judge prefers the typical-but-wrong image well above chance — a culture-specific prototype standing in for the meaning of the pair.</>
           : <><strong style={{ color: "var(--color-text)" }}>At chance.</strong> On {attr.toLowerCase()} there is no prototype to ride, so the judge sits near 50% — the bias is attribute-specific, not everywhere.</>}
         <div className="mt-1.5 text-[var(--color-text-dim)]">Switch the language: the prompt changes, the rate barely moves. The bias follows the attribute, not the language.</div>
       </div>

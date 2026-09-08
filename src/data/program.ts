@@ -42,7 +42,7 @@ export const approach =
 
 /** The theoretical foundation — what the account is stated in. */
 export const foundation =
-  "The theoretical foundation stays linguistic: epistemic modality, speaker commitment, discourse update, and the maintenance of alternatives.";
+  "The theoretical foundation stays linguistic — formal semantics and pragmatics, in the discourse and information-state tradition: epistemic modality, speaker commitment, discourse update, and the maintenance of alternatives.";
 
 /** The default meta description, derived from the identity + current question. */
 export const metaDescription =
@@ -93,7 +93,7 @@ export const questions: ProgramQuestion[] = [
   },
   {
     label: "The computational question",
-    term: "distributional learnability and computational realization",
-    text: "Can it be learned from linguistic input, and how is it realized in language models?",
+    term: "distributional learnability",
+    text: "Can it be learned from linguistic input alone, and what evidence in that input is necessary for it?",
   },
 ];

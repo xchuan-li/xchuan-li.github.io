@@ -1,7 +1,7 @@
-// Single source of truth for the research program — consumed by the rich
-// homepage (src/pages/index.astro) and the plain homepage (src/pages/plain.astro).
-// Keeping the data here means a change to a project or its status updates both
-// presentations at once.
+// Single source of truth for the research program — consumed by the homepage
+// (src/pages/index.astro) and the /research index (src/pages/research/index.astro).
+// Keeping the data here means a change to a project or its status updates every
+// surface at once.
 
 export type ProjectGroup = "core" | "frontier" | "support";
 
@@ -71,7 +71,7 @@ export interface Project {
   // Whether the project page has an interactive demo (shown as a small marker).
   demo?: boolean;
   // Parked: the page stays up (URL unbroken) but the project is withdrawn from
-  // all mainline narratives (homepage, /research index, /plain).
+  // all mainline narratives (homepage, /research index).
   parked?: boolean;
   // Archived: off the current active focus (only SNG + CAST stay on the
   // mainline). The project page and its record are kept, but the piece is demoted
@@ -80,27 +80,33 @@ export interface Project {
   archived?: boolean;
 }
 
+// Ordered as they should read: the strongest concrete output first (a first-author
+// paper), then the DFKI collaboration, then the earlier methods pilot. All three
+// are `archived` — i.e. off the modality MAINLINE, which is the identity — but each
+// is real, completed or ongoing work. The current mainline (the modality construct)
+// is deliberately NOT a project card: it has no results yet, so it lives as the
+// narrative "Current case" section on the homepage / research page, per CONTEXT.md.
 export const projects: Project[] = [
   {
-    title: "MODUS",
-    href: "/research/modus",
-    color: "var(--accent-deep-purple)",
-    tint: "rgba(176, 156, 219, 0.10)",
-    glyph: "xling",
-    tags: ["LM pilot", "Methods", "Exploratory"],
-    desc: "An exploratory language-model pilot developing methods to separate modal function from modal vocabulary. It constructs a direction from evidence contrasts that contain no modal words, checks whether must and might associate with it, and tests whether intervening on it changes the model's certainty-related behaviour — while exposing the lexical, base-rate, and generic-disruption confounds any such claim has to survive. It is the methodological groundwork for the alternative-maintenance question, not a result about modal semantics: it does not show that the model represents worlds, maintains live alternatives, or shares anything with a human mind.",
-    group: "core",
-    tier: "thesis",
+    title: "Cross-lingual ProtoBias",
+    href: "/research/cross-lingual-protobias",
+    color: "var(--accent-indigo)",
+    glyph: "protobias",
+    tags: ["First-author paper", "Multimodal", "Cross-lingual"],
+    short: "A first-author paper — Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges (public code; revised version in preparation for arXiv). A controlled cross-lingual audit: hold the image pair fixed, vary only the prompt language, and test whether VLM judges track meaning or a culture-specific prototype shortcut. ~12,600 judgments across seven languages and two model families, item-clustered robust regression, a 90-item human control, and a translation-cache integrity fault found, re-run in full, and reported. The same design logic the thesis applies to modal semantics: structure versus surface.",
+    group: "support",
+    tier: "group",
     category: "personal",
-    status: "Exploratory",
-    node: "certify",
-    maturity: "active",
-    progress: "exploratory · methods pilot",
-    output: "Methods pilot",
-    blurb: "Controlled LM experiments on modal force, lexical form, evidence, and targeted intervention — methods groundwork, not a verdict.",
-    domain: "Epistemic modality · language models",
-    kind: "project",
-    demo: false,
+    status: "Complete",
+    node: "crosslingual",
+    maturity: "near",
+    progress: "paper complete · arXiv in prep",
+    output: "First-author paper",
+    blurb: "A first-author paper: a controlled cross-lingual audit — hold the image fixed, vary only the language — testing whether VLM judges track meaning or a culture-specific prototype. Seven languages, two model families.",
+    domain: "Multimodal evaluation · cross-lingual",
+    kind: "paper",
+    demo: true,
+    archived: true,
   },
   {
     title: "Latent Control States",
@@ -115,7 +121,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     node: "mechanism",
     maturity: "active",
-    progress: "data pipeline built",
+    progress: "ongoing · DFKI",
     output: "Decision experiment",
     blurb: "Does prompt framing shift a causally relevant latent state, or only the surface?",
     domain: "Mechanistic interp",
@@ -123,24 +129,25 @@ export const projects: Project[] = [
     archived: true,
   },
   {
-    title: "Cross-lingual ProtoBias",
-    href: "/research/cross-lingual-protobias",
-    color: "var(--accent-indigo)",
-    glyph: "protobias",
-    tags: ["Extension · applied"],
-    short: "An applied multimodal stress test: semantic content versus culture-specific prototype shortcuts. My contribution: the cross-lingual evaluation across seven languages that extends an established NLP group's forthcoming paper.",
-    group: "support",
-    tier: "group",
-    category: "collaborative",
-    status: "Ongoing",
-    node: "crosslingual",
-    maturity: "active",
-    progress: "report 2 · 2 models, 7 langs",
-    output: "Co-authored paper",
-    blurb: "Across languages, does a vision-language model track meaning or culture-specific prototype shortcuts?",
-    domain: "Multimodal bias",
-    kind: "paper",
-    demo: true,
+    title: "MODUS",
+    href: "/research/modus",
+    color: "var(--accent-deep-purple)",
+    tint: "rgba(176, 156, 219, 0.10)",
+    glyph: "xling",
+    tags: ["LM pilot", "Methods", "Earlier"],
+    desc: "An earlier, exploratory language-model pilot developing methods to separate modal function from modal vocabulary. It constructs a direction from evidence contrasts that contain no modal words, checks whether must and might associate with it, and tests whether intervening on it changes the model's certainty-related behaviour — while exposing the lexical, base-rate, and generic-disruption confounds any such claim has to survive. It is methodological groundwork for the current construct, not a result about modal semantics: it does not show that the model represents worlds, maintains live alternatives, or shares anything with a human mind.",
+    group: "core",
+    tier: "thesis",
+    category: "personal",
+    status: "Exploratory",
+    node: "certify",
+    maturity: "concept",
+    progress: "earlier · exploratory pilot",
+    output: "Methods pilot",
+    blurb: "An earlier exploratory pilot: controlled LM experiments separating modal function from modal vocabulary, with the confounds made explicit. Methods groundwork for the current question, not a verdict.",
+    domain: "Epistemic modality · language models",
+    kind: "project",
+    demo: false,
     archived: true,
   },
 ];
@@ -156,8 +163,12 @@ export const now: NowItem[] = [
     text: "Working out the linguistic account: whether an epistemic possibility expression such as \"It might be a star\" merely signals uncertainty, or whether it also helps maintain the star as a live alternative for subsequent reasoning — and what would have to hold for that to be a real effect rather than mention, priming, or generic uncertainty.",
   },
   {
-    label: "Language models",
-    text: "MODUS, an exploratory pilot: controlled experiments on modal force, lexical form, evidence, and causal intervention, developing methods that separate modal function from modal vocabulary. Behavioural and logit-based first; representational and causal analyses only if the behaviour warrants them.",
+    label: "Right now",
+    text: "Fixing the construct before any model or behavioural study: the target and the diagnostics — content-specific, persistent, evidence-sensitive — that would separate a real maintenance effect from mention, priming, or generic uncertainty. The construct brief is under review by a formal semanticist.",
+  },
+  {
+    label: "Recent output",
+    text: "Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges — a first-author paper with public code, in revision for arXiv. Earlier, MODUS: an exploratory pilot that built the methods for separating modal function from modal vocabulary.",
   },
   {
     label: "Cognitive side",
