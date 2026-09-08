@@ -45,6 +45,7 @@ const timeline = [
     period: "2024 – 2025",
     mono: "UMR",
     logo: "/images/logos/marburg.svg",
+    emblem: true,
     org: "University of Marburg",
     role: "German language program · graduate preparation",
     did: "Reached C1 German over an intensive year — and, with Chinese and English already in hand, spent it living inside a third language rather than only studying one.",
@@ -55,6 +56,7 @@ const timeline = [
     period: "2020 – 2024",
     mono: "SZU",
     logo: "/images/logos/szu.svg",
+    emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
     did: "Logic, philosophy of language, and analytic philosophy; senior thesis on Leibniz's characteristica universalis.",
@@ -70,7 +72,6 @@ const recentPosts = posts.slice(0, 4);
   <div class="wrap">
     <!-- ===== header ===== -->
     <header class="hd">
-      <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
       <div class="hd-main">
         <h1 class="hd-name">Xiaochuan Li</h1>
         <p class="hd-tag">{identityLong}</p>
@@ -87,6 +88,7 @@ const recentPosts = posts.slice(0, 4);
           <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
         </p>
       </div>
+      <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
     </header>
 
     <!-- ===== timeline / CV ===== -->
@@ -96,7 +98,7 @@ const recentPosts = posts.slice(0, 4);
         {timeline.map((t) => (
           <div class="tl-item">
             <div class="tl-aside">
-              <div class="tl-logo">
+              <div class={`tl-logo${t.emblem ? " emblem" : ""}`}>
                 {t.logo ? <img src={t.logo} alt={`${t.org} logo`} /> : <span aria-hidden="true">{t.mono}</span>}
               </div>
               <div class="tl-period">{t.period}</div>
@@ -158,13 +160,14 @@ const recentPosts = posts.slice(0, 4);
   .hd {
     display: flex;
     align-items: center;
-    gap: 2.25rem;
+    justify-content: space-between;
+    gap: 2.5rem;
     margin-bottom: 1rem;
   }
   .hd-photo {
     flex: none;
-    width: 200px;
-    height: 200px;
+    width: 208px;
+    height: 260px;
     border-radius: 14px;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface-2);
@@ -203,7 +206,7 @@ const recentPosts = posts.slice(0, 4);
 
   @media (max-width: 620px) {
     .hd { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
-    .hd-photo { width: 148px; height: 148px; }
+    .hd-photo { order: -1; width: 168px; height: 210px; }
     .hd-name { font-size: 2rem; }
     .hd-tag { font-size: 1.05rem; }
   }
@@ -230,13 +233,15 @@ const recentPosts = posts.slice(0, 4);
     gap: 1.75rem;
   }
   .tl-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
-  .tl-logo { height: 42px; display: flex; align-items: center; }
+  .tl-logo { min-height: 42px; display: flex; align-items: center; }
   .tl-logo img {
     height: 42px;
     width: auto;
     max-width: 148px;
     display: block;
   }
+  /* circular emblems read smaller than a wordmark at the same height — size them up to match */
+  .tl-logo.emblem img { height: 62px; }
   /* monogram fallback (only used if an entry has no logo file) */
   .tl-logo span {
     width: 52px;
