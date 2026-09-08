@@ -19,7 +19,7 @@ export const posts: Post[] = [
     date: "July 2026",
     pubDate: "2026-07-16",
     excerpt:
-      "The arc from Aristotle to language models, told through modality. Classical logic turns out to be a special case of a larger logic linguistics is still mapping — and Leibniz's question, whether natural language can be translated into logic, has quietly inverted now that a model learns its own. Why I came to linguistics from philosophy.",
+      "How a question about logical form moved from Aristotle and Leibniz to formal semantics and language models, and why that history led me from philosophy to linguistics.",
     status: "note",
   },
   {
@@ -28,7 +28,7 @@ export const posts: Post[] = [
     date: "June 2026",
     pubDate: "2026-06-21",
     excerpt:
-      "Developmental psychology and interpretability ask one question — behind a system that looks like it can, what is the format of the representation? — from opposite sides of a mirror. One sees behavior but not mechanism; the other sees mechanism but cannot trust behavior. Why they calibrate each other, where the mirror misleads, and why language is the instrument they share.",
+      "Developmental psychology infers hidden representations from behaviour. Interpretability can inspect mechanisms but often struggles to say what they mean. This essay asks what the two fields can learn from each other.",
     status: "note",
   },
   {
@@ -37,7 +37,7 @@ export const posts: Post[] = [
     date: "June 2026",
     pubDate: "2026-06-04",
     excerpt:
-      "The same content is carried by German morphology, English word order, and Chinese context. When a model handles all three, does it represent the meaning beneath the forms — or three separate surface habits that each happen to work? The motivating question behind the typological-grounding line.",
+      "German, English, and Chinese can express similar content through different grammatical resources. When a model handles all three, what would show that it learned a shared meaning rather than three separate shortcuts?",
     status: "note",
   },
   {
@@ -46,7 +46,7 @@ export const posts: Post[] = [
     date: "May 2026",
     pubDate: "2026-05-23",
     excerpt:
-      "My undergraduate thesis was on Leibniz's characteristica universalis. Two years and a discipline change later, that ambition has split into the two poles of my work — the principle of sufficient reason as the question I can put to a model, and the universal character as the goal I can only walk toward.",
+      "My undergraduate work on Leibniz left me with two questions: what counts as a sufficient reason, and whether a formal system can preserve the structure of thought. This essay traces how those questions reappeared in my work on language models.",
     status: "note",
   },
 ];

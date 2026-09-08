@@ -1,52 +1,38 @@
-// Single source of truth for the research program's POSITIONING copy — the
-// identity line, the current question, the operational criteria, the approach,
-// and the two explanatory questions.
-//
-// Everything that states what the work IS lives here and nowhere else, so the
-// rich homepage, the plain homepage, the research index, the approach page, the
-// CV, and the default meta description cannot drift apart. Project-level records
-// live in `research.ts`; writing posts in `writing.ts`.
-//
-// Deliberate vocabulary (do not "improve" without asking):
-//   - "experimental and computational semantics", NOT "experimental linguistics"
-//     — the latter implies a running programme of human experiments.
-//   - "testable questions for cognitive science and language models", NOT
-//     "experiments in both" — the developmental side is being scoped, not run.
-//   - two QUESTIONS (developmental / computational), never "two arms".
+// Single source of truth for the site's positioning copy (see A3g §14). Everything
+// that states what the work IS lives here, so the homepage, Current Work page,
+// Research Program page, CV, and the default meta description cannot drift apart.
+// Project records live in `research.ts`; writing posts in `writing.ts`.
 
-/** The identity claim. Short form — used where one sentence is all there is room for. */
-export const identity =
-  "I work in experimental and computational semantics, studying how linguistic expressions structure reasoning.";
+/** The identity claim. Short form. */
+export const identity = "I work on experimental and computational semantics.";
 
-/** The identity claim, long form — names the fields the methods come from. */
+/** The identity claim, long form — used in the homepage header. */
 export const identityLong =
-  "I study how linguistic expressions structure reasoning, using ideas and methods from experimental semantics, cognitive science, and language-model research.";
+  "I work on experimental and computational semantics. I study how expressions such as might and may shape the possibilities available in later reasoning.";
 
-/** The current research question. Follows the identity claim everywhere. */
+/** The current research question, in plain language. */
 export const currentQuestion =
-  "My current work asks whether epistemic possibility expressions merely weaken commitment, or also keep content-specific alternatives available for subsequent evidence updating.";
+  "Does saying that something might be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
 
-// Marked-up variants of the two statements above, for the surfaces that carry
-// emphasis (the hero, the plain header). Rendered with `set:html`. Keep the
-// prose identical to the plain versions above — only the markup differs, so the
-// two never say different things.
+// Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
+// Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =
-  "I study <strong>how linguistic expressions structure reasoning</strong>, using ideas and methods from <strong>experimental semantics</strong>, <strong>cognitive science</strong>, and <strong>language-model research</strong>.";
+  "I work on <strong>experimental and computational semantics</strong>. I study how expressions such as <em>might</em> and <em>may</em> shape the possibilities available in later reasoning.";
 
 export const currentQuestionHtml =
-  "My current work asks whether <strong>epistemic possibility expressions</strong> — <em>might</em>, <em>may</em> — merely <strong>weaken commitment</strong>, or also keep <strong>content-specific alternatives available</strong> for subsequent evidence updating.";
+  "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that <strong>particular possibility available</strong> for later reasoning?";
 
-/** The research approach, in one sentence. */
+/** How the work proceeds, in one sentence. */
 export const approach =
-  "Start from a linguistic question, translate it into testable questions for cognitive science and language models, and use the resulting evidence to refine the original linguistic account.";
+  "I begin with a question about linguistic meaning, work out what it predicts for later reasoning, and then choose a method that can separate those predictions.";
 
 /** The theoretical foundation — what the account is stated in. */
 export const foundation =
-  "The theoretical foundation stays linguistic — formal semantics and pragmatics, in the discourse and information-state tradition: epistemic modality, speaker commitment, discourse update, and the maintenance of alternatives.";
+  "The analysis draws on formal semantics and pragmatics, especially work on epistemic modality, speaker commitment, and discourse update.";
 
-/** The default meta description, derived from the identity + current question. */
+/** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li — experimental and computational semantics: how linguistic expressions structure reasoning. Current work asks whether epistemic possibility expressions merely weaken commitment, or also keep content-specific alternatives available for subsequent evidence updating.";
+  "Xiaochuan Li — experimental and computational semantics. I study how expressions such as might and may shape the possibilities available in later reasoning, and whether that difference can be learned from linguistic input.";
 
 export interface Criterion {
   name: string;
@@ -54,46 +40,37 @@ export interface Criterion {
 }
 
 /**
- * What would have to be true for "keeping an alternative available" to be a real
- * effect rather than mention, priming, memorability, or generic uncertainty.
- * These are the operational definitions that make the hypothesis falsifiable —
- * they belong under the current case, not in the hero figure.
+ * An observable difference between a maintained possibility and ordinary
+ * uncertainty (A3g §6.3). Consumed on the Current Work page.
  */
 export const criteria: Criterion[] = [
   {
-    name: "content-specific",
-    text: "it preserves the particular alternative p, not uncertainty in general",
+    name: "Content-specific",
+    text: "the effect concerns the proposition introduced by the utterance, not uncertainty in general",
   },
   {
-    name: "persistent",
-    text: "it continues to affect subsequent reasoning",
+    name: "Persistent",
+    text: "it remains detectable after the original sentence is gone",
   },
   {
-    name: "evidence-sensitive",
-    text: "it remains open when evidence permits it, but is removed when evidence rules it out",
+    name: "Evidence-sensitive",
+    text: "it disappears when later evidence rules the proposition out",
   },
 ];
 
 export interface ProgramQuestion {
   label: string;
-  /** The technical term for what this side establishes. */
-  term: string;
   text: string;
 }
 
-/**
- * The two explanatory levels. NOT two arms, NOT two running experiments — two
- * questions the linguistic account gets translated into.
- */
+/** The two empirical questions the linguistic analysis leads to (A3g §6.4). */
 export const questions: ProgramQuestion[] = [
   {
-    label: "The developmental question",
-    term: "developmental realization",
-    text: "How does this linguistic function become available in human cognition?",
+    label: "Developmental",
+    text: "How does this function emerge in human cognition?",
   },
   {
-    label: "The computational question",
-    term: "distributional learnability",
-    text: "Can it be learned from linguistic input alone, and what evidence in that input is necessary for it?",
+    label: "Computational",
+    text: "Can a learner acquire it from linguistic input alone? If so, what patterns in the input support it?",
   },
 ];

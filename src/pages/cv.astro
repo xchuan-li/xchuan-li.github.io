@@ -1,19 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
+
+// CV (A3g §10): conventional and scannable. It verifies the story told elsewhere;
+// it does not retell it. Order: contact → research interests → education →
+// manuscripts & projects → collaborations → methods & skills → languages.
+// NOTE: /cv.pdf is a separately generated file; regenerate it (print this page) so
+// the two do not contradict.
 ---
 
 <Base
   title="CV · Xiaochuan Li"
-  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. I work in experimental and computational semantics: what epistemic modal language does to the reasoning that follows, whether that function can be learned from linguistic input, and how it becomes available in human cognition."
+  description="CV of Xiaochuan Li, M.Sc. Human and AI, University of Technology Nuremberg. Experimental and computational semantics; epistemic modality; discourse update; language and reasoning; linguistically informed evaluation of language models."
 >
-  <header class="mb-10">
+  <header class="mb-8">
     <div class="flex items-baseline justify-between gap-4">
       <h1 class="text-3xl font-medium tracking-tight">Xiaochuan Li</h1>
       <a href="/cv.pdf" class="no-print text-sm text-[var(--color-accent)] hover:underline whitespace-nowrap">Download PDF ↗</a>
     </div>
-    <p class="text-[var(--color-text-muted)] mt-1">
-      M.Sc. Human and AI · University of Technology Nuremberg
-    </p>
+    <p class="text-[var(--color-text-muted)] mt-1">M.Sc. Human and AI · University of Technology Nuremberg</p>
     <p class="text-sm text-[var(--color-text-dim)] mt-2">
       <a href="mailto:xiaochuan.li@utn.de" class="hover:text-[var(--color-accent)] transition-colors">xiaochuan.li@utn.de</a>
       · <a href="https://github.com/xchuan-li" class="hover:text-[var(--color-accent)] transition-colors">github.com/xchuan-li</a>
@@ -21,131 +25,96 @@ import Base from "../layouts/Base.astro";
     </p>
   </header>
 
-  <section class="mb-9">
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">Research interests</h2>
+    <p class="text-sm text-[var(--color-text-muted)] max-w-prose">
+      Experimental and computational semantics; epistemic modality; discourse update; language and
+      reasoning; linguistically informed evaluation of language models.
+    </p>
+  </section>
+
+  <section class="mb-8">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Education</h2>
-    <div class="space-y-4">
+    <div class="space-y-3">
       <div class="flex justify-between gap-4 break-inside-avoid">
         <div>
-          <p class="font-medium">M.Sc., Human and AI</p>
+          <p class="font-medium">M.Sc., Human and Artificial Intelligence</p>
           <p class="text-sm text-[var(--color-text-muted)]">University of Technology Nuremberg (UTN)</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Research focus.</span> Experimental and computational semantics — how linguistic expressions structure the reasoning that follows. Thesis on epistemic modality and the maintenance of alternatives (detailed below).</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1"><span class="font-medium text-[var(--color-text)]">Coursework.</span> Cognitive psychology · experimental design &amp; statistics · interpretability · deep learning · epistemology.</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-0.5">Coursework: cognitive psychology, experimental design and statistics, interpretability, deep learning, epistemology.</p>
         </div>
-        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 to 2027</p>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2025 – 2027</p>
       </div>
       <div class="flex justify-between gap-4 break-inside-avoid">
         <div>
           <p class="font-medium">German language program</p>
           <p class="text-sm text-[var(--color-text-muted)]">University of Marburg · intensive German for graduate study</p>
         </div>
-        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2024 to 2025</p>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2024 – 2025</p>
       </div>
       <div class="flex justify-between gap-4 break-inside-avoid">
         <div>
           <p class="font-medium">B.A., Philosophy</p>
-          <p class="text-sm text-[var(--color-text-muted)]">Shenzhen University · College of Humanities</p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">
-            Senior thesis: <a href="/writing/from-leibniz" class="text-[var(--color-accent)] hover:underline"><em>On Leibniz's Logical Theory</em></a> (advisor: Zang Yong)
-          </p>
-          <p class="text-sm text-[var(--color-text-muted)] mt-1">
-            Coursework: logic, history of philosophy, analytic philosophy, mathematical logic; electives in cognitive psychology and linguistics. Shapes my focus on reasons, causality, and what licenses an inference.
+          <p class="text-sm text-[var(--color-text-muted)]">Shenzhen University</p>
+          <p class="text-sm text-[var(--color-text-muted)] mt-0.5">
+            Senior thesis on Leibniz's <em>characteristica universalis</em> (advisor: Zang Yong). Coursework in philosophy of language, analytic philosophy, logic, and mathematical logic.
           </p>
         </div>
-        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2020 to 2024</p>
+        <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">2020 – 2024</p>
       </div>
     </div>
   </section>
 
-  <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research: epistemic modality and the maintenance of alternatives</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">One linguistic question — does an epistemic possibility expression merely signal uncertainty, or does it also help maintain a content-specific alternative for subsequent reasoning? — made testable as a learnability question: whether the function can be acquired from developmentally-realistic linguistic input, and what evidence in that input it requires, calibrated against what the developmental literature knows about how it emerges in human cognition.</p>
-    <div class="space-y-5">
-      <div class="break-inside-avoid">
-        <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">Working paper on epistemic modality</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">in preparation</p>
-        </div>
-        <p class="text-sm mt-1">The linguistic account: speaker commitment, discourse update, and the maintenance of alternatives. States the competing analyses, what each predicts about the reasoning that follows an utterance, and the criteria — content-specificity, persistence, evidence-sensitivity — that separate a real maintenance effect from mention, priming, or generic uncertainty. The construct brief is currently under review by a formal semanticist, before any model or behavioural study.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">MODUS — earlier language-model pilot</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">methods pilot</p>
-        </div>
-        <p class="text-sm mt-1">Controlled experiments on modal force, lexical form, evidence, and targeted intervention, developing methods to separate modal function from modal vocabulary: a direction built from evidence contrasts containing no modal words, tested by intervention against a base-rate control, with the lexical and generic-disruption confounds made explicit. Methodological groundwork for the alternative-maintenance experiments, not a result about modal semantics.</p>
-        <p class="text-xs mt-1.5">
-          <a href="https://xchuan-li.github.io/research/modus" class="text-[var(--color-accent)] hover:underline">Project page ↗</a>
-        </p>
-      </div>
-      <div class="break-inside-avoid">
-        <div class="flex justify-between gap-4 items-baseline">
-          <p class="font-medium text-[15px]">Developmental question</p>
-          <p class="text-sm text-[var(--color-text-dim)] whitespace-nowrap">being scoped</p>
-        </div>
-        <p class="text-sm mt-1">How does this linguistic function become available in human cognition? Nonverbal modal reasoning and the acquisition of modal language have largely been studied separately; the question is what the modal expression itself does to subsequent reasoning when the available information is held constant. Being scoped against the existing developmental literature.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers &amp; collaborations</h2>
-    <p class="text-sm text-[var(--color-text-muted)] mb-4 max-w-prose">A first-author paper, and a collaboration — the concrete output behind the program, and where the engineering came from: controlled multilingual evaluation, intervention inside a model, and the analysis to read the result.</p>
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Manuscripts and research projects</h2>
     <div class="space-y-4 text-sm">
       <div class="break-inside-avoid">
-        <p class="font-medium text-[15px]">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges <span class="font-normal text-[var(--color-text-dim)]">· first-author paper</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">A controlled cross-lingual audit of VLM judges and evaluation metrics: hold the image pair fixed, vary only the prompt language, and test whether the judge tracks meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two VLM families; item-clustered robust regression, a 90-item human control, and a translation-cache integrity fault I found, re-ran in full, and reported. The same design logic the thesis applies to modal semantics: structure versus surface. Public code; revised version in preparation for arXiv.
+        <p><span class="font-medium">Epistemic modality and the maintenance of alternatives</span> <span class="text-[var(--color-text-dim)]">— manuscript in preparation</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Develops diagnostics for distinguishing content-specific alternative maintenance from mention, generic uncertainty, and perseveration. Construct brief under review by a formal semanticist.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">M.Sc. thesis: learnability of modal discourse effects</span> <span class="text-[var(--color-text-dim)]">— in design</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Tests whether a small language model can acquire the target distinctions from developmentally realistic linguistic input and which input patterns are necessary.</p>
+      </div>
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</span> <span class="text-[var(--color-text-dim)]">— first-author; in revision for arXiv</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Controlled cross-lingual evaluation across seven languages and two VLM families; about 12,600 judgments, item-clustered analysis, a human control, and public code.
           <a href="https://github.com/xchuan-li/cross_lingual_protobias" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">GitHub ↗</a></p>
       </div>
       <div class="break-inside-avoid">
-        <p class="font-medium text-[15px]">Latent Control States <span class="font-normal text-[var(--color-text-dim)]">· DFKI</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure.</p>
+        <p><span class="font-medium">MODUS</span> <span class="text-[var(--color-text-dim)]">— exploratory methods pilot</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Developed controlled contrasts and interventions for separating modal vocabulary from certainty-related behaviour; identified lexical, base-rate, and generic-disruption confounds.</p>
       </div>
     </div>
   </section>
 
-  <section class="mb-9">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Skills</h2>
-    <p class="text-sm text-[var(--color-text-muted)] italic mb-4 max-w-prose">
-      Both the engineering my research needs (controlled linguistic data generation, transformer
-      model evaluation, intervention-based causal testing, human-behavioural experiment design and
-      statistics, reproducible pipelines) and the foundations it draws on: cognitive psychology,
-      linguistics, and logic.
-    </p>
-    <div class="space-y-3 text-sm">
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research experience</h2>
+    <div class="text-sm break-inside-avoid">
+      <p><span class="font-medium">Latent Control States</span> <span class="text-[var(--color-text-dim)]">— ongoing collaboration with DFKI</span></p>
+      <p class="text-[var(--color-text-muted)] mt-0.5">Designed a utilitarian minimal-pair experiment varying dilemma, benefit size, and framing to test whether prompt framing changes a causally relevant internal state.</p>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Methods and technical skills</h2>
+    <div class="space-y-2 text-sm">
       <div class="break-inside-avoid">
-        <p class="font-medium">Programming &amp; data</p>
-        <p class="text-[var(--color-text-muted)]">Python (NumPy, pandas, scikit-learn), Git, LaTeX.</p>
+        <p><span class="font-medium">Programming and data.</span> <span class="text-[var(--color-text-muted)]">Python, NumPy, pandas, scikit-learn, Git, LaTeX.</span></p>
       </div>
       <div class="break-inside-avoid">
-        <p class="font-medium">ML / NLP tooling</p>
-        <p class="text-[var(--color-text-muted)]">PyTorch and HuggingFace Transformers (working proficiency): model inference, dataset pipelines, LoRA fine-tuning.</p>
+        <p><span class="font-medium">ML / NLP.</span> <span class="text-[var(--color-text-muted)]">PyTorch, Hugging Face Transformers, model inference, dataset pipelines, LoRA fine-tuning.</span></p>
       </div>
       <div class="break-inside-avoid">
-        <p class="font-medium">Interpretability methods (basic)</p>
-        <p class="text-[var(--color-text-muted)]">Probing (linear and structural), activation patching, steering, and ablation — reading a representation and testing what is causal, in a linguistically-informed frame rather than mechanistic interpretability for its own sake.</p>
+        <p><span class="font-medium">Interpretability.</span> <span class="text-[var(--color-text-muted)]">Linear and structural probing, activation patching, steering, ablation (working proficiency).</span></p>
       </div>
       <div class="break-inside-avoid">
-        <p class="font-medium">Experimental design &amp; statistics</p>
-        <p class="text-[var(--color-text-muted)]">Foundations in controlled behavioural design (minimal pairs, pre-registration) and mixed-effects analysis, building toward the shared paradigm that reads one prediction in both people and models.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <p class="font-medium">Cognitive psychology</p>
-        <p class="text-[var(--color-text-muted)]">Working foundations in concept learning, cognitive development, and human reasoning, including the developmental literature on modal cognition (Leahy &amp; Carey), which grounds the emergence question the thesis asks.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <p class="font-medium">Linguistics &amp; logic</p>
-        <p class="text-[var(--color-text-muted)]">Formal semantics (possible-worlds, modal quantification), modal and predicate logic, and morphology/syntax across isolating, fusional, and agglutinative types; grounded in a philosophy background in logic and philosophy of language.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <p class="font-medium">Linguistic evaluation</p>
-        <p class="text-[var(--color-text-muted)]">Designing controlled stimuli for morphology, agreement, dependency structure, and word order across Chinese, German, English, and Japanese.</p>
+        <p><span class="font-medium">Experimental design and statistics.</span> <span class="text-[var(--color-text-muted)]">Controlled stimuli, minimal pairs, preregistration, mixed-effects analysis (working proficiency).</span></p>
       </div>
     </div>
   </section>
 
-  <section class="mb-9">
+  <section class="mb-8">
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Languages</h2>
-    <p class="text-sm text-[var(--color-text-muted)]">Mandarin Chinese (native) · German (C1) · English (C1), spanning isolating, fusional, and analytic types. Learning Japanese, an agglutinative head-final system, to extend the typological span my linguistic work draws on.</p>
+    <p class="text-sm text-[var(--color-text-muted)]">Mandarin Chinese (native), German (C1), English (C1), Japanese (learning).</p>
   </section>
-
 </Base>

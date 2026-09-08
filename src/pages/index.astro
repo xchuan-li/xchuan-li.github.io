@@ -1,86 +1,88 @@
 ---
 import Base from "../layouts/Base.astro";
 import { posts } from "../data/writing";
-import { identityLong } from "../data/program";
+import { identityLongHtml } from "../data/program";
 
-// Homepage — a wider, modular "researcher personal site" (cf. karpathy.ai): a photo
-// header, a reverse-chronological CV timeline (what I did, then its influence, with
-// an institution logo per entry), the current projects, a personal "playground",
-// and writing. The identity line comes from data/program.ts; the timeline, projects,
-// and playground are page-specific and defined in this file.
+// Homepage (A3g §5). Section order: header → current work → selected work →
+// research program preview → writing → timeline → playground → contact. Research
+// evidence comes before biography, so the timeline sits below the projects. The
+// identity line comes from data/program.ts; page-specific copy lives here.
 //
-// PHOTO: public/images/headshot.jpg — painted as a CSS background, so a missing file
-// shows a clean empty frame, never a broken image.
-//
-// LOGOS: public/images/logos/{utn,marburg,szu}.svg, rendered in .tl-logo. Circular
-// emblems (`emblem: true`) are sized up so they match the UTN wordmark's weight.
+// PHOTO: public/images/headshot.jpg (CSS background — a missing file just shows an
+// empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
+// circular emblems (emblem: true) are sized up to match the UTN wordmark.
 
-// The four current projects (B1–B4). Defined here on the homepage; the /research
-// page keeps its own fuller records. Ordered mainline-first.
-const projects = [
+const selectedWork = [
   {
-    title: "Three Ways of Leaving p Unsettled",
-    tag: "Formal semantics · in progress",
+    title: "Three Ways of Leaving <em>p</em> Unsettled",
+    tag: "Semantics paper · construct under review",
     href: "/research",
     current: true,
-    desc: "A formal-semantics and pragmatics paper on three things everyday talk files under “uncertainty”: saying something might be so, saying it might or might not be, and saying you don’t know whether it is. Each leaves a different question open and licenses a different reply — the paper pins the distinction down. Currently under review by a formal semanticist.",
+    desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. I ask how each utterance changes the discourse and which replies it makes appropriate. A construct brief is currently under review by a formal semanticist.",
   },
   {
-    title: "Master’s thesis — is meaning like this learnable?",
+    title: "Master’s thesis: learning these distinctions",
     tag: "Thesis · in design",
     href: "/research",
-    desc: "Takes that distinction and asks a learnability question: trained on realistic input, does a small language model come to hold a possibility open and reason about it — and what in the input does that take? Formal analysis sets the target; a controlled corpus-and-training experiment tests it.",
+    desc: "My master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. The project begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
   },
   {
     title: "Cross-lingual ProtoBias",
-    tag: "First-author paper",
+    tag: "First-author paper · in revision for arXiv",
     href: "/research/cross-lingual-protobias",
-    desc: "A first-author paper: a controlled cross-lingual audit — hold the image pair fixed, vary only the prompt language, and test whether vision-language judges track meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two model families; public code, arXiv in preparation.",
+    desc: "I keep each image pair fixed and vary the language of the prompt to test when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
   },
   {
     title: "Latent Control States",
     tag: "Collaboration · DFKI",
     href: "/research",
-    desc: "With DFKI: does prompt framing shift a causally relevant latent state, or only the output? My part is a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the model’s choice tracks the real stakes or just surface pressure.",
+    desc: "In this collaboration with DFKI, we ask whether prompt framing changes only a model’s answer or also a causally relevant internal state. I designed a utilitarian minimal-pair experiment that varies the dilemma, benefit size, and framing.",
   },
 ];
 
 const timeline = [
   {
     period: "2025 – present",
-    mono: "UTN",
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    did: "Coming from philosophy, I learned how language models work—and how to use them as experimental systems for studying linguistic knowledge. I now design controlled experiments that ask what models have learned about meaning, not simply how well they perform.",
-    impact:
-      "Here, my research question took its current form: how linguistic expressions structure information—which possibilities remain open, which are ruled out, and what can be taken up in later reasoning—and how that structure is acquired by people and learned by models. This is the thread connecting my work beyond any single thesis topic.",
+    did: "At UTN, I moved from philosophy into language-model research. I learned to build controlled experiments and now use them to study what models learn about meaning.",
+    impact: "This is where my current research took shape: how linguistic expressions change which possibilities remain available for later reasoning.",
   },
   {
     period: "2024 – 2025",
-    mono: "UMR",
     logo: "/images/logos/marburg.svg",
     emblem: true,
     org: "University of Marburg",
     role: "German language program",
-    did: "A year immersed in German became more than a language program: it was a close encounter with how grammar shapes meaning through case, word order, and clause structure.",
-    impact:
-      "Comparing German with Chinese and English taught me to see languages as systems of structural choices.",
+    did: "I spent a year in an intensive German program before graduate study. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
+    impact: "",
   },
   {
     period: "2020 – 2024",
-    mono: "SZU",
     logo: "/images/logos/szu.svg",
     emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
-    did: "I studied philosophy of language, analytic philosophy, and logic, and wrote my senior thesis on Leibniz’s characteristica universalis—the idea of a universal notation whose form would mirror the structure of thought.",
-    impact:
-      "That project gave me the question that still anchors my work: if reasoning has a structure, how much of it is carried by the language through which we reason?",
+    did: "I studied philosophy of language, analytic philosophy, and logic. My senior thesis examined Leibniz’s <em>characteristica universalis</em>, a proposed notation whose form would mirror the structure of thought.",
+    impact: "It left me with a question I still work on: how much of reasoning is carried by the language in which it is expressed?",
   },
 ];
 
-const recentPosts = posts.slice(0, 4);
+const playground = [
+  {
+    title: "Information Machines",
+    tag: "Constructed language",
+    desc: "A small constructed language for experimenting with how a grammar introduces, connects, revises, and transmits information. It has a grammar, a changelog, and a test suite.",
+  },
+  {
+    title: "RELAY",
+    tag: "Language-puzzle game",
+    desc: "A puzzle game about discovering an unfamiliar language from scenes and short utterances. Players infer the pieces, build a new sentence, and see whether it communicates the intended message.",
+  },
+];
+
+const recentPosts = posts.slice(0, 3);
 ---
 
 <Base wide={true}>
@@ -89,9 +91,9 @@ const recentPosts = posts.slice(0, 4);
     <header class="hd">
       <div class="hd-main">
         <h1 class="hd-name">Xiaochuan Li</h1>
-        <p class="hd-tag">{identityLong}</p>
+        <p class="hd-tag" set:html={identityLongHtml} />
         <p class="hd-affil">
-          M.Sc. Human and AI · University of Technology Nuremberg · applying for PhD positions for fall 2027
+          M.Sc. Human and AI · University of Technology Nuremberg · applying for PhD positions beginning in fall 2027
         </p>
         <p class="hd-links">
           <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
@@ -106,65 +108,46 @@ const recentPosts = posts.slice(0, 4);
       <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
     </header>
 
-    <!-- ===== timeline / CV ===== -->
+    <!-- ===== current work ===== -->
     <section class="sec">
-      <h2 class="sec-h">Timeline</h2>
-      <div class="tl">
-        {timeline.map((t) => (
-          <div class="tl-item">
-            <div class="tl-aside">
-              <div class={`tl-logo${t.emblem ? " emblem" : ""}`}>
-                {t.logo ? <img src={t.logo} alt={`${t.org} logo`} /> : <span aria-hidden="true">{t.mono}</span>}
-              </div>
-              <div class="tl-period">{t.period}</div>
-            </div>
-            <div class="tl-body">
-              <h3 class="tl-org">{t.org}</h3>
-              <p class="tl-role">{t.role}</p>
-              <p class="tl-did">{t.did}</p>
-              <p class="tl-impact">{t.impact}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <h2 class="sec-h">Current work</h2>
+      <h3 class="blk-h">What does <em>might</em> leave open?</h3>
+      <p class="blk-body">
+        Suppose someone says, “The key might be in the drawer.” Does <em>might</em> simply mark
+        uncertainty, or does it keep the drawer possibility available when new evidence arrives? My
+        current work develops a semantic account of this difference and the diagnostics needed to
+        test it.
+      </p>
+      <p class="blk-link"><a href="/research">Read about the current work →</a></p>
     </section>
 
-    <!-- ===== projects ===== -->
+    <!-- ===== selected work ===== -->
     <section class="sec">
-      <h2 class="sec-h">Projects</h2>
+      <h2 class="sec-h">Selected work</h2>
       <div class="proj-list">
-        {projects.map((p) => (
+        {selectedWork.map((p) => (
           <div class={`proj${p.current ? " proj-current" : ""}`}>
             <div class="proj-top">
-              <a class="proj-title" href={p.href}>{p.title}</a>
+              <a class="proj-title" href={p.href} set:html={p.title} />
               <span class="proj-tag">{p.tag}</span>
             </div>
-            <p class="proj-desc">{p.desc}</p>
+            <p class="proj-desc" set:html={p.desc} />
           </div>
         ))}
       </div>
     </section>
 
-    <!-- ===== playground ===== -->
+    <!-- ===== research program preview ===== -->
     <section class="sec">
-      <h2 class="sec-h">Playground</h2>
-      <p class="block-note">Language isn’t only what I study — it’s what I tinker with. Two long-running side projects, for their own sake.</p>
-      <div class="proj-list">
-        <div class="proj">
-          <div class="proj-top">
-            <span class="proj-title-plain">Information Machines — a made-up language</span>
-            <span class="proj-tag">Conlang · ongoing</span>
-          </div>
-          <p class="proj-desc">I’m building a small language as an experiment in how information can be introduced, connected, revised, and transmitted — the same thing I chase in research, here as pure play. It has a grammar, a changelog, and a test suite, and it is never finished.</p>
-        </div>
-        <div class="proj">
-          <div class="proj-top">
-            <span class="proj-title-plain">RELAY — a language-puzzle game</span>
-            <span class="proj-tag">Game demo · prototype</span>
-          </div>
-          <p class="proj-desc">A puzzle game where you meet an invented language the way a field linguist would: watch a few scene-and-phrase pairs, work out the pieces and the order, then build a sentence you’ve never seen and test whether it transmits. A small authored thing, not a language-learning app.</p>
-        </div>
-      </div>
+      <h2 class="sec-h">Research program</h2>
+      <h3 class="blk-h">From linguistic analysis to evidence</h3>
+      <p class="blk-body">
+        The broader program connects formal semantics with two empirical questions. How does a
+        linguistic function emerge in human cognition? Can it be learned from linguistic input alone?
+        I use the same semantic analysis to formulate both questions, without treating models as
+        stand-ins for people.
+      </p>
+      <p class="blk-link"><a href="/approach">See the research program →</a></p>
     </section>
 
     <!-- ===== writing ===== -->
@@ -180,6 +163,58 @@ const recentPosts = posts.slice(0, 4);
       </ul>
       <p class="more"><a href="/writing">All writing →</a></p>
     </section>
+
+    <!-- ===== timeline ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Timeline</h2>
+      <div class="tl">
+        {timeline.map((t) => (
+          <div class="tl-item">
+            <div class="tl-aside">
+              <div class={`tl-logo${t.emblem ? " emblem" : ""}`}>
+                <img src={t.logo} alt={`${t.org} logo`} />
+              </div>
+              <div class="tl-period">{t.period}</div>
+            </div>
+            <div class="tl-body">
+              <h3 class="tl-org">{t.org}</h3>
+              <p class="tl-role">{t.role}</p>
+              <p class="tl-did" set:html={t.did} />
+              {t.impact && <p class="tl-impact" set:html={t.impact} />}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== playground ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Playground</h2>
+      <p class="block-note">I also build things with language for fun.</p>
+      <div class="proj-list">
+        {playground.map((p) => (
+          <div class="proj">
+            <div class="proj-top">
+              <span class="proj-title-plain">{p.title}</span>
+              <span class="proj-tag">{p.tag}</span>
+            </div>
+            <p class="proj-desc">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== contact ===== -->
+    <section class="sec">
+      <div class="cta">
+        <p class="cta-line">I’m applying for PhD positions beginning in fall 2027. Email is the best way to reach me.</p>
+        <p class="cta-links">
+          <a href="mailto:xiaochuan.li@utn.de">Email me →</a>
+          <span class="sep">·</span>
+          <a href="/contact">More ways to get in touch</a>
+        </p>
+      </div>
+    </section>
   </div>
 </Base>
 
@@ -187,13 +222,7 @@ const recentPosts = posts.slice(0, 4);
   .wrap { max-width: 940px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; }
 
   /* ===== header ===== */
-  .hd {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2.5rem;
-    margin-bottom: 1rem;
-  }
+  .hd { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; margin-bottom: 1rem; }
   .hd-photo {
     flex: none;
     width: 208px;
@@ -207,28 +236,11 @@ const recentPosts = posts.slice(0, 4);
     background-repeat: no-repeat;
   }
   .hd-main { min-width: 0; }
-  .hd-name {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.6rem;
-    color: var(--color-text);
-    line-height: 1.05;
-  }
-  .hd-tag {
-    font-size: 1.15rem;
-    line-height: 1.5;
-    color: var(--color-text);
-    margin: 0 0 0.9rem;
-    max-width: 34rem;
-  }
-  .hd-affil {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    margin: 0 0 0.8rem;
-    line-height: 1.5;
-  }
+  .hd-name { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.6rem; color: var(--color-text); line-height: 1.05; }
+  .hd-tag { font-size: 1.15rem; line-height: 1.5; color: var(--color-text); margin: 0 0 0.9rem; max-width: 34rem; }
+  .hd-tag :global(strong) { font-weight: 600; }
+  .hd-tag :global(em) { font-style: italic; }
+  .hd-affil { font-size: 0.9rem; color: var(--color-text-muted); margin: 0 0 0.8rem; line-height: 1.5; }
   .hd-links { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
   .hd-links a { color: var(--color-accent); text-decoration: none; }
   .hd-links a:hover { text-decoration: underline; }
@@ -250,107 +262,69 @@ const recentPosts = posts.slice(0, 4);
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-text-dim);
-    margin: 0 0 1.6rem;
+    margin: 0 0 1.4rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* block heading + body (current work, research program) */
+  .blk-h { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-text); margin: 0 0 0.7rem; }
+  .blk-h :global(em) { font-style: italic; }
+  .blk-body { font-size: 0.98rem; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 0.8rem; max-width: 46rem; }
+  .blk-body :global(em) { font-style: italic; color: var(--color-text); }
+  .blk-link { margin: 0; font-size: 0.9rem; }
+  .blk-link a { color: var(--color-accent); text-decoration: none; }
+  .blk-link a:hover { text-decoration: underline; }
+  .block-note { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 1.4rem; }
+
   /* ===== timeline ===== */
   .tl { display: flex; flex-direction: column; gap: 2rem; }
-  .tl-item {
-    display: grid;
-    grid-template-columns: 150px minmax(0, 1fr);
-    gap: 1.75rem;
-  }
+  .tl-item { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.75rem; }
   .tl-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
   .tl-logo { min-height: 48px; display: flex; align-items: center; }
-  .tl-logo img {
-    height: 36px;
-    width: auto;
-    max-width: 124px;
-    display: block;
-  }
-  /* circular emblems read smaller than a wordmark at the same height — size them up to match */
+  .tl-logo img { height: 36px; width: auto; max-width: 124px; display: block; }
   .tl-logo.emblem img { height: 78px; }
-  /* monogram fallback (only used if an entry has no logo file) */
-  .tl-logo span {
-    width: 52px;
-    height: 52px;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    background: var(--color-surface-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: var(--color-text-muted);
-  }
-  .tl-period {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    letter-spacing: 0.03em;
-    color: var(--color-text-dim);
-  }
+  .tl-period { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.03em; color: var(--color-text-dim); }
   .tl-org { font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
   .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
   .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
+  .tl-did :global(em) { font-style: italic; }
   .tl-impact { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
-
   @media (max-width: 620px) {
     .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
     .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }
   }
 
-  /* ===== projects ===== */
+  /* ===== project / selected-work list ===== */
   .proj-list { display: flex; flex-direction: column; }
   .proj { padding: 1.15rem 0; border-bottom: 1px solid var(--color-border); }
   .proj:first-child { border-top: 1px solid var(--color-border); }
-  .proj-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0.4rem;
-  }
+  .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
   .proj-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
   .proj-title:hover { color: var(--color-accent); }
+  .proj-title :global(em) { font-style: italic; }
   .proj-title-plain { font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
-  .proj-tag {
-    flex: none;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-    white-space: nowrap;
-  }
+  .proj-tag { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
   .proj-current .proj-tag { color: var(--color-accent); }
   .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 62ch; }
+  .proj-desc :global(em) { font-style: italic; }
 
   /* ===== writing ===== */
   .writing { list-style: none; margin: 0; padding: 0; }
-  .writing li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.72rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
+  .writing li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.72rem 0; border-bottom: 1px solid var(--color-border); }
   .writing li:first-child { border-top: 1px solid var(--color-border); }
   .writing a { color: var(--color-text); text-decoration: none; font-size: 0.98rem; }
   .writing a:hover { color: var(--color-accent); }
-  .writing-date {
-    flex: none;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    color: var(--color-text-dim);
-    white-space: nowrap;
-  }
+  .writing-date { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-dim); white-space: nowrap; }
   .more { margin: 1.1rem 0 0; font-size: 0.9rem; }
   .more a { color: var(--color-accent); text-decoration: none; }
   .more a:hover { text-decoration: underline; }
+
+  /* ===== contact cta ===== */
+  .cta { border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem 1.6rem; background: var(--color-surface); }
+  .cta-line { margin: 0 0 0.5rem; color: var(--color-text); font-size: 0.98rem; line-height: 1.6; }
+  .cta-links { margin: 0; font-size: 0.9rem; }
+  .cta-links a { color: var(--color-accent); text-decoration: none; }
+  .cta-links a:hover { text-decoration: underline; }
+  .cta-links .sep { color: var(--color-text-ghost); margin: 0 0.45rem; }
 </style>

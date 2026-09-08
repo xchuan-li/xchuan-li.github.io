@@ -1,141 +1,201 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { identityLong } from "../../data/program";
+import { criteria, questions } from "../../data/program";
 
-// The research page — the fuller version of the homepage's research + projects,
-// kept consistent with it. The four current projects (B1–B4) are defined here for
-// this page.
-const projects = [
+// Current Work page (A3g §6). Route stays /research; the displayed H1 and title
+// are "Current Work". Begins with the current problem, not the global identity.
+const selectedWork = [
   {
-    title: "Three Ways of Leaving p Unsettled",
-    tag: "Formal semantics · in progress",
+    title: "Three Ways of Leaving <em>p</em> Unsettled",
+    meta: "Semantics paper · construct under review",
     href: null,
     current: true,
-    desc: "A formal-semantics and pragmatics paper on three things everyday talk files under “uncertainty”: saying something might be so, saying it might or might not be, and saying you don’t know whether it is. Each leaves a different question open and licenses a different reply — the paper pins the distinction down. Currently under review by a formal semanticist.",
+    desc: "Compares <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, asking how each changes the discourse and which replies it licenses. No results yet; the construct brief is under review by a formal semanticist.",
   },
   {
-    title: "Master’s thesis — is meaning like this learnable?",
-    tag: "Thesis · in design",
+    title: "Master’s thesis: learning these distinctions",
+    meta: "Thesis · in design",
     href: null,
-    desc: "Takes that distinction and asks a learnability question: trained on realistic input, does a small language model come to hold a possibility open and reason about it — and what in the input does that take? Formal analysis sets the target; a controlled corpus-and-training experiment tests it.",
+    desc: "Asks whether a small language model can acquire the same distinctions from developmentally realistic text, and which patterns in the input are needed for them to emerge. Begins with the formal analysis above.",
   },
   {
     title: "Cross-lingual ProtoBias",
-    tag: "First-author paper",
+    meta: "First-author paper · in revision for arXiv",
     href: "/research/cross-lingual-protobias",
-    desc: "A first-author paper: a controlled cross-lingual audit — hold the image pair fixed, vary only the prompt language, and test whether vision-language judges track meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two model families; public code, arXiv in preparation.",
+    desc: "Holds each image pair fixed and varies the prompt language to test when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. About 12,600 judgments across seven languages and two model families; code is public.",
   },
   {
     title: "Latent Control States",
-    tag: "Collaboration · DFKI",
+    meta: "Collaboration · DFKI",
     href: null,
-    desc: "With DFKI: does prompt framing shift a causally relevant latent state, or only the output? My part is a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the model’s choice tracks the real stakes or just surface pressure.",
+    desc: "With DFKI, asks whether prompt framing changes only a model’s answer or also a causally relevant internal state. My role: I designed the utilitarian minimal-pair experiment varying dilemma, benefit size, and framing.",
   },
 ];
 ---
 
 <Base
-  title="Research · Xiaochuan Li"
-  description="Experimental and computational semantics: how linguistic expressions structure information — which possibilities stay open, which are ruled out, what can be taken up in later reasoning — and how that structure is acquired by people and learned by language models."
+  title="Current Work · Xiaochuan Li"
+  description="How epistemic possibility expressions such as might affect later reasoning: does might only lower a speaker's commitment, or does it keep a particular possibility available? The current construct, its diagnostics, honest status, and selected work."
 >
-  <article class="rx">
-    <h1 class="rx-h1">Research</h1>
-    <p class="rx-lede">{identityLong}</p>
-    <p class="rx-lede">
-      The throughline is one question: how linguistic expressions structure information — which
-      possibilities remain open, which are ruled out, and what can be taken up in later reasoning —
-      and how much of that structure is acquired by people and learned by models.
+  <article class="cw">
+    <h1 class="cw-h1">Current Work</h1>
+    <p class="cw-lede">
+      I am developing a semantic account of how epistemic possibility expressions affect later
+      reasoning. The central contrast is simple: does <em>might</em> only lower a speaker’s
+      commitment, or does it keep a particular possibility in play?
     </p>
 
-    <section class="rx-sec">
-      <h2 class="rx-h2">The current question</h2>
-      <p class="rx-p">
-        Everyday talk files a lot of things under “uncertainty”, but they are not the same. Saying
-        <em>the key might be in the drawer</em> leaves that possibility open. Saying <em>it might be,
-        or it might not</em> explicitly opens both sides. Saying <em>I don’t know whether it is</em>
-        reports that you cannot settle the question at all. Each leaves a different question open in
-        the discourse, and each licenses a different reply and a different next move.
-      </p>
-      <p class="rx-p">
-        My current paper — formal semantics and pragmatics — pins that three-way distinction down.
-        The thesis then asks the learnability question: whether a language model, trained on
-        realistic input, comes to treat these the way a competent speaker does, and what in the input
-        that would take. The point of the model is not that it resembles a mind; it is a system whose
-        entire input is linguistic, so it bounds what linguistic distribution alone can deliver.
+    <section class="cw-sec">
+      <h2 class="cw-h2">The linguistic problem</h2>
+      <p class="cw-p">Consider three answers to the question “Where is the key?”</p>
+      <ol class="cw-ex">
+        <li>It <em>might</em> be in the drawer.</li>
+        <li>It <em>might</em> be in the drawer, or it might not.</li>
+        <li>I <em>don’t know whether</em> it is in the drawer.</li>
+      </ol>
+      <p class="cw-p">
+        All three leave the key’s location unresolved, but they need not do the same discourse work. A
+        modal assertion introduces a possibility. A disjunction makes both sides explicit. An
+        ignorance report describes what the speaker cannot settle. My current paper asks how these
+        utterances differ in the commitments they create and the replies they license.
       </p>
     </section>
 
-    <section class="rx-sec">
-      <h2 class="rx-h2">Projects</h2>
-      <div class="rx-projs">
-        {projects.map((p) => (
-          <div class={`rx-proj${p.current ? " rx-proj-current" : ""}`}>
-            <div class="rx-proj-top">
+    <section class="cw-sec">
+      <h2 class="cw-h2">What would count as evidence</h2>
+      <p class="cw-p">
+        Before testing the proposal, I need an observable difference between a maintained possibility
+        and ordinary uncertainty. I use three criteria:
+      </p>
+      <ul class="cw-crit">
+        {criteria.map((c) => (
+          <li><strong>{c.name}:</strong> {c.text}.</li>
+        ))}
+      </ul>
+      <p class="cw-p">
+        Evidence-sensitivity is crucial. If a possibility remains active even after it has been ruled
+        out, the effect may be simple perseveration rather than semantic maintenance. The design
+        therefore holds the available information fixed, varies the linguistic framing, and measures
+        comprehension instead of assuming it.
+      </p>
+    </section>
+
+    <section class="cw-sec">
+      <h2 class="cw-h2">Two empirical questions</h2>
+      <div class="cw-qs">
+        {questions.map((q) => (
+          <div class="cw-q">
+            <p class="cw-q-label">{q.label}</p>
+            <p class="cw-q-text">{q.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="cw-p">
+        These questions require different evidence. The developmental question concerns human
+        acquisition. The computational question asks what linguistic distribution can support in a
+        controlled learner. A language model is useful for the second question; it is not a proxy for
+        a developing child.
+      </p>
+    </section>
+
+    <section class="cw-sec">
+      <h2 class="cw-h2">Current status</h2>
+      <p class="cw-status">
+        The project is still at the construct stage. A formal semanticist is reviewing the brief that
+        defines the theoretical contrast and the diagnostics. The developmental literature review is
+        under way, and no behavioural or model study has yet produced a result.
+      </p>
+    </section>
+
+    <section class="cw-sec">
+      <h2 class="cw-h2">Selected work</h2>
+      <div class="cw-projs">
+        {selectedWork.map((p) => (
+          <div class={`cw-proj${p.current ? " cw-proj-current" : ""}`}>
+            <div class="cw-proj-top">
               {p.href
-                ? <a class="rx-proj-title" href={p.href}>{p.title}</a>
-                : <span class="rx-proj-title-plain">{p.title}</span>}
-              <span class="rx-proj-tag">{p.tag}</span>
+                ? <a class="cw-proj-title" href={p.href} set:html={p.title} />
+                : <span class="cw-proj-title-plain" set:html={p.title} />}
+              <span class="cw-proj-meta">{p.meta}</span>
             </div>
-            <p class="rx-proj-desc">{p.desc}</p>
+            <p class="cw-proj-desc" set:html={p.desc} />
           </div>
         ))}
       </div>
     </section>
-
-    <p class="rx-foot">
-      More on where this came from is in the <a href="/writing">writing</a>; the front page has the
-      short version and a timeline.
-    </p>
   </article>
 </Base>
 
 <style>
-  .rx { max-width: 42rem; }
-  .rx-h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1rem; color: var(--color-text); }
-  .rx-lede { font-size: 1.02rem; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 1rem; max-width: 40rem; }
-  .rx-lede:first-of-type { color: var(--color-text); }
+  .cw { max-width: 42rem; }
+  .cw-h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 0.9rem; color: var(--color-text); }
+  .cw-lede { font-size: 1.05rem; line-height: 1.7; color: var(--color-text); margin: 0 0 1rem; max-width: 40rem; }
+  .cw-lede em { font-style: italic; }
 
-  .rx-sec { margin-top: 2.8rem; }
-  .rx-h2 {
+  .cw-sec { margin-top: 2.8rem; }
+  .cw-h2 {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-text-dim);
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.2rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--color-border);
   }
-  .rx-p { font-size: 0.96rem; line-height: 1.72; color: var(--color-text-muted); margin: 0 0 1rem; }
-  .rx-p em { font-style: italic; color: var(--color-text); }
+  .cw-p { font-size: 0.96rem; line-height: 1.72; color: var(--color-text-muted); margin: 0 0 1rem; }
+  .cw-p em { font-style: italic; color: var(--color-text); }
 
-  .rx-projs { display: flex; flex-direction: column; }
-  .rx-proj { padding: 1.1rem 0; border-bottom: 1px solid var(--color-border); }
-  .rx-proj:first-child { border-top: 1px solid var(--color-border); }
-  .rx-proj-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0.4rem;
+  .cw-ex {
+    list-style: decimal;
+    margin: 0 0 1.1rem;
+    padding: 1rem 1.2rem 1rem 2.6rem;
+    border-left: 2px solid var(--color-border-strong);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
   }
-  .rx-proj-title { font-size: 1.04rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
-  .rx-proj-title:hover { color: var(--color-accent); }
-  .rx-proj-title-plain { font-size: 1.04rem; font-weight: 500; color: var(--color-text); }
-  .rx-proj-tag {
-    flex: none;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-text-dim);
-    white-space: nowrap;
-  }
-  .rx-proj-current .rx-proj-tag { color: var(--color-accent); }
-  .rx-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
+  .cw-ex li { margin: 0.25rem 0; color: var(--color-text); line-height: 1.6; }
+  .cw-ex em { font-style: italic; }
 
-  .rx-foot { margin-top: 2.4rem; font-size: 0.9rem; color: var(--color-text-dim); }
-  .rx-foot a { color: var(--color-accent); text-decoration: none; }
-  .rx-foot a:hover { text-decoration: underline; }
+  .cw-crit { list-style: none; margin: 0 0 1.1rem; padding: 0; }
+  .cw-crit li {
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+  .cw-crit li:last-child { border-bottom: 1px solid var(--color-border); }
+  .cw-crit strong { color: var(--color-text); font-weight: 600; }
+
+  .cw-qs { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; margin: 0 0 1.1rem; }
+  @media (max-width: 560px) { .cw-qs { grid-template-columns: 1fr; } }
+  .cw-q { border: 1px solid var(--color-border); border-radius: 10px; padding: 1rem 1.1rem; }
+  .cw-q-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.5rem; }
+  .cw-q-text { font-size: 0.95rem; line-height: 1.55; color: var(--color-text); margin: 0; }
+
+  .cw-status {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .cw-projs { display: flex; flex-direction: column; }
+  .cw-proj { padding: 1.05rem 0; border-bottom: 1px solid var(--color-border); }
+  .cw-proj:first-child { border-top: 1px solid var(--color-border); }
+  .cw-proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem; }
+  .cw-proj-title { font-size: 1.02rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .cw-proj-title:hover { color: var(--color-accent); }
+  .cw-proj-title-plain { font-size: 1.02rem; font-weight: 500; color: var(--color-text); }
+  .cw-proj-title em, .cw-proj-title-plain em { font-style: italic; }
+  .cw-proj-meta { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
+  .cw-proj-current .cw-proj-meta { color: var(--color-accent); }
+  .cw-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
+  .cw-proj-desc em { font-style: italic; }
 </style>

@@ -16,10 +16,8 @@ export default defineConfig({
     '/plain': '/',
     // The long "Motivation" essay moved into Writing (2026-07-16).
     '/motivation': '/writing/logic-of-natural-language',
-    // The /approach page was retired (2026-09); its ground is covered by the
-    // homepage and /research.
-    '/approach': '/research',
-    '/research-program': '/research',
+    // /research is "Current Work"; /approach is "Research Program".
+    '/research-program': '/approach',
     '/research/causal-direction': '/research',
     '/research/arrowhead': '/research',
     '/research/ciy': '/research',

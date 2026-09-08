@@ -1,0 +1,90 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Research Program page (A3g §7). Explains how Xiaochuan works in general; it must
+// not repeat the whole modality case, which lives on Current Work (/research).
+---
+
+<Base
+  title="Research Program · Xiaochuan Li"
+  description="How I work in general: begin with a question about linguistic meaning, work out what each account predicts for later reasoning, and only then choose a method that can separate those predictions."
+>
+  <article class="rp">
+    <h1 class="rp-h1">Research Program</h1>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">Language first</h2>
+      <p class="rp-p">
+        Language comes first in my work. I begin with a disagreement about meaning, work out what each
+        account predicts for the reasoning that follows, and only then choose a method that can
+        separate those predictions.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">From analysis to predictions</h2>
+      <p class="rp-p">
+        Formal semantics gives me explicit alternatives rather than a general claim that a system
+        “understands” an expression. For each account, I ask what should remain possible after an
+        utterance, which inferences it should license, and what later evidence should change.
+      </p>
+      <p class="rp-p">
+        Those predictions determine the experiment. Depending on the question, the relevant evidence
+        may come from behavioural work, controlled model training, diagnostic evaluation, or
+        intervention. The method serves the linguistic contrast; it does not define the research
+        identity.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">Two empirical questions</h2>
+      <p class="rp-p">
+        The same linguistic analysis leads to two questions. The developmental question asks how the
+        function becomes available in human cognition. The computational question asks whether
+        linguistic input is sufficient for a learner to acquire it, and which features of that input
+        matter.
+      </p>
+      <p class="rp-p">
+        The questions meet at the linguistic account, but they are not versions of the same
+        experiment. Evidence about human development does not tell us what a model learned, and
+        evidence about a model does not explain how a child acquires language.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">Why language models</h2>
+      <p class="rp-p">
+        A language model offers two useful forms of control. Its training input can be specified, and
+        its internal states can be measured or intervened on. This makes it possible to ask what a
+        linguistic distribution can teach and which learned representations are causally involved in a
+        behaviour. Internal structure matters only when it explains a well-defined behavioural effect.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">Beyond modality</h2>
+      <p class="rp-p">
+        Epistemic modality is the first case because it provides explicit competing analyses and clear
+        questions about later reasoning. The same approach could extend to evidentials, conditionals,
+        negation, counterfactuals, and propositional attitudes. In each case, the task is to state the
+        linguistic function precisely enough that evidence can count for or against it.
+      </p>
+    </section>
+
+    <p class="rp-foot"><a href="/research">See how this program is being developed in the current work →</a></p>
+  </article>
+</Base>
+
+<style>
+  .rp { max-width: 42rem; }
+  .rp-h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1.4rem; color: var(--color-text); }
+  .rp-sec { margin-top: 2.4rem; }
+  .rp-sec:first-of-type { margin-top: 0; }
+  .rp-h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.7rem; }
+  .rp-p { font-size: 0.97rem; line-height: 1.72; color: var(--color-text-muted); margin: 0 0 0.9rem; }
+  .rp-p:last-child { margin-bottom: 0; }
+  .rp-p em { font-style: italic; color: var(--color-text); }
+  .rp-foot { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border); font-size: 0.92rem; }
+  .rp-foot a { color: var(--color-accent); text-decoration: none; }
+  .rp-foot a:hover { text-decoration: underline; }
+</style>
