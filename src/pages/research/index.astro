@@ -1,214 +1,141 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { projects } from "../../data/research";
-import { approach, criteria, foundation, identityLong, questions } from "../../data/program";
+import { identityLong } from "../../data/program";
 
-// The research page, in the order a reader needs it:
-//   the program → the current case → the linguistic hypothesis (+ criteria)
-//   → the developmental question → the LM question → methods & existing work.
-//
-// It must stay honest about status, which means keeping these distinct:
-//   - a current theoretical question (being worked out),
-//   - an exploratory LM pilot (built, smoke-test only),
-//   - a developmental component (being scoped — NOT a running experiment, no
-//     collaborator or institution named),
-//   - completed methodological work (the collaborations).
-//
-// Do NOT reintroduce: "human arm" / "LM arm", "one theory two systems", or any
-// claim that internal geometry adjudicates Kratzer vs. Lassiter. Positioning
-// copy comes from data/program.ts. See CONTEXT.md for the red lines.
-const protobias = projects.find((p) => p.href === "/research/cross-lingual-protobias");
-
-// Earlier & collaborative work, shown as compact credits below the headline paper.
-const earlier = [
+// The research page — the fuller version of the homepage's research + projects,
+// kept consistent with it. The four current projects (B1–B4) are defined here for
+// this page.
+const projects = [
   {
-    name: "Latent Control States",
-    org: "DFKI",
-    text: "Does prompt framing shift a causally relevant latent state, or only the output? My contribution: a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the choice tracks the real stakes or only surface pressure. An ongoing collaboration.",
+    title: "Three Ways of Leaving p Unsettled",
+    tag: "Formal semantics · in progress",
+    href: null,
+    current: true,
+    desc: "A formal-semantics and pragmatics paper on three things everyday talk files under “uncertainty”: saying something might be so, saying it might or might not be, and saying you don’t know whether it is. Each leaves a different question open and licenses a different reply — the paper pins the distinction down. Currently under review by a formal semanticist.",
   },
   {
-    name: "MODUS",
-    org: "earlier methods pilot",
-    text: "An exploratory language-model pilot that built the methods for separating modal function from modal vocabulary, and stress-tested the confounds any such claim has to survive. Groundwork for the current construct, not a result about modal semantics.",
-    href: "/research/modus",
-    hrefLabel: "Project page →",
+    title: "Master’s thesis — is meaning like this learnable?",
+    tag: "Thesis · in design",
+    href: null,
+    desc: "Takes that distinction and asks a learnability question: trained on realistic input, does a small language model come to hold a possibility open and reason about it — and what in the input does that take? Formal analysis sets the target; a controlled corpus-and-training experiment tests it.",
+  },
+  {
+    title: "Cross-lingual ProtoBias",
+    tag: "First-author paper",
+    href: "/research/cross-lingual-protobias",
+    desc: "A first-author paper: a controlled cross-lingual audit — hold the image pair fixed, vary only the prompt language, and test whether vision-language judges track meaning or a culture-specific prototype. ~12,600 judgments across seven languages and two model families; public code, arXiv in preparation.",
+  },
+  {
+    title: "Latent Control States",
+    tag: "Collaboration · DFKI",
+    href: null,
+    desc: "With DFKI: does prompt framing shift a causally relevant latent state, or only the output? My part is a utilitarian minimal-pair probe — dilemma × benefit-size × framing — testing whether the model’s choice tracks the real stakes or just surface pressure.",
   },
 ];
 ---
 
 <Base
   title="Research · Xiaochuan Li"
-  description="Experimental and computational semantics: whether epistemic possibility expressions merely weaken commitment, or also keep content-specific alternatives available for subsequent evidence updating — and how that question becomes testable for cognitive science and language models."
+  description="Experimental and computational semantics: how linguistic expressions structure information — which possibilities stay open, which are ruled out, what can be taken up in later reasoning — and how that structure is acquired by people and learned by language models."
 >
-  <h1 class="text-2xl font-medium tracking-tight mb-2">Research</h1>
-  <p class="text-[var(--color-text-muted)] mb-4 max-w-prose">
-    {identityLong} The work is one program rather than a list of projects, and it runs in one
-    direction: <strong>{approach.charAt(0).toLowerCase() + approach.slice(1)}</strong> How that works
-    in general is on the <a href="/approach" class="text-[var(--color-accent)] hover:opacity-75">approach page</a>.
-    This page is the current case.
-  </p>
+  <article class="rx">
+    <h1 class="rx-h1">Research</h1>
+    <p class="rx-lede">{identityLong}</p>
+    <p class="rx-lede">
+      The throughline is one question: how linguistic expressions structure information — which
+      possibilities remain open, which are ruled out, and what can be taken up in later reasoning —
+      and how much of that structure is acquired by people and learned by models.
+    </p>
 
-  <!-- ============ CURRENT CASE ============ -->
-  <section class="mt-12">
-    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Current case
-    </p>
-    <h2 class="text-xl font-medium tracking-tight mb-3">Epistemic modality</h2>
-    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-3">
-      Someone says <em>“It might be a star.”</em> Does that expression merely signal uncertainty — or
-      does it also help maintain <em>the star</em> as a live alternative for subsequent reasoning?
-      {foundation}
-    </p>
-    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-      The semantics literature has analysed <em>might</em> in terms of alternatives and keeping
-      possibilities open. Developmental work has studied nonverbal modal reasoning, and separately the
-      acquisition of modal language. Recent work suggests language models are sensitive to epistemic
-      language but inconsistent in modal reasoning. What I have not found is a study that holds the
-      available information constant and asks whether linguistic modality selectively maintains a
-      <em>particular</em> alternative.
-    </p>
-  </section>
-
-  <!-- ============ THE HYPOTHESIS ============ -->
-  <section class="mt-11">
-    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      The linguistic hypothesis
-    </p>
-    <h2 class="text-xl font-medium tracking-tight mb-3">What would make this a real effect</h2>
-    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-4">
-      "Keeping an alternative available" is too easy to satisfy as stated: mentioning the
-      proposition, priming on the modal word, finding the sentence memorable, being generally
-      unsure, or fixating on a first answer would all produce something that looks like it. So the
-      effect has to be pinned down in advance. A genuine alternative-maintenance effect should be:
-    </p>
-    <ul class="list-none p-0 m-0 mb-4 border-t border-[var(--color-border)] max-w-prose">
-      {criteria.map((c) => (
-        <li class="flex items-baseline gap-2 flex-wrap py-2.5 border-b border-[var(--color-border)] text-sm">
-          <span class="font-mono text-[11.5px] tracking-[0.06em] text-[var(--accent-deep-purple)] whitespace-nowrap">
-            {c.name}
-          </span>
-          <span class="text-[var(--color-text-ghost)]" aria-hidden="true">—</span>
-          <span class="flex-1 min-w-[16rem] text-[var(--color-text-muted)] leading-relaxed">{c.text}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-      Evidence-sensitivity carries the argument. Without it, "the alternative is still active" cannot
-      be told apart from a representation that is merely stuck. The design follows from the same
-      logic: hold the available information constant and vary only the linguistic framing, so that a
-      modal is compared against expressed ignorance, an explicit disjunction, and a neutral
-      description — with comprehension of the expression measured, not assumed.
-    </p>
-  </section>
-
-  <!-- ============ THE TWO QUESTIONS ============ -->
-  <section class="mt-11">
-    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Two questions, one account
-    </p>
-    <h2 class="text-xl font-medium tracking-tight mb-3">Where the evidence would come from</h2>
-    <div class="grid gap-4 sm:grid-cols-2 mb-4">
-      {questions.map((q) => (
-        <div class="rounded-[10px] border border-[var(--color-border)] p-4">
-          <p class="font-mono text-[10px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] mb-2">
-            {q.label}
-          </p>
-          <p class="text-sm text-[var(--color-text)] leading-relaxed mb-2">{q.text}</p>
-          <p class="font-mono text-[10.5px] text-[var(--accent-deep-purple)] m-0">{q.term}</p>
-        </div>
-      ))}
-    </div>
-    <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose">
-      <span class="font-medium text-[var(--color-text)]">Status, honestly.</span> This is at the
-      <strong>construct stage</strong>: the brief that fixes the target and the diagnostics is under
-      review by a formal semanticist, before any model or behavioural study. The developmental side is
-      <strong>being scoped</strong> — against the existing literature, and as a question, not a running
-      experiment. Neither is a result yet, and the evidence from either goes back to the linguistic
-      account rather than to a comparison between minds and models.
-    </p>
-  </section>
-
-  <!-- ============ EXISTING WORK ============ -->
-  <section class="mt-11">
-    <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Papers &amp; existing work
-    </p>
-    <h2 class="text-xl font-medium tracking-tight mb-4">What is built</h2>
-
-    {protobias && (
-      <a href={protobias.href} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors border-t border-[var(--color-border)]">
-        <div class="flex justify-between items-baseline gap-3 mb-1">
-          <h3 class="text-base font-medium group-hover:text-[var(--color-accent)]">{protobias.title}</h3>
-          <span class="proj-output" style={`--pc: ${protobias.color}`}>{protobias.output}</span>
-        </div>
-        <p class="proj-subtitle">a controlled cross-lingual audit — meaning versus culture-specific prototype</p>
-        <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mt-1.5 max-w-prose">
-          {protobias.short}
-        </p>
-        <div class="mt-2.5">
-          <span class="proj-state">{protobias.progress}</span>
-        </div>
-      </a>
-    )}
-
-    <div class="mt-9">
-      <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-        Earlier &amp; collaborative work
+    <section class="rx-sec">
+      <h2 class="rx-h2">The current question</h2>
+      <p class="rx-p">
+        Everyday talk files a lot of things under “uncertainty”, but they are not the same. Saying
+        <em>the key might be in the drawer</em> leaves that possibility open. Saying <em>it might be,
+        or it might not</em> explicitly opens both sides. Saying <em>I don’t know whether it is</em>
+        reports that you cannot settle the question at all. Each leaves a different question open in
+        the discourse, and each licenses a different reply and a different next move.
       </p>
-      <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mb-4">
-        A collaboration and an earlier pilot — where the engineering came from: controlled evaluation,
-        intervention inside a model, and the analysis to read the result. Methodological training,
-        not the identity. What I did, in two lines.
+      <p class="rx-p">
+        My current paper — formal semantics and pragmatics — pins that three-way distinction down.
+        The thesis then asks the learnability question: whether a language model, trained on
+        realistic input, comes to treat these the way a competent speaker does, and what in the input
+        that would take. The point of the model is not that it resembles a mind; it is a system whose
+        entire input is linguistic, so it bounds what linguistic distribution alone can deliver.
       </p>
-      <ul class="list-none p-0 m-0 space-y-5">
-        {
-          earlier.map((c) => (
-            <li>
-              <p class="text-[15px] font-medium text-[var(--color-text)]">
-                {c.name}<span class="font-normal text-[var(--color-text-dim)]"> · {c.org}</span>
-              </p>
-              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed max-w-prose mt-1">{c.text}</p>
-              {c.href && (
-                <p class="text-xs mt-1.5">
-                  <a href={c.href} class="text-[var(--color-accent)] hover:underline">{c.hrefLabel}</a>
-                </p>
-              )}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+    </section>
+
+    <section class="rx-sec">
+      <h2 class="rx-h2">Projects</h2>
+      <div class="rx-projs">
+        {projects.map((p) => (
+          <div class={`rx-proj${p.current ? " rx-proj-current" : ""}`}>
+            <div class="rx-proj-top">
+              {p.href
+                ? <a class="rx-proj-title" href={p.href}>{p.title}</a>
+                : <span class="rx-proj-title-plain">{p.title}</span>}
+              <span class="rx-proj-tag">{p.tag}</span>
+            </div>
+            <p class="rx-proj-desc">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <p class="rx-foot">
+      More on where this came from is in the <a href="/writing">writing</a>; the front page has the
+      short version and a timeline.
+    </p>
+  </article>
 </Base>
 
 <style>
-  /* Natural-output pill + state line. The pill is tinted with the project accent. */
-  .proj-output {
-    flex: none;
+  .rx { max-width: 42rem; }
+  .rx-h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1rem; color: var(--color-text); }
+  .rx-lede { font-size: 1.02rem; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 1rem; max-width: 40rem; }
+  .rx-lede:first-of-type { color: var(--color-text); }
+
+  .rx-sec { margin-top: 2.8rem; }
+  .rx-h2 {
     font-family: var(--font-mono);
-    font-size: 9.5px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    white-space: nowrap;
-    padding: 2px 8px;
-    border-radius: 999px;
-    color: color-mix(in srgb, var(--pc) 72%, var(--color-text));
-    border: 1px solid color-mix(in srgb, var(--pc) 38%, var(--color-border));
-    background: color-mix(in srgb, var(--pc) 8%, transparent);
+    color: var(--color-text-dim);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-border);
   }
-  .proj-state {
+  .rx-p { font-size: 0.96rem; line-height: 1.72; color: var(--color-text-muted); margin: 0 0 1rem; }
+  .rx-p em { font-style: italic; color: var(--color-text); }
+
+  .rx-projs { display: flex; flex-direction: column; }
+  .rx-proj { padding: 1.1rem 0; border-bottom: 1px solid var(--color-border); }
+  .rx-proj:first-child { border-top: 1px solid var(--color-border); }
+  .rx-proj-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .rx-proj-title { font-size: 1.04rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .rx-proj-title:hover { color: var(--color-accent); }
+  .rx-proj-title-plain { font-size: 1.04rem; font-weight: 500; color: var(--color-text); }
+  .rx-proj-tag {
+    flex: none;
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-dim);
+    white-space: nowrap;
   }
-  .proj-subtitle {
-    font-size: 13.5px;
-    font-style: italic;
-    color: var(--color-text);
-    opacity: 0.82;
-    line-height: 1.4;
-  }
+  .rx-proj-current .rx-proj-tag { color: var(--color-accent); }
+  .rx-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
+
+  .rx-foot { margin-top: 2.4rem; font-size: 0.9rem; color: var(--color-text-dim); }
+  .rx-foot a { color: var(--color-accent); text-decoration: none; }
+  .rx-foot a:hover { text-decoration: underline; }
 </style>

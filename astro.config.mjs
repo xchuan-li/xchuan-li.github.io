@@ -14,10 +14,12 @@ export default defineConfig({
     // The homepage became the plain, single-column academic page (2026-09), so the
     // old plain mirror is merged into "/".
     '/plain': '/',
-    // The long "Motivation" essay moved into Writing (2026-07-16); `/approach`
-    // now carries the short research-approach statement in the nav.
+    // The long "Motivation" essay moved into Writing (2026-07-16).
     '/motivation': '/writing/logic-of-natural-language',
-    '/research-program': '/approach',
+    // The /approach page was retired (2026-09); its ground is covered by the
+    // homepage and /research.
+    '/approach': '/research',
+    '/research-program': '/research',
     '/research/causal-direction': '/research',
     '/research/arrowhead': '/research',
     '/research/ciy': '/research',
