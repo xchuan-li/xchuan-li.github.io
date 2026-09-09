@@ -1,37 +1,42 @@
 ---
 layout: ../../layouts/Base.astro
-title: Is there meaning beneath the language?
-description: The motivating question behind the typological-grounding line — whether a model represents a meaning beneath the particular forms a language uses, or just the forms.
+title: What would it mean for meaning to survive a change of language?
+description: German, English, and Chinese carry similar content by different grammatical means. When a model handles all three, what evidence would show it learned a shared structure rather than three separate habits?
 ---
 
 <div class="prose">
 
 <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-  Note · June 2026
+  Research note · June 2026
 </div>
 
-# Is there meaning beneath the language?
+# What would it mean for meaning to survive a change of language?
 
-## The question the typological-grounding line is built to ask
+<p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">When a model handles the same content across languages, what would show that it learned a shared structure rather than three separate habits?</p>
 
-The same thing can be said three ways. German puts much of it in the shape of the word — case, tense, agreement folded into morphology. English fixes it by position: who did what to whom is mostly word order. Chinese leaves more of it to context — tense, number, even part of speech are often not marked on the word at all, and the surrounding sentence carries them.
+Take one small fact: a dog bit a man, not the other way around. English fixes who did what by word order — *the dog bit the man*. German can mark it with case instead, so the order is freer: *den Mann biss der Hund* still has the dog doing the biting. Mandarin leans on order again, with little morphology: *狗咬了人*. Same event, three grammatical strategies for the same distinction — agent versus patient.
 
-We say, casually, that these are *the same meaning in different languages*. That phrase smuggles in a strong assumption: that there is a meaning, sitting beneath the particular surface each language happens to use, which the forms are all encoding.
+We say, casually, that these are *the same meaning in different languages*. That phrase carries an assumption worth examining: that there is a meaning sitting beneath the surface each language happens to use, which the three forms all encode.
 
----
+It is a hypothesis, not a given. The philosophy of language has a long argument about whether there is any language-independent content to recover at all, and the realistic answer is probably mixed: some of what a sentence conveys is shared, some is specific to the resources a particular grammar makes available. So the useful question is not "is there meaning beneath the language" in general, but a narrower one I can get evidence on.
 
-When a model handles all three, the question I care about is whether it represents that thing beneath — or three separate surface habits that each happen to work. A model can be right in German because it learned the morphology, right in English because it learned the order, and right in Chinese because it learned the contextual cue, without anything in it corresponding to the meaning the three share. Fluent in each, grounded in none.
+When a model gets the dog-and-man sentence right in all three languages, several different things could be true, and they are worth keeping apart:
 
-This is the grounding question again — is the behavior carried by the structure, or by a correlate of it? — but with a piece supplied that the abstract version never has. The abstract version is hard to make decidable precisely because you rarely hold the structure in hand. Language hands it to you. Typology is a catalogue of the same content deliberately re-encoded by different grammars: a minimal-pair generator for meaning-versus-form, built over millennia, for free.
+- **Translation equivalence** — it maps the three sentences to nearby internal states. This is the weakest reading; nearby states could still be three memorised surface routes.
+- **Similar truth conditions** — it agrees, in each language, about which situations the sentence describes.
+- **Similar inferential consequences** — it draws the same downstream inferences from each: that the man was bitten, that the dog acted.
+- **Similar representations** — the internal state driving those judgments is, in some measurable sense, the same across languages.
 
----
+These are not the same claim, and cross-lingual stability supports the stronger ones only under conditions. A model can be right in German because it learned the case morphology, right in English because it learned the order, and right in Mandarin because it learned the local cue — three habits, each working, with nothing shared underneath. Fluent in each, grounded in none.
 
-It also suggests the shape of the test. If the model has the meaning beneath, its grip on a sentence should survive a change of form: re-encode the same content in another language's strategy, and the representation — and the behavior it licenses — should hold. If it only has the surface, the grip should break exactly when the form changes. Stability across forms is the signature of structure; breaking across forms is the signature of surface.
+That points to the design, and to one commitment:
 
----
+> Cross-lingual stability is evidence for abstraction only when lexical overlap, translation artifacts, task format, and language-specific cues have been separately controlled.
 
-*Meaning beneath the language* is a hypothesis, not a given. There is a long argument in the philosophy of language about whether there is any language-independent content to find at all. I don't need to settle that. I need the weaker, workable version: for a meaning we can hold fixed, a controlled way to ask whether the model tracks it or its surface — and an honest account of when that question is decidable and when it is not.
+Without those controls, "the behaviour holds across languages" can mean the languages were too similar on the surface, or that the translations leaked the answer, or that the task rewarded a shortcut every language happens to share. With them, a stable effect is harder to explain away as three coincidences.
 
-That weaker question is enough to build on, and it is the one the typological grounding line is built to ask.
+The shape of the test follows. If a model has something shared beneath the forms, its grip on a sentence should survive a change of form: re-encode the same content in another language's strategy — trade English order for German case — and the judgment, and the inference it licenses, should hold. If it only has the surface, the grip should break exactly where the form changes.
+
+I do not need to settle the old philosophical question. I need its workable form: for a piece of content we can hold fixed, a controlled way to ask whether the model tracks it or its surface, and an honest account of when that question is decidable and when it is not. That is enough to build on, and it is what this line of work is set up to ask.
 
 </div>

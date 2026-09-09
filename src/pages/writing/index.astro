@@ -1,11 +1,20 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { posts } from "../../data/writing";
+
+// Writing, layered into tiers so the research identity reads as settled: research
+// notes lead; intellectual background and earlier thinking sit below but stay
+// accessible.
+const groups = [
+  { label: "Research notes", tier: "research-note" as const },
+  { label: "Intellectual background", tier: "intellectual-background" as const },
+  { label: "Earlier thinking", tier: "earlier-work" as const },
+];
 ---
 
 <Base
   title="Writing · Xiaochuan Li"
-  description="Longer-form notes and essays on linguistic meaning, research taste, and what philosophy training does to how one reads ML papers."
+  description="Notes and essays on linguistic meaning, research method, and the habits Xiaochuan Li brought from philosophy into machine-learning research."
 >
   <div class="flex items-baseline justify-between gap-3 mb-2">
     <h1 class="text-2xl font-medium tracking-tight">Writing</h1>
@@ -17,20 +26,23 @@ import { posts } from "../../data/writing";
     philosophy into machine-learning research.
   </p>
 
-  <div class="divide-y divide-[var(--color-border)]">
-    {
-      posts.map((p) => (
-        <a href={`/writing/${p.slug}`} class="block py-6 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
-          <div class="flex justify-between items-baseline gap-3 mb-2">
-            <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
-            <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.date}</span>
-          </div>
-          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">{p.excerpt}</p>
-          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-[var(--color-surface)] text-[var(--color-text-muted)] border border-[var(--color-border)]">
-            {p.status}
-          </span>
-        </a>
-      ))
-    }
-  </div>
+  {groups.map((g) => {
+    const items = posts.filter((p) => p.tier === g.tier);
+    return items.length ? (
+      <section class="mt-10">
+        <p class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">{g.label}</p>
+        <div class="divide-y divide-[var(--color-border)]">
+          {items.map((p) => (
+            <a href={`/writing/${p.slug}`} class="block py-5 group hover:bg-[var(--color-surface)] -mx-3 px-3 rounded-md transition-colors">
+              <div class="flex justify-between items-baseline gap-3 mb-1.5">
+                <h2 class="text-base font-medium group-hover:text-[var(--color-accent)]">{p.title}</h2>
+                <span class="text-xs text-[var(--color-text-dim)] whitespace-nowrap">{p.date}</span>
+              </div>
+              <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{p.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ) : null;
+  })}
 </Base>

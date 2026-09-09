@@ -82,7 +82,7 @@ const playground = [
   },
 ];
 
-const recentPosts = posts.slice(0, 3);
+const featured = posts.find((p) => p.featured) ?? posts[0];
 ---
 
 <Base wide={true}>
@@ -153,14 +153,12 @@ const recentPosts = posts.slice(0, 3);
     <!-- ===== writing ===== -->
     <section class="sec">
       <h2 class="sec-h">Writing</h2>
-      <ul class="writing">
-        {recentPosts.map((p) => (
-          <li>
-            <a href={`/writing/${p.slug}`}>{p.title}</a>
-            <span class="writing-date">{p.date}{p.status === "draft" ? " · draft" : ""}</span>
-          </li>
-        ))}
-      </ul>
+      {featured && (
+        <a class="feat" href={`/writing/${featured.slug}`}>
+          <span class="feat-title">{featured.title}</span>
+          <span class="feat-excerpt">{featured.excerpt}</span>
+        </a>
+      )}
       <p class="more"><a href="/writing">All writing →</a></p>
     </section>
 
@@ -309,13 +307,11 @@ const recentPosts = posts.slice(0, 3);
   .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 62ch; }
   .proj-desc :global(em) { font-style: italic; }
 
-  /* ===== writing ===== */
-  .writing { list-style: none; margin: 0; padding: 0; }
-  .writing li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.72rem 0; border-bottom: 1px solid var(--color-border); }
-  .writing li:first-child { border-top: 1px solid var(--color-border); }
-  .writing a { color: var(--color-text); text-decoration: none; font-size: 0.98rem; }
-  .writing a:hover { color: var(--color-accent); }
-  .writing-date { flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--color-text-dim); white-space: nowrap; }
+  /* ===== writing (one featured note) ===== */
+  .feat { display: block; text-decoration: none; padding: 0.1rem 0 0.2rem; }
+  .feat-title { display: block; font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
+  .feat:hover .feat-title { color: var(--color-accent); }
+  .feat-excerpt { display: block; margin-top: 0.35rem; font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); max-width: 60ch; }
   .more { margin: 1.1rem 0 0; font-size: 0.9rem; }
   .more a { color: var(--color-accent); text-decoration: none; }
   .more a:hover { text-decoration: underline; }

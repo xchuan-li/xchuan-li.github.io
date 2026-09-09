@@ -5,7 +5,6 @@ description: The arc from Aristotle to language models, told through modality. C
 toc: true
 ---
 
-import LineageTimeline from "../../components/LineageTimeline.astro";
 import HeroWorlds from "../../components/HeroWorlds.astro";
 
 <div class="prose">
@@ -16,17 +15,17 @@ import HeroWorlds from "../../components/HeroWorlds.astro";
 
 # Is the logic of natural language the logic of the logicians?
 
-<p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">Why I came to linguistics from philosophy, told as the history of one question. This is a motivation, not a result — <a href="/research">the research page</a> carries the current work.</p>
+<p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">How formal semantics turns intuitions about meaning into competing, testable hypotheses.</p>
 
-The answer is not "no." Modern linguistics does not say natural language is illogical. It says something more interesting: classical logic is a *special case* of a larger logic we are still mapping. Here is that arc in five steps, and where I come in.
+The answer is not "no." Modern linguistics does not say natural language is illogical. Classical extensional logic gives us indispensable tools for representing entailment; what it does not settle on its own is what an ordinary modal sentence means, because those expressions draw on further parameters supplied by context, evidence, and conversational goals. Formal semantics is the study of that gap. Here is the arc in five steps, and where I come in.
 
 ## 1. One fixed form
 
-Aristotle and the tradition assumed a proposition has a fixed logical form. "All ravens are black" is ∀x(Raven(x) → Black(x)); a single non-black raven refutes it. The system is clean because every proposition is simply true or false, with nothing in between. Necessity and possibility, when they appear, are read the same flat way: *necessary* means true in all cases, *possible* means true in some.
+Classical logic assigns a proposition a truth value and a form to match. "All ravens are black" is ∀x(Raven(x) → Black(x)); a single non-black raven refutes it. The system is clean and powerful for entailment: every proposition is true or false, with nothing in between. Necessity and possibility, in the basic modal reading, are treated the same flat way — *necessary* is true in all cases, *possible* in some.
 
 ## 2. Then natural language misbehaves
 
-Now take an ordinary modal sentence: "It **must** be raining." Classical logic offers two flat readings — necessity (in all worlds it is raining) or possibility (in some) — and neither fits. The speaker is not claiming it rains in every possible world; they are reasoning from the evidence they have (wet umbrellas, a darkened sky) to what those clues force. And strangely, "It must be raining" is *weaker* than a plain "It is raining": you reach for *must* precisely when you are inferring rather than seeing. A logic that makes necessity the strongest possible claim gets the direction backwards.
+Now take an ordinary modal sentence: "It **must** be raining." The flat modal reading — necessity as "in all worlds it is raining," possibility as "in some" — does not fit. The speaker is not claiming it rains in every possible world; they are reasoning from the evidence they have (wet umbrellas, a darkened sky) to what those clues force. And strangely, "It must be raining" is *weaker* than a plain "It is raining": you reach for *must* precisely when you are inferring rather than seeing. A logic that makes necessity the strongest possible claim gets the direction backwards.
 
 So the real question is not whether "It must be raining" is true. It is: **what is the logical form of *must* in the first place?** Traditional logic assumed the form was already known. Linguistics answered no: the logical form is itself the object of study. That reversal is one of formal semantics' deepest moves.
 
@@ -36,9 +35,7 @@ Formal semantics answers with more logic, not less. Kratzer's account gives *mus
 
 Linguistics never abandoned logic. It kept building new logic: modal bases and ordering sources, degrees, conditionals, presupposition, alternatives.
 
-<LineageTimeline />
-
-The people who built these tools sit on one line. Leibniz made necessity and possibility quantification: the necessary holds in *all* worlds, the possible in *some*. Kripke turned that into mathematics, a frame of worlds and an accessibility relation. Kratzer connected it to the modal words of natural language. And developmental psychology, in Leahy and Carey, turned "does a mind *possess* this structure" into an experiment. My undergraduate thesis was on Leibniz's *characteristica universalis*; the distance from there to here is shorter than it looks.
+These traditions do not form a single inheritance line — the history is messier than that. But they supply different parts of the present question. Modal logic (Leibniz's quantification over worlds, Kripke's frames and accessibility relations) provides the formal structures. Linguistic semantics — Kratzer, and the degree camp after her — studies how those structures are realized in context. And cognitive experiments, like Leahy and Carey's, ask what observable behaviour would distinguish one representation from another. My undergraduate thesis was on Leibniz's *characteristica universalis*; the distance from there to here is real, though not a straight line.
 
 ## 4. Does the mind hold it?
 
@@ -46,9 +43,9 @@ Grant that *must* is best written as a modal base plus an ordering source. A new
 
 What that literature has largely left separate is the language itself. Nonverbal modal reasoning has been studied, and the acquisition of modal vocabulary has been studied, but the question of what the modal *expression* does to a child's subsequent reasoning sits between them.
 
-## 5. Which one did the model build?
+## 5. What evidence could distinguish the accounts?
 
-Now a version of the question that did not exist thirty years ago. When a language model reads "It must be raining," what has it built?
+Now a version of the question that did not exist thirty years ago. The accounts disagree about what *must* contributes:
 
 - **worlds and an ordering**: a modal base ranked by the evidence (Kratzer);
 - a **degree**: a single point of certainty on a scale (Lassiter);
@@ -57,7 +54,7 @@ Now a version of the question that did not exist thirty years ago. When a langua
 
 <HeroWorlds />
 
-It is tempting to think you can settle this by looking inside — decode the representation, name its format, and read the answer off. I no longer think the internal geometry adjudicates it. A direction in a model that correlates with certainty is a direction that correlates with certainty; calling it a set of worlds is a decision made outside the data. What a model does give you, and no person does, is the ability to hold the input fixed, change one thing, and intervene directly on what you find. That is a real methodological gift, and it is worth exactly what the behaviour it explains is worth — which is why the behaviour has to come first.
+It is tempting to think a language model could settle this — decode its representation, name the format, read the answer off. I do not think the internal geometry adjudicates it: a direction that correlates with certainty is a direction that correlates with certainty, and calling it a set of worlds is a decision made outside the data. The accounts are better separated by what they *predict*. Do they differ in the judgments speakers accept, the inferences a sentence licenses, how a claim is revised when new evidence arrives, or how the pattern generalizes to sentences no one has seen? A language model is useful here for one reason: you can hold the input fixed, change a single thing, and check whether the predicted difference appears. That is worth exactly what the behaviour it explains is worth, which is why the behaviour comes first.
 
 ## An older project, inverted
 
@@ -71,37 +68,8 @@ So the framing I hold is this. **Formal semantics offers a set of explicit, comp
 
 Modality is where I work now, though not the limit of the question. It runs on to attitudes, evidentials, conditionals, and counterfactuals: each a place where the logic of natural language looks unlike the logic of the logic books, and a chance to ask what a linguistic expression does to the reasoning around it. The current work is on the [research page](/research).
 
-<div class="mt-12 px-7 pt-5 pb-3 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-[10px] text-[15px] [&>h2:first-child]:mt-2 [&_p]:text-[var(--color-text-muted)] [&_li]:text-[14px] [&_li]:text-[var(--color-text-muted)]">
+<p class="mt-10 text-sm"><a href="/writing/reading-notes">A reading list for this lineage — modal logic, semantics, developmental cognition, and evaluation →</a></p>
 
-## Appendix: reading the lineage systematically
-
-A working syllabus, ordered so each stage equips the next. (Personal study plan; folded into the formal-semantics block of my broader curriculum.)
-
-**Stage 1: Modal logic (the formal layer)**
-- Hughes & Cresswell, *A New Introduction to Modal Logic*: chapters 1 to 3 for working fluency (K, T, S4, S5; Kripke frames; axiom-to-frame correspondence).
-- Optional depth: Blackburn, de Rijke & Venema, *Modal Logic* (ch. 1); SEP entry "Modal Logic" as a map.
-
-**Stage 2: Meaning as structure (the linguistic layer)**
-- Kratzer, "The Notional Category of Modality" (1981; revised in *Modals and Conditionals*, 2012): modal base, ordering source, the thin semantics of modal words.
-- von Fintel & Gillies, "Must … Stay … Strong!" (*NALS* 2010): why epistemic *must* is weaker than a bare assertion, and how a worlds account survives it.
-- Lassiter, *Graded Modality* (2017), and von Fintel & Heim, *Intensional Semantics*: the degree camp, and the fastest rigorous entry to the worlds camp.
-
-**Stage 3: Meaning in the mind (the developmental layer)**
-- Leahy & Carey, "The Acquisition of Modal Concepts," *TiCS* 2020: the minimal/modal distinction and the task logic built on it.
-- Cesana-Arlotti et al. and the developmental literature on early logical/modal reasoning: what a possession-versus-performance test looks like in practice.
-- Quilty-Dunn, Porot & Mandelbaum, "The Best Game in Town," *BBS* 2023: the representational-format debate in its current form.
-
-**Stage 4: The question posed to language models (the experimental layer)**
-- Linzen, "How Can We Accelerate Progress Towards Human-like Linguistic Generalization?" (ACL 2020): the evaluation philosophy this program adopts.
-- McCoy, Pavlick & Linzen, "Right for the Wrong Reasons" (ACL 2019): surface heuristics vs. licensing structure.
-- Recent work on modal and epistemic reasoning in LMs, tracked as the *Semantics with LMs* literature develops.
-
-**Historical companions (read for pleasure, cite for lineage)**
-- Leibniz, "On Freedom and Possibility" and the Arnauld correspondence: possible worlds in their original habitat.
-- Montague, "The Proper Treatment of Quantification in Ordinary English" (1973): natural language as a formal language.
-
-</div>
-
-<p class="mt-8 text-[13px] leading-relaxed text-[var(--color-text-dim)]"><em>Last revised July 2026. This is a motivation essay, not a result.</em></p>
+<p class="mt-8 text-[13px] leading-relaxed text-[var(--color-text-dim)]"><em>Last revised July 2026.</em></p>
 
 </div>
