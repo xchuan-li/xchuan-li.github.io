@@ -62,12 +62,12 @@ const progress = [
 
     <h2>Results</h2>
     <p>
-      <strong>Report 2</strong> scaled the probe to two model families (Qwen2.5-VL-7B and InternVL3-8B)
+      Report 2 scaled the probe to two model families (Qwen2.5-VL-7B and InternVL3-8B)
       and seven languages, adding Russian, Bengali, and Greek to span resource levels and scripts. Two
-      results <strong>replicate across both families</strong>: the bias is
-      <strong>attribute-specific</strong> (concentrated on Wealth and social status, near chance for
+      results replicate across both families: the bias is
+      attribute-specific (concentrated on Wealth and social status, near chance for
       Morality and Intellect), and, once lower-resource, distinct-script prompts are added, a
-      <strong>language effect the first four languages missed</strong> appears, with Bengali and Greek
+      language effect the first four languages missed appears, with Bengali and Greek
       eliciting measurably more bias than English. A back-translation check rules out translation
       quality, and there is no attribute × language interaction: the attribute <em>pattern</em> is
       language-invariant while the overall <em>level</em> is not. Report 1's "language barely moves it"
@@ -76,18 +76,18 @@ const progress = [
     <p>
       Two deeper checks make the effect hard to dismiss. First, it is not a low-level visual artifact:
       the prototypical image always alters one feature (count, colour, size, layout) and
-      <strong>colour, the obvious confound, is where the model is least fooled</strong>; the bias is
+      colour, the obvious confound, is where the model is least fooled; the bias is
       strongest exactly when the discriminating cue is hard to perceive. Second, the two families fail on
-      largely the <strong>same image pairs</strong> (per-item error correlation r = 0.68), so the
+      largely the same image pairs (per-item error correlation r = 0.68), so the
       prototype trap is an objective property of the pair, not a quirk of one model. Together these point
-      to a <strong>two-factor account</strong>: the attribute decides whether a visual shortcut exists at
+      to a two-factor account: the attribute decides whether a visual shortcut exists at
       all (a prototype for wealth and status, none for morality or intellect), and the weakness of the
       signal, whether a hard-to-perceive cue or an unfamiliar language, decides how strongly the model
       takes it.
     </p>
 
     <p>
-      The interactive read below shows the original <strong>four-language</strong> picture from
+      The interactive read below shows the original four-language picture from
       Report 1, not the final seven-language result: bias swings sharply by attribute, only mildly by
       language until Report 2's lower-resource prompts are added.
     </p>

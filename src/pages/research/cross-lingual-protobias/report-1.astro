@@ -30,22 +30,22 @@ import Base from "../../../layouts/Base.astro";
       Automatic metrics and MLLM judges increasingly stand in for humans when evaluating
       text-to-image models. Their failure mode is that they reward images that <em>look</em>
       prototypical even when the image is semantically wrong for the prompt. ProtoBias makes that
-      measurable: each prompt is shown with two images, a <strong>semantically-correct</strong> but
-      non-prototypical image (SC), and a <strong>prototypical but wrong</strong> adversarial image
+      measurable: each prompt is shown with two images, a semantically-correct but
+      non-prototypical image (SC), and a prototypical but wrong adversarial image
       (PA). We ask the judge, in the target language, which image matches the description, with
       left/right position randomized to control for position bias.
     </p>
     <p>
-      The metric is the <strong>error rate</strong>: the fraction of times the judge picks the
+      The metric is the error rate: the fraction of times the judge picks the
       prototypical-but-wrong image. <code>0.50</code> is chance; anything above is bias.
     </p>
     <ul>
-      <li><strong>Judge:</strong> Qwen2.5-VL-7B-Instruct.</li>
-      <li><strong>Scale:</strong> 300 rows/domain × 3 domains × 4 languages = <strong>3,600 judgments</strong>.</li>
-      <li><strong>Domains:</strong> Animals · Objects · Demography.</li>
-      <li><strong>Languages:</strong> English · Chinese · Arabic · Hindi.</li>
-      <li><strong>Translation:</strong> Google (deep-translator); Chinese human-verified, Arabic/Hindi not yet validated.</li>
-      <li><strong>Compute:</strong> NHR@FAU Alex, 1× A40 GPU.</li>
+      <li>Judge: Qwen2.5-VL-7B-Instruct.</li>
+      <li>Scale: 300 rows/domain × 3 domains × 4 languages = 3,600 judgments.</li>
+      <li>Domains: Animals · Objects · Demography.</li>
+      <li>Languages: English · Chinese · Arabic · Hindi.</li>
+      <li>Translation: Google (deep-translator); Chinese human-verified, Arabic/Hindi not yet validated.</li>
+      <li>Compute: NHR@FAU Alex, 1× A40 GPU.</li>
     </ul>
 
     <h2>First pass: it looked like nothing</h2>
@@ -72,8 +72,8 @@ import Base from "../../../layouts/Base.astro";
       Each Demography row is tagged with <em>which</em> stereotype it probes (Wealth, Power,
       Civility, Morality, Intellect), the social-hierarchy axis the dataset was designed around. The
       default analysis averaged over that label and collapsed Demography to a single number. Once we
-      stop averaging, a flat <strong>.56</strong> Demography mean turns out to hide a <strong>0.30
-      spread</strong>.
+      stop averaging, a flat .56 Demography mean turns out to hide a 0.30
+      spread.
     </p>
 
     <h2>Headline: the bias is attribute-specific</h2>
@@ -87,15 +87,15 @@ import Base from "../../../layouts/Base.astro";
         <tr><th>Social attribute</th><th>Error rate</th><th>n</th><th>95% CI</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Wealth</strong></td><td><strong>.774</strong></td><td>124</td><td>[.69, .84]</td></tr>
-        <tr><td><strong>Power</strong></td><td><strong>.672</strong></td><td>256</td><td>[.61, .73]</td></tr>
+        <tr><td>Wealth</td><td>.774</td><td>124</td><td>[.69, .84]</td></tr>
+        <tr><td>Power</td><td>.672</td><td>256</td><td>[.61, .73]</td></tr>
         <tr><td>Civility</td><td>.539</td><td>256</td><td>[.48, .60]</td></tr>
         <tr><td>Morality</td><td>.487</td><td>372</td><td>[.44, .54]</td></tr>
         <tr><td>Intellect</td><td>.479</td><td>192</td><td>[.41, .55]</td></tr>
       </tbody>
     </table>
     <p>
-      This answers <strong>RQ2</strong>: prototypicality bias is far stronger for socially sensitive
+      This answers RQ2: prototypicality bias is far stronger for socially sensitive
       attributes than for neutral domains, where objects sit at chance.
     </p>
 
@@ -110,15 +110,15 @@ import Base from "../../../layouts/Base.astro";
         <tr><th>Attribute</th><th>en</th><th>zh</th><th>ar</th><th>hi</th><th>n / lang</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Wealth</strong></td><td>.774</td><td>.774</td><td>.839</td><td>.710</td><td>31</td></tr>
-        <tr><td><strong>Power</strong></td><td>.703</td><td>.672</td><td>.594</td><td>.719</td><td>64</td></tr>
+        <tr><td>Wealth</td><td>.774</td><td>.774</td><td>.839</td><td>.710</td><td>31</td></tr>
+        <tr><td>Power</td><td>.703</td><td>.672</td><td>.594</td><td>.719</td><td>64</td></tr>
         <tr><td>Civility</td><td>.547</td><td>.484</td><td>.547</td><td>.578</td><td>64</td></tr>
         <tr><td>Morality</td><td>.473</td><td>.559</td><td>.505</td><td>.409</td><td>93</td></tr>
         <tr><td>Intellect</td><td>.417</td><td>.479</td><td>.542</td><td>.479</td><td>48</td></tr>
       </tbody>
     </table>
     <p>
-      This is the preliminary read on <strong>RQ1</strong>: the bias appears to be baked into the
+      This is the preliminary read on RQ1: the bias appears to be baked into the
       visual representation rather than produced by any one prompt language. A "language doesn't move
       it" result is itself a valid multilingual finding. If it holds, it strengthens the claim that
       the failure is structural rather than an artifact of one language's phrasing.
@@ -146,10 +146,10 @@ import Base from "../../../layouts/Base.astro";
 
     <h2>Next: Experiment 2</h2>
     <ol>
-      <li><strong>Confirm statistically.</strong> Mixed-effects logistic regression, <code>picked_adv ~ socio_attr + subcategory + lang + gender + (1|item)</code>, so the attribute effect is tested with item-level random effects rather than read off raw means.</li>
-      <li><strong>Tighten the estimates.</strong> Balance Demography sampling to ≥150 items per cell to narrow the Wealth / Power intervals.</li>
-      <li><strong>Test low-resource directly.</strong> Extend across the resource spectrum to probe the "low-resource = worse" hypothesis.</li>
-      <li><strong>Validate translation.</strong> Back-translation drift plus per-language parse-failure rates.</li>
+      <li>Confirm statistically. Mixed-effects logistic regression, <code>picked_adv ~ socio_attr + subcategory + lang + gender + (1|item)</code>, so the attribute effect is tested with item-level random effects rather than read off raw means.</li>
+      <li>Tighten the estimates. Balance Demography sampling to ≥150 items per cell to narrow the Wealth / Power intervals.</li>
+      <li>Test low-resource directly. Extend across the resource spectrum to probe the "low-resource = worse" hypothesis.</li>
+      <li>Validate translation. Back-translation drift plus per-language parse-failure rates.</li>
     </ol>
     <p class="text-[var(--color-text-muted)] !text-base">
       Either outcome is informative: a flat result confirms language-invariance; a low-resource spike

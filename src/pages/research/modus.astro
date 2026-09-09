@@ -44,17 +44,17 @@ import Base from "../../layouts/Base.astro";
     <h2>What the pilot does</h2>
     <p>On the running example "the ball is red":</p>
     <ol>
-      <li><strong>Build a certainty direction <code>D</code> with no modal words.</strong> Hold the
+      <li>Build a certainty direction <code>D</code> with no modal words. Hold the
         fact fixed and vary only the evidence: "all three sensors report red" (sure) vs. "one of three
         reports red" (unsure). The internal difference gives <code>D</code>, evidence-based certainty,
         with no <em>must</em> / <em>might</em> in it.</li>
-      <li><strong>Check the anchors.</strong> "must be red" and "might be red" should land on the sure
+      <li>Check the anchors. "must be red" and "might be red" should land on the sure
         and unsure ends of <code>D</code>.</li>
-      <li><strong>Intervene.</strong> Remove <code>D</code> from a "might be red" sentence and see
+      <li>Intervene. Remove <code>D</code> from a "might be red" sentence and see
         whether the model's certainty-related behaviour moves.</li>
-      <li><strong>Control.</strong> <code>D</code> could be encoding the evidence description itself
+      <li>Control. <code>D</code> could be encoding the evidence description itself
         (how many sensors report red) rather than certainty. So compare it against a competing
-        <strong>base-rate</strong> direction <code>D′</code>, built by changing how many red balls are
+        base-rate direction <code>D′</code>, built by changing how many red balls are
         in the box instead of the evidence. Removing <code>D</code> should move <em>might</em> while
         removing <code>D′</code> should not.</li>
     </ol>
@@ -68,9 +68,9 @@ import Base from "../../layouts/Base.astro";
 
     <h2>Status</h2>
     <p>
-      <strong>Pilot, done — a smoke test.</strong> Qwen2.5-0.5B, one evidence family: the direction
+      Pilot, done — a smoke test. Qwen2.5-0.5B, one evidence family: the direction
       <code>D</code> is built from evidence alone, with no modal word present; ablating it while the
-      model answers a <em>might</em> item raises that item's certainty by <strong>+0.152</strong>,
+      model answers a <em>might</em> item raises that item's certainty by +0.152,
       while ablating the base-rate control <code>D′</code> does nothing (−0.033).
     </p>
     <p class="!text-sm !text-[var(--color-text-muted)]">
@@ -83,7 +83,7 @@ import Base from "../../layouts/Base.astro";
 
     <h2>What this can and cannot support</h2>
     <p>Worth stating flatly, because each of these has a tempting overstatement one step away.</p>
-    <p><strong>It can support:</strong></p>
+    <p>It can support:</p>
     <ul>
       <li>that a direction can be constructed from evidence contrasts containing no modal words;</li>
       <li>that <em>must</em> and <em>might</em> associate with that direction;</li>
@@ -92,7 +92,7 @@ import Base from "../../layouts/Base.astro";
         what it takes to separate them;</li>
       <li>a methodological basis for the alternative-maintenance experiments this is groundwork for.</li>
     </ul>
-    <p><strong>It cannot support:</strong></p>
+    <p>It cannot support:</p>
     <ul>
       <li>that the model implements Kratzer-style worlds — or any claim that internal geometry
         adjudicates between competing semantic theories;</li>
@@ -117,9 +117,9 @@ import Base from "../../layouts/Base.astro";
 
     <h2>Scope &amp; claim discipline</h2>
     <ul>
-      <li><strong>Epistemic force only</strong>: <em>must</em> / <em>might</em> as evidence-licensed
+      <li>Epistemic force only: <em>must</em> / <em>might</em> as evidence-licensed
         inference (von Fintel &amp; Gillies 2010), not logical necessity.</li>
-      <li>ML vocabulary stays <strong>instrument</strong> vocabulary. The model is a system whose
+      <li>ML vocabulary stays instrument vocabulary. The model is a system whose
         input is entirely linguistic, which makes it a good probe of what linguistic distribution can
         deliver — never a claim that "the model understands modality".</li>
       <li>No claim about people. Convergence ≠ homology, and a model result is not evidence about a
