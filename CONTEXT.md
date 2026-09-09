@@ -10,7 +10,7 @@ A personal research website for **Xiaochuan Li**, MSc student in Human and AI at
 
 **Information architecture (A3g §4–5).** Nav: **Current Work** (`/research`) · **Research Program** (`/approach`) · Writing · CV · Contact. Each page has one job. Home = orientation + evidence, ordered header → current work → selected work → research program → writing → timeline → playground → contact (research evidence before biography). Current Work (`/research`, displayed H1 "Current Work", route unchanged) = the present problem, evidence criteria, two empirical questions, honest status, selected work. Research Program (`/approach`) = how the work proceeds in general — must not repeat the whole modality case. CV = conventional, scannable verification, not a second research essay.
 
-**Status reality (do not overstate).** Current stage is the **construct**: the linguistic construct brief (target + diagnostics) is under review by a formal semanticist, before any model or behavioural study — the modality mainline has **no results yet**, so it stays a narrative "Current case", never a project card. The developmental side is **being scoped** — no experiment running, no ethics/participants, no collaborator named publicly. **MODUS** is now an **earlier** exploratory methods pilot (one model, one evidence family, missing a norm-matched random-direction control), demoted from the current-pilot slot — groundwork, not a finding, and not the identity. **Cross-lingual ProtoBias** is a **first-author paper** with public code (revised version in prep for arXiv) — the strongest concrete output, but capability/methods evidence, not the research identity. Keep these tiers visibly distinct on `/research`. (Last synced to the vault 2026-09-08.)
+**Status reality (do not overstate).** Current stage is the **construct**: the linguistic construct brief (target + diagnostics) is under review by a formal semanticist, before any model or behavioural study — the modality mainline has **no results yet**, so it stays a narrative "Current case", never a project card. The developmental side is **being scoped** — no experiment running, no ethics/participants, no collaborator named publicly. **MODUS** (an earlier exploratory methods pilot) has been **removed from the site** (2026-09): it is not one of the current B1–B4 projects and no longer has a page; `/research/modus` redirects to `/research`. **Cross-lingual ProtoBias** is a **first-author paper** with public code (revised version in prep for arXiv) — the strongest concrete output, but capability/methods evidence, not the research identity. Keep these tiers visibly distinct on `/research`. (Last synced to the vault 2026-09-08.)
 
 **Redirects & retired routes.** `/motivation` → `/writing/logic-of-natural-language`; `/research-program` → `/approach`; older project routes (HanGL, ORDO, SNG, Isotrace, Arrowhead, CIY, etc.) → `/research` (see `astro.config.mjs`). Retired in 2026-09: the scroll-portfolio hero, the `/plain` mirror, and `src/data/research.ts`. Many homepage figure components (`HeroAlternatives`, `ResearchMap`, `DecryptedText`, `HeroModality`, …) are now orphaned; they are kept for possible revert but are not imported by any current page.
 
@@ -64,9 +64,8 @@ src/
 │   ├── contact.astro               # Email, GitHub, LinkedIn, PhD-application note
 │   ├── 404.astro, rss.xml.ts
 │   ├── research/
-│   │   ├── index.astro             # Research index (mainline + collaborations)
-│   │   ├── modus.astro             # Thesis — the format of modal force
-│   │   ├── hangl.astro             # Sino-Korean morphology (has demo)
+│   │   ├── index.astro             # Current Work page (B1–B4 projects)
+│   │   ├── hangl.astro             # (orphaned) Sino-Korean morphology
 │   │   ├── ordo.astro              # Generics / defeasibility
 │   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
 │   └── writing/

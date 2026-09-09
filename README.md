@@ -38,8 +38,7 @@ src/
 │   ├── approach.astro          # the research approach, short (nav slot; was /motivation)
 │   ├── cv.astro / contact.astro / 404.astro / rss.xml.ts
 │   ├── research/
-│   │   ├── index.astro         # current case → hypothesis → two questions → work
-│   │   ├── modus.astro         # exploratory LM methods pilot
+│   │   ├── index.astro         # Current Work page
 │   │   ├── hangl.astro         # (orphaned) Sino-Korean morphology
 │   │   ├── ordo.astro          # (orphaned) generics / defeasibility
 │   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
