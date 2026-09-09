@@ -1,0 +1,123 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Project page for the semantics paper (B2, "Three Ways of Leaving p Unsettled").
+// A pure formal-semantics/pragmatics paper at the construct stage — evidence is
+// constructed examples with context, linguistic judgments, comparison of existing
+// accounts, and formal derivation. The learnability/behavioural side belongs to the
+// thesis (/research/learnability), not here. Red lines: no "two arms", no
+// "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names (the
+// reviewer is "a formal semanticist"). Cited authors are published literature, not
+// collaborators. No results are claimed — the page is honest that it is pre-analysis.
+---
+
+<Base
+  title="Three Ways of Leaving p Unsettled · Xiaochuan Li"
+  description="A formal-semantics paper distinguishing one-sided possibility, explicit two-sided openness, and an explicit report of non-resolution, and what each predicts for the discourse that follows. Construct under review; no results yet."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Semantics paper · construct under review
+    </div>
+    <h1>Three Ways of Leaving <em>p</em> Unsettled</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
+      How should we distinguish one-sided possibility, explicit two-sided openness, and an explicit
+      report of non-resolution — and what does each predict for the discourse that follows?
+    </p>
+    <p class="text-sm text-[var(--color-text-dim)] !mb-8">
+      A paper in formal semantics and pragmatics. The companion question — whether these distinctions
+      can be <a href="/research/learnability">learned from language alone</a> — is treated separately,
+      in my thesis.
+    </p>
+
+    <p>
+      This paper compares three utterances that all leave a question open but need not do the same work
+      in a conversation. Its evidence is linguistic: constructed minimal pairs with explicit context,
+      judgments about which replies and continuations they license, a comparison of existing accounts,
+      and formal derivation. It makes no claim about reaction times, group effect sizes, or what a
+      language model does — those belong to the thesis, and do not decide whether the paper is right.
+    </p>
+
+    <h2>The three-way distinction</h2>
+    <p>
+      Take the question <em>Where is the key?</em>, and let <em>p</em> be “the key is in the drawer.”
+      Three answers all leave the location unresolved:
+    </p>
+    <ul>
+      <li><strong>One-sided possibility.</strong> “It might be in the drawer.” The relevant information state is compatible with <em>p</em>.</li>
+      <li><strong>Bilateral openness.</strong> “It might be in the drawer, or it might not.” Both <em>p</em> and not-<em>p</em> are explicitly left open.</li>
+      <li><strong>Issue non-resolution.</strong> “I don’t know whether it is in the drawer.” The speaker reports being unable to resolve the question.</li>
+    </ul>
+    <p>
+      The distinction matters because the obvious label — “uncertainty” — hides at least three different
+      contributions. Saying <em>might&nbsp;p</em> guarantees only that <em>p</em> is a live possibility; it
+      does not by itself keep not-<em>p</em> open. Saying <em>I don’t know whether&nbsp;p</em> asserts that the
+      speaker has not settled the question, but not that the two answers are equally likely. So the three
+      cannot be collapsed into a single scale of confidence.
+    </p>
+
+    <h2>What would tell the accounts apart</h2>
+    <p>
+      The work of the paper is to find observable differences that separate the three. I use a battery of
+      diagnostics rather than any single test, and I weight them honestly:
+    </p>
+    <ul>
+      <li><strong>Which question each most directly answers.</strong> A possibility claim, an explicit two-sided statement, and an ignorance report address different questions under discussion — but this is supporting evidence, not decisive, since a possibility claim can implicate ignorance and an ignorance report can still make <em>p</em> salient.</li>
+      <li><strong>A matched grid of replies.</strong> Denying that <em>p</em> is true, rejecting the modal update, correcting the claim of ignorance, and simply answering the embedded question are four different moves. Crossing them against the three utterances is sharper than the blunt “just reply <em>No</em>” test, which can point at either the modal or its complement.</li>
+      <li><strong>Behaviour under supposition and embedding.</strong> “Suppose the key is in the drawer, although Maya doesn’t know whether it is” separates the facts from Maya’s knowledge; “#Suppose the key is in the drawer and it might not be” is contradictory in one information state. This is a known baseline the account must recover, not a new diagnostic.</li>
+      <li><strong>Sensitivity to false belief.</strong> A negated <em>know whether</em> tends to convey not just an absence of knowledge but the absence of a settled opinion, which is what calibrates the third condition.</li>
+      <li><strong>Where a following <em>Why?</em> attaches.</strong> After each utterance, an explanation defaults to explaining something different — why <em>p</em> is still possible, why both answers are open, or why the speaker cannot decide. This is the most promising new candidate, and still under check, because <em>Why?</em> can also attach to the whole speech act.</li>
+    </ul>
+
+    <h2>Where existing accounts stop</h2>
+    <p>
+      Each ingredient has been analysed. The attentive contribution of <em>might</em> (Ciardelli and
+      colleagues), question-embedding <em>know</em>, the question under discussion and the space of
+      rejections, and weak assertion and modal update are all established results. The epistemic
+      contradiction under supposition is Yalcin’s, and Dorr and Hawthorne’s. The paper claims to
+      discover none of these.
+    </p>
+    <p>
+      Its bet is narrower. As far as I have found, no existing account compares all three utterances, on
+      the same balanced contexts, across this full set of diagnostics at once — the matched reply grid,
+      embedding, false-belief sensitivity, and default explanatory attachment together. Whether that
+      comparison turns up a genuinely new constraint, or a clean unification of what is already known, is
+      exactly what is open.
+    </p>
+
+    <h2>Two routes</h2>
+    <p>The paper can land at two scales, and I am building toward the first with the second as a floor:</p>
+    <ul>
+      <li><strong>Interface analysis.</strong> A small set of balanced dialogues that check where default corrections and explanations land, using the embedding and false-belief facts as independent baselines. This upgrades to a stronger claim only if a stable new constraint — or a wrong prediction of the existing combination — actually appears.</li>
+      <li><strong>Comparative unification.</strong> If it does not, the paper combines existing theories into one account of the three-way distinction and the diagnostics, with no experiment. Its value is then explanatory unification at the scale of a seminar paper or thesis chapter, not a new mechanism.</li>
+    </ul>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      The project is at the construct stage. The brief that fixes the contrast and the diagnostics is
+      under review by a formal semanticist. Its one real dependency is independent judgment on the
+      candidate examples: my own judgments, the literature positioning, and the diagnostic materials are
+      in place, but the examples have not yet been checked by others, so the formal analysis and the
+      case-by-case derivations are deliberately not written yet. There are no results to report.
+    </p>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .cw-status {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+</style>

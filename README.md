@@ -39,6 +39,9 @@ src/
 │   ├── cv.astro / contact.astro / 404.astro / rss.xml.ts
 │   ├── research/
 │   │   ├── index.astro         # Current Work page
+│   │   ├── three-ways.astro    # B2 semantics paper — construct stage, no results
+│   │   ├── learnability.astro  # B3 master's thesis — in design, no results
+│   │   ├── latent-control-states.astro  # B4 DFKI interpretability pilot
 │   │   ├── hangl.astro         # (orphaned) Sino-Korean morphology
 │   │   ├── ordo.astro          # (orphaned) generics / defeasibility
 │   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)

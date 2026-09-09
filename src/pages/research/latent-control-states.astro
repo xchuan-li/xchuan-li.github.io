@@ -1,0 +1,89 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Project page for the DFKI mechanistic-interpretability collaboration (B4). A
+// bounded pilot: does prompt framing change a causally relevant internal state, or
+// only the output? Xiaochuan's role is the experimental design. Red lines: the
+// project is never called "LiT" on the site; no collaborator is named (DFKI as an
+// institution is already public on the CV/homepage); the method is stated modestly
+// and no results are claimed — the minimal evidence chain is still being assembled.
+---
+
+<Base
+  title="Latent Control States · Xiaochuan Li"
+  description="A bounded mechanistic-interpretability collaboration with DFKI: when prompt framing changes a model's answer, does it also change a causally relevant internal state, or only the output? A utilitarian minimal-pair design with a minimal intervention test."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Collaboration · DFKI
+    </div>
+    <h1>Latent Control States</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
+      When a change in prompt framing changes a model’s answer, does it also change a causally relevant
+      internal state — or only the output?
+    </p>
+    <p class="text-sm text-[var(--color-text-dim)] !mb-8">
+      A bounded mechanistic-interpretability collaboration with DFKI. My role on the project is the
+      experimental design.
+    </p>
+
+    <p>
+      Prompt framing is known to move a model’s answers. On its own, that is compatible with a purely
+      output-level effect: the model could reach the same internal decision and merely phrase it
+      differently. This project asks the causal version of the question instead — whether framing also
+      moves an internal state that is responsible for the decision, not just the words that come out.
+    </p>
+
+    <h2>The design</h2>
+    <p>
+      The setup is a utilitarian minimal-pair experiment. Each pair holds the moral scenario fixed and
+      varies one thing at a time — the dilemma, the size of the benefit at stake, and the framing of the
+      prompt — so a difference in the model’s decision can be traced to a specific manipulation rather
+      than to unrelated content. Keeping the pair matched is what lets an internal difference be read as
+      caused by framing rather than by a change of topic.
+    </p>
+
+    <h2>The test</h2>
+    <p>
+      The evidence chain is deliberately minimal and direct. Rather than a full circuit analysis, it
+      targets one question: can the direction in the model’s activations that tracks framing be added or
+      removed, and does doing so change the decision? A necessity-and-sufficiency check of that kind is
+      enough to separate “framing changes a causally relevant state” from “framing changes only the
+      answer.” Heavier machinery — exhaustive activation patching, attention-head localization, sparse
+      dictionaries — stays out of scope unless the minimal chain turns out to need it.
+    </p>
+
+    <h2>Scope and limits</h2>
+    <p>
+      This is a focused contribution, not an open-ended interpretability program: a minimal, credible
+      mechanistic-evidence chain with its limitations stated plainly. The aim is to answer the causal
+      question at the smallest scale that is convincing, and to be explicit about what a single
+      steering-style intervention can and cannot show about a model’s internal states.
+    </p>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      The experiment is designed and the minimal evidence chain is being assembled. Any claim will be
+      held to what the intervention actually licenses, with the limits reported rather than rounded away.
+    </p>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .cw-status {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+</style>

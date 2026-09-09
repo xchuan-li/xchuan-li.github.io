@@ -27,7 +27,6 @@ export default defineConfig({
     '/research/modus': '/research',
     '/research/typological-grounding': '/research',
     '/research/mini-causal-models': '/research',
-    '/research/latent-control-states': '/research',
     '/research/ordo': '/research',
     '/research/hangl': '/research',
   },

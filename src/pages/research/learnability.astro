@@ -1,0 +1,94 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Project page for the master's thesis (B3). The computational extension of the
+// semantics paper: can the three-way distinction be acquired from linguistic input
+// alone? In design — scope is deliberately not frozen; it waits on the semantics
+// paper's construct gate and advisor feedback. Red lines: a language model is an
+// instrument for the computational question, not a proxy for a child; no
+// developmental collaborator is named; the developmental angle is a reference, not a
+// study with children. No results claimed.
+---
+
+<Base
+  title="Learning these distinctions · Xiaochuan Li"
+  description="Master's thesis in design: can a learner acquire the one-sided / two-sided / non-resolution distinction from linguistic input alone, and which input patterns are necessary? A language model is an instrument for the computational question, not a proxy for a child."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Master’s thesis · in design
+    </div>
+    <h1>Learning these distinctions</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
+      Can a learner acquire the distinctions from the <a href="/research/three-ways">semantics paper</a>
+      from linguistic input alone — and, if so, which patterns in the input are doing the work?
+    </p>
+    <p class="text-sm text-[var(--color-text-dim)] !mb-8">
+      The computational companion to the semantics paper. A language model is used here as an instrument
+      for one question — what a linguistic distribution can support in a controlled learner — not as a
+      stand-in for a developing child.
+    </p>
+
+    <p>
+      My master’s thesis takes the same three-way distinction — one-sided possibility, explicit two-sided
+      openness, and an explicit report of non-resolution — and asks an acquisition question: can a system
+      that sees only language come to make the distinction, and what in the input is necessary for it to
+      emerge? The thesis is the computational extension of the paper, not a restatement of the theory.
+    </p>
+
+    <h2>Why this follows from the semantics</h2>
+    <p>
+      Once the paper fixes what the distinction is and what would count as evidence for it, a learnability
+      question becomes well-posed. The same criteria that separate a maintained possibility from ordinary
+      uncertainty — that the effect is specific to the proposition, survives the sentence, and disappears
+      when the proposition is ruled out — can be turned into a test of whether a trained model has actually
+      acquired the distinction rather than a cheaper statistical shortcut. The thesis begins from that
+      analysis; the formal work is the paper’s, not repeated here.
+    </p>
+
+    <h2>The planned study</h2>
+    <p>The current candidate design has three steps, in order:</p>
+    <ol>
+      <li><strong>Audit the evidence.</strong> Find, in natural corpora, the cues that can be reliably annotated — where a possibility is kept open, invoked again later, or closed off — and measure how the evidence is distributed.</li>
+      <li><strong>Intervene on the input.</strong> Train a small model under matched conditions that remove, shuffle, or enrich those cues, and ask whether the target distinction still becomes learnable, and how the learning trajectory changes.</li>
+      <li><strong>Test generalization.</strong> Check whether the model extends the distinction to unseen words, templates, and contexts — with an explicit control for surface cues such as frequency, topic, length, and local co-occurrence, so that an apparent success is not a shortcut wearing the right answer’s clothes.</li>
+    </ol>
+
+    <h2>What this is not</h2>
+    <p>
+      The thesis is deliberately bounded. Its default core is a formal analysis plus one credible
+      behavioural or computational experiment. Training runs from scratch, checkpoint-trajectory analysis,
+      probing, and circuit-level mechanism work are not default chapters; they enter only where a specific
+      question needs them. Developmental cognition is a theoretical reference that keeps the acquisition
+      question honest — the thesis does not run studies with children, and does not treat the model as a
+      model of a child.
+    </p>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      In design. The scope is intentionally not frozen: it waits on the semantics paper’s construct gate
+      and on advisor feedback before the exact question and experiment are fixed. The controlled-input
+      training is written above as the priority candidate, not as a commitment. No study has yet produced
+      a result.
+    </p>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .cw-status {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+</style>
