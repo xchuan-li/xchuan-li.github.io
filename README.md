@@ -2,7 +2,7 @@
 
 A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
 
-The site presents one research program — *experimental and computational semantics: how linguistic expressions structure reasoning* — organised as identity → current case (epistemic modality) → approach → selected work, plus writing and a CV. The current question is whether epistemic possibility expressions merely weaken commitment or also keep content-specific alternatives available for subsequent evidence updating.
+The site presents one research program — *experimental and computational semantics: how language organizes information, and how a learner such as a language model acquires that structure from language.* Top-level pages (A3g information architecture): **Current Work** (`/research`), **Research Program** (`/approach`), Writing, CV, Contact. The homepage is ordered header → current work → selected work → research program → writing → timeline → playground → contact. The current linguistic problem is the three-way distinction among *might p*, *might p or might not p*, and *I don't know whether p*, at the construct stage.
 
 **Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). **All positioning copy lives in `src/data/program.ts`** and is imported everywhere; never hand-write it into a page.
 
@@ -69,7 +69,7 @@ The GitHub Actions workflow (`.github/workflows/deploy.yml`) auto-builds and dep
 
 Projects have two touch-points: the data record and the page.
 
-1. **Data record** — add or edit an entry in `src/data/research.ts`. This single source feeds both the rich homepage (`src/pages/index.astro`) and the plain one (`src/pages/plain.astro`), plus the `/research` index. The homepage timeline only shows the projects squarely on the modality mainline; the rest live on `/research`.
+1. **Data record** — project, timeline, and playground records are defined per page in `src/pages/index.astro` (homepage) and `src/pages/research/index.astro` (Current Work). Positioning copy lives in `src/data/program.ts`; writing metadata in `src/data/writing.ts`. (`src/data/research.ts` and the `/plain` mirror were retired in 2026-09; consolidating the two per-page project arrays into one source is a known cleanup.)
 2. **Page** — each project main page under `src/pages/research/` follows one template:
 
 ```

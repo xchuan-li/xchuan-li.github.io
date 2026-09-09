@@ -8,7 +8,7 @@ export const identity = "I work on experimental and computational semantics.";
 
 /** The identity claim, long form — used in the homepage header. */
 export const identityLong =
-  "I work on experimental and computational semantics. I study how expressions such as might and may shape the possibilities available in later reasoning.";
+  "I work on experimental and computational semantics. I study how language organizes information, and how a learner such as a language model acquires that structure from language.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -17,7 +17,7 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =
-  "I work on <strong>experimental and computational semantics</strong>. I study how expressions such as <em>might</em> and <em>may</em> shape the possibilities available in later reasoning.";
+  "I work on <strong>experimental and computational semantics</strong>. I study how language <strong>organizes information</strong>, and how a learner such as a <strong>language model</strong> acquires that structure from language.";
 
 export const currentQuestionHtml =
   "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that <strong>particular possibility available</strong> for later reasoning?";
@@ -32,7 +32,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li — experimental and computational semantics. I study how expressions such as might and may shape the possibilities available in later reasoning, and whether that difference can be learned from linguistic input.";
+  "Xiaochuan Li — experimental and computational semantics. I study how language organizes information, and how a learner such as a language model acquires that structure from language.";
 
 export interface Criterion {
   name: string;

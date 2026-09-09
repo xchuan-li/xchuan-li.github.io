@@ -27,43 +27,40 @@ const progress = [
 
 <Base
   title="Cross-lingual ProtoBias · Xiaochuan Li"
-  description="An applied multilingual/multimodal stress test of semantic grounding versus language- and culture-specific prototype shortcuts."
+  description="Does a vision-language judge follow the meaning of an image–prompt pair, or fall back on a familiar visual prototype? A controlled cross-lingual audit across seven languages and two model families; about 12,600 judgments, with public code."
   showProgress={true}
   toc={true}
 >
   <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      First-author paper · applied stress test
+      First-author paper · in revision for arXiv
     </div>
     <h1>Cross-lingual ProtoBias</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
-      Semantic grounding versus prototype shortcuts under language variation.
+      Does a vision-language judge follow the meaning of an image–prompt pair, or fall back on a
+      familiar visual prototype?
     </p>
     <p class="text-sm text-[var(--color-text-dim)] !mb-8">
       <em>Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</em> —
-      single-author paper; revised version in preparation for arXiv. Code and data:
+      first-author; revised version in preparation for arXiv. Code and data:
       <a href="https://github.com/xchuan-li/cross_lingual_protobias">cross_lingual_protobias ↗</a>.
     </p>
 
     <p>
-      Cross-lingual ProtoBias carries the same structure-versus-surface question my thesis asks — here,
-      meaning versus prototype shortcut — into multilingual, multimodal evaluation: does an MLLM judge
-      track the meaning of an image-text pair, or lean on a language- and culture-specific prototype?
-      Each prompt shows two images, one semantically correct but less prototypical, one more
-      prototypical but wrong, so a judge that prefers the typical-but-wrong image is riding the
-      shortcut. The cross-lingual turn holds the image pairs fixed and translates only the prompt: if
-      the verdict moves with the language, the judge is importing expectations a language-independent
-      meaning would not. It is a controlled audit and a proof of method — the same design logic the
-      thesis applies to modal semantics — not the research identity itself.
+      Cross-lingual ProtoBias tests whether a vision-language judge follows the semantic relation
+      between an image and a prompt or relies on a familiar visual prototype. Each item pairs a
+      semantically correct but atypical image with a typical but incorrect one. I keep the images
+      fixed and translate the prompt, so changes in judgment can be attributed to linguistic
+      presentation rather than visual content.
     </p>
-
-    <h2>Roadmap</h2>
     <p>
-      Each completed milestone opens its own standalone report.
+      Across approximately 12,600 judgments from seven languages and two model families, the strongest
+      variation is associated with the attribute being judged. Lower-resource, distinct-script prompts
+      also produce a measurable language effect.
     </p>
-    <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
 
-    <h2>Latest progress</h2>
+    <h2>Results</h2>
     <p>
       <strong>Report 2</strong> scaled the probe to two model families (Qwen2.5-VL-7B and InternVL3-8B)
       and seven languages, adding Russian, Bengali, and Greek to span resource levels and scripts. Two
@@ -74,10 +71,8 @@ const progress = [
       eliciting measurably more bias than English. A back-translation check rules out translation
       quality, and there is no attribute × language interaction: the attribute <em>pattern</em> is
       language-invariant while the overall <em>level</em> is not. Report 1's "language barely moves it"
-      now reads as a four-language artifact. Code and figures:
-      <a href="https://github.com/xchuan-li/cross_lingual_protobias">cross_lingual_protobias →</a>.
+      now reads as a four-language artifact.
     </p>
-
     <p>
       Two deeper checks make the effect hard to dismiss. First, it is not a low-level visual artifact:
       the prototypical image always alters one feature (count, colour, size, layout) and
@@ -92,40 +87,36 @@ const progress = [
     </p>
 
     <p>
-      The interactive read below is the original <strong>four-language</strong> picture from Report 1:
-      bias swings sharply by attribute, only mildly by language until Report 2's lower-resource prompts
-      are added.
+      The interactive read below shows the original <strong>four-language</strong> picture from
+      Report 1, not the final seven-language result: bias swings sharply by attribute, only mildly by
+      language until Report 2's lower-resource prompts are added.
     </p>
 
     <ProtoBiasDemo client:visible />
 
-    <h2>Research questions</h2>
-    <ul>
-      <li>
-        <strong>RQ1:</strong> Is prototypicality bias consistent across languages when the semantic
-        content of the prompt is held fixed?
-      </li>
-      <li>
-        <strong>RQ2:</strong> Are cross-lingual differences stronger in socially sensitive contexts
-        such as wealth, intelligence, and profession than in neutral domains such as animals or
-        objects?
-      </li>
-    </ul>
-
-    <h2>AI relation</h2>
+    <h2>Design and data</h2>
     <p>
-      The project uses multimodal large language models as evaluators of image-text alignment. The
-      object of study is not whether a model gets an item right, but what signal its decision rides on:
-      semantic consistency, visual typicality, or a culturally specific prototype activated by the prompt
-      language.
+      Each item pairs two images for one attribute — one semantically correct but atypical, one typical
+      but incorrect — and asks a multimodal judge which fits the prompt. I use the ProtoBias dataset and
+      translate the prompt into each language while holding the image pair fixed, so the translation is
+      an intervention on the linguistic presentation of the same semantic task. Two questions organize
+      it: whether prototypicality bias is consistent across languages when the semantic content is held
+      fixed, and whether cross-lingual differences are stronger in socially sensitive attributes such as
+      wealth and status than in neutral ones.
     </p>
 
-    <h2>Data</h2>
+    <h2>Limitations</h2>
     <p>
-      The project uses the ProtoBias dataset, translating prompts into multiple languages while holding
-      the image pairs fixed. The translation is thus an intervention on the linguistic presentation of
-      the same semantic task.
+      The images are generated, so item validity varies. The non-English prompts are machine-translated;
+      a back-translation check addresses quality, not nuance. The judges are two 7–8B models, and the
+      metric comparison uses a single multilingual encoder. The human control is 90 items with two
+      annotators, and some attribute cells are small (the wealth cell has n = 31). The paper reports
+      these rather than rounding them into a stronger claim.
     </p>
+
+    <h2>Roadmap</h2>
+    <p>Each completed milestone opens its own standalone report.</p>
+    <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
 
     <h2>Literature</h2>
     <p class="!text-sm text-[var(--color-text-dim)] !mb-3">Source benchmark and the closest related work.</p>
@@ -136,5 +127,9 @@ const progress = [
       <li>Neplenbroek, Bisazza &amp; Fernández. <a href="https://arxiv.org/abs/2406.07243">MBBQ</a> (CoLM 2024): non-English stereotypes exceed English even after controlling for culture; the text-only precedent, with a control parallel to our back-translation check.</li>
       <li>Friedrich et&nbsp;al. <a href="https://aclanthology.org/2025.acl-long.966/">Multilingual T2I Generation Magnifies Gender Stereotypes</a> (ACL 2025): cross-lingual bias variation in image generation; a contrasting modality.</li>
     </ol>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
+    </p>
   </article>
 </Base>

@@ -22,25 +22,23 @@ import Base from "../../layouts/Base.astro";
   toc={true}
 >
   <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Exploratory · methods pilot
+      Exploratory methods pilot
     </div>
     <h1>MODUS: separating modal function from modal vocabulary</h1>
-    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-8">
-      An exploratory language-model pilot developing methods for one narrow problem: when a model
-      handles <em>must</em> and <em>might</em>, how would you tell whether anything is running on the
-      modal <strong>function</strong> rather than on the modal <strong>word</strong>? Controlled
-      experiments on modal force, lexical form, evidence, and causal intervention.
-    </p>
 
     <p>
-      MODUS is <strong>methods groundwork</strong>, not a finding. It exists because the question I
-      actually care about —
-      <a href="/research">whether an epistemic possibility expression keeps a content-specific
-      alternative available for subsequent reasoning</a> — needs an instrument that can hold the
-      information constant and vary only the linguistic form, and needs that instrument to survive
-      the obvious confounds before any of its outputs mean anything. This page is that instrument
-      being built and stress-tested.
+      MODUS was an exploratory pilot on epistemic modals in language models. It asked whether an
+      internal direction built from evidence-strength contrasts also tracked the difference between
+      <em>must</em> and <em>might</em>, and whether intervening on that direction changed
+      certainty-related behaviour.
+    </p>
+    <p>
+      The pilot helped establish an experimental workflow and exposed several confounds, including
+      lexical overlap, base-rate effects, and generic disruption. It does not show that the model
+      represents possible worlds or maintains live alternatives. I keep it here as methodological
+      background for the current project.
     </p>
 
     <h2>What the pilot does</h2>
@@ -116,10 +114,6 @@ import Base from "../../layouts/Base.astro";
       not. Behaviour first; representation only if the behaviour is there; intervention only to test
       what the representation is carrying.
     </p>
-    <p>
-      That reordering is what demoted this project from a thesis flagship to what it should always
-      have been: a methods pilot that makes the real experiments possible.
-    </p>
 
     <h2>Scope &amp; claim discipline</h2>
     <ul>
@@ -133,5 +127,9 @@ import Base from "../../layouts/Base.astro";
       <li>Primary venues are semantics-side (SALT, <em>Semantics &amp; Pragmatics</em>, Sinn und
         Bedeutung, IWCS); interpretability venues are a secondary, methods-facing outlet.</li>
     </ul>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
+    </p>
   </article>
 </Base>
