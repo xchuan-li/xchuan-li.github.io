@@ -78,8 +78,7 @@ const path = Astro.url.pathname;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#fafaf7" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- No custom favicon: the browser default is used, as on most academic sites. -->
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -122,14 +121,6 @@ const path = Astro.url.pathname;
     <nav class="site-nav" aria-label="Primary">
       <div class="site-nav-inner">
         <a href="/" class="site-brand" aria-label="Home">
-          <svg class="site-mark" viewBox="0 0 32 32" width="26" height="26" role="img" aria-label="Home">
-            <g fill="none" stroke-width="1.3" stroke-linejoin="round">
-              <rect x="5.7" y="13.2" width="12.8" height="12.6" rx="2.4" stroke="#7c7a75" />
-              <path d="M18.1 13.2 L28.4 25.8 L13 25.8 Z" stroke="#9c8a76" />
-              <circle cx="17.6" cy="11.6" r="8.4" stroke="#c0492b" />
-            </g>
-            <path d="M15 15.6 Q17.6 14.3 20.2 15.6 Q18.6 18.6 17.6 19.4 Q16.6 18.6 15 15.6 Z" fill="#c0492b" />
-          </svg>
           <span class="wordmark">Xiaochuan Li</span>
         </a>
 
