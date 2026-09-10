@@ -6,9 +6,17 @@
 /** The identity claim. Short form. */
 export const identity = "I work on experimental and computational semantics.";
 
-/** The identity claim, long form — used in the homepage header. */
+// The homepage header lede is two paragraphs: a three-question hook (openingQuestions /
+// openingQuestionsHtml), then an identity statement that lands on the current research
+// question (identityLong / identityLongHtml).
+
+/** Homepage header, paragraph 1 — the three-question hook (philosophy → semantics → language models). */
+export const openingQuestions =
+  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone?";
+
+/** Homepage header, paragraph 2 — the identity claim, landing on the current research question. */
 export const identityLong =
-  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone? I work on experimental and computational semantics.";
+  "I work on experimental and computational semantics. My current work asks whether saying that something might be true simply lowers a speaker's commitment, or keeps that particular possibility available for later reasoning.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -16,8 +24,11 @@ export const currentQuestion =
 
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
+export const openingQuestionsHtml =
+  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone?";
+
 export const identityLongHtml =
-  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone? I work on experimental and computational semantics.";
+  "I work on experimental and computational semantics. My current work asks whether saying that something <em>might</em> be true simply lowers a speaker's commitment, or keeps that particular possibility available for later reasoning.";
 
 export const currentQuestionHtml =
   "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";

@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { posts } from "../data/writing";
-import { identityLongHtml } from "../data/program";
+import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 
 // Homepage (A3g §5). Section order: header → current work → selected work →
 // research program preview → writing → timeline → playground → contact. Research
@@ -99,7 +99,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <header class="hd">
       <div class="hd-main">
         <h1 class="hd-name">Xiaochuan Li</h1>
-        <p class="hd-tag" set:html={identityLongHtml} />
+        <p class="hd-tag" set:html={openingQuestionsHtml} />
+        <p class="hd-tag hd-tag-work" set:html={identityLongHtml} />
         <p class="hd-affil">
           M.Sc. Human and AI · University of Technology Nuremberg · applying for PhD positions beginning in fall 2027
         </p>
@@ -126,7 +127,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         current work develops a semantic account of this difference and the diagnostics needed to
         test it.
       </p>
-      <p class="blk-link"><a href="/research">Read about the current work →</a></p>
+      <p class="blk-link"><a href="/research">Read about the current work</a></p>
     </section>
 
     <!-- ===== selected work ===== -->
@@ -134,18 +135,18 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <h2 class="sec-h">Selected work</h2>
       <div class="proj-list">
         {selectedWork.map((p) => (
-          <div class={`proj${p.current ? " proj-current" : ""}`}>
+          <a class={`proj-card${p.current ? " proj-card-current" : ""}`} href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
             <div class="proj-copy">
               <div class="proj-top">
-                <a class="proj-title" href={p.href} set:html={p.title} />
+                <span class="proj-title" set:html={p.title} />
                 <span class="proj-tag">{p.tag}</span>
               </div>
               <p class="proj-desc" set:html={p.desc} />
             </div>
-            <a class="proj-figure" href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
+            <div class="proj-figure">
               <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
-            </a>
-          </div>
+            </div>
+          </a>
         ))}
       </div>
     </section>
@@ -160,7 +161,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         I use the same semantic analysis to formulate both questions, without treating models as
         stand-ins for people.
       </p>
-      <p class="blk-link"><a href="/approach">See the research program →</a></p>
+      <p class="blk-link"><a href="/approach">See the research program</a></p>
     </section>
 
     <!-- ===== writing ===== -->
@@ -172,7 +173,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           <span class="feat-excerpt">{featured.excerpt}</span>
         </a>
       )}
-      <p class="more"><a href="/writing">All writing →</a></p>
+      <p class="more"><a href="/writing">All writing</a></p>
     </section>
 
     <!-- ===== timeline ===== -->
@@ -202,14 +203,16 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <section class="sec">
       <h2 class="sec-h">Playground</h2>
       <p class="block-note">I also build things with language for fun.</p>
-      <div class="proj-list">
+      <div class="play-grid">
         {playground.map((p) => (
-          <div class="proj">
-            <div class="proj-top">
-              <span class="proj-title-plain">{p.title}</span>
-              <span class="proj-tag">{p.tag}</span>
+          <div class="proj-card proj-card-static">
+            <div class="proj-copy">
+              <div class="proj-top">
+                <span class="proj-title">{p.title}</span>
+                <span class="proj-tag">{p.tag}</span>
+              </div>
+              <p class="proj-desc">{p.desc}</p>
             </div>
-            <p class="proj-desc">{p.desc}</p>
           </div>
         ))}
       </div>
@@ -220,7 +223,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="cta">
         <p class="cta-line">I’m applying for PhD positions beginning in fall 2027. Email is the best way to reach me.</p>
         <p class="cta-links">
-          <a href="mailto:xiaochuan.li@utn.de">Email me →</a>
+          <a href="mailto:xiaochuan.li@utn.de">Email me</a>
           <span class="sep">·</span>
           <a href="/contact">More ways to get in touch</a>
         </p>
@@ -230,7 +233,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
 </Base>
 
 <style>
-  .wrap { max-width: 940px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; font-family: var(--font-mono); }
 
   /* ===== header ===== */
   .hd { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; margin-bottom: 1rem; }
@@ -248,11 +251,13 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   }
   .hd-main { min-width: 0; }
   .hd-name { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.6rem; color: var(--color-text); line-height: 1.05; }
-  .hd-tag { font-size: 1.15rem; line-height: 1.5; color: var(--color-text); margin: 0 0 0.9rem; max-width: 34rem; }
+  .hd-tag { font-size: 1.15rem; line-height: 1.5; color: var(--color-text); margin: 0 0 0.7rem; max-width: 34rem; }
   .hd-tag :global(strong) { font-weight: 600; }
   .hd-tag :global(em) { font-style: italic; }
+  .hd-tag-work { font-size: 1.02rem; color: var(--color-text-muted); margin: 0 0 0.9rem; }
+  .hd-tag-work :global(em) { font-style: italic; color: var(--color-text); }
   .hd-affil { font-size: 0.9rem; color: var(--color-text-muted); margin: 0 0 0.8rem; line-height: 1.5; }
-  .hd-links { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
+  .hd-links { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.01em; color: var(--color-text-muted); margin: 0; }
   .hd-links a { color: var(--color-accent); text-decoration: none; }
   .hd-links a:hover { text-decoration: underline; }
   .hd-links .sep { color: var(--color-text-ghost); margin: 0 0.45rem; }
@@ -277,9 +282,10 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--color-border);
   }
+  .sec-h::before { content: "// "; color: var(--color-accent); opacity: 0.6; }
 
   /* block heading + body (current work, research program) */
-  .blk-h { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-text); margin: 0 0 0.7rem; }
+  .blk-h { font-family: var(--font-sans); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-text); margin: 0 0 0.7rem; }
   .blk-h :global(em) { font-style: italic; }
   .blk-body { font-size: 0.98rem; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 0.8rem; max-width: 46rem; }
   .blk-body :global(em) { font-style: italic; color: var(--color-text); }
@@ -296,7 +302,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .tl-logo img { height: 36px; width: auto; max-width: 124px; display: block; }
   .tl-logo.emblem img { height: 78px; }
   .tl-period { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.03em; color: var(--color-text-dim); }
-  .tl-org { font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
+  .tl-org { font-family: var(--font-sans); font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
   .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
   .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .tl-did :global(em) { font-style: italic; }
@@ -306,53 +312,60 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }
   }
 
-  /* ===== project / selected-work list ===== */
-  .proj-list { display: flex; flex-direction: column; min-width: 0; }
-  .proj {
+  /* ===== project / selected-work cards ===== */
+  .proj-list { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .proj-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
+    grid-template-columns: minmax(0, 1fr) 300px;
     gap: 1.5rem;
     align-items: center;
-    padding: 1.4rem 0;
-    border-bottom: 1px solid var(--color-border);
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    background: var(--card-bg);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
   }
-  .proj:first-child { border-top: 1px solid var(--color-border); }
+  .proj-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -14px rgba(23, 33, 48, 0.28);
+    border-color: var(--card-hover-border);
+  }
+  .proj-card-current { border-color: color-mix(in srgb, var(--color-accent) 40%, var(--card-border)); }
   .proj-copy { min-width: 0; }
   .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
-  .proj-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
-  .proj-title:hover { color: var(--color-accent); }
+  .proj-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--color-text); transition: color 0.2s ease; }
+  .proj-card:hover .proj-title { color: var(--color-accent); }
   .proj-title :global(em) { font-style: italic; }
-  .proj-title-plain { font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
   .proj-tag { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
-  .proj-current .proj-tag { color: var(--color-accent); }
-  .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 62ch; }
+  .proj-card-current .proj-tag { color: var(--color-accent); }
+  .proj-card-current .proj-tag::before { content: "\25CF\00a0"; font-size: 0.8em; }
+  .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
   .proj-desc :global(em) { font-style: italic; }
-  .proj-figure {
-    display: block;
-    min-width: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    text-decoration: none;
-  }
-  .proj-figure img {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 5 / 3;
-  }
+  .proj-figure { min-width: 0; border-radius: 8px; overflow: hidden; }
+  .proj-figure img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 5 / 3; transition: transform 0.35s ease; }
+  .proj-card:hover .proj-figure img { transform: scale(1.03); }
+
+  /* playground — static cards (no link, no lift) */
+  .play-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .proj-card-static { grid-template-columns: 1fr; cursor: default; }
+  .proj-card-static:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
+  .proj-card-static:hover .proj-title { color: var(--color-text); }
+
   @media (max-width: 760px) {
-    .proj { grid-template-columns: minmax(0, 1fr) 210px; gap: 1.15rem; }
-    .proj-top { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .proj-card { grid-template-columns: minmax(0, 1fr) 220px; gap: 1.15rem; }
   }
-  @media (max-width: 580px) {
-    .proj { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: 1.35rem 0; }
-    .proj-figure { max-width: 100%; }
+  @media (max-width: 560px) {
+    .proj-card { grid-template-columns: 1fr; gap: 1rem; }
+    .proj-card .proj-figure { order: -1; }
+    .proj-top { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .play-grid { grid-template-columns: 1fr; }
   }
 
   /* ===== writing (one featured note) ===== */
   .feat { display: block; text-decoration: none; padding: 0.1rem 0 0.2rem; }
-  .feat-title { display: block; font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
+  .feat-title { display: block; font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--color-text); }
   .feat:hover .feat-title { color: var(--color-accent); }
   .feat-excerpt { display: block; margin-top: 0.35rem; font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); max-width: 60ch; }
   .more { margin: 1.1rem 0 0; font-size: 0.9rem; }
