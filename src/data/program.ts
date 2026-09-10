@@ -8,7 +8,7 @@ export const identity = "I work on experimental and computational semantics.";
 
 /** The identity claim, long form — used in the homepage header. */
 export const identityLong =
-  "How much of a sentence's meaning is carried by language itself, and how much has to come from the world? I work on experimental and computational semantics — how language organizes information, and whether a learner such as a language model can acquire that structure from language alone.";
+  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone? I work on experimental and computational semantics.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -17,7 +17,7 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =
-  "How much of a sentence's meaning is carried by language itself, and how much has to come from the world? I work on experimental and computational semantics — how language organizes information, and whether a learner such as a language model can acquire that structure from language alone.";
+  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone? I work on experimental and computational semantics.";
 
 export const currentQuestionHtml =
   "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
