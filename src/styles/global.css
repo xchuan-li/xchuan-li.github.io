@@ -15,31 +15,36 @@
    Theme tokens — light only (the dark theme was removed).
    ============================================================ */
 :root {
-  --color-bg: #fafaf7;
+  /* Slate palette (2026-09): a cool, restrained scheme. The primary accent moved
+     from a warm brick-red (#b8350f) to a desaturated slate blue; neutrals were
+     cooled to match, and the paper lost its warm cast. The prominent secondary
+     accent (--accent-deep-purple, used on the ProtoBias timeline and pull-quotes)
+     was pulled toward a muted indigo so it harmonises with the slate. */
+  --color-bg: #f8f9fa;
   --color-surface: #ffffff;
-  --color-surface-2: #f3f3ee;
-  --color-text: #1a1a1a;
-  --color-text-muted: #6b6b6b;
-  --color-text-dim: #9a9a9a;
-  --color-text-ghost: #b8b8b8;
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-border-strong: rgba(0, 0, 0, 0.18);
-  --color-accent: #b8350f;
+  --color-surface-2: #eef1f4;
+  --color-text: #1b1e24;
+  --color-text-muted: #5f6672;
+  --color-text-dim: #98a0ac;
+  --color-text-ghost: #c2c8d0;
+  --color-border: rgba(23, 33, 48, 0.11);
+  --color-border-strong: rgba(23, 33, 48, 0.20);
+  --color-accent: #3d5a73;
 
   --nav-bg: rgba(255, 255, 255, 0.78);
-  --nav-border: rgba(0, 0, 0, 0.06);
+  --nav-border: rgba(23, 33, 48, 0.07);
 
   --card-bg: #ffffff;
-  --card-border: rgba(0, 0, 0, 0.06);
-  --card-hover-bg: #f7f7f3;
-  --card-hover-border: rgba(0, 0, 0, 0.18);
+  --card-border: rgba(23, 33, 48, 0.07);
+  --card-hover-bg: #f2f5f8;
+  --card-hover-border: rgba(23, 33, 48, 0.18);
 
-  --btn-primary-bg: #1a1a1a;
+  --btn-primary-bg: #1b1e24;
   --btn-primary-text: #ffffff;
-  --btn-secondary-text: #1a1a1a;
-  --btn-secondary-border: rgba(0, 0, 0, 0.20);
-  --btn-secondary-hover-bg: rgba(0, 0, 0, 0.04);
-  --btn-secondary-hover-border: rgba(0, 0, 0, 0.45);
+  --btn-secondary-text: #1b1e24;
+  --btn-secondary-border: rgba(23, 33, 48, 0.20);
+  --btn-secondary-hover-bg: rgba(23, 33, 48, 0.04);
+  --btn-secondary-hover-border: rgba(23, 33, 48, 0.45);
 
   --accent-coral: #d85a30;
   --accent-teal: #1d9e75;
@@ -47,7 +52,7 @@
   --accent-purple: #7f77dd;
   --accent-amber: #ba7517;
   --accent-indigo: #2d4a7c;
-  --accent-deep-purple: #5d3b8c;
+  --accent-deep-purple: #46567a;
   --accent-champagne: #b8924b;
 
   --accent-teal-tint: #e1f5ee;
@@ -851,7 +856,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
     --color-text-dim: #666666;
     --color-border: rgba(0, 0, 0, 0.18);
     --color-border-strong: rgba(0, 0, 0, 0.28);
-    --color-accent: #a8300d;
+    --color-accent: #33506a;
     color-scheme: light;
   }
   @page { margin: 1.5cm 1.7cm; }
