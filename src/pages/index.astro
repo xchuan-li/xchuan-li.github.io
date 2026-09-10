@@ -17,6 +17,8 @@ const selectedWork = [
     title: "Three Ways of Leaving <em>p</em> Unsettled",
     tag: "Semantics paper · construct under review",
     href: "/research/three-ways",
+    cover: "/images/project-covers/three-ways.png",
+    coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
     current: true,
     desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. I ask how each utterance changes the discourse and which replies it makes appropriate. A construct brief is currently under review by a formal semanticist.",
   },
@@ -24,18 +26,24 @@ const selectedWork = [
     title: "Master’s thesis: learning these distinctions",
     tag: "Thesis · in design",
     href: "/research/learnability",
+    cover: "/images/project-covers/learnability.png",
+    coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
     desc: "My master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. The project begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
   },
   {
     title: "Cross-lingual ProtoBias",
     tag: "First-author paper · in revision for arXiv",
     href: "/research/cross-lingual-protobias",
+    cover: "/images/project-covers/protobias.png",
+    coverAlt: "Seven language prompts feeding one vision-language judge comparing a duck and panda benchmark image pair",
     desc: "I keep each image pair fixed and vary the language of the prompt to test when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
   },
   {
     title: "Latent Control States",
     tag: "Collaboration · DFKI",
     href: "/research/latent-control-states",
+    cover: "/images/project-covers/latent-control-states.png",
+    coverAlt: "A utilitarian diversion dilemma passing through model layers with a causal intervention on an internal direction",
     desc: "In this collaboration with DFKI, we ask whether prompt framing changes only a model’s answer or also a causally relevant internal state. I designed a utilitarian minimal-pair experiment that varies the dilemma, benefit size, and framing.",
   },
 ];
@@ -127,11 +135,16 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="proj-list">
         {selectedWork.map((p) => (
           <div class={`proj${p.current ? " proj-current" : ""}`}>
-            <div class="proj-top">
-              <a class="proj-title" href={p.href} set:html={p.title} />
-              <span class="proj-tag">{p.tag}</span>
+            <div class="proj-copy">
+              <div class="proj-top">
+                <a class="proj-title" href={p.href} set:html={p.title} />
+                <span class="proj-tag">{p.tag}</span>
+              </div>
+              <p class="proj-desc" set:html={p.desc} />
             </div>
-            <p class="proj-desc" set:html={p.desc} />
+            <a class="proj-figure" href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
+              <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
+            </a>
           </div>
         ))}
       </div>
@@ -294,9 +307,17 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   }
 
   /* ===== project / selected-work list ===== */
-  .proj-list { display: flex; flex-direction: column; }
-  .proj { padding: 1.15rem 0; border-bottom: 1px solid var(--color-border); }
+  .proj-list { display: flex; flex-direction: column; min-width: 0; }
+  .proj {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
   .proj:first-child { border-top: 1px solid var(--color-border); }
+  .proj-copy { min-width: 0; }
   .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
   .proj-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
   .proj-title:hover { color: var(--color-accent); }
@@ -306,6 +327,28 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .proj-current .proj-tag { color: var(--color-accent); }
   .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 62ch; }
   .proj-desc :global(em) { font-style: italic; }
+  .proj-figure {
+    display: block;
+    min-width: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .proj-figure img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 3;
+  }
+  @media (max-width: 760px) {
+    .proj { grid-template-columns: minmax(0, 1fr) 210px; gap: 1.15rem; }
+    .proj-top { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  }
+  @media (max-width: 580px) {
+    .proj { grid-template-columns: minmax(0, 1fr); gap: 1rem; padding: 1.35rem 0; }
+    .proj-figure { max-width: 100%; }
+  }
 
   /* ===== writing (one featured note) ===== */
   .feat { display: block; text-decoration: none; padding: 0.1rem 0 0.2rem; }
