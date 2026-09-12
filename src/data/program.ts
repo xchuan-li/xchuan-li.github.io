@@ -16,7 +16,7 @@ export const openingQuestions =
 
 /** Homepage header, paragraph 2 — the identity claim, landing on the current research question. */
 export const identityLong =
-  "I work on experimental and computational semantics. My current work asks whether saying that something might be true simply lowers a speaker's commitment, or keeps that particular possibility available for later reasoning.";
+  "My work is in experimental and computational semantics. The current question: does saying that something might be true simply lower a speaker's commitment, or keep that particular possibility available for later reasoning?";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -28,7 +28,7 @@ export const openingQuestionsHtml =
   "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone?";
 
 export const identityLongHtml =
-  "I work on experimental and computational semantics. My current work asks whether saying that something <em>might</em> be true simply lowers a speaker's commitment, or keeps that particular possibility available for later reasoning.";
+  "My work is in experimental and computational semantics. The current question: does saying that something <em>might</em> be true simply lower a speaker's commitment, or keep that particular possibility available for later reasoning?";
 
 export const currentQuestionHtml =
   "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
@@ -43,7 +43,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li — experimental and computational semantics. I study how language organizes information, and how a learner such as a language model acquires that structure from language.";
+  "Xiaochuan Li — experimental and computational semantics: how language organizes information, and how a learner such as a language model acquires that structure from language.";
 
 export interface Criterion {
   name: string;

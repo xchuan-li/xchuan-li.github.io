@@ -20,7 +20,7 @@ const selectedWork = [
     cover: "/images/project-covers/three-ways.png",
     coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
     current: true,
-    desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. I ask how each utterance changes the discourse and which replies it makes appropriate. A construct brief is currently under review by a formal semanticist.",
+    desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. It asks how each utterance changes the discourse and which replies each makes appropriate. A construct brief is currently under review by a formal semanticist.",
   },
   {
     title: "Master’s thesis: learning these distinctions",
@@ -28,7 +28,7 @@ const selectedWork = [
     href: "/research/learnability",
     cover: "/images/project-covers/learnability.png",
     coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
-    desc: "My master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. The project begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
+    desc: "The master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. It begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
   },
   {
     title: "Cross-lingual ProtoBias",
@@ -36,7 +36,7 @@ const selectedWork = [
     href: "/research/cross-lingual-protobias",
     cover: "/images/project-covers/protobias.png",
     coverAlt: "Seven language prompts feeding one vision-language judge comparing a duck and panda benchmark image pair",
-    desc: "I keep each image pair fixed and vary the language of the prompt to test when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
+    desc: "Each image pair stays fixed while the prompt language varies, testing when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
   },
   {
     title: "Latent Control States",
@@ -44,7 +44,7 @@ const selectedWork = [
     href: "/research/latent-control-states",
     cover: "/images/project-covers/latent-control-states.png",
     coverAlt: "A utilitarian diversion dilemma passing through model layers with a causal intervention on an internal direction",
-    desc: "In this collaboration with DFKI, we ask whether prompt framing changes only a model’s answer or also a causally relevant internal state. I designed a utilitarian minimal-pair experiment that varies the dilemma, benefit size, and framing.",
+    desc: "In this collaboration with DFKI, we ask whether prompt framing changes only a model’s answer or also a causally relevant internal state. The design is a utilitarian minimal-pair experiment that varies the dilemma, benefit size, and framing.",
   },
 ];
 
@@ -54,8 +54,8 @@ const timeline = [
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    did: "At UTN, I moved from philosophy into language-model research. I learned to build controlled experiments and now use them to study what models learn about meaning.",
-    impact: "This is where my current research took shape: how linguistic expressions change which possibilities remain available for later reasoning.",
+    did: "At UTN, my focus moved from philosophy into language-model research — learning to build controlled experiments and using them to study what models learn about meaning.",
+    impact: "This is where the current research took shape: how linguistic expressions change which possibilities remain available for later reasoning.",
   },
   {
     period: "2024 – 2025",
@@ -63,7 +63,7 @@ const timeline = [
     emblem: true,
     org: "University of Marburg",
     role: "Student · Preparatory Studies",
-    did: "I spent a year here as an enrolled student in preparatory studies, building the German I needed for graduate work. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
+    did: "A year here as an enrolled student in preparatory studies built the German needed for graduate work. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
     impact: "",
   },
   {
@@ -72,8 +72,8 @@ const timeline = [
     emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
-    did: "I studied philosophy of language, analytic philosophy, and logic. My senior thesis examined Leibniz’s <em>characteristica universalis</em>, a proposed notation whose form would mirror the structure of thought.",
-    impact: "It left me with a question I still work on: how much of reasoning is carried by the language in which it is expressed?",
+    did: "Coursework in philosophy of language, analytic philosophy, and logic; a senior thesis on Leibniz’s <em>characteristica universalis</em>, a proposed notation whose form would mirror the structure of thought.",
+    impact: "It left a question that still drives the work: how much of reasoning is carried by the language in which it is expressed?",
   },
 ];
 
@@ -94,7 +94,7 @@ const playground = [
     href: "/information-machines",
     cta: "Read the design log",
     steps: ["Add", "Link", "Revise", "Retract"],
-    desc: "A language whose grammar has a single job: move information around — introduce a fact, link it to what came before, revise it, take it back. I grow it slowly and keep it honest with a changelog and a suite of tests.",
+    desc: "A language whose grammar has a single job: move information around — introduce a fact, link it to what came before, revise it, take it back. It grows slowly, kept honest with a changelog and a suite of tests.",
   },
 ];
 
@@ -118,8 +118,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           <a href="/cv">CV</a>
           <span class="sep">·</span>
           <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
-          <span class="sep">·</span>
-          <a href="https://www.linkedin.com/in/xiaochuan-li-0488533b5/" rel="noopener" target="_blank">LinkedIn</a>
         </p>
       </div>
       <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
@@ -131,7 +129,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <h3 class="blk-h">What does <em>might</em> leave open?</h3>
       <p class="blk-body">
         Suppose someone says, “The key might be in the drawer.” Does <em>might</em> simply mark
-        uncertainty, or does it keep the drawer possibility available when new evidence arrives? My
+        uncertainty, or does it keep the drawer possibility available when new evidence arrives? The
         current work develops a semantic account of this difference and the diagnostics needed to
         test it.
       </p>
@@ -166,7 +164,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="blk-body">
         The broader program connects formal semantics with two empirical questions. How does a
         linguistic function emerge in human cognition? Can it be learned from linguistic input alone?
-        I use the same semantic analysis to formulate both questions, without treating models as
+        The same semantic analysis formulates both questions, without treating models as
         stand-ins for people.
       </p>
       <p class="blk-link"><a href="/approach">See the research program</a></p>
@@ -211,9 +209,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <section class="sec play-sec" id="playground">
       <h2 class="sec-h">Playground</h2>
       <p class="block-note play-note">
-        Outside my research, I like to make small, <em>playable</em> things out of language — a toy
-        grammar I can run tests against, a puzzle where you reverse-engineer a language you’ve never
-        seen. Same curiosity as the papers, with room to just follow a hunch and watch what it does.
+        Outside the research, I like building small, <em>playable</em> things out of language — a toy
+        grammar with its own test suite, a puzzle where you reverse-engineer a language you’ve never
+        seen. Same curiosity as the papers, with room to follow a hunch and see what it does.
       </p>
       <div class="play-grid">
         {playground.map((p) => (
@@ -280,7 +278,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <!-- ===== contact ===== -->
     <section class="sec">
       <div class="cta">
-        <p class="cta-line">I’m applying for PhD positions beginning in fall 2027. Email is the best way to reach me.</p>
+        <p class="cta-line">Currently applying for PhD positions beginning in fall 2027 — email is the best way to get in touch.</p>
         <p class="cta-links">
           <a href="mailto:xiaochuan.li@utn.de">Email me</a>
           <span class="sep">·</span>
