@@ -62,8 +62,8 @@ const timeline = [
     logo: "/images/logos/marburg.svg",
     emblem: true,
     org: "University of Marburg",
-    role: "German language program",
-    did: "I spent a year in an intensive German program before graduate study. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
+    role: "Student · Preparatory Studies",
+    did: "I spent a year here as an enrolled student in preparatory studies, building the German I needed for graduate work. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
     impact: "",
   },
   {
@@ -79,14 +79,22 @@ const timeline = [
 
 const playground = [
   {
-    title: "Information Machines",
-    tag: "Constructed language",
-    desc: "A small constructed language for experimenting with how a grammar introduces, connects, revises, and transmits information. It has a grammar, a changelog, and a test suite.",
-  },
-  {
+    variant: "relay",
     title: "RELAY",
     tag: "Language-puzzle game",
-    desc: "A puzzle game about discovering an unfamiliar language from scenes and short utterances. Players infer the pieces, build a new sentence, and see whether it communicates the intended message.",
+    href: "/relay/",
+    cta: "Play the prototype",
+    steps: ["Observe", "Infer", "Compose"],
+    desc: "You’re handed a machine that speaks a language nobody taught you. Feed it inputs, watch how it answers, and reverse-engineer the rules — then compose a brand-new utterance and see whether it actually gets through.",
+  },
+  {
+    variant: "im",
+    title: "Information Machines",
+    tag: "Constructed language",
+    href: "/information-machines",
+    cta: "Read the design log",
+    steps: ["Add", "Link", "Revise", "Retract"],
+    desc: "A language whose grammar has a single job: move information around — introduce a fact, link it to what came before, revise it, take it back. I grow it slowly and keep it honest with a changelog and a suite of tests.",
   },
 ];
 
@@ -200,20 +208,71 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     </section>
 
     <!-- ===== playground ===== -->
-    <section class="sec">
+    <section class="sec play-sec" id="playground">
       <h2 class="sec-h">Playground</h2>
-      <p class="block-note">I also build things with language for fun.</p>
+      <p class="block-note play-note">
+        Outside my research, I like to make small, <em>playable</em> things out of language — a toy
+        grammar I can run tests against, a puzzle where you reverse-engineer a language you’ve never
+        seen. Same curiosity as the papers, with room to just follow a hunch and watch what it does.
+      </p>
       <div class="play-grid">
         {playground.map((p) => (
-          <div class="proj-card proj-card-static">
-            <div class="proj-copy">
-              <div class="proj-top">
-                <span class="proj-title">{p.title}</span>
-                <span class="proj-tag">{p.tag}</span>
-              </div>
-              <p class="proj-desc">{p.desc}</p>
+          <a class={`play-card play-${p.variant}`} href={p.href} aria-label={`Open ${p.title}`}>
+            <div class="play-fig" aria-hidden="true">
+              {p.variant === "relay" && (
+                <svg class="pr" viewBox="0 0 220 200" role="img" aria-label="The RELAY language machine">
+                  <g class="pr-rings">
+                    <circle class="pr-ring pr-ring-a" cx="110" cy="100" r="86" />
+                    <circle class="pr-ring pr-ring-b" cx="110" cy="100" r="73" />
+                  </g>
+                  <circle class="pr-disc" cx="110" cy="100" r="66" />
+                  <g class="pr-bot">
+                    <path class="pr-stalk" d="M64 8v16" />
+                    <circle class="pr-bulb" cx="64" cy="8" r="7" />
+                    <path class="pr-ear" d="M22 49H12v34h10M106 49h10v34h-10" />
+                    <rect class="pr-head" x="20" y="25" width="88" height="86" rx="24" />
+                    <rect class="pr-face" x="34" y="42" width="60" height="52" rx="15" />
+                    <g class="pr-eyes">
+                      <rect class="pr-eye" x="44" y="57" width="16" height="12" />
+                      <rect class="pr-eye" x="68" y="57" width="16" height="12" />
+                      <rect class="pr-pupil" x="50" y="61" width="6" height="6" />
+                      <rect class="pr-pupil" x="72" y="61" width="6" height="6" />
+                    </g>
+                    <path class="pr-mouth" d="M49 80h30" />
+                  </g>
+                </svg>
+              )}
+              {p.variant === "im" && (
+                <svg class="pg" viewBox="0 0 220 200" role="img" aria-label="An information state being introduced, linked, and revised">
+                  <line class="pg-edge" x1="66" y1="132" x2="156" y2="74" />
+                  <circle class="pg-spark" cx="66" cy="132" r="4.5" />
+                  <g class="pg-node pg-q">
+                    <circle cx="156" cy="74" r="21" />
+                    <text x="156" y="75" class="pg-label">q</text>
+                  </g>
+                  <g class="pg-node pg-p">
+                    <circle cx="66" cy="132" r="21" />
+                    <text x="66" y="133" class="pg-label">p</text>
+                  </g>
+                  <g class="pg-revise">
+                    <circle class="pg-halo" cx="66" cy="132" r="27" />
+                    <text x="95" y="120" class="pg-prime">′</text>
+                  </g>
+                </svg>
+              )}
             </div>
-          </div>
+            <div class="play-body">
+              <div class="play-top">
+                <span class="play-title">{p.title}</span>
+                <span class="play-tag">{p.tag}</span>
+              </div>
+              <p class="play-desc">{p.desc}</p>
+              <div class={`play-chips play-chips-${p.variant}`}>
+                {p.steps.map((s) => <span class="play-chip">{s}</span>)}
+              </div>
+              <span class="play-cta">{p.cta}<span class="play-cta-arrow">→</span></span>
+            </div>
+          </a>
         ))}
       </div>
     </section>
@@ -347,11 +406,123 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .proj-figure img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 5 / 3; transition: transform 0.35s ease; }
   .proj-card:hover .proj-figure img { transform: scale(1.03); }
 
-  /* playground — static cards (no link, no lift) */
-  .play-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .proj-card-static { grid-template-columns: 1fr; cursor: default; }
-  .proj-card-static:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
-  .proj-card-static:hover .proj-title { color: var(--color-text); }
+  /* ===== playground — playable cards ===== */
+  .play-sec {
+    --pg-blue: #2f58db;
+    --pg-amber: #f6ad28;
+    --pg-ink: #172137;
+    --pg-cream: #f4efe3;
+    --pg-indigo: #46567a;
+  }
+  .play-note { max-width: 46rem; }
+  .play-note :global(em) { font-style: italic; color: var(--color-text); }
+
+  .play-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .play-card {
+    display: grid;
+    grid-template-rows: 168px auto;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    background: var(--card-bg);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+  }
+  .play-card:hover { transform: translateY(-4px); }
+  .play-relay:hover {
+    border-color: color-mix(in srgb, var(--pg-blue) 45%, var(--card-border));
+    box-shadow: 0 16px 34px -18px color-mix(in srgb, var(--pg-blue) 60%, transparent);
+  }
+  .play-im:hover {
+    border-color: color-mix(in srgb, var(--pg-indigo) 50%, var(--card-border));
+    box-shadow: 0 16px 34px -18px color-mix(in srgb, var(--pg-indigo) 50%, transparent);
+  }
+
+  .play-fig {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid var(--card-border);
+    overflow: hidden;
+  }
+  .play-relay .play-fig { background: radial-gradient(125% 125% at 50% 0%, #eef3ff 0%, #e3ebff 100%); }
+  .play-im .play-fig { background: radial-gradient(125% 125% at 50% 0%, #f6f8fb 0%, #edf0f5 100%); }
+  .play-fig svg { height: 150px; width: auto; display: block; }
+
+  /* --- RELAY robot --- */
+  .pr-ring { fill: none; stroke: var(--pg-ink); stroke-opacity: 0.16; stroke-width: 2; stroke-linecap: round; transform-origin: 110px 100px; }
+  .pr-ring-a { stroke-dasharray: 2 8; animation: pr-spin 26s linear infinite; }
+  .pr-ring-b { stroke-dasharray: 3 11; animation: pr-spin 34s linear infinite reverse; }
+  .pr-disc { fill: var(--pg-cream); stroke: var(--pg-ink); stroke-opacity: 0.10; stroke-width: 1.5; }
+  .pr-bot { transform: translate(46px, 34px); }
+  .pr-stalk { fill: none; stroke: var(--pg-ink); stroke-width: 7; stroke-linecap: square; }
+  .pr-bulb { fill: var(--pg-amber); stroke: var(--pg-ink); stroke-width: 5; transform-box: fill-box; transform-origin: center; animation: pr-glow 2.6s ease-in-out infinite; }
+  .pr-ear { fill: var(--pg-amber); stroke: var(--pg-ink); stroke-width: 6; }
+  .pr-head { fill: var(--pg-blue); stroke: var(--pg-ink); stroke-width: 7; }
+  .pr-face { fill: var(--pg-cream); stroke: var(--pg-ink); stroke-width: 6; }
+  .pr-eye { fill: #fff; stroke: var(--pg-ink); stroke-width: 4; }
+  .pr-pupil { fill: var(--pg-ink); }
+  .pr-eyes { transform-box: fill-box; transform-origin: center; }
+  .pr-mouth { fill: none; stroke: var(--pg-ink); stroke-width: 5; stroke-linecap: round; }
+  .play-relay:hover .pr-bot { animation: pr-bob 0.7s ease; }
+  .play-relay:hover .pr-eyes { animation: pr-blink 0.45s ease; }
+  .play-relay:hover .pr-bulb { animation: pr-glow-strong 0.9s ease-in-out infinite; }
+
+  @keyframes pr-spin { to { transform: rotate(360deg); } }
+  @keyframes pr-glow { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 4px rgba(246, 173, 40, 0.85)); } }
+  @keyframes pr-glow-strong { 0%, 100% { filter: drop-shadow(0 0 3px rgba(246, 173, 40, 0.7)); } 50% { filter: drop-shadow(0 0 9px rgba(246, 173, 40, 1)); } }
+  @keyframes pr-blink { 35%, 55% { transform: scaleY(0.12); } }
+  @keyframes pr-bob { 0%, 100% { transform: translate(46px, 34px); } 50% { transform: translate(46px, 27px); } }
+
+  /* --- Information Machines: an information state --- */
+  .pg-edge { stroke: var(--pg-ink); stroke-opacity: 0.32; stroke-width: 2.5; stroke-linecap: round; }
+  .pg-node { transform-box: fill-box; transform-origin: center; animation: pg-pulse 3.4s ease-in-out infinite; }
+  .pg-q { animation-delay: 0.7s; }
+  .pg-node circle { stroke: var(--pg-ink); stroke-width: 3.5; }
+  .pg-p circle { fill: var(--pg-amber); }
+  .pg-q circle { fill: var(--pg-blue); }
+  .pg-label { font-family: var(--font-mono); font-size: 20px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+  .pg-p .pg-label { fill: var(--pg-ink); }
+  .pg-q .pg-label { fill: #fff; }
+  .pg-spark { fill: var(--pg-blue); opacity: 0; animation: pg-travel 2.9s ease-in-out infinite; }
+  .pg-halo { fill: none; stroke: var(--pg-indigo); stroke-width: 2.5; opacity: 0; animation: pg-reveal 5.4s ease-in-out infinite; }
+  .pg-prime { font-family: var(--font-mono); font-size: 27px; font-weight: 600; fill: var(--pg-indigo); text-anchor: middle; opacity: 0; animation: pg-reveal 5.4s ease-in-out infinite; }
+
+  @keyframes pg-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+  @keyframes pg-travel {
+    0% { transform: translate(0, 0); opacity: 0; }
+    12% { opacity: 1; }
+    68% { transform: translate(90px, -58px); opacity: 1; }
+    74%, 100% { transform: translate(90px, -58px); opacity: 0; }
+  }
+  @keyframes pg-reveal { 0%, 56% { opacity: 0; } 68%, 86% { opacity: 1; } 100% { opacity: 0; } }
+
+  /* --- card copy --- */
+  .play-body { padding: 1.15rem 1.25rem 1.3rem; }
+  .play-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
+  .play-title { font-family: var(--font-sans); font-size: 1.12rem; font-weight: 600; color: var(--color-text); letter-spacing: -0.005em; transition: color 0.2s ease; }
+  .play-relay:hover .play-title { color: var(--pg-blue); }
+  .play-im:hover .play-title { color: var(--pg-indigo); }
+  .play-tag { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
+  .play-desc { font-size: 0.92rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.95rem; }
+  .play-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-bottom: 1.05rem; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-text-muted); }
+  .play-chips-relay .play-chip:not(:first-child)::before { content: "\2192"; margin-right: 0.45rem; color: var(--pg-blue); }
+  .play-chips-im .play-chip:not(:first-child)::before { content: "\00b7"; margin-right: 0.45rem; color: var(--pg-amber); font-weight: 700; }
+  .play-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+  .play-relay .play-cta { color: var(--pg-blue); }
+  .play-im .play-cta { color: var(--pg-indigo); }
+  .play-cta-arrow { transition: transform 0.2s ease; }
+  .play-card:hover .play-cta-arrow { transform: translateX(4px); }
+
+  @media (max-width: 600px) {
+    .play-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pr-ring-a, .pr-ring-b, .pr-bulb, .pg-node, .pg-spark, .pg-halo, .pg-prime,
+    .play-relay:hover .pr-bot, .play-relay:hover .pr-eyes, .play-relay:hover .pr-bulb { animation: none !important; }
+    .pg-spark, .pg-halo, .pg-prime { opacity: 0; }
+  }
 
   @media (max-width: 760px) {
     .proj-card { grid-template-columns: minmax(0, 1fr) 220px; gap: 1.15rem; }

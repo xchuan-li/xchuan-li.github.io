@@ -1,0 +1,200 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Playground page for the constructed-language side project ("Information Machines").
+// This is a personal, incubating creative project — NOT research. Keep it honest about
+// status: there is no fixed lexicon/phonology/writing system and no results. It documents
+// a design and a method (a grammar built around information operators, kept honest with a
+// changelog and a test suite), and links to its playable spin-off, RELAY (/relay/).
+
+const operators = [
+  { op: "ADD", fn: "Put a new piece of information into the current state." },
+  { op: "LINK", fn: "Relate it to what came before — cause, explanation, contrast, example." },
+  { op: "DERIVE", fn: "Mark that this follows from information already present." },
+  { op: "REVISE", fn: "Change something that was asserted earlier." },
+  { op: "RETRACT", fn: "Withdraw a previous commitment." },
+  { op: "QUERY", fn: "Point at a gap and ask for it to be filled." },
+  { op: "PRESERVE", fn: "Deliberately keep several readings open, without choosing yet." },
+];
+
+const suite = [
+  "Describe something that happened yesterday.",
+  "Pass along a rumor you can’t confirm.",
+  "Correct something you just said wrong.",
+  "Write a recipe, or a set of instructions.",
+  "Explain why something happened.",
+  "Describe a dream.",
+  "Give a stranger directions.",
+  "State a rule, or a prohibition.",
+  "Tell a joke that turns on an ambiguity.",
+  "Say “I don’t know, but I know that you know.”",
+  "Describe something that has no name yet.",
+  "Compress a complicated story into three sentences.",
+];
+---
+
+<Base
+  title="Information Machines · Xiaochuan Li"
+  description="A constructed language whose grammar is built around one job — how information enters, connects, changes, and leaves a conversation. A personal, incubating side project with a changelog and a test suite. No results; it is never finished."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/#playground" class="!text-[var(--color-accent)]">← Playground</a></p>
+    <div class="im-kicker">Playground · Constructed language</div>
+    <h1>Information Machines</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
+      What would a language look like if the way information <em>enters, connects, changes, and
+      leaves</em> a conversation were written directly into its grammar?
+    </p>
+
+    <div class="im-ops" aria-hidden="true">
+      {operators.slice(0, 5).map((o) => <span class="im-op-chip">{o.op}</span>)}
+    </div>
+
+    <p>
+      Information Machines is a small constructed language I build in my spare time. Most of my
+      research approaches meaning from the outside — with analysis, diagnostics, and evidence. This
+      is the inside-out version: rather than describe how some existing language handles information,
+      I try to <em>design</em> one whose grammar is about nothing else, and watch what breaks. It
+      doesn’t have to serve my research or defend a claim. It’s an object about language that I can
+      actually run.
+    </p>
+
+    <h2>The operators</h2>
+    <p>
+      The first version doesn’t need a world, a vocabulary, or a sound system. It needs a handful of
+      moves for changing an information state, and rules for combining them. These are the early
+      candidates — the grammar’s verbs, so to speak:
+    </p>
+    <div class="im-grid">
+      {operators.map((o) => (
+        <div class="im-cell">
+          <span class="im-op">{o.op}</span>
+          <span class="im-fn">{o.fn}</span>
+        </div>
+      ))}
+    </div>
+    <p>
+      A second axis is <strong>where information comes from</strong> — witnessed, reported, inferred,
+      remembered, hypothesized, imagined. Whether the grammar should <em>force</em> you to mark the
+      source, the way some natural languages do, is exactly the kind of question the project exists to
+      play with. Nothing is decided in advance.
+    </p>
+
+    <h2>Unit tests for a language</h2>
+    <p>
+      The project doesn’t depend on anyone else adopting it, so it needs its own way of making
+      progress. I borrow one from software: every version moves through the same loop.
+    </p>
+    <ol>
+      <li>Add or change <strong>one</strong> rule.</li>
+      <li>Use it to express a fixed set of texts.</li>
+      <li>Write down what can’t be said, comes out clumsy, or turns unexpectedly ambiguous.</li>
+      <li>Revise the design — keeping the old version, and the reason for the change.</li>
+      <li>Re-run the old tests: did the change break something that used to work?</li>
+    </ol>
+    <p>
+      Over time that produces the real artifacts — a grammar, a growing dictionary, a corpus of test
+      sentences, a changelog, a graveyard of abandoned rules, and the occasional short text written in
+      the language itself.
+    </p>
+
+    <h2>The test suite</h2>
+    <p>
+      The tests are just things people routinely do with language. A rule earns its place only if the
+      language can still say all of these afterward:
+    </p>
+    <ul class="im-suite">
+      {suite.map((s) => <li>{s}</li>)}
+    </ul>
+
+    <h2>Where it stands</h2>
+    <p class="im-status">
+      It’s early. Right now Information Machines is a design and a method more than a finished
+      language: there’s no fixed lexicon, phonology, or writing system, and there’s nothing here to
+      report as a result. The first real move is small — pick one operator, write three rules and ten
+      example sentences, and test them against a single real conversation. The point was never to
+      finish. It’s to keep an object about language that can grow, fail, and be revised on the record.
+    </p>
+    <p>
+      Rules that turn out to be fun to <em>discover</em>, rather than just to describe, get spun off
+      into <a href="/relay/">RELAY</a> — a puzzle game built on the same idea, where you reverse-engineer
+      a machine’s language instead of designing your own.
+    </p>
+
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
+      <a href="/#playground" class="!text-[var(--color-accent)]">← Back to the Playground</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .im-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  /* operator chips under the lede */
+  .im-ops { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 2rem; }
+  .im-op-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #46567a;
+    background: #eef1f7;
+    border: 1px solid color-mix(in srgb, #46567a 22%, transparent);
+    border-radius: 999px;
+    padding: 4px 11px;
+  }
+
+  /* operator grid */
+  .im-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.4rem 0 1.6rem;
+  }
+  .im-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid #f6ad28;
+    border-radius: 0 9px 9px 0;
+    background: var(--color-surface);
+  }
+  .im-op {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #172137;
+  }
+  .im-fn { font-size: 0.9rem; line-height: 1.55; color: var(--color-text-muted); }
+
+  .im-suite { columns: 2; column-gap: 2rem; }
+  .im-suite li { break-inside: avoid; margin-bottom: 0.5rem; }
+
+  .im-status {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 8px 8px 0;
+  }
+
+  @media (max-width: 620px) {
+    .im-grid { grid-template-columns: 1fr; }
+    .im-suite { columns: 1; }
+  }
+</style>

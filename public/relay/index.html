@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RELAY — Experimental Language Machine</title>
+  <link rel="icon" href="robot-logo.svg">
+  <style>
+    :root{--paper:#f4efe3;--ink:#172137;--blue:#2f58db;--amber:#f6ad28;--display:"Arial Black","Avenir Next",Arial,sans-serif;--body:"Avenir Next","Segoe UI",sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
+    *{box-sizing:border-box}html,body{margin:0;min-width:1050px;min-height:720px;background:var(--paper)}body{color:var(--ink);font:16px/1.45 var(--body);overflow:hidden}button{font:inherit}
+    .site{height:100vh;display:grid;grid-template-rows:76px 1fr 58px;background:linear-gradient(90deg,transparent 49.8%,rgba(23,33,55,.08) 49.8% 50.2%,transparent 50.2%),var(--paper)}
+    header{display:flex;align-items:center;justify-content:space-between;padding:0 4vw;border-bottom:2px solid var(--ink);background:rgba(244,239,227,.96)}.brand{display:flex;align-items:center;gap:12px}.brand img{width:48px;height:48px}.brand b{font:900 24px/1 var(--display);letter-spacing:.13em}.tools{display:flex;align-items:center;gap:22px}.tools span{font:800 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}.sound{border:0;border-bottom:2px solid var(--ink);background:transparent;padding:6px 1px;font:800 10px/1 var(--mono);text-transform:uppercase;cursor:pointer}
+    main{position:relative;display:grid;grid-template-columns:45% 55%;min-height:0}.hero{position:relative;padding:8vh 5vw 5vh;display:flex;flex-direction:column;justify-content:center}.hero:before{content:"";position:absolute;left:-8vw;right:-2vw;top:24%;height:170px;background:var(--amber);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-3deg);z-index:0}.hero>*{position:relative;z-index:1}.eyebrow{font:800 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}.hero h1{margin:15px 0 18px;font:900 clamp(76px,9vw,145px)/.72 var(--display);letter-spacing:-.065em}.hero p{max-width:410px;margin:0;font-size:18px;font-weight:750}.formula{max-width:430px;margin-top:28px;border-left:9px solid var(--blue);padding:12px 15px;background:rgba(244,239,227,.9);font:800 13px/1.5 var(--mono)}
+    .machine{position:absolute;right:-165px;top:50%;transform:translateY(-50%);width:330px;height:330px;border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:repeating-conic-gradient(transparent 0 9deg,rgba(47,88,219,.14) 9deg 10deg),var(--paper);animation:turn 30s linear infinite}.machine img{width:235px;height:235px;animation:counterturn 30s linear infinite}
+    .sessions{padding:6vh 4.5vw 5vh 13vw;background:var(--blue);border-left:2px solid var(--ink);display:grid;align-content:center;gap:16px}.sessions h2{margin:0 0 8px;color:white;font:900 28px/1 var(--display);text-transform:uppercase}.sessions>p{margin:0 0 12px;color:#e3e8ff;font-weight:700}.card{display:grid;grid-template-columns:68px 1fr auto;align-items:center;gap:18px;border:3px solid var(--ink);background:var(--paper);padding:18px 20px;color:var(--ink);text-decoration:none;box-shadow:8px 8px 0 var(--ink);transition:.18s}.card:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 var(--amber)}.number{display:grid;place-items:center;width:54px;height:48px;background:var(--ink);color:var(--paper);font:900 13px/1 var(--mono)}.card small{display:block;color:var(--blue);font:800 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}.card strong{display:block;margin:5px 0;font:900 19px/1 var(--display);text-transform:uppercase}.card p{margin:0;color:#4b5364;font-size:12px;font-weight:650}.arrow{font:900 27px/1 var(--display);color:var(--blue)}.status{display:inline-block;margin-top:7px;padding:5px 7px;background:var(--amber);font:900 9px/1 var(--mono);text-transform:uppercase}
+    footer{display:flex;justify-content:space-between;align-items:center;padding:0 4vw;border-top:2px solid var(--ink);font:750 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}.pulse{display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:#168260;animation:pulse 1.4s infinite}
+    @keyframes turn{to{transform:translateY(-50%) rotate(360deg)}}@keyframes counterturn{to{transform:rotate(-360deg)}}@keyframes pulse{50%{opacity:.25;transform:scale(.7)}}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header><div class="brand"><img src="robot-logo.svg" alt=""><b>RELAY</b></div><div class="tools"><span>Experimental language machine</span><button class="sound" data-sound-toggle type="button">Sound on</button></div></header>
+    <main>
+      <section class="hero"><span class="eyebrow">A game about language as a computable system</span><h1>RELAY</h1><p>Design an input. Watch the machine respond. Discover how world, memory and context become communicative action.</p><div class="formula">RESPONSE = f(CONTENT, FORM, HISTORY, AFFECT, WORLD, SOCIETY)</div><div class="machine"><img src="robot-logo.svg" alt="The RELAY language machine"></div></section>
+      <section class="sessions"><h2>Choose a field session</h2><p>Each session adds one layer to the machine. Start with calibration or enter the context lab directly.</p>
+        <a class="card" href="relay-demo.html"><span class="number">01</span><span><small>Simple · cooperative report</small><strong>Memory Calibration</strong><p>Discover how the machine introduces, confirms and revises stored claims.</p></span><span class="arrow">→</span></a>
+        <a class="card" href="relay-context-lab.html"><span class="number">02</span><span><small>Standard · contextual action</small><strong>Context Lab</strong><p>Hold a request constant while weather, affect, identity and repetition interact.</p><span class="status">New session</span></span><span class="arrow">→</span></a>
+      </section>
+    </main>
+    <footer><span><i class="pulse"></i>Machine online</span><span>Local prototype · no network required</span></footer>
+  </div>
+  <script src="relay-audio.js"></script>
+</body>
+</html>

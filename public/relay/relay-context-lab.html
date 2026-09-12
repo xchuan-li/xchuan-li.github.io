@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RELAY — Context Lab</title>
+  <link rel="icon" href="robot-logo.svg">
+  <style>
+    :root{--paper:#f4efe3;--pale:#e9e0cc;--ink:#172137;--blue:#2f58db;--amber:#f6ad28;--red:#bd4035;--green:#168260;--display:"Arial Black","Avenir Next",Arial,sans-serif;--body:"Avenir Next","Segoe UI",sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
+    *{box-sizing:border-box}html,body{margin:0;min-width:1080px;min-height:700px;background:var(--paper)}body{color:var(--ink);font:16px/1.42 var(--body);overflow:hidden}button{font:inherit;color:inherit}button:focus-visible{outline:4px solid var(--amber);outline-offset:3px}
+    .app{height:100vh;display:grid;grid-template-rows:72px 190px 1fr 178px;background:var(--paper)}
+    header{display:grid;grid-template-columns:255px 1fr 310px;border-bottom:2px solid var(--ink)}
+    .brand,.progress,.mission{display:flex;align-items:center}.brand{gap:12px;padding:0 26px;border-right:2px solid var(--ink);color:var(--ink);text-decoration:none}.brand img{width:45px;height:45px}.brand b{font:900 23px/1 var(--display);letter-spacing:.1em}
+    .mission{gap:18px;padding:0 26px}.mission-no{display:grid;place-items:center;width:42px;height:38px;background:var(--ink);color:var(--paper);font:800 12px/1 var(--mono)}.mission small{display:block;color:var(--blue);font:800 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}.mission strong{display:block;margin-top:6px;font-size:15px}
+    .progress{justify-content:flex-end;gap:13px;padding:0 24px;border-left:2px solid var(--ink)}.track{width:94px;height:9px;border:2px solid var(--ink)}.fill{display:block;height:100%;width:20%;background:var(--amber);transition:.35s}.guide{border:0;border-bottom:2px solid var(--ink);background:transparent;font:800 10px/1 var(--mono);text-transform:uppercase;cursor:pointer}
+    .machine-band{position:relative;display:grid;grid-template-columns:1fr 210px 1fr;align-items:center;gap:28px;padding:18px 6vw;background:var(--amber);border-bottom:2px solid var(--ink);overflow:hidden}
+    .state{text-align:right}.label{display:block;font:800 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}.state p{margin:7px 0;font-weight:850}.context-readout{display:inline-block;border:2px solid var(--ink);background:var(--paper);padding:5px 8px;font:800 10px/1.2 var(--mono);text-transform:uppercase}
+    .robot{position:relative;justify-self:center;width:150px;height:124px;border:6px solid var(--ink);border-radius:23px 23px 42px 42px;background:var(--blue);box-shadow:9px 9px 0 var(--ink);transition:.25s}.robot:before{content:"";position:absolute;left:50%;top:-32px;width:6px;height:30px;background:var(--ink)}.robot:after{content:"";position:absolute;left:calc(50% - 9px);top:-44px;width:20px;height:20px;border:4px solid var(--ink);border-radius:50%;background:var(--amber)}
+    .face{position:absolute;inset:18px 14px 15px;border:4px solid var(--ink);border-radius:12px 12px 27px 27px;background:var(--paper)}.eyes{display:flex;justify-content:center;gap:20px;margin-top:22px}.eyes i{width:27px;height:18px;border:3px solid var(--ink);background:white}.eyes i:after{content:"";display:block;width:8px;height:8px;margin:2px auto;background:var(--ink)}.mouth{position:absolute;left:50%;bottom:15px;width:45px;border-bottom:4px solid var(--ink);transform:translateX(-50%)}.robot.ask{animation:shake .3s 2;background:var(--red)}.robot.open{background:var(--green)}.robot.warn{background:var(--amber)}.robot.refuse{background:var(--red)}
+    .response{min-width:360px}.signal{margin-top:9px;height:65px;display:flex;align-items:center;justify-content:center;border:2px solid var(--ink);background:var(--paper);box-shadow:7px 7px 0 var(--ink);font:900 22px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}.outcome{margin-top:12px;font-weight:800}
+    .work{display:grid;grid-template-columns:44% 56%;min-height:0}.panel{position:relative;padding:22px 28px;border-right:2px solid var(--ink);min-width:0}.panel:last-child{border-right:0}.panel h2{margin:0 0 15px;padding-bottom:12px;border-bottom:2px solid var(--ink);font:900 13px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}
+    .controls{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.control{position:relative;border:2px solid var(--ink);padding:13px;background:#fffaf0;transition:.35s}.control.locked{opacity:.18;pointer-events:none;transform:translateY(15px)}.control.locked:after{content:"LOCKED";position:absolute;inset:0;display:grid;place-items:center;background:rgba(244,239,227,.8);font:900 11px/1 var(--mono)}.control label{display:block;margin-bottom:9px;font:800 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em}.pair{display:grid;grid-template-columns:1fr 1fr}.choice{border:2px solid var(--ink);border-right:0;background:transparent;padding:9px 3px;font:800 10px/1 var(--mono);cursor:pointer}.choice:last-child{border-right:2px solid var(--ink)}.choice.active{background:var(--blue);color:white}
+    .request-card{display:flex;justify-content:space-between;align-items:center;margin-top:17px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:13px 15px}.request-card b{font:900 15px/1 var(--mono);letter-spacing:.08em}.send{border:2px solid var(--paper);background:var(--amber);padding:12px 17px 10px;font:900 12px/1 var(--display);text-transform:uppercase;cursor:pointer;box-shadow:4px 4px 0 var(--blue)}
+    .log{height:245px;overflow:auto}.empty{height:100%;display:grid;place-items:center;border:2px dashed #9d9789;color:#777;font:700 12px/1.5 var(--mono);text-align:center}.row{display:grid;grid-template-columns:34px 1fr auto auto;gap:12px;align-items:center;padding:10px 3px;border-bottom:1px solid #aaa394}.row .id{color:var(--blue);font:800 10px/1 var(--mono)}.row .ctx{font:750 12px/1.25 var(--mono);text-transform:uppercase}.row .ctx small{display:block;color:#716c61}.row .sig{background:var(--ink);color:var(--paper);padding:5px 7px;font:800 11px/1 var(--mono)}.badge{padding:5px 7px;border:2px solid var(--ink);font:900 9px/1 var(--mono);text-transform:uppercase}.badge.open{background:#a9ddc9}.badge.refuse{background:#efaaa3}.badge.confirm{background:#ffe0a3}.badge.warn{background:#f6ca6f}
+    .theory{display:grid;grid-template-columns:38% 1fr;gap:28px;padding:18px 27px;background:var(--ink);color:var(--paper)}.theory h2{margin:0 0 10px;color:var(--amber);font:800 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}.theory-copy{font-size:13px;font-weight:700;color:#cbd0dc}.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.rule{border:2px solid #747c8d;padding:11px;background:#202c44;transition:.35s}.rule.locked{opacity:.18;transform:translateY(16px)}.rule b{display:block;color:var(--amber);font:900 11px/1 var(--mono);margin-bottom:6px}.rule span{font-size:11px;color:#d7dbe3}
+    .arrow{position:fixed;z-index:15;height:5px;opacity:0;pointer-events:none;transform-origin:left;background:var(--blue)}.arrow:after{content:"";position:absolute;right:-1px;top:50%;width:15px;height:15px;border-top:5px solid currentColor;border-right:5px solid currentColor;transform:translateY(-50%) rotate(45deg)}.arrow.in{left:34%;top:48%;width:18%;transform:rotate(-27deg) scaleX(0);color:var(--blue)}.arrow.out{left:53%;top:17%;width:24%;transform:scaleX(0);background:#ae6700;color:#ae6700}.arrow.run.in{animation:flowIn .65s}.arrow.run.out{animation:flowOut .6s}
+    .coach{position:fixed;right:25px;top:85px;z-index:18;width:335px;border:2px solid var(--ink);border-left:10px solid var(--blue);background:var(--paper);box-shadow:7px 7px 0 var(--ink);padding:14px 16px;font-weight:800;font-size:13px;opacity:0;transform:translateY(-14px);transition:.2s;pointer-events:none}.coach.show{opacity:1;transform:none}
+    .brief{position:fixed;inset:0;z-index:25;display:none;place-items:center;background:rgba(23,33,55,.78)}.brief.show{display:grid}.brief-card{width:min(820px,84vw);min-height:500px;display:grid;grid-template-rows:auto 1fr auto;border:4px solid var(--ink);background:var(--paper);box-shadow:14px 14px 0 var(--amber);padding:32px 38px}.brief-top{display:flex;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:12px}.dots{display:flex;gap:7px}.dot{width:24px;height:6px;border:2px solid var(--ink)}.dot.active{background:var(--blue)}.slide{display:none;grid-template-columns:1fr 1fr;align-items:center;gap:34px;padding:27px 0;animation:slide .35s}.slide.active{display:grid}.slide h1{font:900 40px/.95 var(--display);letter-spacing:-.035em;text-transform:uppercase;margin:10px 0 13px}.slide p{font-weight:700;color:#40495b}.diagram{min-height:250px;border:2px solid var(--ink);background:#fffaf0;display:grid;place-items:center;padding:22px}.stack{width:100%;display:grid;gap:10px}.stack div{border:2px solid var(--ink);padding:12px;font:850 11px/1.3 var(--mono);animation:reveal .4s both}.stack div:nth-child(2){animation-delay:.25s}.stack div:nth-child(3){animation-delay:.5s}.stack div:nth-child(4){animation-delay:.75s;background:var(--ink);color:var(--paper)}
+    .brief-actions{display:flex;justify-content:flex-end;gap:16px;border-top:2px solid var(--ink);padding-top:17px}.back{border:0;border-bottom:2px solid var(--ink);background:transparent;font:800 10px/1 var(--mono);text-transform:uppercase}.next{border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:13px 20px 11px;box-shadow:5px 5px 0 var(--amber);font:900 12px/1 var(--display);text-transform:uppercase}
+    .complete{position:fixed;inset:0;z-index:30;display:none;place-items:center;background:rgba(23,33,55,.86)}.complete.show{display:grid}.complete-card{width:620px;border:4px solid var(--ink);background:var(--paper);box-shadow:14px 14px 0 var(--amber);padding:42px;text-align:center}.complete-card h2{font:900 48px/.95 var(--display);text-transform:uppercase;margin:8px}.complete-card p{font-weight:750}
+    @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+    @keyframes flowIn{0%{opacity:0;transform:rotate(-27deg) scaleX(0)}35%{opacity:1}80%{opacity:1;transform:rotate(-27deg) scaleX(1)}100%{opacity:0;transform:rotate(-27deg) scaleX(1)}}
+    @keyframes flowOut{0%{opacity:0;transform:scaleX(0)}35%{opacity:1}80%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+    @keyframes slide{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+    @keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header><a class="brand" href="index.html" aria-label="RELAY home"><img src="robot-logo.svg" alt=""><b>RELAY</b></a><div class="mission"><span class="mission-no" id="missionNo">01</span><div><small>Context Lab · interaction</small><strong id="missionText">Run the calm baseline.</strong></div></div><div class="progress"><div class="track"><span class="fill" id="fill"></span></div><button class="guide" data-sound-toggle type="button">Sound on</button><button class="guide" id="guideButton">Briefing</button></div></header>
+    <section class="machine-band">
+      <div class="state"><span class="label">Robot state</span><p id="robotState">Waiting for a request.</p><span class="context-readout" id="readout">CALM · STEADY · VISITOR</span></div>
+      <div class="robot" id="robot"><div class="face"><div class="eyes"><i></i><i></i></div><div class="mouth"></div></div></div>
+      <div class="response"><span class="label">Unknown response</span><div class="signal" id="signal">—</div><div class="outcome" id="outcome">Gate state · CLOSED</div></div>
+    </section>
+    <main class="work">
+      <section class="panel"><h2>01 — Configure the context</h2><div class="controls">
+        <div class="control" id="weatherControl"><label>Weather</label><div class="pair" data-key="weather"><button class="choice active" data-value="calm">Calm</button><button class="choice" data-value="storm">Storm</button></div></div>
+        <div class="control locked" id="roleControl"><label>Speaker identity</label><div class="pair" data-key="role"><button class="choice active" data-value="visitor">Visitor</button><button class="choice" data-value="operator">Operator</button></div></div>
+        <div class="control locked" id="moodControl"><label>Robot affect</label><div class="pair" data-key="mood"><button class="choice active" data-value="steady">Steady</button><button class="choice" data-value="anxious">Anxious</button></div></div>
+      </div><div class="request-card"><div><span class="label">Fixed request</span><b>OPEN THE GATE</b></div><button class="send" id="sendButton">Send request →</button></div></section>
+      <section class="panel"><h2>02 — Experiment history</h2><div class="log" id="log"><div class="empty">Each request becomes evidence.<br>The same words can produce a different act.</div></div></section>
+    </main>
+    <section class="theory"><div><h2>Current question</h2><div class="theory-copy" id="question">Does the robot always obey the request?</div></div><div><h2>Competing explanations · revealed gradually</h2><div class="rules"><div class="rule"><b>A · WEATHER</b><span>Storm alone determines refusal.</span></div><div class="rule locked" id="ruleRole"><b>B · AUTHORITY</b><span>Permission depends on who is speaking.</span></div><div class="rule locked" id="ruleInteraction"><b>C · INTERACTION</b><span>Weather, authority and affect combine rather than add independently.</span></div></div></div></section>
+  </div>
+  <div class="arrow in" id="arrowIn"></div><div class="arrow out" id="arrowOut"></div><div class="coach" id="coach"></div>
+  <div class="brief show" id="brief"><div class="brief-card"><div class="brief-top"><span class="label">Session 02 · context briefing</span><div class="dots"><i class="dot active"></i><i class="dot"></i><i class="dot"></i></div></div><div>
+    <section class="slide active"><div><span class="label">01 · Same request, different world</span><h1>Context changes what an utterance does.</h1><p>The words OPEN THE GATE stay fixed. You will change the conditions around them and observe the robot's language and action.</p></div><div class="diagram"><div class="stack"><div>REQUEST · fixed</div><div>WEATHER · variable</div><div>ROLE + AFFECT · hidden at first</div><div>RESPONSE · language + action</div></div></div></section>
+    <section class="slide"><div><span class="label">02 · Variables may interact</span><h1>One cause may not be enough.</h1><p>A storm can matter differently for a visitor and an operator. Anxiety may matter only during risk. Look for combinations, not isolated labels.</p></div><div class="diagram"><div class="stack"><div>STORM</div><div>+ OPERATOR</div><div>+ ANXIOUS</div><div>= REQUEST CONFIRMATION</div></div></div></section>
+    <section class="slide"><div><span class="label">03 · Start small</span><h1>Build the rule one contrast at a time.</h1><p>Only Weather is available first. New context layers slide in after each useful comparison.</p></div><div class="diagram"><div class="stack"><div>1 · CALM BASELINE</div><div>2 · CHANGE WEATHER</div><div>3 · TEST AUTHORITY</div><div>4 · TEST THE INTERACTION</div></div></div></section>
+  </div><div class="brief-actions"><button class="back" id="backButton" hidden>← Back</button><button class="next" id="nextButton">Next →</button></div></div></div>
+  <div class="complete" id="complete"><div class="complete-card"><span class="label">Context Lab complete</span><h2>The context is part of the machine.</h2><p>You held the request constant, isolated three background variables, and used repetition to turn uncertainty into authorized action.</p><button class="next" id="returnButton">Return to the lab</button></div></div>
+  <script src="relay-audio.js"></script>
+  <script>
+    (()=>{"use strict";
+      const $=id=>document.getElementById(id), state={weather:"calm",role:"visitor",mood:"steady",mission:1,history:[],pendingKey:null,busy:false,slide:0};
+      const missions=[null,"Run the calm baseline.","Change only Weather to STORM.","Keep STORM. Test the OPERATOR identity.","Keep STORM + OPERATOR. Change affect to ANXIOUS.","Repeat the exact high-risk request to confirm it."];
+      const robot=$("robot"), coach=$("coach"), arrows=[$("arrowIn"),$("arrowOut")]; let coachTimer;
+      function animateArrow(el){el.classList.remove("run");void el.offsetWidth;el.classList.add("run")}
+      function contextKey(){return [state.weather,state.role,state.mood].join("|")}
+      function policy(){
+        if(state.weather==="calm")return{signal:"sa dor",act:"open",text:"Gate opened."};
+        if(state.role==="visitor")return{signal:"nok dor",act:"refuse",text:"Request refused."};
+        if(state.mood==="steady")return{signal:"sa vek dor",act:"warn",text:"Gate opened with a hazard warning."};
+        if(state.pendingKey===contextKey())return{signal:"sa vek dor",act:"open",text:"Confirmation accepted. Gate opened."};
+        return{signal:"mi dor",act:"confirm",text:"The robot requests the same command again."};
+      }
+      function showCoach(text){clearTimeout(coachTimer);coach.textContent=text;coach.classList.add("show");coachTimer=setTimeout(()=>coach.classList.remove("show"),3400)}
+      function renderContext(){$("readout").textContent=`${state.weather} · ${state.mood} · ${state.role}`.toUpperCase()}
+      document.querySelectorAll(".pair").forEach(group=>group.querySelectorAll(".choice").forEach(btn=>btn.addEventListener("click",()=>{group.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));btn.classList.add("active");state[group.dataset.key]=btn.dataset.value;renderContext()})));
+      function advance(result){
+        if(state.mission===1&&state.weather==="calm"){state.mission=2;showCoach("Baseline stored. Keep the request fixed and change only Weather.");}
+        else if(state.mission===2&&state.weather==="storm"&&state.role==="visitor"){state.mission=3;$("roleControl").classList.remove("locked");$("ruleRole").classList.remove("locked");showCoach("Identity unlocked. Storm caused refusal for a visitor—but is weather sufficient?");}
+        else if(state.mission===3&&state.weather==="storm"&&state.role==="operator"&&state.mood==="steady"){state.mission=4;$("moodControl").classList.remove("locked");$("ruleInteraction").classList.remove("locked");showCoach("Affect unlocked. Authority changed the result; now test whether anxiety matters under risk.");}
+        else if(state.mission===4&&state.weather==="storm"&&state.role==="operator"&&state.mood==="anxious"&&result.act==="confirm"){state.mission=5;showCoach("The robot requested confirmation. Repeat without changing any context.");}
+        else if(state.mission===5&&result.act==="open"){$("complete").classList.add("show");}
+        $("missionNo").textContent=String(Math.min(state.mission,5)).padStart(2,"0");$("missionText").textContent=missions[Math.min(state.mission,5)];$("fill").style.width=`${Math.min(state.mission,5)*20}%`;
+        $("question").textContent=state.mission<3?"Does weather alone determine refusal?":state.mission<4?"Does authority override hazardous conditions?":state.mission<5?"When does anxiety change an action into a confirmation request?":"Can repetition itself license the action?";
+      }
+      function renderLog(){if(!state.history.length)return;$("log").innerHTML=state.history.slice().reverse().map((x,i)=>`<div class="row"><span class="id">${String(state.history.length-i).padStart(2,"0")}</span><span class="ctx">${x.weather} · ${x.role}<small>${x.mood}</small></span><span class="sig">${x.signal}</span><span class="badge ${x.act}">${x.act}</span></div>`).join("")}
+      $("sendButton").addEventListener("click",()=>{
+        if(state.busy)return;
+        state.busy=true;
+        RelayAudio.play("transmit");
+        robot.className="robot";
+        $("robotState").textContent="Evaluating request in context…";
+        animateArrow(arrows[0]);
+        setTimeout(()=>{
+          const result=policy();
+          RelayAudio.play(result.act);
+          $("signal").textContent=result.signal;
+          $("outcome").textContent=`Gate state · ${result.act==="open"||result.act==="warn"?"OPEN":"CLOSED"}`;
+          $("robotState").textContent=result.text;
+          robot.classList.add(result.act==="confirm"?"ask":result.act);
+          animateArrow(arrows[1]);
+          state.history.push({...state,...result});
+          if(result.act==="confirm")state.pendingKey=contextKey();else state.pendingKey=null;
+          renderLog();
+          advance(result);
+          state.busy=false;
+        },560);
+      });
+      function renderBrief(){document.querySelectorAll(".slide").forEach((s,i)=>s.classList.toggle("active",i===state.slide));document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===state.slide));$("backButton").hidden=state.slide===0;$("nextButton").textContent=state.slide===2?"Begin baseline →":"Next →"}
+      $("nextButton").addEventListener("click",()=>{if(state.slide<2){state.slide++;renderBrief()}else{$("brief").classList.remove("show");$("sendButton").focus();showCoach("Step 1: send the calm baseline. Only Weather is active.")}});
+      $("backButton").addEventListener("click",()=>{state.slide=Math.max(0,state.slide-1);renderBrief()});$("guideButton").addEventListener("click",()=>{state.slide=0;renderBrief();$("brief").classList.add("show")});$("returnButton").addEventListener("click",()=>$("complete").classList.remove("show"));renderContext();renderBrief();
+    })();
+  </script>
+</body>
+</html>
