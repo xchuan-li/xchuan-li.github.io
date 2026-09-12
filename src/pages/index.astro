@@ -15,7 +15,6 @@ import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 const selectedWork = [
   {
     title: "Three Ways of Leaving <em>p</em> Unsettled",
-    tag: "Semantics paper · construct under review",
     href: "/research/three-ways",
     cover: "/images/project-covers/three-ways.png",
     coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
@@ -23,24 +22,21 @@ const selectedWork = [
     desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. It asks how each utterance changes the discourse and which replies each makes appropriate. A construct brief is currently under review by a formal semanticist.",
   },
   {
-    title: "Master’s thesis: learning these distinctions",
-    tag: "Thesis · in design",
+    title: "Learning epistemic modality from linguistic input",
     href: "/research/learnability",
     cover: "/images/project-covers/learnability.png",
     coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
     desc: "The master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. It begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
   },
   {
-    title: "Cross-lingual ProtoBias",
-    tag: "First-author paper · in revision for arXiv",
+    title: "Cross-lingual prototypicality bias in vision–language models",
     href: "/research/cross-lingual-protobias",
     cover: "/images/project-covers/protobias.png",
     coverAlt: "Seven language prompts feeding one vision-language judge comparing a duck and panda benchmark image pair",
     desc: "Each image pair stays fixed while the prompt language varies, testing when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
   },
   {
-    title: "Latent Control States",
-    tag: "Collaboration · DFKI",
+    title: "Prompt framing and latent control states in language models",
     href: "/research/latent-control-states",
     cover: "/images/project-covers/latent-control-states.png",
     coverAlt: "A utilitarian diversion dilemma passing through model layers with a causal intervention on an internal direction",
@@ -157,7 +153,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
             <div class="proj-copy">
               <div class="proj-top">
                 <span class="proj-title" set:html={p.title} />
-                <span class="proj-tag">{p.tag}</span>
               </div>
               <p class="proj-desc" set:html={p.desc} />
             </div>
