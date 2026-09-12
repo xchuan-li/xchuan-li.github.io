@@ -54,8 +54,12 @@ const timeline = [
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    did: "At UTN, my focus moved from philosophy into language-model research — learning to build controlled experiments and using them to study what models learn about meaning.",
-    impact: "This is where the current research took shape: how linguistic expressions change which possibilities remain available for later reasoning.",
+    did: "A move from philosophy into language-model research, learning to build controlled experiments that test what a model actually represents about meaning.",
+    questions: [
+      "Can a language model acquire a semantic distinction from text alone?",
+      "Which patterns in the training input make it learnable?",
+      "Does saying that something <em>might</em> be true simply lower commitment, or keep that possibility open for later reasoning?",
+    ],
   },
   {
     period: "2024 – 2025",
@@ -63,8 +67,12 @@ const timeline = [
     emblem: true,
     org: "University of Marburg",
     role: "Student · Preparatory Studies",
-    did: "A year here as an enrolled student in preparatory studies built the German needed for graduate work. Comparing German with Chinese and English made grammatical differences—case, word order, and clause structure—concrete rather than abstract.",
-    impact: "",
+    did: "A year of preparatory studies as an enrolled student, learning German for graduate work — and reading the same meanings through three grammars: German, Chinese, and English.",
+    questions: [
+      "When is one meaning carried by very different structures — case, word order, clause shape?",
+      "How much of an inference survives when a sentence crosses languages?",
+      "Do different languages leave the same things unsaid?",
+    ],
   },
   {
     period: "2020 – 2024",
@@ -72,8 +80,12 @@ const timeline = [
     emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
-    did: "Coursework in philosophy of language, analytic philosophy, and logic; a senior thesis on Leibniz’s <em>characteristica universalis</em>, a proposed notation whose form would mirror the structure of thought.",
-    impact: "It left a question that still drives the work: how much of reasoning is carried by the language in which it is expressed?",
+    did: "Philosophy of language, analytic philosophy, and logic — with a senior thesis on Leibniz’s <em>characteristica universalis</em>, a notation whose form was meant to mirror the structure of thought.",
+    questions: [
+      "How much of reasoning is carried by the language it is expressed in?",
+      "Can meaning be given a form precise enough to compute with?",
+      "What does a sentence settle, and what does it leave open?",
+    ],
   },
 ];
 
@@ -198,7 +210,11 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
               <h3 class="tl-org">{t.org}</h3>
               <p class="tl-role">{t.role}</p>
               <p class="tl-did" set:html={t.did} />
-              {t.impact && <p class="tl-impact" set:html={t.impact} />}
+              {t.questions && (
+                <ul class="tl-qs">
+                  {t.questions.map((q) => <li set:html={q} />)}
+                </ul>
+              )}
             </div>
           </div>
         ))}
@@ -363,7 +379,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
   .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .tl-did :global(em) { font-style: italic; }
-  .tl-impact { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
+  .tl-qs { list-style: none; margin: 0.55rem 0 0; padding: 0.1rem 0 0.15rem 0.95rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent); display: flex; flex-direction: column; gap: 0.4rem; }
+  .tl-qs li { font-size: 0.92rem; line-height: 1.5; color: var(--color-text-muted); font-style: italic; }
+  .tl-qs li :global(em) { color: var(--color-text); font-style: italic; }
   @media (max-width: 620px) {
     .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
     .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }
