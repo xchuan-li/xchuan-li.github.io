@@ -12,49 +12,69 @@ import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 // empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
 // circular emblems (emblem: true) are sized up to match the UTN wordmark.
 
-const selectedWork = [
+// Current program: one linguistic question, approached in two stages.
+const currentProgram = [
   {
+    n: "01",
+    phase: "Define the distinction",
     title: "Three Ways of Leaving <em>p</em> Unsettled",
     href: "/research/three-ways",
     cover: "/images/project-covers/three-ways.png",
     coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
-    current: true,
-    desc: "This paper compares three ways of leaving a question unresolved: <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. It asks how each utterance changes the discourse and which replies each makes appropriate. A construct brief is currently under review by a formal semanticist.",
+    desc: "A formal-semantics paper comparing <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. It defines the linguistic contrast and the diagnostics that would count as evidence for it.",
   },
   {
+    n: "02",
+    phase: "Test its learnability",
     title: "Learning epistemic modality from linguistic input",
     href: "/research/learnability",
     cover: "/images/project-covers/learnability.png",
     coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
-    desc: "The master’s thesis asks whether a small language model can learn these distinctions from developmentally realistic text. It begins with a formal analysis, then tests which patterns in the training input are needed for the distinctions to emerge.",
-  },
-  {
-    title: "Cross-lingual prototypicality bias in vision–language models",
-    href: "/research/cross-lingual-protobias",
-    cover: "/images/project-covers/protobias.png",
-    coverAlt: "Seven language prompts feeding one vision-language judge comparing a duck and panda benchmark image pair",
-    desc: "Each image pair stays fixed while the prompt language varies, testing when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. The study contains about 12,600 judgments across seven languages and two model families. Code is public, and a revised manuscript is being prepared for arXiv.",
-  },
-  {
-    title: "Prompt framing and latent control states in language models",
-    href: "/research/latent-control-states",
-    cover: "/images/project-covers/latent-control-states.png",
-    coverAlt: "A utilitarian diversion dilemma passing through model layers with a causal intervention on an internal direction",
-    desc: "In this collaboration with DFKI, we ask whether prompt framing changes only a model’s answer or also a causally relevant internal state. The design is a utilitarian minimal-pair experiment that varies the dilemma, benefit size, and framing.",
+    desc: "My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.",
   },
 ];
 
+const programBridge = "Once the distinction is explicit, its learnability becomes testable.";
+
+// Earlier model work that shaped the program's evidential standards.
+const earlierWork = [
+  {
+    n: "01",
+    phase: "Correct behaviour is not enough",
+    title: "Cross-lingual ProtoBias",
+    href: "/research/cross-lingual-protobias",
+    desc: "Holding each image pair fixed while varying the prompt language showed me why a correct judgment is not yet evidence of semantic sensitivity: a model may instead rely on a culturally familiar prototype. The project established the first constraint on my current work — separate the target linguistic relation from cheaper cues that can mimic it.",
+    meta: "First-author paper · approximately 12,600 judgments · seven languages",
+  },
+  {
+    n: "02",
+    phase: "Internal correlation is not enough",
+    title: "Latent Control States",
+    href: "/research/latent-control-states",
+    desc: "This collaboration moved the question from behavioural sensitivity to causal relevance. If framing changes an answer, does it also change an internal state responsible for that answer? The project established the second constraint I now carry forward: internal structure matters only relative to a precisely defined behavioural contrast.",
+    meta: "Collaboration · DFKI",
+  },
+];
+
+// Background: the questions belong to each period as they were then, so they change
+// stage by stage rather than restating the current program in the past.
 const timeline = [
   {
-    period: "2025 – present",
-    logo: "/images/logos/utn.svg",
-    org: "University of Technology Nuremberg (UTN)",
-    role: "M.Sc. Human and Artificial Intelligence",
-    did: "A move from philosophy into language-model research, learning to build controlled experiments that test what a model actually represents about meaning.",
-    questions: [
-      "Can a language model acquire a semantic distinction from text alone?",
-      "Which patterns in the training input make it learnable?",
-      "Does saying that something <em>might</em> be true simply lower commitment, or keep that possibility open for later reasoning?",
+    period: "2020 – 2024",
+    logo: "/images/logos/szu.svg",
+    emblem: true,
+    org: "Shenzhen University",
+    role: "B.A. Philosophy",
+    phase: "The formal question",
+    did: "Philosophy of language, analytic philosophy, and logic — with a senior thesis on Leibniz’s <em>characteristica universalis</em>, a notation whose form was meant to mirror the structure of thought.",
+    groups: [
+      {
+        questions: [
+          "Can reasoning be represented in a systematic symbolic form?",
+          "What makes an inference valid?",
+          "What is gained — and lost — when natural language is translated into logic?",
+        ],
+      },
     ],
   },
   {
@@ -63,24 +83,42 @@ const timeline = [
     emblem: true,
     org: "University of Marburg",
     role: "Student · Preparatory Studies",
-    did: "A year of preparatory studies as an enrolled student, learning German for graduate work — and reading the same meanings through three grammars: German, Chinese, and English.",
-    questions: [
-      "When is one meaning carried by very different structures — case, word order, clause shape?",
-      "How much of an inference survives when a sentence crosses languages?",
-      "Do different languages leave the same things unsaid?",
+    phase: "Meaning across linguistic forms",
+    did: "A year of preparatory studies as an enrolled student, learning German for graduate work — reading the same meanings through German, Chinese, and English.",
+    groups: [
+      {
+        questions: [
+          "How can similar content be expressed through different grammatical systems?",
+          "Which parts of an interpretation are encoded, and which are supplied by context?",
+          "What remains stable when meaning moves across languages?",
+        ],
+      },
     ],
   },
   {
-    period: "2020 – 2024",
-    logo: "/images/logos/szu.svg",
-    emblem: true,
-    org: "Shenzhen University",
-    role: "B.A. Philosophy",
-    did: "Philosophy of language, analytic philosophy, and logic — with a senior thesis on Leibniz’s <em>characteristica universalis</em>, a notation whose form was meant to mirror the structure of thought.",
-    questions: [
-      "How much of reasoning is carried by the language it is expressed in?",
-      "Can meaning be given a form precise enough to compute with?",
-      "What does a sentence settle, and what does it leave open?",
+    period: "2025 – present",
+    logo: "/images/logos/utn.svg",
+    org: "University of Technology Nuremberg (UTN)",
+    role: "M.Sc. Human and Artificial Intelligence",
+    phase: "From model behaviour to linguistic function",
+    did: "A move from philosophy into language-model research, learning to build controlled experiments that test what a model actually represents about meaning.",
+    groups: [
+      {
+        label: "Early model work",
+        questions: [
+          "Can a model produce the right answer for the wrong reason?",
+          "How can controlled contrasts separate semantic sensitivity from surface shortcuts?",
+          "When is an internal representation causally relevant to behaviour?",
+        ],
+      },
+      {
+        label: "Current program",
+        questions: [
+          "What exactly does an epistemic possibility expression contribute to discourse?",
+          "Can that function be acquired from linguistic input alone?",
+          "Which patterns in the input make it learnable?",
+        ],
+      },
     ],
   },
 ];
@@ -131,37 +169,61 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
     </header>
 
-    <!-- ===== current work ===== -->
-    <section class="sec">
-      <h2 class="sec-h">Current work</h2>
-      <h3 class="blk-h">What does <em>might</em> leave open?</h3>
+    <!-- ===== current research program ===== -->
+    <section class="sec" id="current">
+      <h2 class="sec-h">Current research program</h2>
+      <h3 class="blk-h">One linguistic question, approached in two stages</h3>
       <p class="blk-body">
         Suppose someone says, “The key might be in the drawer.” Does <em>might</em> simply mark
         uncertainty, or does it keep the drawer possibility available when new evidence arrives? The
-        current work develops a semantic account of this difference and the diagnostics needed to
-        test it.
+        current work develops a semantic account of this difference, then asks whether it can be
+        acquired from language.
       </p>
+      <div class="program">
+        {currentProgram.map((p, i) => (
+          <Fragment>
+            <a class="proj-card proj-card-current" href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
+              <div class="proj-copy">
+                <p class="proj-step"><span class="proj-step-n">{p.n}</span> {p.phase}</p>
+                <span class="proj-title" set:html={p.title} />
+                <p class="proj-desc" set:html={p.desc} />
+              </div>
+              <div class="proj-figure">
+                <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
+              </div>
+            </a>
+            {i === 0 && <p class="program-bridge">{programBridge}</p>}
+          </Fragment>
+        ))}
+      </div>
       <p class="blk-link"><a href="/research">Read about the current work</a></p>
     </section>
 
-    <!-- ===== selected work ===== -->
-    <section class="sec">
-      <h2 class="sec-h">Selected work</h2>
-      <div class="proj-list">
-        {selectedWork.map((p) => (
-          <a class={`proj-card${p.current ? " proj-card-current" : ""}`} href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
-            <div class="proj-copy">
-              <div class="proj-top">
-                <span class="proj-title" set:html={p.title} />
-              </div>
-              <p class="proj-desc" set:html={p.desc} />
-            </div>
-            <div class="proj-figure">
-              <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
-            </div>
+    <!-- ===== how this program took shape ===== -->
+    <section class="sec" id="background-program">
+      <h2 class="sec-h">How this program took shape</h2>
+      <p class="blk-body">
+        My earlier model projects did not begin with epistemic modality. They shaped the evidential
+        standards I now bring to it: successful behaviour may rely on the wrong feature, and an
+        internal correlate matters only if it helps explain a controlled behavioural effect.
+      </p>
+      <div class="shaped-list">
+        {earlierWork.map((p) => (
+          <a class="shaped" href={p.href} aria-label={`Open ${p.title}`}>
+            <p class="shaped-step"><span class="shaped-step-n">{p.n}</span> {p.phase}</p>
+            <span class="shaped-title">{p.title}</span>
+            <p class="shaped-desc" set:html={p.desc} />
+            {p.meta && <p class="shaped-meta">{p.meta}</p>}
           </a>
         ))}
       </div>
+      <p class="synthesis">
+        What these projects did not provide was the target itself. Model analysis can test whether a
+        distinction is learned or causally involved, but it cannot decide which distinction about
+        meaning is theoretically important. That target has to come from linguistic analysis. My
+        current work therefore begins with competing semantic accounts and only then asks what
+        behavioural, developmental, or computational evidence could separate them.
+      </p>
     </section>
 
     <!-- ===== research program preview ===== -->
@@ -189,9 +251,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="more"><a href="/writing">All writing</a></p>
     </section>
 
-    <!-- ===== timeline ===== -->
+    <!-- ===== background ===== -->
     <section class="sec">
-      <h2 class="sec-h">Timeline</h2>
+      <h2 class="sec-h">Background</h2>
       <div class="tl">
         {timeline.map((t) => (
           <div class="tl-item">
@@ -204,12 +266,16 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
             <div class="tl-body">
               <h3 class="tl-org">{t.org}</h3>
               <p class="tl-role">{t.role}</p>
+              <p class="tl-phase">{t.phase}</p>
               <p class="tl-did" set:html={t.did} />
-              {t.questions && (
-                <ul class="tl-qs">
-                  {t.questions.map((q) => <li set:html={q} />)}
-                </ul>
-              )}
+              {t.groups.map((g) => (
+                <div class="tl-group">
+                  {g.label && <p class="tl-group-label">{g.label}</p>}
+                  <ul class="tl-qs">
+                    {g.questions.map((q) => <li set:html={q} />)}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         ))}
@@ -371,10 +437,14 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .tl-logo.emblem img { height: 78px; }
   .tl-period { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.03em; color: var(--color-text-dim); }
   .tl-org { font-family: var(--font-sans); font-size: 1.08rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.15rem; letter-spacing: -0.005em; }
-  .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.7rem; }
+  .tl-role { font-size: 0.92rem; color: var(--color-text-muted); margin: 0 0 0.4rem; }
+  .tl-phase { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; color: var(--color-accent); margin: 0 0 0.6rem; }
   .tl-did { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .tl-did :global(em) { font-style: italic; }
-  .tl-qs { list-style: none; margin: 0.55rem 0 0; padding: 0.1rem 0 0.15rem 0.95rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent); display: flex; flex-direction: column; gap: 0.4rem; }
+  .tl-group { margin-top: 0.85rem; }
+  .tl-group:first-of-type { margin-top: 0.6rem; }
+  .tl-group-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.4rem; }
+  .tl-qs { list-style: none; margin: 0; padding: 0.1rem 0 0.15rem 0.95rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent); display: flex; flex-direction: column; gap: 0.4rem; }
   .tl-qs li { font-size: 0.92rem; line-height: 1.5; color: var(--color-text-muted); font-style: italic; }
   .tl-qs li :global(em) { color: var(--color-text); font-style: italic; }
   @media (max-width: 620px) {
@@ -416,6 +486,25 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .proj-figure { min-width: 0; border-radius: 8px; overflow: hidden; }
   .proj-figure img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 5 / 3; transition: transform 0.35s ease; }
   .proj-card:hover .proj-figure img { transform: scale(1.03); }
+
+  /* current program — numbered stage cards + bridge */
+  .program { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+  .proj-step { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.55rem; }
+  .proj-step-n { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: var(--color-accent); color: #fff; font-size: 10px; letter-spacing: 0; }
+  .program-bridge { position: relative; margin: 0; padding-left: 2rem; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; color: var(--color-text-dim); }
+  .program-bridge::before { content: "\2193"; position: absolute; left: 0.55rem; top: -0.05rem; font-size: 15px; color: var(--color-accent); }
+
+  /* earlier work — realizations that shaped the program */
+  .shaped-list { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
+  .shaped { display: block; text-decoration: none; color: inherit; border: 1px solid var(--card-border); border-radius: 12px; padding: 1.2rem 1.4rem; background: var(--card-bg); transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease; }
+  .shaped:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -16px rgba(23, 33, 48, 0.26); border-color: var(--card-hover-border); }
+  .shaped-step { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-sans); font-size: 1.04rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.4rem; transition: color 0.2s ease; }
+  .shaped:hover .shaped-step { color: var(--color-accent); }
+  .shaped-step-n { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; border: 1px solid var(--color-border-strong); font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-text-dim); }
+  .shaped-title { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.6rem; padding-left: 1.75rem; }
+  .shaped-desc { font-size: 0.93rem; line-height: 1.66; color: var(--color-text-muted); margin: 0 0 0.55rem; max-width: 68ch; }
+  .shaped-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-dim); margin: 0; }
+  .synthesis { margin: 1.6rem 0 0; padding: 1.1rem 1.3rem; border-left: 3px solid var(--color-accent); background: var(--color-surface); border-radius: 0 8px 8px 0; font-size: 0.97rem; line-height: 1.72; color: var(--color-text); max-width: 46rem; }
 
   /* ===== playground — playable cards ===== */
   .play-sec {

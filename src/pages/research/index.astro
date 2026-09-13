@@ -4,31 +4,31 @@ import { criteria, questions } from "../../data/program";
 
 // Current Work page (A3g §6). Route stays /research; the displayed H1 and title
 // are "Current Work". Begins with the current problem, not the global identity.
-const selectedWork = [
+// Two stages of the same question: define the contrast, then test its learnability.
+const currentProgram = [
   {
     title: "Three Ways of Leaving <em>p</em> Unsettled",
-    meta: "Semantics paper · construct under review",
     href: "/research/three-ways",
-    current: true,
-    desc: "Compares <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, asking how each changes the discourse and which replies it licenses. No results yet; the construct brief is under review by a formal semanticist.",
+    desc: "A formal-semantics paper that defines the contrast between <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, and the diagnostics that would count as evidence for it.",
   },
   {
-    title: "Master’s thesis: learning these distinctions",
-    meta: "Thesis · in design",
+    title: "Learning epistemic modality from linguistic input",
     href: "/research/learnability",
-    desc: "Asks whether a small language model can acquire the same distinctions from developmentally realistic text, and which patterns in the input are needed for them to emerge. Begins with the formal analysis above.",
+    desc: "My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.",
   },
+];
+
+// Earlier model projects, kept only for what they contributed to the current program.
+const background = [
   {
     title: "Cross-lingual ProtoBias",
-    meta: "First-author paper · in revision for arXiv",
     href: "/research/cross-lingual-protobias",
-    desc: "Holds each image pair fixed and varies the prompt language to test when vision-language judges follow semantic fit and when they fall back on culturally specific prototypes. About 12,600 judgments across seven languages and two model families; code is public.",
+    brought: "Brought the first constraint: separate the target linguistic relation from cheaper cues, since a correct judgment can rest on a familiar prototype rather than semantic sensitivity.",
   },
   {
     title: "Latent Control States",
-    meta: "Collaboration · DFKI",
     href: "/research/latent-control-states",
-    desc: "With DFKI, asks whether prompt framing changes only a model’s answer or also a causally relevant internal state. My role: I designed the utilitarian minimal-pair experiment varying dilemma, benefit size, and framing.",
+    brought: "Brought the second: an internal correlate matters only if intervening on it changes a controlled behavioural effect.",
   },
 ];
 ---
@@ -108,17 +108,32 @@ const selectedWork = [
     </section>
 
     <section class="cw-sec">
-      <h2 class="cw-h2">Selected work</h2>
+      <h2 class="cw-h2">Work within the current program</h2>
       <div class="cw-projs">
-        {selectedWork.map((p) => (
-          <div class={`cw-proj${p.current ? " cw-proj-current" : ""}`}>
-            <div class="cw-proj-top">
-              {p.href
-                ? <a class="cw-proj-title" href={p.href} set:html={p.title} />
-                : <span class="cw-proj-title-plain" set:html={p.title} />}
-              <span class="cw-proj-meta">{p.meta}</span>
-            </div>
+        {currentProgram.map((p) => (
+          <div class="cw-proj cw-proj-current">
+            <a class="cw-proj-title" href={p.href} set:html={p.title} />
             <p class="cw-proj-desc" set:html={p.desc} />
+          </div>
+        ))}
+      </div>
+      <p class="cw-dep">
+        The semantics paper defines the contrast. The thesis asks whether that contrast can be
+        acquired from linguistic input.
+      </p>
+    </section>
+
+    <section class="cw-sec">
+      <h2 class="cw-h2">Methodological background</h2>
+      <p class="cw-p">
+        Two earlier model projects shaped the controls and evidential standards used in the current
+        program.
+      </p>
+      <div class="cw-projs">
+        {background.map((p) => (
+          <div class="cw-proj">
+            <a class="cw-proj-title" href={p.href}>{p.title}</a>
+            <p class="cw-proj-desc">{p.brought}</p>
           </div>
         ))}
       </div>
@@ -190,7 +205,7 @@ const selectedWork = [
   .cw-proj { padding: 1.05rem 0; border-bottom: 1px solid var(--color-border); }
   .cw-proj:first-child { border-top: 1px solid var(--color-border); }
   .cw-proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem; }
-  .cw-proj-title { font-size: 1.02rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .cw-proj-title { display: block; margin-bottom: 0.3rem; font-size: 1.02rem; font-weight: 500; color: var(--color-text); text-decoration: none; }
   .cw-proj-title:hover { color: var(--color-accent); }
   .cw-proj-title-plain { font-size: 1.02rem; font-weight: 500; color: var(--color-text); }
   .cw-proj-title em, .cw-proj-title-plain em { font-style: italic; }
@@ -198,4 +213,5 @@ const selectedWork = [
   .cw-proj-current .cw-proj-meta { color: var(--color-accent); }
   .cw-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
   .cw-proj-desc em { font-style: italic; }
+  .cw-dep { margin: 0.9rem 0 0; padding-left: 0.9rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent); font-size: 0.92rem; line-height: 1.6; font-style: italic; color: var(--color-text); }
 </style>
