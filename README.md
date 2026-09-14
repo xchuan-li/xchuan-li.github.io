@@ -2,9 +2,9 @@
 
 A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
 
-The site presents one research program — *experimental and computational semantics: how language organizes information, and how a learner such as a language model acquires that structure from language.* Top-level pages (A3g information architecture): **Current Work** (`/research`), **Research Program** (`/approach`), Writing, CV, Contact. The homepage is ordered header → current work → selected work → research program → writing → timeline → playground → contact. The current linguistic problem is the three-way distinction among *might p*, *might p or might not p*, and *I don't know whether p*, at the construct stage.
+The site presents one research program: *how structured meaning is represented, processed, and learned*, connecting formal semantics with psycholinguistics and computational language research. Top-level pages (A3g information architecture): **Current Work** (`/research`), **Research Program** (`/approach`), Writing, CV, Contact. The current case study is the three-way distinction among *might p*, *might p or might not p*, and *I don't know whether p*, at the construct stage.
 
-**Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). **All positioning copy lives in `src/data/program.ts`** and is imported everywhere; never hand-write it into a page.
+**Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). Shared identity and question copy lives in `src/data/program.ts`; page-specific framing lives in the relevant page.
 
 ## What's here
 

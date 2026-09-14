@@ -12,7 +12,7 @@ import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 // empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
 // circular emblems (emblem: true) are sized up to match the UTN wordmark.
 
-// Current program: one linguistic question, approached in two stages.
+// Current case study: one linguistic question, approached in two stages.
 const currentProgram = [
   {
     n: "01",
@@ -31,6 +31,25 @@ const currentProgram = [
     cover: "/images/project-covers/learnability.png",
     coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
     desc: "My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.",
+  },
+];
+
+// The three forms of training that define the broader application profile.
+const researchAreas = [
+  {
+    label: "Formal structure",
+    title: "Semantics and pragmatics",
+    desc: "Explicit accounts of what utterances contribute, which alternatives they leave open, and which inferences they license.",
+  },
+  {
+    label: "Human cognition",
+    title: "Psycholinguistics",
+    desc: "Questions about how meaning is represented, processed, updated, and learned, grounded in training in cognitive psychology and experimental methods.",
+  },
+  {
+    label: "Computational systems",
+    title: "Language models",
+    desc: "Controlled studies of what models acquire from linguistic input and which learned representations support their behaviour.",
   },
 ];
 
@@ -98,19 +117,19 @@ const timeline = [
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    phase: "From model behaviour to linguistic function",
-    did: "A move from philosophy into language-model research, learning to build controlled experiments that test what a model actually represents about meaning.",
+    phase: "From formal questions to empirical methods",
+    did: "Graduate training in cognitive psychology, experimental design and statistics, deep learning, and interpretability, connecting linguistic questions with evidence from human behaviour and computational models.",
     groups: [
       {
-        label: "Early model work",
+        label: "Methods and evidence",
         questions: [
-          "Can a model produce the right answer for the wrong reason?",
+          "How can behavioural experiments distinguish competing accounts of meaning?",
           "How can controlled contrasts separate semantic sensitivity from surface shortcuts?",
           "When is an internal representation causally relevant to behaviour?",
         ],
       },
       {
-        label: "Current program",
+        label: "Current case study",
         questions: [
           "What exactly does an epistemic possibility expression contribute to discourse?",
           "Can that function be acquired from linguistic input alone?",
@@ -167,15 +186,29 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
     </header>
 
-    <!-- ===== current research program ===== -->
+    <!-- ===== research scope ===== -->
+    <section class="scope" aria-labelledby="scope-heading">
+      <h2 class="scope-heading" id="scope-heading">Research focus</h2>
+      <div class="scope-grid">
+        {researchAreas.map((area) => (
+          <div class="scope-item">
+            <p class="scope-label">{area.label}</p>
+            <h3 class="scope-title">{area.title}</h3>
+            <p class="scope-desc">{area.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== current case study ===== -->
     <section class="sec" id="current">
-      <h2 class="sec-h">Current research program</h2>
-      <h3 class="blk-h">One linguistic question, approached in two stages</h3>
+      <h2 class="sec-h">Current case study</h2>
+      <h3 class="blk-h">Epistemic possibility as a test case</h3>
       <p class="blk-body">
         Suppose someone says, “The key might be in the drawer.” Does <em>might</em> simply mark
         uncertainty, or does it keep the drawer possibility available when new evidence arrives? The
-        current work develops a semantic account of this difference, then asks whether it can be
-        acquired from language.
+        first case in the broader program develops a semantic account of this difference, then asks
+        how it is processed by people and whether it can be acquired from language.
       </p>
       <div class="program">
         {currentProgram.map((p, i) => (
@@ -240,12 +273,12 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <!-- ===== research program preview ===== -->
     <section class="sec annotation-anchor program-preview">
       <h2 class="sec-h">Research program</h2>
-      <h3 class="blk-h">From linguistic analysis to evidence</h3>
+      <h3 class="blk-h">One object of study, several forms of evidence</h3>
       <p class="blk-body">
-        The broader program connects formal semantics with two empirical questions. How does a
-        linguistic function emerge in human cognition? Can it be learned from linguistic input alone?
-        The same semantic analysis formulates both questions, without treating models as
-        stand-ins for people.
+        The broader program asks how linguistic meaning is represented, processed, and learned.
+        Formal semantics defines the distinctions; psycholinguistic evidence tests their role in
+        human cognition; controlled model studies ask what can be acquired from linguistic input and
+        which learned representations matter. Each source of evidence answers a different question.
       </p>
       <aside class="margin-note margin-note-left margin-note-boundary" aria-label="Boundary annotation">
         <div class="margin-note-head">
@@ -419,6 +452,19 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .hd-photo { order: -1; width: 168px; height: 210px; }
     .hd-name { font-size: 2rem; }
     .hd-tag { font-size: 1.05rem; }
+  }
+
+  /* ===== research scope ===== */
+  .scope { margin-top: 2.6rem; padding: 1.25rem 0 1.35rem; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  .scope-heading { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 1rem; }
+  .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .scope-item { min-width: 0; }
+  .scope-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.35rem; }
+  .scope-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.35rem; }
+  .scope-desc { font-size: 0.88rem; line-height: 1.58; color: var(--color-text-muted); margin: 0; }
+
+  @media (max-width: 680px) {
+    .scope-grid { grid-template-columns: 1fr; gap: 1.15rem; }
   }
 
   /* ===== section frame ===== */

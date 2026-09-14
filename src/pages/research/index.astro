@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { criteria, questions } from "../../data/program";
 
 // Current Work page (A3g §6). Route stays /research; the displayed H1 and title
-// are "Current Work". Begins with the current problem, not the global identity.
+// are "Current Work". Frames the modality project as the current case study.
 // Two stages of the same question: define the contrast, then test its learnability.
 const currentProgram = [
   {
@@ -40,9 +40,10 @@ const background = [
   <article class="cw">
     <h1 class="cw-h1">Current Work</h1>
     <p class="cw-lede">
-      I am developing a semantic account of how epistemic possibility expressions affect later
-      reasoning. The central contrast is simple: does <em>might</em> only lower a speaker’s
-      commitment, or does it keep a particular possibility in play?
+      Epistemic modality is the current case study in a broader program on how structured meaning is
+      represented, processed, and learned. I am developing a semantic account of how possibility
+      expressions affect later reasoning: does <em>might</em> only lower a speaker’s commitment, or
+      does it keep a particular possibility in play?
     </p>
 
     <section class="cw-sec">
@@ -91,10 +92,10 @@ const background = [
         ))}
       </div>
       <p class="cw-p">
-        These questions require different evidence. The developmental question concerns human
-        acquisition. The computational question asks what linguistic distribution can support in a
-        controlled learner. A language model is useful for the second question; it is not a proxy for
-        a developing child.
+        These questions require different evidence. Human studies can test how the distinction
+        affects comprehension, reasoning, and learning. Controlled model studies ask what a
+        particular linguistic distribution can support in a particular learner. A language model is
+        useful for the second question; it is not a proxy for a person.
       </p>
     </section>
 
@@ -108,7 +109,7 @@ const background = [
     </section>
 
     <section class="cw-sec">
-      <h2 class="cw-h2">Work within the current program</h2>
+      <h2 class="cw-h2">Work within the current case study</h2>
       <div class="cw-projs">
         {currentProgram.map((p) => (
           <div class="cw-proj cw-proj-current">
@@ -126,8 +127,9 @@ const background = [
     <section class="cw-sec">
       <h2 class="cw-h2">Methodological background</h2>
       <p class="cw-p">
-        Two earlier model projects shaped the controls and evidential standards used in the current
-        program.
+        Training in cognitive psychology, experimental design, and statistics supports the human
+        questions, while two earlier model projects shaped the controls and evidential standards used
+        in the computational work.
       </p>
       <div class="cw-projs">
         {background.map((p) => (

@@ -4,19 +4,20 @@
 // Project records live in `research.ts`; writing posts in `writing.ts`.
 
 /** The identity claim. Short form. */
-export const identity = "I work on experimental and computational semantics.";
+export const identity =
+  "I study how structured meaning is represented, processed, and learned across human and computational systems.";
 
 // The homepage header lede is two paragraphs: a three-question hook (openingQuestions /
 // openingQuestionsHtml), then an identity statement that lands on the current research
 // question (identityLong / identityLongHtml).
 
-/** Homepage header, paragraph 1 — the three-question hook (philosophy → semantics → language models). */
+/** Homepage header, paragraph 1 — the shared question across semantics, cognition, and language models. */
 export const openingQuestions =
-  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone?";
+  "How does language organize information for reasoning? How is that structure represented and processed in human cognition? And what can a language model learn from linguistic input alone?";
 
-/** Homepage header, paragraph 2 — the identity claim, landing on the current research question. */
+/** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "My work is in experimental and computational semantics. The current question: does saying that something might be true simply lower a speaker's commitment, or keep that particular possibility available for later reasoning?";
+  "My work connects formal semantics with questions from psycholinguistics and computational language research. I study how structured meaning is represented, processed, and learned across human and computational systems.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -25,10 +26,10 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const openingQuestionsHtml =
-  "How much of reasoning is carried by the language it's expressed in? What does a sentence settle, and what does it leave open for later reasoning? And can a language model acquire that structure from text alone?";
+  "How does language organize information for reasoning? How is that structure represented and processed in human cognition? And what can a language model learn from linguistic input alone?";
 
 export const identityLongHtml =
-  "My work is in experimental and computational semantics. The current question: does saying that something <em>might</em> be true simply lower a speaker's commitment, or keep that particular possibility available for later reasoning?";
+  "My work connects formal semantics with questions from psycholinguistics and computational language research. I study how structured meaning is represented, processed, and learned across human and computational systems.";
 
 export const currentQuestionHtml =
   "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
@@ -43,7 +44,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li — experimental and computational semantics: how language organizes information, and how a learner such as a language model acquires that structure from language.";
+  "Xiaochuan Li studies how structured meaning is represented, processed, and learned across formal semantics, human cognition, and computational language models.";
 
 export interface Criterion {
   name: string;
@@ -77,11 +78,11 @@ export interface ProgramQuestion {
 /** The two empirical questions the linguistic analysis leads to (A3g §6.4). */
 export const questions: ProgramQuestion[] = [
   {
-    label: "Developmental",
-    text: "How does this function emerge in human cognition?",
+    label: "Human cognition",
+    text: "How is this function represented, processed, and learned by human reasoners?",
   },
   {
-    label: "Computational",
+    label: "Computational learning",
     text: "Can a learner acquire it from linguistic input alone? If so, what patterns in the input support it?",
   },
 ];
