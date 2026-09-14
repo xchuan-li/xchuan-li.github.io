@@ -34,8 +34,6 @@ const currentProgram = [
   },
 ];
 
-const programBridge = "Once the distinction is explicit, its learnability becomes testable.";
-
 // Earlier model work that shaped the program's evidential standards.
 const earlierWork = [
   {
@@ -181,7 +179,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       </p>
       <div class="program">
         {currentProgram.map((p, i) => (
-          <Fragment>
+          <div class={`program-entry${i === 1 ? " annotation-anchor" : ""}`}>
             <a class="proj-card proj-card-current" href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
               <div class="proj-copy">
                 <p class="proj-step"><span class="proj-step-n">{p.n}</span> {p.phase}</p>
@@ -192,8 +190,19 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
                 <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
               </div>
             </a>
-            {i === 0 && <p class="program-bridge">{programBridge}</p>}
-          </Fragment>
+            {i === 1 && (
+              <>
+                <span class="annotation-target annotation-target-middle" aria-hidden="true"></span>
+                <aside class="margin-note margin-note-dependency" aria-label="Dependency annotation">
+                  <div class="margin-note-head">
+                    <span class="annotation-reg" aria-hidden="true">B</span>
+                    <span class="margin-note-label">Dependency</span>
+                  </div>
+                  <p>Once the linguistic distinction is explicit, its learnability becomes testable.</p>
+                </aside>
+              </>
+            )}
+          </div>
         ))}
       </div>
       <p class="blk-link"><a href="/research">Read about the current work</a></p>
@@ -202,12 +211,21 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <!-- ===== why this program ===== -->
     <section class="sec" id="background-program">
       <h2 class="sec-h">Why this program</h2>
-      <p class="blk-body">
-        My earlier model projects led me to a broader question: what would show that a model has
-        learned a linguistic distinction, rather than a shortcut that happens to produce the same
-        answer? Successful behaviour may rely on the wrong feature, and an internal correlate matters
-        only if it helps explain a controlled behavioural effect.
-      </p>
+      <div class="annotation-anchor">
+        <p class="blk-body">
+          My earlier model projects led me to a broader question: what would show that a model has
+          learned a linguistic distinction, rather than a shortcut that happens to produce the same
+          answer?
+        </p>
+        <span class="annotation-target" aria-hidden="true"></span>
+        <aside class="margin-note margin-note-motive" aria-label="Motivation annotation">
+          <div class="margin-note-head">
+            <span class="annotation-reg" aria-hidden="true">A</span>
+            <span class="margin-note-label">Motive</span>
+          </div>
+          <p><strong>A model can arrive at the right answer for the wrong reason.</strong> The longer-term aim is to understand what lets structured meaning, rather than shortcuts, guide behaviour in new contexts.</p>
+        </aside>
+      </div>
       <div class="shaped-list">
         {earlierWork.map((p) => (
           <a class="shaped" href={p.href} aria-label={`Open ${p.title}`}>
@@ -218,18 +236,11 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           </a>
         ))}
       </div>
-      <p class="synthesis">
-        These projects supplied evidential constraints, but not the linguistic target itself. Model
-        analysis can test whether a distinction is learned or causally involved; linguistic analysis
-        has to say what the distinction is and why it matters. My longer-term aim is to understand how
-        a language model could acquire such structured meaning from linguistic input and use it across
-        new expressions and contexts, rather than rely on prototypes, lexical associations, or
-        task-specific shortcuts.
-      </p>
+      <p class="argument-bridge">Earlier work supplies evidential constraints; the current program supplies the linguistic target.</p>
     </section>
 
     <!-- ===== research program preview ===== -->
-    <section class="sec">
+    <section class="sec annotation-anchor program-preview">
       <h2 class="sec-h">Research program</h2>
       <h3 class="blk-h">From linguistic analysis to evidence</h3>
       <p class="blk-body">
@@ -238,6 +249,14 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         The same semantic analysis formulates both questions, without treating models as
         stand-ins for people.
       </p>
+      <span class="annotation-target annotation-target-program" aria-hidden="true"></span>
+      <aside class="margin-note margin-note-boundary" aria-label="Boundary annotation">
+        <div class="margin-note-head">
+          <span class="annotation-reg" aria-hidden="true">C</span>
+          <span class="margin-note-label">Boundary</span>
+        </div>
+        <p>Evidence about what a model learns does not explain how a child acquires language, and vice versa.</p>
+      </aside>
       <p class="blk-link"><a href="/approach">See the research program</a></p>
     </section>
 
@@ -491,10 +510,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
 
   /* current program — numbered stage cards + bridge */
   .program { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+  .program-entry { min-width: 0; }
   .proj-step { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.55rem; }
   .proj-step-n { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: var(--color-accent); color: #fff; font-size: 10px; letter-spacing: 0; }
-  .program-bridge { position: relative; margin: 0; padding-left: 2rem; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; color: var(--color-text-dim); }
-  .program-bridge::before { content: "\2193"; position: absolute; left: 0.55rem; top: -0.05rem; font-size: 15px; color: var(--color-accent); }
 
   /* earlier work — realizations that shaped the program */
   .shaped-list { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
@@ -506,7 +524,40 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .shaped:hover .shaped-title { color: var(--color-accent); }
   .shaped-desc { font-size: 0.93rem; line-height: 1.66; color: var(--color-text-muted); margin: 0 0 0.55rem; max-width: 68ch; }
   .shaped-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-dim); margin: 0; }
-  .synthesis { margin: 1.6rem 0 0; padding: 1.1rem 1.3rem; border-left: 3px solid var(--color-accent); background: var(--color-surface); border-radius: 0 8px 8px 0; font-size: 0.97rem; line-height: 1.72; color: var(--color-text); max-width: 46rem; }
+  .argument-bridge { display: flex; align-items: center; gap: 0.8rem; margin: 1.15rem 0 0; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.5; letter-spacing: 0.025em; color: var(--color-text-dim); }
+  .argument-bridge::before { content: ""; flex: none; width: 1.5rem; height: 1px; background: var(--color-accent); }
+
+  /* editorial margin annotations — selected direction B */
+  .annotation-anchor { position: relative; }
+  .margin-note {
+    position: absolute;
+    left: calc(100% + 2rem);
+    width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.25rem), 12rem);
+    color: var(--color-text-muted);
+  }
+  .margin-note::before { content: ""; position: absolute; right: 100%; top: 9px; width: 2rem; height: 1px; background: var(--color-border-strong); }
+  .margin-note-motive { top: 0; }
+  .margin-note-dependency { top: 50%; transform: translateY(-50%); }
+  .margin-note-boundary { top: 3.35rem; }
+  .margin-note-head { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.45rem; }
+  .annotation-reg { display: inline-grid; place-items: center; flex: none; width: 19px; height: 19px; border: 1px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-mono); font-size: 9px; line-height: 1; }
+  .margin-note-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
+  .margin-note p { margin: 0; font-size: 0.76rem; line-height: 1.58; text-wrap: pretty; }
+  .margin-note strong { font-weight: 600; color: var(--color-text); }
+  .annotation-target { position: absolute; right: -4px; top: 7px; width: 7px; height: 7px; border: 1px solid var(--color-accent); background: var(--color-bg); transform: rotate(45deg); z-index: 2; }
+  .annotation-target-middle { top: 50%; transform: translateY(-50%) rotate(45deg); background: var(--card-bg); }
+  .annotation-target-program { top: 3.8rem; }
+
+  @media (max-width: 1279px) {
+    .program-entry { display: flex; flex-direction: column; }
+    .margin-note { position: static; width: auto; transform: none; display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 0.65rem; margin: 0.8rem 0 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
+    .margin-note::before, .annotation-target { display: none; }
+    .margin-note-head { display: block; margin: 0; }
+    .margin-note-label { display: none; }
+    .margin-note p { font-size: 0.8rem; line-height: 1.55; }
+    .margin-note-dependency { order: -1; margin-top: 0; }
+    .program-preview .margin-note { margin-bottom: 0.8rem; }
+  }
 
   /* ===== playground — playable cards ===== */
   .play-sec {
