@@ -217,8 +217,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           learned a linguistic distinction, rather than a shortcut that happens to produce the same
           answer?
         </p>
-        <span class="annotation-target" aria-hidden="true"></span>
-        <aside class="margin-note margin-note-motive" aria-label="Motivation annotation">
+        <span class="annotation-target annotation-target-left" aria-hidden="true"></span>
+        <aside class="margin-note margin-note-left margin-note-motive" aria-label="Motivation annotation">
           <div class="margin-note-head">
             <span class="annotation-reg" aria-hidden="true">A</span>
             <span class="margin-note-label">Motive</span>
@@ -249,8 +249,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         The same semantic analysis formulates both questions, without treating models as
         stand-ins for people.
       </p>
-      <span class="annotation-target annotation-target-program" aria-hidden="true"></span>
-      <aside class="margin-note margin-note-boundary" aria-label="Boundary annotation">
+      <span class="annotation-target annotation-target-left annotation-target-program" aria-hidden="true"></span>
+      <aside class="margin-note margin-note-left margin-note-boundary" aria-label="Boundary annotation">
         <div class="margin-note-head">
           <span class="annotation-reg" aria-hidden="true">C</span>
           <span class="margin-note-label">Boundary</span>
@@ -536,6 +536,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     color: var(--color-text-muted);
   }
   .margin-note::before { content: ""; position: absolute; right: 100%; top: 9px; width: 2rem; height: 1px; background: var(--color-border-strong); }
+  .margin-note-left { left: auto; right: calc(100% + 2rem); }
+  .margin-note-left::before { left: 100%; right: auto; }
   .margin-note-motive { top: 0; }
   .margin-note-dependency { top: 50%; transform: translateY(-50%); }
   .margin-note-boundary { top: 3.35rem; }
@@ -545,6 +547,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .margin-note p { margin: 0; font-size: 0.76rem; line-height: 1.58; text-wrap: pretty; }
   .margin-note strong { font-weight: 600; color: var(--color-text); }
   .annotation-target { position: absolute; right: -4px; top: 7px; width: 7px; height: 7px; border: 1px solid var(--color-accent); background: var(--color-bg); transform: rotate(45deg); z-index: 2; }
+  .annotation-target-left { left: -4px; right: auto; }
   .annotation-target-middle { top: 50%; transform: translateY(-50%) rotate(45deg); background: var(--card-bg); }
   .annotation-target-program { top: 3.8rem; }
 
