@@ -532,13 +532,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.25rem), 12rem);
     color: var(--color-text-muted);
   }
-  /* connector rule + diamond pin, both pseudo-elements of the note so they share
-     one origin (the label row) and can never drift apart when text reflows */
-  .margin-note::before { content: ""; position: absolute; right: 100%; top: 9px; width: 2rem; height: 1px; background: var(--color-border-strong); }
-  .margin-note::after { content: ""; position: absolute; right: calc(100% + 2rem - 3.5px); top: 6px; width: 7px; height: 7px; border: 1px solid var(--color-accent); background: var(--card-bg); transform: rotate(45deg); z-index: 2; }
   .margin-note-left { left: auto; right: calc(100% + 2rem); }
-  .margin-note-left::before { left: 100%; right: auto; }
-  .margin-note-left::after { left: calc(100% + 2rem - 3.5px); right: auto; background: var(--color-bg); }
   .margin-note-motive { top: 0; }
   .margin-note-dependency { top: 50%; transform: translateY(-50%); }
   .margin-note-boundary { top: 3.35rem; }
@@ -551,7 +545,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   @media (max-width: 1279px) {
     .program-entry { display: flex; flex-direction: column; }
     .margin-note { position: static; width: auto; transform: none; display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 0.65rem; margin: 0.8rem 0 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
-    .margin-note::before, .margin-note::after { display: none; }
     .margin-note-head { display: block; margin: 0; }
     .margin-note-label { display: none; }
     .margin-note p { font-size: 0.8rem; line-height: 1.55; }
