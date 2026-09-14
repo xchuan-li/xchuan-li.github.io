@@ -192,7 +192,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
             </a>
             {i === 1 && (
               <>
-                <span class="annotation-target annotation-target-middle" aria-hidden="true"></span>
                 <aside class="margin-note margin-note-dependency" aria-label="Dependency annotation">
                   <div class="margin-note-head">
                     <span class="annotation-reg" aria-hidden="true">B</span>
@@ -217,7 +216,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           learned a linguistic distinction, rather than a shortcut that happens to produce the same
           answer?
         </p>
-        <span class="annotation-target annotation-target-left" aria-hidden="true"></span>
         <aside class="margin-note margin-note-left margin-note-motive" aria-label="Motivation annotation">
           <div class="margin-note-head">
             <span class="annotation-reg" aria-hidden="true">A</span>
@@ -249,7 +247,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         The same semantic analysis formulates both questions, without treating models as
         stand-ins for people.
       </p>
-      <span class="annotation-target annotation-target-left annotation-target-program" aria-hidden="true"></span>
       <aside class="margin-note margin-note-left margin-note-boundary" aria-label="Boundary annotation">
         <div class="margin-note-head">
           <span class="annotation-reg" aria-hidden="true">C</span>
@@ -535,9 +532,13 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.25rem), 12rem);
     color: var(--color-text-muted);
   }
+  /* connector rule + diamond pin, both pseudo-elements of the note so they share
+     one origin (the label row) and can never drift apart when text reflows */
   .margin-note::before { content: ""; position: absolute; right: 100%; top: 9px; width: 2rem; height: 1px; background: var(--color-border-strong); }
+  .margin-note::after { content: ""; position: absolute; right: calc(100% + 2rem - 3.5px); top: 6px; width: 7px; height: 7px; border: 1px solid var(--color-accent); background: var(--card-bg); transform: rotate(45deg); z-index: 2; }
   .margin-note-left { left: auto; right: calc(100% + 2rem); }
   .margin-note-left::before { left: 100%; right: auto; }
+  .margin-note-left::after { left: calc(100% + 2rem - 3.5px); right: auto; background: var(--color-bg); }
   .margin-note-motive { top: 0; }
   .margin-note-dependency { top: 50%; transform: translateY(-50%); }
   .margin-note-boundary { top: 3.35rem; }
@@ -546,15 +547,11 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .margin-note-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
   .margin-note p { margin: 0; font-size: 0.76rem; line-height: 1.58; text-wrap: pretty; }
   .margin-note strong { font-weight: 600; color: var(--color-text); }
-  .annotation-target { position: absolute; right: -4px; top: 7px; width: 7px; height: 7px; border: 1px solid var(--color-accent); background: var(--color-bg); transform: rotate(45deg); z-index: 2; }
-  .annotation-target-left { left: -4px; right: auto; }
-  .annotation-target-middle { top: 50%; transform: translateY(-50%) rotate(45deg); background: var(--card-bg); }
-  .annotation-target-program { top: 3.8rem; }
 
   @media (max-width: 1279px) {
     .program-entry { display: flex; flex-direction: column; }
     .margin-note { position: static; width: auto; transform: none; display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 0.65rem; margin: 0.8rem 0 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
-    .margin-note::before, .annotation-target { display: none; }
+    .margin-note::before, .margin-note::after { display: none; }
     .margin-note-head { display: block; margin: 0; }
     .margin-note-label { display: none; }
     .margin-note p { font-size: 0.8rem; line-height: 1.55; }
