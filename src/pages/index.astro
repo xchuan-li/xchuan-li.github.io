@@ -199,13 +199,14 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="blk-link"><a href="/research">Read about the current work</a></p>
     </section>
 
-    <!-- ===== how this program took shape ===== -->
+    <!-- ===== why this program ===== -->
     <section class="sec" id="background-program">
-      <h2 class="sec-h">How this program took shape</h2>
+      <h2 class="sec-h">Why this program</h2>
       <p class="blk-body">
-        My earlier model projects did not begin with epistemic modality. They shaped the evidential
-        standards I now bring to it: successful behaviour may rely on the wrong feature, and an
-        internal correlate matters only if it helps explain a controlled behavioural effect.
+        My earlier model projects led me to a broader question: what would show that a model has
+        learned a linguistic distinction, rather than a shortcut that happens to produce the same
+        answer? Successful behaviour may rely on the wrong feature, and an internal correlate matters
+        only if it helps explain a controlled behavioural effect.
       </p>
       <div class="shaped-list">
         {earlierWork.map((p) => (
@@ -218,11 +219,12 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
         ))}
       </div>
       <p class="synthesis">
-        What these projects did not provide was the target itself. Model analysis can test whether a
-        distinction is learned or causally involved, but it cannot decide which distinction about
-        meaning is theoretically important. That target has to come from linguistic analysis. My
-        current work therefore begins with competing semantic accounts and only then asks what
-        behavioural, developmental, or computational evidence could separate them.
+        These projects supplied evidential constraints, but not the linguistic target itself. Model
+        analysis can test whether a distinction is learned or causally involved; linguistic analysis
+        has to say what the distinction is and why it matters. My longer-term aim is to understand how
+        a language model could acquire such structured meaning from linguistic input and use it across
+        new expressions and contexts, rather than rely on prototypes, lexical associations, or
+        task-specific shortcuts.
       </p>
     </section>
 
