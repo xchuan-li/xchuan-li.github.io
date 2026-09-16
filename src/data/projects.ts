@@ -30,7 +30,7 @@ export const projects = {
     href: "/research/latent-control-states",
     question: "How does prompt framing change model choices, and can the behavioural effect be explained mechanistically?",
     summary: "A collaboration with DFKI in which I designed controlled dilemma comparisons to distinguish sensitivity to outcomes from framing and action preferences.",
-    connection: "The project contributes collaborative experiment-design experience and a behavioural basis for testing causal hypotheses about model internals.",
+    connection: "This project develops my training in mechanistic interpretability: moving from controlled behavioural contrasts to tests of which internal representations and computations contribute to a model’s answer.",
     status: "Behavioural pilots · mechanistic analysis in progress",
   },
   propertyInheritance: {

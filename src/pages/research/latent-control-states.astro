@@ -3,8 +3,8 @@ import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 
 // Project page for the DFKI mechanistic-interpretability collaboration (B4). A
-// bounded pilot: does prompt framing change a causally relevant internal state, or
-// only the output? Xiaochuan's role is the experimental design. Red lines: the
+// bounded pilot and training in explaining model decisions through behavioural
+// controls and internal interventions. Xiaochuan's role is experimental design. Red lines: the
 // project is never called "LiT" on the site; no collaborator is named (DFKI as an
 // institution is already public on the CV/homepage); the method is stated modestly
 // and no results are claimed — the minimal evidence chain is still being assembled.
@@ -12,7 +12,7 @@ import { projects } from "../../data/projects";
 
 <Base
   title="Latent Control States · Xiaochuan Li"
-  description="A bounded mechanistic-interpretability collaboration with DFKI: when prompt framing changes a model's answer, does it also change a causally relevant internal state, or only the output? A utilitarian minimal-pair design with a minimal intervention test."
+  description="Training in mechanistic interpretability through a collaboration with DFKI: controlled behavioural comparisons and proposed internal interventions to explain how prompt framing affects model decisions."
   showProgress={true}
   toc={true}
 >
@@ -23,8 +23,8 @@ import { projects } from "../../data/projects";
     </div>
     <h1>Prompt framing and latent control states in language models</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
-      When a change in prompt framing changes a model’s answer, does it also change a causally relevant
-      internal state — or only the output?
+      Which internal representations and computations contribute to a model’s choice when prompt
+      framing changes its answer?
     </p>
     <p class="text-sm text-[var(--color-text-dim)] !mb-8">
       {projects.latentControl.summary}
@@ -32,14 +32,14 @@ import { projects } from "../../data/projects";
 
     <aside class="rounded-r-lg px-4 py-3 !my-8 [border-top:1px_solid_var(--color-border)] [border-right:1px_solid_var(--color-border)] [border-bottom:1px_solid_var(--color-border)] [border-left:3px_solid_var(--color-accent)] [background:var(--color-surface)]">
       <p class="!mt-0 !mb-1.5 text-[11px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] font-medium" style="font-family:var(--font-mono)">Place in the research trajectory</p>
-      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">{projects.latentControl.connection} The behavioural pilots and mechanistic analysis are distinct stages; the current work does not yet establish a causal internal mechanism.</p>
+      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">{projects.latentControl.connection}</p>
     </aside>
 
     <p>
-      Prompt framing is known to move a model’s answers. On its own, that is compatible with a purely
-      output-level effect: the model could reach the same internal decision and merely phrase it
-      differently. This project asks the causal version of the question instead — whether framing also
-      moves an internal state that is responsible for the decision, not just the words that come out.
+      The behavioural pilots examine how moral framing affects choices in matched dilemmas.
+      Several explanations remain possible: the model may misread the outcomes, retrieve a familiar
+      response, or favour an action despite correctly representing its consequences. The mechanism
+      question is which information and computations actually contribute to the choice.
     </p>
 
     <h2>The design</h2>
@@ -49,6 +49,21 @@ import { projects } from "../../data/projects";
       prompt — so a difference in the model’s decision can be traced to a specific manipulation rather
       than to unrelated content. Keeping the pair matched is what lets an internal difference be read as
       caused by framing rather than by a change of topic.
+    </p>
+
+    <h2>Methods training</h2>
+    <p>
+      The project trains a sequence of research skills: establishing a behavioural contrast,
+      separating competing explanations, identifying candidate internal representations, and
+      designing interventions that test their role in the answer. The current materials distinguish
+      outcome sensitivity from wording, framing, and action preferences. The next tests check whether
+      the model understands the stated consequences before interpreting an internal intervention.
+    </p>
+    <p>
+      A representation may contain decodable information without the model using that information
+      for the task. The proposed interventions therefore ask whether changing a candidate state
+      selectively changes the behavioural contrast while preserving comprehension, with control
+      directions and new materials used to assess alternative explanations.
     </p>
 
     <h2>The test</h2>
@@ -61,18 +76,19 @@ import { projects } from "../../data/projects";
       decision mechanism. More detailed analysis would depend on the result of that controlled test.
     </p>
 
-    <h2>Scope and limits</h2>
+    <h2>Connection to language research</h2>
     <p>
-      This is a focused contribution, not an open-ended interpretability program: a minimal, credible
-      mechanistic-evidence chain with its limitations stated plainly. The aim is to answer the causal
-      question at the smallest scale that is convincing, and to be explicit about what a single
-      steering-style intervention can and cannot show about a model’s internal states.
+      I aim to carry this method into studies of linguistic meaning and inference. Once a semantic
+      distinction produces a reliable model behaviour, internal analysis can ask which information
+      supports it and whether a proposed computation survives targeted tests. This complements
+      formal analysis, human experiments, and explicit model building. Any connection to human
+      processing would require independent human evidence.
     </p>
 
     <h2>Status</h2>
     <p class="cw-status">
       Behavioural pilots and matched materials are in place. They motivated controls separating
-      outcome sensitivity from action preferences and framing. Mechanistic analysis is in progress;
+      outcome sensitivity from action preferences and framing. Mechanistic tests are being developed;
       a causal explanation of the behavioural effect has not yet been established.
     </p>
 
