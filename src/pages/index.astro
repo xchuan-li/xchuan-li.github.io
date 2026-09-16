@@ -4,38 +4,13 @@ import { posts } from "../data/writing";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 import { projects } from "../data/projects";
 
-// Homepage. Section order: header → research program → current case → model work →
-// exploratory work → writing → background → playground → contact. Research
-// evidence comes before biography. The identity line comes from data/program.ts;
-// page-specific copy lives here.
+// Homepage. Section order: header → research program → selected research →
+// background → writing → playground → contact. The middle section is a concise
+// research index; full questions, methods, and evidence live on the linked pages.
 //
 // PHOTO: public/images/headshot.jpg (CSS background — a missing file just shows an
 // empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
 // circular emblems (emblem: true) are sized up to match the UTN wordmark.
-
-// Related theoretical and proposed empirical work; thesis scope remains open.
-const currentProgram = [
-  {
-    n: "01",
-    phase: "Define the distinction",
-    title: "Three Ways of Leaving <em>p</em> Unsettled",
-    href: "/research/three-ways",
-    cover: "/images/project-covers/three-ways.png",
-    coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
-    desc: `${projects.threeWays.question} ${projects.threeWays.summary}`,
-    meta: projects.threeWays.status,
-  },
-  {
-    n: "02",
-    phase: "Develop an empirical question",
-    title: projects.thesis.title,
-    href: projects.thesis.href,
-    cover: undefined,
-    coverAlt: undefined,
-    desc: `${projects.thesis.summary} ${projects.thesis.connection}`,
-    meta: projects.thesis.status,
-  },
-];
 
 // Empirical approaches serve the broader linguistic program, without requiring
 // every project to use both or treating computational models as human proxies.
@@ -52,23 +27,32 @@ const empiricalApproaches = [
   },
 ];
 
-// Earlier model work that shaped the program's evidential standards.
-const earlierWork = [
+// Three concise entries: the related linguistic and human work, a completed
+// evaluation, and ongoing methods training. Private exploratory work stays off-site.
+const selectedResearch = [
   {
-    n: "01",
-    phase: "Semantic constraints and typicality",
-    title: "Cross-lingual ProtoBias",
-    href: "/research/cross-lingual-protobias",
-    desc: `${projects.protobias.question} ${projects.protobias.summary} ${projects.protobias.connection}`,
-    meta: projects.protobias.status,
+    title: "Epistemic meaning and human inference",
+    field: "Semantics & psycholinguistics",
+    desc: "I compare what <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em> contribute to discourse. A proposed master’s study asks how these distinctions affect later access to and use of a possibility.",
+    status: "Formal analysis in development · Human study being scoped",
+    links: [
+      { label: "Linguistic analysis", href: projects.threeWays.href },
+      { label: "Master’s thesis", href: projects.thesis.href },
+    ],
   },
   {
-    n: "02",
-    phase: "Mechanistic interpretability training",
-    title: "Latent Control States",
-    href: "/research/latent-control-states",
-    desc: `${projects.latentControl.summary} ${projects.latentControl.connection}`,
-    meta: projects.latentControl.status,
+    title: projects.protobias.title,
+    field: "Model evaluation",
+    desc: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages? I test this with fixed image pairs across seven languages and two VLM systems.",
+    status: "Completed study · First-author manuscript in revision",
+    links: [{ label: "Study and results", href: projects.protobias.href }],
+  },
+  {
+    title: projects.latentControl.title,
+    field: "Mechanistic interpretability",
+    desc: "A DFKI collaboration developing my training in explaining model decisions: from controlled behavioural contrasts to tests of which internal representations and computations contribute to an answer.",
+    status: "Behavioural pilots · Mechanistic tests in development",
+    links: [{ label: "Project and methods", href: projects.latentControl.href }],
   },
 ];
 
@@ -190,7 +174,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="scope-heading">Research program</p>
       <div class="scope-intro">
         <h2 class="scope-title" id="scope-heading">Linguistic meaning and inference</h2>
-        <p class="scope-lede">I study how linguistic expressions shape the information available for interpretation and inference. Current cases range from properties attributed to an object to possibilities left open and commitments made in discourse. Formal semantics and pragmatics turn these phenomena into competing analyses and testable predictions.</p>
+        <p class="scope-lede">I study how linguistic expressions shape the information available for interpretation and inference. I am interested in how explicit linguistic content interacts with prior expectations, and how expressions establish possibilities and commitments in discourse. Formal semantics and pragmatics turn these phenomena into competing analyses and testable predictions.</p>
       </div>
       <div class="scope-grid" aria-label="Empirical approaches">
         {empiricalApproaches.map((area) => (
@@ -204,96 +188,24 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="scope-link"><a href="/approach">Read the full research program →</a></p>
     </section>
 
-    <!-- ===== current case study ===== -->
-    <section class="sec" id="current">
-      <h2 class="sec-h">Current case study</h2>
-      <h3 class="blk-h">Epistemic possibility as a test case</h3>
-      <p class="blk-body">
-        “The key might be in the drawer” and “I don’t know whether the key is in the drawer”
-        express different claims. I am examining what each contributes to a conversation and
-        whether those differences affect how a specific possibility is subsequently accessed and
-        used. The linguistic analysis is in development; the empirical thesis is being scoped.
-      </p>
-      <div class="program">
-        {currentProgram.map((p, i) => (
-          <div class={`program-entry${i === 1 ? " annotation-anchor" : ""}`}>
-            <a class:list={["proj-card", "proj-card-current", { "proj-card-text": !p.cover }]} href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
-              <div class="proj-copy">
-                <p class="proj-step"><span class="proj-step-n">{p.n}</span> {p.phase}</p>
-                <span class="proj-title" set:html={p.title} />
-                <p class="proj-desc" set:html={p.desc} />
-                <p class="proj-tag">{p.meta}</p>
-              </div>
-              {p.cover && <div class="proj-figure">
-                <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
-              </div>}
-            </a>
-            {i === 1 && (
-              <>
-                <aside class="margin-note margin-note-dependency" aria-label="Dependency annotation">
-                  <div class="margin-note-head">
-                    <span class="annotation-reg" aria-hidden="true">B</span>
-                    <span class="margin-note-label">Connection</span>
-                  </div>
-                  <p>The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.</p>
-                </aside>
-              </>
-            )}
-          </div>
+    <!-- ===== selected research ===== -->
+    <section class="sec selected-research" id="selected-research" aria-labelledby="research-heading">
+      <h2 class="sec-h" id="research-heading">Selected research</h2>
+      <div class="research-list">
+        {selectedResearch.map((project) => (
+          <article class="research-entry">
+            <p class="research-field">{project.field}</p>
+            <div class="research-copy">
+              <h3 class="research-title">{project.title}</h3>
+              <p class="research-desc" set:html={project.desc} />
+              <p class="research-status">{project.status}</p>
+              <p class="research-links">
+                {project.links.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+              </p>
+            </div>
+          </article>
         ))}
       </div>
-      <p class="blk-link"><a href="/research">Read about the current work</a></p>
-    </section>
-
-    <!-- ===== why this program ===== -->
-    <section class="sec" id="background-program">
-      <h2 class="sec-h">Model research</h2>
-      <div class="annotation-anchor">
-        <p class="blk-body">
-          These projects developed my experience in controlled model evaluation and collaborative
-          experiment design. They also sharpened the question of how to identify the information
-          responsible for a judgment.
-        </p>
-        <aside class="margin-note margin-note-left margin-note-motive" aria-label="Motivation annotation">
-          <div class="margin-note-head">
-            <span class="annotation-reg" aria-hidden="true">A</span>
-            <span class="margin-note-label">Motive</span>
-          </div>
-          <p>A correct answer alone does not identify which information a model used. Competing explanations need controlled comparisons.</p>
-        </aside>
-      </div>
-      <div class="shaped-list">
-        {earlierWork.map((p) => (
-          <a class="shaped" href={p.href} aria-label={`Open ${p.title}`}>
-            <p class="shaped-step"><span class="shaped-step-n">{p.n}</span> {p.phase}</p>
-            <span class="shaped-title">{p.title}</span>
-            <p class="shaped-desc" set:html={p.desc} />
-            {p.meta && <p class="shaped-meta">{p.meta}</p>}
-          </a>
-        ))}
-      </div>
-      <p class="argument-bridge">The projects ask different questions while sharing an emphasis on explicit contrasts, competing explanations, and careful measurement.</p>
-    </section>
-
-    <section class="sec" id="exploratory">
-      <h2 class="sec-h">Exploratory work</h2>
-      <h3 class="blk-h">{projects.propertyInheritance.title}</h3>
-      <p class="blk-body">{projects.propertyInheritance.question} {projects.propertyInheritance.summary}</p>
-      <p class="blk-body">I am exploring whether a model of selective property updating can make predictions that existing accounts do not. This is a modeling aim, not an established result.</p>
-      <p class="shaped-meta">{projects.propertyInheritance.status}</p>
-      <p class="blk-link"><a href={projects.propertyInheritance.href}>Read about the question</a></p>
-    </section>
-
-    <!-- ===== writing ===== -->
-    <section class="sec">
-      <h2 class="sec-h">Writing</h2>
-      {featured && (
-        <a class="feat" href={`/writing/${featured.slug}`}>
-          <span class="feat-title">{featured.title}</span>
-          <span class="feat-excerpt">{featured.excerpt}</span>
-        </a>
-      )}
-      <p class="more"><a href="/writing">All writing</a></p>
     </section>
 
     <!-- ===== background ===== -->
@@ -325,6 +237,18 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           </div>
         ))}
       </div>
+    </section>
+
+    <!-- ===== writing ===== -->
+    <section class="sec">
+      <h2 class="sec-h">Writing</h2>
+      {featured && (
+        <a class="feat" href={`/writing/${featured.slug}`}>
+          <span class="feat-title">{featured.title}</span>
+          <span class="feat-excerpt">{featured.excerpt}</span>
+        </a>
+      )}
+      <p class="more"><a href="/writing">All writing</a></p>
     </section>
 
     <!-- ===== playground ===== -->
@@ -483,15 +407,27 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   }
   .sec-h::before { content: "// "; color: var(--color-accent); opacity: 0.6; }
 
-  /* block heading + body (current work, research program) */
-  .blk-h { font-family: var(--font-sans); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; color: var(--color-text); margin: 0 0 0.7rem; }
-  .blk-h :global(em) { font-style: italic; }
-  .blk-body { font-size: 0.98rem; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 0.8rem; max-width: 46rem; }
-  .blk-body :global(em) { font-style: italic; color: var(--color-text); }
-  .blk-link { margin: 0; font-size: 0.9rem; }
-  .blk-link a { color: var(--color-accent); text-decoration: none; }
-  .blk-link a:hover { text-decoration: underline; }
   .block-note { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 1.4rem; }
+
+  /* ===== concise research list ===== */
+  .selected-research { scroll-margin-top: 6rem; }
+  .selected-research .sec-h { margin-bottom: 0; }
+  .research-entry { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 1.75rem; padding: 1.65rem 0; border-bottom: 1px solid var(--color-border); }
+  .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
+  .research-copy { min-width: 0; }
+  .research-title { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; }
+  .research-desc { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
+  .research-desc :global(em) { font-style: italic; color: var(--color-text); }
+  .research-status { font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); margin: 0 0 0.5rem; }
+  .research-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; margin: 0; }
+  .research-links a { color: var(--color-accent); text-decoration: none; text-underline-offset: 0.2em; }
+  .research-links a:hover { text-decoration: underline; }
+  .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  @media (max-width: 620px) {
+    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 0; }
+    .research-field { margin: 0; }
+    .research-title { font-size: 1.35rem; }
+  }
 
   /* ===== timeline ===== */
   .tl { display: flex; flex-direction: column; gap: 2rem; }
@@ -515,87 +451,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   @media (max-width: 620px) {
     .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
     .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }
-  }
-
-  /* ===== project / selected-work cards ===== */
-  .proj-list { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-  .proj-card {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 1.5rem;
-    align-items: center;
-    padding: 1.4rem 1.5rem;
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    background: var(--card-bg);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
-  }
-  .proj-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 30px -14px rgba(23, 33, 48, 0.28);
-    border-color: var(--card-hover-border);
-  }
-  .proj-card-current { border-color: color-mix(in srgb, var(--color-accent) 40%, var(--card-border)); }
-  .proj-card.proj-card-text { grid-template-columns: minmax(0, 1fr); }
-  .proj-copy { min-width: 0; }
-  .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
-  .proj-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--color-text); transition: color 0.2s ease; }
-  .proj-card:hover .proj-title { color: var(--color-accent); }
-  .proj-title :global(em) { font-style: italic; }
-  .proj-tag { font-family: var(--font-mono); font-size: 10px; line-height: 1.6; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); }
-  .proj-card-current .proj-tag { color: var(--color-accent); }
-  .proj-card-current .proj-tag::before { content: "\25CF\00a0"; font-size: 0.8em; }
-  .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }
-  .proj-desc :global(em) { font-style: italic; }
-  .proj-figure { min-width: 0; border-radius: 8px; overflow: hidden; }
-  .proj-figure img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 5 / 3; transition: transform 0.35s ease; }
-  .proj-card:hover .proj-figure img { transform: scale(1.03); }
-
-  /* current program — numbered stage cards + bridge */
-  .program { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
-  .program-entry { min-width: 0; }
-  .proj-step { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.55rem; }
-  .proj-step-n { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; background: var(--color-accent); color: #fff; font-size: 10px; letter-spacing: 0; }
-
-  /* earlier work — realizations that shaped the program */
-  .shaped-list { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
-  .shaped { display: block; text-decoration: none; color: inherit; border: 1px solid var(--card-border); border-radius: 12px; padding: 1.2rem 1.4rem; background: var(--card-bg); transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease; }
-  .shaped:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -16px rgba(23, 33, 48, 0.26); border-color: var(--card-hover-border); }
-  .shaped-step { display: flex; align-items: center; gap: 0.55rem; font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.45rem; }
-  .shaped-step-n { flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; border: 1px solid var(--color-border-strong); font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--color-text-dim); }
-  .shaped-title { display: block; font-family: var(--font-sans); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
-  .shaped:hover .shaped-title { color: var(--color-accent); }
-  .shaped-desc { font-size: 0.93rem; line-height: 1.66; color: var(--color-text-muted); margin: 0 0 0.55rem; max-width: 68ch; }
-  .shaped-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-dim); margin: 0; }
-  .argument-bridge { display: flex; align-items: center; gap: 0.8rem; margin: 1.15rem 0 0; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.5; letter-spacing: 0.025em; color: var(--color-text-dim); }
-  .argument-bridge::before { content: ""; flex: none; width: 1.5rem; height: 1px; background: var(--color-accent); }
-
-  /* editorial margin annotations — selected direction B */
-  .annotation-anchor { position: relative; }
-  .margin-note {
-    position: absolute;
-    left: calc(100% + 2rem);
-    width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.25rem), 12rem);
-    color: var(--color-text-muted);
-  }
-  .margin-note-left { left: auto; right: calc(100% + 2rem); }
-  .margin-note-motive { top: 0; }
-  .margin-note-dependency { top: 50%; transform: translateY(-50%); }
-  .margin-note-head { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.45rem; }
-  .annotation-reg { display: inline-grid; place-items: center; flex: none; width: 19px; height: 19px; border: 1px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-mono); font-size: 9px; line-height: 1; }
-  .margin-note-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
-  .margin-note p { margin: 0; font-size: 0.76rem; line-height: 1.58; text-wrap: pretty; }
-  .margin-note strong { font-weight: 600; color: var(--color-text); }
-
-  @media (max-width: 1279px) {
-    .program-entry { display: flex; flex-direction: column; }
-    .margin-note { position: static; width: auto; transform: none; display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 0.65rem; margin: 0.8rem 0 1rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
-    .margin-note-head { display: block; margin: 0; }
-    .margin-note-label { display: none; }
-    .margin-note p { font-size: 0.8rem; line-height: 1.55; }
-    .margin-note-dependency { order: -1; margin-top: 0; }
   }
 
   /* ===== playground — playable cards ===== */
@@ -714,16 +569,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .pr-ring-a, .pr-ring-b, .pr-bulb, .pg-node, .pg-spark, .pg-halo, .pg-prime,
     .play-relay:hover .pr-bot, .play-relay:hover .pr-eyes, .play-relay:hover .pr-bulb { animation: none !important; }
     .pg-spark, .pg-halo, .pg-prime { opacity: 0; }
-  }
-
-  @media (max-width: 760px) {
-    .proj-card { grid-template-columns: minmax(0, 1fr) 220px; gap: 1.15rem; }
-  }
-  @media (max-width: 560px) {
-    .proj-card { grid-template-columns: 1fr; gap: 1rem; }
-    .proj-card .proj-figure { order: -1; }
-    .proj-top { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
-    .play-grid { grid-template-columns: 1fr; }
   }
 
   /* ===== writing (one featured note) ===== */

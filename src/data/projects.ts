@@ -1,5 +1,5 @@
 // Public project descriptions, checked against the Vault on 17 September 2026.
-// B3's human study is a proposal; B5 is exploratory. Neither has research results.
+// The human study is a proposal. Private exploratory work is not published here.
 export const projects = {
   protobias: {
     title: "Cross-lingual ProtoBias",
@@ -32,13 +32,5 @@ export const projects = {
     summary: "A collaboration with DFKI in which I designed controlled dilemma comparisons to distinguish sensitivity to outcomes from framing and action preferences.",
     connection: "This project develops my training in mechanistic interpretability: moving from controlled behavioural contrasts to tests of which internal representations and computations contribute to a model’s answer.",
     status: "Behavioural pilots · mechanistic analysis in progress",
-  },
-  propertyInheritance: {
-    title: "Selective property inheritance",
-    href: "/research#property-inheritance",
-    question: "When does a modifier cancel one default property of a noun while preserving others?",
-    summary: "An exploratory question about semantic composition: a bird with broken wings may lose the default ability to fly while retaining feathers and its category membership.",
-    connection: "This extends the interest in context-sensitive inference to another linguistic phenomenon. The project is being framed; no learning experiment or result is claimed.",
-    status: "Early exploration · no empirical results",
   },
 };
