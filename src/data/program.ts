@@ -7,17 +7,16 @@
 export const identity =
   "I study how linguistic meaning guides inference, and how to identify the information used by people and language models.";
 
-// The homepage header lede is two paragraphs: a three-question hook (openingQuestions /
-// openingQuestionsHtml), then an identity statement that lands on the current research
-// question (identityLong / identityLongHtml).
+// The homepage header lede names the enduring linguistic question first, then
+// explains how distinct empirical paths test predictions from its analysis.
 
 /** Homepage header, paragraph 1 — the shared question across semantics, cognition, and language models. */
 export const openingQuestions =
-  "How does language guide later reasoning? Which information do people and language models use, and how can we tell?";
+  "How do linguistic expressions structure information for later reasoning?";
 
 /** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "My work connects formal semantics with psycholinguistics and language-model research. Completed model work informs the controls I use; current work develops precise linguistic contrasts and considers how to test their effects on human reasoning.";
+  "I start with formal analyses of what expressions contribute to discourse. Psycholinguistic and language-model studies then test different predictions from that shared linguistic question.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -26,10 +25,10 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const openingQuestionsHtml =
-  "How does language guide later reasoning? Which information do people and language models use, and how can we tell?";
+  "How do linguistic expressions structure information for later reasoning?";
 
 export const identityLongHtml =
-  "My work connects formal semantics with psycholinguistics and language-model research. Completed model work informs the controls I use; current work develops precise linguistic contrasts and considers how to test their effects on human reasoning.";
+  "I start with formal analyses of what expressions contribute to discourse. Psycholinguistic and language-model studies then test different predictions from that shared linguistic question.";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
