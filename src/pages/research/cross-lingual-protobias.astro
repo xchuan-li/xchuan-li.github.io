@@ -35,7 +35,7 @@ const progress = [
 
 <Base
   title="Cross-lingual ProtoBias · Xiaochuan Li"
-  description="Does a vision-language judge follow the meaning of an image–prompt pair, or fall back on a familiar visual prototype? A controlled cross-lingual audit across seven languages and two model families; about 12,600 judgments, with public code."
+  description="Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages? A controlled study with fixed image pairs, seven languages, and two VLM systems."
   showProgress={true}
   toc={true}
 >
@@ -46,8 +46,7 @@ const progress = [
     </div>
     <h1>Cross-lingual prototypicality bias in vision–language models</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
-      Does a vision-language judge follow the meaning of an image–prompt pair, or fall back on a
-      familiar visual prototype?
+      {projects.protobias.question}
     </p>
     <p class="text-sm text-[var(--color-text-dim)] !mb-8">
       <em>Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</em> —
@@ -61,22 +60,30 @@ const progress = [
     </aside>
 
     <p>
-      Cross-lingual ProtoBias tests whether a vision-language judge follows the semantic relation
-      between an image and a prompt or relies on a familiar visual prototype. Each item pairs a
-      semantically correct but atypical image with a typical but incorrect one. I keep the images
-      fixed and translate the prompt, so the visual evidence stays identical across languages. Translation quality,
-      prompt naturalness, and answer position require their own controls.
+      The original <a href="https://arxiv.org/abs/2601.04946">ProtoBias benchmark</a> asks whether
+      an evaluator follows explicit semantic constraints when they conflict with visual or social
+      typicality. Each item pairs an image that satisfies the description but is less typical with
+      a more typical image that violates a specific detail. The contrast tests whether a familiar
+      category example can distract from what the description actually requires.
     </p>
     <p>
-      Across approximately 12,600 judgments from seven languages and two model families, the strongest
-      variation is associated with the attribute being judged. Lower-resource, distinct-script prompts
-      also produce a measurable language effect.
+      My cross-lingual extension asks whether performance on this contrast changes with the prompt
+      language. I keep the image pair fixed and translate both the description and the instruction,
+      aiming to preserve their meaning. The study examines how the observed preference for a
+      semantically correct or a prototypical but incorrect image varies across seven languages.
+      Translation quality, prompt naturalness, and answer position require their own controls.
+    </p>
+    <p>
+      For example, one description calls for a piece of furniture with a grey carpet. The correct
+      image shows a less typical futon mattress with the grey carpet; the adversary shows an ordinary
+      bed with a beige carpet. The task requires attending to the stated detail even when the other
+      image presents a more familiar kind of furniture.
     </p>
 
     <h2>Results from the completed study</h2>
     <p>
       The final course manuscript reports a corrected full rerun of 900 image pairs across seven
-      languages and two model families. Overall typicality error rates were 0.548 for Qwen and
+      languages and two VLM systems. Overall typicality error rates were 0.548 for Qwen and
       0.576 for InternVL. In the demography subset, prompt language affected judgments in both
       models. Holding image position fixed, cross-language inconsistency was 0.261 and 0.271,
       compared with repeat-run disagreement of 0.017 and 0.011.
@@ -88,7 +95,7 @@ const progress = [
       correlated at 0.69. These are behavioural patterns, not an identified internal mechanism.
     </p>
     <p>
-      Independent image-text scorers reproduced some category patterns, while the multilingual
+      Additional image-text scorers reproduced some category patterns, while the multilingual
       scorer gave a different language ranking. Two volunteers made 180 judgments on 90
       counterbalanced items, with a pooled error rate of 0.144. This supports the answerability of
       the tested subset, but does not establish a population-level human cross-language effect.
@@ -100,6 +107,15 @@ const progress = [
       effects and repeated-measurement variability. Back-translation provided a limited consistency
       check; it did not eliminate every translation or cultural confound.
     </p>
+    <h2>Interpreting the contrast</h2>
+    <p>
+      The study measures choices, typicality error rates, and image–text score differences. These
+      establish a behavioural preference under each language condition. They do not separately
+      estimate the strength of semantic representations and prototype associations: a shift could
+      reflect reduced use of a semantic constraint, stronger prototype associations, difficulty
+      recognising a visual detail, or differences in the translated wording. Distinguishing these
+      explanations requires further evidence.
+    </p>
     <p>
       The interactive display below preserves the original four-language Report 1. The final
       seven-language results are summarised above; the display is an earlier milestone.
@@ -109,13 +125,11 @@ const progress = [
 
     <h2>Design and data</h2>
     <p>
-      Each item pairs two images for one attribute — one semantically correct but atypical, one typical
-      but incorrect — and asks a multimodal judge which fits the prompt. I use the ProtoBias dataset and
-      translate the prompt into each language while holding the image pair fixed, so the translation is
-      an intervention on the linguistic presentation of the same semantic task. Two questions organize
-      it: whether prototypicality bias is consistent across languages when the semantic content is held
-      fixed, and whether cross-lingual differences are stronger in socially sensitive attributes such as
-      wealth and status than in neutral ones.
+      The study uses 900 image pairs from ProtoBias, covering animals, objects, and demography.
+      Two VLM systems choose between the images in seven prompt languages, yielding 12,596 valid
+      judgments. The typicality error rate is the proportion of choices favouring the prototypical
+      but incorrect image. Analyses examine overall error rates, changes on individual items, and
+      category patterns, with separate checks for image position and repeat variability.
     </p>
 
     <h2>Limitations</h2>
@@ -124,7 +138,9 @@ const progress = [
       a back-translation check addresses quality, not nuance. The judges are two 7–8B models, and the
       metric comparison uses a single multilingual encoder. The human control is 90 items with two
       annotators, and some attribute cells are small (the wealth cell has n = 31). The paper reports
-      these rather than rounding them into a stronger claim.
+      these rather than rounding them into a stronger claim. Typicality follows the source
+      benchmark’s definitions; the study does not estimate prototypes for individual language
+      communities.
     </p>
 
     <h2>Roadmap</h2>

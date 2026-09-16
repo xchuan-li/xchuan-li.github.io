@@ -1,12 +1,12 @@
-// Public project descriptions, checked against the Vault on 16 September 2026.
+// Public project descriptions, checked against the Vault on 17 September 2026.
 // B3's human study is a proposal; B5 is exploratory. Neither has research results.
 export const projects = {
   protobias: {
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
-    question: "Do model judgments follow semantic evidence or familiar prototypes?",
-    summary: "A controlled evaluation holding image pairs fixed while varying the prompt language, with approximately 12,600 judgments across seven languages and two model families.",
-    connection: "This completed study developed my approach to controlled measurement, competing explanations, and reproducible analysis.",
+    question: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages?",
+    summary: "A controlled evaluation holding image pairs fixed while varying the prompt language, with approximately 12,600 judgments across seven languages and two VLM systems.",
+    connection: "The study connects my interest in how linguistic information interacts with prior expectations to controlled behavioural measurement and reproducible analysis.",
     status: "Study complete · first-author manuscript in revision",
   },
   threeWays: {
