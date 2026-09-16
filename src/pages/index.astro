@@ -238,7 +238,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
                   <p class="research-desc" set:html={project.desc} />
                   <p class="research-status">{project.status}</p>
                   <p class="research-links">
-                    {project.links.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+                    {project.links.map((link) => <a class="research-project-link" href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
                   </p>
                 </div>
                 {project.cover && (
@@ -456,30 +456,49 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
 
   .block-note { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 1.4rem; }
 
-  /* ===== concise research list ===== */
+  /* ===== research cards — original lift, shadow, title and cover feedback ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
-  .research-pair { margin-top: 1.2rem; padding: 0 1.25rem; border: 1px solid var(--color-border); border-radius: 6px; }
-  .research-pair .research-entry { grid-template-columns: calc(160px - 1.25rem) minmax(0, 1fr); }
-  .research-pair .research-entry:last-child { border-bottom: 0; }
-  .research-entry { position: relative; display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 1.75rem; padding: 1.65rem 0; border-bottom: 1px solid var(--color-border); }
+  .research-list { display: grid; gap: 1rem; margin-top: 1.2rem; }
+  .research-group { display: grid; gap: 1rem; min-width: 0; }
+  .research-pair { padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 16px; }
+  .research-entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 1.75rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    background: var(--card-bg);
+    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+  }
+  .research-entry:hover, .research-entry:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -14px rgba(23, 33, 48, 0.28);
+    border-color: var(--card-hover-border);
+  }
   .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
   .research-copy { min-width: 0; }
   .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 1.25rem; align-items: start; }
   .research-cover { display: block; border-radius: 8px; overflow: hidden; }
-  .research-cover img { display: block; width: 100%; height: auto; }
+  .research-cover img { display: block; width: 100%; height: auto; transition: transform 0.35s ease; }
+  .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: scale(1.03); }
   .research-cover:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  .research-note { margin-top: 1.2rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
+  .research-note { position: relative; z-index: 2; margin-top: 1.2rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
   .research-note-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.45rem; }
   .research-note-text { font-size: 0.76rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
-  .research-title { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; }
+  .research-title { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
+  .research-entry:hover .research-title, .research-entry:focus-within .research-title { color: var(--color-accent); }
   .research-desc { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .research-desc :global(em) { font-style: italic; color: var(--color-text); }
   .research-status { font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); margin: 0 0 0.5rem; }
   .research-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; margin: 0; }
   .research-links a { color: var(--color-accent); text-decoration: none; text-underline-offset: 0.2em; }
+  .research-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 12px; }
   .research-links a:hover { text-decoration: underline; }
   .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  .research-project-link:focus-visible::after { outline: 2px solid var(--color-accent); outline-offset: 3px; }
   @media (min-width: 1280px) {
     .research-note { position: absolute; top: 1.8rem; width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.5rem), 11rem); margin-top: 0; }
     .research-note-right { left: calc(100% + 1.75rem); }
@@ -490,9 +509,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .research-cover { max-width: 300px; }
   }
   @media (max-width: 620px) {
-    .research-pair { padding: 0 1rem; }
-    .research-pair .research-entry { grid-template-columns: 1fr; }
-    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 0; }
+    .research-pair { padding: 0.5rem; }
+    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.2rem 1rem; }
     .research-side { display: contents; }
     .research-field { margin: 0; }
     .research-copy { order: 1; }
@@ -500,6 +518,11 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
     .research-cover { order: -1; max-width: 360px; }
     .research-note { order: 2; margin-top: 0.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .research-entry, .research-title, .research-cover img { transition: none; }
+    .research-entry:hover, .research-entry:focus-within,
+    .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: none; }
   }
 
   /* ===== timeline ===== */
