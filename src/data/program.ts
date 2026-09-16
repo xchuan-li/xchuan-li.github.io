@@ -12,11 +12,11 @@ export const identity =
 
 /** Homepage header, paragraph 1 — the shared question across semantics, cognition, and language models. */
 export const openingQuestions =
-  "How do linguistic expressions structure information for later reasoning?";
+  "How does linguistic form shape what we understand and infer?";
 
 /** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "I start with formal analyses of what expressions contribute to discourse. Psycholinguistic and language-model studies then test different predictions from that shared linguistic question.";
+  "My work begins with questions in semantics and pragmatics. I develop explicit analyses of linguistic contrasts, then use human behavioural evidence and computational models to test different predictions.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -25,10 +25,10 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const openingQuestionsHtml =
-  "How do linguistic expressions structure information for later reasoning?";
+  "How does linguistic form shape what we understand and infer?";
 
 export const identityLongHtml =
-  "I start with formal analyses of what expressions contribute to discourse. Psycholinguistic and language-model studies then test different predictions from that shared linguistic question.";
+  "My work begins with questions in semantics and pragmatics. I develop explicit analyses of linguistic contrasts, then use human behavioural evidence and computational models to test different predictions.";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

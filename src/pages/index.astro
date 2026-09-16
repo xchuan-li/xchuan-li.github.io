@@ -4,10 +4,10 @@ import { posts } from "../data/writing";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 import { projects } from "../data/projects";
 
-// Homepage (A3g §5). Section order: header → current work → selected work →
-// research program preview → writing → timeline → playground → contact. Research
-// evidence comes before biography, so the timeline sits below the projects. The
-// identity line comes from data/program.ts; page-specific copy lives here.
+// Homepage. Section order: header → research program → current case → model work →
+// exploratory work → writing → background → playground → contact. Research
+// evidence comes before biography. The identity line comes from data/program.ts;
+// page-specific copy lives here.
 //
 // PHOTO: public/images/headshot.jpg (CSS background — a missing file just shows an
 // empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
@@ -37,17 +37,18 @@ const currentProgram = [
   },
 ];
 
-// Two empirical paths follow from one linguistic question; they need different evidence.
-const empiricalPaths = [
+// Empirical approaches serve the broader linguistic program, without requiring
+// every project to use both or treating computational models as human proxies.
+const empiricalApproaches = [
   {
-    label: "Human evidence",
-    title: "Psycholinguistics",
-    desc: "How do people interpret, retain, and update the information an expression contributes? Behavioural studies can test its effects on comprehension and later reasoning.",
+    label: "Human studies",
+    title: "Psycholinguistic evidence",
+    desc: "Behavioural studies can test how people interpret, learn, and update a linguistic distinction, and whether it guides later inference.",
   },
   {
-    label: "Computational evidence",
-    title: "Language-model research",
-    desc: "Can a model acquire or use the distinction beyond surface cues? Controlled evaluation, training, and intervention address different parts of that question.",
+    label: "Computational studies",
+    title: "Modeling and language models",
+    desc: "Explicit models can test how a semantic account composes or updates information. Language-model experiments ask what can be learned and used beyond surface cues.",
   },
 ];
 
@@ -184,24 +185,23 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
     </header>
 
-    <!-- ===== linguistic question and empirical paths ===== -->
+    <!-- ===== research program ===== -->
     <section class="scope" aria-labelledby="scope-heading">
-      <h2 class="scope-heading" id="scope-heading">One linguistic question · two empirical paths</h2>
-      <div class="scope-core">
-        <p class="scope-label">Research question · theoretical anchor</p>
-        <h3 class="scope-title">Meaning and inference</h3>
-        <p class="scope-desc">What does an utterance add to a conversation, which possibilities remain open, and what later inferences does it license? Formal semantics and pragmatics make the competing accounts explicit.</p>
+      <p class="scope-heading">Research program</p>
+      <div class="scope-intro">
+        <h2 class="scope-title" id="scope-heading">Linguistic meaning and inference</h2>
+        <p class="scope-lede">I study how linguistic expressions shape the information available for interpretation and inference. Current cases range from properties attributed to an object to possibilities left open and commitments made in discourse. Formal semantics and pragmatics turn these phenomena into competing analyses and testable predictions.</p>
       </div>
-      <div class="scope-grid" aria-label="Two empirical paths">
-        {empiricalPaths.map((area) => (
+      <div class="scope-grid" aria-label="Empirical approaches">
+        {empiricalApproaches.map((area) => (
           <div class="scope-item">
             <p class="scope-label">{area.label}</p>
-            <h3 class="scope-title">{area.title}</h3>
+            <h3 class="scope-path-title">{area.title}</h3>
             <p class="scope-desc">{area.desc}</p>
           </div>
         ))}
       </div>
-      <p class="scope-boundary">The paths share a linguistic target. Each requires its own evidence; a result in one does not establish the mechanism in the other.</p>
+      <p class="scope-link"><a href="/approach">Read the full research program →</a></p>
     </section>
 
     <!-- ===== current case study ===== -->
@@ -282,26 +282,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <p class="blk-body">I am exploring whether a model of selective property updating can make predictions that existing accounts do not. This is a modeling aim, not an established result.</p>
       <p class="shaped-meta">{projects.propertyInheritance.status}</p>
       <p class="blk-link"><a href={projects.propertyInheritance.href}>Read about the question</a></p>
-    </section>
-
-    <!-- ===== research program preview ===== -->
-    <section class="sec annotation-anchor program-preview">
-      <h2 class="sec-h">Research program</h2>
-      <h3 class="blk-h">Meaning and inference</h3>
-      <p class="blk-body">
-        The common question is how linguistic meaning guides inference, and which information people
-        and models use. Formal analysis makes the distinctions precise; human experiments can test
-        their consequences for processing; model studies can examine sensitivity, learning, and
-        internal mechanisms. Each project makes a bounded contribution to this wider question.
-      </p>
-      <aside class="margin-note margin-note-left margin-note-boundary" aria-label="Boundary annotation">
-        <div class="margin-note-head">
-          <span class="annotation-reg" aria-hidden="true">C</span>
-          <span class="margin-note-label">Boundary</span>
-        </div>
-        <p>Human processing and model learning require their own evidence. An effect in one system does not establish the same mechanism in the other.</p>
-      </aside>
-      <p class="blk-link"><a href="/approach">See the research program</a></p>
     </section>
 
     <!-- ===== writing ===== -->
@@ -468,20 +448,23 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .hd-tag { font-size: 1.05rem; }
   }
 
-  /* ===== research scope ===== */
-  .scope { margin-top: 2.6rem; padding: 1.25rem 0 1.35rem; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-  .scope-heading { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 1rem; }
-  .scope-core { max-width: 39rem; margin: 0 auto; padding: 1.15rem 1.5rem; border: 1px solid var(--color-border-strong); border-radius: 10px; background: var(--color-surface); text-align: center; }
-  .scope-core .scope-title { font-size: 1.12rem; }
-  .scope-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; max-width: 42rem; margin: 1.5rem auto 0; }
-  .scope-item { min-width: 0; padding: 0.2rem 0 0 1rem; border-left: 2px solid var(--color-border-strong); }
-  .scope-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.35rem; }
-  .scope-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.35rem; }
+  /* ===== research program ===== */
+  .scope { margin-top: 2.6rem; padding: 1.45rem 0 1.6rem; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+  .scope-heading { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.85rem; }
+  .scope-intro { max-width: 45rem; }
+  .scope-title { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: var(--color-text); margin: 0 0 0.55rem; }
+  .scope-lede { font-size: 0.98rem; line-height: 1.7; color: var(--color-text-muted); margin: 0; }
+  .scope-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-top: 1.35rem; padding-top: 1.15rem; border-top: 1px solid var(--color-border); }
+  .scope-item { min-width: 0; }
+  .scope-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.3rem; }
+  .scope-path-title { font-family: var(--font-sans); font-size: 0.98rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.35rem; }
   .scope-desc { font-size: 0.88rem; line-height: 1.58; color: var(--color-text-muted); margin: 0; }
-  .scope-boundary { max-width: 42rem; margin: 1.1rem auto 0; font-size: 0.81rem; line-height: 1.5; color: var(--color-text-muted); }
+  .scope-link { margin: 1.15rem 0 0; font-size: 0.88rem; }
+  .scope-link a { color: var(--color-accent); text-decoration: none; }
+  .scope-link a:hover { text-decoration: underline; }
 
   @media (max-width: 680px) {
-    .scope-core { text-align: left; }
+    .scope-title { font-size: 1.65rem; }
     .scope-grid { grid-template-columns: 1fr; gap: 1.15rem; }
   }
 
@@ -600,7 +583,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .margin-note-left { left: auto; right: calc(100% + 2rem); }
   .margin-note-motive { top: 0; }
   .margin-note-dependency { top: 50%; transform: translateY(-50%); }
-  .margin-note-boundary { top: 3.35rem; }
   .margin-note-head { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.45rem; }
   .annotation-reg { display: inline-grid; place-items: center; flex: none; width: 19px; height: 19px; border: 1px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-mono); font-size: 9px; line-height: 1; }
   .margin-note-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-dim); }
@@ -614,7 +596,6 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .margin-note-label { display: none; }
     .margin-note p { font-size: 0.8rem; line-height: 1.55; }
     .margin-note-dependency { order: -1; margin-top: 0; }
-    .program-preview .margin-note { margin-bottom: 0.8rem; }
   }
 
   /* ===== playground — playable cards ===== */
