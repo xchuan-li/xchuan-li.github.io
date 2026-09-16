@@ -27,24 +27,31 @@ const empiricalApproaches = [
   },
 ];
 
-// Three concise entries: the related linguistic and human work, a completed
-// evaluation, and ongoing methods training. Private exploratory work stays off-site.
-const selectedResearch = [
+// Two distinct but related projects share a quiet outer frame. The completed
+// evaluation and ongoing methods training remain separate entries below it.
+const relatedResearch = [
   {
-    title: "Epistemic meaning and human inference",
-    field: "Semantics & psycholinguistics",
-    desc: "I compare what <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em> contribute to discourse. A proposed master’s study asks how these distinctions affect later access to and use of a possibility.",
-    status: "Formal analysis in development · Human study being scoped",
+    title: projects.threeWays.title,
+    field: "Formal semantics",
+    desc: "A formal semantic and pragmatic comparison of <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, examining the commitments they create and the responses they license.",
+    status: projects.threeWays.status,
+    links: [{ label: "Linguistic analysis", href: projects.threeWays.href }],
+  },
+  {
+    title: projects.thesis.title,
+    field: "Psycholinguistics",
+    desc: projects.thesis.summary,
+    status: projects.thesis.status,
     note: {
       label: "Connection",
       side: "right",
       text: "The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.",
     },
-    links: [
-      { label: "Linguistic analysis", href: projects.threeWays.href },
-      { label: "Master’s thesis", href: projects.thesis.href },
-    ],
+    links: [{ label: "Master’s thesis", href: projects.thesis.href }],
   },
+];
+
+const modelResearch = [
   {
     title: projects.protobias.title,
     field: "Model evaluation",
@@ -68,6 +75,11 @@ const selectedResearch = [
     status: "Behavioural pilots · Mechanistic tests in development",
     links: [{ label: "Project and methods", href: projects.latentControl.href }],
   },
+];
+
+const researchGroups = [
+  { related: true, projects: relatedResearch },
+  { related: false, projects: modelResearch },
 ];
 
 // Background: the questions belong to each period as they were then, so they change
@@ -206,7 +218,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     <section class="sec selected-research" id="selected-research" aria-labelledby="research-heading">
       <h2 class="sec-h" id="research-heading">Selected research</h2>
       <div class="research-list">
-        {selectedResearch.map((project) => (
+        {researchGroups.map((group) => (
+          <div class:list={["research-group", { "research-pair": group.related }]} role={group.related ? "group" : undefined} aria-label={group.related ? "Related projects on epistemic meaning" : undefined}>
+        {group.projects.map((project) => (
           <article class="research-entry">
             <div class="research-side">
               <p class="research-field">{project.field}</p>
@@ -235,6 +249,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
               </div>
             </div>
           </article>
+        ))}
+          </div>
         ))}
       </div>
     </section>
@@ -443,6 +459,9 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   /* ===== concise research list ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
+  .research-pair { margin-top: 1.2rem; padding: 0 1.25rem; border: 1px solid var(--color-border); border-radius: 6px; }
+  .research-pair .research-entry { grid-template-columns: calc(160px - 1.25rem) minmax(0, 1fr); }
+  .research-pair .research-entry:last-child { border-bottom: 0; }
   .research-entry { position: relative; display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 1.75rem; padding: 1.65rem 0; border-bottom: 1px solid var(--color-border); }
   .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
   .research-copy { min-width: 0; }
@@ -471,6 +490,8 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     .research-cover { max-width: 300px; }
   }
   @media (max-width: 620px) {
+    .research-pair { padding: 0 1rem; }
+    .research-pair .research-entry { grid-template-columns: 1fr; }
     .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 0; }
     .research-side { display: contents; }
     .research-field { margin: 0; }
