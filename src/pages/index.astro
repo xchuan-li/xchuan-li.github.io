@@ -35,6 +35,11 @@ const selectedResearch = [
     field: "Semantics & psycholinguistics",
     desc: "I compare what <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em> contribute to discourse. A proposed master’s study asks how these distinctions affect later access to and use of a possibility.",
     status: "Formal analysis in development · Human study being scoped",
+    note: {
+      label: "Connection",
+      side: "right",
+      text: "The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.",
+    },
     links: [
       { label: "Linguistic analysis", href: projects.threeWays.href },
       { label: "Master’s thesis", href: projects.thesis.href },
@@ -45,6 +50,15 @@ const selectedResearch = [
     field: "Model evaluation",
     desc: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages? I test this with fixed image pairs across seven languages and two VLM systems.",
     status: "Completed study · First-author manuscript in revision",
+    cover: {
+      src: "/images/project-covers/protobias.png",
+      alt: "Seven language prompts lead to a model choosing between fixed images of a duck beside two bamboo stalks and a panda among many bamboo stalks.",
+    },
+    note: {
+      label: "Motive",
+      side: "left",
+      text: "A correct answer alone does not identify which information a model used. Competing explanations need controlled comparisons.",
+    },
     links: [{ label: "Study and results", href: projects.protobias.href }],
   },
   {
@@ -194,14 +208,31 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <div class="research-list">
         {selectedResearch.map((project) => (
           <article class="research-entry">
-            <p class="research-field">{project.field}</p>
+            <div class="research-side">
+              <p class="research-field">{project.field}</p>
+              {project.note && (
+                <aside class={`research-note research-note-${project.note.side}`} aria-label={`${project.note.label} annotation`}>
+                  <p class="research-note-label">{project.note.label}</p>
+                  <p class="research-note-text">{project.note.text}</p>
+                </aside>
+              )}
+            </div>
             <div class="research-copy">
               <h3 class="research-title">{project.title}</h3>
-              <p class="research-desc" set:html={project.desc} />
-              <p class="research-status">{project.status}</p>
-              <p class="research-links">
-                {project.links.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
-              </p>
+              <div class:list={["research-detail", { "research-detail-illustrated": project.cover }]}>
+                <div>
+                  <p class="research-desc" set:html={project.desc} />
+                  <p class="research-status">{project.status}</p>
+                  <p class="research-links">
+                    {project.links.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+                  </p>
+                </div>
+                {project.cover && (
+                  <a class="research-cover" href={project.links[0].href} aria-label={`Open ${project.title}`}>
+                    <img src={project.cover.src} alt={project.cover.alt} width="1200" height="720" loading="lazy" decoding="async" />
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))}
@@ -412,9 +443,16 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   /* ===== concise research list ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
-  .research-entry { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 1.75rem; padding: 1.65rem 0; border-bottom: 1px solid var(--color-border); }
+  .research-entry { position: relative; display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 1.75rem; padding: 1.65rem 0; border-bottom: 1px solid var(--color-border); }
   .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
   .research-copy { min-width: 0; }
+  .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 1.25rem; align-items: start; }
+  .research-cover { display: block; border-radius: 8px; overflow: hidden; }
+  .research-cover img { display: block; width: 100%; height: auto; }
+  .research-cover:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  .research-note { margin-top: 1.2rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
+  .research-note-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.45rem; }
+  .research-note-text { font-size: 0.76rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
   .research-title { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; }
   .research-desc { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .research-desc :global(em) { font-style: italic; color: var(--color-text); }
@@ -423,10 +461,24 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   .research-links a { color: var(--color-accent); text-decoration: none; text-underline-offset: 0.2em; }
   .research-links a:hover { text-decoration: underline; }
   .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  @media (min-width: 1280px) {
+    .research-note { position: absolute; top: 1.8rem; width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.5rem), 11rem); margin-top: 0; }
+    .research-note-right { left: calc(100% + 1.75rem); }
+    .research-note-left { right: calc(100% + 1.75rem); }
+  }
+  @media (min-width: 621px) and (max-width: 900px) {
+    .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
+    .research-cover { max-width: 300px; }
+  }
   @media (max-width: 620px) {
     .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 0; }
+    .research-side { display: contents; }
     .research-field { margin: 0; }
+    .research-copy { order: 1; }
     .research-title { font-size: 1.35rem; }
+    .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
+    .research-cover { order: -1; max-width: 360px; }
+    .research-note { order: 2; margin-top: 0.5rem; }
   }
 
   /* ===== timeline ===== */
