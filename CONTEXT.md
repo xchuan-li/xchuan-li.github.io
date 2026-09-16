@@ -2,6 +2,18 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Current project descriptions (16 September 2026)
+
+This update supersedes older instructions that present the MA as a committed computational-training project. Public project questions, summaries, connections, and statuses now live in `src/data/projects.ts`, shared by the homepage, Current Work, and CV. The common question is how linguistic meaning guides inference and how to identify the information used by people and language models.
+
+- ProtoBias: completed controlled model evaluation; first-author revision in preparation. Use the corrected August course-manuscript results, not the superseded June analysis. Do not claim back-translation eliminated translation effects or that correlation established a prototype mechanism.
+- Three Ways: formal analysis and diagnostic materials are in development; draft comparative derivations exist; independent judgments are pending.
+- MA / Epistemic possibilities in use: an adult behavioural direction is being considered, with the final empirical focus and any computational comparison still under discussion. No human experiment or training result is established. Preserve `/research/learnability` as the existing project URL.
+- Latent Control States: behavioural pilots and controlled materials exist; mechanistic analysis remains in progress. Do not turn a proposed intervention into an established mechanism.
+- Selective property inheritance: explicitly authorised as an exploratory question, listed on the homepage and at `/research#property-inheritance`. No empirical or learning results. This does not revive the retired ORDO project or three-case-study framework.
+
+Present each project's scientific question and contribution to the research trajectory in natural academic prose. Application strategy, internal B-numbers, and private supervisor negotiations are not public website content. Keep the English language and existing visual design. The downloadable CV must match the HTML CV.
+
 ## What this is
 
 A personal research website for **Xiaochuan Li**, MSc student in Human and AI at UTN Nürnberg. The site exists to support PhD applications (target: late 2026 application window, fall 2027 start).

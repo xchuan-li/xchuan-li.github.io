@@ -4,7 +4,7 @@ A research-focused personal website built with Astro 5, MDX, React (for interact
 
 The site presents one research program: *how structured meaning is represented, processed, and learned*, connecting formal semantics with psycholinguistics and computational language research. Top-level pages (A3g information architecture): **Current Work** (`/research`), **Research Program** (`/approach`), Writing, CV, Contact. The current case study is the three-way distinction among *might p*, *might p or might not p*, and *I don't know whether p*, at the construct stage.
 
-**Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). Shared identity and question copy lives in `src/data/program.ts`; page-specific framing lives in the relevant page.
+**Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). Shared identity and question copy lives in `src/data/program.ts`; public project descriptions and statuses live in `src/data/projects.ts`. Page-specific framing lives in the relevant page.
 
 ## What's here
 
@@ -71,7 +71,7 @@ The GitHub Actions workflow (`.github/workflows/deploy.yml`) auto-builds and dep
 
 Projects have two touch-points: the data record and the page.
 
-1. **Data record** — project, timeline, and playground records are defined per page in `src/pages/index.astro` (homepage) and `src/pages/research/index.astro` (Current Work). Positioning copy lives in `src/data/program.ts`; writing metadata in `src/data/writing.ts`. (`src/data/research.ts` and the `/plain` mirror were retired in 2026-09; consolidating the two per-page project arrays into one source is a known cleanup.)
+1. **Data record** — project questions, summaries, connections, and statuses live in `src/data/projects.ts` and are shared by the homepage, Current Work, and CV. Homepage visual metadata, timeline, and playground records remain in `src/pages/index.astro`. Positioning copy lives in `src/data/program.ts`; writing metadata in `src/data/writing.ts`. (`src/data/research.ts` and the `/plain` mirror were retired in 2026-09.)
 2. **Page** — each project main page under `src/pages/research/` follows one template:
 
 ```

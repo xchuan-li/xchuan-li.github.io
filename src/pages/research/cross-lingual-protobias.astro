@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ProgressTimeline from "../../components/ProgressTimeline.astro";
 import ProtoBiasDemo from "../../components/ProtoBiasDemo.tsx";
+import { projects } from "../../data/projects";
 
 // Project milestones. Each "done" node links to its own standalone report.
 const progress = [
@@ -19,7 +20,14 @@ const progress = [
     phase: "Experiment 2 · Report 2",
     title: "It replicates across models, and language is not flat after all",
     summary:
-      "Scaled to two model families (Qwen2.5-VL-7B and InternVL3-8B) and seven languages, about 12,500 judgments, adding Russian, Bengali, and Greek across resource levels and scripts. An item-clustered mixed-effects analysis confirms the attribute effect (Wealth, Power) in both families. The lower-resource, distinct-script prompts surface a language effect the first four languages missed: Bengali and Greek elicit measurably more bias than English, and a back-translation check rules out translation quality. The prototype trap is largely item-intrinsic (the same pairs fool both models, r = 0.68) and not a low-level visual artifact, pointing to a two-factor account.",
+      "Expanded to two model families and seven languages. This intermediate analysis was superseded by the corrected full rerun and final course manuscript below.",
+    status: "done",
+  },
+  {
+    date: "2 Aug 2026",
+    phase: "Completed course manuscript",
+    title: "A corrected cross-lingual audit with independent controls",
+    summary: "900 image pairs, seven languages, and two VLM families; 12,596 valid judgments. Includes scorer comparisons, a 90-item human control, and a documented full rerun after a cache-integrity repair. The first-author revision for arXiv is in preparation.",
     status: "done",
   },
 ];
@@ -49,15 +57,15 @@ const progress = [
 
     <aside class="rounded-r-lg px-4 py-3 !my-8 [border-top:1px_solid_var(--color-border)] [border-right:1px_solid_var(--color-border)] [border-bottom:1px_solid_var(--color-border)] [border-left:3px_solid_var(--color-accent)] [background:var(--color-surface)]">
       <p class="!mt-0 !mb-1.5 text-[11px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] font-medium" style="font-family:var(--font-mono)">Place in the research trajectory</p>
-      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">This project predates my current work on epistemic modality. Its lasting contribution to my research program is methodological: holding the target content fixed while varying its linguistic presentation, and testing whether apparently successful behaviour follows the intended semantic relation or a cheaper prototype-based cue.</p>
+      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">{projects.protobias.connection} The study tests model judgments against fixed visual evidence, with separate checks for translation, answer position, and pipeline integrity.</p>
     </aside>
 
     <p>
       Cross-lingual ProtoBias tests whether a vision-language judge follows the semantic relation
       between an image and a prompt or relies on a familiar visual prototype. Each item pairs a
       semantically correct but atypical image with a typical but incorrect one. I keep the images
-      fixed and translate the prompt, so changes in judgment can be attributed to linguistic
-      presentation rather than visual content.
+      fixed and translate the prompt, so the visual evidence stays identical across languages. Translation quality,
+      prompt naturalness, and answer position require their own controls.
     </p>
     <p>
       Across approximately 12,600 judgments from seven languages and two model families, the strongest
@@ -65,36 +73,36 @@ const progress = [
       also produce a measurable language effect.
     </p>
 
-    <h2>Results</h2>
+    <h2>Results from the completed study</h2>
     <p>
-      Report 2 scaled the probe to two model families (Qwen2.5-VL-7B and InternVL3-8B)
-      and seven languages, adding Russian, Bengali, and Greek to span resource levels and scripts. Two
-      results replicate across both families: the bias is
-      attribute-specific (concentrated on Wealth and social status, near chance for
-      Morality and Intellect), and, once lower-resource, distinct-script prompts are added, a
-      language effect the first four languages missed appears, with Bengali and Greek
-      eliciting measurably more bias than English. A back-translation check rules out translation
-      quality, and there is no attribute × language interaction: the attribute <em>pattern</em> is
-      language-invariant while the overall <em>level</em> is not. Report 1's "language barely moves it"
-      now reads as a four-language artifact.
+      The final course manuscript reports a corrected full rerun of 900 image pairs across seven
+      languages and two model families. Overall typicality error rates were 0.548 for Qwen and
+      0.576 for InternVL. In the demography subset, prompt language affected judgments in both
+      models. Holding image position fixed, cross-language inconsistency was 0.261 and 0.271,
+      compared with repeat-run disagreement of 0.017 and 0.011.
     </p>
     <p>
-      Two deeper checks make the effect hard to dismiss. First, it is not a low-level visual artifact:
-      the prototypical image always alters one feature (count, colour, size, layout) and
-      colour, the obvious confound, is where the model is least fooled; the bias is
-      strongest exactly when the discriminating cue is hard to perceive. Second, the two families fail on
-      largely the same image pairs (per-item error correlation r = 0.68), so the
-      prototype trap is an objective property of the pair, not a quirk of one model. Together these point
-      to a two-factor account: the attribute decides whether a visual shortcut exists at
-      all (a prototype for wealth and status, none for morality or intellect), and the weakness of the
-      signal, whether a hard-to-perceive cue or an unfamiliar language, decides how strongly the model
-      takes it.
+      Attribute differences were substantial: wealth produced the most errors in both judges.
+      The attribute-by-language interaction was significant for Qwen but not InternVL; this difference
+      between significance results was not itself tested. The two models’ item-level error rates
+      correlated at 0.69. These are behavioural patterns, not an identified internal mechanism.
     </p>
-
     <p>
-      The interactive read below shows the original four-language picture from
-      Report 1, not the final seven-language result: bias swings sharply by attribute, only mildly by
-      language until Report 2's lower-resource prompts are added.
+      Independent image-text scorers reproduced some category patterns, while the multilingual
+      scorer gave a different language ranking. Two volunteers made 180 judgments on 90
+      counterbalanced items, with a pooled error rate of 0.144. This supports the answerability of
+      the tested subset, but does not establish a population-level human cross-language effect.
+    </p>
+    <p>
+      A cache-integrity audit identified a non-unique key in the translation pipeline. I repaired it
+      and reran all judgments. The aggregate rates moved little, but 11.2% of individual judgments
+      changed. The report documents the correction and distinguishes language effects from position
+      effects and repeated-measurement variability. Back-translation provided a limited consistency
+      check; it did not eliminate every translation or cultural confound.
+    </p>
+    <p>
+      The interactive display below preserves the original four-language Report 1. The final
+      seven-language results are summarised above; the display is an earlier milestone.
     </p>
 
     <ProtoBiasDemo client:visible />
@@ -120,7 +128,7 @@ const progress = [
     </p>
 
     <h2>Roadmap</h2>
-    <p>Each completed milestone opens its own standalone report.</p>
+    <p>Milestones record the project’s development; the first report has a separate page.</p>
     <ProgressTimeline items={progress} accent="var(--accent-deep-purple)" />
 
     <h2>Literature</h2>

@@ -1,49 +1,25 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { criteria, questions } from "../../data/program";
+import { projects } from "../../data/projects";
 
 // Current Work page (A3g §6). Route stays /research; the displayed H1 and title
 // are "Current Work". Frames the modality project as the current case study.
-// Two stages of the same question: define the contrast, then test its learnability.
-const currentProgram = [
-  {
-    title: "Three Ways of Leaving <em>p</em> Unsettled",
-    href: "/research/three-ways",
-    desc: "A formal-semantics paper that defines the contrast between <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, and the diagnostics that would count as evidence for it.",
-  },
-  {
-    title: "Learning epistemic modality from linguistic input",
-    href: "/research/learnability",
-    desc: "My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.",
-  },
-];
-
-// Earlier model projects, kept only for what they contributed to the current program.
-const background = [
-  {
-    title: "Cross-lingual ProtoBias",
-    href: "/research/cross-lingual-protobias",
-    brought: "Brought the first constraint: separate the target linguistic relation from cheaper cues, since a correct judgment can rest on a familiar prototype rather than semantic sensitivity.",
-  },
-  {
-    title: "Latent Control States",
-    href: "/research/latent-control-states",
-    brought: "Brought the second: an internal correlate matters only if intervening on it changes a controlled behavioural effect.",
-  },
-];
+const currentProgram = [projects.threeWays, projects.thesis];
+const background = [projects.protobias, projects.latentControl];
 ---
 
 <Base
   title="Current Work · Xiaochuan Li"
-  description="How epistemic possibility expressions such as might affect later reasoning: does might only lower a speaker's commitment, or does it keep a particular possibility available? The current construct, its diagnostics, honest status, and selected work."
+  description="Related research on linguistic meaning and inference: completed model evaluation, formal analysis, a thesis proposal, mechanistic research, and exploratory property composition, with their current status."
 >
   <article class="cw">
     <h1 class="cw-h1">Current Work</h1>
     <p class="cw-lede">
-      Epistemic modality is the current case study in a broader program on how structured meaning is
-      represented, processed, and learned. I am developing a semantic account of how possibility
-      expressions affect later reasoning: does <em>might</em> only lower a speaker’s commitment, or
-      does it keep a particular possibility in play?
+      My work asks how linguistic meaning guides inference and how to identify the information
+      used by people and language models. The projects below contribute different forms of evidence:
+      completed model evaluation, formal analysis in development, a proposed human study, and
+      exploratory work on model mechanisms and semantic composition.
     </p>
 
     <section class="cw-sec">
@@ -55,18 +31,19 @@ const background = [
         <li>I <em>don’t know whether</em> it is in the drawer.</li>
       </ol>
       <p class="cw-p">
-        All three leave the key’s location unresolved, but they need not do the same discourse work. A
-        modal assertion introduces a possibility. A disjunction makes both sides explicit. An
-        ignorance report describes what the speaker cannot settle. My current paper asks how these
-        utterances differ in the commitments they create and the replies they license.
+        These expressions are often grouped under “uncertainty”, but they need not do the same
+        discourse work. A possibility claim is compatible with <em>p</em>; a bilateral statement
+        explicitly leaves both answers open; an ignorance report concerns the speaker’s knowledge.
+        My current paper asks how their commitments and response patterns differ, including when
+        the knowledge report conveys an additional lack of a settled opinion.
       </p>
     </section>
 
     <section class="cw-sec">
       <h2 class="cw-h2">What would count as evidence</h2>
       <p class="cw-p">
-        Before testing the proposal, I need an observable difference between a maintained possibility
-        and ordinary uncertainty. I use three criteria:
+        For the proposed behavioural study, a claim about the later availability of a possibility
+        needs more than a general change in response speed. Three diagnostic criteria guide the design:
       </p>
       <ul class="cw-crit">
         {criteria.map((c) => (
@@ -76,8 +53,8 @@ const background = [
       <p class="cw-p">
         Evidence-sensitivity is crucial. If a possibility remains active even after it has been ruled
         out, the effect may be simple perseveration rather than semantic maintenance. The design
-        therefore holds the available information fixed, varies the linguistic framing, and measures
-        comprehension instead of assuming it.
+        would hold the available information fixed, vary the linguistic framing, and check the
+        intended interpretation. These are design criteria, not established findings.
       </p>
     </section>
 
@@ -102,9 +79,10 @@ const background = [
     <section class="cw-sec">
       <h2 class="cw-h2">Current status</h2>
       <p class="cw-status">
-        The project is still at the construct stage. A formal semanticist is reviewing the brief that
-        defines the theoretical contrast and the diagnostics. The developmental literature review is
-        under way, and no behavioural or model study has yet produced a result.
+        The semantic analysis and diagnostic materials are in development, with independent
+        judgments pending. The master’s thesis focus is under discussion. A proposed
+        adult experiment has not begun. A preliminary model-scoring pipeline runs, but its checks
+        have not established the target semantic effect.
       </p>
     </section>
 
@@ -113,32 +91,48 @@ const background = [
       <div class="cw-projs">
         {currentProgram.map((p) => (
           <div class="cw-proj cw-proj-current">
-            <a class="cw-proj-title" href={p.href} set:html={p.title} />
-            <p class="cw-proj-desc" set:html={p.desc} />
+            <a class="cw-proj-title" href={p.href}>{p.title}</a>
+            <p class="cw-proj-meta">{p.status}</p>
+            <p class="cw-proj-question">{p.question}</p>
+            <p class="cw-proj-desc">{p.summary} {p.connection}</p>
           </div>
         ))}
       </div>
       <p class="cw-dep">
-        The semantics paper defines the contrast. The thesis asks whether that contrast can be
-        acquired from linguistic input.
+        The formal project develops a linguistic contrast. A human-focused thesis could test how
+        that contrast affects processing and later reasoning. The final thesis direction remains open.
       </p>
     </section>
 
     <section class="cw-sec">
-      <h2 class="cw-h2">Methodological background</h2>
+      <h2 class="cw-h2">Model research</h2>
       <p class="cw-p">
-        Training in cognitive psychology, experimental design, and statistics supports the human
-        questions, while two earlier model projects shaped the controls and evidential standards used
-        in the computational work.
+        These projects provide experience in controlled evaluation, competing explanations, and
+        collaborative experiment design. Each has its own research question and evidential limits.
       </p>
       <div class="cw-projs">
         {background.map((p) => (
           <div class="cw-proj">
             <a class="cw-proj-title" href={p.href}>{p.title}</a>
-            <p class="cw-proj-desc">{p.brought}</p>
+            <p class="cw-proj-meta">{p.status}</p>
+            <p class="cw-proj-question">{p.question}</p>
+            <p class="cw-proj-desc">{p.summary} {p.connection}</p>
           </div>
         ))}
       </div>
+    </section>
+    <section class="cw-sec" id="property-inheritance">
+      <h2 class="cw-h2">Exploratory work: selective property inheritance</h2>
+      <p class="cw-proj-meta">{projects.propertyInheritance.status}</p>
+      <p class="cw-proj-question">{projects.propertyInheritance.question}</p>
+      <p class="cw-p">{projects.propertyInheritance.summary}</p>
+      <p class="cw-p">
+        I am considering how to distinguish stored knowledge about familiar phrases from an ability
+        to combine a noun’s default properties with new information. The initial target is selective
+        cancellation: withdrawing an affected property while preserving unrelated ones. A controlled
+        learning study is a possible later step once the target and measurement are established.
+      </p>
+      <p class="cw-p">{projects.propertyInheritance.connection}</p>
     </section>
   </article>
 </Base>
@@ -211,7 +205,8 @@ const background = [
   .cw-proj-title:hover { color: var(--color-accent); }
   .cw-proj-title-plain { font-size: 1.02rem; font-weight: 500; color: var(--color-text); }
   .cw-proj-title em, .cw-proj-title-plain em { font-style: italic; }
-  .cw-proj-meta { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
+  .cw-proj-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); margin: 0.4rem 0 0.7rem; line-height: 1.6; }
+  .cw-proj-question { font-size: 0.97rem; line-height: 1.65; color: var(--color-text); margin: 0 0 0.5rem; }
   .cw-proj-current .cw-proj-meta { color: var(--color-accent); }
   .cw-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
   .cw-proj-desc em { font-style: italic; }

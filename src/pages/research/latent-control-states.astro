@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
 
 // Project page for the DFKI mechanistic-interpretability collaboration (B4). A
 // bounded pilot: does prompt framing change a causally relevant internal state, or
@@ -18,7 +19,7 @@ import Base from "../../layouts/Base.astro";
   <article class="prose">
     <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
     <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Collaboration · DFKI
+      Collaboration · DFKI · behavioural pilots
     </div>
     <h1>Prompt framing and latent control states in language models</h1>
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
@@ -26,13 +27,12 @@ import Base from "../../layouts/Base.astro";
       internal state — or only the output?
     </p>
     <p class="text-sm text-[var(--color-text-dim)] !mb-8">
-      A bounded mechanistic-interpretability collaboration with DFKI. My role on the project is the
-      experimental design.
+      {projects.latentControl.summary}
     </p>
 
     <aside class="rounded-r-lg px-4 py-3 !my-8 [border-top:1px_solid_var(--color-border)] [border-right:1px_solid_var(--color-border)] [border-bottom:1px_solid_var(--color-border)] [border-left:3px_solid_var(--color-accent)] [background:var(--color-surface)]">
       <p class="!mt-0 !mb-1.5 text-[11px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] font-medium" style="font-family:var(--font-mono)">Place in the research trajectory</p>
-      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">This collaboration added a causal requirement to the same concern. Behavioural differences and decodable internal states are not enough on their own; the question is whether an internal state is causally involved in a controlled behavioural effect. I carry that requirement into my current computational work, but only after the linguistic effect itself has been independently defined.</p>
+      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">{projects.latentControl.connection} The behavioural pilots and mechanistic analysis are distinct stages; the current work does not yet establish a causal internal mechanism.</p>
     </aside>
 
     <p>
@@ -56,9 +56,9 @@ import Base from "../../layouts/Base.astro";
       The evidence chain is deliberately minimal and direct. Rather than a full circuit analysis, it
       targets one question: can the direction in the model’s activations that tracks framing be added or
       removed, and does doing so change the decision? A necessity-and-sufficiency check of that kind is
-      enough to separate “framing changes a causally relevant state” from “framing changes only the
-      answer.” Heavier machinery — exhaustive activation patching, attention-head localization, sparse
-      dictionaries — stays out of scope unless the minimal chain turns out to need it.
+      a candidate test, provided matched control directions and independent materials rule out a
+      nonspecific change in output preference. A steering effect alone does not identify the full
+      decision mechanism. More detailed analysis would depend on the result of that controlled test.
     </p>
 
     <h2>Scope and limits</h2>
@@ -71,8 +71,9 @@ import Base from "../../layouts/Base.astro";
 
     <h2>Status</h2>
     <p class="cw-status">
-      The experiment is designed and the minimal evidence chain is being assembled. Any claim will be
-      held to what the intervention actually licenses, with the limits reported rather than rounded away.
+      Behavioural pilots and matched materials are in place. They motivated controls separating
+      outcome sensitivity from action preferences and framing. Mechanistic analysis is in progress;
+      a causal explanation of the behavioural effect has not yet been established.
     </p>
 
     <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">

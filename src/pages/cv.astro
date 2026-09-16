@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { projects } from "../data/projects";
 
 // CV (A3g §10): conventional and scannable. It verifies the story told elsewhere;
 // it does not retell it. Order: contact → research interests → education →
@@ -30,7 +31,8 @@ import Base from "../layouts/Base.astro";
     <p class="text-sm text-[var(--color-text-muted)] max-w-prose">
       Formal and experimental semantics; psycholinguistics; language processing and learning;
       computational semantics; language-model representation, evaluation, and intervention. Current
-      case study: epistemic modality and discourse alternatives.
+      case study: epistemic modality and discourse alternatives. Exploratory interest: selective
+      property inheritance in noun modification.
     </p>
   </section>
 
@@ -70,12 +72,12 @@ import Base from "../layouts/Base.astro";
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Manuscripts and research projects</h2>
     <div class="space-y-4 text-sm">
       <div class="break-inside-avoid">
-        <p><span class="font-medium">Epistemic modality and the maintenance of alternatives</span> <span class="text-[var(--color-text-dim)]">— manuscript in preparation</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Develops diagnostics for distinguishing content-specific alternative maintenance from mention, generic uncertainty, and perseveration. Construct brief under review by a formal semanticist.</p>
+        <p><span class="font-medium">{projects.threeWays.title}</span> <span class="text-[var(--color-text-dim)]">— analysis in development</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.threeWays.summary} Independent judgments on the diagnostic materials are pending.</p>
       </div>
       <div class="break-inside-avoid">
-        <p><span class="font-medium">M.Sc. thesis: learnability of modal discourse effects</span> <span class="text-[var(--color-text-dim)]">— in design</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Tests whether a small language model can acquire the target distinctions from developmentally realistic linguistic input and which input patterns are necessary.</p>
+        <p><span class="font-medium">M.Sc. thesis: {projects.thesis.title}</span> <span class="text-[var(--color-text-dim)]">— scope under discussion</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.thesis.summary} The primary focus and any computational component remain under discussion; data collection has not begun.</p>
       </div>
       <div class="break-inside-avoid">
         <p><span class="font-medium">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</span> <span class="text-[var(--color-text-dim)]">— first-author; in revision for arXiv</span></p>
@@ -89,8 +91,13 @@ import Base from "../layouts/Base.astro";
     <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research experience</h2>
     <div class="text-sm break-inside-avoid">
       <p><span class="font-medium">Latent Control States</span> <span class="text-[var(--color-text-dim)]">— ongoing collaboration with DFKI</span></p>
-      <p class="text-[var(--color-text-muted)] mt-0.5">Designed a utilitarian minimal-pair experiment varying dilemma, benefit size, and framing to test whether prompt framing changes a causally relevant internal state.</p>
+      <p class="text-[var(--color-text-muted)] mt-0.5">Designed controlled dilemma comparisons separating outcome sensitivity, framing, and action preferences. Behavioural pilots are in place; mechanistic analysis is in progress.</p>
     </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Exploratory work</h2>
+    <p class="text-sm text-[var(--color-text-muted)]"><span class="font-medium">{projects.propertyInheritance.title}.</span> When does a modifier cancel one default property while preserving others? Research framing in progress; no empirical results.</p>
   </section>
 
   <section class="mb-8">

@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { posts } from "../data/writing";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
+import { projects } from "../data/projects";
 
 // Homepage (A3g §5). Section order: header → current work → selected work →
 // research program preview → writing → timeline → playground → contact. Research
@@ -12,7 +13,7 @@ import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 // empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
 // circular emblems (emblem: true) are sized up to match the UTN wordmark.
 
-// Current case study: one linguistic question, approached in two stages.
+// Related theoretical and proposed empirical work; thesis scope remains open.
 const currentProgram = [
   {
     n: "01",
@@ -21,16 +22,18 @@ const currentProgram = [
     href: "/research/three-ways",
     cover: "/images/project-covers/three-ways.png",
     coverAlt: "Three semantic states showing one-sided possibility, bilateral openness, and unresolved knowledge",
-    desc: "A formal-semantics paper comparing <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>. It defines the linguistic contrast and the diagnostics that would count as evidence for it.",
+    desc: `${projects.threeWays.question} ${projects.threeWays.summary}`,
+    meta: projects.threeWays.status,
   },
   {
     n: "02",
-    phase: "Test its learnability",
-    title: "Learning epistemic modality from linguistic input",
-    href: "/research/learnability",
-    cover: "/images/project-covers/learnability.png",
-    coverAlt: "A corpus passing through controlled input interventions, a small learner, and generalization tests",
-    desc: "My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.",
+    phase: "Develop an empirical question",
+    title: projects.thesis.title,
+    href: projects.thesis.href,
+    cover: undefined,
+    coverAlt: undefined,
+    desc: `${projects.thesis.summary} ${projects.thesis.connection}`,
+    meta: projects.thesis.status,
   },
 ];
 
@@ -49,7 +52,7 @@ const researchAreas = [
   {
     label: "Computational systems",
     title: "Language models",
-    desc: "Controlled studies of what models acquire from linguistic input and which learned representations support their behaviour.",
+    desc: "Controlled evaluation of semantic sensitivity, framing, and competing cues, with learning and internal mechanisms as further research questions.",
   },
 ];
 
@@ -57,19 +60,19 @@ const researchAreas = [
 const earlierWork = [
   {
     n: "01",
-    phase: "Correct behaviour is not enough",
+    phase: "Semantic evidence and prototypes",
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
-    desc: "Holding each image pair fixed while varying the prompt language showed me why a correct judgment is not yet evidence of semantic sensitivity: a model may instead rely on a culturally familiar prototype. The project established the first constraint on my current work — separate the target linguistic relation from cheaper cues that can mimic it.",
-    meta: "First-author paper · approximately 12,600 judgments · seven languages",
+    desc: `${projects.protobias.question} ${projects.protobias.summary} ${projects.protobias.connection}`,
+    meta: projects.protobias.status,
   },
   {
     n: "02",
-    phase: "Internal correlation is not enough",
+    phase: "Framing and model decisions",
     title: "Latent Control States",
     href: "/research/latent-control-states",
-    desc: "This collaboration moved the question from behavioural sensitivity to causal relevance. If framing changes an answer, does it also change an internal state responsible for that answer? The project established the second constraint I now carry forward: internal structure matters only relative to a precisely defined behavioural contrast.",
-    meta: "Collaboration · DFKI",
+    desc: `${projects.latentControl.question} ${projects.latentControl.summary}`,
+    meta: projects.latentControl.status,
   },
 ];
 
@@ -132,8 +135,8 @@ const timeline = [
         label: "Current case study",
         questions: [
           "What exactly does an epistemic possibility expression contribute to discourse?",
-          "Can that function be acquired from linguistic input alone?",
-          "Which patterns in the input make it learnable?",
+          "Does the linguistic contrast affect how people subsequently use a possibility?",
+          "What would a model need to learn to reproduce that behaviour?",
         ],
       },
     ],
@@ -205,32 +208,33 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <h2 class="sec-h">Current case study</h2>
       <h3 class="blk-h">Epistemic possibility as a test case</h3>
       <p class="blk-body">
-        Suppose someone says, “The key might be in the drawer.” Does <em>might</em> simply mark
-        uncertainty, or does it keep the drawer possibility available when new evidence arrives? The
-        first case in the broader program develops a semantic account of this difference, then asks
-        how it is processed by people and whether it can be acquired from language.
+        “The key might be in the drawer” and “I don’t know whether the key is in the drawer”
+        express different claims. I am examining what each contributes to a conversation and
+        whether those differences affect how a specific possibility is subsequently accessed and
+        used. The linguistic analysis is in development; the empirical thesis is being scoped.
       </p>
       <div class="program">
         {currentProgram.map((p, i) => (
           <div class={`program-entry${i === 1 ? " annotation-anchor" : ""}`}>
-            <a class="proj-card proj-card-current" href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
+            <a class:list={["proj-card", "proj-card-current", { "proj-card-text": !p.cover }]} href={p.href} aria-label={`Open ${p.title.replace(/<[^>]+>/g, "")}`}>
               <div class="proj-copy">
                 <p class="proj-step"><span class="proj-step-n">{p.n}</span> {p.phase}</p>
                 <span class="proj-title" set:html={p.title} />
                 <p class="proj-desc" set:html={p.desc} />
+                <p class="proj-tag">{p.meta}</p>
               </div>
-              <div class="proj-figure">
+              {p.cover && <div class="proj-figure">
                 <img src={p.cover} alt={p.coverAlt} width="1200" height="720" loading="lazy" decoding="async" />
-              </div>
+              </div>}
             </a>
             {i === 1 && (
               <>
                 <aside class="margin-note margin-note-dependency" aria-label="Dependency annotation">
                   <div class="margin-note-head">
                     <span class="annotation-reg" aria-hidden="true">B</span>
-                    <span class="margin-note-label">Dependency</span>
+                    <span class="margin-note-label">Connection</span>
                   </div>
-                  <p>Once the linguistic distinction is explicit, its learnability becomes testable.</p>
+                  <p>The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.</p>
                 </aside>
               </>
             )}
@@ -242,19 +246,19 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
 
     <!-- ===== why this program ===== -->
     <section class="sec" id="background-program">
-      <h2 class="sec-h">Why this program</h2>
+      <h2 class="sec-h">Model research</h2>
       <div class="annotation-anchor">
         <p class="blk-body">
-          My earlier model projects led me to a broader question: what would show that a model has
-          learned a linguistic distinction, rather than a shortcut that happens to produce the same
-          answer?
+          These projects developed my experience in controlled model evaluation and collaborative
+          experiment design. They also sharpened the question of how to identify the information
+          responsible for a judgment.
         </p>
         <aside class="margin-note margin-note-left margin-note-motive" aria-label="Motivation annotation">
           <div class="margin-note-head">
             <span class="annotation-reg" aria-hidden="true">A</span>
             <span class="margin-note-label">Motive</span>
           </div>
-          <p><strong>A model can arrive at the right answer for the wrong reason.</strong> The longer-term aim is to understand what lets structured meaning, rather than shortcuts, guide behaviour in new contexts.</p>
+          <p>A correct answer alone does not identify which information a model used. Competing explanations need controlled comparisons.</p>
         </aside>
       </div>
       <div class="shaped-list">
@@ -267,25 +271,33 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
           </a>
         ))}
       </div>
-      <p class="argument-bridge">Earlier work supplies evidential constraints; the current program supplies the linguistic target.</p>
+      <p class="argument-bridge">The projects ask different questions while sharing an emphasis on explicit contrasts, competing explanations, and careful measurement.</p>
+    </section>
+
+    <section class="sec" id="exploratory">
+      <h2 class="sec-h">Exploratory work</h2>
+      <h3 class="blk-h">{projects.propertyInheritance.title}</h3>
+      <p class="blk-body">{projects.propertyInheritance.question} {projects.propertyInheritance.summary}</p>
+      <p class="shaped-meta">{projects.propertyInheritance.status}</p>
+      <p class="blk-link"><a href={projects.propertyInheritance.href}>Read about the question</a></p>
     </section>
 
     <!-- ===== research program preview ===== -->
     <section class="sec annotation-anchor program-preview">
       <h2 class="sec-h">Research program</h2>
-      <h3 class="blk-h">One object of study, several forms of evidence</h3>
+      <h3 class="blk-h">Meaning and inference</h3>
       <p class="blk-body">
-        The broader program asks how linguistic meaning is represented, processed, and learned.
-        Formal semantics defines the distinctions; psycholinguistic evidence tests their role in
-        human cognition; controlled model studies ask what can be acquired from linguistic input and
-        which learned representations matter. Each source of evidence answers a different question.
+        The common question is how linguistic meaning guides inference, and which information people
+        and models use. Formal analysis makes the distinctions precise; human experiments can test
+        their consequences for processing; model studies can examine sensitivity, learning, and
+        internal mechanisms. Each project makes a bounded contribution to this wider question.
       </p>
       <aside class="margin-note margin-note-left margin-note-boundary" aria-label="Boundary annotation">
         <div class="margin-note-head">
           <span class="annotation-reg" aria-hidden="true">C</span>
           <span class="margin-note-label">Boundary</span>
         </div>
-        <p>Evidence about what a model learns does not explain how a child acquires language, and vice versa.</p>
+        <p>Human processing and model learning require their own evidence. An effect in one system does not establish the same mechanism in the other.</p>
       </aside>
       <p class="blk-link"><a href="/approach">See the research program</a></p>
     </section>
@@ -537,12 +549,13 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
     border-color: var(--card-hover-border);
   }
   .proj-card-current { border-color: color-mix(in srgb, var(--color-accent) 40%, var(--card-border)); }
+  .proj-card.proj-card-text { grid-template-columns: minmax(0, 1fr); }
   .proj-copy { min-width: 0; }
   .proj-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; }
   .proj-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--color-text); transition: color 0.2s ease; }
   .proj-card:hover .proj-title { color: var(--color-accent); }
   .proj-title :global(em) { font-style: italic; }
-  .proj-tag { flex: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); white-space: nowrap; }
+  .proj-tag { font-family: var(--font-mono); font-size: 10px; line-height: 1.6; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-dim); }
   .proj-card-current .proj-tag { color: var(--color-accent); }
   .proj-card-current .proj-tag::before { content: "\25CF\00a0"; font-size: 0.8em; }
   .proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; }

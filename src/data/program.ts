@@ -1,11 +1,11 @@
 // Single source of truth for the site's positioning copy (see A3g §14). Everything
 // that states what the work IS lives here, so the homepage, Current Work page,
 // Research Program page, CV, and the default meta description cannot drift apart.
-// Project records live in `research.ts`; writing posts in `writing.ts`.
+// Public project records live in `projects.ts`; writing posts in `writing.ts`.
 
 /** The identity claim. Short form. */
 export const identity =
-  "I study how structured meaning is represented, processed, and learned across human and computational systems.";
+  "I study how linguistic meaning guides inference, and how to identify the information used by people and language models.";
 
 // The homepage header lede is two paragraphs: a three-question hook (openingQuestions /
 // openingQuestionsHtml), then an identity statement that lands on the current research
@@ -13,26 +13,26 @@ export const identity =
 
 /** Homepage header, paragraph 1 — the shared question across semantics, cognition, and language models. */
 export const openingQuestions =
-  "How does language organize information for reasoning? How is that structure represented and processed in human cognition? And what can a language model learn from linguistic input alone?";
+  "How does language guide later reasoning? Which information do people and language models use, and how can we tell?";
 
 /** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "My work connects formal semantics with questions from psycholinguistics and computational language research. I study how structured meaning is represented, processed, and learned across human and computational systems.";
+  "My work connects formal semantics with psycholinguistics and language-model research. Completed model work informs the controls I use; current work develops precise linguistic contrasts and considers how to test their effects on human reasoning.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
-  "Does saying that something might be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
+  "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
 
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const openingQuestionsHtml =
-  "How does language organize information for reasoning? How is that structure represented and processed in human cognition? And what can a language model learn from linguistic input alone?";
+  "How does language guide later reasoning? Which information do people and language models use, and how can we tell?";
 
 export const identityLongHtml =
-  "My work connects formal semantics with questions from psycholinguistics and computational language research. I study how structured meaning is represented, processed, and learned across human and computational systems.";
+  "My work connects formal semantics with psycholinguistics and language-model research. Completed model work informs the controls I use; current work develops precise linguistic contrasts and considers how to test their effects on human reasoning.";
 
 export const currentQuestionHtml =
-  "Does saying that something <em>might</em> be true simply lower a speaker's commitment, or does it keep that particular possibility available for later reasoning?";
+  "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
 
 /** How the work proceeds, in one sentence. */
 export const approach =
@@ -44,7 +44,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li studies how structured meaning is represented, processed, and learned across formal semantics, human cognition, and computational language models.";
+  "Xiaochuan Li studies linguistic meaning and inference through formal analysis and controlled model research, with a human behavioural thesis proposal in development.";
 
 export interface Criterion {
   name: string;
