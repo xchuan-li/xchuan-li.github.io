@@ -31,7 +31,7 @@ export const projects = {
     question: "When a description built on a category term fits two candidates, how much of the choice is the description doing, and how much is typicality?",
     summary: "A working paper separating three conditions under which a superordinate description meets two candidates differing in typicality, and stating the limits of what a forced choice between them can report.",
     connection: "The paper gives the linguistic analysis the ProtoBias evaluation needed: it states the distinction that design presupposes but does not itself separate.",
-    status: "Working paper · lingbuzz/010343 · Zenodo DOI",
+    status: "Working paper · lingbuzz/010343",
   },
   latentControl: {
     title: "Latent Control States",
