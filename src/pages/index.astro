@@ -86,13 +86,13 @@ const latest = [
 const researchGroups = [
   {
     label: "Typicality and reference",
-    blurb: "The earlier case. A description built on a category term narrows to one candidate; this work concerns where that narrowing lands.",
+    blurb: "The earlier face: where the narrowing lands.",
     related: true,
     projects: typicalityCase,
   },
   {
     label: "Epistemic modality",
-    blurb: "The current case, and the same kind of event seen from the other side: whether a possibility is held open after <em>might p</em>, and whether later evidence revises it. This is a direction rather than a result — the behavioural study has not begun.",
+    blurb: "The current face: whether the possibility is held open in between, and what revises it. The study has not begun.",
     related: true,
     projects: modalityCase,
   },
@@ -388,17 +388,18 @@ const timeline = [
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
   .research-list { display: grid; gap: 3rem; margin-top: 1.2rem; }
-  .research-block { display: grid; gap: 0.55rem; min-width: 0; }
+  .research-block { display: grid; gap: 0.45rem; min-width: 0; }
+  .research-block + .research-block { border-top: 1px solid var(--color-border); padding-top: 2.4rem; }
   .research-group-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    font-family: var(--font-serif);
+    font-size: 1.62rem;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
     color: var(--color-text);
     margin: 0;
   }
-  .research-group-blurb { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.35rem; max-width: 46rem; }
+  .research-group-blurb { font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.6rem; max-width: 46rem; }
   .research-group-blurb em { font-style: italic; color: var(--color-text); }
   .research-group { display: grid; gap: 1rem; min-width: 0; }
   .research-pair { padding: 0; border: 0; }
@@ -425,7 +426,7 @@ const timeline = [
   .research-note { position: relative; z-index: 2; margin-top: 1.2rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
   .research-note-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.45rem; }
   .research-note-text { font-size: 0.76rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
-  .research-title { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
+  .research-title { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
   .research-entry:hover .research-title, .research-entry:focus-within .research-title { color: var(--color-accent); }
   .research-desc { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
   .research-desc :global(em) { font-style: italic; color: var(--color-text); }
@@ -451,7 +452,7 @@ const timeline = [
     .research-side { display: contents; }
     .research-field { margin: 0; }
     .research-copy { order: 1; }
-    .research-title { font-size: 1.35rem; }
+    .research-title { font-size: 1.12rem; }
     .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
     .research-cover { order: -1; max-width: 360px; }
     .research-note { order: 2; margin-top: 0.5rem; }
