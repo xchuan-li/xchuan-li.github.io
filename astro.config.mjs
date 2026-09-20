@@ -14,8 +14,16 @@ export default defineConfig({
     // The homepage became the plain, single-column academic page (2026-09), so the
     // old plain mirror is merged into "/".
     '/plain': '/',
+    // Writing retired 2026-09-20 (XC): the essays were a pre-publication substitute
+    // for output. Files remain in git history; restore with `git revert`.
+    '/writing': '/',
+    '/writing/logic-of-natural-language': '/',
+    '/writing/from-leibniz': '/',
+    '/writing/meaning-beneath-language': '/',
+    '/writing/inverted-observability': '/',
+    '/writing/reading-notes': '/',
     // The long "Motivation" essay moved into Writing (2026-07-16).
-    '/motivation': '/writing/logic-of-natural-language',
+    '/motivation': '/',
     // /research is "Current Work"; /approach is "Research Program".
     '/research-program': '/approach',
     '/research/causal-direction': '/research',
