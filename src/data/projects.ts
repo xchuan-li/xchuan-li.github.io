@@ -25,6 +25,14 @@ export const projects = {
     connection: "This would connect the formal analysis to human behaviour. The final empirical scope is under discussion, including any computational comparison.",
     status: "Master’s thesis · scope under discussion",
   },
+  typicality: {
+    title: "Typicality in referent choice",
+    href: "/research/typicality-in-referent-choice",
+    question: "When a description built on a category term fits two candidates, how much of the choice is the description doing, and how much is typicality?",
+    summary: "A working paper separating three conditions under which a superordinate description meets two candidates differing in typicality, and stating the limits of what a forced choice between them can report.",
+    connection: "The paper gives the linguistic analysis the ProtoBias evaluation needed: it states the distinction that design presupposes but does not itself separate.",
+    status: "Working paper · lingbuzz/010343 · Zenodo DOI",
+  },
   latentControl: {
     title: "Latent Control States",
     href: "/research/latent-control-states",

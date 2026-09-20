@@ -1,0 +1,114 @@
+---
+import Base from "../../layouts/Base.astro";
+
+// Project page for the typicality working paper (B6). Published as lingbuzz/010343
+// and on Zenodo (concept DOI 10.5281/zenodo.22855036). This is the linguistic
+// analysis that the ProtoBias audit grew into: it states the semantic distinction
+// the benchmark design presupposes but does not itself separate. Honest status:
+// it reports no new data, and says so. Do not describe it as an experiment, and do
+// not claim the three conditions have been tested — the paper argues they must be
+// held apart before a typicality effect can be interpreted, not that they have been.
+const doi = "https://doi.org/10.5281/zenodo.22855036";
+const lingbuzz = "https://lingbuzz.net/lingbuzz/010343";
+---
+
+<Base
+  title="Typicality in referent choice · Xiaochuan Li"
+  description="A description built on a superordinate category term does not pick out its members evenly. Three conditions have to be held apart before a typicality effect on referent choice says anything determinate. Working paper; no new results."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
+      Working paper · published
+    </div>
+    <h1>Typicality in referent choice</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
+      When a description built on a category term fits two candidates, how much of the choice is the
+      description doing, and how much is typicality?
+    </p>
+    <p class="text-sm text-[var(--color-text-dim)] !mb-8">
+      <a href={lingbuzz}>lingbuzz/010343</a> · <a href={doi}>doi:10.5281/zenodo.22855036</a> ·
+      CC&nbsp;BY&nbsp;4.0. The paper reports no new data; it states a distinction and what follows from
+      it for measurement.
+    </p>
+
+    <p>
+      Say <em>an animal perched on a branch</em>. The phrase is true of a great many things, but hearers
+      do not treat its extension as flat: a bird comes to mind before a stick insect, a dog before an
+      octopus. The question this paper takes up is not whether that readiness exists, but how much work
+      it does in fixing reference, and what in the rest of the description displaces it.
+    </p>
+
+    <h2>Three conditions, not one</h2>
+    <p>
+      The question is usually posed loosely, as “does typicality affect which referent is chosen.” But a
+      description built on a category term can meet two candidates in at least three different semantic
+      situations. Hold the pair fixed — a monkey on a branch above a red leaf pile, a stick insect on a
+      branch above a green one — and vary only the description:
+    </p>
+    <ul>
+      <li><strong>Neither candidate is excluded.</strong> <em>An animal perched on a branch</em> is satisfied by both. Only here is typicality doing identifying work without a competing constraint.</li>
+      <li><strong>The description picks out the atypical one.</strong> <em>…above a green leaf pile</em> is satisfied by the stick insect alone. Choosing the monkey now fails a description that one candidate alone meets.</li>
+      <li><strong>The description picks out the typical one.</strong> <em>…above a red leaf pile</em> is satisfied by the monkey alone. Constraint and typicality agree, and the condition serves as a control.</li>
+    </ul>
+    <p>
+      The same choice response means something different in each. Collapsing the first two is easy, since
+      the category term alone is true of both candidates in all three, and it turns “typicality influences
+      reference” into a claim that cannot be assigned to a condition.
+    </p>
+
+    <h2>What a choice can and cannot report</h2>
+    <p>
+      Forced-choice referent selection is the right primary instrument here: it is the only readout that
+      directly reports which candidate a description is taken to pick out. But it has limits that have to
+      be stated rather than assumed away.
+    </p>
+    <ul>
+      <li>A rejected candidate may have been rejected as false or as a worse fit, and the task cannot tell those apart. Judgment data stay necessary alongside it.</li>
+      <li>There is an endpoint but no course: the measure says where interpretation landed, not how it got there.</li>
+      <li>In picture-based versions the restricting detail has to be recovered from the image before it can override anything. A wrong answer is then ambiguous between “the description did not override typicality” and “the two pictures were not told apart on that dimension.” The paper proposes a per-item discriminability control, and is explicit that it is necessary but not sufficient.</li>
+    </ul>
+
+    <h2>Where it comes from</h2>
+    <p>
+      The <a href="/research/cross-lingual-protobias">cross-lingual ProtoBias</a> audit ran a picture-based
+      design of exactly this shape at scale, and found a measurable effect. What it did not establish is how
+      its items distribute across the three conditions — that would require checking, item by item, whether
+      the full description holds of both candidates, not merely whether one dimension is mentioned. This
+      paper is the linguistic analysis that the audit needed: it states the distinction the design
+      presupposes, and sets the conditions under which a comparison would answer something.
+    </p>
+    <p>
+      It also positions the work against its nearest neighbour. Kobrock, Uhlemann and Gotzner (2024) study
+      comprehension of superordinate reference directly, and propose relaxing their contexts so that a
+      level of specificity is sufficient but not necessary for identification. That is a different
+      manipulation: there, reference stays unambiguous and what varies is how specific the speaker is;
+      here, the full description is true of two competing candidates and the listener must still choose.
+      The two can be combined, but neither subsumes the other.
+    </p>
+
+    <p>
+      Read against the <a href="/research">current work on epistemic modality</a>, the two are the same
+      event approached from different points. A description narrowing to one candidate and a possibility
+      being revised when evidence arrives are both cases of a linguistic form settling what stays
+      available. This paper is about where the narrowing lands; the modality work asks what happens in
+      between.
+    </p>
+
+    <h2>Status</h2>
+    <p>
+      Published as a working paper, not peer-reviewed. It reports no new results, and the design
+      requirements it states are written for future studies rather than as faults in existing ones. The
+      literature search behind its positioning section was a title-and-abstract query, not an exhaustive
+      review, and the paper says so.
+    </p>
+
+    <p class="!mt-8 text-sm">
+      <a href={lingbuzz} class="!text-[var(--color-accent)]">Read on LingBuzz ↗</a>
+      <span class="text-[var(--color-text-dim)]"> · </span>
+      <a href={doi} class="!text-[var(--color-accent)]">Zenodo (DOI, PDF) ↗</a>
+    </p>
+  </article>
+</Base>

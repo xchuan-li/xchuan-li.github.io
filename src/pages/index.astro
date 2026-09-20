@@ -51,6 +51,21 @@ const relatedResearch = [
   },
 ];
 
+const linguisticOutput = [
+  {
+    title: projects.typicality.title,
+    field: "Semantics and pragmatics",
+    desc: "A description built on a category term can fit more than one candidate. The paper separates three conditions under which that happens, so that the same choice is not read the same way in all three, and states what a forced choice can and cannot report.",
+    status: projects.typicality.status,
+    note: {
+      label: "Relation",
+      side: "left",
+      text: "The narrowing from a category term to one candidate is the earlier face of the question the modality work asks about possibilities.",
+    },
+    links: [{ label: "Paper and framing", href: projects.typicality.href }],
+  },
+];
+
 const modelResearch = [
   {
     title: projects.protobias.title,
@@ -79,6 +94,7 @@ const modelResearch = [
 
 const researchGroups = [
   { related: true, projects: relatedResearch },
+  { related: false, projects: linguisticOutput },
   { related: false, projects: modelResearch },
 ];
 
