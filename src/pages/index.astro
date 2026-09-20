@@ -27,49 +27,22 @@ const empiricalApproaches = [
   },
 ];
 
-// Two distinct but related projects share a quiet outer frame. The completed
-// evaluation and ongoing methods training remain separate entries below it.
-const relatedResearch = [
-  {
-    title: projects.threeWays.title,
-    field: "Formal semantics",
-    desc: "A formal semantic and pragmatic comparison of <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, examining the commitments they create and the responses they license.",
-    status: projects.threeWays.status,
-    links: [{ label: "Linguistic analysis", href: projects.threeWays.href }],
-  },
-  {
-    title: projects.thesis.title,
-    field: "Psycholinguistics",
-    desc: projects.thesis.summary,
-    status: projects.thesis.status,
-    note: {
-      label: "Connection",
-      side: "right",
-      text: "The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.",
-    },
-    links: [{ label: "Master’s thesis", href: projects.thesis.href }],
-  },
-];
-
-const linguisticOutput = [
+// Selected research is organised on two axes: which case a project belongs to,
+// and which kind of evidence it contributes. The evidence labels reuse the
+// empirical approaches above, so the same kinds recur across both cases and the
+// gaps stay visible — the typicality case has no human study, and no public model
+// work belongs to the modality case yet.
+const typicalityCase = [
   {
     title: projects.typicality.title,
-    field: "Semantics and pragmatics",
-    desc: "A description built on a category term can fit more than one candidate. The paper separates three conditions under which that happens, so that the same choice is not read the same way in all three, and states what a forced choice can and cannot report.",
+    field: "Linguistic analysis",
+    desc: "A description built on a category term can fit more than one candidate. The paper separates three conditions under which that happens, so the same choice is not read the same way in all three, and states what a forced choice can and cannot report.",
     status: projects.typicality.status,
-    note: {
-      label: "Relation",
-      side: "left",
-      text: "The narrowing from a category term to one candidate is the earlier face of the question the modality work asks about possibilities.",
-    },
     links: [{ label: "Paper and framing", href: projects.typicality.href }],
   },
-];
-
-const modelResearch = [
   {
     title: projects.protobias.title,
-    field: "Model evaluation",
+    field: "Computational studies",
     desc: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages? I test this with fixed image pairs across seven languages and two VLM systems.",
     status: "Completed study · First-author manuscript in revision",
     cover: {
@@ -83,6 +56,31 @@ const modelResearch = [
     },
     links: [{ label: "Study and results", href: projects.protobias.href }],
   },
+];
+
+const modalityCase = [
+  {
+    title: projects.threeWays.title,
+    field: "Linguistic analysis",
+    desc: "A formal semantic and pragmatic comparison of <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, examining the commitments they create and the responses they license.",
+    status: projects.threeWays.status,
+    links: [{ label: "Paper and diagnostics", href: projects.threeWays.href }],
+  },
+  {
+    title: projects.thesis.title,
+    field: "Human studies",
+    desc: projects.thesis.summary,
+    status: projects.thesis.status,
+    note: {
+      label: "Connection",
+      side: "right",
+      text: "The formal analysis identifies a contrast. A behavioural study could test what that contrast changes for a listener.",
+    },
+    links: [{ label: "Master’s thesis", href: projects.thesis.href }],
+  },
+];
+
+const methodsWork = [
   {
     title: projects.latentControl.title,
     field: "Mechanistic interpretability",
@@ -93,9 +91,23 @@ const modelResearch = [
 ];
 
 const researchGroups = [
-  { related: true, projects: relatedResearch },
-  { related: false, projects: linguisticOutput },
-  { related: false, projects: modelResearch },
+  {
+    label: "Typicality and reference",
+    blurb: "The earlier case. A description built on a category term narrows to one candidate; this work concerns where that narrowing lands.",
+    related: true,
+    projects: typicalityCase,
+  },
+  {
+    label: "Epistemic modality",
+    blurb: "The current case, and the same kind of event seen from the other side: whether a possibility is held open after <em>might p</em>, and whether later evidence revises it. This is a direction rather than a result — the behavioural study has not begun.",
+    related: true,
+    projects: modalityCase,
+  },
+  {
+    label: "Methods",
+    blurb: "Training in explaining model decisions, carried into both cases.",
+    projects: methodsWork,
+  },
 ];
 
 // Background: the questions belong to each period as they were then, so they change
@@ -235,7 +247,10 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
       <h2 class="sec-h" id="research-heading">Selected research</h2>
       <div class="research-list">
         {researchGroups.map((group) => (
-          <div class:list={["research-group", { "research-pair": group.related }]} role={group.related ? "group" : undefined} aria-label={group.related ? "Related projects on epistemic meaning" : undefined}>
+          <div class="research-block">
+            <p class="research-group-label">{group.label}</p>
+            <p class="research-group-blurb" set:html={group.blurb} />
+            <div class:list={["research-group", { "research-pair": group.related }]} role={group.related ? "group" : undefined} aria-label={group.label}>
         {group.projects.map((project) => (
           <article class="research-entry">
             <div class="research-side">
@@ -266,6 +281,7 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
             </div>
           </article>
         ))}
+            </div>
           </div>
         ))}
       </div>
@@ -475,7 +491,19 @@ const featured = posts.find((p) => p.featured) ?? posts[0];
   /* ===== research cards — original lift, shadow, title and cover feedback ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
-  .research-list { display: grid; gap: 1rem; margin-top: 1.2rem; }
+  .research-list { display: grid; gap: 2.4rem; margin-top: 1.2rem; }
+  .research-block { display: grid; gap: 0.55rem; min-width: 0; }
+  .research-group-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .research-group-blurb { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.35rem; max-width: 46rem; }
+  .research-group-blurb em { font-style: italic; color: var(--color-text); }
   .research-group { display: grid; gap: 1rem; min-width: 0; }
   .research-pair { padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 16px; }
   .research-entry {
