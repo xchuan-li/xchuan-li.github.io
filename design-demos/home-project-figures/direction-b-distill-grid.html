@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Direction B — Distill Figure Grid</title>
+  <!--
+    Assumption: visitors should be able to scan all four research questions at once.
+    Reasoning: this direction transfers Distill's inline-explainer principle into
+    the homepage: the figure is the entry point, with the prose acting as caption.
+    Placeholder policy: none; all miniature figures encode actual project design.
+  -->
+  <style>
+    :root{--bg:#f8f9fa;--paper:#fff;--ink:#1b1e24;--muted:#5f6672;--dim:#98a0ac;--line:#dfe3e7;--accent:#3d5a73;--teal:#26866c;--coral:#c66747;--amber:#b07a2b;--violet:#667098}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    nav{height:60px;border-bottom:1px solid #e6e9ec;background:rgba(255,255,255,.76);display:flex;align-items:center}
+    .nav-inner{width:1310px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 8px}
+    .brand{font-weight:600;font-size:17px}.links{display:flex;gap:38px;font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;color:var(--muted)}
+    .links span:first-child{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:8px}
+    main{width:1040px;margin:0 auto;padding:34px 0 44px}
+    header{display:grid;grid-template-columns:1fr 460px;gap:50px;align-items:end;margin-bottom:25px}
+    .eyebrow{font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}
+    h1{font-family:Georgia,'Times New Roman',serif;font-size:34px;line-height:1.08;font-weight:500;letter-spacing:-.025em;margin:0}
+    .intro{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.55;color:var(--muted);margin:0;font-style:italic}
+    .grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .project{min-height:372px;padding:18px 20px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:inherit;background:rgba(255,255,255,.33);transition:background .2s ease}
+    .project:hover{background:var(--paper)}
+    .project-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+    .fig-no{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+    .status{font:500 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+    .visual{height:195px;background:var(--paper);border:1px solid #e5e8eb;display:flex;align-items:center;justify-content:center;padding:15px;margin-bottom:14px;position:relative;overflow:hidden}
+    .visual:after{content:"";position:absolute;inset:8px;border:1px solid rgba(23,33,48,.035);pointer-events:none}
+    svg{width:100%;height:165px;display:block}
+    h2{font-size:18px;line-height:1.25;letter-spacing:-.015em;font-weight:600;margin:0 0 7px}h2 em{font-family:Georgia,serif;font-weight:500}
+    .caption{font:14px/1.5 Georgia,'Times New Roman',serif;color:var(--muted);margin:0;max-width:56ch}
+    .caption strong{color:var(--ink);font-weight:500}
+    .s-text{font:12px Inter,ui-sans-serif,system-ui,sans-serif;fill:var(--ink)}
+    .s-small{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;fill:var(--muted)}
+    .s-tiny{font:8.5px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;fill:var(--dim)}
+    .box{fill:var(--bg);stroke:#d9dee3;stroke-width:1}.paper{fill:#fff;stroke:#d9dee3;stroke-width:1}
+    .line{fill:none;stroke:#aab1b9;stroke-width:1.2}.dash{fill:none;stroke:#aab1b9;stroke-width:1.1;stroke-dasharray:4 4}
+    .accent{fill:none;stroke:var(--accent);stroke-width:1.6}.teal{fill:none;stroke:var(--teal);stroke-width:1.6}.coral{fill:none;stroke:var(--coral);stroke-width:1.6}.amber{fill:none;stroke:var(--amber);stroke-width:1.6}
+    .fill-a{fill:#e8eef2;stroke:var(--accent)}.fill-t{fill:#e7f3ef;stroke:var(--teal)}.fill-c{fill:#faeee9;stroke:var(--coral)}.fill-y{fill:#f7f0e3;stroke:var(--amber)}
+    @media(max-width:850px){.nav-inner,main{width:auto;margin-left:22px;margin-right:22px}.links{display:none}header{grid-template-columns:1fr;gap:12px}.grid{grid-template-columns:1fr}.project{min-height:0}}
+  </style>
+</head>
+<body>
+  <nav><div class="nav-inner"><div class="brand">Xiaochuan Li</div><div class="links"><span>CURRENT WORK</span><span>RESEARCH PROGRAM</span><span>WRITING</span><span>CV</span><span>CONTACT</span></div></div></nav>
+  <main>
+    <header><div><p class="eyebrow">Selected work · four visual abstracts</p><h1>Read the question<br>before the résumé line.</h1></div><p class="intro">Each project begins with a visual abstract: what is held fixed, what changes, and what the evidence would need to distinguish.</p></header>
+    <section class="grid">
+      <a class="project" href="#">
+        <div class="project-top"><span class="fig-no">Figure 01 · semantic states</span><span class="status">Construct under review</span></div>
+        <div class="visual">
+          <svg viewBox="0 0 450 165" role="img" aria-label="Three semantic states for p">
+            <text class="s-tiny" x="225" y="11" text-anchor="middle">ONE QUESTION · THREE DISCOURSE UPDATES</text>
+            <path class="dash" d="M225 22 V40 M225 40 H74 M225 40 H225 M225 40 H376"/>
+            <circle class="fill-a" cx="74" cy="78" r="31"/><text class="s-text" x="74" y="75" text-anchor="middle">p</text><text class="s-tiny" x="74" y="91" text-anchor="middle">LIVE</text>
+            <circle class="fill-a" cx="205" cy="78" r="26"/><text class="s-text" x="205" y="82" text-anchor="middle">p</text><circle class="fill-a" cx="270" cy="78" r="26"/><text class="s-text" x="270" y="82" text-anchor="middle">¬p</text><line class="accent" x1="232" y1="78" x2="243" y2="78"/>
+            <rect class="paper" x="331" y="51" width="90" height="54"/><text class="s-text" x="376" y="73" text-anchor="middle">?</text><text class="s-small" x="376" y="90" text-anchor="middle">unsettled</text>
+            <text class="s-small" x="74" y="138" text-anchor="middle">might p</text><text class="s-small" x="237" y="138" text-anchor="middle">might p or not</text><text class="s-small" x="376" y="138" text-anchor="middle">don’t know whether p</text>
+          </svg>
+        </div>
+        <h2>Three Ways of Leaving <em>p</em> Unsettled</h2><p class="caption"><strong>Question.</strong> Do one-sided possibility, explicit two-sided openness, and issue non-resolution license the same replies?</p>
+      </a>
+
+      <a class="project" href="#">
+        <div class="project-top"><span class="fig-no">Figure 02 · candidate design</span><span class="status">Thesis in design</span></div>
+        <div class="visual">
+          <svg viewBox="0 0 450 165" role="img" aria-label="Evidence diet intervention generalization loop">
+            <text class="s-tiny" x="225" y="11" text-anchor="middle">FROM DISTRIBUTION TO GENERALIZATION</text>
+            <rect class="box" x="22" y="48" width="108" height="60"/><text class="s-small" x="76" y="69" text-anchor="middle">AUDIT</text><text class="s-text" x="76" y="88" text-anchor="middle">linguistic cues</text>
+            <rect class="box" x="171" y="38" width="110" height="80"/><text class="s-small" x="226" y="61" text-anchor="middle">INTERVENE</text><text class="s-text" x="226" y="80" text-anchor="middle">input diet</text><text class="s-tiny" x="226" y="99" text-anchor="middle">− CUE · SHUFFLE · + CUE</text>
+            <rect class="box" x="322" y="48" width="108" height="60"/><text class="s-small" x="376" y="69" text-anchor="middle">TEST</text><text class="s-text" x="376" y="88" text-anchor="middle">new contexts</text>
+            <path class="dash" d="M131 78 H169 M282 78 H320"/><path class="line" d="M163 73 L169 78 L163 83 M314 73 L320 78 L314 83"/>
+            <path class="accent" d="M376 119 C376 149 76 149 76 119"/><path class="accent" d="M70 125 L76 119 L82 125"/>
+            <text class="s-tiny" x="226" y="160" text-anchor="middle">FAILURE REFINES THE EVIDENCE AUDIT</text>
+          </svg>
+        </div>
+        <h2>Master’s thesis: learning these distinctions</h2><p class="caption"><strong>Question.</strong> Which patterns in developmentally realistic input are necessary for a controlled learner to acquire the distinction?</p>
+      </a>
+
+      <a class="project" href="#">
+        <div class="project-top"><span class="fig-no">Figure 03 · controlled comparison</span><span class="status">In revision for arXiv</span></div>
+        <div class="visual">
+          <svg viewBox="0 0 450 165" role="img" aria-label="Fixed image pair with seven language prompts and two judges">
+            <text class="s-tiny" x="225" y="11" text-anchor="middle">VISUAL CONTENT HELD FIXED · LANGUAGE VARIED</text>
+            <rect class="fill-t" x="18" y="39" width="82" height="66"/><text class="s-small" x="59" y="66" text-anchor="middle">semantic</text><text class="s-small" x="59" y="83" text-anchor="middle">atypical</text>
+            <rect class="fill-c" x="106" y="39" width="82" height="66"/><text class="s-small" x="147" y="66" text-anchor="middle">prototype</text><text class="s-small" x="147" y="83" text-anchor="middle">incorrect</text>
+            <path class="line" d="M190 72 H227"/><path class="line" d="M221 67 L227 72 L221 77"/>
+            <g><circle class="paper" cx="254" cy="44" r="12"/><circle class="paper" cx="285" cy="44" r="12"/><circle class="paper" cx="316" cy="44" r="12"/><circle class="paper" cx="347" cy="44" r="12"/><circle class="paper" cx="269" cy="76" r="12"/><circle class="paper" cx="300" cy="76" r="12"/><circle class="paper" cx="331" cy="76" r="12"/><text class="s-tiny" x="300" y="108" text-anchor="middle">7 PROMPT LANGUAGES</text></g>
+            <path class="line" d="M359 62 H384"/><path class="line" d="M378 57 L384 62 L378 67"/>
+            <circle class="fill-a" cx="408" cy="46" r="17"/><circle class="fill-y" cx="408" cy="90" r="17"/><text class="s-tiny" x="408" y="137" text-anchor="middle">2 JUDGES</text>
+            <line class="teal" x1="228" y1="131" x2="306" y2="131"/><line class="coral" x1="306" y1="131" x2="359" y2="131"/><text class="s-tiny" x="293" y="151" text-anchor="middle">ATTRIBUTE PATTERN × LANGUAGE LEVEL</text>
+          </svg>
+        </div>
+        <h2>Cross-lingual ProtoBias</h2><p class="caption"><strong>Question.</strong> When visual evidence is unchanged, does a judge follow semantic fit or fall back on a culturally familiar prototype?</p>
+      </a>
+
+      <a class="project" href="#">
+        <div class="project-top"><span class="fig-no">Figure 04 · causal discriminator</span><span class="status">Collaboration · DFKI</span></div>
+        <div class="visual">
+          <svg viewBox="0 0 450 165" role="img" aria-label="Causal and output-only paths from framing to answer">
+            <text class="s-tiny" x="92" y="11" text-anchor="middle">SAME SCENARIO · TWO PATHS</text>
+            <rect class="paper" x="20" y="57" width="88" height="42"/><text class="s-text" x="64" y="82" text-anchor="middle">framing</text>
+            <rect class="fill-y" x="181" y="29" width="108" height="46"/><text class="s-text" x="235" y="57" text-anchor="middle">latent state</text>
+            <rect class="paper" x="350" y="57" width="80" height="42"/><text class="s-text" x="390" y="82" text-anchor="middle">answer</text>
+            <path class="amber" d="M109 67 C140 67 144 52 180 52 M290 52 C325 52 326 67 349 67"/>
+            <path class="dash" d="M109 91 C185 137 288 137 349 91"/><text class="s-tiny" x="229" y="143" text-anchor="middle">OUTPUT-ONLY PATH</text>
+            <path class="coral" d="M235 2 V28"/><path class="coral" d="M230 21 L235 28 L240 21"/><text class="s-tiny" x="278" y="15">INTERVENE HERE</text>
+            <text class="s-tiny" x="144" y="54">?</text><text class="s-tiny" x="325" y="54">?</text>
+          </svg>
+        </div>
+        <h2>Latent Control States</h2><p class="caption"><strong>Question.</strong> Does framing change a state that causally drives the decision, or only the surface form of the output?</p>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Direction A — Big Type Research Index</title>
+  <!--
+    Assumption: the homepage remains an academic profile, not a portfolio.
+    Reasoning: the roulette selected Web style #6, Bold Big-Type Editorial. The
+    large project numerals become the visual rhythm while diagrams carry meaning.
+    Placeholder policy: none; every diagram represents real project structure.
+  -->
+  <style>
+    :root {
+      --bg:#f8f9fa; --paper:#fff; --ink:#1b1e24; --muted:#5f6672;
+      --dim:#98a0ac; --line:rgba(23,33,48,.14); --accent:#3d5a73;
+      --teal:#1d7f65; --coral:#bf5838; --amber:#a36a18;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    body{min-height:100vh}
+    nav{height:60px;border-bottom:1px solid rgba(23,33,48,.08);display:flex;align-items:center;background:rgba(255,255,255,.72)}
+    .nav-inner{width:1310px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 8px}
+    .brand{font-size:17px;font-weight:600;letter-spacing:-.01em}
+    .links{display:flex;gap:38px;font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;color:var(--muted)}
+    .links span:first-child{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:8px}
+    main{width:1050px;margin:0 auto;padding:38px 0 40px}
+    .eyebrow{margin:0 0 9px;font:500 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.23em;text-transform:uppercase;color:var(--dim)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}
+    h1{font-size:38px;line-height:1.05;letter-spacing:-.035em;margin:0;font-weight:620}
+    .section-note{width:330px;margin:0 0 2px;font:400 13px/1.45 Georgia,serif;font-style:italic;color:var(--muted);text-align:right}
+    .work{position:relative;display:grid;grid-template-columns:108px 350px 1fr;gap:26px;min-height:196px;padding:22px 0 20px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+    .work:last-child{border-bottom:1px solid var(--line)}
+    .num{font-size:94px;line-height:.8;letter-spacing:-.08em;font-weight:650;color:#e7eaed;font-variant-numeric:tabular-nums}
+    .meta{font:500 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:9px}
+    h2{font-size:21px;line-height:1.2;letter-spacing:-.018em;margin:0 0 9px;font-weight:610;text-wrap:balance}
+    h2 em{font-family:Georgia,serif;font-weight:500}
+    .desc{font-size:13px;line-height:1.55;color:var(--muted);margin:0;max-width:39ch}
+    .open{position:absolute;left:134px;bottom:22px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent);letter-spacing:.06em}
+    .figure{height:150px;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--line);padding-left:26px}
+    svg{display:block;width:100%;height:142px;overflow:visible}
+    .s-text{font:12px Inter,ui-sans-serif,system-ui,sans-serif;fill:var(--ink)}
+    .s-small{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;fill:var(--muted)}
+    .s-tiny{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.07em;fill:var(--dim);text-transform:uppercase}
+    .s-box{fill:var(--paper);stroke:var(--line);stroke-width:1}
+    .s-open{fill:var(--bg);stroke:var(--accent);stroke-width:1.4}
+    .s-filled{fill:var(--accent)}
+    .s-line{fill:none;stroke:var(--dim);stroke-width:1.15}
+    .s-dash{fill:none;stroke:var(--dim);stroke-width:1.15;stroke-dasharray:4 4}
+    .s-accent{fill:none;stroke:var(--accent);stroke-width:1.5}
+    .s-teal{fill:none;stroke:var(--teal);stroke-width:1.5}
+    .s-coral{fill:none;stroke:var(--coral);stroke-width:1.5}
+    .s-amber{fill:none;stroke:var(--amber);stroke-width:1.5}
+    .s-fill-teal{fill:rgba(29,127,101,.10);stroke:var(--teal)}
+    .s-fill-coral{fill:rgba(191,88,56,.09);stroke:var(--coral)}
+    .s-fill-amber{fill:rgba(163,106,24,.09);stroke:var(--amber)}
+    .status{fill:var(--bg);stroke:var(--line);stroke-dasharray:3 3}
+    @media(max-width:900px){
+      .links{display:none}.nav-inner,main{width:auto;margin:0 24px}.section-head{align-items:start;gap:18px}.section-note{display:none}
+      .work{grid-template-columns:58px 1fr;gap:16px}.num{font-size:52px}.figure{grid-column:1/-1;border-left:0;padding:8px 0 0;height:160px}.open{display:none}
+    }
+  </style>
+</head>
+<body>
+  <nav><div class="nav-inner"><div class="brand">Xiaochuan Li</div><div class="links"><span>CURRENT WORK</span><span>RESEARCH PROGRAM</span><span>WRITING</span><span>CV</span><span>CONTACT</span></div></div></nav>
+  <main>
+    <div class="section-head">
+      <div><p class="eyebrow">Selected work</p><h1>Four questions,<br>made visible.</h1></div>
+      <p class="section-note">Each figure is a compact model of the research question—not a decorative project logo.</p>
+    </div>
+
+    <a class="work" href="#">
+      <div class="num">01</div>
+      <div><div class="meta">Semantics paper · construct under review</div><h2>Three Ways of Leaving <em>p</em> Unsettled</h2><p class="desc">The same unresolved question can be left open in three different ways, with different discourse work.</p></div>
+      <div class="figure">
+        <svg viewBox="0 0 520 150" role="img" aria-label="Three ways of leaving p unsettled">
+          <text class="s-tiny" x="8" y="13">ONE-SIDED</text><text class="s-tiny" x="181" y="13">TWO-SIDED</text><text class="s-tiny" x="354" y="13">NON-RESOLUTION</text>
+          <circle class="s-open" cx="55" cy="67" r="26"/><text class="s-text" x="55" y="72" text-anchor="middle">p</text>
+          <path class="s-dash" d="M82 67 H132"/><circle class="status" cx="143" cy="67" r="8"/><text class="s-small" x="55" y="112" text-anchor="middle">might p</text>
+          <circle class="s-open" cx="218" cy="67" r="25"/><text class="s-text" x="218" y="72" text-anchor="middle">p</text><circle class="s-open" cx="293" cy="67" r="25"/><text class="s-text" x="293" y="72" text-anchor="middle">¬p</text><path class="s-accent" d="M244 67 H267"/>
+          <text class="s-small" x="255" y="112" text-anchor="middle">might p ∨ might ¬p</text>
+          <rect class="s-box" x="376" y="39" width="116" height="56" rx="2"/><text class="s-small" x="434" y="62" text-anchor="middle">speaker cannot</text><text class="s-text" x="434" y="80" text-anchor="middle">settle ?p</text>
+          <text class="s-small" x="434" y="112" text-anchor="middle">don’t know whether p</text>
+          <path class="s-dash" d="M12 132 H507"/><text class="s-tiny" x="260" y="146" text-anchor="middle">WORKING CONSTRUCT · NOT RESULTS</text>
+        </svg>
+      </div>
+      <span class="open">OPEN PROJECT →</span>
+    </a>
+
+    <a class="work" href="#">
+      <div class="num">02</div>
+      <div><div class="meta">Master’s thesis · in design</div><h2>Learning these distinctions</h2><p class="desc">Which patterns in linguistic input are necessary for the distinction to become learnable?</p></div>
+      <div class="figure">
+        <svg viewBox="0 0 520 150" role="img" aria-label="Candidate study pipeline from evidence audit to input intervention to generalization">
+          <text class="s-tiny" x="10" y="18">CANDIDATE STUDY</text>
+          <rect class="status" x="10" y="38" width="126" height="62" rx="3"/><text class="s-small" x="73" y="61" text-anchor="middle">01 · AUDIT</text><text class="s-text" x="73" y="81" text-anchor="middle">corpus cues</text>
+          <path class="s-dash" d="M137 69 H181"/><path class="s-line" d="M176 64 L182 69 L176 74"/>
+          <rect class="status" x="183" y="30" width="145" height="78" rx="3"/><text class="s-small" x="255" y="53" text-anchor="middle">02 · INTERVENE</text><text class="s-text" x="255" y="74" text-anchor="middle">matched input diets</text><text class="s-tiny" x="255" y="93" text-anchor="middle">REMOVE · SHUFFLE · ENRICH</text>
+          <path class="s-dash" d="M329 69 H373"/><path class="s-line" d="M368 64 L374 69 L368 74"/>
+          <rect class="status" x="375" y="38" width="133" height="62" rx="3"/><text class="s-small" x="441" y="61" text-anchor="middle">03 · TEST</text><text class="s-text" x="441" y="81" text-anchor="middle">unseen contexts</text>
+          <path class="s-accent" d="M73 119 H441"/><circle class="s-filled" cx="73" cy="119" r="3"/><circle class="s-filled" cx="255" cy="119" r="3"/><circle class="s-filled" cx="441" cy="119" r="3"/>
+          <text class="s-tiny" x="257" y="139" text-anchor="middle">CONTROL FREQUENCY · TOPIC · LENGTH · LOCAL CO-OCCURRENCE</text>
+        </svg>
+      </div>
+      <span class="open">OPEN PROJECT →</span>
+    </a>
+
+    <a class="work" href="#">
+      <div class="num">03</div>
+      <div><div class="meta">First-author paper · in revision for arXiv</div><h2>Cross-lingual ProtoBias</h2><p class="desc">The images stay fixed while language varies: does the judge follow meaning or a familiar prototype?</p></div>
+      <div class="figure">
+        <svg viewBox="0 0 520 150" role="img" aria-label="Fixed image pair evaluated in seven languages by two model families">
+          <rect class="s-fill-teal" x="8" y="33" width="82" height="62" rx="3"/><text class="s-small" x="49" y="59" text-anchor="middle">semantic</text><text class="s-small" x="49" y="76" text-anchor="middle">atypical</text>
+          <rect class="s-fill-coral" x="99" y="33" width="82" height="62" rx="3"/><text class="s-small" x="140" y="59" text-anchor="middle">prototype</text><text class="s-small" x="140" y="76" text-anchor="middle">incorrect</text>
+          <text class="s-tiny" x="94" y="116" text-anchor="middle">FIXED IMAGE PAIR</text>
+          <path class="s-line" d="M184 64 H226"/><path class="s-line" d="M221 59 L227 64 L221 69"/>
+          <g><rect class="s-box" x="229" y="25" width="106" height="79" rx="3"/><text class="s-small" x="282" y="48" text-anchor="middle">7 prompts</text><text class="s-text" x="282" y="69" text-anchor="middle">EN · 中文 · AR</text><text class="s-small" x="282" y="87" text-anchor="middle">HI · RU · BN · EL</text></g>
+          <path class="s-line" d="M337 64 H378"/><path class="s-line" d="M373 59 L379 64 L373 69"/>
+          <rect class="s-box" x="381" y="25" width="127" height="79" rx="3"/><text class="s-small" x="444" y="47" text-anchor="middle">2 model families</text><line class="s-teal" x1="400" y1="66" x2="489" y2="66"/><circle cx="425" cy="66" r="4" fill="var(--teal)"/><circle cx="474" cy="66" r="4" fill="var(--coral)"/><text class="s-tiny" x="444" y="90" text-anchor="middle">ATTRIBUTE × LANGUAGE</text>
+          <path class="s-accent" d="M228 125 H508"/><text class="s-tiny" x="368" y="141" text-anchor="middle">SAME PAIR · DIFFERENT LINGUISTIC PRESENTATION</text>
+        </svg>
+      </div>
+      <span class="open">OPEN PROJECT →</span>
+    </a>
+
+    <a class="work" href="#">
+      <div class="num">04</div>
+      <div><div class="meta">Collaboration · DFKI</div><h2>Latent Control States</h2><p class="desc">Does prompt framing move a causally relevant internal state, or only the words that come out?</p></div>
+      <div class="figure">
+        <svg viewBox="0 0 520 150" role="img" aria-label="Competing causal paths from prompt framing to answer">
+          <rect class="s-box" x="8" y="52" width="104" height="45" rx="3"/><text class="s-small" x="60" y="72" text-anchor="middle">PROMPT</text><text class="s-text" x="60" y="89" text-anchor="middle">framing</text>
+          <rect class="s-fill-amber" x="203" y="20" width="125" height="45" rx="3"/><text class="s-text" x="265" y="47" text-anchor="middle">latent state</text>
+          <rect class="s-box" x="404" y="52" width="105" height="45" rx="3"/><text class="s-small" x="456" y="72" text-anchor="middle">MODEL</text><text class="s-text" x="456" y="89" text-anchor="middle">answer</text>
+          <path class="s-amber" d="M112 67 C148 67 158 42 202 42"/><path class="s-amber" d="M328 42 C370 42 377 67 403 67"/>
+          <path class="s-dash" d="M112 88 C205 132 319 132 403 88"/><text class="s-tiny" x="260" y="137" text-anchor="middle">OUTPUT-ONLY ALTERNATIVE</text>
+          <path class="s-coral" d="M265 2 V19"/><path class="s-coral" d="M260 12 L265 19 L270 12"/><text class="s-tiny" x="304" y="12">PATCH / STEER</text>
+          <circle cx="158" cy="53" r="3.5" fill="var(--amber)"/><circle cx="371" cy="53" r="3.5" fill="var(--amber)"/>
+        </svg>
+      </div>
+      <span class="open">OPEN PROJECT →</span>
+    </a>
+  </main>
+</body>
+</html>

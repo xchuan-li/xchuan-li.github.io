@@ -1,0 +1,337 @@
+<!--
+  ASSUMPTIONS
+  - This is a focused structural study, not a production-page redesign.
+  - At desktop widths the existing ~890px reading column remains intact; the page expands only to make room for a 210px outer rail.
+  - The viewport begins at the end of the current programme so the reader can see where the earlier work enters the argument.
+  - Mobile readers receive the same notes in document order, inline before the content they qualify.
+
+  REASONING
+  - Direction C treats the annotations as a system of research principles, not isolated comments.
+  - A single continuous rule carries motive, dependency, and boundary through the programme. Numbered stations make their order visible without competing with project names.
+  - The rail remains open and unfilled: whitespace, hairlines, ticks, and small monospace labels make it read as marginalia rather than another card stack.
+
+  PLACEHOLDERS / PROTOTYPE LIMITS
+  - Links are inert and the current-programme cover image is represented by a restrained crop placeholder; the study is about annotation hierarchy.
+  - The excerpted page intentionally omits navigation and unrelated homepage sections.
+
+  CONTENT-DERIVED FORM
+  The vertical rail is a diagram of the programme's logic: motive establishes the problem, dependency names the order of inquiry, and boundary prevents evidence from one domain being mistaken for evidence in another.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direction C — Research principles rail</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --surface-2: #eef1f4;
+      --ink: #1b1e24;
+      --muted: #5f6672;
+      --dim: #89929f;
+      --ghost: #c2c8d0;
+      --border: rgba(23, 33, 48, 0.11);
+      --border-strong: rgba(23, 33, 48, 0.20);
+      --accent: #3d5a73;
+      --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    body { margin: 0; min-width: 320px; font-size: 16px; line-height: 1.65; }
+
+    .page {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 34px 0 78px;
+    }
+
+    .main-width { width: min(870px, 100%); }
+
+    .section-label {
+      margin: 0 0 17px;
+      padding: 0 0 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .section-label::before { content: "// "; color: var(--accent); opacity: .65; }
+
+    .current-tail { margin-bottom: 20px; }
+    .current-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 198px;
+      gap: 22px;
+      align-items: center;
+      padding: 13px 17px;
+      border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+      border-radius: 11px;
+      background: var(--surface);
+    }
+    .current-figure {
+      height: 82px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(90deg, transparent 49.8%, rgba(61,90,115,.2) 50%, transparent 50.2%),
+        linear-gradient(0deg, transparent 49.8%, rgba(61,90,115,.15) 50%, transparent 50.2%),
+        var(--surface-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .current-figure::before,
+    .current-figure::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      width: 38px;
+      height: 48px;
+      border: 1px solid rgba(61,90,115,.32);
+      background: rgba(255,255,255,.64);
+    }
+    .current-figure::before { left: 31px; }
+    .current-figure::after { right: 31px; border-style: dashed; }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .085em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      margin-right: 7px;
+      border-radius: 5px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 0;
+    }
+    .current-title { margin: 0 0 5px; font-size: 17px; font-weight: 600; letter-spacing: -.005em; line-height: 1.3; }
+    .current-desc { margin: 0; color: var(--muted); font-size: 13.2px; line-height: 1.52; }
+    .bridge {
+      margin: 7px 0 0;
+      padding-left: 30px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .02em;
+      position: relative;
+    }
+    .bridge::before { content: "↓"; position: absolute; left: 8px; color: var(--accent); font-size: 15px; top: -2px; }
+
+    .argument {
+      display: grid;
+      grid-template-columns: minmax(0, 850px) 230px;
+      grid-template-areas:
+        "why motive"
+        "cards dependency"
+        "research boundary";
+      column-gap: 40px;
+      position: relative;
+    }
+
+    .why-head { grid-area: why; padding-top: 1px; }
+    .question {
+      max-width: 760px;
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.67;
+    }
+    .question strong { color: var(--ink); font-weight: 500; }
+
+    .cards { grid-area: cards; display: flex; flex-direction: column; gap: 9px; padding-bottom: 22px; }
+    .project {
+      display: block;
+      padding: 12px 17px 11px;
+      border: 1px solid rgba(23,33,48,.075);
+      border-radius: 11px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+    }
+    .project .eyebrow { margin-bottom: 4px; }
+    .project .number { border: 1px solid var(--border-strong); background: transparent; color: var(--dim); }
+    .project-title {
+      display: block;
+      margin: 0 0 5px;
+      color: var(--ink);
+      font-size: 17.5px;
+      font-weight: 600;
+      letter-spacing: -.008em;
+      line-height: 1.35;
+    }
+    .project-desc { max-width: 82ch; margin: 0 0 4px; color: var(--muted); font-size: 12.8px; line-height: 1.5; }
+    .project-meta { margin: 0; color: var(--dim); font-family: var(--mono); font-size: 9.5px; letter-spacing: .055em; line-height: 1.5; text-transform: uppercase; }
+
+    .research { grid-area: research; padding-top: 15px; border-top: 1px solid var(--border); }
+    .research .section-label { border-bottom: 0; margin-bottom: 10px; padding-bottom: 0; }
+    .research h2 { margin: 0 0 5px; font-size: 19px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; }
+    .research p { max-width: 760px; margin: 0; color: var(--muted); font-size: 13.4px; line-height: 1.55; }
+
+    .principle {
+      align-self: stretch;
+      position: relative;
+      margin-left: 9px;
+      padding: 3px 0 15px 25px;
+      border-left: 1px solid rgba(61,90,115,.35);
+      color: var(--muted);
+    }
+    .principle::before {
+      content: "";
+      position: absolute;
+      left: -4px;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      background: var(--bg);
+    }
+    .principle::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 11px;
+      width: 12px;
+      border-top: 1px solid rgba(61,90,115,.35);
+    }
+    .principle-motive { grid-area: motive; padding-top: 3px; }
+    .principle-dependency { grid-area: dependency; display: flex; flex-direction: column; justify-content: center; padding-bottom: 30px; }
+    .principle-dependency::before { top: calc(50% - 15px); }
+    .principle-dependency::after { top: calc(50% - 12px); }
+    .principle-boundary { grid-area: boundary; padding-top: 18px; border-left-color: rgba(61,90,115,.35); }
+    .principle-boundary::before { top: 23px; }
+    .principle-boundary::after { top: 26px; }
+
+    .principle-kicker {
+      display: block;
+      margin: 0 0 6px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .15em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .principle-kicker b { margin-right: 7px; font-weight: 600; color: var(--dim); }
+    .principle-title { display: block; margin: 0 0 5px; color: var(--ink); font-size: 13px; font-weight: 600; line-height: 1.35; }
+    .principle p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    @media (max-width: 900px) {
+      .page { width: min(100% - 36px, 720px); padding-top: 27px; }
+      .main-width { width: 100%; }
+      .current-card { grid-template-columns: 1fr; }
+      .current-figure { display: none; }
+      .argument {
+        display: flex;
+        flex-direction: column;
+      }
+      .why-head { order: 1; }
+      .principle-motive { order: 2; }
+      .cards { order: 3; padding-bottom: 12px; }
+      .principle-dependency { order: 4; }
+      .research { order: 5; margin-top: 18px; }
+      .principle-boundary { order: 6; }
+      .principle {
+        min-height: 0;
+        margin: 0 0 18px;
+        padding: 0 0 0 20px;
+        border-left: 1px solid rgba(61,90,115,.38);
+      }
+      .principle::before { left: -4px; top: 4px; }
+      .principle::after { display: none; }
+      .principle-dependency { display: block; }
+      .principle-dependency::before,
+      .principle-boundary::before { top: 4px; }
+      .principle-boundary { padding-top: 0; }
+      .principle p { max-width: 56ch; font-size: 12.5px; }
+    }
+
+    @media (max-width: 540px) {
+      .page { width: calc(100% - 28px); }
+      .project { padding: 14px 15px; }
+      .project-title { font-size: 17px; }
+      .project-desc { font-size: 13.2px; }
+      .question { font-size: 14.5px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="current-tail main-width" aria-labelledby="current-programme">
+      <h1 class="section-label" id="current-programme">Current research program · concluding stage</h1>
+      <article class="current-card">
+        <div>
+          <p class="eyebrow"><span class="number">02</span>Test its learnability</p>
+          <h2 class="current-title">Learning epistemic modality from linguistic input</h2>
+          <p class="current-desc">My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.</p>
+        </div>
+        <div class="current-figure" aria-hidden="true"></div>
+      </article>
+      <p class="bridge">Once the distinction is explicit, its learnability becomes testable.</p>
+    </section>
+
+    <div class="argument">
+      <section class="why-head" aria-labelledby="why-program">
+        <h2 class="section-label" id="why-program">Why this program</h2>
+        <p class="question"><strong>What would show that a model has learned a linguistic distinction,</strong> rather than a shortcut that happens to produce the same answer?</p>
+      </section>
+
+      <aside class="principle principle-motive" aria-label="Research principle one: motive">
+        <span class="principle-kicker"><b>01</b>Motive</span>
+        <p>A model can arrive at the right answer for the wrong reason. My longer-term aim is to understand what would let structured meaning, rather than shortcuts, guide its behaviour in new contexts.</p>
+      </aside>
+
+      <div class="cards" aria-label="Earlier projects that shaped the programme">
+        <a class="project" href="#">
+          <p class="eyebrow"><span class="number">01</span>Correct behaviour is not enough</p>
+          <span class="project-title">Cross-lingual ProtoBias</span>
+          <p class="project-desc">Holding each image pair fixed while varying the prompt language showed me why a correct judgment is not yet evidence of semantic sensitivity: a model may instead rely on a culturally familiar prototype. The project established the first constraint on my current work — separate the target linguistic relation from cheaper cues that can mimic it.</p>
+          <p class="project-meta">First-author paper · approximately 12,600 judgments · seven languages</p>
+        </a>
+
+        <a class="project" href="#">
+          <p class="eyebrow"><span class="number">02</span>Internal correlation is not enough</p>
+          <span class="project-title">Latent Control States</span>
+          <p class="project-desc">This collaboration moved the question from behavioural sensitivity to causal relevance. If framing changes an answer, does it also change an internal state responsible for that answer? The project established the second constraint I now carry forward: internal structure matters only relative to a precisely defined behavioural contrast.</p>
+          <p class="project-meta">Collaboration · DFKI</p>
+        </a>
+      </div>
+
+      <aside class="principle principle-dependency" aria-label="Research principle two: dependency">
+        <span class="principle-kicker"><b>02</b>Dependency</span>
+        <p>Once the linguistic distinction is explicit, its learnability becomes testable.</p>
+      </aside>
+
+      <section class="research" aria-labelledby="research-programme">
+        <p class="section-label">Research program</p>
+        <h2 id="research-programme">From linguistic analysis to evidence</h2>
+        <p>The broader program connects formal semantics with two empirical questions. How does a linguistic function emerge in human cognition? Can it be learned from linguistic input alone? The same semantic analysis formulates both questions, without treating models as stand-ins for people.</p>
+      </section>
+
+      <aside class="principle principle-boundary" aria-label="Research principle three: boundary">
+        <span class="principle-kicker"><b>03</b>Boundary</span>
+        <p>Evidence about what a model learns does not explain how a child acquires language, and vice versa.</p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Direction C — Scientific Plates</title>
+  <!--
+    Assumption: the four projects should read as one coherent research programme.
+    Reasoning: a Tufte / Müller-Brockmann-inspired plate system uses a shared
+    measurement grid and direct labels. Each project has a distinct mechanism,
+    but all four belong to the same visual grammar.
+    Placeholder policy: none; speculative work is explicitly drawn with dashed ink.
+  -->
+  <style>
+    :root{--bg:#f7f8f9;--ink:#161a20;--muted:#59616c;--dim:#929aa5;--line:#d9dde2;--line2:#b9c0c8;--accent:#345a72;--wash:#e8eef2;--planned:#f1f3f5}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    nav{height:60px;border-bottom:1px solid #e2e6e9;display:flex;align-items:center;background:rgba(255,255,255,.72)}
+    .nav-inner{width:1310px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:0 8px}.brand{font-size:17px;font-weight:600}
+    .links{display:flex;gap:38px;font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.17em;color:var(--muted)}.links span:first-child{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:8px}
+    main{width:1120px;margin:0 auto;padding:38px 0 42px}
+    .title-row{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:80px;margin-bottom:25px}
+    .eyebrow{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin:0 0 9px}
+    h1{font-size:31px;line-height:1.12;letter-spacing:-.028em;margin:0;font-weight:610}
+    .note{font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);margin:0}
+    .plate-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+    .plate{min-width:0;padding:13px 18px 20px;border-right:1px solid var(--line2);text-decoration:none;color:inherit;position:relative}
+    .plate:first-child{border-left:1px solid var(--line2)}
+    .plate:hover .plate-title{color:var(--accent)}
+    .plate-head{height:42px;display:flex;justify-content:space-between;align-items:start;gap:8px;border-bottom:1px solid var(--line);padding-bottom:9px}
+    .fig{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;color:var(--accent);text-transform:uppercase}
+    .stage{font:500 8.5px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-align:right;line-height:1.35}
+    .drawing{height:380px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);position:relative}
+    .drawing:before{content:"";position:absolute;inset:15px 0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 47px,rgba(23,33,48,.04) 48px);pointer-events:none}
+    svg{position:relative;width:100%;height:345px;display:block}
+    .plate-copy{padding-top:15px;min-height:190px}
+    .plate-title{font:600 17px/1.24 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:-.014em;margin:0 0 10px;transition:color .18s}.plate-title em{font-family:Georgia,serif;font-weight:500}
+    .question{font:14px/1.55 Georgia,'Times New Roman',serif;color:var(--muted);margin:0 0 12px}
+    .question strong{font-weight:500;color:var(--ink)}
+    .read{font:500 9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)}
+    .t{font:11px Inter,ui-sans-serif,system-ui,sans-serif;fill:var(--ink)}.s{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--muted);letter-spacing:.035em}.xs{font:7.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--dim);letter-spacing:.08em}
+    .node{fill:var(--bg);stroke:var(--line2);stroke-width:1}.node-a{fill:var(--wash);stroke:var(--accent);stroke-width:1.2}.node-p{fill:var(--planned);stroke:var(--line2);stroke-width:1;stroke-dasharray:4 3}
+    .l{fill:none;stroke:var(--line2);stroke-width:1.05}.la{fill:none;stroke:var(--accent);stroke-width:1.35}.ld{fill:none;stroke:var(--line2);stroke-width:1.05;stroke-dasharray:4 4}
+    .dot{fill:var(--accent)}.x{stroke:#9d5743;stroke-width:1.35}.ok{stroke:#2d806c;stroke-width:1.35}
+    @media(max-width:900px){.nav-inner,main{width:auto;margin-left:22px;margin-right:22px}.links{display:none}.title-row{grid-template-columns:1fr;gap:15px}.plate-grid{grid-template-columns:1fr 1fr}.plate:nth-child(2){border-right:1px solid var(--line2)}.drawing{height:330px}}
+  </style>
+</head>
+<body>
+  <nav><div class="nav-inner"><div class="brand">Xiaochuan Li</div><div class="links"><span>CURRENT WORK</span><span>RESEARCH PROGRAM</span><span>WRITING</span><span>CV</span><span>CONTACT</span></div></div></nav>
+  <main>
+    <div class="title-row"><div><p class="eyebrow">Selected work · visual index</p><h1>Four projects, one discipline:<br>make the contrast testable.</h1></div><p class="note">READ EACH PLATE TOP → BOTTOM<br>OPEN FOR ARGUMENT, DESIGN, EVIDENCE, AND LIMITS.</p></div>
+    <section class="plate-grid">
+      <a class="plate" href="#">
+        <div class="plate-head"><span class="fig">Plate 01</span><span class="stage">Construct<br>under review</span></div>
+        <div class="drawing">
+          <svg viewBox="0 0 240 345" role="img" aria-label="Three vertical paths for leaving p unsettled">
+            <text class="xs" x="120" y="15" text-anchor="middle">WHERE IS THE KEY?</text><circle class="node" cx="120" cy="42" r="16"/><text class="t" x="120" y="46" text-anchor="middle">?p</text>
+            <path class="ld" d="M120 59 V86 M120 86 H40 V108 M120 86 V108 M120 86 H200 V108"/>
+            <text class="xs" x="40" y="101" text-anchor="middle">ONE-SIDED</text><text class="xs" x="120" y="101" text-anchor="middle">BILATERAL</text><text class="xs" x="200" y="101" text-anchor="middle">REPORT</text>
+            <circle class="node-a" cx="40" cy="136" r="22"/><text class="t" x="40" y="140" text-anchor="middle">p</text>
+            <circle class="node-a" cx="101" cy="136" r="20"/><text class="t" x="101" y="140" text-anchor="middle">p</text><circle class="node-a" cx="141" cy="136" r="20"/><text class="t" x="141" y="140" text-anchor="middle">¬p</text><line class="la" x1="121" y1="136" x2="121" y2="136"/>
+            <rect class="node" x="173" y="114" width="54" height="44"/><text class="s" x="200" y="132" text-anchor="middle">cannot</text><text class="t" x="200" y="148" text-anchor="middle">settle</text>
+            <path class="l" d="M40 159 V211 M120 159 V211 M200 159 V211"/>
+            <rect class="node" x="16" y="212" width="48" height="34"/><text class="s" x="40" y="233" text-anchor="middle">reply?</text><rect class="node" x="96" y="212" width="48" height="34"/><text class="s" x="120" y="233" text-anchor="middle">reply?</text><rect class="node" x="176" y="212" width="48" height="34"/><text class="s" x="200" y="233" text-anchor="middle">reply?</text>
+            <path class="ld" d="M24 278 H216"/><text class="xs" x="120" y="297" text-anchor="middle">MATCHED DIAGNOSTIC GRID</text><text class="s" x="120" y="317" text-anchor="middle">denial · correction · why?</text><text class="xs" x="120" y="337" text-anchor="middle">PREDICTIONS NOT YET FIXED</text>
+          </svg>
+        </div>
+        <div class="plate-copy"><h2 class="plate-title">Three Ways of Leaving <em>p</em> Unsettled</h2><p class="question"><strong>Contrast:</strong> the issue stays open, but the discourse update may differ.</p><span class="read">Read the construct →</span></div>
+      </a>
+
+      <a class="plate" href="#">
+        <div class="plate-head"><span class="fig">Plate 02</span><span class="stage">Thesis<br>in design</span></div>
+        <div class="drawing">
+          <svg viewBox="0 0 240 345" role="img" aria-label="Vertical loop for the planned learnability study">
+            <text class="xs" x="120" y="15" text-anchor="middle">WHAT IN THE INPUT TEACHES THE DISTINCTION?</text>
+            <rect class="node-p" x="46" y="34" width="148" height="48"/><text class="s" x="120" y="55" text-anchor="middle">01 · EVIDENCE AUDIT</text><text class="t" x="120" y="70" text-anchor="middle">annotatable cues</text>
+            <path class="ld" d="M120 83 V112"/><path class="l" d="M115 106 L120 112 L125 106"/>
+            <rect class="node-p" x="35" y="114" width="170" height="68"/><text class="s" x="120" y="136" text-anchor="middle">02 · INPUT INTERVENTION</text><text class="t" x="120" y="154" text-anchor="middle">matched training diets</text><text class="xs" x="120" y="172" text-anchor="middle">REMOVE · SHUFFLE · ENRICH</text>
+            <path class="ld" d="M120 183 V211"/><path class="l" d="M115 205 L120 211 L125 205"/>
+            <rect class="node-p" x="46" y="213" width="148" height="48"/><text class="s" x="120" y="234" text-anchor="middle">03 · GENERALIZATION</text><text class="t" x="120" y="249" text-anchor="middle">unseen forms + contexts</text>
+            <path class="la" d="M46 237 C13 237 13 58 45 58"/><path class="la" d="M39 53 L46 58 L39 63"/>
+            <circle class="dot" cx="18" cy="148" r="3"/><text class="xs" x="24" y="143">ITERATE</text>
+            <path class="ld" d="M31 292 H209"/><text class="xs" x="120" y="311" text-anchor="middle">CONTROLS BELOW EVERY STAGE</text><text class="s" x="120" y="329" text-anchor="middle">frequency · topic · length · locality</text>
+          </svg>
+        </div>
+        <div class="plate-copy"><h2 class="plate-title">Master’s thesis: learning these distinctions</h2><p class="question"><strong>Intervention:</strong> change the linguistic diet and observe what remains learnable.</p><span class="read">Read the candidate design →</span></div>
+      </a>
+
+      <a class="plate" href="#">
+        <div class="plate-head"><span class="fig">Plate 03</span><span class="stage">Paper<br>in revision</span></div>
+        <div class="drawing">
+                   <svg viewBox="0 0 240 345" role="img" aria-label="Fixed image pair passes through seven prompts to two model judges">
+            <text class="xs" x="120" y="15" text-anchor="middle">FIX THE IMAGE PAIR · VARY THE LANGUAGE</text>
+            <rect class="node-a" x="30" y="36" width="78" height="61"/><text class="s" x="69" y="61" text-anchor="middle">semantic</text><text class="s" x="69" y="77" text-anchor="middle">atypical</text><path class="ok" d="M56 86 l6 6 13-15" fill="none"/>
+            <rect class="node" x="132" y="36" width="78" height="61"/><text class="s" x="171" y="61" text-anchor="middle">prototype</text><text class="s" x="171" y="77" text-anchor="middle">incorrect</text><path class="x" d="M163 81 l14 14 M177 81 l-14 14"/>
+            <path class="l" d="M69 98 V122 H120 M171 98 V122 H120 V143"/><path class="l" d="M115 137 L120 143 L125 137"/>
+            <g><circle class="node" cx="66" cy="164" r="13"/><circle class="node" cx="102" cy="164" r="13"/><circle class="node" cx="138" cy="164" r="13"/><circle class="node" cx="174" cy="164" r="13"/><circle class="node" cx="84" cy="198" r="13"/><circle class="node" cx="120" cy="198" r="13"/><circle class="node" cx="156" cy="198" r="13"/><text class="xs" x="120" y="225" text-anchor="middle">SEVEN PROMPT LANGUAGES</text></g>
+            <path class="l" d="M120 231 V250 H78 V268 M120 250 H162 V268"/><circle class="node-a" cx="78" cy="286" r="19"/><circle class="node-a" cx="162" cy="286" r="19"/><text class="s" x="78" y="290" text-anchor="middle">M₁</text><text class="s" x="162" y="290" text-anchor="middle">M₂</text>
+            <text class="xs" x="120" y="324" text-anchor="middle">ATTRIBUTE PATTERN</text><line class="la" x1="39" y1="337" x2="201" y2="337"/><circle class="dot" cx="79" cy="337" r="3"/><circle class="dot" cx="163" cy="337" r="3"/>
+          </svg>
+        </div>
+        <div class="plate-copy"><h2 class="plate-title">Cross-lingual ProtoBias</h2><p class="question"><strong>Control:</strong> visual content stays fixed while prompts vary across languages and models.</p><span class="read">Read the evidence →</span></div>
+      </a>
+
+      <a class="plate" href="#">
+        <div class="plate-head"><span class="fig">Plate 04</span><span class="stage">Collaboration<br>DFKI</span></div>
+        <div class="drawing">
+          <svg viewBox="0 0 240 345" role="img" aria-label="Competing causal paths between prompt framing and model answer">
+            <text class="xs" x="120" y="15" text-anchor="middle">DOES FRAMING MOVE A CAUSAL STATE?</text>
+            <rect class="node" x="58" y="35" width="124" height="43"/><text class="t" x="120" y="61" text-anchor="middle">prompt framing</text>
+            <path class="la" d="M120 79 V115"/><path class="la" d="M115 109 L120 115 L125 109"/>
+            <rect class="node-a" x="47" y="117" width="146" height="55"/><text class="s" x="120" y="138" text-anchor="middle">CANDIDATE MEDIATOR</text><text class="t" x="120" y="157" text-anchor="middle">latent control state</text>
+            <path class="la" d="M120 173 V208"/><path class="la" d="M115 202 L120 208 L125 202"/>
+            <rect class="node" x="64" y="210" width="112" height="43"/><text class="t" x="120" y="236" text-anchor="middle">model answer</text>
+            <path class="ld" d="M183 57 C225 57 225 231 177 231"/><text class="xs" x="204" y="130" text-anchor="middle" transform="rotate(90 204 130)">OUTPUT-ONLY ALTERNATIVE</text>
+            <path class="l" d="M30 144 H46"/><path class="x" d="M24 137 l13 13 M37 137 l-13 13"/><text class="xs" x="29" y="167" text-anchor="middle">ABLATE</text>
+            <path class="l" d="M120 284 V257"/><path class="l" d="M115 263 L120 257 L125 263"/><text class="s" x="120" y="302" text-anchor="middle">patch · steer · test mediation</text>
+            <path class="ld" d="M31 322 H209"/><text class="xs" x="120" y="339" text-anchor="middle">INTERVENTION DISTINGUISHES THE PATHS</text>
+          </svg>
+        </div>
+        <div class="plate-copy"><h2 class="plate-title">Latent Control States</h2><p class="question"><strong>Causal test:</strong> intervene on the internal state and ask whether the decision follows.</p><span class="read">Read the experiment →</span></div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

@@ -16,14 +16,16 @@
    ============================================================ */
 :root {
   /* Report palette (2026-09-20). The site moved to a flat, print-like register:
-     paper white, near-black ink, and a single link accent. Rounded corners, drop
+     a pure white page, near-black ink, and a single link accent. The page is #fff and
+     the secondary fills are neutral greys — the inverse of the earlier warm-paper
+     scheme, and the structure every comparison site uses. Rounded corners, drop
      shadows, hover lift and the frosted nav were removed — the only shadows left
      are rings on timeline dots, and the only radius is the 50% on those dots.
      The secondary --accent-* variables below are still used by figures; chrome
      must not reach for them. */
-  --color-bg: #fdfdfb;
-  --color-surface: #ffffff;
-  --color-surface-2: #f2f2ee;
+  --color-bg: #ffffff;
+  --color-surface: #f6f7f8;
+  --color-surface-2: #eeeff1;
   --color-text: #16181d;
   --color-text-muted: #4c515c;
   --color-text-dim: #8b919c;
@@ -32,7 +34,7 @@
   --color-border-strong: rgba(0, 0, 0, 0.24);
   --color-accent: #17457a;
 
-  --nav-bg: #fdfdfb;
+  --nav-bg: #ffffff;
   --nav-border: rgba(0, 0, 0, 0.13);
 
   --card-bg: transparent;

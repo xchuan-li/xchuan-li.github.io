@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#1b1e24" flood-opacity=".11"/>
+    </filter>
+    <clipPath id="leftClip"><rect x="72" y="278" width="420" height="300" rx="22"/></clipPath>
+    <clipPath id="rightClip"><rect x="708" y="278" width="420" height="300" rx="22"/></clipPath>
+    <marker id="arrowGreen" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5 0 9Z" fill="#1d9e75"/>
+    </marker>
+    <marker id="arrowCoral" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5 0 9Z" fill="#d85a30"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" rx="34" fill="#f8f9fa"/>
+  <rect x="34" y="34" width="1132" height="652" rx="26" fill="#fff" stroke="#dce1e6"/>
+
+  <!-- Seven differently structured prompts feed the same visual decision. -->
+  <g transform="translate(86 82)" fill="#f7f8fa" stroke="#d5dbe1" stroke-width="2">
+    <rect width="126" height="58" rx="14"/><rect x="150" width="126" height="58" rx="14"/>
+    <rect x="300" width="126" height="58" rx="14"/><rect x="450" width="126" height="58" rx="14"/>
+    <rect x="600" width="126" height="58" rx="14"/><rect x="750" width="126" height="58" rx="14"/>
+    <rect x="900" width="126" height="58" rx="14"/>
+  </g>
+  <g stroke="#46567a" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M108 101H188M108 121H164"/>
+    <path d="M246 101H326M260 121H338"/>
+    <path d="M400 101H438M454 101H486M400 121H478"/>
+    <path d="M548 101H626M568 121H652"/>
+    <path d="M706 101H730M744 101H804M706 121H790"/>
+    <path d="M844 101H924M858 121H906"/>
+    <path d="M1008 101H1088M990 121H1064"/>
+  </g>
+  <g fill="#3d5a73">
+    <circle cx="149" cy="154" r="5"/><circle cx="299" cy="154" r="5"/><circle cx="449" cy="154" r="5"/>
+    <circle cx="599" cy="154" r="5"/><circle cx="749" cy="154" r="5"/><circle cx="899" cy="154" r="5"/><circle cx="1049" cy="154" r="5"/>
+  </g>
+  <g stroke="#aeb7c0" stroke-width="2" fill="none">
+    <path d="M149 159C149 210 520 175 570 226"/>
+    <path d="M299 159C299 205 530 183 575 226"/>
+    <path d="M449 159C449 199 544 192 582 226"/>
+    <path d="M599 159V215"/>
+    <path d="M749 159C749 199 654 192 616 226"/>
+    <path d="M899 159C899 205 668 183 623 226"/>
+    <path d="M1049 159C1049 210 678 175 628 226"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="600" cy="235" r="42" fill="#fff" stroke="#46567a" stroke-width="4"/>
+    <path d="M574 235C588 213 612 213 626 235C612 257 588 257 574 235Z" fill="#e6eaf2" stroke="#46567a" stroke-width="3"/>
+    <circle cx="600" cy="235" r="8" fill="#3d5a73"/>
+  </g>
+
+  <path d="M567 260C520 282 488 310 453 348" fill="none" stroke="#1d9e75" stroke-width="4" marker-end="url(#arrowGreen)"/>
+  <path d="M633 260C680 282 712 310 747 348" fill="none" stroke="#d85a30" stroke-width="4" marker-end="url(#arrowCoral)"/>
+
+  <!-- The images are the benchmark's own animal minimal pair. -->
+  <g filter="url(#shadow)">
+    <image href="assets/protobias-animal-sc.png" x="72" y="278" width="420" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#leftClip)"/>
+    <rect x="72" y="278" width="420" height="300" rx="22" fill="none" stroke="#1d9e75" stroke-width="7"/>
+    <image href="assets/protobias-animal-pa.png" x="708" y="278" width="420" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#rightClip)"/>
+    <rect x="708" y="278" width="420" height="300" rx="22" fill="none" stroke="#d85a30" stroke-width="7"/>
+  </g>
+
+  <g transform="translate(466 624)">
+    <circle cx="0" cy="0" r="7" fill="#1d9e75"/>
+    <circle cx="45" cy="0" r="7" fill="#3d5a73"/><circle cx="90" cy="0" r="7" fill="#3d5a73"/>
+    <circle cx="135" cy="0" r="7" fill="#3d5a73"/><circle cx="180" cy="0" r="7" fill="#3d5a73"/>
+    <circle cx="225" cy="0" r="7" fill="#3d5a73"/><circle cx="270" cy="0" r="7" fill="#d85a30"/>
+  </g>
+</svg>

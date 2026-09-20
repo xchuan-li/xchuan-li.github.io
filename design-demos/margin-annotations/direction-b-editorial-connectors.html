@@ -1,0 +1,381 @@
+<!--
+ASSUMPTIONS
+- This prototype is a focused crop of the production homepage, not a redesign.
+- Desktop readers scan project names first; notes should reward a second pass without becoming a second column of prose.
+- At widths below 900px, every marginal annotation returns to the document flow immediately after the content it qualifies.
+
+REASONING
+- Direction B treats the notes as editorial apparatus attached to exact transitions: a motivation note qualifies the earlier-work question,
+  a dependency note marks the hand-off from defining a distinction to testing learnability, and a boundary note qualifies the research-program claim.
+- The attachment is expressed by a registration letter, one hairline, and a terminal tick. No note receives a card surface, shadow, or decorative colour.
+- Project cards retain the production hierarchy: the project name is the strongest line, while the methodological lesson remains a small mono eyebrow.
+
+PLACEHOLDERS / SCOPE
+- Links are presentational in this static study.
+- The top current-program card is intentionally shown as a compact tail of the preceding section so the argumentative transition can be judged at 1440x900.
+
+FORM FROM CONTENT
+- The motif comes from copy-editing marks and scholarly cross-reference: A (motive), B (dependency), C (boundary).
+  Each mark pins a note to the claim it limits or advances, mirroring the programme's claim → evidence → boundary logic.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Margin annotations — Direction B: Editorial connectors</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --surface-2: #eef1f4;
+      --ink: #1b1e24;
+      --muted: #5f6672;
+      --dim: #89929e;
+      --ghost: #c2c8d0;
+      --line: rgba(23, 33, 48, .11);
+      --line-strong: rgba(23, 33, 48, .20);
+      --card-line: rgba(23, 33, 48, .08);
+      --accent: #3d5a73;
+      --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg); color: var(--ink); font-family: var(--sans); font-feature-settings: "ss01", "cv11"; -webkit-font-smoothing: antialiased; }
+    body { margin: 0; min-width: 320px; font-size: 16px; line-height: 1.7; }
+    a { color: inherit; }
+
+    .site-nav {
+      height: 52px;
+      border-bottom: 1px solid rgba(23, 33, 48, .07);
+      background: rgba(255, 255, 255, .86);
+      display: flex;
+      align-items: center;
+    }
+    .site-nav-inner {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wordmark { font-size: 17px; font-weight: 500; letter-spacing: -.005em; }
+    .wordmark::before { content: "›"; margin-right: 9px; font-family: var(--mono); font-size: 19px; color: var(--accent); }
+    .nav-links { display: flex; gap: 33px; font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .nav-links span:first-child { color: var(--ink); }
+
+    .page {
+      width: min(1180px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 830px) 250px;
+      column-gap: 64px;
+      align-items: start;
+    }
+    .main { min-width: 0; }
+
+    .section-label {
+      margin: 0 0 11px;
+      padding: 0 0 7px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .section-label::before { content: "// "; color: var(--accent); opacity: .62; }
+    .section-label.compact { margin-bottom: 9px; }
+
+    .tail { margin-bottom: 20px; }
+    .tail-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 205px;
+      gap: 20px;
+      min-height: 106px;
+      padding: 13px 18px;
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--card-line));
+      border-radius: 12px;
+      background: var(--surface);
+    }
+    .eyebrow {
+      margin: 0 0 6px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: .085em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      border-radius: 5px;
+      background: var(--accent);
+      color: white;
+      letter-spacing: 0;
+    }
+    .tail-title { margin: 0 0 3px; font-size: 17.5px; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
+    .tail-desc { margin: 0; max-width: 60ch; font-size: 12.5px; line-height: 1.46; color: var(--muted); }
+    .tail-figure {
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, transparent 0 18%, rgba(61, 90, 115, .11) 18% 19%, transparent 19% 49%, rgba(61, 90, 115, .11) 49% 50%, transparent 50%),
+        repeating-linear-gradient(0deg, rgba(61, 90, 115, .07) 0 1px, transparent 1px 20px),
+        var(--surface-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .tail-figure::before,
+    .tail-figure::after { content: ""; position: absolute; top: 20px; width: 34px; height: 34px; border: 1px solid rgba(61, 90, 115, .35); border-radius: 50%; }
+    .tail-figure::before { left: 38px; }
+    .tail-figure::after { right: 38px; }
+    .tail-figure span { position: absolute; left: 50%; top: 37px; width: 46px; height: 1px; transform: translateX(-50%); background: var(--accent); }
+    .tail-link, .read-link { margin: 5px 0 0; font-size: 12.5px; color: var(--accent); }
+
+    .why { padding-top: 0; }
+    .question {
+      max-width: 760px;
+      margin: 0 0 12px;
+      font-size: 14px;
+      line-height: 1.57;
+      color: var(--muted);
+    }
+
+    .cards { display: grid; gap: 10px; }
+    .project-card {
+      display: block;
+      padding: 12px 18px 11px;
+      border: 1px solid var(--card-line);
+      border-radius: 12px;
+      background: var(--surface);
+      text-decoration: none;
+    }
+    .project-card .eyebrow { margin-bottom: 2px; }
+    .card-number {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      color: var(--dim);
+      font-size: 10px;
+      letter-spacing: 0;
+    }
+    .project-title { display: block; margin: 0 0 3px; font-size: 18px; font-weight: 650; line-height: 1.28; letter-spacing: -.012em; }
+    .project-desc { margin: 0 0 4px; max-width: 78ch; font-size: 12.5px; line-height: 1.46; color: var(--muted); }
+    .project-meta { margin: 0; font-family: var(--mono); font-size: 9px; line-height: 1.4; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); }
+
+    .argument-bridge {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin: 9px 0 0;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .035em;
+      color: var(--dim);
+    }
+    .argument-bridge::before { content: ""; flex: none; width: 23px; height: 1px; background: var(--accent); }
+
+    .research { margin-top: 18px; padding-bottom: 18px; }
+    .research-title { margin: 0 0 5px; font-size: 20px; font-weight: 600; line-height: 1.35; letter-spacing: -.01em; }
+    .research-body { margin: 0; max-width: 730px; font-size: 14.5px; line-height: 1.65; color: var(--muted); }
+
+    .annotated { position: relative; }
+    .note {
+      position: absolute;
+      left: calc(100% + 64px);
+      width: 250px;
+      color: var(--muted);
+    }
+    .note::before {
+      content: "";
+      position: absolute;
+      right: 100%;
+      top: 9px;
+      width: 47px;
+      height: 1px;
+      margin-right: 17px;
+      background: var(--line-strong);
+    }
+    .note::after {
+      content: "";
+      position: absolute;
+      right: calc(100% + 62px);
+      top: 5px;
+      width: 1px;
+      height: 9px;
+      background: var(--accent);
+    }
+    .note-a { top: 2px; }
+    .note-b { top: 35px; }
+    .note-c { top: 51px; }
+    .note-head { display: flex; align-items: center; gap: 9px; margin: 0 0 7px; }
+    .reg {
+      display: inline-grid;
+      place-items: center;
+      flex: none;
+      width: 19px;
+      height: 19px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 9px;
+      line-height: 1;
+    }
+    .note-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .note p { margin: 0; font-size: 12.25px; line-height: 1.58; }
+    .note strong { font-weight: 550; color: var(--ink); }
+
+    .target {
+      position: absolute;
+      right: -3px;
+      top: 7px;
+      width: 7px;
+      height: 7px;
+      border: 1px solid var(--accent);
+      background: var(--bg);
+      transform: rotate(45deg);
+      z-index: 2;
+    }
+    .tail-card > .target { top: 35px; right: -4px; background: var(--surface); }
+    .research > .target { top: 56px; }
+
+    .mobile-note { display: none; }
+
+    @media (max-width: 899px) {
+      .page { width: min(760px, calc(100% - 40px)); padding-top: 25px; }
+      .content-grid { display: block; }
+      .note { display: none; }
+      .target { display: none; }
+      .mobile-note {
+        display: grid;
+        grid-template-columns: 23px minmax(0, 1fr);
+        gap: 10px;
+        margin: 12px 0 17px;
+        padding: 11px 0 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .mobile-note .reg { margin-top: 1px; }
+      .mobile-note .note-label { display: block; margin-bottom: 3px; }
+      .mobile-note p { margin: 0; font-size: 12.5px; line-height: 1.55; }
+      .tail-card { grid-template-columns: 1fr 190px; }
+    }
+
+    @media (max-width: 600px) {
+      .site-nav-inner { width: calc(100% - 32px); }
+      .nav-links { display: none; }
+      .page { width: calc(100% - 32px); }
+      .tail-card { grid-template-columns: 1fr; }
+      .tail-figure { display: none; }
+      .project-card { padding: 16px; }
+      .project-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav-inner">
+      <div class="wordmark">Xiaochuan Li</div>
+      <div class="nav-links" aria-hidden="true"><span>Home</span><span>Research</span><span>Approach</span><span>Writing</span><span>CV</span></div>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="content-grid">
+      <div class="main">
+        <section class="tail" aria-label="End of current research program">
+          <h2 class="section-label compact">Current research program · stage 02</h2>
+          <article class="tail-card annotated">
+            <span class="target" aria-hidden="true"></span>
+            <div>
+              <p class="eyebrow"><span class="number">02</span>Test its learnability</p>
+              <h3 class="tail-title">Learning epistemic modality from linguistic input</h3>
+              <p class="tail-desc">My master’s thesis asks whether a small language model can acquire the same distinction from developmentally realistic text, and which patterns in the input make it learnable.</p>
+            </div>
+            <div class="tail-figure" aria-hidden="true"><span></span></div>
+            <aside class="note note-b" aria-label="Dependency annotation">
+              <div class="note-head"><span class="reg">B</span><span class="note-label">Dependency</span></div>
+              <p>Once the linguistic distinction is explicit, its learnability becomes testable.</p>
+            </aside>
+          </article>
+          <aside class="mobile-note" aria-label="Dependency annotation">
+            <span class="reg">B</span><div><span class="note-label">Dependency</span><p>Once the linguistic distinction is explicit, its learnability becomes testable.</p></div>
+          </aside>
+          <p class="tail-link">Read about the current work</p>
+        </section>
+
+        <section class="why" aria-labelledby="why-heading">
+          <h2 id="why-heading" class="section-label">Why this program</h2>
+          <div class="annotated">
+            <span class="target" aria-hidden="true"></span>
+            <p class="question">What would show that a model has learned a linguistic distinction, rather than a shortcut that happens to produce the same answer? Successful behaviour may rely on the wrong feature, and an internal correlate matters only if it helps explain a controlled behavioural effect.</p>
+            <aside class="note note-a" aria-label="Motivation annotation">
+              <div class="note-head"><span class="reg">A</span><span class="note-label">Motive</span></div>
+              <p><strong>A model can arrive at the right answer for the wrong reason.</strong> The longer-term aim is to understand what lets structured meaning, rather than shortcuts, guide behaviour in new contexts.</p>
+            </aside>
+          </div>
+          <aside class="mobile-note" aria-label="Motivation annotation">
+            <span class="reg">A</span><div><span class="note-label">Motive</span><p><strong>A model can arrive at the right answer for the wrong reason.</strong> The longer-term aim is to understand what lets structured meaning, rather than shortcuts, guide behaviour in new contexts.</p></div>
+          </aside>
+
+          <div class="cards">
+            <a class="project-card" href="#" aria-label="Open Cross-lingual ProtoBias">
+              <p class="eyebrow"><span class="card-number">01</span>Correct behaviour is not enough</p>
+              <span class="project-title">Cross-lingual ProtoBias</span>
+              <p class="project-desc">Holding each image pair fixed while varying the prompt language showed me why a correct judgment is not yet evidence of semantic sensitivity: a model may instead rely on a culturally familiar prototype. The project established the first constraint on my current work — separate the target linguistic relation from cheaper cues that can mimic it.</p>
+              <p class="project-meta">First-author paper · approximately 12,600 judgments · seven languages</p>
+            </a>
+
+            <a class="project-card" href="#" aria-label="Open Latent Control States">
+              <p class="eyebrow"><span class="card-number">02</span>Internal correlation is not enough</p>
+              <span class="project-title">Latent Control States</span>
+              <p class="project-desc">This collaboration moved the question from behavioural sensitivity to causal relevance. If framing changes an answer, does it also change an internal state responsible for that answer? The project established the second constraint I now carry forward: internal structure matters only relative to a precisely defined behavioural contrast.</p>
+              <p class="project-meta">Collaboration · DFKI</p>
+            </a>
+          </div>
+          <p class="argument-bridge">Earlier work supplies evidential constraints; the current programme supplies the linguistic target.</p>
+        </section>
+
+        <section class="research annotated" aria-labelledby="research-heading">
+          <span class="target" aria-hidden="true"></span>
+          <h2 id="research-heading" class="section-label">Research program</h2>
+          <h3 class="research-title">From linguistic analysis to evidence</h3>
+          <p class="research-body">The broader program connects formal semantics with two empirical questions. How does a linguistic function emerge in human cognition? Can it be learned from linguistic input alone? The same semantic analysis formulates both questions, without treating models as stand-ins for people.</p>
+          <aside class="note note-c" aria-label="Boundary annotation">
+            <div class="note-head"><span class="reg">C</span><span class="note-label">Boundary</span></div>
+            <p>Evidence about what a model learns does not explain how a child acquires language, and vice versa.</p>
+          </aside>
+        </section>
+        <aside class="mobile-note" aria-label="Boundary annotation">
+          <span class="reg">C</span><div><span class="note-label">Boundary</span><p>Evidence about what a model learns does not explain how a child acquires language, and vice versa.</p></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
