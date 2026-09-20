@@ -103,8 +103,8 @@ const researchGroups = [
   },
 ];
 
-// Background: the questions belong to each period as they were then, so they change
-// stage by stage rather than restating the current program in the past.
+// Background: one question per period — the one the prose beside it does not already
+// answer, and that the research section above does not already cover.
 const timeline = [
   {
     period: "2020 – 2024",
@@ -117,8 +117,6 @@ const timeline = [
     groups: [
       {
         questions: [
-          "Can reasoning be represented in a systematic symbolic form?",
-          "What makes an inference valid?",
           "What is gained — and lost — when natural language is translated into logic?",
         ],
       },
@@ -135,9 +133,7 @@ const timeline = [
     groups: [
       {
         questions: [
-          "How can similar content be expressed through different grammatical systems?",
           "Which parts of an interpretation are encoded, and which are supplied by context?",
-          "What remains stable when meaning moves across languages?",
         ],
       },
     ],
@@ -151,19 +147,8 @@ const timeline = [
     did: "Graduate training in cognitive psychology, experimental design and statistics, deep learning, and interpretability, connecting linguistic questions with evidence from human behaviour and computational models.",
     groups: [
       {
-        label: "Methods and evidence",
         questions: [
           "How can behavioural experiments distinguish competing accounts of meaning?",
-          "How can controlled contrasts separate semantic sensitivity from surface shortcuts?",
-          "When is an internal representation causally relevant to behaviour?",
-        ],
-      },
-      {
-        label: "Current case study",
-        questions: [
-          "What exactly does an epistemic possibility expression contribute to discourse?",
-          "Does the linguistic contrast affect how people subsequently use a possibility?",
-          "What would a model need to learn to reproduce that behaviour?",
         ],
       },
     ],
@@ -387,9 +372,9 @@ const timeline = [
   /* ===== research cards — original lift, shadow, title and cover feedback ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
-  .research-list { display: grid; gap: 3rem; margin-top: 1.2rem; }
+  .research-list { display: grid; gap: 2rem; margin-top: 1.2rem; }
   .research-block { display: grid; gap: 0.45rem; min-width: 0; }
-  .research-block + .research-block { border-top: 1px solid var(--color-border); padding-top: 2.4rem; }
+  .research-block + .research-block { border-top: 1px solid var(--color-border); padding-top: 1.6rem; }
   .research-group-label {
     font-family: var(--font-serif);
     font-size: 1.62rem;
@@ -401,14 +386,14 @@ const timeline = [
   }
   .research-group-blurb { font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.6rem; max-width: 46rem; }
   .research-group-blurb em { font-style: italic; color: var(--color-text); }
-  .research-group { display: grid; gap: 1rem; min-width: 0; }
+  .research-group { display: grid; gap: 0; min-width: 0; }
   .research-pair { padding: 0; border: 0; }
   .research-entry {
     position: relative;
     display: grid;
     grid-template-columns: 140px minmax(0, 1fr);
     gap: 1.75rem;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     border: 0;
     border-top: 1px solid var(--color-border);
     background: transparent;
@@ -418,17 +403,17 @@ const timeline = [
   }
   .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
   .research-copy { min-width: 0; }
-  .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 1.25rem; align-items: start; }
+  .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 1.25rem; align-items: start; }
   .research-cover { display: block; border-radius: 0; overflow: hidden; }
   .research-cover img { display: block; width: 100%; height: auto; transition: transform 0.35s ease; }
   .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: scale(1.03); }
   .research-cover:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  .research-note { position: relative; z-index: 2; margin-top: 1.2rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
+  .research-note { position: relative; z-index: 2; margin-top: 0.7rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
   .research-note-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.45rem; }
   .research-note-text { font-size: 0.76rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
   .research-title { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
   .research-entry:hover .research-title, .research-entry:focus-within .research-title { color: var(--color-accent); }
-  .research-desc { font-size: 0.94rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 0.6rem; }
+  .research-desc { font-size: 0.94rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 0.55rem; }
   .research-desc :global(em) { font-style: italic; color: var(--color-text); }
   .research-status { font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); margin: 0 0 0.5rem; }
   .research-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; margin: 0; }
