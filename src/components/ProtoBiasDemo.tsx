@@ -5,6 +5,9 @@ import { useState } from "react";
 // one prototypical but wrong) and we measure how often it picks the prototypical-
 // but-wrong one. Switch the ATTRIBUTE (bias moves a lot) and the LANGUAGE (it
 // barely moves) — Report 1: "the bias follows the attribute, not the language."
+// SUPERSEDED: the seven-language study found prompt language does affect judgments
+// in the demography subset. This island is kept as version history and is collapsed
+// behind a <details> on the project page. Do not present its claim as current.
 // Anchors: Qwen2.5-VL-7B, Wealth .77, Power .67, Morality / Intellect ≈ chance.
 
 type Attr = "Wealth" | "Power" | "Morality" | "Intellect";
@@ -100,7 +103,7 @@ export default function ProtoBiasDemo() {
         {rides
           ? <><strong style={{ color: "var(--color-text)" }}>Rides the prototype.</strong> On {attr.toLowerCase()}, the judge prefers the typical-but-wrong image well above chance — a culture-specific prototype standing in for the meaning of the pair.</>
           : <><strong style={{ color: "var(--color-text)" }}>At chance.</strong> On {attr.toLowerCase()} there is no prototype to ride, so the judge sits near 50% — the bias is attribute-specific, not everywhere.</>}
-        <div className="mt-1.5 text-[var(--color-text-dim)]">Switch the language: the prompt changes, the rate barely moves. The bias follows the attribute, not the language.</div>
+        <div className="mt-1.5 text-[var(--color-text-dim)]">Switch the language: in these four, the rate barely moves. <span style={{ color: "var(--color-text-muted)" }}>Report 1 read this as the bias following the attribute, not the language. The seven-language study revised it — prompt language does affect judgments in the demography subset.</span></div>
       </div>
     </div>
   );

@@ -117,12 +117,20 @@ const progress = [
       recognising a visual detail, or differences in the translated wording. Distinguishing these
       explanations requires further evidence.
     </p>
-    <p>
-      The interactive display below preserves the original four-language Report 1. The final
-      seven-language results are summarised above; the display is an earlier milestone.
-    </p>
-
-    <ProtoBiasDemo client:visible />
+    <details class="!my-8 px-4 py-3 [border:1px_solid_var(--color-border)]">
+      <summary class="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--color-text-dim)]">
+        Version history · Report 1, June 2026, four languages · superseded
+      </summary>
+      <p class="!mt-4 !mb-4 text-sm leading-relaxed text-[var(--color-text-muted)]">
+        Report 1 concluded that the bias followed the attribute and not the language. The
+        seven-language study revised that: prompt language does affect judgments in the demography
+        subset. The display below is kept because the revision is part of the result, not because
+        its conclusion still stands.
+      </p>
+      <!-- client:visible is required here. client:idle renders nothing inside a <details>;
+           verified 2026-09-20 by expanding the panel with each directive. -->
+      <ProtoBiasDemo client:visible />
+    </details>
 
     <h2>Design and data</h2>
     <p>

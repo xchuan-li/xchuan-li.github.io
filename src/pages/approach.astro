@@ -75,7 +75,15 @@ import Base from "../layouts/Base.astro";
         empirical foundation: it tests whether models follow explicit semantic constraints when
         these conflict with typicality, and whether their choices change across prompt languages.
         This provides behavioural evidence about how linguistic information interacts with prior
-        expectations. <a href="/research/latent-control-states">Latent Control States</a>
+        expectations. That audit also produced a question it could not answer with its own
+        design, and <a href="/research/typicality-in-referent-choice">Typicality in referent
+        choice</a> is the answer to it: the benchmark scores a forced choice between two images,
+        but a wrong answer is ambiguous between a description that failed to override typicality
+        and a description that never ruled the other candidate out. The paper separates the three
+        conditions the design presupposes but does not itself distinguish, and states what a forced
+        choice can and cannot report. It is published as a working paper
+        (<a href="https://lingbuzz.net/lingbuzz/010343" rel="noopener">lingbuzz/010343</a>) and
+        reports no new data. <a href="/research/latent-control-states">Latent Control States</a>
         provides training in mechanistic interpretability: using controlled behavioural contrasts
         to develop hypotheses about model decisions, then designing internal interventions to test
         which representations and computations contribute to an answer. This method can inform
