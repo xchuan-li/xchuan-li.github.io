@@ -309,7 +309,7 @@ const timeline = [
     flex: none;
     width: 208px;
     height: 260px;
-    border-radius: 14px;
+    border-radius: 0;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface-2);
     background-image: url("/images/headshot.jpg");
@@ -379,7 +379,7 @@ const timeline = [
   .latest-item { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 1.75rem; font-size: 0.93rem; line-height: 1.6; }
   .latest-date { font-family: var(--font-mono); font-size: 0.79rem; color: var(--color-text-dim); padding-top: 0.15rem; }
   .latest-text { color: var(--color-text-muted); }
-  .latest-text a { color: var(--color-accent); }
+  .latest-text :global(a) { color: var(--color-accent); border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent); }
   @media (max-width: 720px) {
     .latest-item { grid-template-columns: 1fr; gap: 0.15rem; }
   }
@@ -387,7 +387,7 @@ const timeline = [
   /* ===== research cards — original lift, shadow, title and cover feedback ===== */
   .selected-research { scroll-margin-top: 6rem; }
   .selected-research .sec-h { margin-bottom: 0; }
-  .research-list { display: grid; gap: 2.4rem; margin-top: 1.2rem; }
+  .research-list { display: grid; gap: 3rem; margin-top: 1.2rem; }
   .research-block { display: grid; gap: 0.55rem; min-width: 0; }
   .research-group-label {
     font-family: var(--font-mono);
@@ -401,27 +401,24 @@ const timeline = [
   .research-group-blurb { font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.35rem; max-width: 46rem; }
   .research-group-blurb em { font-style: italic; color: var(--color-text); }
   .research-group { display: grid; gap: 1rem; min-width: 0; }
-  .research-pair { padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 16px; }
+  .research-pair { padding: 0; border: 0; }
   .research-entry {
     position: relative;
     display: grid;
     grid-template-columns: 140px minmax(0, 1fr);
     gap: 1.75rem;
-    padding: 1.4rem 1.5rem;
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    background: var(--card-bg);
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+    padding: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    background: transparent;
   }
   .research-entry:hover, .research-entry:focus-within {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 30px -14px rgba(23, 33, 48, 0.28);
     border-color: var(--card-hover-border);
   }
   .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
   .research-copy { min-width: 0; }
   .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 1.25rem; align-items: start; }
-  .research-cover { display: block; border-radius: 8px; overflow: hidden; }
+  .research-cover { display: block; border-radius: 0; overflow: hidden; }
   .research-cover img { display: block; width: 100%; height: auto; transition: transform 0.35s ease; }
   .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: scale(1.03); }
   .research-cover:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
@@ -435,7 +432,7 @@ const timeline = [
   .research-status { font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); margin: 0 0 0.5rem; }
   .research-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; margin: 0; }
   .research-links a { color: var(--color-accent); text-decoration: none; text-underline-offset: 0.2em; }
-  .research-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 12px; }
+  .research-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 0; }
   .research-links a:hover { text-decoration: underline; }
   .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
   .research-project-link:focus-visible::after { outline: 2px solid var(--color-accent); outline-offset: 3px; }
@@ -449,8 +446,8 @@ const timeline = [
     .research-cover { max-width: 300px; }
   }
   @media (max-width: 620px) {
-    .research-pair { padding: 0.5rem; }
-    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.2rem 1rem; }
+    .research-pair { padding: 0; }
+    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.3rem 0; }
     .research-side { display: contents; }
     .research-field { margin: 0; }
     .research-copy { order: 1; }
@@ -490,7 +487,7 @@ const timeline = [
   }
 
   /* ===== contact cta ===== */
-  .cta { border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem 1.6rem; background: var(--color-surface); }
+  .cta { border: 1px solid var(--color-border); border-radius: 0; padding: 1.5rem 1.6rem; background: var(--color-surface); }
   .cta-line { margin: 0 0 0.5rem; color: var(--color-text); font-size: 0.98rem; line-height: 1.6; }
   .cta-links { margin: 0; font-size: 0.9rem; }
   .cta-links a { color: var(--color-accent); text-decoration: none; }

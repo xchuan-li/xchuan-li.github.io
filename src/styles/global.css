@@ -5,39 +5,40 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Crimson Pro", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
 }
 
 /* ============================================================
    Theme tokens — light only (the dark theme was removed).
    ============================================================ */
 :root {
-  /* Slate palette (2026-09): a cool, restrained scheme. The primary accent moved
-     from a warm brick-red (#b8350f) to a desaturated slate blue; neutrals were
-     cooled to match, and the paper lost its warm cast. The prominent secondary
-     accent (--accent-deep-purple, used on the ProtoBias timeline and pull-quotes)
-     was pulled toward a muted indigo so it harmonises with the slate. */
-  --color-bg: #f8f9fa;
+  /* Report palette (2026-09-20). The site moved to a flat, print-like register:
+     paper white, near-black ink, and a single link accent. Rounded corners, drop
+     shadows, hover lift and the frosted nav were removed — the only shadows left
+     are rings on timeline dots, and the only radius is the 50% on those dots.
+     The secondary --accent-* variables below are still used by figures; chrome
+     must not reach for them. */
+  --color-bg: #fdfdfb;
   --color-surface: #ffffff;
-  --color-surface-2: #eef1f4;
-  --color-text: #1b1e24;
-  --color-text-muted: #5f6672;
-  --color-text-dim: #98a0ac;
+  --color-surface-2: #f2f2ee;
+  --color-text: #16181d;
+  --color-text-muted: #4c515c;
+  --color-text-dim: #8b919c;
   --color-text-ghost: #c2c8d0;
-  --color-border: rgba(23, 33, 48, 0.11);
-  --color-border-strong: rgba(23, 33, 48, 0.20);
-  --color-accent: #3d5a73;
+  --color-border: rgba(0, 0, 0, 0.13);
+  --color-border-strong: rgba(0, 0, 0, 0.24);
+  --color-accent: #17457a;
 
-  --nav-bg: rgba(255, 255, 255, 0.78);
-  --nav-border: rgba(23, 33, 48, 0.07);
+  --nav-bg: #fdfdfb;
+  --nav-border: rgba(0, 0, 0, 0.13);
 
-  --card-bg: #ffffff;
-  --card-border: rgba(23, 33, 48, 0.07);
-  --card-hover-bg: #f2f5f8;
-  --card-hover-border: rgba(23, 33, 48, 0.18);
+  --card-bg: transparent;
+  --card-border: rgba(0, 0, 0, 0.11);
+  --card-hover-bg: transparent;
+  --card-hover-border: rgba(0, 0, 0, 0.28);
 
   --btn-primary-bg: #1b1e24;
   --btn-primary-text: #ffffff;
@@ -85,9 +86,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   z-index: 50;
   height: 60px;
   background: var(--nav-bg);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
-  border-bottom: 1px solid var(--nav-border);
+  -webkit-border-bottom: 1px solid var(--nav-border);
 }
 .site-nav-inner {
   max-width: 1200px;
@@ -166,7 +165,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   color: var(--color-text-muted);
   border: none;
@@ -320,7 +319,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   justify-content: center;
   gap: 0.55rem;
   padding: 14px 30px;
-  border-radius: 4px;
+  border-radius: 0;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 11.5px;
@@ -333,7 +332,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   white-space: nowrap;
 }
 .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-text); }
-.btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-primary:hover { opacity: 0.92; }
 .btn-secondary {
   background: transparent;
   color: var(--btn-secondary-text);
@@ -465,7 +464,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   transition: color 0.2s ease, transform 0.2s ease;
   text-decoration: none;
 }
-.hero-social-link:hover { color: var(--color-text); transform: translateY(-2px); }
+.hero-social-link:hover { color: var(--color-text); }
 .scroll-indicator {
   position: absolute;
   left: 50%;
@@ -541,7 +540,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
 .areas-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 1.75rem 1.75rem 2rem;
   margin-top: 2.75rem;
 }
@@ -647,7 +646,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
    ============================================================ */
 .contact-cta {
   border: 1px solid var(--card-border);
-  border-radius: 12px;
+  border-radius: 0;
   padding: 2.5rem 2.5rem;
   background: var(--card-bg);
   display: grid;
@@ -694,10 +693,10 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
    ============================================================ */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(28px);
+  transform: none;
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+.fade-in-up.visible { opacity: 1; }
 .fade-in { opacity: 0; transition: opacity 0.9s ease; }
 .fade-in.visible { opacity: 1; }
 .fade-delay-100 { transition-delay: 100ms; }
@@ -722,7 +721,6 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
     transition-duration: 0.01ms !important;
   }
   .scroll-indicator { animation: none; }
-  .site-nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .fade-in-up, .fade-in { opacity: 1; transform: none; }
 }
 
@@ -768,7 +766,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   bottom: 0.5rem;
   width: 3px;
   background: var(--color-accent);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .proj-card { position: relative; padding-left: 1.25rem; }
@@ -780,7 +778,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   bottom: 1.25rem;
   width: 2px;
   background: var(--proj-color, var(--color-border-strong));
-  border-radius: 2px;
+  border-radius: 0;
   transition: width 0.2s ease;
 }
 .proj-card:hover::before { width: 3px; }
@@ -841,8 +839,8 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   padding-bottom: 1px;
 }
 .prose a:hover { opacity: 0.75; }
-.prose code { font-family: var(--font-mono); font-size: 0.88em; background: var(--color-surface); padding: 1px 5px; border-radius: 3px; border: 0.5px solid var(--color-border); }
-.prose pre { background: var(--color-surface); border: 0.5px solid var(--color-border); border-radius: 8px; padding: 1rem; overflow-x: auto; font-size: 14px; }
+.prose code { font-family: var(--font-mono); font-size: 0.88em; background: var(--color-surface); padding: 1px 5px; border-radius: 0; border: 0.5px solid var(--color-border); }
+.prose pre { background: var(--color-surface); border: 0.5px solid var(--color-border); border-radius: 0; padding: 1rem; overflow-x: auto; font-size: 14px; }
 .prose pre code { background: transparent; border: none; padding: 0; }
 .prose blockquote { border-left: 2px solid var(--color-accent); padding-left: 1rem; color: var(--color-text-muted); font-style: italic; margin: 1.5rem 0; }
 .prose ul, .prose ol { margin: 0 0 1.2rem; padding-left: 1.5rem; }
