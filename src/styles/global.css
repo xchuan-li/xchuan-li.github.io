@@ -88,7 +88,7 @@ body { font-size: 16px; line-height: 1.7; overflow-x: hidden; }
   z-index: 50;
   height: 60px;
   background: var(--nav-bg);
-  -webkit-border-bottom: 1px solid var(--nav-border);
+  border-bottom: 1px solid var(--nav-border);
 }
 .site-nav-inner {
   max-width: 1200px;

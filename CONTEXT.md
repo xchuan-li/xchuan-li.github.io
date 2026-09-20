@@ -56,49 +56,48 @@ Repo: **https://github.com/xchuan-li/xchuan-li.github.io**
 
 ## File structure
 
+Verified against the repo on 2026-09-20. The previous version of this tree was almost
+entirely fiction — it listed a theme toggle, `research.ts`, `writing.ts`, `plain.astro`,
+`motivation.mdx`, `rss.xml.ts`, a `/writing` directory and eight components that no longer
+exist. Check the tree before trusting it; re-verify it whenever files move.
+
 ```
 src/
-├── layouts/Base.astro              # Shared shell: fixed frosted-glass nav (mark + wordmark +
-│                                   # page links + theme toggle), footer, IntersectionObserver
-│                                   # script (.fade-in / .fade-in-up), pre-paint theme script
-│                                   # (localStorage), reading-progress bar, optional "On this page"
-│                                   # TOC rail. `wide` prop opts out of the 720px container (homepage).
-├── components/                     # Astro figures + a few React islands (interactive demos)
-│   ├── HeroCaseStudies.astro       # Homepage hero figure — the three case studies.
-│   ├── ResearchTimeline.astro      # Homepage vertical research spine (Leibniz lead-in + timeline).
-│   ├── ProgressTimeline.astro      # Reusable vertical milestone timeline for project pages.
-│   │                               # Current milestone shown by default; full history expands.
-│   ├── ProjectGlyph.astro          # Project glyphs reused on the /research index.
-│   ├── CaseFigure.astro, TLFig.astro          # spine/case sub-figures used by ResearchTimeline.
-│   ├── HeroWorlds.astro, HeroCausalMatrix.astro, LineageTimeline.astro   # /motivation figures.
-│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro                    # /writing/from-leibniz figures.
-│   ├── HanGLFigure.astro, HanGLDemo.tsx        # /research/hangl figure + interactive demo.
-│   └── ProtoBiasDemo.tsx           # /research/cross-lingual-protobias interactive demo.
+├── layouts/Base.astro              # Shared shell: fixed nav (wordmark + `nav` array), footer,
+│                                   # reading-progress bar, optional "On this page" TOC rail.
+│                                   # No theme toggle and no pre-paint theme script — light only.
+│                                   # `wide` opts out of the 720px container.
+├── components/
+│   ├── ProgressTimeline.astro      # Vertical milestone timeline.   → cross-lingual-protobias
+│   ├── ProtoBiasDemo.tsx           # React island, interactive demo. → cross-lingual-protobias
+│   │                               # Live user of --accent-coral / --accent-teal.
+│   │  ⚠ ORPHANED — nothing imports these. Kept for revert, not reachable from any page:
+│   ├── ResearchMap.astro           # old homepage research map
+│   ├── HeroAlternatives.astro, HeroWorlds.astro, LineageTimeline.astro   # old homepage / motivation
+│   ├── Leibniz{Freedom,Language,Parallel}Figure.astro   # were /writing/from-leibniz, retired
+│   └── DecryptedText.astro         # old homepage text effect
 ├── data/
-│   ├── research.ts                 # Single source of truth for the project list (homepage + /research).
-│   └── writing.ts                  # Single source of truth for writing posts (index + RSS).
+│   ├── projects.ts                 # Single source of truth for the project list
+│   │                               # (homepage "Selected research" + /research).
+│   └── program.ts                  # criteria, questions, openingQuestionsHtml, identityLongHtml.
 ├── pages/
-│   ├── index.astro                 # Home: Hero / research spine / Collaborations / Contact CTA.
-│   │                               # Uses `<Base wide={true}>`.
-│   ├── plain.astro                 # Plain-text version of the homepage (same data sources).
-│   ├── motivation.mdx              # The program's origin essay (Leibniz → modality).
-│   ├── cv.astro                    # CV page (PDF download link points to /cv.pdf)
-│   ├── contact.astro               # Email, GitHub, LinkedIn, PhD-application note
-│   ├── 404.astro, rss.xml.ts
-│   ├── research/
-│   │   ├── index.astro             # Current Work page (B1–B4 projects)
-│   │   ├── hangl.astro             # (orphaned) Sino-Korean morphology
-│   │   ├── ordo.astro              # Generics / defeasibility
-│   │   └── cross-lingual-protobias.astro  (+ cross-lingual-protobias/report-1.astro)
-│   └── writing/
-│       ├── index.astro
-│       ├── from-leibniz.mdx
-│       ├── inverted-observability.mdx
-│       └── meaning-beneath-language.mdx
-└── styles/global.css               # Design tokens (dark-default, .light override), frosted nav,
-                                    # hero/section/contact-cta, buttons (.btn-primary/.btn-secondary),
-                                    # fade-in-up, prose, essay-fig, print stylesheet for /cv PDF.
+│   ├── index.astro                 # Home: header → Latest → Selected research → Background →
+│   │                               # Contact. `latest` and `researchGroups` are defined inline.
+│   ├── approach.astro              # Research Program (the long version of the programme).
+│   ├── playground.astro            # RELAY + Information Machines; moved off the homepage.
+│   ├── information-machines.astro  # Standalone piece linked from Playground.
+│   ├── cv.astro                    # CV (PDF link → /cv.pdf; @media print styles it).
+│   ├── contact.astro, 404.astro
+│   └── research/
+│       ├── index.astro                        # Current Work
+│       ├── typicality-in-referent-choice.astro   # the published working paper (B6)
+│       ├── three-ways.astro, learnability.astro, latent-control-states.astro
+│       └── cross-lingual-protobias.astro (+ cross-lingual-protobias/report-1.astro)
+└── styles/global.css               # Design tokens, nav, prose, print stylesheet for /cv.
 ```
+
+There is no `/writing` directory and no RSS feed — both were retired on 2026-09-20 and the
+old routes redirect. Redirects live in `astro.config.mjs`.
 
 ## Identity (do not change without asking)
 
@@ -112,24 +111,69 @@ src/
 
 ## Visual / design philosophy
 
-> ⚠️ **STALE — superseded by the 2026-09-20 register rebuild (see "Visual register rebuilt" above).** This section describes the site before that rebuild: dark default with a theme toggle, Inter / Crimson Pro / JetBrains Mono, a terracotta accent, a frosted nav, rounded cards, hover lift and scroll choreography — all of which were removed. Read it as history only; the current spec and its red lines are above. Do not act on this section.
+Rewritten 2026-09-20 to describe the site as it now is. The rationale and the
+prohibitions live in **"Visual register rebuilt 2026-09-20"** above; this section is the
+inventory. The earlier version of this section described a dark-default scroll portfolio
+with Inter, a terracotta accent and a frosted nav — none of that survives, and it is gone
+rather than kept as history, because a stale spec here gets acted on.
 
-The homepage uses a dark-default, scroll-portfolio aesthetic — frosted-glass sticky nav, big display headings, fade-in-on-scroll, and a vertical research spine. Inner pages (research detail, writing, cv, contact) keep the narrow 720px container with prose typography. Academic-honest tone throughout: no inflated credentials, no skill-percentage bars, no marketing copy.
+Flat and print-like. No cards, no shadows, no rounded corners, no hover lift, no frosted
+glass, no scroll animation, no theme toggle. Serif prose on white, with a monospace
+skeleton carrying the structure. Academic-honest tone: no inflated credentials, no skill
+bars, no marketing copy.
 
-- **Theme.** Dark is default (`<html>` ships clean, `:root` carries dark tokens). User toggle adds `.light` and persists to `localStorage('theme')`. The pre-paint script in Base.astro applies the saved class before first paint to avoid flash.
-- **Accent.** One warm accent color (`--color-accent`, terracotta in light, soft coral in dark). Project accent colors are scoped to research cards (driven by inline `--proj-color` and `--proj-tint`). Extended palette (deep, used sparingly): `--accent-indigo`, `--accent-deep-purple` (hero pull-quote rule), `--accent-champagne`, `--accent-amber` (load-bearing in the SCHierarchyFigure).
-- **Fonts.** Inter (sans, also reused as `--font-display` at large sizes), Crimson Pro (serif — used for the hero pull-quote and margin questions), JetBrains Mono (code, status tags, formula captions in figures).
-- **Type scale.** Hero heading `clamp(2.6rem, 9vw, 7.5rem)` / `font-weight: 700` / `line-height: 0.96`. Section heading `clamp(2.1rem, 5.5vw, 3.75rem)`. Body 16px / 1.7. Long-form prose 17px / 1.75, max-width 65ch.
-- **Nav.** Fixed top, 60px tall, `backdrop-filter: blur(28px) saturate(1.4)`, 1px bottom border. Brand mark on left, page links centre-right, theme toggle far right. Hides nav-links below 720px.
-- **Buttons.** `.btn-primary` (filled — white on dark / black on light), `.btn-secondary` (outline). Uppercase, 0.1em tracking, 12px, slight `translateY` lift on hover.
-- **Scroll choreography.** `.fade-in-up` (28px translate + opacity) and `.fade-in` (opacity only); revealed by an IntersectionObserver in Base.astro at `threshold: 0.1`. `.fade-delay-100..600` modifiers stagger entries. `prefers-reduced-motion` disables all of it.
-- **Cards.** Use cards only for compact repeated items or small tools. The homepage research section is not a card grid; the vertical spine leads alone.
-- **Section rhythm.** Every section opens with: optional `.divider-line` (1px hairline) → `.section-label` (uppercase 0.3em tracking) → `.section-heading` (big bold) → optional `.section-sub`. The pattern is consistent across About / Currently / Research / Writing / Contact.
-- **Homepage figures.**
-  - `HeroModality.astro` is the hero's right-column figure (the modal *must*: the theory fork — Kratzer's possible worlds vs. Lassiter's degree — read in two systems, the mind and the model). `HeroCaseStudies.astro` is the orphaned former figure, kept for one-line revert.
-  - `ResearchTimeline.astro` renders the research program below the hero: the Leibniz lead-in (`spineLeadIn` / `spineOrigin` in `index.astro`) followed by a single reverse-chronological stream of projects and mainline notes, driven by `src/data/research.ts` + `src/data/writing.ts`.
-  - The Leibniz origin (on `/motivation`) uses `/public/images/leibniz-portrait.png`, an artistic historical portrait asset generated for the site.
-- **Project status tags.** Rows use uppercase label + monospace status tag + thin colored hairline. No numbers / no skill-percentage bars. Status tags reflect each project's real state (e.g. `Ongoing`, `In design`, `Complete`) from `research.ts`, not a fixed paper roadmap.
+- **Theme.** Light only. `<html>` ships clean and there is no toggle and no
+  `localStorage('theme')`. Tailwind's `dark:` variant is bound to a `.dark` class that
+  never exists (`@custom-variant dark` at the top of global.css), so stray `dark:`
+  utilities cannot fire on an OS preference. `.light` survives in exactly one place: the
+  `:root, :root.light` selector in the `@media print` block.
+- **Palette.** Page `#ffffff`. Recessed surfaces `--color-surface: #f6f7f8` and
+  `--color-surface-2: #eeeff1`. Ink `--color-text: #16181d`, muted `#4c515c`, dim
+  `#8b919c`. Borders are black at 13% / 24% alpha. One link accent,
+  `--color-accent: #17457a`. See the register note above for why the background is pure
+  white and why the surface layer recesses rather than lifts. The twelve `--accent-*`
+  variables (including the warm coral / amber / champagne) exist **only** for figures that
+  encode data with them — `ProtoBiasDemo`, `LeibnizFreedomFigure`, `ResearchMap`. Site
+  chrome must never reach for them.
+- **Fonts.** **Source Serif 4** for all prose — it is bound to `--font-sans`,
+  `--font-serif` and `--font-display` alike, so there is no sans/serif contrast to manage.
+  **IBM Plex Mono** for the skeleton only: nav, section rules, field labels, dates, status
+  lines, DOIs, identifiers, code. Loaded from Google Fonts in Base.astro. Inter, Crimson
+  Pro and JetBrains Mono were all removed.
+- **Type scale.** Body 16px / 1.7. Long-form prose 17px / 1.75. Page H1 around 1.6rem —
+  the old `clamp()` display sizes are gone; nothing on the site is set at hero scale.
+  Mono labels sit at 10–12.5px with wide tracking (0.13–0.3em), uppercase.
+- **Nav.** Fixed, 60px, `background: var(--nav-bg)` (`#ffffff`) with a 1px bottom rule. No
+  `backdrop-filter`. Brand wordmark left, links right, no toggle. Items come from the
+  `nav` array in Base.astro: **Current Work (`/research`) · Research Program (`/approach`)
+  · Playground · CV · Contact**. ⚠️ The bottom rule was written `-webkit-border-bottom`,
+  which is not a property, so the nav rendered with no border at all until it was fixed on
+  2026-09-20; the damage came from a regex that was meant to strip `-webkit-backdrop-filter`.
+- **Containers.** `.container-narrow` is 720px; `.container-wide` is 1200px. Page-local
+  articles set their own `max-width` (the Current Work page uses 42rem).
+- **Section rhythm.** A section opens with a mono rule label — `// LATEST`, `// SELECTED
+  RESEARCH` — in uppercase with 0.22em tracking and a hairline under it. Entries below are
+  separated by hairline top borders, never boxed.
+- **Motion.** None in practice. `.fade-in-up`, `.fade-in` and `.fade-delay-*` are still
+  defined in global.css but **no page or component uses them**, and `.fade-in-up` already
+  has `transform: none`. They are dead code; delete them rather than reviving them.
+- **Buttons.** `.btn-primary` / `.btn-secondary` survive in global.css but are used on
+  `404.astro` only. They are not part of the current register — do not spread them.
+- **Status labels.** Research pages carry a mono eyebrow above the H1 stating real state:
+  `First-author paper · in revision for arXiv`, `Collaboration · DFKI · behavioural
+  pilots`, `Semantics paper · construct under review`, `Working paper`. The eyebrow states
+  state, not the fact of publication — `· published` was cut on 2026-09-20 because the
+  lingbuzz handle and the DOI sit two lines below it. `projects.ts` `status` strings follow
+  the same rule and are otherwise pure state (`Study complete · first-author manuscript in
+  revision`).
+- **Copy register.** Terse. No announcing prefixes (`Working paper out:`), no explanatory
+  tails appended to identifier lines, no label that names a registry instead of giving the
+  identifier (`Zenodo DOI`). Honesty statements stay, but each appears once, in the place
+  built for it. `Latest` entries follow the form peers use — title first, nature of the
+  item as trailing metadata: *"Typicality in referent choice: what the description leaves
+  open. Working paper, lingbuzz/010343, doi:10.5281/zenodo.22855036."*
+- **Figures.** ⚠️ The ProtoBias cover PNG still has rounding and a drop shadow baked into
+  the image. It is an asset, not CSS, and is the one thing still out of register.
 
 ## The research program (high-level — don't summarize wrong)
 
@@ -202,7 +246,7 @@ pnpm preview      # preview production build locally
 The site's visual language is established: dark-default scroll-portfolio chassis + academic-honest content. Stay inside it unless the user is explicitly redirecting.
 
 - Reuse the existing tokens and classes (`.section`, `.section-label`, `.section-heading`, `.btn-primary/secondary`, `.fade-in-up`, `.areas-card`, `.contact-cta`) before inventing new ones.
-- New homepage figures should match `SCHierarchyFigure`'s level of concept density — boxless, theme-aware via `var(--color-text-*)` and accent CSS vars, captioned with a small monospace footer if needed.
+- New figures are boxless, use `var(--color-text-*)` and the `--accent-*` vars for data encoding only, and carry a small monospace caption if one is needed. (This rule used to point at `SCHierarchyFigure` as the model; that component no longer exists.)
 - Hero/section heading scale is `clamp(...)`-based; don't hard-code px sizes for the display layer.
 - If you need a new "skills"-shaped block, copy the `.areas-card` pattern (uppercase label + monospace status tag + thin colored hairline). Don't introduce percentages.
 - Inner pages stay narrow (720px) by default via `<Base>`; only the homepage uses `<Base wide={true}>`. Long-form detail pages may opt into the documented `toc` layout, which adds a left rail and widens `.prose` to 70ch on desktop.
