@@ -2,6 +2,21 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Approved homepage opening (22 September 2026)
+
+The author reviewed a compact interactive homepage preview and requested publication (“上线吧”).
+This supersedes earlier homepage layout and palette constraints below for the homepage only.
+The opening connects epistemic modality and typicality/reference in one illustrative exchange,
+with hover, keyboard and touch explanations; it is not an empirical result or a model transcript.
+The compact LCLM programme explicitly returns evidence and explanatory modeling to linguistic
+analysis, with explanatory modeling marked as a longer-term aim. Selected work is grouped by
+question and explicitly labelled as linguistic analysis, proposed human behaviour research,
+VLM evaluation or mechanistic model research. The homepage brand says Home so the name is not
+repeated next to its main heading. Keep the approved restrained paper/ink palette and thin
+rectangular project borders; no large hero or automatic animation. Photo, ProtoBias cover,
+Connection/Motive notes, real Latest news, background and contact are retained. Other pages keep
+their existing styling. Project titles, URLs and statuses still use `src/data/projects.ts`.
+
 ## Current project descriptions (17 September 2026)
 
 This update supersedes older instructions that present the MA as a committed computational-training project. Public project questions, summaries, connections, and statuses now live in `src/data/projects.ts`, shared by the homepage, Current Work, and CV. The common question is how linguistic meaning guides inference and how to identify the information used by people and language models.
