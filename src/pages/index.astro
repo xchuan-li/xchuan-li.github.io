@@ -2,14 +2,16 @@
 import Base from "../layouts/Base.astro";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 import { projects } from "../data/projects";
+import MappingFigure from "../components/MappingFigure.astro";
 
-// Homepage. Section order: header → latest → selected research →
-// background → contact. The middle section is a concise
-// research index; full questions, methods, and evidence live on the linked pages.
+// Homepage (2026-09-23). A sticky left column carries who and where, the question, the
+// research programme as an index of this page, and contact; the main column runs
+// intro → Fig. 1 → latest → selected research → background → contact. The middle
+// section is a concise research index; full questions, methods, and evidence live on
+// the linked pages. Below 960px the left column becomes an ordinary header.
 //
-// PHOTO: public/images/headshot.jpg (CSS background — a missing file just shows an
-// empty frame). LOGOS: public/images/logos/{utn,marburg,szu}.svg in .tl-logo;
-// circular emblems (emblem: true) are sized up to match the UTN wordmark.
+// PHOTO: moved to /contact (2026-09-23). LOGOS: public/images/logos/{utn,marburg,szu}.svg
+// in .tl-logo; circular emblems (emblem: true) are sized up to match the UTN wordmark.
 
 // Selected research is organised on two axes: which case a project belongs to,
 // and which kind of evidence it contributes. The evidence labels reuse the
@@ -85,18 +87,24 @@ const latest = [
 
 const researchGroups = [
   {
+    id: "typicality",
+    sec: "§1",
     label: "Typicality and reference",
     blurb: "Hearing <em>an animal perched on a branch</em>, people settle on one candidate rather than another. This work asks what does the settling.",
     related: true,
     projects: typicalityCase,
   },
   {
+    id: "modality",
+    sec: "§2",
     label: "Epistemic modality",
     blurb: "Hearing <em>it might be in the drawer</em>, is that possibility still held open once the sentence is over, and does later evidence revise it? Typicality asks where a choice like this ends up; this asks what happens before it does. The study has not begun.",
     related: true,
     projects: modalityCase,
   },
   {
+    id: "methods",
+    sec: "§3",
     label: "Methods",
     blurb: "Training in explaining model decisions, carried into both cases.",
     projects: methodsWork,
@@ -160,27 +168,32 @@ const timeline = [
 
 <Base wide={true}>
   <div class="wrap">
-    <!-- ===== header ===== -->
-    <header class="hd">
-      <div class="hd-main">
-        <h1 class="hd-name">Xiaochuan Li</h1>
-        <p class="hd-tag" set:html={openingQuestionsHtml} />
-        <p class="hd-tag hd-tag-work" set:html={identityLongHtml} />
-        <p class="hd-affil">
-          M.Sc. Human and AI · University of Technology Nuremberg · applying for PhD positions beginning in fall 2027
+    <!-- ===== left column: stays in view on wide screens ===== -->
+    <aside class="side" aria-label="About Xiaochuan Li">
+      <div class="side-inner">
+        <h1 class="side-name">Xiaochuan Li</h1>
+        <p class="side-affil">
+          M.Sc. Human and AI<br />University of Technology Nuremberg<br />
+          <span>Applying for PhD positions beginning in fall 2027</span>
         </p>
-        <p class="hd-links">
-          <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a>
-          <span class="sep">·</span>
-          <a href="/approach">Research Program</a>
-          <span class="sep">·</span>
-          <a href="/cv">CV</a>
-          <span class="sep">·</span>
-          <a href="https://github.com/xchuan-li" rel="noopener">GitHub</a>
+        <p class="side-q" set:html={openingQuestionsHtml} />
+        <nav class="side-toc" aria-label="Research program on this page">
+          <p class="side-k">Research program</p>
+          {researchGroups.map((group) => (
+            <a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
+          ))}
+          <a href="#background"><span>—</span>Background</a>
+        </nav>
+        <p class="side-links">
+          <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a><br />
+          <a href="/cv">CV</a><span class="sep">·</span><a href="https://github.com/xchuan-li" rel="noopener">GitHub</a><span class="sep">·</span><a href="/approach">Research Program</a>
         </p>
       </div>
-      <div class="hd-photo" role="img" aria-label="Portrait of Xiaochuan Li"></div>
-    </header>
+    </aside>
+
+    <div class="main">
+    <p class="intro" set:html={identityLongHtml} />
+    <MappingFigure />
 
     <!-- ===== latest ===== -->
     <section class="sec" aria-labelledby="latest-heading">
@@ -200,7 +213,8 @@ const timeline = [
       <h2 class="sec-h" id="research-heading">Selected research</h2>
       <div class="research-list">
         {researchGroups.map((group) => (
-          <div class="research-block">
+          <div class="research-block" id={group.id}>
+            <p class="research-sec">{group.sec}</p>
             <p class="research-group-label">{group.label}</p>
             <p class="research-group-blurb" set:html={group.blurb} />
             <div class:list={["research-group", { "research-pair": group.related }]} role={group.related ? "group" : undefined} aria-label={group.label}>
@@ -241,7 +255,7 @@ const timeline = [
     </section>
 
     <!-- ===== background ===== -->
-    <section class="sec">
+    <section class="sec" id="background">
       <h2 class="sec-h">Background</h2>
       <div class="tl">
         {timeline.map((t) => (
@@ -282,44 +296,56 @@ const timeline = [
         </p>
       </div>
     </section>
+    </div>
   </div>
 </Base>
 
+<script>
+  // The left column marks the section currently in the upper third of the viewport.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a")];
+  const targets = links.map((a) => document.querySelector(a.getAttribute("href") ?? ""));
+  const update = () => {
+    let current = -1;
+    targets.forEach((t, i) => {
+      if (t && t.getBoundingClientRect().top < innerHeight * 0.35) current = i;
+    });
+    links.forEach((a, i) => a.setAttribute("aria-current", String(i === current)));
+  };
+  addEventListener("scroll", update, { passive: true });
+  update();
+</script>
+
 <style>
-  .wrap { max-width: 940px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; font-family: var(--font-sans); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 2.75rem 1.5rem 5rem; font-family: var(--font-sans); display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 3.5rem; }
+  /* the column stretches the full height of the page so its inner block can stay in view */
+  .main { min-width: 0; }
 
-  /* ===== header ===== */
-  .hd { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; margin-bottom: 1rem; }
-  .hd-photo {
-    flex: none;
-    width: 208px;
-    height: 260px;
-    border-radius: 0;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface-2);
-    background-image: url("/images/headshot.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  /* ===== left column ===== */
+  .side-inner { position: sticky; top: calc(60px + 1.75rem); }
+  .side-name { font-family: var(--font-display); font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 0.75rem; color: var(--color-text); }
+  .side-affil { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 1.1rem; }
+  .side-affil span { color: var(--color-text-dim); }
+  .side-q { font-size: 1.06rem; line-height: 1.45; color: var(--color-text); margin: 0 0 1.4rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .side-k { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.35rem; }
+  .side-toc a { display: grid; grid-template-columns: 2.1em 1fr; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.95; color: var(--color-text-muted); text-decoration: none; }
+  .side-toc a span { color: var(--color-text-dim); }
+  .side-toc a:hover { color: var(--color-text); }
+  .side-toc a[aria-current="true"], .side-toc a[aria-current="true"] span { color: var(--color-accent); }
+  .side-links { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.9; margin: 1.4rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--color-border); }
+  .side-links a { color: var(--color-accent); text-decoration: none; }
+  .side-links a:hover { text-decoration: underline; }
+  .side-links .sep { color: var(--color-text-ghost); margin: 0 0.4rem; }
+  .intro { font-size: 1.08rem; line-height: 1.6; color: var(--color-text-muted); margin: 0.15rem 0 0; max-width: 36rem; }
+  .research-block, #background { scroll-margin-top: 5rem; }
+  .research-sec { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--color-text-dim); margin: 0; }
+
+  @media (max-width: 960px) {
+    .wrap { grid-template-columns: 1fr; gap: 1.6rem; max-width: 940px; }
+    .side-inner { position: static; }
+    .side-toc { display: none; }
   }
-  .hd-main { min-width: 0; }
-  .hd-name { font-family: var(--font-display); font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 0.6rem; color: var(--color-text); line-height: 1.05; }
-  .hd-tag { font-size: 1.15rem; line-height: 1.5; color: var(--color-text); margin: 0 0 0.7rem; max-width: 34rem; }
-  .hd-tag :global(strong) { font-weight: 600; }
-  .hd-tag :global(em) { font-style: italic; }
-  .hd-tag-work { font-size: 1.02rem; color: var(--color-text-muted); margin: 0 0 0.9rem; }
-  .hd-tag-work :global(em) { font-style: italic; color: var(--color-text); }
-  .hd-affil { font-size: 0.9rem; color: var(--color-text-muted); margin: 0 0 0.8rem; line-height: 1.5; }
-  .hd-links { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.01em; color: var(--color-text-muted); margin: 0; }
-  .hd-links a { color: var(--color-accent); text-decoration: none; }
-  .hd-links a:hover { text-decoration: underline; }
-  .hd-links .sep { color: var(--color-text-ghost); margin: 0 0.45rem; }
-
-  @media (max-width: 620px) {
-    .hd { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
-    .hd-photo { order: -1; width: 168px; height: 210px; }
-    .hd-name { font-size: 2rem; }
-    .hd-tag { font-size: 1.05rem; }
+  @media (max-height: 640px) {
+    .side-inner { position: static; }
   }
 
   /* ===== research program ===== */
@@ -422,11 +448,6 @@ const timeline = [
   .research-links a:hover { text-decoration: underline; }
   .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
   .research-project-link:focus-visible::after { outline: 2px solid var(--color-accent); outline-offset: 3px; }
-  @media (min-width: 1280px) {
-    .research-note { position: absolute; top: 1.8rem; width: clamp(8.5rem, calc((100vw - 940px) / 2 - 2.5rem), 11rem); margin-top: 0; }
-    .research-note-right { left: calc(100% + 1.75rem); }
-    .research-note-left { right: calc(100% + 1.75rem); }
-  }
   @media (min-width: 621px) and (max-width: 900px) {
     .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
     .research-cover { max-width: 300px; }

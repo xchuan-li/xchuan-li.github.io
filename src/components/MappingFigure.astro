@@ -1,0 +1,106 @@
+---
+// Homepage Fig. 1 (2026-09-23). One exchange, drawn as the mapping from a superordinate
+// term to its members. Only what is said is solid: the term, the possibility "might"
+// raises, the question "whether" opens. Members nobody has named stay faint, resolving
+// as far as they come to mind (typicality), never completely. The rest of the
+// description rules members out (×) rather than reweighting them; an assertion, shown
+// for comparison, settles the mapping (═). Drawing and timing: src/scripts/mapping-figure.js.
+//
+// Palette: the page's recessed surface and the figure coral, set as CSS custom
+// properties the canvas reads. The styles are global because the prompt and status
+// lines are written by the script, which scoped styles cannot reach.
+const caption =
+  'How far the description goes, and what typicality adds: <a href="/research/typicality-in-referent-choice"><i>Typicality in referent choice</i></a>. What <i>might</i> and <i>I don’t know whether</i> leave open: <a href="/research/three-ways"><i>Three Ways of Leaving p Unsettled</i></a>.';
+---
+
+<figure class="mapfig" data-mapping aria-labelledby="mapfig-caption">
+  <div class="mapfig-screen">
+    <div class="mapfig-hud">
+      <span>Fig. 1 · discourse state<span class="mapfig-tag" data-turn-tag></span></span>
+      <span class="mapfig-keys" role="group" aria-label="Step through the exchange">
+        <button type="button" data-go="1" aria-pressed="false">1</button>
+        <button type="button" data-go="2" aria-pressed="false">2</button>
+        <button type="button" data-go="3" aria-pressed="false">3</button>
+        <button type="button" data-go="replay" aria-label="Replay">↻</button>
+        <button type="button" data-pause aria-pressed="false" aria-label="Pause">❚❚</button>
+      </span>
+    </div>
+    <canvas data-field aria-hidden="true"></canvas>
+    <p class="mapfig-status" data-status aria-live="polite"></p>
+    <div class="mapfig-prompt" data-prompt></div>
+    <div class="mapfig-foot">
+      <button type="button" class="mapfig-compare" data-compare aria-pressed="false">compare: It is a stick insect.</button>
+    </div>
+  </div>
+  <p class="sr-only">
+    An animated diagram. The word animal, once said, maps onto four members: bird, dog, octopus and stick insect.
+    Their names stay faint because nobody has said them; each resolves as far as it comes to mind, dog and bird furthest.
+    “Perched on that branch” rules out the dog and the octopus. “It might be a stick insect” says the stick insect out loud,
+    and its name turns solid; the bird remains the strongest unsaid option. “I don’t know whether it is” adds an open question.
+    For comparison, “It is a stick insect” rules out the bird and turns the mapping into a settled line.
+  </p>
+  <p class="mapfig-legend">
+    faint names: left open, never said · how far a name resolves: how readily it comes to mind · solid: said ·
+    × ruled out by the description · <span class="said">◇</span> said by <i>might</i> · ? asked · ═ settled
+  </p>
+  <figcaption id="mapfig-caption"><b>Fig. 1</b><Fragment set:html={caption} /></figcaption>
+</figure>
+
+<script>
+  import "../scripts/mapping-figure.js";
+</script>
+
+<style is:global>
+  .mapfig { margin: 2rem 0 0; }
+  .mapfig-screen {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-text);
+    /* canvas ink, as "r,g,b" */
+    --ink-strong: 22, 24, 29;
+    --ink-said: 216, 90, 48;
+    --ink-rail: 194, 200, 208;
+    --ink-rail-said: 236, 190, 172;
+    --ink-ghost: 76, 81, 92;
+    --ink-unsaid: 76, 81, 92;
+    --ink-cut: 139, 145, 156;
+    --ink-glow: 0;
+  }
+  .mapfig-hud { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; color: var(--color-text-dim); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .mapfig-tag { color: var(--accent-coral); margin-left: 0.6rem; letter-spacing: 0.06em; text-transform: none; }
+  .mapfig-keys { display: flex; gap: 4px; }
+  .mapfig-keys button, .mapfig-compare { font: 10.5px var(--font-mono); color: var(--color-text-muted); background: transparent; border: 1px solid var(--color-border); padding: 2px 7px; cursor: pointer; letter-spacing: 0; }
+  .mapfig-keys button:hover, .mapfig-compare:hover { color: var(--color-text); border-color: var(--color-border-strong); }
+  .mapfig-keys button[aria-pressed="true"], .mapfig-compare[aria-pressed="true"] { color: #fff; background: var(--color-text); border-color: var(--color-text); }
+  .mapfig-keys button:focus-visible, .mapfig-compare:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .mapfig canvas { display: block; width: 100%; margin: 0.75rem 0 0.5rem; }
+  .mapfig-status { text-align: center; color: var(--color-text-dim); letter-spacing: 0.1em; font-size: 10.5px; text-transform: uppercase; min-height: 15px; margin: 0; }
+  .mapfig-status .t { color: var(--accent-coral); text-transform: none; }
+  .mapfig-prompt { margin-top: 0.75rem; padding-top: 0.6rem; border-top: 1px solid var(--color-border); }
+  .mapfig-prompt p { margin: 0; font-size: 12.5px; line-height: 20px; color: var(--color-text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mapfig-prompt p.current { color: var(--color-text); }
+  .mapfig-prompt p.empty { color: var(--color-text-ghost); }
+  .mapfig-prompt .gt { color: var(--accent-coral); }
+  .mapfig-prompt .who { color: var(--color-text-dim); display: inline-block; min-width: 1.6em; }
+  .mapfig-prompt .cursor { display: inline-block; width: 0.55em; height: 1.05em; margin-left: 2px; background: var(--accent-coral); vertical-align: -2px; animation: mapfig-blink 1s steps(1) infinite; }
+  @keyframes mapfig-blink { 50% { opacity: 0; } }
+  .mapfig-foot { display: flex; justify-content: flex-end; margin-top: 0.6rem; }
+  .mapfig-legend { font-family: var(--font-mono); font-size: 11px; line-height: 1.6; color: var(--color-text-dim); margin: 0.6rem 0 0; }
+  .mapfig-legend .said { color: var(--accent-coral); }
+  .mapfig figcaption { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-muted); margin-top: 0.5rem; }
+  .mapfig figcaption b { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; color: var(--color-text); margin-right: 0.4rem; }
+  .mapfig figcaption a { color: var(--color-accent); }
+  @media (prefers-reduced-motion: reduce) {
+    .mapfig-prompt .cursor { animation: none; }
+  }
+  @media (max-width: 600px) {
+    .mapfig-screen { padding: 0.6rem 0.75rem; }
+    .mapfig-hud { flex-wrap: wrap; }
+    .mapfig-prompt p { font-size: 11.5px; white-space: normal; line-height: 17px; }
+  }
+</style>
