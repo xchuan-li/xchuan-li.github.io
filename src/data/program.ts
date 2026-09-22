@@ -85,8 +85,3 @@ export const questions: ProgramQuestion[] = [
     text: "Can a learner acquire it from linguistic input alone? If so, what patterns in the input support it?",
   },
 ];
-
-/** Compact homepage account of LCLM, approved for publication 22 September 2026.
- * Explanatory modeling is an aim, not an already completed result. */
-export const programmeSummary =
-  "My research programme connects linguistics, cognitive science and language models. I begin with contrasts in meaning and use; my longer-term aim is to develop computational explanations that can be tested against evidence and feed back into linguistic theory.";
