@@ -1,17 +1,13 @@
 ---
-// User-selected typographic mosaic: compact, passive, and slowly repeating.
+// User-selected typographic mosaic: compact, passive, and repeating.
 // Areas are illustrative relative referent weights. Mention changes ink only.
 ---
-<figure class="spacefig" data-space tabindex="0" aria-labelledby="spacefig-title" aria-describedby="spacefig-description">
-  <div class="spacefig-heading">
-    <span id="spacefig-title">What <i>animal</i> leaves open</span><span>Fig. 1</span>
-  </div>
+<figure class="spacefig" data-space tabindex="0" aria-label="Three sentences and their possible referents">
   <div class="spacefig-context" aria-hidden="true">
     <p data-line="0">“There is an animal.”</p>
     <p data-line="1">“It is in the tree.”</p>
     <p data-line="2">“It <em>might</em> be an insect.”</p>
   </div>
-  <div class="spacefig-field-heading" aria-hidden="true"><span>Four example candidates</span><span>area: relative weight</span></div>
   <div class="spacefig-field" data-field aria-hidden="true">
     <canvas></canvas>
     <div class="spacefig-region" data-kind="bird"><span class="spacefig-name">BIRD</span></div>
@@ -19,27 +15,13 @@
     <div class="spacefig-region" data-kind="monkey"><span class="spacefig-name">MONKEY</span></div>
     <div class="spacefig-region" data-kind="insect"><span class="spacefig-name" data-mentioned>INSECT</span></div>
   </div>
-  <p class="spacefig-note"><span class="spacefig-ink-key">Warm ink: explicitly mentioned.</span> Illustrative weights, not measurements.</p>
-  <p class="sr-only" id="spacefig-description">
-    A slow, repeating illustration with four example candidates, not all animals. Bird, dog, monkey and insect
-    remain possible referents. The context “in the tree” redistributes their illustrative relative weights.
-    “It might be an insect” then makes insect bold and warm-coloured without changing its area.
-    The animation pauses while keyboard-focused or while its tab is hidden. Reduced-motion preferences show the mentioned state.
-  </p>
-  <figcaption>
-    <b>Fig. 1</b> What a description leaves open, and what it makes explicit:
-    <a href="/research/typicality-in-referent-choice"><i>Typicality in referent choice</i></a>
-    and <a href="/research/three-ways"><i>Three Ways of Leaving p Unsettled</i></a>.
-  </figcaption>
 </figure>
 <script>
   import "../scripts/space-figure.js";
 </script>
 <style>
-  .spacefig { --space-ink:#282825; --space-warm:#9b4d2e; margin:1.6rem 0 0; color:var(--space-ink); }
-  .spacefig-heading { display:flex; justify-content:space-between; gap:12px; border-bottom:1px solid var(--color-border-strong); padding-bottom:8px; font:12px/1.4 var(--font-mono); }
-  .spacefig-heading > span:last-child { color:var(--color-text-muted); }
-  .spacefig-context { display:grid; gap:2px; margin:12px 0; font:13px/1.5 var(--font-mono); }
+  .spacefig { --space-ink:#282825; --space-warm:#9b4d2e; margin:1.2rem 0 0; color:var(--space-ink); }
+  .spacefig-context { display:grid; gap:2px; margin:0 0 10px; font:13px/1.5 var(--font-mono); }
   .spacefig-context p { margin:0; min-height:20px; }
   .spacefig-context p:not(:first-child) { opacity:.12; }
   .spacefig-context p { font-weight:600; transition:opacity .25s ease,color .25s ease; }
@@ -47,23 +29,15 @@
   .spacefig-context p[data-line="2"] { color:#9b4d2e; }
   .spacefig-context p.is-current[data-line="2"] { color:#9b4d2e!important; text-decoration-color:#9b4d2e; }
   .spacefig-context em { font-style:normal; }
-  .spacefig-field-heading { display:flex; justify-content:space-between; gap:8px; margin-bottom:6px; color:#62625c; font:12px/1.4 var(--font-mono); }
   .spacefig-field { position:relative; height:196px; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); isolation:isolate; overflow:hidden; }
   .spacefig-field canvas { display:block; position:absolute; inset:0; width:100%; height:100%; }
   .spacefig-region { position:absolute; display:flex; align-items:center; justify-content:center; pointer-events:none; }
   .spacefig-name { display:block; background:var(--color-bg); padding:4px 9px; font:400 19px/1.1 var(--font-mono); letter-spacing:.08em; white-space:nowrap; }
-  .spacefig-note { margin:9px 0 0; font:12px/1.5 var(--font-mono); color:#62625c; }
-  .spacefig-ink-key { color:var(--space-warm); }
-  .spacefig figcaption { font-size:.86rem; line-height:1.5; color:var(--color-text-muted); margin-top:8px; }
-  .spacefig figcaption b { margin-right:5px; font:500 12px var(--font-mono); color:var(--color-text); }
-  .spacefig figcaption a { color:var(--color-accent); }
   .spacefig:focus-visible { outline:1px solid var(--color-border-strong); outline-offset:8px; }
   @media(prefers-reduced-motion:reduce) { .spacefig-context p { transition:none; } }
   @media(max-width:600px) {
     .spacefig { margin-top:1.4rem; }
     .spacefig-field { height:184px; }
-    .spacefig-field-heading { flex-wrap:wrap; row-gap:2px; }
     .spacefig-name { font-size:16px; letter-spacing:.025em; padding:3px 6px; }
-    .spacefig-note { font-size:12px; }
   }
 </style>
