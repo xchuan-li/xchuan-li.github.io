@@ -2,15 +2,15 @@
 // Mention affects colour and type weight, never geometry.
 const INITIAL = [0.32, 0.34, 0.26, 0.08];
 const CONTEXT = [0.43, 0.08, 0.35, 0.14];
-export const LOOP_MS = 24000;
+export const LOOP_MS = 14000;
 const smooth = (x) => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 - 2 * t); };
 export function frameAt(elapsed) {
   const t = ((elapsed % LOOP_MS) + LOOP_MS) % LOOP_MS;
-  const returning = smooth((t - 21000) / 3000);
-  const context = smooth((t - 5000) / 2000) * (1 - returning);
-  const mention = smooth((t - 12000) / 1800) * (1 - returning);
+  const returning = smooth((t - 11000) / 3000);
+  const context = smooth((t - 2600) / 1250) * (1 - returning);
+  const mention = smooth((t - 6900) / 1100) * (1 - returning);
   return { context, mention, weights: INITIAL.map((w, i) => w + (CONTEXT[i] - w) * context),
-    phase: t < 5000 ? 'animal' : t < 12000 ? 'context' : t < 21000 ? 'mentioned' : 'return' };
+    phase: t < 2600 ? 'animal' : t < 6900 ? 'context' : t < 11000 ? 'mentioned' : 'return' };
 }
 export function regionsFor(weights, width, height) {
   const left = weights[0] + weights[1], x = left * width;
@@ -28,21 +28,24 @@ function init(fig) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const font = getComputedStyle(fig).getPropertyValue('--font-mono').trim() || 'Menlo, monospace';
   let width = 0, height = 0, clock = 0, raf = 0, previous = null, drawnAt = -Infinity;
-  let visible = false, hovered = false, focused = false, disposed = false, lastKey = '';
+  let visible = false, focused = false, disposed = false, lastKey = '';
   const observer = new ResizeObserver(resize);
   const intersection = new IntersectionObserver(entries => {
     visible = entries.some(entry => entry.isIntersecting); sync();
   }, { threshold:0.12 });
   function draw(force = false) {
     if (!width || !height) return;
-    const state = frameAt(reduced.matches ? 16000 : clock);
+    const state = frameAt(reduced.matches ? 10000 : clock);
     const key = state.context.toFixed(4) + '/' + state.mention.toFixed(4);
     if (!force && key === lastKey) return;
     lastKey = key;
     fig.dataset.phase = state.phase;
-    lines[1].style.opacity = String(state.context);
-    lines[2].style.opacity = String(state.mention);
-    lines[2].style.color = '#9b4d2e';
+    const activeLine = state.mention > 0.08 ? 2 : state.context > 0.08 ? 1 : 0;
+    lines.forEach((line, i) => {
+      line.classList.toggle('is-current', i === activeLine);
+      line.style.opacity = i === activeLine ? '1' : i < activeLine ? '0.48' : '0.12';
+    });
+    lines[2].style.color = activeLine === 2 ? '#9b4d2e' : '';
     const ink = [40, 40, 37].map((v, i) => Math.round(v + ([155, 77, 46][i] - v) * state.mention));
     mentioned.style.color = `rgb(${ink.join(',')})`;
     mentioned.style.fontWeight = state.mention > 0.45 ? '700' : '400';
@@ -86,13 +89,11 @@ function init(fig) {
     raf = requestAnimationFrame(tick);
   }
   function sync() {
-    const running = !disposed && visible && !document.hidden && !hovered && !focused && !reduced.matches;
+    const running = !disposed && visible && !document.hidden && !focused && !reduced.matches;
     if (!running && raf) { cancelAnimationFrame(raf); raf = 0; previous = null; }
     if (running && !raf) { previous = null; raf = requestAnimationFrame(tick); }
     if (reduced.matches) draw(true);
   }
-  fig.addEventListener('pointerenter', () => { hovered = true; sync(); });
-  fig.addEventListener('pointerleave', () => { hovered = false; sync(); });
   fig.addEventListener('focusin', () => { focused = true; sync(); });
   fig.addEventListener('focusout', event => { focused = fig.contains(event.relatedTarget); sync(); });
   document.addEventListener('visibilitychange', sync);

@@ -7,9 +7,9 @@
     <span id="spacefig-title">What <i>animal</i> leaves open</span><span>Fig. 1</span>
   </div>
   <div class="spacefig-context" aria-hidden="true">
-    <p data-line="0">There is an animal.</p>
-    <p data-line="1">It is in the tree.</p>
-    <p data-line="2">It <em>might</em> be an insect.</p>
+    <p data-line="0">“There is an animal.”</p>
+    <p data-line="1">“It is in the tree.”</p>
+    <p data-line="2">“It <em>might</em> be an insect.”</p>
   </div>
   <div class="spacefig-field-heading" aria-hidden="true"><span>Four example candidates</span><span>area: relative weight</span></div>
   <div class="spacefig-field" data-field aria-hidden="true">
@@ -24,7 +24,7 @@
     A slow, repeating illustration with four example candidates, not all animals. Bird, dog, monkey and insect
     remain possible referents. The context “in the tree” redistributes their illustrative relative weights.
     “It might be an insect” then makes insect bold and warm-coloured without changing its area.
-    The animation pauses while hovered or keyboard-focused. Reduced-motion preferences show the final state.
+    The animation pauses while keyboard-focused or while its tab is hidden. Reduced-motion preferences show the mentioned state.
   </p>
   <figcaption>
     <b>Fig. 1</b> What a description leaves open, and what it makes explicit:
@@ -41,7 +41,11 @@
   .spacefig-heading > span:last-child { color:var(--color-text-muted); }
   .spacefig-context { display:grid; gap:2px; margin:12px 0; font:13px/1.5 var(--font-mono); }
   .spacefig-context p { margin:0; min-height:20px; }
-  .spacefig-context p:not(:first-child) { opacity:0; }
+  .spacefig-context p:not(:first-child) { opacity:.12; }
+  .spacefig-context p { font-weight:600; transition:opacity .25s ease,color .25s ease; }
+  .spacefig-context p.is-current { color:#282825!important; font-weight:700; text-decoration:underline; text-decoration-color:var(--color-border-strong); text-underline-offset:4px; }
+  .spacefig-context p[data-line="2"] { color:#9b4d2e; }
+  .spacefig-context p.is-current[data-line="2"] { color:#9b4d2e!important; text-decoration-color:#9b4d2e; }
   .spacefig-context em { font-style:normal; }
   .spacefig-field-heading { display:flex; justify-content:space-between; gap:8px; margin-bottom:6px; color:#62625c; font:12px/1.4 var(--font-mono); }
   .spacefig-field { position:relative; height:196px; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); isolation:isolate; overflow:hidden; }
@@ -54,6 +58,7 @@
   .spacefig figcaption b { margin-right:5px; font:500 12px var(--font-mono); color:var(--color-text); }
   .spacefig figcaption a { color:var(--color-accent); }
   .spacefig:focus-visible { outline:1px solid var(--color-border-strong); outline-offset:8px; }
+  @media(prefers-reduced-motion:reduce) { .spacefig-context p { transition:none; } }
   @media(max-width:600px) {
     .spacefig { margin-top:1.4rem; }
     .spacefig-field { height:184px; }
