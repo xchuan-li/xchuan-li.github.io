@@ -15,98 +15,74 @@ import Base from "../layouts/Base.astro";
     <section class="rp-sec">
       <h2 class="rp-h2">Linguistic meaning and inference</h2>
       <p class="rp-p">
-        My work asks how linguistic meaning guides later inference, and how to identify the
-        information used by people and language models. The projects approach particular parts of
-        this question through formal analysis, model evaluation, and proposed behavioural work.
+        My work asks how linguistic form shapes the alternatives available for interpretation and
+        what happens to them in later reasoning. A description can make some possible referents more
+        likely than others; an epistemic expression can present a proposition as possible while
+        leaving its truth unsettled. These are related questions about interpretation, but they do
+        not assume one shared mechanism.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">From analysis to predictions</h2>
+      <h2 class="rp-h2">Three roles, three kinds of evidence</h2>
       <p class="rp-p">
-        Formal semantics offers explicit alternatives rather than a general claim that a system
-        “understands” an expression. For each account, the questions are what should remain possible
-        after an utterance, which inferences it should license, and what later evidence should change.
+        <strong>Linguistic analysis</strong> specifies what expressions mean, which alternatives they
+        make available, and what inferences they license. It turns an intuitive contrast into
+        explicit predictions. It can show what a theory says, but by itself it cannot show how
+        people or models behave.
       </p>
       <p class="rp-p">
-        Those predictions determine the experiment. Depending on the question, the relevant evidence
-        may come from behavioural work, controlled model training, diagnostic evaluation, or
-        intervention. The method serves the linguistic contrast; it does not define the research
-        identity.
+        <strong>Human experiments</strong> test whether a linguistic contrast changes how people
+        interpret, remember, or reason about those alternatives. They provide evidence about human
+        cognition. A proposed study can follow from an analysis, but it remains a proposal until it
+        is run and its results are reported.
       </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2">Human cognition</h2>
       <p class="rp-p">
-        Psycholinguistic evidence can show whether a theoretically defined distinction affects
-        comprehension, later reasoning, or learning. My master’s training in cognitive psychology,
-        experimental design, and statistics provides the basis for turning a semantic contrast into
-        controlled behavioural predictions.
+        <strong>Language-model experiments</strong> test what a model can learn from specified input,
+        whether it generalises beyond surface cues, and which information guides its choices. When
+        behaviour is controlled carefully, internal interventions can further test which model
+        representations contribute to an answer. This evidence is about the tested models and setup.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Computational learning and representation</h2>
+      <h2 class="rp-h2">How the evidence connects</h2>
       <p class="rp-p">
-        Language models make a different set of questions tractable: what can be learned from a
-        specified input distribution, whether learning generalises beyond surface cues, and which
-        internal representations are causally involved in a controlled behaviour. Training,
-        evaluation, and intervention are useful here because each exposes a different part of the
-        learning process.
+        The three routes can constrain one another: an analysis guides what to test; human and model
+        results can support, challenge, or refine its predictions; and a mismatch can expose a
+        missing distinction or a limitation in the experiment. But they answer different questions.
+        A model result does not establish how people understand language, and a human result does not
+        establish what a model learned.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Evidence without substitution</h2>
+      <h2 class="rp-h2">Where the current projects fit</h2>
       <p class="rp-p">
-        Human and model studies do not answer the same question. Behavioural evidence concerns how
-        people process or learn a distinction; controlled model studies concern what a particular
-        learner can acquire from particular input. Comparing them can clarify hypotheses, but a
-        language model is not a proxy for a person and a human result does not establish what a model
-        has learned.
-      </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2">How the projects connect</h2>
-      <p class="rp-p">
-        <a href="/research/cross-lingual-protobias">Cross-lingual ProtoBias</a> is the completed
-        empirical foundation: it tests whether models follow explicit semantic constraints when
-        these conflict with typicality, and whether their choices change across prompt languages.
-        This provides behavioural evidence about how linguistic information interacts with prior
-        expectations. That audit also produced a question it could not answer with its own
-        design, and <a href="/research/typicality-in-referent-choice">Typicality in referent
-        choice</a> is the answer to it: the benchmark scores a forced choice between two images,
-        but a wrong answer is ambiguous between a description that failed to override typicality
-        and a description that never ruled the other candidate out. The paper separates the three
-        conditions the design presupposes but does not itself distinguish, and states what a forced
-        choice can and cannot report. It is published as a working paper
-        (<a href="https://lingbuzz.net/lingbuzz/010343" rel="noopener">lingbuzz/010343</a>) and
-        reports no new data. <a href="/research/latent-control-states">Latent Control States</a>
-        provides training in mechanistic interpretability: using controlled behavioural contrasts
-        to develop hypotheses about model decisions, then designing internal interventions to test
-        which representations and computations contribute to an answer. This method can inform
-        future studies of linguistic meaning in models. Behavioural pilots are in place; the
-        mechanistic tests are still being developed.
+        The typicality projects show how the roles differ. <a href="/research/typicality-in-referent-choice">Typicality
+        in referent choice</a> is a linguistic analysis of what a forced choice between candidate
+        referents can establish; it reports no new experiment. <a href="/research/cross-lingual-protobias">Cross-lingual
+        ProtoBias</a> is a completed language-model study testing whether models follow explicit
+        semantic constraints when they conflict with typicality, and whether choices vary across
+        prompt languages. Its results are evidence about those models and materials, not about human
+        interpretation.
       </p>
       <p class="rp-p">
-        <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> develops the
-        theoretical side: what apparently similar epistemic expressions contribute to discourse.
-        A <a href="/research/learnability">human-focused thesis</a>, currently under discussion,
-        could test whether those differences affect later access to and use of a possibility.
-        This is a direct connection between linguistic analysis and a psychological question.
+        <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> compares what
+        epistemic expressions contribute to discourse. A related <a href="/research/learnability">human-focused
+        thesis</a> is under discussion; it could test whether the analysed differences affect
+        people's later access to and use of a possibility. That experiment has not begun. <a href="/research/latent-control-states">Latent
+        Control States</a> develops methods for testing which internal model computations contribute
+        to a choice; those mechanistic tests are also still in development.
       </p>
     </section>
 
     <section class="rp-sec">
       <h2 class="rp-h2">Scope and progress</h2>
       <p class="rp-p">
-        These projects have different goals and levels of completion. Their connection is a recurring
-        concern with linguistic contrasts, competing explanations, and what a particular measurement
-        establishes. Each study needs a question that can be answered within its own scope. Human
-        processing, formal interpretation, and computational learning can inform one another without
-        all becoming requirements of a single thesis.
+        The shared programme is a way of asking and testing questions, not a claim that every project
+        contains all three kinds of evidence. Each study has its own question and completion status;
+        comparisons are useful when their limits are kept explicit.
       </p>
     </section>
 
