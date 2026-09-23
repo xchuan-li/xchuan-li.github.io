@@ -16,7 +16,7 @@ export const openingQuestions =
 
 /** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "I analyse how linguistic form shapes the alternatives available for interpretation and how they are weighted or revised. Formal analysis makes the contrasts explicit; human studies test their effects on people's understanding, while language-model experiments test what models learn from input and use when choosing among alternatives. These are distinct lines of evidence about related questions.";
+  "Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input. Training and internal interventions ask what models learn and which representations contribute to a choice.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -28,7 +28,7 @@ export const openingQuestionsHtml =
   "How does linguistic form shape what we understand and infer?";
 
 export const identityLongHtml =
-  "I analyse how linguistic form shapes the alternatives available for interpretation and how they are weighted or revised. Formal analysis makes the contrasts explicit; human studies test their effects on people's understanding, while language-model experiments test what models learn from input and use when choosing among alternatives. These are distinct lines of evidence about related questions.";
+  "Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input. Training and internal interventions ask what models learn and which representations contribute to a choice.";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
