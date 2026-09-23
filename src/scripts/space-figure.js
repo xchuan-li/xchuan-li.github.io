@@ -25,6 +25,7 @@
   const T = { context: 3800, might: 8600, back: 13600, loop: 15400 };
   const STEP = 420;                             // ms per step of the drifting letters
   const MONO = '"IBM Plex Mono", Menlo, monospace', FACE = '"Helvetica Neue", Arial, sans-serif';
+  const SIDE = 360;                             // the square's side at most, in px
   const TRACK = 12, SX = 2, SY = 3, PAD = 0.45, LEVELS = 24;
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -66,17 +67,19 @@
       const termW = ctx.measureText(TERM).width;
       ctx.font = `${fs}px ${MONO}`;
       const labelW = ctx.measureText(MIGHT.join("")).width;
-      // side by side if the square keeps about 320px; otherwise the term and the labels sit above it
-      const sideW = width - termW - labelW - 40;
-      const sideBySide = sideW >= 320;
-      const S = Math.floor(sideBySide ? Math.min(440, sideW) : Math.min(440, width - 2));
+      // side by side, as one centred group, if the square keeps at least 280px; otherwise the term and
+      // the labels sit above the square
+      const lead = termW + 14 + labelW + 36 + 12;          // the term, the arrow under its labels, a gap
+      const sideBySide = width - lead >= 280;
+      const S = Math.floor(Math.min(SIDE, sideBySide ? width - lead : width - 2));
       const topH = sideBySide ? 0 : termPx + 3 * lh + 16;
       const height = topH + S;
       canvas.style.height = height + "px";
       canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
-      const sqX = sideBySide ? width - S : Math.floor((width - S) / 2), sqY = topH;
+      const x0 = sideBySide ? Math.floor((width - lead - S) / 2) : 0;
+      const sqX = sideBySide ? x0 + lead : Math.floor((width - S) / 2), sqY = topH;
       // the field: one grid of letters over the whole square
-      const cf = S < 380 ? 5 : 6;
+      const cf = S < 400 ? 5 : 6;
       ctx.font = `500 ${cf}px ${MONO}`;
       const cw = ctx.measureText(CAPS).width / 6;
       const rows = Math.round(S / cf), rh = S / rows;
@@ -98,7 +101,7 @@
       });
       // each row starts on its own letter, so no column is one letter all the way down
       const phase = Array.from({ length: rows }, (_, r) => (r * 5 + ((r * r) % 7)) % 6);
-      g = { width, height, dpr, fs, lh, termPx, termW, sideBySide, S, sqX, sqY, cf, cw, rows, rh, cols, gx,
+      g = { width, height, dpr, fs, lh, termPx, termW, sideBySide, S, x0, sqX, sqY, cf, cw, rows, rh, cols, gx,
             off, octx, tracks, shape, phase, cov: null, covKey: "",
             from: layout(SHARES.animal, S), to: layout(SHARES.tree, S) };
       lastKey = "";
@@ -179,8 +182,8 @@
       let labelX, contextY, mightY;
       ctx.strokeStyle = `rgba(${RGB.strong},0.45)`; ctx.lineWidth = 1;
       if (g.sideBySide) {
-        text(TERM, 0, midY + g.termPx * 0.35, RGB.strong, 0.96, g.termPx, 500);
-        const ax0 = g.termW + 14, ax1 = g.sqX - 12;
+        text(TERM, g.x0, midY + g.termPx * 0.35, RGB.strong, 0.96, g.termPx, 500);
+        const ax0 = g.x0 + g.termW + 14, ax1 = g.sqX - 12;
         ctx.beginPath(); ctx.moveTo(ax0, midY + 0.5); ctx.lineTo(ax1, midY + 0.5); ctx.stroke();
         text("▶", ax1 - 6, midY + 4, RGB.strong, 0.7, 9);
         labelX = ax0 + 6; contextY = midY - 10; mightY = midY + g.lh + 6;
