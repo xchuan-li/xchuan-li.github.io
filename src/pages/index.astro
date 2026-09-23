@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 import { projects } from "../data/projects";
-import MappingFigure from "../components/MappingFigure.astro";
+import SpaceFigure from "../components/SpaceFigure.astro";
 
 // Homepage (2026-09-23). A sticky left column carries who and where, the question, the
 // research programme as an index of this page, and contact; the main column runs
@@ -193,7 +193,7 @@ const timeline = [
 
     <div class="main">
     <p class="intro" set:html={identityLongHtml} />
-    <MappingFigure />
+    <SpaceFigure />
 
     <!-- ===== latest ===== -->
     <section class="sec" aria-labelledby="latest-heading">
