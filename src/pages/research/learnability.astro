@@ -2,13 +2,15 @@
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 
-// Preserve the existing URL. The human-focused route is under discussion.
+// Preserve the existing URL. Since 23 September 2026 the thesis studies modal language in preschool
+// children, planned alongside an existing study; topic and design are still being agreed and no
+// data exist. No collaborator or institution names (CONTEXT.md red line 6).
 const project = projects.thesis;
 ---
 
 <Base
   title={`${project.title} · Xiaochuan Li`}
-  description="Master’s thesis under discussion: how epistemic expressions affect later access to a specific possibility. An adult behavioural study is proposed; the final focus and computational scope remain open."
+  description="Master’s thesis in planning: how preschool children understand modal expressions, and how this relates to their reasoning about possibilities. No data have been collected."
   showProgress={true}
   toc={true}
 >
@@ -22,42 +24,30 @@ const project = projects.thesis;
     <h2>The connection to the formal analysis</h2>
     <p>
       <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> examines what
-      possibility claims, explicit bilateral openness, and ignorance reports contribute to discourse.
-      The thesis proposal asks an empirical question about the consequences of such differences:
-      whether an expression changes how readily a listener accesses a particular possibility later on.
-      The formal analysis motivates the comparison; it does not establish a psychological effect.
+      possibility claims, explicit two-sided openness, and ignorance reports contribute to discourse.
+      The thesis asks a developmental question about expressions of this kind: what preschool children
+      understand when they hear them, and how that understanding relates to the way they reason about
+      possibilities. The formal analysis suggests which contrasts are worth testing; it does not
+      establish what children know.
     </p>
 
-    <h2>A proposed adult behavioural study</h2>
+    <h2>A study with preschool children</h2>
     <p>
-      One candidate design compares expressions such as “It might be a lemon” and “I don’t know
-      whether it is a lemon” in matched contexts. A speeded detection or verification task could
-      measure subsequent access to the target, with related and unrelated probes and controls for
-      lexical mention, delay, and later evidence excluding the possibility.
-    </p>
-    <p>
-      The intended test is whether a content-specific difference survives those controls and changes
-      appropriately when new evidence arrives. Faster responses alone would not establish a new
-      semantic representation. The materials, task, analysis, and feasible scope need to be agreed
-      before data collection. A well-supported absence of the predicted effect would also constrain
-      the proposed account.
+      Which expressions are compared, the age range, the materials, and the measures are still being
+      agreed. If children’s performance on the language task is related to their reasoning in the
+      existing study, that shows an association. It would not show that language drives the
+      development of reasoning about possibilities.
     </p>
 
-    <h2>The computational question</h2>
+    <h2>Language models</h2>
     <p>
-      Earlier versions of the proposal prioritised controlled language-model training: which input
-      relations could enable a learner to acquire and generalise a specified discourse behaviour?
-      That remains a research interest. The current discussion concerns which question should be
-      the thesis’s primary contribution and whether a limited model comparison would serve it.
-      A full human experiment and a full training study are not jointly committed deliverables.
+      The thesis includes no language-model study. Questions about what models can learn from
+      linguistic input are pursued in separate projects.
     </p>
 
     <h2>Status</h2>
     <p class="cw-status">
-      The thesis is in design. A human-focused direction is being considered; its primary empirical
-      focus has not yet been finalised. No adult data have been collected. Preliminary
-      model-scoring checks have tested the measurement pipeline and exposed material confounds;
-      they have not established the target semantic effect. There are no confirmatory thesis results.
+      The thesis is being planned. No data have been collected, and there are no results.
     </p>
     <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Current Work</a></p>
   </article>

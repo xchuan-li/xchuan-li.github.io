@@ -1,5 +1,6 @@
-// Public project descriptions, checked against the Vault on 17 September 2026.
-// The human study is a proposal. Private exploratory work is not published here.
+// Public project descriptions, checked against the Vault on 17 September 2026; the thesis
+// entry on 24 September (the MA moved to modal language in preschool children on 23 September).
+// The thesis study is planned, not running. Private exploratory work is not published here.
 export const projects = {
   protobias: {
     title: "Cross-lingual ProtoBias",
@@ -18,12 +19,12 @@ export const projects = {
     status: "Analysis in development · independent judgments pending",
   },
   thesis: {
-    title: "Epistemic possibilities in use",
+    title: "Modal language in preschool children",
     href: "/research/learnability",
-    question: "Do differences between epistemic expressions affect how people subsequently access and use a possibility?",
-    summary: "A proposed adult behavioural study would test whether the linguistic contrasts affect later access to a specific possibility and its updating when new evidence arrives.",
-    connection: "This would connect the formal analysis to human behaviour. The final empirical scope is under discussion, including any computational comparison.",
-    status: "Master’s thesis · scope under discussion",
+    question: "How do preschool children understand modal expressions, and how does this relate to their reasoning about possibilities?",
+    summary: "A small study of modal language, planned to run alongside an existing study of how preschool children reason about possibilities.",
+    connection: "The formal analysis specifies what modal expressions contribute; the thesis asks how children come to understand them. It includes no language-model study.",
+    status: "Master’s thesis · in planning",
   },
   typicality: {
     title: "Typicality in referent choice",

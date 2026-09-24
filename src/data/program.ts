@@ -43,7 +43,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li studies linguistic meaning and inference through formal analysis and controlled model research, with a human behavioural thesis proposal in development.";
+  "Xiaochuan Li studies linguistic meaning and inference through formal analysis and controlled model research, and is planning a master’s thesis on modal language in preschool children.";
 
 export interface Criterion {
   name: string;

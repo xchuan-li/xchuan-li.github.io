@@ -11,15 +11,15 @@ const background = [projects.protobias, projects.latentControl];
 
 <Base
   title="Current Work · Xiaochuan Li"
-  description="Research on linguistic meaning and inference: formal analysis, a proposed human study, completed model evaluation, and mechanistic interpretability, with their current status."
+  description="Research on linguistic meaning and inference: formal analysis, a planned study with preschool children, completed model evaluation, and mechanistic interpretability, with their current status."
 >
   <article class="cw">
     <h1 class="cw-h1">Current Work</h1>
     <p class="cw-lede">
       My work asks how linguistic meaning guides inference and how to identify the information
       used by people and language models. The projects below contribute different forms of evidence:
-      completed model evaluation, formal analysis in development, a proposed human study, and
-      methods training in mechanistic interpretability.
+      completed model evaluation, formal analysis in development, a planned study with preschool
+      children, and methods training in mechanistic interpretability.
     </p>
 
     <section class="cw-sec">
@@ -42,8 +42,8 @@ const background = [projects.protobias, projects.latentControl];
     <section class="cw-sec">
       <h2 class="cw-h2">What would count as evidence</h2>
       <p class="cw-p">
-        For the proposed behavioural study, a claim about the later availability of a possibility
-        needs more than a general change in response speed. Three diagnostic criteria guide the design:
+        A claim about the later availability of a possibility needs more than a general change in
+        response speed. Three diagnostic criteria would guide a study of it:
       </p>
       <ul class="cw-crit">
         {criteria.map((c) => (
@@ -52,7 +52,7 @@ const background = [projects.protobias, projects.latentControl];
       </ul>
       <p class="cw-p">
         Evidence-sensitivity is crucial. If a possibility remains active even after it has been ruled
-        out, the effect may be simple perseveration rather than semantic maintenance. The design
+        out, the effect may be simple perseveration rather than semantic maintenance. Such a study
         would hold the available information fixed, vary the linguistic framing, and check the
         intended interpretation. These are design criteria, not established findings.
       </p>
@@ -80,8 +80,8 @@ const background = [projects.protobias, projects.latentControl];
       <h2 class="cw-h2">Current status</h2>
       <p class="cw-status">
         The semantic analysis and diagnostic materials are in development, with independent
-        judgments pending. The master’s thesis focus is under discussion. A proposed
-        adult experiment has not begun. A preliminary model-scoring pipeline runs, but its checks
+        judgments pending. The master’s thesis is being planned as a study of modal language in
+        preschool children; no data have been collected. A preliminary model-scoring pipeline runs, but its checks
         have not established the target semantic effect.
       </p>
     </section>
@@ -98,10 +98,6 @@ const background = [projects.protobias, projects.latentControl];
           </div>
         ))}
       </div>
-      <p class="cw-dep">
-        The formal project develops a linguistic contrast. A human-focused thesis could test how
-        that contrast affects processing and later reasoning. The final thesis direction remains open.
-      </p>
     </section>
 
     <section class="cw-sec">
@@ -219,5 +215,4 @@ const background = [projects.protobias, projects.latentControl];
   .cw-proj-current .cw-proj-meta { color: var(--color-accent); }
   .cw-proj-desc { font-size: 0.93rem; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 60ch; }
   .cw-proj-desc em { font-style: italic; }
-  .cw-dep { margin: 0.9rem 0 0; padding-left: 0.9rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent); font-size: 0.92rem; line-height: 1.6; font-style: italic; color: var(--color-text); }
 </style>

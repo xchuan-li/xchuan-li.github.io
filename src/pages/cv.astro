@@ -81,8 +81,8 @@ import { projects } from "../data/projects";
         <p class="text-[var(--color-text-muted)] mt-0.5">{projects.threeWays.summary} Independent judgments on the diagnostic materials are pending.</p>
       </div>
       <div class="break-inside-avoid">
-        <p><span class="font-medium">M.Sc. thesis: {projects.thesis.title}</span> <span class="text-[var(--color-text-dim)]">— scope under discussion</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.thesis.summary} The primary focus and any computational component remain under discussion; data collection has not begun.</p>
+        <p><span class="font-medium">M.Sc. thesis: {projects.thesis.title}</span> <span class="text-[var(--color-text-dim)]">— in planning</span></p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.thesis.summary} Topic and design are being agreed; data collection has not begun.</p>
       </div>
       <div class="break-inside-avoid">
         <p><span class="font-medium">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</span> <span class="text-[var(--color-text-dim)]">— first-author; in revision for arXiv</span></p>
@@ -123,3 +123,13 @@ import { projects } from "../data/projects";
     <p class="text-sm text-[var(--color-text-muted)]">Mandarin Chinese (native), German (C1), English (C1), Japanese (learning).</p>
   </section>
 </Base>
+
+<style is:global>
+  /* /cv.pdf is printed from this page: one A4 page. Component styles load only on /cv. */
+  @media print {
+    @page { size: A4; margin: 1.3cm 1.6cm; }
+    html { font-size: 12.5px; }
+    main header { margin-bottom: 1rem !important; }
+    main section { margin-bottom: 0.95rem !important; }
+  }
+</style>
