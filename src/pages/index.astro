@@ -8,8 +8,8 @@ import PaperList from "../components/PaperList.astro";
 import LclmCartoon from "../components/LclmCartoon.astro";
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
-// 27 September 2026 (XC): one narrow column like the other pages (no sidebar), Fig. 1 is
-// the hand-drawn LclmCartoon; the barcode figure moved to /research/three-ways.
+// 27 September 2026 (XC): keep the sticky left column; the main column is narrow (720 px)
+// and airy like the other pages. Fig. 1 is the hand-drawn LclmCartoon.
 
 // Latest keeps one line per real event. An empty or padded list is worse than a
 // short one — only add items that actually happened.
@@ -75,17 +75,32 @@ const timeline = [
 
 ---
 
-<Base>
-    <header class="home-head">
-      <h1 class="side-name">Xiaochuan Li</h1>
-      <p class="side-affil">M.Sc. Human and AI · University of Technology Nuremberg<br />
-        <span>Applying for PhD positions beginning in fall 2027</span></p>
-      <p class="side-q" set:html={openingQuestionsHtml} />
-      <p class="side-links">
-        <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a><span class="sep">·</span><a href="/cv">CV</a><span class="sep">·</span><a href="https://github.com/xchuan-li" rel="noopener">GitHub</a><span class="sep">·</span><a href="/approach">Research Program</a>
-      </p>
-    </header>
+<Base wide={true}>
+  <div class="wrap">
+    <!-- ===== left column: stays in view on wide screens ===== -->
+    <aside class="side" aria-label="About Xiaochuan Li">
+      <div class="side-inner">
+        <h1 class="side-name">Xiaochuan Li</h1>
+        <p class="side-affil">
+          M.Sc. Human and AI<br />University of Technology Nuremberg<br />
+          <span>Applying for PhD positions beginning in fall 2027</span>
+        </p>
+        <p class="side-q" set:html={openingQuestionsHtml} />
+        <nav class="side-toc" aria-label="Work on this page">
+          <p class="side-k">Selected work</p>
+          {portfolioSections.map((group) => (
+            <a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
+          ))}
+          <a href="#background"><span>—</span>Background</a>
+        </nav>
+        <p class="side-links">
+          <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a><br />
+          <a href="/cv">CV</a><span class="sep">·</span><a href="https://github.com/xchuan-li" rel="noopener">GitHub</a><span class="sep">·</span><a href="/approach">Research Program</a>
+        </p>
+      </div>
+    </aside>
 
+    <div class="main">
     <p class="intro" set:html={identityLongHtml} />
     <LclmCartoon />
 
@@ -160,22 +175,57 @@ const timeline = [
         </p>
       </div>
     </section>
+    </div>
+  </div>
 </Base>
 
+<script>
+  // The left column marks the section currently in the upper third of the viewport.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a")];
+  const targets = links.map((a) => document.querySelector(a.getAttribute("href") ?? ""));
+  const update = () => {
+    let current = -1;
+    targets.forEach((t, i) => {
+      if (t && t.getBoundingClientRect().top < innerHeight * 0.35) current = i;
+    });
+    links.forEach((a, i) => a.setAttribute("aria-current", String(i === current)));
+  };
+  addEventListener("scroll", update, { passive: true });
+  update();
+</script>
+
 <style>
-  /* ===== header: one narrow column, like the other pages ===== */
-  .home-head { display: block; margin: 0.5rem 0 2.4rem; }
-  .side-name { font-family: var(--font-display); font-size: 2.3rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 0.8rem; color: var(--color-text); }
-  .side-affil { font-size: 0.95rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 1.4rem; }
+  .wrap { max-width: calc(240px + 4rem + 720px + 3rem); margin: 0 auto; padding: 2.75rem 1.5rem 5rem; font-family: var(--font-sans); display: grid; grid-template-columns: 240px minmax(0, 720px); gap: 4rem; }
+  /* the column stretches the full height of the page so its inner block can stay in view */
+  .main { min-width: 0; }
+
+  /* ===== left column ===== */
+  .side-inner { position: sticky; top: calc(60px + 1.75rem); }
+  .side-name { font-family: var(--font-display); font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 0.75rem; color: var(--color-text); }
+  .side-affil { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 1.1rem; }
   .side-affil span { color: var(--color-text-dim); }
-  .side-q { font-size: 1.2rem; line-height: 1.45; color: var(--color-text); margin: 0 0 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border); }
-  .side-links { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.9; margin: 0; }
+  .side-q { font-size: 1.06rem; line-height: 1.45; color: var(--color-text); margin: 0 0 1.4rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+  .side-k { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.35rem; }
+  .side-toc a { display: grid; grid-template-columns: 2.1em 1fr; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.95; color: var(--color-text-muted); text-decoration: none; }
+  .side-toc a span { color: var(--color-text-dim); }
+  .side-toc a:hover { color: var(--color-text); }
+  .side-toc a[aria-current="true"], .side-toc a[aria-current="true"] span { color: var(--color-accent); }
+  .side-links { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.9; margin: 1.4rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--color-border); }
   .side-links a { color: var(--color-accent); text-decoration: none; }
   .side-links a:hover { text-decoration: underline; }
-  .side-links .sep { color: var(--color-text-ghost); margin: 0 0.5rem; }
-  .intro { font-size: 1.02rem; line-height: 1.7; color: var(--color-text-muted); margin: 0; }
+  .side-links .sep { color: var(--color-text-ghost); margin: 0 0.4rem; }
+  .intro { font-size: 1.02rem; line-height: 1.7; color: var(--color-text-muted); margin: 0.15rem 0 0; }
   .research-block, #background { scroll-margin-top: 5rem; }
   .research-sec { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--color-text-dim); margin: 0; }
+
+  @media (max-width: 960px) {
+    .wrap { grid-template-columns: 1fr; gap: 1.6rem; max-width: 720px; }
+    .side-inner { position: static; }
+    .side-toc { display: none; }
+  }
+  @media (max-height: 640px) {
+    .side-inner { position: static; }
+  }
 
   /* ===== research program ===== */
   .scope { margin-top: 2.6rem; padding: 1.45rem 0 1.6rem; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }

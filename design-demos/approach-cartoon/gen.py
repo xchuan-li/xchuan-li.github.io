@@ -46,9 +46,9 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
 <defs>
   <filter id="lc-boil" x="-5%" y="-5%" width="110%" height="110%">
     <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
-      <animate attributeName="seed" values="1;4;8;13" dur="0.36s" calcMode="discrete" repeatCount="indefinite"/>
+      <animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
     </feTurbulence>
-    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/>
   </filter>
   <marker id="lc-head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
     <path d="M1 1 L11 6 L1 11" fill="none" stroke="{INK}" stroke-width="2.2" stroke-linejoin="round"/>
