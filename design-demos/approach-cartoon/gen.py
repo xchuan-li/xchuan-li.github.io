@@ -1,12 +1,12 @@
 """Hand-drawn LCLM cartoon for /approach (draft). Pure SVG + CSS + SMIL, no JS.
 Style reference (XC): Jason Windsor, "The End of the World" (2003): thick wobbly
 outlines, flat fills, choppy low-frame-rate motion, hand lettering.
-20 s loop: analysis on a blackboard -> prediction splits to a child and a machine
--> results fly back -> the analysis is revised -> the machine tries to pass its
-result off as the child's and gets stamped "different evidence"."""
+24 s loop: analysis on a blackboard -> prediction splits to a child and a machine
+-> a small cognitive model supplies an intervention hypothesis -> separate results
+return to revise the account. No correspondence is presented as an established result."""
 import pathlib
 OUT = pathlib.Path(__file__).resolve().parent / "lclm-cartoon.html"
-CYCLE = 20
+CYCLE = 24
 kf = []   # keyframe CSS
 rules = []
 
@@ -29,20 +29,17 @@ def fly(cls, on, off, dx, dy, steps=7):
               f"{off:.2f}% {{opacity:1; transform:translate({dx}px,{dy}px)}} {off+0.01:.2f}%, 100% {{opacity:0; transform:translate({dx}px,{dy}px)}} }}")
     rules.append(f".{cls} {{ animation-name:lc-{cls}; }}")
 
-# timeline (percent of 20 s)
-vis("c1", 5); vis("c2", 12.5); vis("pred", 17.5); vis("split", 22.5)
-vis("kid", 25); vis("bot", 30); vis("bub", 33)
-vis2("kidarm0", [(25, 45)]); vis("kidarm1", 45); vis("strip", 47)
-fly("planeA", 50, 62, 120, -150); fly("planeB", 50, 62, -120, -150)
-vis("rev", 65); vis2("armpoint", [(0.01, 65), (85, 99.9)]); vis2("armscratch", [(65, 85)])
-kf.append("@keyframes lc-gag { 0%, 84.99% {opacity:0; transform:translate(0,0)} 85% {opacity:1; transform:translate(0,0); animation-timing-function:steps(5,end)} "
-          "90% {opacity:1; transform:translate(-420px,0)} 96.5% {opacity:1; transform:translate(-420px,0); animation-timing-function:steps(3,end)} "
-          "99% {opacity:1; transform:translate(0,0)} 99.01%, 100% {opacity:0} }")
-rules.append(".gag { animation-name:lc-gag; }")
-vis("stamp", 90, 96.5)
+# A proposed research route, not experimental results. 24 s loop.
+vis("c1", 4); vis("c2", 10); vis("pred", 17.5); vis("split", 24)
+vis("kid", 27); vis("bot", 30); vis("bub", 33)
+vis2("kidarm0", [(27, 43)]); vis("kidarm1", 43); vis("strip", 55)
+vis("align", 40, 84); vis("intervene", 50, 84)
+vis2("state-open", [(17.5, 49.99)]); vis("state-updated", 50)
+fly("planeA", 76, 87, 120, -150); fly("planeB", 76, 87, -120, -150)
+vis("rev", 88); vis2("armpoint", [(0.01, 88)]); vis("armscratch", 88)
 
 INK, SKIN = "#141414", "#f2cfa4"
-SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. A linguist writes on a blackboard that might p is not the same as I don't know whether p and draws a prediction arrow. The arrow splits: a child is told it might be in the box and points at the box; a machine prints a number. Both results fly back to the blackboard, the linguist scratches their head and adds a missing distinction. Finally the machine pushes its printout into the child's place and it is stamped different evidence.">
+SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Sketch of a proposed research route. Linguistic distinctions lead to a small cognitive model of open possibilities. Its predictions are tested with a child. A robot reveals candidate internal connections; changing a state asks whether the same update occurs inside the language model. Separate observations return to revise the account. The correspondence is an open question, not a reported result.">
 <defs>
   <filter id="lc-boil" x="-5%" y="-5%" width="110%" height="110%">
     <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
@@ -56,7 +53,7 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
 </defs>
 <g filter="url(#lc-boil)" stroke="{INK}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
   <path d="M8 9 L793 5 L795 473 L5 475 Z" fill="#fff"/>
-  <text class="lab" x="24" y="40" stroke="none">the analysis</text>
+  <text class="lab" x="24" y="40" stroke="none">a language question</text>
 
   <!-- blackboard -->
   <path d="M232 44 L604 40 L608 184 L228 187 Z" fill="#9b6b3d"/>
@@ -64,7 +61,7 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
   <g class="chalk" stroke="none">
     <text class="a c1" x="262" y="92">might p  ≠</text>
     <text class="a c2" x="262" y="128">I don’t know whether p</text>
-    <g class="a rev"><text x="262" y="163" class="small">+ a missing distinction?</text></g>
+    <g class="a rev"><text x="262" y="163" class="small">revise the account?</text></g>
   </g>
 
   <!-- linguist -->
@@ -82,9 +79,16 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
       <text x="160" y="72" class="lab" stroke="none">?!</text></g>
   </g>
 
-  <!-- prediction -->
-  <g class="a pred"><path d="M418 190 L416 232" fill="none"/><text x="428" y="222" class="lab" stroke="none">prediction</text></g>
-  <g class="a split" fill="none"><path d="M416 232 L272 292" marker-end="url(#lc-head)"/><path d="M416 232 L560 292" marker-end="url(#lc-head)"/></g>
+  <!-- A minimal state model: hypothetical, not an empirical cognitive result. -->
+  <g class="a pred">
+    <path d="M418 189 L418 206" fill="none"/>
+    <path d="M310 207 L512 204 L516 298 L308 301 Z" fill="#fff8df" stroke-width="2.4"/>
+    <text x="413" y="230" class="lab" stroke="none" text-anchor="middle">a small model</text>
+    <text class="a state-open" x="413" y="266" stroke="none" text-anchor="middle" font-size="29">p or q</text>
+    <text class="a state-updated" x="413" y="266" stroke="none" text-anchor="middle" font-size="29">q</text>
+    <text class="a intervene" x="413" y="288" stroke="none" text-anchor="middle" font-size="18">new evidence: not p</text>
+  </g>
+  <g class="a split" fill="none"><path d="M336 302 L280 335" marker-end="url(#lc-head)"/><path d="M489 302 L556 336" marker-end="url(#lc-head)"/></g>
 
   <!-- child -->
   <g class="a kid">
@@ -113,21 +117,32 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
     <path d="M612 316 L622 316 L622 326 L612 326 Z M640 316 L650 316 L650 326 L640 326 Z" fill="{INK}"/>
     <path d="M614 338 L648 337" fill="none" stroke-width="2.4"/>
     <path d="M588 352 L676 350 L678 424 L586 426 Z" fill="#b9bec4"/>
-    <path d="M604 368 L620 367 M604 380 L628 379" fill="none" stroke-width="2.4"/>
+    <path d="M604 367 L633 392 L658 367 M604 367 L611 409 L633 392 L658 410" fill="none" stroke-width="2.4"/>
+    <g fill="#fff" stroke-width="2.4">
+      <circle cx="604" cy="367" r="6"/><circle cx="658" cy="367" r="6"/>
+      <circle cx="633" cy="392" r="6"/><circle cx="611" cy="409" r="6"/><circle cx="658" cy="410" r="6"/>
+    </g>
+    <g class="a intervene"><circle cx="604" cy="367" r="9" fill="#e8b33c"/><path d="M598 361 L610 373 M610 361 L598 373" stroke-width="2"/></g>
     <path d="M612 426 L608 458 M652 425 L656 458" fill="none" stroke-width="4"/>
     <path d="M676 380 L684 380" fill="none"/>
-    <g class="a strip"><path d="M682 368 L752 366 L754 394 L682 396 Z" fill="#fff" stroke-width="2.4"/><text x="694" y="388" class="num" stroke="none">0.71</text></g>
-    <text x="672" y="466" class="lab" stroke="none">a model</text>
+    <g class="a strip"><path d="M682 368 L752 366 L754 394 L682 396 Z" fill="#fff" stroke-width="2.4"/><text x="694" y="388" class="num" stroke="none">?</text></g>
+    <text x="578" y="466" class="lab" stroke="none">inside an LM</text>
   </g>
 
   <!-- results fly back -->
   <g class="a planeA"><path d="M170 300 L204 286 L178 314 L182 302 Z" fill="#fff" stroke-width="2.4"/></g>
   <g class="a planeB"><path d="M640 292 L606 280 L632 306 L628 294 Z" fill="#fff" stroke-width="2.4"/></g>
 
-  <!-- the gag -->
-  <g class="a gag"><path d="M682 368 L752 366 L754 394 L682 396 Z" fill="#fff" stroke-width="2.4"/><text x="694" y="388" class="num" stroke="none">0.71</text></g>
-  <g class="a stamp" transform="rotate(-9 300 360)"><path d="M186 334 L416 330 L418 386 L184 388 Z" fill="none" stroke="#d22a1e" stroke-width="4"/>
-    <text x="198" y="370" class="stampt" stroke="none">DIFFERENT EVIDENCE</text></g>
+  <!-- A candidate mapping and a paired intervention, explicitly a question. -->
+  <g class="a align">
+    <path d="M477 270 Q558 286 593 354" fill="none" stroke-dasharray="6 7" stroke-width="2.4"/>
+    <text x="511" y="308" class="big" stroke="none">?</text>
+    <text x="411" y="384" class="lab" stroke="none" text-anchor="middle">same computation?</text>
+  </g>
+  <g class="a intervene">
+    <text x="413" y="413" class="lab" stroke="none" text-anchor="middle">change a state</text>
+    <path d="M496 406 Q549 404 592 375" fill="none" stroke-width="2.4" marker-end="url(#lc-head)"/>
+  </g>
 </g>
 </svg>'''
 
@@ -153,7 +168,7 @@ figcaption b {{ font-family:var(--mono); font-weight:500; font-size:11px; color:
 {chr(10).join(rules)}
 @media (prefers-reduced-motion: reduce) {{
   .a {{ animation:none !important; opacity:0; }}
-  .c1,.c2,.rev,.pred,.split,.kid,.bot,.bub,.kidarm1,.strip,.armpoint {{ opacity:1; }}
+  .c1,.c2,.pred,.state-open,.split,.kid,.bot,.bub,.kidarm1,.strip,.armpoint,.align {{ opacity:1; }}
   #lc-boil animate {{ display:none; }}
 }}
 """
@@ -164,10 +179,10 @@ HTML = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>{CSS}</style></head><body><div class="page">
 <h2>How the evidence connects</h2>
-<p class="p">The three routes can constrain one another: an analysis guides what to test; human and model results can support, challenge, or refine its predictions; and a mismatch can expose a missing distinction. But they answer different questions. A model result does not establish how people understand language.</p>
+<p class="p">Linguistic distinctions guide a simple cognitive account. Human studies test its predictions; LM interventions test proposed internal computations. Each can refine the account, without establishing that humans and language models use the same mechanism.</p>
 <figure>{SVG}
-<figcaption><b>Fig. 2</b><span>An analysis makes predictions; children and models are tested separately; a mismatch sends the analysis back for revision. A model’s result is not evidence about children.</span></figcaption></figure>
-<p class="note">Draft · hand-drawn style after Jason Windsor’s “The End of the World” (2003) · 20 s loop · pure SVG/CSS, no scripts.</p>
+<figcaption><b>Fig. 2</b><span>A proposed route from linguistic analysis to a cognitive model, human predictions, and LM interventions. Illustration, not results.</span></figcaption></figure>
+<p class="note">Draft · hand-drawn style after Jason Windsor’s “The End of the World” (2003) · 24 s loop · pure SVG/CSS, no scripts.</p>
 </div></body></html>"""
 OUT.write_text(HTML); print(OUT)
 
@@ -176,10 +191,9 @@ COMP_CSS = "\n".join(kf + rules)
 COMP.write_text(f"""---
 // Homepage Fig. 1 since 27 September 2026 (XC: "我挺想放在首页的"). Hand-drawn in the
 // style of Jason Windsor's "The End of the World" (2003): thick wobbly outlines, flat
-// fills, choppy motion. It shows how the evidence connects: an analysis predicts; a
-// child and a model are tested separately; results come back and the analysis is
-// revised; a model's printout pushed into the child's place is stamped "different
-// evidence" (red line 1: separate studies, not one theory in two systems).
+// fills, choppy motion. A cognitive model proposes computations; human predictions
+// and LM interventions are separate tests. The candidate correspondence is a question.
+// This illustration contains no empirical results or claim of a shared mechanism.
 // GENERATED by design-demos/approach-cartoon/gen.py — edit there and re-run.
 // Loop is CSS + SMIL (no script needed); the script only adds Pause and stops the
 // line boil under reduced motion.
@@ -188,7 +202,7 @@ COMP.write_text(f"""---
   {SVG}
   <figcaption>
     <span class="lcfig-mark">Fig. 1</span>
-    <span>How the evidence connects. An analysis makes predictions; children and models are tested separately; a mismatch sends the analysis back for revision. A model’s result is not evidence about children. See the <a href="/approach">research program</a>.</span>
+    <span>A proposed route: build a cognitive model, test its human predictions, and look for corresponding computations in an LM. Illustration, not results. See the <a href="/approach">research program</a>.</span>
     <button type="button" class="lcfig-pause" data-lc-pause hidden>Pause</button>
   </figcaption>
 </figure>
@@ -229,7 +243,7 @@ COMP.write_text(f"""---
 {COMP_CSS}
   @media (prefers-reduced-motion: reduce) {{
     .a {{ animation:none !important; opacity:0; }}
-    .c1,.c2,.rev,.pred,.split,.kid,.bot,.bub,.kidarm1,.strip,.armpoint {{ opacity:1; }}
+    .c1,.c2,.pred,.state-open,.split,.kid,.bot,.bub,.kidarm1,.strip,.armpoint,.align {{ opacity:1; }}
   }}
   @media (max-width:600px) {{
     figcaption {{ grid-template-columns:auto 1fr; }}

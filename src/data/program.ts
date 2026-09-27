@@ -16,7 +16,7 @@ export const openingQuestions =
 
 /** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
 export const identityLong =
-  "Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input. Training and internal interventions ask what models learn and which representations contribute to a choice.";
+  "I start with distinctions in linguistic meaning and aim to express them in simple cognitive models. Human studies test their predictions; interventions in language models ask whether corresponding computations can be found inside the network.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -28,7 +28,7 @@ export const openingQuestionsHtml =
   "How does linguistic form shape what we understand and infer?";
 
 export const identityLongHtml =
-  "Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input. Training and internal interventions ask what models learn and which representations contribute to a choice.";
+  "I start with distinctions in linguistic meaning and aim to express them in simple cognitive models. Human studies test their predictions; interventions in language models ask whether corresponding computations can be found inside the network.";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

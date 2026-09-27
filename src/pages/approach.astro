@@ -13,76 +13,88 @@ import Base from "../layouts/Base.astro";
     <h1 class="rp-h1">Research Program</h1>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Linguistic meaning and inference</h2>
+      <h2 class="rp-h2">From meaning to a computational account</h2>
       <p class="rp-p">
-        My work asks how linguistic form shapes the alternatives available for interpretation and
-        what happens to them in later reasoning. During my master’s degree I focus on epistemic
-        modality: an expression such as <em>might</em> can present a proposition as possible while
-        leaving its truth unsettled, and I ask what that contributes to a conversation and how
-        children come to understand it.
+        My work asks how language shapes the possibilities we keep available and revise as
+        new information arrives. My current focus is epistemic modality: what expressions
+        such as <em>might</em> contribute, how children understand them, and how these
+        distinctions can be made explicit in a simple cognitive model.
+      </p>
+      <p class="rp-p">
+        The next direction is to use such a model to specify representations, update rules,
+        and predictions, then ask whether corresponding computations can be identified in
+        a language model. The cognitive model and this correspondence are still to be established.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Three roles, three kinds of evidence</h2>
+      <h2 class="rp-h2">Four connected roles</h2>
       <p class="rp-p">
-        <strong>Linguistic analysis</strong> specifies what expressions mean, which alternatives they
-        make available, and what inferences they license. It turns an intuitive contrast into
-        explicit predictions. It can show what a theory says, but by itself it cannot show how
-        people or models behave.
+        <strong>Linguistic analysis</strong> states what expressions contribute and which
+        inferences they license. It supplies contrasts and competing explanations; a semantic
+        description alone does not specify a psychological algorithm.
       </p>
       <p class="rp-p">
-        <strong>Human experiments</strong> test whether a linguistic contrast changes how people
-        interpret, remember, or reason about those alternatives. They provide evidence about human
-        cognition. A proposed study can follow from an analysis, but it remains a proposal until it
-        is run and its results are reported.
+        <strong>Cognitive modelling</strong> makes a candidate explanation runnable: what
+        information is represented, how it changes, and what answers or errors should follow.
+        Alternative models need to make distinguishable predictions.
       </p>
       <p class="rp-p">
-        <strong>Language-model studies</strong> test how particular models respond to controlled
-        linguistic input. Controlled training can test what a model can learn and whether it
-        generalises beyond surface cues; internal interventions can test which model representations
-        contribute to a choice. This evidence is about the tested models and setup.
+        <strong>Human studies</strong> test those predictions against people's understanding
+        and reasoning. The planned thesis studies preschool children; its measures and contrasts
+        must suit that population. It has no language-model component.
       </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2">How the evidence connects</h2>
       <p class="rp-p">
-        The three routes can constrain one another: an analysis guides what to test; human and model
-        results can support, challenge, or refine its predictions; and a mismatch can expose a
-        missing distinction or a limitation in the experiment. But they answer different questions.
-        A model result does not establish how people understand language, and a human result does not
-        establish what a model learned.
+        <strong>LM mechanism tests</strong> ask whether changing a candidate internal state
+        produces the selective changes predicted by the cognitive model. Reading a variable
+        from an activation is a starting point; an intervention must do more than change an answer.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Where the current projects fit</h2>
+      <h2 class="rp-h2">What would count as a correspondence?</h2>
       <p class="rp-p">
-        <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> is the linguistic
-        analysis: it compares what <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know
-        whether p</em> contribute to discourse and which replies they license. My <a href="/research/learnability">master’s
-        thesis</a>, now in planning, asks how preschool children understand modal expressions and how
-        this relates to their reasoning about possibilities; it has not begun. A separate
-        <a href="/research/modal-language-models">language-model study</a> asks what models learn
-        about modal expressions and which cues in their input support it; diagnostic runs exist, and
-        controlled training has not begun.
+        If changing a variable in the simple model predicts a particular pattern of changed and
+        unchanged answers, an aligned intervention in the LM should produce the same pattern
+        on new examples. The alignment could be distributed across many units and hold only
+        within a limited task. Even a successful alignment would not establish that people
+        use the same algorithm; that requires independent human evidence.
       </p>
       <p class="rp-p">
-        Other work takes up different questions. <a href="/research/typicality-in-referent-choice">Typicality
-        in referent choice</a> is a working paper on reference, analysing what a forced choice between candidate
-        referents can establish; it reports no new experiment. <a href="/research/latent-control-states">Latent
-        Control States</a> develops methods for testing which internal model computations contribute
-        to a choice; those mechanistic tests are still in development.
+        <a href="https://proceedings.mlr.press/v236/geiger24a.html">Distributed alignment search</a>
+        and <a href="https://jmlr.org/papers/v26/23-0058.html">causal abstraction</a> provide
+        methodological starting points. Whether they support a useful explanation of the modal
+        phenomenon is an open research question.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Scope and progress</h2>
+      <h2 class="rp-h2">Where the projects fit</h2>
       <p class="rp-p">
-        The shared programme is a way of asking and testing questions, not a claim that every project
-        contains all three kinds of evidence. Each study has its own question and completion status;
-        comparisons are useful when their limits are kept explicit.
+        <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> develops
+        linguistic contrasts. The <a href="/research/learnability">planned master's thesis</a>
+        provides the route to evidence from children. A separate
+        <a href="/research/modal-language-models">model project</a> is the intended home for
+        a simple computational account and its comparison with LMs; diagnostic runs exist,
+        while cognitive modelling, controlled training, and internal alignment tests remain ahead.
+      </p>
+      <p class="rp-p">
+        <a href="/research/latent-control-states">Latent Control States</a> contributes experience
+        with internal interventions and competing explanations from a different task. Its
+        experiments concern prompt framing in dilemmas, not an identified modal circuit.
+        The manuscript is in preparation. The
+        <a href="/research/typicality-in-referent-choice">typicality working paper</a> remains
+        a separate piece of linguistic analysis.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">A programme, with separate studies</h2>
+      <p class="rp-p">
+        These projects can constrain one another without sharing every manipulation, dataset,
+        or completion date. A mismatch may reveal a weak analysis, an inadequate cognitive model,
+        a measurement problem, or a genuinely different computation. The aim is to distinguish
+        those explanations, not to assume a common mechanism in advance.
       </p>
     </section>
 

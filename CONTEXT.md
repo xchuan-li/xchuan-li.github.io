@@ -2,6 +2,16 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Cognitive-model bridge, 27 September 2026 — latest authority
+
+XC asked to connect the linguistic analysis, child study, modal model work, and mechanistic methods, and update the homepage device. This section supersedes conflicting descriptions of the figure and three-step chain below.
+
+- Start from linguistic distinctions, express candidate computations in a simple cognitive model, test human predictions independently, and ask whether corresponding computations can be causally identified in an LM. This is the programme being developed, not a completed evidence chain.
+- The homepage's existing hand-drawn `LclmCartoon.astro` now has a **24 s loop**: blackboard → small state model → separate child and LM tests → candidate internal alignment marked with a question → state intervention → observations return to revise the account. Keep the slow 1.2 s line boil, Pause, reduced-motion composite, sticky sidebar, and 720 px main column. Edit `design-demos/approach-cartoon/gen.py` and regenerate both outputs.
+- `ModalityChain.astro` now has four roles: linguistic analysis; the independent child thesis; a cognitive account and LM comparison in development; and methods from **Latent Control States**, a separate dilemma task. Its present results do not identify a modal circuit. The manuscript stays in preparation.
+- The modal-model project has existing diagnostic materials and mixed, uncalibrated runs. The cognitive account is being specified; controlled training and internal causal alignment remain planned. The child thesis still has no LM component and no data. Human–LM algorithmic identity is not claimed.
+- Keep the public site in English, omit internal project IDs and private application deliberations, and retain the three-line Papers & Writing Samples list. The HTML CV content and downloadable PDF are unchanged in this update.
+
 ## Modality focus, 27 September 2026 — current authority
 
 XC decided that the master's stage focuses only on modality, and that Cross-lingual ProtoBias is downgraded from a research line to a project on the same footing as the street-view course project. This supersedes the 26 September section below where they conflict, and supersedes the "two faces" framing further down as a description of current work (the typicality paper keeps its own page and its closing link to the modality work).

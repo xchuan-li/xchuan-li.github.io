@@ -1,7 +1,7 @@
 // Output categories are independent of research topics. Publication status is
 // explicit on every entry; "forthcoming" is reserved for confirmed acceptance.
-// 27 September 2026 (XC): two sections only. Modality shows one question with three
-// kinds of evidence; papers and writing samples share the second. Course projects
+// 27 September 2026 (XC): two sections only. Modality connects linguistic, human, computational,
+// and mechanistic-method roles; papers and writing samples share the second. Course projects
 // (ProtoBias, street view) are listed on the CV and in a line under /research.
 import { projects } from "./projects";
 
@@ -29,7 +29,7 @@ export interface PortfolioSection {
 export const portfolioSections: PortfolioSection[] = [
   {
     id: "current", sec: "01", label: "Current Research: Modality",
-    blurb: "What do modal expressions contribute, and how are they learned? One analysis, tested by a study with children and a study with language models.",
+    blurb: "How do we represent, learn, and revise possibilities? Linguistic analysis and human studies guide a developing computational account; mechanistic work supplies methods for testing it in language models.",
     entries: [
       {
         title: projects.threeWays.title,
@@ -51,6 +51,13 @@ export const portfolioSections: PortfolioSection[] = [
         desc: projects.modalModels.summary,
         status: projects.modalModels.status,
         links: [{ label: "Project outline", href: projects.modalModels.href }],
+      },
+      {
+        title: projects.latentControl.title,
+        field: "Mechanistic methods from a separate task",
+        desc: projects.latentControl.summary,
+        status: projects.latentControl.status,
+        links: [{ label: "Interventions & controls", href: projects.latentControl.href }],
       },
     ],
   },

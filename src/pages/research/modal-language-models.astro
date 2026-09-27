@@ -10,7 +10,7 @@ const project = projects.modalModels;
 
 <Base
   title={`${project.title} · Xiaochuan Li`}
-  description="A language-model study in development: how pretrained models treat a possibility once it is ruled out, and what small models can learn about modal expressions from controlled input."
+  description="A developing project connecting simple accounts of modal reasoning with language-model behaviour and planned internal mechanism tests."
   showProgress={true}
   toc={true}
 >
@@ -21,35 +21,50 @@ const project = projects.modalModels;
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">{project.question}</p>
     <p>{project.summary} {project.connection}</p>
 
-    <h2>The connection to the formal analysis</h2>
+    <h2>From a linguistic contrast to a cognitive model</h2>
     <p>
-      <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> states what
-      different epistemic expressions contribute to a conversation and which replies they license.
-      Those contrasts can be written as minimal pairs, which is what a model study needs. A model’s
-      preference between two sentences shows how that model responds to the contrast; it does not
-      show how people understand it.
+      <a href="/research/three-ways">The linguistic analysis</a> supplies distinctions about
+      possibility, knowledge, and conversational commitments. The proposed next step is to
+      state a small computational account: which alternatives it represents, how evidence
+      updates them, and what responses it predicts. Its cognitive interpretation must be tested
+      against independent human evidence, including suitable developmental findings.
     </p>
 
-    <h2>Diagnostics on pretrained models</h2>
+    <h2>What already exists</h2>
     <p>
-      The first stage tested whether pretrained models keep a possibility available after it has been
-      ruled out, scoring matched continuations by their probability. Each version included instrument
-      checks that the models had to pass before a result was read. The results so far are mixed and
-      the materials have not yet been checked against independent judgments, so no finding is
-      reported here.
+      Diagnostic runs on pretrained models tested how a possibility is treated after exclusion
+      and attempted reopening, using matched continuations and instrument checks. Results are
+      mixed and independent material calibration is incomplete. These runs motivate the next
+      question; they do not establish a cognitive model or an internal mechanism.
     </p>
 
-    <h2>Controlled training</h2>
+    <h2>Testing a proposed computation inside an LM</h2>
     <p>
-      The next stage asks what a learner can acquire from its input. Small models are first compared
-      against a baseline on a contrast people answer reliably; if the contrast is learnable at that
-      scale, models are trained on input in which specific cues are removed or added. Training data
-      size is not a proxy for a child’s age, and a small model is not a model of a child.
+      Once a candidate model makes clear predictions, the planned comparison asks whether its
+      intermediate variables can be aligned with LM representations. Changing an aligned state
+      should produce the specific changes predicted by the small model, including answers that
+      should remain unchanged. Tests on new examples and competing models are needed to separate
+      an explanatory correspondence from a convenient readout of the answer.
+    </p>
+    <p>
+      <a href="/research/latent-control-states">Separate work on internal interventions</a>
+      supplies methodological experience. That work studies prompt framing in dilemmas;
+      transferring its methods to modal reasoning is a future step, not an existing result.
+    </p>
+
+    <h2>Learning from controlled input</h2>
+    <p>
+      Controlled training remains a complementary way to investigate which input cues or
+      learning assumptions support the target distinction. It is a different question from
+      locating an existing computation in a fixed pretrained model. A model trained to follow
+      a prescribed cognitive account cannot then be used as evidence that the original LM
+      acquired that account spontaneously.
     </p>
 
     <h2>Status</h2>
     <p class="cw-status">
-      In development. Diagnostic runs exist but are not calibrated; controlled training has not begun.
+      Diagnostic runs exist. The cognitive account is being specified; controlled training and
+      causal alignment tests have not begun. This project is separate from the human master's thesis.
     </p>
     <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
   </article>

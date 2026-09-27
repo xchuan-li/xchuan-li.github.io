@@ -1,15 +1,15 @@
 ---
 // The modality section as one chain (XC, 27 September 2026): the left column names the
-// question each project answers, a hairline spine joins them, and a return line closes
-// the loop. It shows one analysis tested by two separate studies, not "one theory, two
-// systems" (CONTEXT red line 1). Status lines say what exists, not only what is missing.
+// question each project answers. Cognitive modelling is the proposed bridge; the
+// mechanistic project contributes methods from a separate task, not modal results.
+// Status lines distinguish existing work from the next research direction.
 import { projects } from "../data/projects";
 
 const steps = [
   {
     question: "What does it contribute?",
     project: projects.threeWays,
-    status: "Formal analysis · draft derivations; independent judgments pending",
+    status: "Formal analysis · draft derivations; judgments under evaluation",
     link: "Question & diagnostics",
   },
   {
@@ -19,10 +19,16 @@ const steps = [
     link: "Thesis outline",
   },
   {
-    question: "Can it be learned from input alone?",
+    question: "What computation could explain it?",
     project: projects.modalModels,
-    status: "Model study · diagnostic runs; controlled training planned",
+    status: "Model study · diagnostics exist; cognitive model being specified",
     link: "Project outline",
+  },
+  {
+    question: "How can we test the mechanism?",
+    project: projects.latentControl,
+    status: "Methods from a separate task · manuscript in preparation",
+    link: "Interventions & controls",
   },
 ];
 ---
@@ -40,7 +46,7 @@ const steps = [
     </li>
   ))}
 </ol>
-<p class="chain-return"><span class="chain-loop" aria-hidden="true">↺</span><span>Where children or models depart from the predictions, the analysis is revised.</span></p>
+<p class="chain-return"><span class="chain-loop" aria-hidden="true">↺</span><span>Human evidence and LM interventions can each refine the account. A shared mechanism remains a question to test.</span></p>
 
 <style>
   /* Columns match PortfolioEntry (140px | gap 1.75rem | body); the spine sits in the gap. */

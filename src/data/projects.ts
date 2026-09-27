@@ -2,7 +2,8 @@
 // B4: manuscript in preparation, not submitted. B1: project/report, not a promised publication.
 // 27 September 2026 (XC): the master's work focuses on modality; ProtoBias is a single-author
 // course project on the same footing as the street-view course project, not a research line.
-// Modality is shown as one question with three kinds of evidence: threeWays, thesis, modalModels.
+// Modality connects linguistic analysis, human evidence, a proposed cognitive account,
+// and LM tests; latentControl supplies methods from a separate task.
 // The thesis study is planned, not running. Private exploratory work is not published here.
 export const projects = {
   protobias: {
@@ -32,9 +33,9 @@ export const projects = {
   modalModels: {
     title: "Modal expressions in language models",
     href: "/research/modal-language-models",
-    question: "What do language models learn about modal expressions, and which cues in their input support it?",
-    summary: "Diagnostic tests of how pretrained models treat a possibility after it has been ruled out, followed by a planned study that trains small models on controlled input.",
-    connection: "The formal analysis specifies the contrasts; this project asks whether a learner can acquire them from linguistic input alone. It is separate from the thesis.",
+    question: "Can a simple account of modal reasoning explain language-model behaviour and correspond to computations inside the model?",
+    summary: "Diagnostic work on how models treat ruled-out possibilities, now motivating a simple cognitive account and planned tests of its predictions in model behaviour and internal computations.",
+    connection: "Linguistic analysis guides the account; human evidence constrains its cognitive interpretation. Planned LM interventions draw on methods developed in separate mechanistic work. The project remains separate from the thesis.",
     status: "Language-model study · in development",
   },
   typicality: {
