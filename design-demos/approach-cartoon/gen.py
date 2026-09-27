@@ -42,7 +42,7 @@ rules.append(".gag { animation-name:lc-gag; }")
 vis("stamp", 90, 96.5)
 
 INK, SKIN = "#141414", "#f2cfa4"
-SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. A linguist writes on a blackboard that might p is not the same as I don't know whether p and draws a prediction arrow. The arrow splits: a child is told it might be in the box and points at the box; a machine prints a number. Both results fly back to the blackboard, the linguist scratches his head and adds a missing distinction. Finally the machine pushes its printout into the child's place and it is stamped different evidence.">
+SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. A linguist writes on a blackboard that might p is not the same as I don't know whether p and draws a prediction arrow. The arrow splits: a child is told it might be in the box and points at the box; a machine prints a number. Both results fly back to the blackboard, the linguist scratches their head and adds a missing distinction. Finally the machine pushes its printout into the child's place and it is stamped different evidence.">
 <defs>
   <filter id="lc-boil" x="-5%" y="-5%" width="110%" height="110%">
     <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
@@ -64,8 +64,7 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="Hand-drawn cartoon. 
   <g class="chalk" stroke="none">
     <text class="a c1" x="262" y="92">might p  ≠</text>
     <text class="a c2" x="262" y="128">I don’t know whether p</text>
-    <g class="a rev"><path d="M470 118 C492 108 508 132 530 116 C548 104 560 128 574 118" fill="none" stroke="#dfe6df" stroke-width="7" opacity=".35"/>
-      <text x="262" y="163" class="small">+ a missing distinction?</text></g>
+    <g class="a rev"><text x="262" y="163" class="small">+ a missing distinction?</text></g>
   </g>
 
   <!-- linguist -->
