@@ -2,6 +2,8 @@
 import Base from "../../layouts/Base.astro";
 import { portfolioSections, courseProjects } from "../../data/portfolio";
 import PortfolioEntry from "../../components/PortfolioEntry.astro";
+import ModalityChain from "../../components/ModalityChain.astro";
+import PaperList from "../../components/PaperList.astro";
 ---
 <Base title="Research & Projects · Xiaochuan Li"
   description="Working papers, manuscripts in preparation, completed research and technical projects, and selected writing by Xiaochuan Li.">
@@ -20,8 +22,8 @@ import PortfolioEntry from "../../components/PortfolioEntry.astro";
       <section class="work-section" id={section.id} aria-labelledby={section.id + "-heading"}>
         <p class="eyebrow">{section.sec}</p>
         <h2 id={section.id + "-heading"}>{section.label}</h2>
-        <p class="section-intro">{section.blurb}</p>
-        {section.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+        {section.blurb && <p class="section-intro">{section.blurb}</p>}
+        {section.id === "current" ? <ModalityChain /> : section.id === "papers" ? <PaperList entries={section.entries} /> : section.entries.map((entry) => <PortfolioEntry entry={entry} />)}
       </section>
     ))}
     <p class="course-link" id="projects">Course projects:

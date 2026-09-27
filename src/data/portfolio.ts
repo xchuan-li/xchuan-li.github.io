@@ -13,6 +13,10 @@ export interface PortfolioEntry {
   links: { label: string; href: string }[];
   cover?: { src: string; alt: string };
   note?: { label: string; text: string };
+  /** Compact list (papers): output type, one sentence, and whether it is a writing sample. */
+  kind?: string;
+  short?: string;
+  sample?: boolean;
 }
 export interface PortfolioSection {
   id: string;
@@ -25,7 +29,7 @@ export interface PortfolioSection {
 export const portfolioSections: PortfolioSection[] = [
   {
     id: "current", sec: "01", label: "Current Research: Modality",
-    blurb: "One question about modal expressions, studied through linguistic analysis, a study with children, and language models.",
+    blurb: "What do modal expressions contribute, and how are they learned? One analysis, tested by a study with children and a study with language models.",
     entries: [
       {
         title: projects.threeWays.title,
@@ -52,16 +56,19 @@ export const portfolioSections: PortfolioSection[] = [
   },
   {
     id: "papers", sec: "02", label: "Papers & Writing Samples",
-    blurb: "Working papers, manuscripts, and selected reports, with their current status.",
+    blurb: "",
     entries: [
       {
         title: projects.typicality.title,
         field: "Semantics & pragmatics",
         desc: projects.typicality.summary,
         status: projects.typicality.status + " · writing sample",
+        kind: "Working paper 2026",
+        short: "What a forced choice between two candidates can show about typicality when the description fits both.",
+        sample: true,
         links: [
-          { label: "Paper overview", href: projects.typicality.href },
-          { label: "Read working paper", href: "https://lingbuzz.net/lingbuzz/010343" },
+          { label: "overview", href: projects.typicality.href },
+          { label: "LingBuzz", href: "https://lingbuzz.net/lingbuzz/010343" },
         ],
       },
       {
@@ -69,16 +76,21 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Mechanistic interpretability",
         desc: projects.latentControl.summary,
         status: projects.latentControl.status,
-        links: [{ label: "Research overview", href: projects.latentControl.href }],
+        kind: "Manuscript in preparation",
+        short: "How prompt framing changes model choices, tested with residual-stream interventions and low-rank analysis.",
+        links: [{ label: "overview", href: projects.latentControl.href }],
       },
       {
-        title: "Cross-lingual ProtoBias — project report",
+        title: "Cross-lingual ProtoBias",
         field: "Course project report",
         desc: "A single-author report on a multilingual vision–language evaluation: the design, corrected results, and limits of the comparison.",
         status: "Completed course project · writing sample",
+        kind: "Course report 2026",
+        short: "Whether vision–language models follow explicit constraints over typicality across seven prompt languages.",
+        sample: true,
         links: [
-          { label: "Read report", href: projects.protobias.href },
-          { label: "Code & data", href: "https://github.com/xchuan-li/cross_lingual_protobias" },
+          { label: "report", href: projects.protobias.href },
+          { label: "code", href: "https://github.com/xchuan-li/cross_lingual_protobias" },
         ],
       },
     ],

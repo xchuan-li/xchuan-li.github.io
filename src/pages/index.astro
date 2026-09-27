@@ -3,6 +3,8 @@ import Base from "../layouts/Base.astro";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
 import { portfolioSections } from "../data/portfolio";
 import PortfolioEntry from "../components/PortfolioEntry.astro";
+import ModalityChain from "../components/ModalityChain.astro";
+import PaperList from "../components/PaperList.astro";
 import ModalityFigure from "../components/ModalityFigure.astro";
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
@@ -121,8 +123,8 @@ const timeline = [
           <section class="research-block" id={group.id} aria-labelledby={group.id + "-heading"}>
             <p class="research-sec">{group.sec}</p>
             <h2 class="research-group-label" id={group.id + "-heading"}>{group.label}</h2>
-            <p class="research-group-blurb">{group.blurb}</p>
-            {group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+            {group.blurb && <p class="research-group-blurb">{group.blurb}</p>}
+            {group.id === "current" ? <ModalityChain /> : group.id === "papers" ? <PaperList entries={group.entries} /> : group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
           </section>
         ))}
       </div>
