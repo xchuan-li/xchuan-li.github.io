@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fig. 1 · C · Logical space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  Direction C · Logical space, as small multiples (Tufte's discipline; the
+  possible-worlds picture of formal semantics). Each square is one way things
+  could be; the left block are the worlds where it is the outage. All four states
+  are on the page at once, so the contrast reads without waiting; a slow highlight
+  walks through them. The question is drawn as a partition by a gutter, not a line.
+-->
+<style>
+  :root { --bg:#fff; --surface:#f6f7f8; --ink:#16181d; --muted:#4c515c; --dim:#8b919c; --ghost:#d3d7dd; --border:rgba(0,0,0,.13);
+    --serif:"Source Serif 4", Georgia, serif; --mono:"IBM Plex Mono", ui-monospace, monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--serif); }
+  .page { max-width:760px; margin:56px auto; padding:0 16px; }
+  .intro { font-size:1.08rem; line-height:1.6; color:var(--muted); margin:0 0 28px; }
+  figure { margin:0; }
+  .stage { background:var(--surface); border:1px solid var(--border); padding:28px 28px 22px; }
+  .ctx { font-family:var(--mono); font-size:12.5px; color:var(--dim); margin:0 0 20px; }
+  .panels { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+  .panel { transition:opacity .8s; }
+  .panel.dimmed { opacity:.32; }
+  .utt { font-style:italic; font-size:15.5px; line-height:1.35; min-height:3.9em; margin:0 0 10px; color:var(--ink); }
+  .utt.none { color:var(--dim); font-style:normal; font-family:var(--mono); font-size:12px; }
+  svg { display:block; width:100%; height:auto; }
+  .sym { font-family:var(--mono); font-size:12px; color:var(--muted); margin:10px 0 0; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:22px; padding-top:0; font-family:var(--mono); font-size:11.5px; color:var(--dim); }
+  .legend i { display:inline-block; width:10px; height:10px; margin-right:6px; vertical-align:-1px; }
+  figcaption { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:baseline; margin-top:12px; font-size:.86rem; color:var(--muted); }
+  .fig-k { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  button { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); background:none; border:1px solid var(--border); padding:3px 8px; cursor:pointer; }
+  .note { font-size:.8rem; color:var(--dim); margin-top:28px; font-family:var(--mono); line-height:1.6; }
+  @media (max-width:620px) { .panels { grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px 20px; } .stage { padding:20px 16px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="intro">Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input.</p>
+  <figure>
+    <div class="stage">
+      <p class="ctx">Why is the internet down?</p>
+      <div class="panels" id="panels"></div>
+      <div class="legend">
+        <span><i style="border:1.3px solid #8b919c"></i>one way things could be</span>
+        <span>left block: worlds where it is the outage (p)</span>
+      </div>
+    </div>
+    <figcaption>
+      <span class="fig-k">Fig. 1</span>
+      <span>What each utterance does to the open possibilities. Illustration, not data.</span>
+      <button id="pause" type="button">Pause</button>
+    </figcaption>
+  </figure>
+  <p class="note">Direction C · logical space · small multiples; the possible-worlds picture set with Tufte's economy. Illustration, not data.</p>
+</div>
+<script>
+  const INK="#16181d", DIM="#8b919c", GHOST="#d3d7dd";
+  const COLS=6, ROWS=4, S=17, G=7, PCOLS=2;
+  const panels=[
+    { utt:null, sym:"open",
+      cell:p=>({fill:"none", stroke:DIM}) },
+    { utt:"It might be the outage.", sym:"might p · p raised",
+      cell:p=>p?{fill:INK,stroke:INK}:{fill:"none",stroke:DIM} },
+    { utt:"I don’t know whether it’s the outage.", sym:"whether p · p | not p", split:true,
+      cell:p=>({fill:"none", stroke:INK}) },
+    { utt:"It’s the outage.", sym:"p · not p ruled out",
+      cell:p=>p?{fill:INK,stroke:INK}:{fill:"none",stroke:GHOST} },
+  ];
+  const root=document.getElementById("panels");
+  const els=panels.map(pn=>{
+    const d=document.createElement("div"); d.className="panel";
+    const u=document.createElement("p"); u.className="utt"+(pn.utt?"":" none"); u.textContent=pn.utt?pn.utt:"(before anything is said)";
+    const gap = pn.split ? 16 : 0;
+    const W=COLS*S+(COLS-1)*G+gap, H=ROWS*S+(ROWS-1)*G;
+    let svg=`<svg viewBox="-1 -1 ${W+2} ${H+2}" aria-hidden="true">`;
+    for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
+      const p=c<PCOLS, st=pn.cell(p), x=c*(S+G)+(c>=PCOLS?gap:0), y=r*(S+G);
+      svg+=`<rect x="${x+.65}" y="${y+.65}" width="${S-1.3}" height="${S-1.3}" fill="${st.fill}" stroke="${st.stroke}" stroke-width="1.3"/>`;
+    }
+    svg+="</svg>";
+    const sy=document.createElement("p"); sy.className="sym"; sy.textContent=pn.sym;
+    d.append(u); d.insertAdjacentHTML("beforeend",svg); d.append(sy); root.appendChild(d); return d;
+  });
+  let i=0, timer=null;
+  const step=()=>{ els.forEach((e,k)=>e.classList.toggle("dimmed",k!==i)); i=(i+1)%els.length; };
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { step(); timer=setInterval(step,2800); }
+  document.getElementById("pause").onclick=e=>{ if(timer){clearInterval(timer);timer=null;els.forEach(x=>x.classList.remove("dimmed"));e.target.textContent="Play";} else {step();timer=setInterval(step,2800);e.target.textContent="Pause";} };
+</script>
+</body>
+</html>

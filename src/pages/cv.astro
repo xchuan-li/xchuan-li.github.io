@@ -31,7 +31,7 @@ import { projects } from "../data/projects";
     <p class="text-sm text-[var(--color-text-muted)] max-w-prose">
       Formal and experimental semantics; psycholinguistics; language processing and learning;
       computational semantics; language-model representation, evaluation, and intervention. Current
-      case study: epistemic modality and discourse alternatives.
+      focus: epistemic modality and discourse alternatives.
     </p>
   </section>
 
@@ -68,35 +68,52 @@ import { projects } from "../data/projects";
   </section>
 
   <section class="mb-8">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Manuscripts and research projects</h2>
-    <div class="space-y-4 text-sm">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Current research: modality</h2>
+    <div class="space-y-3 text-sm">
       <div class="break-inside-avoid">
-        <p><span class="font-medium">Typicality in referent choice: what the description leaves open</span> <span class="text-[var(--color-text-dim)]">— working paper</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Separates three conditions under which a description built on a superordinate category term meets two candidate referents differing in typicality, and states the limits of what a forced choice between them can report. No new results.
-          <a href="https://doi.org/10.5281/zenodo.22855036" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">DOI ↗</a>
-          <a href="https://lingbuzz.net/lingbuzz/010343" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">LingBuzz ↗</a></p>
+        <p><span class="font-medium">{projects.threeWays.title}</span> — analysis in development</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.threeWays.summary}</p>
       </div>
       <div class="break-inside-avoid">
-        <p><span class="font-medium">{projects.threeWays.title}</span> <span class="text-[var(--color-text-dim)]">— analysis in development</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.threeWays.summary} Independent judgments on the diagnostic materials are pending.</p>
+        <p><span class="font-medium">M.Sc. thesis: {projects.thesis.title}</span> — in planning</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Planned alongside an existing study of how preschool children reason about possibilities; design being agreed, no data yet.</p>
       </div>
       <div class="break-inside-avoid">
-        <p><span class="font-medium">M.Sc. thesis: {projects.thesis.title}</span> <span class="text-[var(--color-text-dim)]">— in planning</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">{projects.thesis.summary} Topic and design are being agreed; data collection has not begun.</p>
-      </div>
-      <div class="break-inside-avoid">
-        <p><span class="font-medium">Cross-Lingual Prototypicality Bias in Multimodal Evaluation Metrics and VLM Judges</span> <span class="text-[var(--color-text-dim)]">— first-author; in revision for arXiv</span></p>
-        <p class="text-[var(--color-text-muted)] mt-0.5">Controlled cross-lingual evaluation across seven languages and two VLM families; about 12,600 judgments, item-clustered analysis, a human control, and public code.
-          <a href="https://github.com/xchuan-li/cross_lingual_protobias" class="text-[var(--color-accent)] hover:underline whitespace-nowrap">GitHub ↗</a></p>
+        <p><span class="font-medium">{projects.modalModels.title}</span> — in development</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Diagnostics on pretrained models; controlled training of small models is planned.</p>
       </div>
     </div>
   </section>
 
   <section class="mb-8">
-    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Research experience</h2>
-    <div class="text-sm break-inside-avoid">
-      <p><span class="font-medium">Latent Control States</span> <span class="text-[var(--color-text-dim)]">— ongoing collaboration with DFKI</span></p>
-      <p class="text-[var(--color-text-muted)] mt-0.5">Designed controlled dilemma comparisons separating outcome sensitivity, framing, and action preferences. Behavioural pilots are in place; mechanistic analysis is in progress.</p>
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Papers and manuscripts</h2>
+    <div class="space-y-4 text-sm">
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">Typicality in referent choice: what the description leaves open</span> — working paper</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Superordinate descriptions, typicality, and what forced-choice responses can show.
+          <a href="https://lingbuzz.net/lingbuzz/010343" class="text-[var(--color-accent)]">LingBuzz</a> ·
+          <a href="https://doi.org/10.5281/zenodo.22855036" class="text-[var(--color-accent)]">DOI</a></p>
+      </div>
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">Prompt framing and latent control states</span> — {projects.latentControl.status.toLowerCase()}</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Designed controlled dilemma comparisons; experimental analysis of residual-stream interventions, low-rank effects, and competing explanations. Ongoing collaboration with DFKI.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-[11px] uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-3">Course and technical projects</h2>
+    <div class="space-y-4 text-sm">
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">{projects.protobias.title}</span> — single-author course project</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Controlled evaluation across seven languages and two VLM families; approximately 12,600 judgments, item-clustered analysis, human controls, and pipeline-integrity checks.
+          <a href={projects.protobias.href} class="text-[var(--color-accent)]">Report</a> ·
+          <a href="https://github.com/xchuan-li/cross_lingual_protobias" class="text-[var(--color-accent)]">Code</a></p>
+      </div>
+      <div class="break-inside-avoid">
+        <p><span class="font-medium">{projects.streetView.title}</span> — team course project</p>
+        <p class="text-[var(--color-text-muted)] mt-0.5">Trained a CNN from random initialization and ran controlled experiments for 18-country classification. My contribution: training, ablations, and performance analysis; a teammate led the core implementation.</p>
+      </div>
     </div>
   </section>
 
@@ -125,11 +142,13 @@ import { projects } from "../data/projects";
 </Base>
 
 <style is:global>
-  /* /cv.pdf is printed from this page: one A4 page. Component styles load only on /cv. */
+  /* /cv.pdf is printed from this page. Keep individual entries together on A4. */
   @media print {
     @page { size: A4; margin: 1.3cm 1.6cm; }
     html { font-size: 12.5px; }
     main header { margin-bottom: 1rem !important; }
-    main section { margin-bottom: 0.95rem !important; }
+    main section { margin-bottom: 0.7rem !important; }
+    main h2 { margin-bottom: 0.45rem !important; }
+    main .max-w-prose { max-width: none !important; }
   }
 </style>

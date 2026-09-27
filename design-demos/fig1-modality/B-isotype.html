@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fig. 1 · B · Isotype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  Direction B · Isotype (Otto Neurath, Gerd Arntz).
+  Assumptions: XC wants figures; Isotype makes them schematic rather than cute —
+  flat geometric silhouettes, no faces, no speech bubbles. A speaker, a listener,
+  and the listener's open explanations as a list of equal tokens. Only ink changes;
+  in the "whether" state the list parts into two groups (p / not p).
+-->
+<style>
+  :root { --bg:#fff; --surface:#f6f7f8; --ink:#16181d; --muted:#4c515c; --dim:#8b919c; --border:rgba(0,0,0,.13);
+    --serif:"Source Serif 4", Georgia, serif; --mono:"IBM Plex Mono", ui-monospace, monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--serif); }
+  .page { max-width:760px; margin:56px auto; padding:0 16px; }
+  .intro { font-size:1.08rem; line-height:1.6; color:var(--muted); margin:0 0 28px; }
+  figure { margin:0; }
+  .stage { background:var(--surface); border:1px solid var(--border); }
+  svg { display:block; width:100%; height:auto; }
+  .utt { font-family:var(--serif); font-style:italic; font-size:21px; fill:var(--ink); transition:opacity .4s; }
+  .ctx { font-family:var(--mono); font-size:13px; fill:var(--dim); letter-spacing:.02em; }
+  .tok rect { transition: fill .7s, stroke .7s; }
+  .tok text { font-family:var(--serif); font-size:17px; transition: fill .7s; }
+  .tok { transition: transform .9s cubic-bezier(.65,0,.35,1); }
+  .role { font-family:var(--mono); font-size:11px; letter-spacing:.14em; fill:var(--dim); text-transform:uppercase; }
+  .qmark { font-family:var(--serif); font-style:italic; font-size:44px; fill:var(--ink); transition:opacity .6s; }
+  figcaption { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:baseline; margin-top:12px; }
+  .fig-k { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  .gloss { font-family:var(--mono); font-size:12px; color:var(--muted); }
+  button { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); background:none; border:1px solid var(--border); padding:3px 8px; cursor:pointer; }
+  .note { font-size:.8rem; color:var(--dim); margin-top:28px; font-family:var(--mono); line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="intro">Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input.</p>
+  <figure>
+    <div class="stage">
+      <svg viewBox="0 0 800 440" role="img" aria-label="Illustration: a speaker's utterance changes which explanations the listener keeps open.">
+        <text class="ctx" x="48" y="54">Why is the internet down?</text>
+        <text class="utt" id="utt" x="48" y="100"></text>
+
+        <!-- speaker: Arntz-style silhouette, facing right -->
+        <g transform="translate(120 250)" fill="#16181d">
+          <circle cx="0" cy="0" r="17"/>
+          <path d="M-24 26 H24 L20 104 H-20 Z"/>
+          <rect x="-19" y="104" width="16" height="62"/>
+          <rect x="3" y="104" width="16" height="62"/>
+        </g>
+        <text class="role" x="120" y="440" text-anchor="middle" dy="-14">speaker</text>
+
+        <!-- listener -->
+        <g transform="translate(400 250)" fill="#16181d">
+          <circle cx="0" cy="0" r="17"/>
+          <path d="M-24 26 H24 L20 104 H-20 Z"/>
+          <rect x="-19" y="104" width="16" height="62"/>
+          <rect x="3" y="104" width="16" height="62"/>
+        </g>
+        <text class="role" x="400" y="440" text-anchor="middle" dy="-14">listener</text>
+
+        <!-- utterance travels: a plain rule, no bubble -->
+        <line x1="158" y1="252" x2="362" y2="252" stroke="#16181d" stroke-width="1.5"/>
+        <path d="M362 252 l-9 -5 v10 z" fill="#16181d"/>
+
+        <!-- listener's open explanations -->
+        <g fill="#8b919c"><rect x="432" y="214" width="6" height="6"/><rect x="448" y="196" width="8" height="8"/><rect x="468" y="176" width="10" height="10"/></g>
+        <rect x="492" y="44" width="264" height="300" fill="#eceef1"/>
+        <g id="tokens"></g>
+        <text class="qmark" id="qmark" x="714" y="186" opacity="0">?</text>
+      </svg>
+    </div>
+    <figcaption>
+      <span class="fig-k">Fig. 1</span>
+      <span class="gloss" id="gloss"></span>
+      <button id="pause" type="button">Pause</button>
+    </figcaption>
+  </figure>
+  <p class="note">Direction B · Isotype · schematic figures in the Neurath–Arntz tradition; the listener's explanations as equal tokens. Illustration, not data.</p>
+</div>
+<script>
+  const NS="http://www.w3.org/2000/svg", INK="#16181d", DIM="#8b919c", GHOST="#d3d7dd";
+  const items=["the outage","the router","the cable","the modem","an update","the bill"];
+  const g=document.getElementById("tokens");
+  const toks=items.map((t,k)=>{ const tg=document.createElementNS(NS,"g"); tg.setAttribute("class","tok");
+    const y=84+k*42; const r=document.createElementNS(NS,"rect"); r.setAttribute("x",520); r.setAttribute("y",y-12); r.setAttribute("width",14); r.setAttribute("height",14); r.setAttribute("stroke-width",1.5);
+    const tx=document.createElementNS(NS,"text"); tx.setAttribute("x",548); tx.setAttribute("y",y); tx.textContent=t;
+    tg.append(r,tx); g.appendChild(tg); return {g:tg,r,tx,p:k===0}; });
+  function paint(tok, mode){ // mode: open | ink | ghost | outline
+    const c = mode==="ink"?INK : mode==="ghost"?GHOST : mode==="outline"?INK : DIM;
+    tok.r.setAttribute("fill", mode==="ink"?INK:"none"); tok.r.setAttribute("stroke", c); tok.tx.setAttribute("fill", c); }
+  const states=[
+    { utt:"", gloss:"Open: every explanation is still available.", f:t=>"open" },
+    { utt:"“It might be the outage.”", gloss:"might p — p is raised; nothing is ruled out.", f:t=>t.p?"ink":"open" },
+    { utt:"“I don’t know whether it’s the outage.”", gloss:"whether p — the question p or not p is raised.", f:t=>"outline", split:true },
+    { utt:"“It’s the outage.”", gloss:"p — the other explanations are ruled out.", f:t=>t.p?"ink":"ghost" },
+  ];
+  const utt=document.getElementById("utt"), gloss=document.getElementById("gloss"), qm=document.getElementById("qmark");
+  function show(s){ utt.style.opacity=0; setTimeout(()=>{utt.textContent=s.utt; utt.style.opacity=1;},200);
+    gloss.textContent=s.gloss; qm.setAttribute("opacity", s.split?1:0);
+    toks.forEach(t=>{ paint(t,s.f(t)); t.g.style.transform = (s.split && !t.p) ? "translateY(26px)" : "translateY(0)"; }); }
+  let i=0, timer=null; const step=()=>{ show(states[i]); i=(i+1)%states.length; };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) show(states[3]); else { step(); timer=setInterval(step,3400); }
+  document.getElementById("pause").onclick=e=>{ if(timer){clearInterval(timer);timer=null;e.target.textContent="Play";} else {step();timer=setInterval(step,3400);e.target.textContent="Pause";} };
+</script>
+</body>
+</html>

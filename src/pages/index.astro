@@ -1,80 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
-import { projects } from "../data/projects";
-import SpaceFigure from "../components/SpaceFigure.astro";
+import { portfolioSections } from "../data/portfolio";
+import PortfolioEntry from "../components/PortfolioEntry.astro";
+import ModalityFigure from "../components/ModalityFigure.astro";
 
-// Homepage (2026-09-23). A sticky left column carries who and where, the question, the
-// research programme as an index of this page, and contact; the main column runs
-// intro → Fig. 1 → latest → selected research → background → contact. The middle
-// section is a concise research index; full questions, methods, and evidence live on
-// the linked pages. Below 960px the left column becomes an ordinary header.
-//
-// PHOTO: moved to /contact (2026-09-23). LOGOS: public/images/logos/{utn,marburg,szu}.svg
-// in .tl-logo; circular emblems (emblem: true) are sized up to match the UTN wordmark.
-
-// Selected research is organised on two axes: which case a project belongs to,
-// and which kind of evidence it contributes. The evidence labels reuse the
-// empirical approaches above, so the same kinds recur across both cases and the
-// gaps stay visible — the typicality case has no human study, and no public model
-// work belongs to the modality case yet.
-const typicalityCase = [
-  {
-    title: projects.typicality.title,
-    field: "Linguistic analysis",
-    desc: "A description built on a category term can fit more than one candidate. The paper separates three conditions under which that happens, so the same choice is not read the same way in all three, and states what a forced choice can and cannot report.",
-    status: projects.typicality.status,
-    links: [{ label: "Paper and framing", href: projects.typicality.href }],
-  },
-  {
-    title: projects.protobias.title,
-    field: "Computational studies",
-    desc: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages? I test this with fixed image pairs across seven languages and two VLM systems.",
-    status: "Completed study · First-author manuscript in revision",
-    cover: {
-      src: "/images/project-covers/protobias.png",
-      alt: "Seven language prompts lead to a model choosing between fixed images of a duck beside two bamboo stalks and a panda among many bamboo stalks.",
-    },
-    note: {
-      label: "Motive",
-      side: "left",
-      text: "A correct answer alone does not identify which information a model used. Competing explanations need controlled comparisons.",
-    },
-    links: [{ label: "Study and results", href: projects.protobias.href }],
-  },
-];
-
-const modalityCase = [
-  {
-    title: projects.threeWays.title,
-    field: "Linguistic analysis",
-    desc: "A formal semantic and pragmatic comparison of <em>might p</em>, <em>might p or might not p</em>, and <em>I don’t know whether p</em>, examining the commitments they create and the responses they license.",
-    status: projects.threeWays.status,
-    links: [{ label: "Paper and diagnostics", href: projects.threeWays.href }],
-  },
-  {
-    title: projects.thesis.title,
-    field: "Human studies",
-    desc: projects.thesis.summary,
-    status: projects.thesis.status,
-    note: {
-      label: "Connection",
-      side: "right",
-      text: "The formal analysis specifies what these expressions contribute; the thesis asks how children come to understand them.",
-    },
-    links: [{ label: "Master’s thesis", href: projects.thesis.href }],
-  },
-];
-
-const methodsWork = [
-  {
-    title: projects.latentControl.title,
-    field: "Mechanistic interpretability",
-    desc: "A DFKI collaboration developing my training in explaining model decisions: from controlled behavioural contrasts to tests of which internal representations and computations contribute to an answer.",
-    status: "Behavioural pilots · Mechanistic tests in development",
-    links: [{ label: "Project and methods", href: projects.latentControl.href }],
-  },
-];
+// Homepage groups outputs by type and state; /approach retains the research programme.
 
 // Latest keeps one line per real event. An empty or padded list is worse than a
 // short one — only add items that actually happened.
@@ -82,32 +13,6 @@ const latest = [
   {
     date: "September 2026",
     html: '<a href="/research/typicality-in-referent-choice">Typicality in referent choice: what the description leaves open</a>. Working paper, <a href="https://lingbuzz.net/lingbuzz/010343" rel="noopener">lingbuzz/010343</a>, <a href="https://doi.org/10.5281/zenodo.22855036" rel="noopener">doi:10.5281/zenodo.22855036</a>.',
-  },
-];
-
-const researchGroups = [
-  {
-    id: "typicality",
-    sec: "§1",
-    label: "Typicality and reference",
-    blurb: "A description such as <em>an animal perched on a branch</em> can fit several candidates without making them equally likely referents. This work asks what typicality and descriptive constraints let a forced choice tell us.",
-    related: true,
-    projects: typicalityCase,
-  },
-  {
-    id: "modality",
-    sec: "§2",
-    label: "Epistemic modality",
-    blurb: "Expressions such as <em>it might be in the drawer</em> and <em>I don’t know whether it is</em> concern alternatives to what is known. This work asks how their meanings differ and whether those differences shape later reasoning. The thesis study has not begun.",
-    related: true,
-    projects: modalityCase,
-  },
-  {
-    id: "methods",
-    sec: "§3",
-    label: "Methods",
-    blurb: "Training in explaining model decisions, carried into both cases.",
-    projects: methodsWork,
   },
 ];
 
@@ -177,9 +82,9 @@ const timeline = [
           <span>Applying for PhD positions beginning in fall 2027</span>
         </p>
         <p class="side-q" set:html={openingQuestionsHtml} />
-        <nav class="side-toc" aria-label="Research program on this page">
-          <p class="side-k">Research program</p>
-          {researchGroups.map((group) => (
+        <nav class="side-toc" aria-label="Work on this page">
+          <p class="side-k">Selected work</p>
+          {portfolioSections.map((group) => (
             <a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
           ))}
           <a href="#background"><span>—</span>Background</a>
@@ -193,7 +98,7 @@ const timeline = [
 
     <div class="main">
     <p class="intro" set:html={identityLongHtml} />
-    <SpaceFigure />
+    <ModalityFigure />
 
     <!-- ===== latest ===== -->
     <section class="sec" aria-labelledby="latest-heading">
@@ -208,50 +113,20 @@ const timeline = [
       </ul>
     </section>
 
-    <!-- ===== selected research ===== -->
+    <!-- Output type and publication status are separate from research topic. -->
     <section class="sec selected-research" id="selected-research" aria-labelledby="research-heading">
-      <h2 class="sec-h" id="research-heading">Selected research</h2>
-      <div class="research-list">
-        {researchGroups.map((group) => (
-          <div class="research-block" id={group.id}>
+      <h2 class="sec-h" id="research-heading">Selected work</h2>
+      <div class="portfolio-list">
+        {portfolioSections.map((group) => (
+          <section class="research-block" id={group.id} aria-labelledby={group.id + "-heading"}>
             <p class="research-sec">{group.sec}</p>
-            <p class="research-group-label">{group.label}</p>
-            <p class="research-group-blurb" set:html={group.blurb} />
-            <div class:list={["research-group", { "research-pair": group.related }]} role={group.related ? "group" : undefined} aria-label={group.label}>
-        {group.projects.map((project) => (
-          <article class="research-entry">
-            <div class="research-side">
-              <p class="research-field">{project.field}</p>
-              {project.note && (
-                <aside class={`research-note research-note-${project.note.side}`} aria-label={`${project.note.label} annotation`}>
-                  <p class="research-note-label">{project.note.label}</p>
-                  <p class="research-note-text">{project.note.text}</p>
-                </aside>
-              )}
-            </div>
-            <div class="research-copy">
-              <h3 class="research-title">{project.title}</h3>
-              <div class:list={["research-detail", { "research-detail-illustrated": project.cover }]}>
-                <div>
-                  <p class="research-desc" set:html={project.desc} />
-                  <p class="research-status">{project.status}</p>
-                  <p class="research-links">
-                    {project.links.map((link) => <a class="research-project-link" href={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
-                  </p>
-                </div>
-                {project.cover && (
-                  <a class="research-cover" href={project.links[0].href} aria-label={`Open ${project.title}`}>
-                    <img src={project.cover.src} alt={project.cover.alt} width="1200" height="720" loading="lazy" decoding="async" />
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-        ))}
-            </div>
-          </div>
+            <h2 class="research-group-label" id={group.id + "-heading"}>{group.label}</h2>
+            <p class="research-group-blurb">{group.blurb}</p>
+            {group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+          </section>
         ))}
       </div>
+      <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
     </section>
 
     <!-- ===== background ===== -->
@@ -395,79 +270,14 @@ const timeline = [
     .latest-item { grid-template-columns: 1fr; gap: 0.15rem; }
   }
 
-  /* ===== research cards — original lift, shadow, title and cover feedback ===== */
-  .selected-research { scroll-margin-top: 6rem; }
-  .selected-research .sec-h { margin-bottom: 0; }
-  .research-list { display: grid; gap: 2rem; margin-top: 1.2rem; }
-  .research-block { display: grid; gap: 0.45rem; min-width: 0; }
-  .research-block + .research-block { border-top: 1px solid var(--color-border); padding-top: 1.6rem; }
-  .research-group-label {
-    font-family: var(--font-serif);
-    font-size: 1.62rem;
-    font-weight: 600;
-    letter-spacing: -0.012em;
-    line-height: 1.3;
-    color: var(--color-text);
-    margin: 0;
-  }
-  .research-group-blurb { font-size: 0.92rem; line-height: 1.6; color: var(--color-text-muted); margin: 0 0 0.6rem; max-width: 46rem; }
-  .research-group-blurb em { font-style: italic; color: var(--color-text); }
-  .research-group { display: grid; gap: 0; min-width: 0; }
-  .research-pair { padding: 0; border: 0; }
-  .research-entry {
-    position: relative;
-    display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
-    gap: 1.75rem;
-    padding: 1rem 0;
-    border: 0;
-    border-top: 1px solid var(--color-border);
-    background: transparent;
-  }
-  .research-entry:hover, .research-entry:focus-within {
-    border-color: var(--card-hover-border);
-  }
-  .research-field { font-size: 0.79rem; line-height: 1.5; color: var(--color-accent); margin: 0.25rem 0 0; }
-  .research-copy { min-width: 0; }
-  .research-detail-illustrated { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 1.25rem; align-items: start; }
-  .research-cover { display: block; border-radius: 0; overflow: hidden; }
-  .research-cover img { display: block; width: 100%; height: auto; transition: transform 0.35s ease; }
-  .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: scale(1.03); }
-  .research-cover:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  .research-note { position: relative; z-index: 2; margin-top: 0.7rem; padding-left: 0.7rem; border-left: 1px solid var(--color-border-strong); }
-  .research-note-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 0.45rem; }
-  .research-note-text { font-size: 0.76rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
-  .research-title { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; line-height: 1.25; color: var(--color-text); margin: 0 0 0.55rem; transition: color 0.2s ease; }
-  .research-entry:hover .research-title, .research-entry:focus-within .research-title { color: var(--color-accent); }
-  .research-desc { font-size: 0.94rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 0.55rem; }
-  .research-desc :global(em) { font-style: italic; color: var(--color-text); }
-  .research-status { font-size: 0.78rem; line-height: 1.5; color: var(--color-text-muted); margin: 0 0 0.5rem; }
-  .research-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.85rem; margin: 0; }
-  .research-links a { color: var(--color-accent); text-decoration: none; text-underline-offset: 0.2em; }
-  .research-project-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 0; }
-  .research-links a:hover { text-decoration: underline; }
-  .research-links a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
-  .research-project-link:focus-visible::after { outline: 2px solid var(--color-accent); outline-offset: 3px; }
-  @media (min-width: 621px) and (max-width: 900px) {
-    .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
-    .research-cover { max-width: 300px; }
-  }
-  @media (max-width: 620px) {
-    .research-pair { padding: 0; }
-    .research-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.3rem 0; }
-    .research-side { display: contents; }
-    .research-field { margin: 0; }
-    .research-copy { order: 1; }
-    .research-title { font-size: 1.12rem; }
-    .research-detail-illustrated { grid-template-columns: 1fr; gap: 1rem; }
-    .research-cover { order: -1; max-width: 360px; }
-    .research-note { order: 2; margin-top: 0.5rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .research-entry, .research-title, .research-cover img { transition: none; }
-    .research-entry:hover, .research-entry:focus-within,
-    .research-entry:hover .research-cover img, .research-entry:focus-within .research-cover img { transform: none; }
-  }
+  /* ===== portfolio: output types share the existing flat academic register ===== */
+  .selected-research { scroll-margin-top:6rem; }
+  .portfolio-list { display:grid; gap:2.8rem; }
+  .research-block { min-width:0; }
+  .research-group-label { font-family:var(--font-serif); font-size:1.65rem; font-weight:600; line-height:1.3; margin:0.35rem 0 0.6rem; }
+  .research-group-blurb { font-size:0.94rem; line-height:1.6; color:var(--color-text-muted); margin:0 0 1rem; }
+  .work-index-link a { color:var(--color-accent); text-underline-offset:0.2em; }
+  .work-index-link { font-size:0.9rem; margin:1.5rem 0 0; }
 
   /* ===== timeline ===== */
   .tl { display: flex; flex-direction: column; gap: 2rem; }

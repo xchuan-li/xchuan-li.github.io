@@ -2,6 +2,36 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Modality focus, 27 September 2026 — current authority
+
+XC decided that the master's stage focuses only on modality, and that Cross-lingual ProtoBias is downgraded from a research line to a project on the same footing as the street-view course project. This supersedes the 26 September section below where they conflict, and supersedes the "two faces" framing further down as a description of current work (the typicality paper keeps its own page and its closing link to the modality work).
+
+- Portfolio order (home, /research, sidebar index): 01 Current Research: Modality (Three Ways + MA thesis) → 02 Papers & Manuscripts (typicality, Latent Control States) → 03 Course & Technical Projects (ProtoBias, street view) → 04 Writing Samples.
+- ProtoBias is a single-author course project (the August 2026 course paper). Status "Completed course project · project report". Its portfolio entry has no cover image and no margin note, matching street view; its detail page keeps the report, code, timeline and demo, but the aside is "About this project", not "Place in the research trajectory".
+- /approach opens with the modality focus; typicality and Latent Control States are "other work", not a parallel programme strand. ProtoBias is not mentioned there.
+- CV: "Current research: modality" follows Education; "Course and technical projects" replaces "Research and technical projects".
+
+**Later the same day (XC): two sections only.** 01 Current Research: Modality shows the full LCLM chain on one question — Three Ways (linguistic analysis), the MA thesis (human study), and **Modal expressions in language models** (`projects.modalModels`, `/research/modal-language-models`; the Vault's B7). 02 Papers & Writing Samples merges the typicality paper, Latent Control States and the ProtoBias report. Course projects (ProtoBias, street view) are not a section: they appear as one line on `/research` (`id="projects"`, from `courseProjects` in `portfolio.ts`) and in the CV's "Course and technical projects". XC's instruction to show the model study **supersedes the 17 September rule keeping it private**, for this project only. Its page reports no effect sizes: diagnostic runs are uncalibrated and mixed, controlled training has not begun; keep it separate from the thesis, which has no LM component.
+
+## Fig. 1 replaced, 27 September 2026 (XC) — current authority for the homepage figure
+
+`src/components/ModalityFigure.astro` replaces `SpaceFigure` (now orphaned) because the animal figure drew typicality. XC rejected three first drafts as "视觉不够高级", asked for Japanese references, chose Ryoji Ikeda over Hara Design Institute and Takram, then chose the barcode draft from three Ikeda variants. Drafts, generator and XC's words: `design-demos/fig1-modality/` (`direction-approved.md`).
+
+What it shows: after *Why is the internet down?*, a band of 120 equal hairlines, each one way things could be; 36 are the outage. Loop of 14 s, pure CSS (plays without scripts; JS only adds Pause): *It might be the outage.* thickens the 36 and rules nothing out; *I don't know whether it's the outage.* sorts the band into two blocks, p and not p, with a question mark; *It's the outage.* removes the other 84. A mono count line reads the state. Reduced motion holds the *might* state. Binding: pure black on white, hairlines, small mono type, no colour, no typicality (all lines equal), "Illustration, not data" in the caption. This supersedes the Fig. 1 sections further down.
+
+## Output categories updated 26 September 2026
+
+XC requested that the site distinguish non-publication project experience and writing samples (ProtoBias, street-view CNN) from manuscripts being developed for publication. XC explicitly confirmed B4 is **in preparation and not submitted**. This update supersedes older topic-first homepage instructions and ProtoBias arXiv plans below.
+
+- Home and /research use src/data/portfolio.ts: Papers & Manuscripts; Research & Technical Projects; Writing Samples; Work in Development.
+- Papers: typicality working paper and Latent Control States manuscript in preparation. No accepted/forthcoming status is claimed.
+- Projects: Cross-lingual ProtoBias and the completed team street-view CNN project. ProtoBias retains the report, code and version history; no automatic arXiv promise.
+- Writing Samples links the typicality working paper and the ProtoBias web report. It does not revive retired essay/blog routes.
+- C3’s contribution is training, experimental runs and performance analysis; core implementation belongs to a teammate. Validation metrics must not be called test results.
+- Keep the existing white, serif, flat visual register. /approach retains the research programme; existing detail URLs remain stable.
+- Private exploratory projects stay private. Application strategy and internal project numbers stay off the public site.
+- HTML CV and downloadable PDF are updated together.
+
 ## Current project descriptions (17 September 2026)
 
 This update supersedes older instructions that present the MA as a committed computational-training project. Public project questions, summaries, connections, and statuses now live in `src/data/projects.ts`, shared by the homepage, Current Work, and CV. The common question is how linguistic meaning guides inference and how to identify the information used by people and language models.

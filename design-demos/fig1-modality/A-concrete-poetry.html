@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fig. 1 · A · Concrete poetry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  Direction A · Concrete poetry (Gomringer, Martens). Chosen by XC on 2026-09-27.
+  Words are the only material; ink and position carry the meaning. Candidates are equal
+  in size (no typicality). The loop is pure CSS so it plays where scripts do not run;
+  one 14s cycle = four states of 3.5s:
+    open → "It might be the outage." → "I don't know whether it's the outage." → "It's the outage."
+  Only ink changes, except in the "whether" state, where the field parts into two cells
+  (p / not p), because a question is a partition.
+-->
+<style>
+  :root { --bg:#fff; --surface:#f6f7f8; --ink:#16181d; --muted:#4c515c; --dim:#8b919c; --ghost:#d6dade; --border:rgba(0,0,0,.13);
+    --serif:"Source Serif 4", Georgia, serif; --mono:"IBM Plex Mono", ui-monospace, monospace; --cycle:14s; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--serif); }
+  .page { max-width:760px; margin:56px auto; padding:0 16px; }
+  .intro { font-size:1.08rem; line-height:1.6; color:var(--muted); margin:0 0 28px; }
+  figure { margin:0; }
+  .stage { position:relative; background:var(--surface); border:1px solid var(--border); aspect-ratio:16 / 9; min-height:300px; overflow:hidden; container-type:inline-size; }
+  .ctx { position:absolute; left:6%; top:8%; font-family:var(--mono); font-size:max(12px,1.7cqw); letter-spacing:.02em; color:var(--dim); }
+  .utts { position:absolute; left:6%; right:6%; top:17%; display:grid; }
+  .utts > * { grid-area:1 / 1; margin:0; font-style:italic; font-size:max(18px,3.6cqw); line-height:1.25; color:var(--ink); opacity:0; }
+  .field { position:absolute; left:6%; right:6%; top:42%; bottom:10%; }
+  .w { position:absolute; left:var(--hx); top:var(--hy); transform:translate(-50%,-50%); white-space:nowrap;
+       font-size:max(15px,2.6cqw); color:var(--dim); }
+  .q { position:absolute; left:41%; top:50%; transform:translate(-50%,-50%); font-style:italic; font-size:max(24px,5cqw); color:var(--ink); opacity:0; }
+  figcaption { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:baseline; margin-top:12px; }
+  .fig-k { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
+  .glosses { display:grid; }
+  .glosses > * { grid-area:1 / 1; font-family:var(--mono); font-size:12px; line-height:1.5; color:var(--muted); opacity:0; }
+  button { display:none; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); background:none; border:1px solid var(--border); padding:3px 8px; cursor:pointer; }
+  .js button { display:inline-block; }
+  button:hover { color:var(--ink); border-color:rgba(0,0,0,.3); }
+  .note { font-size:.8rem; color:var(--dim); margin-top:28px; font-family:var(--mono); line-height:1.6; }
+
+  /* ---- the loop: four quarters of one cycle ---- */
+  .w, .q, .utts > *, .glosses > * { animation-duration:var(--cycle); animation-iteration-count:infinite; animation-timing-function:ease-in-out; }
+  .w { animation-name: pos, ink-other; }
+  .w.p { animation-name: pos, ink-p; }
+  .s1 { animation-name: show-1; } .s2 { animation-name: show-2; } .s3 { animation-name: show-3; } .s0 { animation-name: show-0; }
+  .paused .w, .paused .q, .paused .utts > *, .paused .glosses > * { animation-play-state:paused; }
+
+  @keyframes pos {
+    0%, 48%   { left:var(--hx); top:var(--hy); }
+    54%, 72%  { left:var(--sx); top:var(--sy); }
+    78%, 100% { left:var(--hx); top:var(--hy); }
+  }
+  @keyframes ink-p     { 0%, 23% { color:var(--dim); } 28%, 95% { color:var(--ink); } 100% { color:var(--dim); } }
+  @keyframes ink-other { 0%, 48% { color:var(--dim); } 54%, 72% { color:var(--ink); } 78%, 95% { color:var(--ghost); } 100% { color:var(--dim); } }
+  @keyframes show-0 { 0%, 22% { opacity:1; } 25%, 97% { opacity:0; } 100% { opacity:1; } }
+  @keyframes show-1 { 0%, 25% { opacity:0; } 28%, 47% { opacity:1; } 50%, 100% { opacity:0; } }
+  @keyframes show-2 { 0%, 50% { opacity:0; } 53%, 72% { opacity:1; } 75%, 100% { opacity:0; } }
+  @keyframes show-3 { 0%, 75% { opacity:0; } 78%, 97% { opacity:1; } 100% { opacity:0; } }
+  .q { animation-name: show-q; }
+  @keyframes show-q { 0%, 51% { opacity:0; } 55%, 71% { opacity:1; } 75%, 100% { opacity:0; } }
+
+  /* Reduced motion: hold the "might" state. */
+  @media (prefers-reduced-motion: reduce) {
+    .w, .q, .utts > *, .glosses > * { animation:none; }
+    .w.p { color:var(--ink); }
+    .s1 { opacity:1; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <p class="intro">Formal analysis spells out linguistic contrasts and their predictions. Human studies test how they shape people's understanding; language-model studies test how specific models use controlled input.</p>
+  <figure>
+    <div class="stage" id="stage" role="img" aria-label="Illustration: after the question “Why is the internet down?”, three utterances change which explanations remain open. “It might be the outage” raises the outage without ruling anything out; “I don't know whether it's the outage” divides the explanations into the outage and the rest; “It's the outage” rules the rest out.">
+      <div class="ctx">Why is the internet down?</div>
+      <div class="utts" aria-hidden="true">
+        <p class="s0"></p>
+        <p class="s1">It might be the outage.</p>
+        <p class="s2">I don’t know whether it’s the outage.</p>
+        <p class="s3">It’s the outage.</p>
+      </div>
+      <div class="field" aria-hidden="true">
+        <span class="w p" style="--hx:50%;--hy:50%;--sx:20%;--sy:50%">the outage</span>
+        <span class="w"   style="--hx:16%;--hy:22%;--sx:62%;--sy:18%">the router</span>
+        <span class="w"   style="--hx:82%;--hy:26%;--sx:86%;--sy:40%">the cable</span>
+        <span class="w"   style="--hx:22%;--hy:82%;--sx:66%;--sy:64%">the modem</span>
+        <span class="w"   style="--hx:80%;--hy:78%;--sx:88%;--sy:86%">an update</span>
+        <span class="w"   style="--hx:52%;--hy:12%;--sx:64%;--sy:90%">the bill</span>
+        <span class="q">?</span>
+      </div>
+    </div>
+    <figcaption>
+      <span class="fig-k">Fig. 1</span>
+      <span class="glosses">
+        <span class="s0">Open: every explanation is still available.</span>
+        <span class="s1">might p — p is raised; nothing is ruled out.</span>
+        <span class="s2">whether p — the question p or not p is raised.</span>
+        <span class="s3">p — the other explanations are ruled out.</span>
+      </span>
+      <button id="pause" type="button">Pause</button>
+    </figcaption>
+  </figure>
+  <p class="note">Direction A · concrete poetry · words are the only material; ink and position carry the meaning. Illustration, not data.</p>
+</div>
+<script>
+  // Optional: scripts only add the pause control; the loop itself is CSS.
+  document.documentElement.classList.add("js");
+  const stage=document.querySelector("figure"), btn=document.getElementById("pause");
+  btn.onclick=()=>{ const p=stage.classList.toggle("paused"); btn.textContent=p?"Play":"Pause"; };
+</script>
+</body>
+</html>

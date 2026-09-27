@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
+
+// Added 27 September 2026 (XC) so the modality section shows analysis, human study and model study
+// together. Diagnostic runs on pretrained models exist but are not calibrated; controlled training
+// has not started. Report no effect sizes here, and keep it separate from the thesis.
+const project = projects.modalModels;
+---
+
+<Base
+  title={`${project.title} · Xiaochuan Li`}
+  description="A language-model study in development: how pretrained models treat a possibility once it is ruled out, and what small models can learn about modal expressions from controlled input."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research#current" class="!text-[var(--color-accent)]">← Current Research: Modality</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">{project.status}</div>
+    <h1>{project.title}</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">{project.question}</p>
+    <p>{project.summary} {project.connection}</p>
+
+    <h2>The connection to the formal analysis</h2>
+    <p>
+      <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> states what
+      different epistemic expressions contribute to a conversation and which replies they license.
+      Those contrasts can be written as minimal pairs, which is what a model study needs. A model’s
+      preference between two sentences shows how that model responds to the contrast; it does not
+      show how people understand it.
+    </p>
+
+    <h2>Diagnostics on pretrained models</h2>
+    <p>
+      The first stage tested whether pretrained models keep a possibility available after it has been
+      ruled out, scoring matched continuations by their probability. Each version included instrument
+      checks that the models had to pass before a result was read. The results so far are mixed and
+      the materials have not yet been checked against independent judgments, so no finding is
+      reported here.
+    </p>
+
+    <h2>Controlled training</h2>
+    <p>
+      The next stage asks what a learner can acquire from its input. Small models are first compared
+      against a baseline on a contrast people answer reliably; if the contrast is learnable at that
+      scale, models are trained on input in which specific cues are removed or added. Training data
+      size is not a proxy for a child’s age, and a small model is not a model of a child.
+    </p>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      In development. Diagnostic runs exist but are not calibrated; controlled training has not begun.
+    </p>
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
+  </article>
+</Base>
+
+<style>
+  .cw-status { font-size: 0.98rem; line-height: 1.7; color: var(--color-text); padding: 1rem 1.2rem; border-left: 3px solid var(--color-accent); background: var(--color-surface); border-radius: 0 8px 8px 0; }
+</style>

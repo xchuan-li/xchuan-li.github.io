@@ -1,0 +1,148 @@
+---
+// Homepage Fig. 1 since 27 September 2026 (XC chose the Ikeda "barcode" direction;
+// drafts and the choice are in design-demos/fig1-modality/). It replaces SpaceFigure,
+// which drew typicality. One band of equal hairlines, each one way things could be;
+// the 36 p-lines are those where it is the outage. The loop is pure CSS (14 s, four
+// states): might thickens the p-lines and rules nothing out; whether sorts the band
+// into two blocks, p and not p; the assertion removes the rest. No typicality: all
+// lines are equal. Illustration, not data.
+
+const N = 120, P = 36, PITCH = 6, W = N * PITCH;
+// Seeded shuffle so the band is the same on every build.
+let seed = 7;
+const rand = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+const order = Array.from({ length: N }, (_, i) => i);
+for (let i = N - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+const pset = new Set(order.slice(0, P));
+
+// Partition layout for "whether": p block, gap, not-p block, at a tighter pitch.
+const TP = 5, OFF = 40, GAP = 44;
+const pList = [...Array(N).keys()].filter((i) => pset.has(i));
+const qList = [...Array(N).keys()].filter((i) => !pset.has(i));
+const target = new Map<number, number>();
+pList.forEach((i, k) => target.set(i, OFF + k * TP));
+qList.forEach((i, k) => target.set(i, OFF + P * TP + GAP + k * TP));
+const bars = [...Array(N).keys()].map((i) => {
+  const x = i * PITCH + 3;
+  return { x, p: pset.has(i), dx: (target.get(i) ?? x) - x };
+});
+const pb = [OFF, OFF + (P - 1) * TP];
+const qb = [OFF + P * TP + GAP, OFF + P * TP + GAP + (N - P - 1) * TP];
+const pct = (v: number) => `${((v / W) * 100).toFixed(2)}%`;
+
+const utterances = ["", "It might be the outage.", "I don’t know whether it’s the outage.", "It’s the outage."];
+const states = ["open", "might p", "whether p", "p"];
+const counts = [
+  "120 possibilities · none ruled out",
+  "36 raised · none ruled out",
+  "36 | 84 · a question: p or not p",
+  "36 remain · 84 ruled out",
+];
+const H = 132;
+---
+<figure class="modfig" aria-label="Figure 1">
+  <div class="modfig-stage" role="img"
+    aria-label="Illustration. After “Why is the internet down?”, a band of 120 lines stands for the open possibilities. “It might be the outage” thickens the 36 outage lines and rules nothing out; “I don’t know whether it’s the outage” sorts the band into two blocks, the outage and the rest; “It’s the outage” removes the other 84.">
+    <div class="modfig-head" aria-hidden="true">
+      <span class="modfig-ctx">Why is the internet down?</span>
+      <span class="modfig-layer modfig-state">{states.map((s, k) => <span class={`modfig-s${k}`}>{s}</span>)}</span>
+    </div>
+    <p class="modfig-layer modfig-utt" aria-hidden="true">
+      {utterances.map((u, k) => <span class={`modfig-s${k}`}>{u || " "}</span>)}
+    </p>
+    <div class="modfig-band" aria-hidden="true">
+      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none">
+        {bars.map((b) => (
+          <g class={`modfig-bar ${b.p ? "is-p" : "is-q"}`} style={`--dx:${b.dx}px`}>
+            <rect x={b.x - 0.5} y="0" width="1" height={H} />
+            {b.p && <rect class="modfig-thick" x={b.x - 2.5} y="0" width="5" height={H} />}
+          </g>
+        ))}
+      </svg>
+      <div class="modfig-part modfig-s2">
+        <span class="modfig-q" style={`left:${pct((pb[1] + qb[0]) / 2)}`}>?</span>
+        <span class="modfig-brk" style={`left:${pct(pb[0])};width:${pct(pb[1] - pb[0])}`}><i>p</i></span>
+        <span class="modfig-brk" style={`left:${pct(qb[0])};width:${pct(qb[1] - qb[0])}`}><i>not p</i></span>
+      </div>
+    </div>
+    <p class="modfig-layer modfig-count" aria-hidden="true">
+      {counts.map((c, k) => <span class={`modfig-s${k}`}>{c}</span>)}
+    </p>
+  </div>
+  <figcaption>
+    <span class="modfig-mark">Fig. 1</span>
+    <span>What an utterance does to the open possibilities: <i>might</i> raises one, <i>whether</i> raises a question, an assertion settles it. Illustration, not data. See <a href="/research/three-ways"><i>Three Ways of Leaving p Unsettled</i></a>.</span>
+    <button type="button" class="modfig-pause" data-modfig-pause hidden>Pause</button>
+  </figcaption>
+</figure>
+
+<script>
+  // The loop is CSS; this only adds the pause control.
+  document.querySelectorAll<HTMLElement>(".modfig").forEach((fig) => {
+    const btn = fig.querySelector<HTMLButtonElement>("[data-modfig-pause]");
+    if (!btn) return;
+    btn.hidden = false;
+    btn.addEventListener("click", () => {
+      const paused = fig.classList.toggle("is-paused");
+      btn.textContent = paused ? "Play" : "Pause";
+    });
+  });
+</script>
+
+<style>
+  .modfig { --modfig-ink:#111; --modfig-cycle:14s; margin:1.4rem 0 0; }
+  .modfig-stage { border-top:1px solid var(--modfig-ink); padding-top:10px; }
+  .modfig-head { display:flex; justify-content:space-between; gap:1rem; font:11.5px/1.4 var(--font-mono); }
+  .modfig-ctx { color:var(--color-text-dim); }
+  .modfig-state { font-weight:500; color:var(--modfig-ink); text-align:right; }
+  .modfig-layer { display:grid; margin:0; }
+  .modfig-layer > span { grid-area:1 / 1; }
+  .modfig-utt { margin:12px 0 18px; font-family:var(--font-serif); font-style:italic; font-size:1.35rem; line-height:1.3; color:var(--modfig-ink); }
+  .modfig-band { position:relative; height:132px; margin-bottom:46px; }
+  .modfig-band svg { display:block; width:100%; height:100%; fill:var(--modfig-ink); overflow:visible; }
+  .modfig-part { position:absolute; inset:0; pointer-events:none; }
+  .modfig-q { position:absolute; top:50%; transform:translate(-50%,-50%); font:italic 1.9rem/1 var(--font-serif); color:var(--modfig-ink); }
+  .modfig-brk { position:absolute; top:calc(100% + 8px); height:6px; border:1px solid var(--modfig-ink); border-top:0; }
+  .modfig-brk i { position:absolute; top:10px; left:50%; transform:translateX(-50%); font:11px/1 var(--font-mono); font-style:normal; white-space:nowrap; }
+  .modfig-count { font:11.5px/1.4 var(--font-mono); color:var(--modfig-ink); padding-bottom:10px; border-bottom:1px solid var(--modfig-ink); }
+  .modfig figcaption { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:baseline; margin-top:10px; font-size:.86rem; line-height:1.5; color:var(--color-text-muted); }
+  .modfig-mark { font:500 11px/1.5 var(--font-mono); letter-spacing:.06em; color:var(--modfig-ink); white-space:nowrap; }
+  .modfig figcaption a { color:var(--color-accent); }
+  .modfig-pause { font:11px/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-dim); background:none; border:1px solid var(--color-border); padding:4px 8px; cursor:pointer; }
+  .modfig-pause:hover { color:var(--color-text); border-color:var(--color-border-strong); }
+  .modfig-pause:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+
+  /* ---- loop: four quarters of one cycle ---- */
+  .modfig-s0, .modfig-s1, .modfig-s2, .modfig-s3, .modfig-bar, .modfig-thick {
+    animation-duration:var(--modfig-cycle); animation-iteration-count:infinite; animation-timing-function:cubic-bezier(.65,0,.35,1);
+  }
+  .modfig-s0, .modfig-s1, .modfig-s2, .modfig-s3 { opacity:0; }
+  .modfig-s0 { animation-name:modfig-show0; } .modfig-s1 { animation-name:modfig-show1; }
+  .modfig-s2 { animation-name:modfig-show2; } .modfig-s3 { animation-name:modfig-show3; }
+  .modfig-bar { transform-box:view-box; }
+  .modfig-bar.is-p { animation-name:modfig-part; }
+  .modfig-bar.is-q { animation-name:modfig-part, modfig-gone; }
+  .modfig-thick { opacity:0; animation-name:modfig-thick; }
+  .is-paused :is(.modfig-s0, .modfig-s1, .modfig-s2, .modfig-s3, .modfig-bar, .modfig-thick) { animation-play-state:paused; }
+
+  @keyframes modfig-show0 { 0%, 22% { opacity:1; } 25%, 97% { opacity:0; } 100% { opacity:1; } }
+  @keyframes modfig-show1 { 0%, 25% { opacity:0; } 28%, 47% { opacity:1; } 50%, 100% { opacity:0; } }
+  @keyframes modfig-show2 { 0%, 50% { opacity:0; } 53%, 72% { opacity:1; } 75%, 100% { opacity:0; } }
+  @keyframes modfig-show3 { 0%, 75% { opacity:0; } 78%, 97% { opacity:1; } 100% { opacity:0; } }
+  @keyframes modfig-part { 0%, 48% { transform:translateX(0); } 54%, 72% { transform:translateX(var(--dx)); } 78%, 100% { transform:translateX(0); } }
+  @keyframes modfig-thick { 0%, 23% { opacity:0; } 28%, 48% { opacity:1; } 53%, 73% { opacity:0; } 78%, 95% { opacity:1; } 100% { opacity:0; } }
+  @keyframes modfig-gone { 0%, 75% { opacity:1; } 79%, 95% { opacity:0; } 100% { opacity:1; } }
+
+  /* Reduced motion: hold the "might" state. */
+  @media (prefers-reduced-motion: reduce) {
+    .modfig-s0, .modfig-s1, .modfig-s2, .modfig-s3, .modfig-bar, .modfig-thick { animation:none; }
+    .modfig-s1, .modfig-thick { opacity:1; }
+    .modfig-pause { display:none; }
+  }
+  @media (max-width:600px) {
+    .modfig-band { height:104px; }
+    .modfig-utt { font-size:1.15rem; min-height:3em; }
+    .modfig figcaption { grid-template-columns:auto 1fr; }
+    .modfig-pause { grid-column:1 / -1; justify-self:start; }
+  }
+</style>

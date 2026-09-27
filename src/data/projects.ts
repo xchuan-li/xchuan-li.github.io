@@ -1,14 +1,17 @@
-// Public project descriptions, checked against the Vault on 17 September 2026; the thesis
-// entry on 24 September (the MA moved to modal language in preschool children on 23 September).
+// Public project descriptions, checked against the Vault and XC on 26 September 2026.
+// B4: manuscript in preparation, not submitted. B1: project/report, not a promised publication.
+// 27 September 2026 (XC): the master's work focuses on modality; ProtoBias is a single-author
+// course project on the same footing as the street-view course project, not a research line.
+// Modality is shown as one question with three kinds of evidence: threeWays, thesis, modalModels.
 // The thesis study is planned, not running. Private exploratory work is not published here.
 export const projects = {
   protobias: {
     title: "Cross-lingual ProtoBias",
     href: "/research/cross-lingual-protobias",
     question: "Can models follow explicit semantic constraints despite prototypicality, and does this ability vary across languages?",
-    summary: "A controlled evaluation holding image pairs fixed while varying the prompt language, with approximately 12,600 judgments across seven languages and two VLM systems.",
-    connection: "The study connects my interest in how linguistic information interacts with prior expectations to controlled behavioural measurement and reproducible analysis.",
-    status: "Study complete · first-author manuscript in revision",
+    summary: "A single-author course project: a controlled evaluation holding image pairs fixed while varying the prompt language, with approximately 12,600 judgments across seven languages and two VLM systems.",
+    connection: "The project developed my experience with controlled behavioural measurement, translation and answer-position checks, and reproducible analysis.",
+    status: "Completed course project · project report",
   },
   threeWays: {
     title: "Three Ways of Leaving p Unsettled",
@@ -26,6 +29,14 @@ export const projects = {
     connection: "The formal analysis specifies what modal expressions contribute; the thesis asks how children come to understand them. It includes no language-model study.",
     status: "Master’s thesis · in planning",
   },
+  modalModels: {
+    title: "Modal expressions in language models",
+    href: "/research/modal-language-models",
+    question: "What do language models learn about modal expressions, and which cues in their input support it?",
+    summary: "Diagnostic tests of how pretrained models treat a possibility after it has been ruled out, followed by a planned study that trains small models on controlled input.",
+    connection: "The formal analysis specifies the contrasts; this project asks whether a learner can acquire them from linguistic input alone. It is separate from the thesis.",
+    status: "Language-model study · in development",
+  },
   typicality: {
     title: "Typicality in referent choice",
     href: "/research/typicality-in-referent-choice",
@@ -34,12 +45,20 @@ export const projects = {
     connection: "The paper gives the linguistic analysis the ProtoBias evaluation needed: it states the distinction that design presupposes but does not itself separate.",
     status: "Working paper · lingbuzz/010343",
   },
+  streetView: {
+    title: "Street-view country classification",
+    href: "/research/street-view-classification",
+    question: "How do training choices affect a CNN’s ability to classify street images by country?",
+    summary: "An 18-country image-classification course project. My contribution covered model training, controlled experiments, and performance analysis.",
+    connection: "The project developed my experience with training neural networks, comparing configurations, and interpreting validation results.",
+    status: "Completed team course project",
+  },
   latentControl: {
     title: "Latent Control States",
     href: "/research/latent-control-states",
     question: "How does prompt framing change model choices, and can the behavioural effect be explained mechanistically?",
-    summary: "A collaboration with DFKI in which I designed controlled dilemma comparisons to distinguish sensitivity to outcomes from framing and action preferences.",
-    connection: "This project develops my training in mechanistic interpretability: moving from controlled behavioural contrasts to tests of which internal representations and computations contribute to a model’s answer.",
-    status: "Behavioural pilots · mechanistic analysis in progress",
+    summary: "A study of prompt framing and model choices, combining controlled dilemma comparisons, residual-stream interventions, and low-rank analysis.",
+    connection: "The work connects behavioural controls with interventions on internal representations, while checking alternative explanations involving answer format and outcome comprehension.",
+    status: "Manuscript in preparation",
   },
 };

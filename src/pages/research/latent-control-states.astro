@@ -1,111 +1,40 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
-
-// Project page for the DFKI mechanistic-interpretability collaboration (B4). A
-// bounded pilot and training in explaining model decisions through behavioural
-// controls and internal interventions. Xiaochuan's role is experimental design. Red lines: the
-// project is never called "LiT" on the site; no collaborator is named (DFKI as an
-// institution is already public on the CV/homepage); the method is stated modestly
-// and no results are claimed — the minimal evidence chain is still being assembled.
 ---
-
-<Base
-  title="Latent Control States · Xiaochuan Li"
-  description="Training in mechanistic interpretability through a collaboration with DFKI: controlled behavioural comparisons and proposed internal interventions to explain how prompt framing affects model decisions."
-  showProgress={true}
-  toc={true}
->
+<Base title="Prompt framing and latent control states · Xiaochuan Li"
+  description="A manuscript in preparation on prompt framing, controlled model choices, and interventions on internal representations."
+  showProgress={true} toc={true}>
   <article class="prose">
-    <p class="!mb-6 !text-sm"><a href="/research" class="!text-[var(--color-accent)]">← Current Work</a></p>
-    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">
-      Collaboration · DFKI · behavioural pilots
-    </div>
+    <p class="!mb-6 !text-sm"><a href="/research#papers">← Papers & Manuscripts</a></p>
+    <p class="text-xs uppercase tracking-wider text-[var(--color-text-muted)]">{projects.latentControl.status}</p>
     <h1>Prompt framing and latent control states in language models</h1>
-    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">
-      Which internal representations and computations contribute to a model’s choice when prompt
-      framing changes its answer?
-    </p>
-    <p class="text-sm text-[var(--color-text-dim)] !mb-8">
-      {projects.latentControl.summary}
-    </p>
-
-    <aside class="rounded-r-lg px-4 py-3 !my-8 [border-top:1px_solid_var(--color-border)] [border-right:1px_solid_var(--color-border)] [border-bottom:1px_solid_var(--color-border)] [border-left:3px_solid_var(--color-accent)] [background:var(--color-surface)]">
-      <p class="!mt-0 !mb-1.5 text-[11px] uppercase tracking-[0.13em] text-[var(--color-text-dim)] font-medium" style="font-family:var(--font-mono)">Place in the research trajectory</p>
-      <p class="!my-0 text-sm leading-relaxed text-[var(--color-text-muted)]">{projects.latentControl.connection}</p>
-    </aside>
-
-    <p>
-      The behavioural pilots examine how moral framing affects choices in matched dilemmas.
-      Several explanations remain possible: the model may misread the outcomes, retrieve a familiar
-      response, or favour an action despite correctly representing its consequences. The mechanism
-      question is which information and computations actually contribute to the choice.
-    </p>
-
-    <h2>The design</h2>
-    <p>
-      The setup is a utilitarian minimal-pair experiment. Each pair holds the moral scenario fixed and
-      varies one thing at a time — the dilemma, the size of the benefit at stake, and the framing of the
-      prompt — so a difference in the model’s decision can be traced to a specific manipulation rather
-      than to unrelated content. Keeping the pair matched is what lets an internal difference be read as
-      caused by framing rather than by a change of topic.
-    </p>
-
-    <h2>Methods training</h2>
-    <p>
-      The project trains a sequence of research skills: establishing a behavioural contrast,
-      separating competing explanations, identifying candidate internal representations, and
-      designing interventions that test their role in the answer. The current materials distinguish
-      outcome sensitivity from wording, framing, and action preferences. The next tests check whether
-      the model understands the stated consequences before interpreting an internal intervention.
-    </p>
-    <p>
-      A representation may contain decodable information without the model using that information
-      for the task. The proposed interventions therefore ask whether changing a candidate state
-      selectively changes the behavioural contrast while preserving comprehension, with control
-      directions and new materials used to assess alternative explanations.
-    </p>
-
-    <h2>The test</h2>
-    <p>
-      The evidence chain is deliberately minimal and direct. Rather than a full circuit analysis, it
-      targets one question: can the direction in the model’s activations that tracks framing be added or
-      removed, and does doing so change the decision? A necessity-and-sufficiency check of that kind is
-      a candidate test, provided matched control directions and independent materials rule out a
-      nonspecific change in output preference. A steering effect alone does not identify the full
-      decision mechanism. More detailed analysis would depend on the result of that controlled test.
-    </p>
-
-    <h2>Connection to language research</h2>
-    <p>
-      I aim to carry this method into studies of linguistic meaning and inference. Once a semantic
-      distinction produces a reliable model behaviour, internal analysis can ask which information
-      supports it and whether a proposed computation survives targeted tests. This complements
-      formal analysis, human experiments, and explicit model building. Any connection to human
-      processing would require independent human evidence.
-    </p>
-
+    <p class="!text-lg">{projects.latentControl.question}</p>
+    <p>{projects.latentControl.summary}</p>
+    <h2>Research question</h2>
+    <p>Different prompt framings can change a model’s answer to the same dilemma.
+      The project asks which changes in internal representations contribute to that behavioural
+      difference, and how to distinguish them from effects of answer labels, display order,
+      and the model’s understanding of the stated outcomes.</p>
+    <h2>Approach</h2>
+    <p>Controlled dilemma comparisons establish the behavioural contrast. Residual-stream
+      patching then tests how replacing a state at a particular layer and token position
+      changes the model’s choice. Low-rank analysis asks how much of that effect can be
+      carried by a restricted subspace, with held-out items and random-subspace controls.</p>
+    <p>The subspace is fitted without the held-out item, but its low-rank patch still uses
+      that item’s donor difference. This evaluates the representation of an observed
+      contrast; it does not by itself establish a fixed steering intervention for new inputs.</p>
+    <h2>My contribution</h2>
+    <p>I designed controlled dilemma comparisons and developed the experimental analysis
+      around behavioural contrasts, activation interventions, and checks of competing explanations.
+      The work is part of an ongoing collaboration with DFKI.</p>
+    <h2>Interpretation</h2>
+    <p>Changing an activation and observing a changed answer is one part of the evidence.
+      Answer-format effects and inconsistent outcome comprehension constrain how the
+      result can be interpreted. The analysis keeps those diagnostics alongside the
+      intervention results.</p>
     <h2>Status</h2>
-    <p class="cw-status">
-      Behavioural pilots and matched materials are in place. They motivated controls separating
-      outcome sensitivity from action preferences and framing. Mechanistic tests are being developed;
-      a causal explanation of the behavioural effect has not yet been established.
-    </p>
-
-    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]">
-      <a href="/research" class="!text-[var(--color-accent)]">← Back to Current Work</a>
-    </p>
+    <p>The manuscript is in preparation and has not been submitted. Behavioural experiments
+      and mechanistic analyses are being brought together into the paper.</p>
   </article>
 </Base>
-
-<style>
-  .cw-status {
-    font-size: 0.98rem;
-    line-height: 1.7;
-    color: var(--color-text);
-    padding: 1rem 1.2rem;
-    border-left: 3px solid var(--color-accent);
-    background: var(--color-surface);
-    border-radius: 0 8px 8px 0;
-  }
-</style>
