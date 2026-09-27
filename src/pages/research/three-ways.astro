@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ModalityFigure from "../../components/ModalityFigure.astro";
 
 // Project page for the semantics paper (B2, "Three Ways of Leaving p Unsettled").
 // A pure formal-semantics/pragmatics paper at the construct stage — evidence is
@@ -51,6 +52,7 @@ import Base from "../../layouts/Base.astro";
       <li><strong>Bilateral openness.</strong> “It might be in the drawer, or it might not.” Both <em>p</em> and not-<em>p</em> are explicitly left open.</li>
       <li><strong>Issue non-resolution.</strong> “I don’t know whether it is in the drawer.” The speaker reports being unable to resolve the question.</li>
     </ul>
+    <ModalityFigure context="Where is the key?" utterances={["It might be in the drawer.", "I don’t know whether it’s in the drawer.", "It’s in the drawer."]} seeAlso={false} />
     <p>
       The distinction matters because the obvious label — “uncertainty” — hides at least three different
       contributions. Saying <em>might&nbsp;p</em> guarantees only that <em>p</em> is a live possibility; it

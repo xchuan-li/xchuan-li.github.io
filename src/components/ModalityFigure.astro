@@ -6,6 +6,18 @@
 // states): might thickens the p-lines and rules nothing out; whether sorts the band
 // into two blocks, p and not p; the assertion removes the rest. No typicality: all
 // lines are equal. Illustration, not data.
+// Since the same evening it lives on /research/three-ways (the homepage uses LclmCartoon);
+// the example is a prop so the figure can use the page's own key/drawer example.
+interface Props {
+  context?: string;
+  utterances?: [string, string, string];
+  seeAlso?: boolean;
+}
+const {
+  context = "Why is the internet down?",
+  utterances: said = ["It might be the outage.", "I don’t know whether it’s the outage.", "It’s the outage."],
+  seeAlso = true,
+} = Astro.props;
 
 const N = 120, P = 36, PITCH = 6, W = N * PITCH;
 // Seeded shuffle so the band is the same on every build.
@@ -30,7 +42,7 @@ const pb = [OFF, OFF + (P - 1) * TP];
 const qb = [OFF + P * TP + GAP, OFF + P * TP + GAP + (N - P - 1) * TP];
 const pct = (v: number) => `${((v / W) * 100).toFixed(2)}%`;
 
-const utterances = ["", "It might be the outage.", "I don’t know whether it’s the outage.", "It’s the outage."];
+const utterances = ["", ...said];
 const states = ["open", "might p", "whether p", "p"];
 const counts = [
   "120 possibilities · none ruled out",
@@ -42,9 +54,9 @@ const H = 132;
 ---
 <figure class="modfig" aria-label="Figure 1">
   <div class="modfig-stage" role="img"
-    aria-label="Illustration. After “Why is the internet down?”, a band of 120 lines stands for the open possibilities. “It might be the outage” thickens the 36 outage lines and rules nothing out; “I don’t know whether it’s the outage” sorts the band into two blocks, the outage and the rest; “It’s the outage” removes the other 84.">
+    aria-label={`Illustration. After “${context}”, a band of 120 lines stands for the open possibilities. “${said[0]}” thickens the 36 lines where p holds and rules nothing out; “${said[1]}” sorts the band into two blocks, p and not p; “${said[2]}” removes the other 84.`}>
     <div class="modfig-head" aria-hidden="true">
-      <span class="modfig-ctx">Why is the internet down?</span>
+      <span class="modfig-ctx">{context}</span>
       <span class="modfig-layer modfig-state">{states.map((s, k) => <span class={`modfig-s${k}`}>{s}</span>)}</span>
     </div>
     <p class="modfig-layer modfig-utt" aria-hidden="true">
@@ -71,7 +83,7 @@ const H = 132;
   </div>
   <figcaption>
     <span class="modfig-mark">Fig. 1</span>
-    <span>What an utterance does to the open possibilities: <i>might</i> raises one, <i>whether</i> raises a question, an assertion settles it. Illustration, not data. See <a href="/research/three-ways"><i>Three Ways of Leaving p Unsettled</i></a>.</span>
+    <span>What an utterance does to the open possibilities: <i>might</i> raises one, <i>whether</i> raises a question, an assertion settles it. Illustration, not data.{seeAlso && <> See <a href="/research/three-ways"><i>Three Ways of Leaving p Unsettled</i></a>.</>}</span>
     <button type="button" class="modfig-pause" data-modfig-pause hidden>Pause</button>
   </figcaption>
 </figure>
