@@ -2,7 +2,13 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
-## Cognitive-model bridge, 27 September 2026 — latest authority
+## Modality boundary correction, 27 September 2026 — latest authority
+
+XC explicitly corrected the grouping: “B4跟这些不要连起来，因为B4不是模态”. Latent Control States is an independent prompt-framing / dilemma study. Do not place it in the modality chain or describe it as that chain's method source. Remove the cross-links between it and the modal-model project. It remains in Papers & Writing Samples and on its own page.
+
+The modality programme contains only the linguistic analysis, child study, and modal-model project. Cognitive modelling and planned LM internal interventions belong to the latter, so the hand-drawn device still illustrates that research direction. Keep its current design and evidence-status boundaries.
+
+## Cognitive-model bridge, 27 September 2026 — historical grouping, corrected above
 
 XC asked to connect the linguistic analysis, child study, modal model work, and mechanistic methods, and update the homepage device. This section supersedes conflicting descriptions of the figure and three-step chain below.
 
