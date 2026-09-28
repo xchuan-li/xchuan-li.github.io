@@ -99,6 +99,7 @@ export const portfolioSections: PortfolioSection[] = [
 
 // Course projects: listed, not showcased.
 export const courseProjects = [
+  { title: projects.psyStudy.title, href: projects.psyStudy.href },
   { title: projects.protobias.title, href: projects.protobias.href },
   { title: projects.streetView.title, href: projects.streetView.href },
 ];

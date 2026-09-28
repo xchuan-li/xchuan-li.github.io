@@ -2,6 +2,10 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Psychology course study added, 28 September 2026 (XC)
+
+`/research/fact-checking-study` (`projects.psyStudy`), listed first in the /research "Course projects" line and in the CV. Facts per the Vault record verified on 19 Sep (A2u1): protocol by a group of three, adopted by class vote and run by the whole class (N = 49, pilot N = 8); XC's own part is the JASP analysis. No teammate or instructor names, no per-group means, and the result is stated only as "matched one of two predictions" until XC confirms the predicted directions.
+
 ## CV rebuilt, 28 September 2026 (XC) — current authority for the CV
 
 XC found the CV "太满…很杂乱" and the Research / Papers / Projects sections overlapping. Now one data source, `src/data/cv.ts`, rendered by `src/components/CvDocument.astro` in three variants:
