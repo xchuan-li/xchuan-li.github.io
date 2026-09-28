@@ -1,20 +1,20 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PdfReport from "../../components/PdfReport.astro";
+import PaperArticle from "../../components/PaperArticle.astro";
+import body from "../../content/papers/fact-checking-study.html?raw";
 import { projects } from "../../data/projects";
-// Full write-up (reports/fact-checking/, tectonic), 28 Sep 2026. Sources: the group
-// protocol (Assignment 7 and its revision), the pilot table, and XC's own analysis
-// (Assignment 10). Group design, class-wide data collection, XC's analysis; the Welch
-// tests are computed from summary statistics for the write-up. No classmate names.
-const p = projects.psyStudy;
+// The write-up as a web page, built from reports/fact-checking/fact-checking.tex by
+// reports/web/build_web.py. Group design, class-wide data collection, XC's analysis;
+// no classmate names.
 ---
-<Base title={`${p.title} · Xiaochuan Li`}
-  description="Does checking with ChatGPT first change how people check and double-check? A between-subjects course experiment (N = 47 analysed), written up with design, pilot revisions, results, and limits.">
-  <PdfReport
-    back={{ label: "Papers & Reports", href: "/research#papers" }}
-    status={p.status}
-    title="Does Checking with ChatGPT First Change How People Check and Double-Check?"
-    meta="Xiaochuan Li · written up September 2026 from a course study (Foundations in Psychology and Empirical Study Design, Winter 2025–26). Designed with two classmates and run by the class; I analysed the data."
-    pdf="/papers/fact-checking-study.pdf"
-    preview="/papers/fact-checking-study.png" />
+<Base title={`${projects.psyStudy.title} · Xiaochuan Li`} toc={true}
+  description="Does checking with ChatGPT first change how people check and double-check? A complete between-subjects course experiment: design, pilot, revision, data collection (N = 47) and analysis.">
+  <PaperArticle
+    status={projects.psyStudy.status}
+    title="Does Checking with ChatGPT First Change How People Check and Double-Check? A Class Experiment"
+    authors="Xiaochuan Li"
+    affiliation="University of Technology Nuremberg · xiaochuan.li@utn.de"
+    date="Written up September 2026 from a course study, Foundations in Psychology and Empirical Study Design, Winter 2025–26"
+    body={body}
+    pdf="/papers/fact-checking-study.pdf" />
 </Base>

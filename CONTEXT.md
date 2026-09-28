@@ -2,6 +2,10 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Papers as web pages, 28 September 2026 (XC: "把论文写到网页上，格式不变")
+
+Typicality, the psychology study and street view render as HTML papers (`PaperArticle.astro`): centred title block, abstract, numbered sections, numbered figures and tables with working cross-references, author–year citations, reference list, "On this page" rail; the PDF is one click away. Fragments in `src/content/papers/*.html` are **generated** by `reports/web/build_web.py` (pandoc + citeproc from `refs.bib`, tectonic for TikZ, pdftocairo for SVG figures in `public/papers/<slug>/`); edit the LaTeX / the Vault Markdown and re-run it. Typicality is built from the Vault's clean English Markdown (B6h output), with the PDF's keyword line added. **ProtoBias stays a PDF preview**: the LaTeX in `Desktop/Projects/B1-ProtoBias/v3/paper/report/` is now the unpublished co-authored arXiv revision ("Fixed Images, Changing Judgments"), and the 30 July single-author source no longer exists; do not publish the revision.
+
 ## Papers & Reports, 28 September 2026 (XC) — supersedes the three-line list
 
 XC found the three-line list "太简略". Section 02 is now **Papers & Reports** (`PaperList.astro`): every written output once — typicality working paper, Latent Control States manuscript, ProtoBias course paper, the psychology experiment report, the street-view report — each with a first-page thumbnail (`public/papers/*-thumb.png`; a dashed "in prep." box when there is no public PDF), title, mono meta line, one sentence on what it finds, and links. Writing samples keep a small tag. The "Course projects" line under /research is removed; course report pages link back to `/research#papers`. The street-view team repository is private, so no code link is given for it.

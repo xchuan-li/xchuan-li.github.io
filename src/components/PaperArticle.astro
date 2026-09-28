@@ -1,0 +1,81 @@
+---
+// A paper rendered as a web page (XC, 28 Sep 2026: "把论文写到网页上，格式不变"). The body is
+// an HTML fragment built by reports/web/build_web.py from the paper's own source, so the
+// structure stays the paper's: title block, abstract, numbered sections, numbered figures
+// and tables, citations and references. The PDF stays one click away.
+interface Props {
+  status: string;
+  title: string;
+  authors: string;
+  affiliation: string;
+  date: string;
+  note?: string;                           // one line, e.g. how the report came about
+  body: string;                            // HTML fragment
+  pdf: string;
+  links?: { label: string; href: string }[];
+  back?: { label: string; href: string };
+}
+const { status, title, authors, affiliation, date, note, body, pdf, links = [], back = { label: "Papers & Reports", href: "/research#papers" } } = Astro.props;
+---
+<article class="prose paper">
+  <p class="paper-back"><a href={back.href}>← {back.label}</a></p>
+  <header class="paper-head">
+    <p class="paper-status">{status}</p>
+    <h1>{title}</h1>
+    <p class="paper-authors">{authors}</p>
+    <p class="paper-aff">{affiliation}</p>
+    <p class="paper-date">{date}</p>
+    {note && <p class="paper-note">{note}</p>}
+    <p class="paper-actions">
+      <a href={pdf}>PDF ↓</a>
+      {links.map((l) => <a href={l.href} rel="noopener">{l.label}</a>)}
+    </p>
+  </header>
+  <Fragment set:html={body} />
+</article>
+
+<style is:global>
+  .paper { font-size:1rem; }
+  .paper .paper-back { margin:0 0 1.6rem; font-size:0.86rem; }
+  .paper .paper-back a, .paper .paper-actions a { color:var(--color-accent); text-decoration:none; }
+  .paper .paper-head { text-align:center; margin:0 0 2rem; padding-bottom:1.4rem; border-bottom:1px solid var(--color-border); }
+  .paper .paper-status { margin:0 0 0.9rem !important; font:0.66rem/1.5 var(--font-mono); letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-muted); }
+  .paper .paper-head h1 { margin:0 0 0.9rem; font-size:clamp(1.5rem,3.6vw,1.95rem); line-height:1.22; font-weight:700; letter-spacing:-0.01em; text-wrap:balance; }
+  .paper .paper-authors { margin:0 !important; font-size:1.02rem; }
+  .paper .paper-aff { margin:0.1rem 0 0 !important; font-size:0.9rem; color:var(--color-text-muted); }
+  .paper .paper-date { margin:0.35rem 0 0 !important; font-size:0.85rem; color:var(--color-text-muted); }
+  .paper .paper-note { margin:0.6rem auto 0 !important; max-width:34rem; font-size:0.85rem; line-height:1.5; color:var(--color-text-muted); }
+  .paper .paper-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:0.3rem 1.3rem; margin:1rem 0 0 !important; font:0.78rem/1.6 var(--font-mono); }
+
+  .paper .paper-abstract { margin:0 1.2rem 2.2rem; font-size:0.93rem; line-height:1.6; }
+  .paper .paper-abstract h2 { margin:0 0 0.5rem; text-align:center; font-size:0.95rem; font-weight:700; border:0; padding:0; }
+  .paper .paper-abstract p { margin:0 0 0.6rem; text-align:justify; hyphens:auto; }
+
+  .paper > h2 { margin:2.2rem 0 0.8rem; font-size:1.3rem; font-weight:700; }
+  .paper > h3 { margin:1.6rem 0 0.6rem; font-size:1.06rem; font-weight:700; }
+  .paper .sec-n { margin-right:0.55rem; font-variant-numeric:tabular-nums; }
+  .paper > p { text-align:justify; hyphens:auto; }
+  .paper p > strong:first-child, .paper p > b:first-child { margin-right:0.35rem; }
+
+  .paper figure { margin:1.8rem 0; text-align:center; }
+  .paper figure img { display:inline-block; width:min(100%, 600px); height:auto; }
+  .paper figure img.fig-diagram { width:100%; }
+  .paper figcaption, .paper table caption { margin-top:0.6rem; font-size:0.84rem; line-height:1.5; color:var(--color-text-muted); text-align:left; }
+  .paper .cap-n { font-weight:700; color:var(--color-text); margin-right:0.2rem; }
+
+  .paper table { margin:1.6rem auto; border-collapse:collapse; font-size:0.86rem; font-variant-numeric:tabular-nums; border-top:1.5px solid var(--color-text); border-bottom:1.5px solid var(--color-text); }
+  .paper table caption { caption-side:bottom; }
+  .paper thead th { border-bottom:1px solid var(--color-text); }
+  .paper th, .paper td { padding:0.3rem 0.7rem; text-align:left; vertical-align:top; }
+  .paper .table-wrap, .paper div:has(> table) { overflow-x:auto; }
+
+  .paper .citation { white-space:normal; }
+  .paper #refs, .paper .references { font-size:0.88rem; line-height:1.5; }
+  .paper .references p { margin:0 0 0.55rem; padding-left:1.4rem; text-indent:-1.4rem; text-align:left; }
+  .paper .csl-entry { margin:0 0 0.55rem; padding-left:1.4rem; text-indent:-1.4rem; }
+  .paper math { font-size:1.02em; }
+  @media (max-width:620px) {
+    .paper .paper-abstract { margin:0 0 2rem; }
+    .paper > p, .paper .paper-abstract p { text-align:left; }
+  }
+</style>

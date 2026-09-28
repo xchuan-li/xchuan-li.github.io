@@ -1,0 +1,177 @@
+<section class="paper-abstract"><h2>Abstract</h2>
+<p>This report documents a complete experimental cycle, from design and piloting to revision, online data collection and analysis. Its question: when people can verify an answer with ChatGPT, do they verify more, and do they then look less often at a second source? In a between-subjects experiment, participants answered ten two-alternative general-knowledge questions and could check each answer, first with one tool and then with the other. The first tool was assigned at random: Wikipedia or ChatGPT, shown as static screenshots of each tool’s answer. We predicted that the ChatGPT-first group would check more in the first round and less in the second. With 47 participants in the analysis (29 Wikipedia-first, 18 ChatGPT-first), both differences ran against the predictions, and neither was reliable: the ChatGPT-first group checked slightly fewer answers in the first round (5.78 vs. 6.24 of 10; Welch <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mn>29.4</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>−</mi><mn>0.46</mn></mrow><annotation encoding="application/x-tex">t(29.4) = -0.46</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>.65</mn></mrow><annotation encoding="application/x-tex">p = .65</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mi>−</mi><mn>0.15</mn></mrow><annotation encoding="application/x-tex">d = -0.15</annotation></semantics></math>) and more in the second (7.00 vs. 5.38; <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mn>38.1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1.44</mn></mrow><annotation encoding="application/x-tex">t(38.1) = 1.44</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>.16</mn></mrow><annotation encoding="application/x-tex">p = .16</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>0.43</mn></mrow><annotation encoding="application/x-tex">d = 0.43</annotation></semantics></math>). The study is small and unbalanced, and it measured checking with a fixed, low-cost interface; we report it as a completed pilot-scale experiment, not as evidence for or against the hypothesis.</p>
+</section>
+
+<h2 data-number="1" id="introduction"><span class="sec-n">1</span> Introduction</h2>
+<p>People increasingly hand parts of their thinking to external tools, a practice discussed as <em>cognitive offloading</em> <span class="citation" data-cites="shanmugasundaram">(Shanmugasundaram and Tamilarasu 2023)</span>. A review of how digital technology affects cognition discusses over-reliance on AI tools in decision-making, but does not compare AI tools with other digital sources as means of looking up or cross-checking information. A second line of work asks whether ChatGPT functions as an <em>epistemic authority</em>: a source whose answer is taken as a reason to believe <span class="citation" data-cites="hauswald richards">(Hauswald 2025; Richards 2025)</span>. Students report treating ChatGPT as a trusted learning source <span class="citation" data-cites="rastogi">(Rastogi and Lawati 2024)</span>, and educators have raised concerns about what this does to justification practices <span class="citation" data-cites="cooper jose">(Cooper et al. 2024; Jose et al. 2025)</span>. The study was also prompted by an everyday observation: students verify even simple sums with a calculator, although they were sure of the answer.</p>
+<p>We asked whether meeting ChatGPT as the first available checking tool changes checking behaviour, compared with meeting Wikipedia, which is similarly familiar and encyclopaedic. We predicted:</p>
+<ul>
+<li><p><strong>H1</strong> Participants who can check with ChatGPT first check more of their answers in the first round than participants who can check with Wikipedia first.</p></li>
+<li><p><strong>H2</strong> Participants who check with ChatGPT first check fewer answers with the other source in the second round.</p></li>
+</ul>
+<p>H2 follows the idea that an answer from a tool treated as an authority is less often cross-checked.</p>
+<h2 data-number="2" id="method"><span class="sec-n">2</span> Method</h2>
+<h3 data-number="2.1" id="participants"><span class="sec-n">2.1</span> Participants</h3>
+<p>The class ran the study together, recruiting a convenience sample. Participants had to read English, be familiar with digital search tools, and not be enrolled in advanced courses in psychology or AI. Of 49 participants, two lacked a recorded group assignment and were excluded, leaving 47: 29 in the Wikipedia-first group and 18 in the ChatGPT-first group. The groups are unequal in size; the pilot had revealed a problem with the online group assignment, which was fixed before the main study (Section <a href="#sec:pilot">2.4</a>), and the record does not say why the main groups differ.</p>
+<h3 data-number="2.2" id="materials"><span class="sec-n">2.2</span> Materials</h3>
+<p>Ten general-knowledge questions each offered two answers (for example, <em>What is the coloured portion of the eye called?</em> Iris / Pupil; the full list is in Appendix A). For each answer, participants rated their certainty from 1 (<em>not certain</em>) to 4 (<em>highly certain</em>). The checking tools were presented as static screenshots of Wikipedia’s or ChatGPT’s answer to the question, so that every participant saw the same content. After the task, participants rated each tool from 1 (<em>is never correct</em>) to 4 (<em>is always correct</em>), and their usual double-checking from 1 (<em>I never double-check</em>) to 4 (<em>I always double-check</em>).</p>
+<h3 data-number="2.3" id="design-and-procedure"><span class="sec-n">2.3</span> Design and procedure</h3>
+<figure id="fig:procedure" data-latex-placement="t">
+<img loading="lazy" alt="" src="/papers/fact-checking-study/tikz-1.svg" class="fig-diagram">
+<figcaption><span class="cap-n">Figure 1:</span> Procedure. The first tool (round 1) was assigned at random between subjects; round 2 offered the other tool. A check showed a screenshot of that tool’s answer.</figcaption>
+</figure>
+<p>The independent variable was the first available checking tool, manipulated between subjects: group 0 could check with Wikipedia first, group 1 with ChatGPT first (Figure <a href="#fig:procedure">1</a>). After giving consent online, participants read a task description that did not mention the checking opportunities. In round 1, they answered each question, rated their certainty, and could check the answer with their group’s tool. After an overview of their answers and of which ones they had checked, round 2 offered, for each question, a check with the other tool. The questionnaire followed, asking about the usual double-checking only after the task so that it would not reveal the study’s interest. Participants were then debriefed about the cover story and the purpose of the study. The study was anonymous, and no identifying information was collected. It was implemented in PsychoPy and run online through Pavlovia.</p>
+<p><strong>Measures.</strong> The two dependent variables are the number of questions checked in round 1 (0–10) and the number checked with the other tool in round 2 (0–10). Round 2 was offered for every question, so its count can include questions that were not checked in round 1; it measures checking with a second source rather than strictly double-checking the same answer.</p>
+<h3 data-number="2.4" id="sec:pilot"><span class="sec-n">2.4</span> Pilot and revisions</h3>
+<p>Eight people took part in a pilot; seven consented. Although the counterbalancing was set up in PsychoPy and on Pavlovia, six of the eight were assigned to the ChatGPT-first group, and the assignment was then fixed. Participants answered almost all questions correctly and with high certainty, and two did not check any answer, which suggested that the questions were too easy to prompt checking. We therefore replaced two questions with harder ones. One participant noted that a question about the Spanish siesta favoured people with a European background and said they had guessed it; it was among the two replaced. Finally, because one participant rated ChatGPT as almost always correct but checked only with Wikipedia, we added an authority rating for Wikipedia alongside the one for ChatGPT.</p>
+<h2 data-number="3" id="results"><span class="sec-n">3</span> Results</h2>
+<table id="tab:desc">
+<caption><span class="cap-n">Table 1:</span> Number of questions checked (of 10). Both scores range from 0 to 10 in both groups.</caption>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th colspan="3" style="text-align: center;">Round 1: first tool</th>
+<th colspan="3" style="text-align: center;">Round 2: other tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span>2-4</span>(l)<span>5-7</span> Group</td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math></td>
+<td style="text-align: center;">Median</td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">SD</annotation></semantics></math></td>
+<td style="text-align: center;">Median</td>
+</tr>
+<tr>
+<td style="text-align: left;">Wikipedia first (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>29</mn></mrow><annotation encoding="application/x-tex">n = 29</annotation></semantics></math>)</td>
+<td style="text-align: center;">6.24</td>
+<td style="text-align: center;">2.80</td>
+<td style="text-align: center;">7.0</td>
+<td style="text-align: center;">5.38</td>
+<td style="text-align: center;">3.90</td>
+<td style="text-align: center;">5.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">ChatGPT first (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>18</mn></mrow><annotation encoding="application/x-tex">n = 18</annotation></semantics></math>)</td>
+<td style="text-align: center;">5.78</td>
+<td style="text-align: center;">3.64</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">7.00</td>
+<td style="text-align: center;">3.65</td>
+<td style="text-align: center;">9.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Predicted</td>
+<td colspan="3" style="text-align: center;">ChatGPT first higher (H1)</td>
+<td colspan="3" style="text-align: center;">ChatGPT first lower (H2)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Observed</td>
+<td colspan="3" style="text-align: center;">slightly lower</td>
+<td colspan="3" style="text-align: center;">higher</td>
+</tr>
+</tbody>
+</table>
+<figure id="fig:dist" data-latex-placement="h">
+<img loading="lazy" alt="" src="/papers/fact-checking-study/distributions.svg" >
+<figcaption><span class="cap-n">Figure 2:</span> Distribution of the number of questions checked, as a share of each group, in the bins of the course analysis.</figcaption>
+</figure>
+<p>Table <a href="#tab:desc">1</a> and Figures <a href="#fig:dist">2</a> and <a href="#fig:means">3</a> summarise the two measures. In round 1, the ChatGPT-first group checked slightly fewer answers than the Wikipedia-first group, and its scores were more spread out. In round 2, the ChatGPT-first group checked more answers with the other tool; half of its members checked nine or more of the ten. Round-2 scores clustered at the extremes: many participants checked nearly all answers with the second tool, and in the Wikipedia-first group many checked almost none.</p>
+<figure id="fig:means" data-latex-placement="h">
+<img loading="lazy" alt="" src="/papers/fact-checking-study/means.svg" >
+<figcaption><span class="cap-n">Figure 3:</span> Means <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>±</mi><annotation encoding="application/x-tex">\pm</annotation></semantics></math> one standard deviation.</figcaption>
+</figure>
+<p>The course analysis was descriptive. For this write-up, we compared the groups with Welch’s <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>-test, computed from the summary statistics. Neither difference was reliable. In round 1 the difference was <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>0.46</mn></mrow><annotation encoding="application/x-tex">-0.46</annotation></semantics></math> questions (ChatGPT first minus Wikipedia first), <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mn>29.4</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>−</mi><mn>0.46</mn></mrow><annotation encoding="application/x-tex">t(29.4) = -0.46</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>.65</mn></mrow><annotation encoding="application/x-tex">p = .65</annotation></semantics></math>, Cohen’s <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mi>−</mi><mn>0.15</mn></mrow><annotation encoding="application/x-tex">d = -0.15</annotation></semantics></math>. In round 2 it was <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mn>1.62</mn></mrow><annotation encoding="application/x-tex">+1.62</annotation></semantics></math> questions, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mn>38.1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1.44</mn></mrow><annotation encoding="application/x-tex">t(38.1) = 1.44</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>.16</mn></mrow><annotation encoding="application/x-tex">p = .16</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>0.43</mn></mrow><annotation encoding="application/x-tex">d = 0.43</annotation></semantics></math>. The scores are bounded counts with skewed distributions, so these tests are a rough guide rather than an exact analysis.</p>
+<h2 data-number="4" id="discussion"><span class="sec-n">4</span> Discussion</h2>
+<p>Neither prediction was supported. Descriptively, both differences ran the other way: participants who met ChatGPT first checked slightly fewer answers at first, and checked more answers with Wikipedia afterwards. The second pattern is the larger one, and if it held in a larger sample it would suggest the opposite of the authority hypothesis: that an answer from ChatGPT prompts people to look elsewhere, rather than settling the question. With 18 and 29 participants and effect sizes of this magnitude, however, the study could not tell these patterns apart from chance, and we draw no conclusion about the direction.</p>
+<p><strong>Limitations.</strong> The sample was small, unbalanced between groups, and recruited by convenience, largely among students. Checking cost one click and showed a static screenshot, which is much easier than using the real tools; the high rate of checking may reflect this. The questions were easy for many participants even after revision. Round 2 counted checks with the second tool for any question, not only for answers already checked. The certainty and authority ratings were collected but are not analysed here, so we cannot say whether checking tracked uncertainty or trust in a tool. The study was a course exercise without pre-registration or a power analysis.</p>
+<p><strong>What a follow-up should change.</strong> A larger, balanced sample; harder questions calibrated so that participants are genuinely uncertain; a checking step with a real cost, such as time; a second round restricted to answers already checked, so that it measures double-checking; and an analysis that relates each check to the rated certainty of the answer and to the rated authority of each tool.</p>
+<h2 class="unnumbered" id="contributions-and-ethics">Contributions and ethics</h2>
+<p>I designed the study with two classmates; the class adopted our protocol by vote as the study it would run, and the data were collected by the class. I analysed the data during the course (descriptive statistics in JASP). This write-up, its figures, and the Welch tests computed from summary statistics were prepared by me after the course. Participants gave informed consent online, took part anonymously, and were debriefed about the cover story.</p>
+<h2 class="unnumbered" id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-cooper" class="csl-entry" role="listitem">
+Cooper, Grant, Kok-Sing Tang, and Natasha Anne Rappa. 2024. <span>“Generative Artificial Intelligence as Epistemic Authority? Perspectives from Higher Education.”</span> In <em>Artificial Intelligence Applications in Higher Education</em>, edited by Helen Crompton and Diane Burke. Routledge.
+</div>
+<div id="ref-hauswald" class="csl-entry" role="listitem">
+Hauswald, Rico. 2025. <span>“Artificial Epistemic Authorities.”</span> <em>Social Epistemology</em> 39 (6): 716–25.
+</div>
+<div id="ref-jose" class="csl-entry" role="listitem">
+Jose, B., A. Cleetus, B. Joseph, L. Joseph, B. Jose, and A. K. John. 2025. <span>“Epistemic Authority and Generative <span>AI</span> in Learning Spaces: Rethinking Knowledge in the Algorithmic Age.”</span> <em>Frontiers in Education</em> 10: 1647687.
+</div>
+<div id="ref-rastogi" class="csl-entry" role="listitem">
+Rastogi, A., and A. G. A. A. H. A. Lawati. 2024. <span>“Understanding the Acceptance of <span>ChatGPT</span> by <span>HEI</span>’s Students for Knowledge Enhancement.”</span> <em>1st International Conference on Innovative Engineering Sciences and Technological Research (ICIESTR)</em>, 1–8.
+</div>
+<div id="ref-richards" class="csl-entry" role="listitem">
+Richards, K.-A. 2025. <em>Post-Cognitive Epistemology: Rethinking Knowledge, Authority, and Meaning in the Age of Predictive Language</em>. Working paper, SSRN.
+</div>
+<div id="ref-shanmugasundaram" class="csl-entry" role="listitem">
+Shanmugasundaram, M., and A. Tamilarasu. 2023. <span>“The Impact of Digital Technology, Social Media, and Artificial Intelligence on Cognitive Functions: A Review.”</span> <em>Frontiers in Cognition</em> 2: 1203077.
+</div>
+</div>
+<h2 class="unnumbered" id="app:items">Appendix A: Questions</h2>
+<table>
+<caption><span class="cap-n">Table 2:</span> The ten questions after the pilot. Starred questions replaced two pilot items, one of them the question about the siesta.</caption>
+<thead>
+<tr>
+<th style="text-align: right;"></th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">What is the coloured portion of the eye called?</td>
+<td style="text-align: left;">Iris / Pupil</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Humans are classified as what species?</td>
+<td style="text-align: left;">Sapiens / Robustus</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">What is the term for when three musical notes are played together?</td>
+<td style="text-align: left;">Chord / Melody</td>
+</tr>
+<tr>
+<td style="text-align: right;">4*</td>
+<td style="text-align: left;">What is the largest planet in our solar system?</td>
+<td style="text-align: left;">Jupiter / Saturn</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">What is the name of the art of Japanese paper folding?</td>
+<td style="text-align: left;">Origami / Bonsai</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">What is the famous prehistoric structure on Salisbury Plain, England, called?</td>
+<td style="text-align: left;">Stonehenge / Easter Statues</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">What is the term for nautical miles per hour?</td>
+<td style="text-align: left;">Knot / Speed</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">What are people who make maps called?</td>
+<td style="text-align: left;">Cartographers / Geographers</td>
+</tr>
+<tr>
+<td style="text-align: right;">9*</td>
+<td style="text-align: left;">Which metal is liquid at room temperature?</td>
+<td style="text-align: left;">Mercury / Gallium</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">What is the name of the nylon fabric of two pieces that stick to each other, used as a fastener?</td>
+<td style="text-align: left;">Velcro / Toggles</td>
+</tr>
+</tbody>
+</table>
+

@@ -1,18 +1,22 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PdfReport from "../../components/PdfReport.astro";
+import PaperArticle from "../../components/PaperArticle.astro";
+import body from "../../content/papers/typicality-in-referent-choice.html?raw";
 import { projects } from "../../data/projects";
-// The published working paper (lingbuzz/010343; Zenodo concept DOI 10.5281/zenodo.22855036;
-// CC BY 4.0), shown in full since 28 Sep 2026. The PDF is the LingBuzz version of 20 Sep 2026.
+// The published working paper as a web page (lingbuzz/010343; Zenodo concept DOI
+// 10.5281/zenodo.22855036; CC BY 4.0), built from the clean English Markdown in the
+// Vault (B6h output) by reports/web/build_web.py. The PDF is the LingBuzz version.
 ---
-<Base title={`${projects.typicality.title} · Xiaochuan Li`}
+<Base title={`${projects.typicality.title} · Xiaochuan Li`} toc={true}
   description="Typicality in referent choice: what the description leaves open. Working paper, lingbuzz/010343.">
-  <PdfReport
+  <PaperArticle
     status={projects.typicality.status}
-    title="Typicality in Referent Choice: What the Description Leaves Open"
-    meta="Xiaochuan Li · working paper, September 2026 · CC BY 4.0"
+    title="Typicality in referent choice: what the description leaves open"
+    authors="Xiaochuan Li"
+    affiliation="University of Technology Nuremberg · xiaochuan.li@utn.de"
+    date="20 September 2026 · working paper · CC BY 4.0"
+    body={body}
     pdf="/papers/typicality-in-referent-choice.pdf"
-    preview="/papers/typicality-in-referent-choice.png"
     links={[
       { label: "LingBuzz ↗", href: "https://lingbuzz.net/lingbuzz/010343" },
       { label: "DOI ↗", href: "https://doi.org/10.5281/zenodo.22855036" },
