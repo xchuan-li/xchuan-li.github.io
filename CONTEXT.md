@@ -2,6 +2,10 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Papers & Reports, 28 September 2026 (XC) — supersedes the three-line list
+
+XC found the three-line list "太简略". Section 02 is now **Papers & Reports** (`PaperList.astro`): every written output once — typicality working paper, Latent Control States manuscript, ProtoBias course paper, the psychology experiment report, the street-view report — each with a first-page thumbnail (`public/papers/*-thumb.png`; a dashed "in prep." box when there is no public PDF), title, mono meta line, one sentence on what it finds, and links. Writing samples keep a small tag. The "Course projects" line under /research is removed; course report pages link back to `/research#papers`. The street-view team repository is private, so no code link is given for it.
+
 ## Project pages are full reports, 28 September 2026 (XC) — current authority
 
 XC: "每一个项目点开都是完整的报告/pdf预览". `src/components/PdfReport.astro` shows the PDF inline on desktop and a first-page preview linking to the PDF below 700 px. PDFs and previews live in `public/papers/`.
