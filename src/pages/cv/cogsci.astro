@@ -1,0 +1,8 @@
+---
+import Base from "../../layouts/Base.astro";
+import CvDocument from "../../components/CvDocument.astro";
+// Application variant (cogsci). Unlinked, noindex, excluded from the sitemap; printed to PDF.
+---
+<Base title="CV · Xiaochuan Li" noindex={true}>
+  <CvDocument variant="cogsci" />
+</Base>

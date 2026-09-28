@@ -38,7 +38,7 @@ export default defineConfig({
     '/research/ordo': '/research',
     '/research/hangl': '/research',
   },
-  integrations: [mdx(), react(), sitemap()],
+  integrations: [mdx(), react(), sitemap({ filter: (page) => !/\/cv\/(lm|cogsci)\/?$/.test(page) })],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -2,6 +2,14 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## CV rebuilt, 28 September 2026 (XC) — current authority for the CV
+
+XC found the CV "太满…很杂乱" and the Research / Papers / Projects sections overlapping. Now one data source, `src/data/cv.ts`, rendered by `src/components/CvDocument.astro` in three variants:
+- **general** at `/cv` (linked; `/cv.pdf` is printed from it), **lm** at `/cv/lm`, **cogsci** at `/cv/cogsci` — the last two unlinked, `noindex` (Base prop), excluded from the sitemap; PDFs for applications live in the Vault (`Deliverables/CV-2026-09-28/`).
+- Sections: Education · Research (Current · epistemic modality / Earlier) · Papers and manuscripts (citations, own name bold) · Employment · Skills and languages. **Each item appears once**; at most one short note per entry. Layout after Hening Wang's CV (title bold left, context italic, dates right).
+- Variants change order, emphasis and omissions only, never what an entry is. LM: modal-LM project first, LCS first among papers, LoRA/Slurm in skills. CogSci: psychology course study first in Earlier with full design details, psychology grades, street view omitted.
+- Facts: the course study (W25/26, Foundations in Psychology and Empirical Study Design) was designed by a group of three and adopted for the class-wide study; XC did the analysis (JASP). The IT Service Desk entry uses the wording XC confirmed on 27 Sep (Vault A3x1 §6); duties only, nothing from work data. "Mixed-effects" was dropped (no verified record).
+
 ## Modality boundary correction, 27 September 2026 — latest authority
 
 XC explicitly corrected the grouping: “B4跟这些不要连起来，因为B4不是模态”. Latent Control States is an independent prompt-framing / dilemma study. Do not place it in the modality chain or describe it as that chain's method source. Remove the cross-links between it and the modal-model project. It remains in Papers & Writing Samples and on its own page.
