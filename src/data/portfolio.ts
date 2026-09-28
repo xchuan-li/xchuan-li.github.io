@@ -67,7 +67,7 @@ export const portfolioSections: PortfolioSection[] = [
         short: "What a forced choice between two candidates can show about typicality when the description fits both.",
         sample: true,
         links: [
-          { label: "overview", href: projects.typicality.href },
+          { label: "paper", href: projects.typicality.href },
           { label: "LingBuzz", href: "https://lingbuzz.net/lingbuzz/010343" },
         ],
       },

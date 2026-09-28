@@ -1,56 +1,20 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PdfReport from "../../components/PdfReport.astro";
 import { projects } from "../../data/projects";
-// Course study, W25/26 "Foundations in Psychology and Empirical Study Design" (UTN).
-// Facts from the Vault record verified on 19 Sep 2026 (A2u1): design and protocol by a
-// group of three, adopted for the class-wide study by class vote; XC did the analysis.
-// No names of teammates or the instructor; no per-group numbers beyond N (class data,
-// descriptive only). Added at XC's request, 28 Sep 2026.
+// Full write-up (reports/fact-checking/, tectonic), 28 Sep 2026. Sources: the group
+// protocol (Assignment 7 and its revision), the pilot table, and XC's own analysis
+// (Assignment 10). Group design, class-wide data collection, XC's analysis; the Welch
+// tests are computed from summary statistics for the write-up. No classmate names.
 const p = projects.psyStudy;
 ---
 <Base title={`${p.title} · Xiaochuan Li`}
-  description="A between-subjects course experiment on whether meeting ChatGPT first changes how people check and double-check answers: design, pilot, revision, online data collection (N = 49), and analysis."
-  toc={true}>
-  <article class="prose">
-    <p class="!mb-6 !text-sm"><a href="/research#projects">← Course projects</a></p>
-    <p class="text-xs uppercase tracking-wider text-[var(--color-text-muted)]">{p.status}</p>
-    <h1>{p.title}</h1>
-    <p class="!text-lg">{p.question}</p>
-    <p>A study from the course Foundations in Psychology and Empirical Study Design at the
-      University of Technology Nuremberg. Our group of three wrote the protocol; the class voted
-      to adopt it as the study everyone would run, and the whole class collected the data.</p>
-
-    <h2>My contribution</h2>
-    <p>I co-designed the study with two classmates and did the data analysis on my own:
-      descriptive statistics, frequency plots, and group comparisons in JASP.</p>
-
-    <h2>Design</h2>
-    <p>Participants answered factual questions and could check their answers.
-      The first checking tool they were offered was assigned at random, Wikipedia or ChatGPT,
-      between subjects. Their behaviour over two rounds was coded as one of four paths: whether they
-      checked an answer, and whether they then double-checked it with another source. Each answer also carried a
-      four-point certainty rating, and participants rated how often they found ChatGPT and
-      Wikipedia to be right.</p>
-    <p>Habitual double-checking was asked only after the task, so that the question would not
-      reveal what the study was about. Participants gave informed consent online; the task
-      used a mild cover story, followed by a debriefing. The experiment ran
-      in PsychoPy and online through Pavlovia.</p>
-
-    <h2>Pilot and revision</h2>
-    <p>A pilot with eight participants showed that the online group assignment was not working:
-      six of the eight landed in the same group. We fixed the assignment. Participants also
-      answered the questions too well to need checking, so two items were replaced with harder
-      ones; one item that a participant flagged as culturally biased was replaced; and an
-      authority rating for Wikipedia was added alongside the one for ChatGPT.</p>
-
-    <h2>Results and limits</h2>
-    <p>The main study had 49 participants. The descriptive pattern matched one of the two
-      predictions and not the other. The course covered descriptive analysis only, so these
-      are observed patterns, not tested effects; the groups were also unequal in size.</p>
-
-    <h2>Methods and scope</h2>
-    <p>Between-subjects design, random assignment, rating scales, informed consent and
-      debriefing, pilot testing, PsychoPy and Pavlovia, descriptive analysis in JASP.
-      This was a completed course study; my individual part was the analysis.</p>
-  </article>
+  description="Does checking with ChatGPT first change how people check and double-check? A between-subjects course experiment (N = 47 analysed), written up with design, pilot revisions, results, and limits.">
+  <PdfReport
+    back={{ label: "Course projects", href: "/research#projects" }}
+    status={p.status}
+    title="Does Checking with ChatGPT First Change How People Check and Double-Check?"
+    meta="Xiaochuan Li · written up September 2026 from a course study (Foundations in Psychology and Empirical Study Design, Winter 2025–26). Designed with two classmates and run by the class; I analysed the data."
+    pdf="/papers/fact-checking-study.pdf"
+    preview="/papers/fact-checking-study.png" />
 </Base>

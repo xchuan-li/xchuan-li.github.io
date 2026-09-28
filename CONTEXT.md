@@ -2,6 +2,15 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Project pages are full reports, 28 September 2026 (XC) — current authority
+
+XC: "每一个项目点开都是完整的报告/pdf预览". `src/components/PdfReport.astro` shows the PDF inline on desktop and a first-page preview linking to the PDF below 700 px. PDFs and previews live in `public/papers/`.
+- **Typicality**: the LingBuzz PDF (CC BY 4.0) with LingBuzz and DOI links.
+- **Cross-lingual ProtoBias**: the single-author course paper, final version of 30 Jul 2026 (12 pages). The earlier web report (timeline, demo) is in git history; `report-1` keeps its URL. The Vault notes Steffen's plan to fold these experiments into the ProtoBias manuscript.
+- **Street view**: a new write-up by XC, `reports/street-view/` (LaTeX, tectonic; `make_figs.py` draws from `data/`, copied from github.com/xchuan-li/HAI_DL_Group_Assignment). The submitted model uses the `cls` head only. The "oracle 0.969" figure in the Vault note has no source in the repository and is not used.
+- **Psychology study**: a new write-up, `reports/fact-checking/`, from the group protocol (Assignment 7 and its revision), the pilot table, and XC's Assignment 10. Against the protocol's hypothesis (ChatGPT first: more round-1 checks, fewer round-2 checks) both descriptive differences run the other way; Welch tests from summary statistics: t(29.4) = −0.46, p = .65; t(38.1) = 1.44, p = .16. No classmate names.
+- Three Ways, the thesis and the modal-LM project keep their short pages until a public full text exists; Latent Control States needs its collaborators' consent.
+
 ## Psychology course study added, 28 September 2026 (XC)
 
 `/research/fact-checking-study` (`projects.psyStudy`), listed first in the /research "Course projects" line and in the CV. Facts per the Vault record verified on 19 Sep (A2u1): protocol by a group of three, adopted by class vote and run by the whole class (N = 49, pilot N = 8); XC's own part is the JASP analysis. No teammate or instructor names, no per-group means, and the result is stated only as "matched one of two predictions" until XC confirms the predicted directions.
