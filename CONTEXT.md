@@ -2,6 +2,10 @@
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.
 
+## Homepage lead question, 29 September 2026 (XC) — current authority
+
+The homepage opens with one question that sums up the paradigm, set bold as the page's first visual anchor (`identityLong` in `program.ts`, `.intro` in `index.astro`): "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?" The sidebar question ("How does linguistic form shape what we understand and infer?") and the common-question line above Research & Papers are removed, so the page carries one question only.
+
 ## Later on 29 September 2026 (XC) — supersedes the item details below
 
 - **No spine.** The items are independent projects; each is ruled off on its own.

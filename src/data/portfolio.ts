@@ -48,7 +48,7 @@ export interface PortfolioSection {
 export const portfolioSections: PortfolioSection[] = [
   {
     id: "work", sec: "", label: "Research & Papers",
-    blurb: "How does language express possibility, knowledge and uncertainty, and how do people and language models use these expressions to understand and infer?",
+    blurb: "",
     entries: [
       {
         track: "meaning", topic: "Modality",

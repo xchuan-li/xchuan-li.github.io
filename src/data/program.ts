@@ -7,16 +7,9 @@
 export const identity =
   "I study how linguistic meaning guides inference, and how to identify the information used by people and language models.";
 
-// The homepage header lede names the enduring linguistic question first, then
-// explains how distinct empirical paths test predictions from its analysis.
-
-/** Homepage header, paragraph 1 — the shared question across semantics, cognition, and language models. */
-export const openingQuestions =
-  "How does linguistic form shape what we understand and infer?";
-
-/** Homepage header, paragraph 2 — human findings first, then explicit accounts, then model and LM tests (XC, 29 Sep 2026); Fig. 1 illustrates it. */
+/** Homepage lead: the paradigm as one question, set bold as the page's first visual anchor (XC, 29 Sep 2026). Fig. 1 illustrates it. The sidebar question it replaced is gone. */
 export const identityLong =
-  "I start from findings in human studies, state what they imply in explicit linguistic terms, and test those accounts in computational models and language models.";
+  "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -24,11 +17,8 @@ export const currentQuestion =
 
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
-export const openingQuestionsHtml =
-  "How does linguistic form shape what we understand and infer?";
-
 export const identityLongHtml =
-  "I start from findings in human studies, state what they imply in explicit linguistic terms, and test those accounts in computational models and language models.";
+  "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
