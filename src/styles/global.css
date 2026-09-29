@@ -102,7 +102,7 @@ body { font-size: 15px; line-height: 1.6; overflow-x: hidden; }
   gap: 2rem;
 }
 .site-brand { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--color-text); }
-.site-brand::before { content: "\203A"; font-family: var(--font-mono); font-size: 18px; line-height: 1; color: var(--color-accent); }
+.brand-logo { display: block; width: 22px; height: 22px; flex: none; }
 .site-mark { display: block; flex: none; overflow: visible; }
 .site-mark .sm-surface {
   fill: none;

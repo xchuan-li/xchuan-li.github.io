@@ -81,7 +81,10 @@ const path = Astro.url.pathname;
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f8f9fa" />
-    <!-- No custom favicon: the browser default is used, as on most academic sites. -->
+    <!-- Logo and favicon since 29 Sep 2026 (XC): the robot's head from Fig. 1. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- Source Serif 4 for prose, IBM Plex Mono for labels and metadata (2026-09-20). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -122,6 +125,7 @@ const path = Astro.url.pathname;
     <nav class="site-nav" aria-label="Primary">
       <div class="site-nav-inner">
         <a href="/" class="site-brand" aria-label="Home">
+          <img class="brand-logo" src="/favicon.svg" alt="" width="22" height="22" />
           <span class="wordmark">Xiaochuan Li</span>
         </a>
 

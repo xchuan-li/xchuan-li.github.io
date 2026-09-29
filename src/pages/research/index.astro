@@ -2,7 +2,6 @@
 import Base from "../../layouts/Base.astro";
 import { portfolioSections } from "../../data/portfolio";
 import PortfolioEntry from "../../components/PortfolioEntry.astro";
-import ModalityChain from "../../components/ModalityChain.astro";
 import PaperList from "../../components/PaperList.astro";
 ---
 <Base title="Research & Projects · Xiaochuan Li"
@@ -20,10 +19,10 @@ import PaperList from "../../components/PaperList.astro";
     </header>
     {portfolioSections.map((section) => (
       <section class="work-section" id={section.id} aria-labelledby={section.id + "-heading"}>
-        <p class="eyebrow">{section.sec}</p>
+        {section.sec && <p class="eyebrow">{section.sec}</p>}
         <h2 id={section.id + "-heading"}>{section.label}</h2>
         {section.blurb && <p class="section-intro">{section.blurb}</p>}
-        {section.id === "current" ? <ModalityChain /> : section.id === "papers" ? <PaperList entries={section.entries} /> : section.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+        {section.id === "work" ? <PaperList entries={section.entries} /> : section.entries.map((entry) => <PortfolioEntry entry={entry} />)}
       </section>
     ))}
     <p class="program-link">For the questions connecting these projects, see my <a href="/approach">research program</a>.</p>

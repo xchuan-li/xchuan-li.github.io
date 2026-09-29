@@ -14,9 +14,9 @@ export const identity =
 export const openingQuestions =
   "How does linguistic form shape what we understand and infer?";
 
-/** Homepage header, paragraph 2 — the identity claim; the current case is introduced below. */
+/** Homepage header, paragraph 2 — human findings first, then explicit accounts, then model and LM tests (XC, 29 Sep 2026); Fig. 1 illustrates it. */
 export const identityLong =
-  "I start with distinctions in linguistic meaning and aim to express them in simple cognitive models. Human studies test their predictions; interventions in language models ask whether corresponding computations can be found inside the network.";
+  "I start from findings in human studies, state what they imply in explicit linguistic terms, and test those accounts in computational models and language models.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -28,7 +28,7 @@ export const openingQuestionsHtml =
   "How does linguistic form shape what we understand and infer?";
 
 export const identityLongHtml =
-  "I start with distinctions in linguistic meaning and aim to express them in simple cognitive models. Human studies test their predictions; interventions in language models ask whether corresponding computations can be found inside the network.";
+  "I start from findings in human studies, state what they imply in explicit linguistic terms, and test those accounts in computational models and language models.";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

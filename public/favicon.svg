@@ -1,9 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#faf9f6"/>
-  <g fill="none" stroke-width="1.5" stroke-linejoin="round">
-    <rect x="5.7" y="13.2" width="12.8" height="12.6" rx="2.4" stroke="#7c7a75"/>
-    <path d="M18.1 13.2 L28.4 25.8 L13 25.8 Z" stroke="#9c8a76"/>
-    <circle cx="17.6" cy="11.6" r="8.4" stroke="#c0492b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="589 271 86 86">
+  <!-- Site logo and favicon (XC, 29 Sep 2026): the robot's head from Fig. 1
+       (src/components/TwoLearnersFigure.astro), same coordinates, heavier strokes
+       so it holds at 16 px. -->
+  <g stroke="#141414" stroke-width="4.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M631 303 L631 288" fill="none"/>
+    <circle cx="631" cy="281" r="6" fill="#e03a2f"/>
+    <path d="M600 304 L664 302 L666 350 L598 352 Z" fill="#b9bec4"/>
+    <path d="M611 317 L623 317 L623 329 L611 329 Z M639 317 L651 317 L651 329 L639 329 Z" fill="#141414"/>
+    <path d="M614 340 L648 339" fill="none" stroke-width="3.6"/>
   </g>
-  <path d="M15 15.6 Q17.6 14.3 20.2 15.6 Q18.6 18.6 17.6 19.4 Q16.6 18.6 15 15.6 Z" fill="#c0492b"/>
 </svg>

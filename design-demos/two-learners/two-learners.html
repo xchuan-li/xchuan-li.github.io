@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two learners · draft</title>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>body { margin:0; background:#fff; font-family:"Source Serif 4", Georgia, serif; } .page { max-width:720px; margin:56px auto; padding:0 16px; }
+svg { display:block; width:100%; height:auto; }
+  svg text { font-family:"Patrick Hand", "Comic Sans MS", cursive; fill:#141414; }
+  .lab { font-size:21px; } .say { font-size:21px; } .card { font-size:25px; } .ask { font-size:28px; } .big { font-size:58px; }
+.a { opacity:0; animation-duration:18s; animation-iteration-count:infinite; animation-timing-function:linear; }
+@keyframes tl-ev1 { 0%, 1.99% {opacity:0} 2.00%, 47.00% {opacity:1} 47.01%, 100% {opacity:0} }
+@keyframes tl-ev2 { 0%, 50.99% {opacity:0} 51.00%, 97.00% {opacity:1} 97.01%, 100% {opacity:0} }
+@keyframes tl-q { 0% {opacity:0} 5.99% {opacity:0} 6.00% {opacity:1} 47.00% {opacity:1} 47.01% {opacity:0} 54.99% {opacity:0} 55.00% {opacity:1} 97.00% {opacity:1} 97.01% {opacity:0} 100% {opacity:0} }
+@keyframes tl-arr { 0% {opacity:0} 9.99% {opacity:0} 10.00% {opacity:1} 47.00% {opacity:1} 47.01% {opacity:0} 57.99% {opacity:0} 58.00% {opacity:1} 97.00% {opacity:1} 97.01% {opacity:0} 100% {opacity:0} }
+@keyframes tl-kb { 0% {opacity:0} 14.99% {opacity:0} 15.00% {opacity:1} 47.00% {opacity:1} 47.01% {opacity:0} 61.99% {opacity:0} 62.00% {opacity:1} 97.00% {opacity:1} 97.01% {opacity:0} 100% {opacity:0} }
+@keyframes tl-k1 { 0%, 14.99% {opacity:0} 15.00%, 47.00% {opacity:1} 47.01%, 100% {opacity:0} }
+@keyframes tl-k2 { 0%, 61.99% {opacity:0} 62.00%, 97.00% {opacity:1} 97.01%, 100% {opacity:0} }
+@keyframes tl-bb { 0% {opacity:0} 20.99% {opacity:0} 21.00% {opacity:1} 47.00% {opacity:1} 47.01% {opacity:0} 67.99% {opacity:0} 68.00% {opacity:1} 97.00% {opacity:1} 97.01% {opacity:0} 100% {opacity:0} }
+@keyframes tl-b1 { 0% {opacity:0} 20.99% {opacity:0} 21.00% {opacity:1} 47.00% {opacity:1} 47.01% {opacity:0} 67.99% {opacity:0} 68.00% {opacity:1} 97.00% {opacity:1} 97.01% {opacity:0} 100% {opacity:0} }
+@keyframes tl-agree { 0%, 26.99% {opacity:0} 27.00%, 47.00% {opacity:1} 47.01%, 100% {opacity:0} }
+@keyframes tl-why { 0%, 31.99% {opacity:0} 32.00%, 47.00% {opacity:1} 47.01%, 100% {opacity:0} }
+@keyframes tl-plate { 0% {opacity:0} 0.01% {opacity:0} 0.02% {opacity:1} 31.99% {opacity:1} 32.00% {opacity:0} 47.00% {opacity:0} 47.01% {opacity:1} 99.98% {opacity:1} 99.99% {opacity:0} 100% {opacity:0} }
+@keyframes tl-door { 0%, 31.99% {opacity:0} 32.00%, 47.00% {opacity:1} 47.01%, 100% {opacity:0} }
+@keyframes tl-diff { 0%, 73.99% {opacity:0} 74.00%, 97.00% {opacity:1} 97.01%, 100% {opacity:0} }
+@keyframes tl-diffq { 0%, 75.99% {opacity:0} 76.00%, 97.00% {opacity:1} 97.01%, 100% {opacity:0} }
+.ev1 { animation-name:tl-ev1; }
+.ev2 { animation-name:tl-ev2; }
+.q { animation-name:tl-q; }
+.arr { animation-name:tl-arr; }
+.kb { animation-name:tl-kb; }
+.k1 { animation-name:tl-k1; }
+.k2 { animation-name:tl-k2; }
+.bb { animation-name:tl-bb; }
+.b1 { animation-name:tl-b1; }
+.agree { animation-name:tl-agree; }
+.why { animation-name:tl-why; }
+.plate { animation-name:tl-plate; }
+.door { animation-name:tl-door; }
+.diff { animation-name:tl-diff; }
+.diffq { animation-name:tl-diffq; }
+figcaption { margin-top:10px; font-size:.86rem; line-height:1.5; color:#4c515c; }</style></head>
+<body><div class="page"><figure><svg viewBox="0 0 800 480" role="img" aria-label="Sketch: one item, a wet street and the choice between must and might, is put to a person and to a language model. First both answer must, and the model's casing opens to ask whether it answered for the same reason. Then someone only reports that it rained; the two answers differ, and the difference is marked as a question. Illustration, not results.">
+<defs>
+  <filter id="tl-boil" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
+      <animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/>
+  </filter>
+  <marker id="tl-head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M1 1 L11 6 L1 11" fill="none" stroke="#141414" stroke-width="2.2" stroke-linejoin="round"/>
+  </marker>
+</defs>
+<g filter="url(#tl-boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M8 9 L793 5 L795 473 L5 475 Z" fill="#fff"/>
+  <text class="lab" x="24" y="42" stroke="none">one question, two learners</text>
+
+  <!-- the item -->
+  <path d="M262 58 L540 54 L544 172 L258 175 Z" fill="#fff8df" stroke-width="2.6"/>
+  <text class="card a ev1" x="401" y="104" stroke="none" text-anchor="middle">You see a wet street.</text>
+  <text class="card a ev2" x="401" y="104" stroke="none" text-anchor="middle">Someone says it rained.</text>
+  <text class="ask a q" x="401" y="150" stroke="none" text-anchor="middle">must  or  might?</text>
+  <g class="a arr" fill="none" stroke-width="2.6"><path d="M318 178 L214 228" marker-end="url(#tl-head)"/><path d="M484 178 L588 228" marker-end="url(#tl-head)"/></g>
+
+  <!-- a person -->
+  <path class="a kb" d="M18 236 L262 232 L264 276 L154 278 L172 300 L132 279 L16 281 Z" fill="#fff"/>
+  <text class="say a k1" x="32" y="264" stroke="none">It must have rained!</text>
+  <text class="say a k2" x="32" y="264" stroke="none">It might have rained.</text>
+  <g>
+    <circle cx="150" cy="322" r="21" fill="#f2cfa4"/>
+    <path d="M131 314 L136 298 L144 310 L150 294 L156 310 L165 298 L169 314" fill="#e8b33c" stroke-width="2.4"/>
+    <circle cx="143" cy="323" r="2.4" fill="#141414" stroke="none"/><circle cx="157" cy="323" r="2.4" fill="#141414" stroke="none"/>
+    <path d="M143 333 Q150 338 157 332" fill="none" stroke-width="2.2"/>
+    <path d="M131 344 L169 342 L174 400 L127 402 Z" fill="#e2574c"/>
+    <path d="M140 402 L136 442 M162 401 L167 442" fill="none" stroke-width="4"/>
+    <path d="M131 352 L114 386 M169 352 L186 386" fill="none" stroke-width="4"/>
+  </g>
+  <text class="lab" x="36" y="466" stroke="none">people · behavioural experiments</text>
+
+  <!-- a language model -->
+  <path class="a bb" d="M540 236 L786 233 L788 276 L690 278 L664 298 L668 278 L538 280 Z" fill="#fff"/>
+  <text class="say a b1" x="554" y="264" stroke="none">It must have rained.</text>
+  <g>
+    <path d="M631 302 L631 286" fill="none"/><circle cx="631" cy="281" r="5" fill="#e03a2f"/>
+    <path d="M600 304 L664 302 L666 350 L598 352 Z" fill="#b9bec4"/>
+    <path d="M612 318 L622 318 L622 328 L612 328 Z M640 318 L650 318 L650 328 L640 328 Z" fill="#141414"/>
+    <path d="M614 340 L648 339" fill="none" stroke-width="2.4"/>
+    <path d="M588 352 L676 350 L678 424 L586 426 Z" fill="#b9bec4"/>
+    <path d="M604 367 L633 392 L658 367 M604 367 L611 409 L633 392 L658 410" fill="none" stroke-width="2.4"/>
+    <g fill="#fff" stroke-width="2.4">
+      <circle cx="604" cy="367" r="6"/><circle cx="658" cy="367" r="6"/>
+      <circle cx="633" cy="392" r="6"/><circle cx="611" cy="409" r="6"/><circle cx="658" cy="410" r="6"/>
+    </g>
+    <!-- casing: closed, or swung open -->
+    <g class="a plate"><path d="M588 352 L676 350 L678 424 L586 426 Z" fill="#9aa0a6"/><path d="M664 384 L670 384" fill="none" stroke-width="4"/></g>
+    <g class="a door"><path d="M678 350 L722 338 L724 414 L678 424 Z" fill="#9aa0a6" stroke-width="2.6"/></g>
+    <path d="M612 426 L610 446 M652 425 L654 446" fill="none" stroke-width="4"/>
+  </g>
+  <text class="lab" x="780" y="466" stroke="none" text-anchor="end">language models · behaviour and internals</text>
+
+  <!-- round 1: same answer, same reason? -->
+  <text class="lab a agree" x="400" y="346" stroke="none" text-anchor="middle">same answer.</text>
+  <g class="a why">
+    <text class="lab" x="400" y="382" stroke="none" text-anchor="middle">same reason?</text>
+    <path d="M466 376 Q540 362 590 384" fill="none" stroke-dasharray="6 7" stroke-width="2.4" marker-end="url(#tl-head)"/>
+  </g>
+  <!-- round 2: the difference is the question -->
+  <text class="big a diff" x="400" y="352" stroke="none" text-anchor="middle">?</text>
+  <text class="lab a diffq" x="400" y="394" stroke="none" text-anchor="middle">why different?</text>
+</g>
+</svg><figcaption>Fig. 1 · One item, two learners. Where the answers agree, the model can be opened to ask what its answer rests on; where they differ, the difference becomes the question. Illustration, not results.</figcaption></figure></div></body></html>

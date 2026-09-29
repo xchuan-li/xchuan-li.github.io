@@ -1,24 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
 import { openingQuestionsHtml, identityLongHtml } from "../data/program";
-import { portfolioSections } from "../data/portfolio";
+import { portfolioSections, paperTracks } from "../data/portfolio";
 import PortfolioEntry from "../components/PortfolioEntry.astro";
-import ModalityChain from "../components/ModalityChain.astro";
 import PaperList from "../components/PaperList.astro";
-import LclmCartoon from "../components/LclmCartoon.astro";
+import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
 // 27 September 2026 (XC): keep the sticky left column; the main column is narrow (720 px)
-// and airy like the other pages. Fig. 1 is the hand-drawn LclmCartoon.
-
-// Latest keeps one line per real event. An empty or padded list is worse than a
-// short one — only add items that actually happened.
-const latest = [
-  {
-    date: "September 2026",
-    html: '<a href="/research/typicality-in-referent-choice">Typicality in referent choice: what the description leaves open</a>. Working paper, <a href="https://lingbuzz.net/lingbuzz/010343" rel="noopener">lingbuzz/010343</a>, <a href="https://doi.org/10.5281/zenodo.22855036" rel="noopener">doi:10.5281/zenodo.22855036</a>.',
-  },
-];
+// and airy like the other pages. Fig. 1 is the hand-drawn MeaningBridgeFigure (29 Sep 2026; LclmCartoon before).
+// 29 Sep 2026 (XC): no "Latest" list and no "Selected work" heading; the page goes from
+// Fig. 1 straight to Research & Papers.
 
 // Background: one question per period — the one the prose beside it does not already
 // answer, and that the research section above does not already cover.
@@ -87,9 +79,10 @@ const timeline = [
         </p>
         <p class="side-q" set:html={openingQuestionsHtml} />
         <nav class="side-toc" aria-label="Work on this page">
-          <p class="side-k">Selected work</p>
+          <p class="side-k">On this page</p>
           {portfolioSections.map((group) => (
-            <a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
+            <><a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
+            {group.id === "work" && paperTracks.map((t) => <a class="side-sub" href={`#work-${t.id}`}><span></span>{t.label}</a>)}</>
           ))}
           <a href="#background"><span>—</span>Background</a>
         </nav>
@@ -102,31 +95,17 @@ const timeline = [
 
     <div class="main">
     <p class="intro" set:html={identityLongHtml} />
-    <LclmCartoon />
-
-    <!-- ===== latest ===== -->
-    <section class="sec" aria-labelledby="latest-heading">
-      <h2 class="sec-h" id="latest-heading">Latest</h2>
-      <ul class="latest-list">
-        {latest.map((item) => (
-          <li class="latest-item">
-            <span class="latest-date">{item.date}</span>
-            <span class="latest-text" set:html={item.html} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <MeaningBridgeFigure />
 
     <!-- Output type and publication status are separate from research topic. -->
-    <section class="sec selected-research" id="selected-research" aria-labelledby="research-heading">
-      <h2 class="sec-h" id="research-heading">Selected work</h2>
+    <section class="sec selected-research" id="selected-research" aria-label="Research and papers">
       <div class="portfolio-list">
         {portfolioSections.map((group) => (
           <section class="research-block" id={group.id} aria-labelledby={group.id + "-heading"}>
-            <p class="research-sec">{group.sec}</p>
+            {group.sec && <p class="research-sec">{group.sec}</p>}
             <h2 class="research-group-label" id={group.id + "-heading"}>{group.label}</h2>
             {group.blurb && <p class="research-group-blurb">{group.blurb}</p>}
-            {group.id === "current" ? <ModalityChain /> : group.id === "papers" ? <PaperList entries={group.entries} /> : group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+            {group.id === "work" ? <PaperList entries={group.entries} /> : group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
           </section>
         ))}
       </div>
@@ -181,7 +160,9 @@ const timeline = [
 
 <script>
   // The left column marks the section currently in the upper third of the viewport.
-  const links = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a")];
+  // Under Research & Papers, the sub-link of the open tab is marked while that section is.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a:not(.side-sub)")];
+  const subs = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a.side-sub")];
   const targets = links.map((a) => document.querySelector(a.getAttribute("href") ?? ""));
   const update = () => {
     let current = -1;
@@ -189,8 +170,15 @@ const timeline = [
       if (t && t.getBoundingClientRect().top < innerHeight * 0.35) current = i;
     });
     links.forEach((a, i) => a.setAttribute("aria-current", String(i === current)));
+    const inWork = targets[current]?.id === "work";
+    subs.forEach((a) => {
+      const panel = document.querySelector<HTMLElement>(a.getAttribute("href") ?? "");
+      a.setAttribute("aria-current", String(inWork && !!panel && !panel.hidden));
+    });
   };
   addEventListener("scroll", update, { passive: true });
+  addEventListener("hashchange", () => setTimeout(update));
+  document.querySelectorAll("[data-ptab]").forEach((b) => b.addEventListener("click", () => setTimeout(update)));
   update();
 </script>
 
@@ -209,6 +197,7 @@ const timeline = [
   .side-toc a { display: grid; grid-template-columns: 2.1em 1fr; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.95; color: var(--color-text-muted); text-decoration: none; }
   .side-toc a span { color: var(--color-text-dim); }
   .side-toc a:hover { color: var(--color-text); }
+  .side-toc a.side-sub { padding-left: 0.9em; font-size: 0.74rem; line-height: 1.85; color: var(--color-text-dim); }
   .side-toc a[aria-current="true"], .side-toc a[aria-current="true"] span { color: var(--color-accent); }
   .side-links { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.9; margin: 1.4rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--color-border); }
   .side-links a { color: var(--color-accent); text-decoration: none; }
@@ -263,16 +252,6 @@ const timeline = [
   .sec-h::before { content: "// "; color: var(--color-accent); opacity: 0.6; }
 
   .block-note { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); margin: 0 0 1.4rem; }
-
-  /* ===== latest ===== */
-  .latest-list { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
-  .latest-item { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 1.75rem; font-size: 0.93rem; line-height: 1.6; }
-  .latest-date { font-family: var(--font-mono); font-size: 0.79rem; color: var(--color-text-dim); padding-top: 0.15rem; }
-  .latest-text { color: var(--color-text-muted); }
-  .latest-text :global(a) { color: var(--color-accent); border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent); }
-  @media (max-width: 720px) {
-    .latest-item { grid-template-columns: 1fr; gap: 0.15rem; }
-  }
 
   /* ===== portfolio: output types share the existing flat academic register ===== */
   .selected-research { scroll-margin-top:6rem; }

@@ -15,7 +15,7 @@ interface Props {
   links?: { label: string; href: string }[];
   back?: { label: string; href: string };
 }
-const { status, title, authors, affiliation, date, note, body, pdf, links = [], back = { label: "Papers & Reports", href: "/research#papers" } } = Astro.props;
+const { status, title, authors, affiliation, date, note, body, pdf, links = [], back = { label: "Research & Papers", href: "/research#work" } } = Astro.props;
 ---
 <article class="prose paper">
   <p class="paper-back"><a href={back.href}>← {back.label}</a></p>
