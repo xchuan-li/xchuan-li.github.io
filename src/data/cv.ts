@@ -4,6 +4,9 @@
 // and omissions only — never what an entry says it is.
 // Facts: psychology study per Vault A2u1 (design = group of three, adopted by class
 // vote; analysis = XC); IT job wording per Vault A3x1 §6 (confirmed 27 Sep 2026).
+// Dyslexia screening per Vault C0 (XC, 1 Oct 2026): memory is vague and no documents
+// survive, so the entry claims only the collaboration; cogsci only (off-topic for lm,
+// and general keeps its course projects).
 
 export type Variant = "general" | "lm" | "cogsci";
 type ByVariant<T> = T | Partial<Record<Variant, T>> & { default?: T };
@@ -19,6 +22,9 @@ export function pick<T>(v: ByVariant<T> | undefined, variant: Variant): T | unde
 
 export interface Entry {
   id: string;
+  method?: string;          // programme rows: method label (Formal analysis / Human study / Language models)
+  row?: ByVariant<string>;  // programme rows: one HTML line; compact earlier rows: the line after the title
+  status?: string;          // programme rows: "In development." etc.
   title: string;
   href?: string;
   context: string;          // italic line: what it is / where
@@ -60,24 +66,40 @@ export const education: (Entry & { place: string })[] = [
 const research: Record<string, Entry> = {
   threeWays: {
     id: "threeWays", title: "Three Ways of Leaving p Unsettled", href: "/research/three-ways",
+    method: "Formal analysis", status: "In development.",
+    row: 'compares <i>might p</i>, <i>might p or might not p</i> and <i>I don’t know whether p</i> by the replies each licenses.',
     context: "Formal semantics and pragmatics · analysis in development", when: "2026 –",
     note: "Compares might p, might p or might not p, and I don’t know whether p by the replies each licenses.",
   },
   thesis: {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
+    method: "Human study", status: "In planning.",
+    row: 'modal language in preschool children, run alongside an existing study of how they reason about possibilities.',
     context: "M.Sc. thesis · in planning", when: "2026 –",
     note: "A small study run alongside an existing study of how preschool children reason about possibilities.",
   },
   modalLM: {
     id: "modalLM", title: "Modal expressions in language models", href: "/research/modal-language-models",
+    method: "Language models", status: "In development.",
+    row: {
+      default: 'diagnostics of how models treat ruled-out possibilities; a cognitive account and internal tests are planned.',
+      cogsci: 'a simple cognitive account of modal reasoning, to be tested against language-model behaviour.',
+    },
     context: "Language-model study · in development", when: "2026 –",
     note: {
       default: "Diagnostics of how models treat ruled-out possibilities; a cognitive account and internal tests are planned.",
       cogsci: "A simple cognitive account of modal reasoning, to be tested against language-model behaviour.",
     },
   },
+  dyslexia: {
+    id: "dyslexia", title: "Reading-difficulty screening in primary-school children",
+    row: "human study with the Shenzhen Learning Disorders Association",
+    context: "Undergraduate course project, with the Shenzhen Learning Disorders Association", when: "Spring 2022",
+    note: "Helped select homophone-character stimuli and administered a reaction-time task to children at a primary school.",
+  },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure",
+    row: "human study, class-wide experiment (N = 49); my part: data analysis",
     context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
     note: {
       default: "Between-subjects experiment (N = 49), group-designed and adopted for the class-wide study; my part: data analysis.",
@@ -86,12 +108,14 @@ const research: Record<string, Entry> = {
   },
   protobias: {
     id: "protobias", title: "Cross-lingual ProtoBias", href: "/research/cross-lingual-protobias",
+    row: "VLM evaluation, single-author course project, about 12,600 judgments",
     context: "Single-author course project", when: "Summer 2026",
     note: "Evaluation of two VLM families across seven prompt languages, about 12,600 judgments.",
     links: [{ label: "report", href: "https://xchuan-li.github.io/research/cross-lingual-protobias" }, { label: "code", href: "https://github.com/xchuan-li/cross_lingual_protobias" }],
   },
   streetView: {
     id: "streetView", title: "Street-view country classification", href: "/research/street-view-classification",
+    row: "team course project, Deep Learning; my part: CNN training and analysis",
     context: "Team course project, Deep Learning", when: "Summer 2026",
     note: "My part: CNN training, ablations, and performance analysis.",
   },
@@ -100,9 +124,28 @@ const research: Record<string, Entry> = {
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
   general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["psy", "protobias", "streetView"] },
   lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["protobias", "streetView", "psy"] },
-  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["psy", "protobias"] },
+  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["dyslexia", "psy", "protobias"] },
 };
 export const researchEntry = (id: string) => research[id];
+
+// Research is drawn as one programme (one question, three methods) plus a compact list of
+// earlier work, so the page reads as one line of research rather than six parallel items
+// (XC, 1 Oct 2026, after comparing Hening Wang's and Polina Tsvilodub's pages).
+// Question line confirmed by XC, 1 Oct 2026.
+export const programme = {
+  title: "Epistemic modality in people and language models",
+  when: "2026 –",
+  question: "Current focus · how modal expressions are understood and used, by people and by language models",
+};
+// Link text for each programme row (the rest of the line comes from `row`).
+export const programmeLabel: Record<string, string> = {
+  threeWays: "Three Ways of Leaving p Unsettled",
+  thesis: "M.Sc. thesis",
+  modalLM: "Language-model study",
+};
+export const compactWhen: Record<string, string> = {
+  dyslexia: "2022", psy: "2025–26", protobias: "2026", streetView: "2026",
+};
 
 export interface Paper { id: string; html: string; }
 const papers: Record<string, Paper> = {
