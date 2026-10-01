@@ -1,8 +1,8 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { portfolioSections } from "../../data/portfolio";
+import { workTiers, entriesOfTier } from "../../data/portfolio";
 import PortfolioEntry from "../../components/PortfolioEntry.astro";
-import PaperList from "../../components/PaperList.astro";
+import WorkList from "../../components/WorkList.astro";
 ---
 <Base title="Research & Projects · Xiaochuan Li"
   description="Working papers, manuscripts in preparation, completed research and technical projects, and selected writing by Xiaochuan Li.">
@@ -14,15 +14,14 @@ import PaperList from "../../components/PaperList.astro";
         and computational methods. My master’s work focuses on modal expressions. Here are the papers,
         projects, and texts that come from that work.</p>
       <nav class="section-index" aria-label="Work categories">
-        {portfolioSections.map((section) => <a href={"#" + section.id}>{section.label}</a>)}
+        {workTiers.map((t) => <a href={"#" + t.id}>{t.label}</a>)}
       </nav>
     </header>
-    {portfolioSections.map((section) => (
-      <section class="work-section" id={section.id} aria-labelledby={section.id + "-heading"}>
-        {section.sec && <p class="eyebrow">{section.sec}</p>}
-        <h2 id={section.id + "-heading"}>{section.label}</h2>
-        {section.blurb && <p class="section-intro">{section.blurb}</p>}
-        {section.id === "work" ? <PaperList entries={section.entries} /> : section.entries.map((entry) => <PortfolioEntry entry={entry} />)}
+    {workTiers.map((t) => (
+      <section class="work-section" id={t.id} aria-labelledby={t.id + "-heading"}>
+        <h2 id={t.id + "-heading"}>{t.label}</h2>
+        {t.blurb && <p class="section-intro">{t.blurb}</p>}
+        <WorkList entries={entriesOfTier(t.id)} compact={t.compact} />
       </section>
     ))}
     <p class="program-link">For the questions connecting these projects, see my <a href="/approach">research program</a>.</p>

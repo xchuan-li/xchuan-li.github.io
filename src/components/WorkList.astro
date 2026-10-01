@@ -1,0 +1,78 @@
+---
+// One flat list of work, no tabs (XC, 1 Oct 2026). Weight is carried by the layout:
+// `compact` rows are one line each, for coursework; full rows carry a sentence,
+// links and a thumbnail. Field labels (Human study / Language models) are on the
+// item, so topic and weight stay independent of each other.
+import type { PortfolioEntry } from "../data/portfolio";
+interface Props { entries: PortfolioEntry[]; compact?: boolean; }
+const { entries, compact = false } = Astro.props;
+---
+{compact ? (
+  <ul class="rows">
+    {entries.map((e) => {
+      const href = e.links[0]?.href;
+      return (
+        <li class="row">
+          <span class="row-t">{href ? <a href={href}>{e.title}</a> : e.title}</span>
+          <span class="row-m">{e.kind ?? e.status}</span>
+        </li>
+      );
+    })}
+  </ul>
+) : (
+  <ol class="chain">
+    {entries.map((e) => {
+      const href = e.links[0]?.href;
+      return (
+        <li class="step">
+          <p class="topic">{e.topic ?? e.field}</p>
+          <div class="body">
+            <p class="meta">{e.kind ?? e.status}</p>
+            <h4>{href ? <a href={href}>{e.title}</a> : e.title}</h4>
+            <p class="short">{e.short ?? e.desc}</p>
+            {e.links.length > 1 && <p class="links">{e.links.slice(1).map((l, i) => <>{i > 0 && <span class="sep" aria-hidden="true">·</span>}<a href={l.href}>{l.label}</a></>)}</p>}
+          </div>
+          {e.thumb && href && <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={e.thumb} alt="" width="300" height="424" loading="lazy" decoding="async" /></a>}
+        </li>
+      );
+    })}
+  </ol>
+)}
+
+<style>
+  .chain { --q:140px; --gap:1.75rem; list-style:none; margin:0; padding:0; border-top:1px solid var(--color-border); }
+  .step { display:grid; grid-template-columns:var(--q) minmax(0,1fr) auto; column-gap:var(--gap); padding:0.95rem 0 1rem; border-bottom:1px solid var(--color-border); }
+  .topic { margin:0.05rem 0 0; font-family:var(--font-serif); font-size:0.98rem; line-height:1.4; color:var(--color-text); text-wrap:balance; }
+  .body { min-width:0; }
+  .meta { margin:0 0 0.45rem; font:0.65rem/1.6 var(--font-mono); letter-spacing:0.04em; color:var(--color-text-muted); }
+  h4 { margin:0 0 0.3rem; font-family:var(--font-serif); font-size:1.08rem; font-weight:600; line-height:1.35; color:var(--color-text); text-wrap:pretty; }
+  h4 a { color:var(--color-text); text-decoration:none; }
+  h4 a::after { content:" →"; color:var(--color-accent); font-weight:400; }
+  h4 a:hover { color:var(--color-accent); text-decoration:underline; text-underline-offset:0.15em; }
+  .short { margin:0; font-size:0.93rem; line-height:1.55; color:var(--color-text-muted); text-wrap:pretty; }
+  .links { margin:0.4rem 0 0; font:0.72rem/1.6 var(--font-mono); }
+  .links a { color:var(--color-accent); text-decoration:none; }
+  .links a:hover { text-decoration:underline; text-underline-offset:0.2em; }
+  .sep { color:var(--color-text-ghost); margin:0 0.45rem; }
+  .thumb { display:block; width:56px; aspect-ratio:1 / 1.414; margin-top:0.2rem; border:1px solid var(--color-border-strong); background:#fff; overflow:hidden; }
+  .thumb img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; transition:opacity .15s; }
+  .thumb:hover img { opacity:.8; }
+
+  /* Coursework: one line each. */
+  .rows { list-style:none; margin:0; padding:0; border-top:1px solid var(--color-border); }
+  .row { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:0.4rem 1.2rem; padding:0.5rem 0; border-bottom:1px solid var(--color-border); }
+  .row-t { font-size:0.93rem; line-height:1.45; color:var(--color-text); }
+  .row-t a { color:var(--color-text); text-decoration:none; }
+  .row-t a:hover { color:var(--color-accent); text-decoration:underline; text-underline-offset:0.15em; }
+  .row-m { font:0.65rem/1.6 var(--font-mono); letter-spacing:0.04em; color:var(--color-text-muted); white-space:nowrap; }
+  a:focus-visible { outline:2px solid var(--color-accent); outline-offset:3px; }
+
+  @media (max-width:620px) {
+    .chain { --gap:1rem; }
+    .step { grid-template-columns:minmax(0,1fr) auto; }
+    .topic { grid-column:1; font-style:italic; margin-bottom:0.35rem; }
+    .body { grid-column:1; }
+    .thumb { grid-column:2; grid-row:1 / span 2; width:44px; }
+    .row-m { white-space:normal; }
+  }
+</style>

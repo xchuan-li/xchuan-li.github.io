@@ -29,13 +29,14 @@ export interface PortfolioEntry {
   /** Papers list: which tab the entry sits under, and the topic label shown on it. */
   track?: PaperTrack;
   topic?: string;
+  /** How much weight the item carries: own research, writing samples, or coursework. */
+  tier?: "research" | "writing" | "course";
 }
-export type PaperTrack = "meaning" | "human" | "lm";
+export type PaperTrack = "langcog" | "lm";
 /** Tab label (short), then the full heading and its subtitle shown above the open list. */
 export const paperTracks: { id: PaperTrack; label: string; title: string; sub: string }[] = [
-  { id: "meaning", label: "Meaning & inference", title: "Linguistic meaning and inference", sub: "Theoretical hypotheses and empirical operationalization" },
-  { id: "human", label: "Human cognition", title: "Human cognition and development", sub: "Behavioural evidence and hypothesis testing" },
-  { id: "lm", label: "Language models", title: "Language models: behaviour and mechanisms", sub: "Computational modelling and mechanistic tests" },
+  { id: "langcog", label: "Language & cognition", title: "Language and cognition", sub: "Computational models, behavioural evidence, and the analyses behind them" },
+  { id: "lm", label: "Language models", title: "Language models: behaviour and mechanisms", sub: "Controlled experiments and mechanistic tests" },
 ];
 export interface PortfolioSection {
   id: string;
@@ -51,15 +52,31 @@ export const portfolioSections: PortfolioSection[] = [
     blurb: "",
     entries: [
       {
-        track: "meaning", topic: "Modality",
-        title: projects.threeWays.title,
-        field: "Semantics & pragmatics", desc: projects.threeWays.summary, status: projects.threeWays.status,
-        kind: "Writing sample · in development",
-        short: "Compares answers that leave a question open, such as might p and I don’t know whether p, by the replies and continuations each one licenses.",
-        links: [{ label: "Question & diagnostics", href: projects.threeWays.href }],
+        tier: "research", track: "langcog", topic: "Computational model",
+        title: projects.modalModels.title,
+        field: "Language models", desc: projects.modalModels.summary, status: projects.modalModels.status,
+        kind: "Project · in development",
+        short: "From diagnostics of ruled-out possibilities to a cognitive account tested in model behaviour and internals.",
+        links: [{ label: "Project outline", href: projects.modalModels.href }],
       },
       {
-        track: "meaning", topic: "Typicality",
+        tier: "research", track: "langcog", topic: "Behavioural experiment",
+        title: projects.thesis.title,
+        field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
+        kind: "Project · master’s thesis · in planning, no data yet",
+        short: "A small study run alongside an existing study of how preschoolers reason about possibilities.",
+        links: [{ label: "Thesis outline", href: projects.thesis.href }],
+      },
+      {
+        tier: "research", track: "lm", topic: "Mechanistic interpretability",
+        title: "Prompt framing and latent control states in language models",
+        field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
+        kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
+        short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
+        links: [{ label: "Overview", href: projects.latentControl.href }],
+      },
+      {
+        tier: "writing", track: "langcog", topic: "Typicality",
         title: "Typicality in referent choice: what the description leaves open",
         field: "Semantics & pragmatics", desc: projects.typicality.summary, status: projects.typicality.status,
         kind: "Writing sample · working paper 2026 · lingbuzz/010343",
@@ -73,51 +90,15 @@ export const portfolioSections: PortfolioSection[] = [
         ],
       },
       {
-        track: "human", topic: "Behavioural experiment",
-        title: projects.thesis.title,
-        field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
-        kind: "Project · master’s thesis · in planning, no data yet",
-        short: "A small study run alongside an existing study of how preschoolers reason about possibilities.",
-        links: [{ label: "Thesis outline", href: projects.thesis.href }],
+        tier: "writing", track: "langcog", topic: "Modality",
+        title: projects.threeWays.title,
+        field: "Semantics & pragmatics", desc: projects.threeWays.summary, status: projects.threeWays.status,
+        kind: "Writing sample · in development",
+        short: "Compares answers that leave a question open, such as might p and I don’t know whether p, by the replies and continuations each one licenses.",
+        links: [{ label: "Question & diagnostics", href: projects.threeWays.href }],
       },
       {
-        track: "human", topic: "Behavioural experiment",
-        title: "Does checking with ChatGPT first change how people check and double-check?",
-        field: "Course experiment", desc: projects.psyStudy.summary, status: projects.psyStudy.status,
-        kind: "Project · course study, Winter 2025–26 · report 2026",
-        short: "A complete between-subjects experiment, from design and pilot to data collection (N = 47) and analysis; neither predicted difference was reliable.",
-        thumb: "/papers/fact-checking-study-thumb.png",
-        links: [
-          { label: "Report", href: projects.psyStudy.href },
-          { label: "PDF", href: "/papers/fact-checking-study.pdf" },
-        ],
-      },
-      {
-        track: "human", topic: "EEG experiment",
-        title: "A group EEG study in Cognitive Neuroscience",
-        field: "Course project", desc: "", status: "Planned course project · Winter 2026–27",
-        kind: "Project · course study, Winter 2026–27 · planned",
-        short: "A guided group study covering preregistration, EEG recording, and preprocessing and analysis in MNE-Python.",
-        links: [],
-      },
-      {
-        track: "lm", topic: "Model evaluation",
-        title: projects.modalModels.title,
-        field: "Language models", desc: projects.modalModels.summary, status: projects.modalModels.status,
-        kind: "Project · in development",
-        short: "From diagnostics of ruled-out possibilities to a cognitive account tested in model behaviour and internals.",
-        links: [{ label: "Project outline", href: projects.modalModels.href }],
-      },
-      {
-        track: "lm", topic: "Mechanistic interpretability",
-        title: "Prompt framing and latent control states in language models",
-        field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
-        kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
-        short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
-        links: [{ label: "Overview", href: projects.latentControl.href }],
-      },
-      {
-        track: "lm", topic: "Model evaluation",
+        tier: "course", track: "lm", topic: "Model evaluation",
         title: "Cross-lingual prototypicality bias in multimodal evaluation metrics and VLM judges",
         field: "Course paper", desc: projects.protobias.summary, status: projects.protobias.status,
         kind: "Project · course paper 2026 · single author",
@@ -130,7 +111,7 @@ export const portfolioSections: PortfolioSection[] = [
         ],
       },
       {
-        track: "lm", topic: "Model training · image CNN",
+        tier: "course", track: "lm", topic: "Model training · image CNN",
         title: "Training choices in a small CNN for street-view country classification",
         field: "Course project", desc: projects.streetView.summary, status: projects.streetView.status,
         kind: "Project · team course project 2026 · report 2026",
@@ -141,6 +122,35 @@ export const portfolioSections: PortfolioSection[] = [
           { label: "PDF", href: "/papers/street-view-classification.pdf" },
         ],
       },
+      {
+        tier: "course", track: "langcog", topic: "Behavioural experiment",
+        title: "Does checking with ChatGPT first change how people check and double-check?",
+        field: "Course experiment", desc: projects.psyStudy.summary, status: projects.psyStudy.status,
+        kind: "Project · course study, Winter 2025–26 · report 2026",
+        short: "A complete between-subjects experiment, from design and pilot to data collection (N = 47) and analysis; neither predicted difference was reliable.",
+        thumb: "/papers/fact-checking-study-thumb.png",
+        links: [
+          { label: "Report", href: projects.psyStudy.href },
+          { label: "PDF", href: "/papers/fact-checking-study.pdf" },
+        ],
+      },
+      {
+        tier: "course", track: "langcog", topic: "EEG experiment",
+        title: "A group EEG study in Cognitive Neuroscience",
+        field: "Course project", desc: "", status: "Planned course project · Winter 2026–27",
+        kind: "Project · course study, Winter 2026–27 · planned",
+        short: "A guided group study covering preregistration, EEG recording, and preprocessing and analysis in MNE-Python.",
+        links: [],
+      },
     ],
   },
 ];
+
+/** The one work section's entries, grouped by weight for the homepage and the research index. */
+export const workEntries = portfolioSections[0].entries;
+export const workTiers: { id: string; label: string; blurb: string; compact: boolean }[] = [
+  { id: "research", label: "Research", blurb: "Projects I am responsible for, with their current state.", compact: false },
+  { id: "writing", label: "Writing", blurb: "Analyses written up on their own; used as writing samples.", compact: false },
+  { id: "course", label: "Course projects", blurb: "", compact: true },
+];
+export const entriesOfTier = (t: string) => workEntries.filter((e) => (e.tier ?? "course") === t);

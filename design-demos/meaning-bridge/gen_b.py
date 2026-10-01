@@ -70,7 +70,7 @@ SVG = f'''<svg viewBox="0 0 800 480" role="img" aria-label="{ARIA}">
   <path d="M8 9 L793 5 L795 473 L5 475 Z" fill="#fff"/>
   <g stroke="none">
     <text class="st" x="121" y="36" text-anchor="middle">1 · a human finding</text>
-    <text class="st" x="400" y="36" text-anchor="middle">2 · linguistic analysis</text>
+    <text class="st" x="400" y="36" text-anchor="middle">2 · rival accounts</text>
     <text class="st" x="679" y="36" text-anchor="middle">3 · model and LM tests</text>
   </g>
 
@@ -210,7 +210,7 @@ button:hover {{ color:#16181d; border-color:rgba(0,0,0,.3); }}
 {SVG}
 <ol class="steps">
   <li class="s1"><b>1 · Human studies</b>A finding that needs explaining: whether people say “must” depends on how they know.</li>
-  <li class="s2"><b>2 · Linguistic analysis</b>Variables, rival accounts, and predictions that tell them apart.</li>
+  <li class="s2"><b>2 · Rival accounts</b>Variables, rival accounts, and predictions that tell them apart.</li>
   <li class="s3"><b>3 · Models and LMs</b>Test the accounts in model fits, in LM behaviour, and inside the LM.</li>
   <li class="s4"><b>4 · Back</b>Results revise the account and can raise new questions for human studies.</li>
 </ol>
@@ -234,7 +234,7 @@ print(HERE / "meaning-bridge-b.html")
 # ---- site component (XC, 29 Sep 2026: "B 上线") ----
 STEPS = """<ol class="steps">
     <li class="s1"><b>1 · Human studies</b>A finding that needs explaining: whether people say “must” depends on how they know.</li>
-    <li class="s2"><b>2 · Linguistic analysis</b>Variables, rival accounts, and predictions that tell them apart.</li>
+    <li class="s2"><b>2 · Rival accounts</b>Variables, rival accounts, and predictions that tell them apart.</li>
     <li class="s3"><b>3 · Models and LMs</b>Test the accounts in model fits, in LM behaviour, and inside the LM.</li>
     <li class="s4"><b>4 · Back</b>Results revise the account and can raise new questions for human studies.</li>
   </ol>"""

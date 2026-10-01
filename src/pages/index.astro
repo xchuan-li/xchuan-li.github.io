@@ -1,9 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import { identityLongHtml } from "../data/program";
-import { portfolioSections, paperTracks } from "../data/portfolio";
+import { entriesOfTier } from "../data/portfolio";
 import PortfolioEntry from "../components/PortfolioEntry.astro";
-import PaperList from "../components/PaperList.astro";
+import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
@@ -84,9 +84,9 @@ const timeline = [
         </p>
         <nav class="side-toc" aria-label="Work on this page">
           <p class="side-k">On this page</p>
-          {portfolioSections.map((group) => (
+          {[{ id: "selected-research", label: "Research & Papers" }].map((group) => (
             <><a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
-            {group.id === "work" && paperTracks.map((t) => <a class="side-sub" href={`#work-${t.id}`}><span></span>{t.label}</a>)}</>
+</>
           ))}
           <a href="#background"><span>—</span>Background</a>
         </nav>
@@ -104,14 +104,10 @@ const timeline = [
     <!-- Output type and publication status are separate from research topic. -->
     <section class="sec selected-research" id="selected-research" aria-label="Research and papers">
       <div class="portfolio-list">
-        {portfolioSections.map((group) => (
-          <section class="research-block" id={group.id} aria-labelledby={group.id + "-heading"}>
-            {group.sec && <p class="research-sec">{group.sec}</p>}
-            <h2 class="research-group-label" id={group.id + "-heading"}>{group.label}</h2>
-            {group.blurb && <p class="research-group-blurb">{group.blurb}</p>}
-            {group.id === "work" ? <PaperList entries={group.entries} /> : group.entries.map((entry) => <PortfolioEntry entry={entry} />)}
-          </section>
-        ))}
+        <section class="research-block" id="work" aria-labelledby="work-heading">
+          <h2 class="research-group-label" id="work-heading">Research</h2>
+          <WorkList entries={entriesOfTier("research")} />
+        </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
     </section>
