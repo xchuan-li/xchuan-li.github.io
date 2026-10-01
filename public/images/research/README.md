@@ -9,4 +9,4 @@ The homepage and research index share captions and accessible descriptions in `s
 
 ## Compact covers (latest layout)
 
-Listings now show four small right-side covers without visible captions. Planned-study schematics are omitted. `framing-carry-cover.svg` is a viewport of the complete grid body, linked to the full labelled figure. The portrait figure is retained as an asset but is no longer used in listings.
+Listings now show four small right-side covers without visible captions. Planned-study schematics are omitted. `framing-carry-cover.svg` is a viewport of the complete grid body, with the full labelled figure retained as a separate asset. Covers are static and non-clickable. The portrait figure is retained as an asset but is no longer used in listings.

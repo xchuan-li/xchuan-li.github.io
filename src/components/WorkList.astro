@@ -34,9 +34,9 @@ const { entries, compact = false, illustrated = false } = Astro.props;
             {e.links.length > 1 && <p class="links">{e.links.slice(1).map((l, i) => <>{i > 0 && <span class="sep" aria-hidden="true">·</span>}<a href={l.href}>{l.label}</a></>)}</p>}
           </div>
           {!illustrated && e.thumb && href && <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={e.thumb} alt="" width="300" height="424" loading="lazy" decoding="async" /></a>}
-          {illustrated && e.figure && e.figure.preview !== false && <a class="project-cover" href={e.figure.src} target="_blank" rel="noopener" aria-label={`View figure for ${e.title}`}>
+          {illustrated && e.figure && e.figure.preview !== false && <div class="project-cover">
             <img src={e.figure.previewSrc ?? e.figure.src} alt={e.figure.alt} width={e.figure.width} height={e.figure.height} loading="lazy" decoding="async" />
-          </a>}
+          </div>}
         </li>
       );
     })}
@@ -62,16 +62,15 @@ const { entries, compact = false, illustrated = false } = Astro.props;
   .thumb img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; transition:opacity .15s; }
   .thumb:hover img { opacity:.8; }
 
-  .illustrated .step { grid-template-columns:minmax(0,1fr) 164px; column-gap:1.6rem; padding:1.1rem 0 1.2rem; scroll-margin-top:6rem; }
+  .illustrated .step { grid-template-columns:minmax(0,1fr) 196px; column-gap:1.6rem; padding:1.1rem 0 1.2rem; scroll-margin-top:6rem; }
   .illustrated .topic { grid-column:1; grid-row:1; font-size:0.78rem; color:var(--color-text-muted); margin:0 0 0.35rem; }
   .illustrated .body { grid-column:1; grid-row:2; }
   .illustrated .step:not(:has(.project-cover)) { grid-template-columns:minmax(0,1fr); }
-  .project-cover { grid-column:2; grid-row:1 / span 2; align-self:center; display:flex; align-items:center; justify-content:center; width:164px; height:112px; }
+  .project-cover { grid-column:2; grid-row:1 / span 2; align-self:center; display:flex; align-items:center; justify-content:center; width:196px; height:134px; }
   .project-cover img { display:block; width:100%; height:100%; object-fit:contain; }
-  .project-cover:hover { opacity:0.8; }
   @media (max-width:620px) {
-    .illustrated .step { grid-template-columns:minmax(0,1fr) 96px; column-gap:1rem; }
-    .project-cover { width:96px; height:78px; }
+    .illustrated .step { grid-template-columns:minmax(0,1fr) 112px; column-gap:1rem; }
+    .project-cover { width:112px; height:91px; }
   }
 
   /* Coursework: one line each. */

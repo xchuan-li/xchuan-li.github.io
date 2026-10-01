@@ -1,6 +1,6 @@
 ## Compact project covers, 2 October 2026 — latest user correction
 
-Figures belong to the RIGHT of each project as small covers, not full-width figure blocks. Remove visible long captions and full-size text links. Desktop covers are 164 × 112 px; mobile covers stay on the right at 96 × 78 px. Click the cover to see the full original figure. Keep real plots for prompt framing, ProtoBias, street view and the checking study. Omit the two planned-study diagrams from listings because their explanatory text does not work at cover size. The heatmap cover shows the complete grid body; its linked full SVG retains axes and scale. Existing source data and captions remain in the repository.
+Figures belong to the RIGHT of each project as small covers, not full-width figure blocks. Remove visible long captions and full-size text links. Desktop covers are 196 × 134 px; mobile covers stay on the right at 112 × 91 px. Covers are static, non-clickable images with no hover effect (latest user correction). Keep real plots for prompt framing, ProtoBias, street view and the checking study. Omit the two planned-study diagrams from listings because their explanatory text does not work at cover size. The heatmap cover shows the complete grid body; the full SVG asset retains axes and scale. Existing source data and captions remain in the repository.
 
 ## Research figures, 2 October 2026 — latest user decision
 
