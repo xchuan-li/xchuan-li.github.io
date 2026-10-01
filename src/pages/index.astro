@@ -89,7 +89,6 @@ const timeline = [
           M.Sc. Human and AI<br />University of Technology Nuremberg<br />
           <span>Applying for PhD positions beginning in fall 2027</span>
         </p>
-        <p class="side-field">Computational cognitive science&ensp;·&ensp;interpretability&ensp;·&ensp;semantics and pragmatics</p>
         <nav class="side-toc" aria-label="Work on this page">
           <p class="side-k">On this page</p>
           <a href="#selected-research"><span></span>Research & Papers</a>
@@ -107,6 +106,7 @@ const timeline = [
     </aside>
 
     <div class="main">
+    <p class="field-kicker">Computational cognitive science <span aria-hidden="true">&#215;</span><span class="sr-only">and</span> language model interpretability</p>
     <p class="intro" set:html={identityLongHtml} />
     <MeaningBridgeFigure />
 
@@ -200,7 +200,6 @@ const timeline = [
 
   /* ===== left column ===== */
   .side-inner { position: sticky; top: calc(60px + 1.75rem); }
-  .side-field { margin:0.7rem 0 0; font-size:0.84rem; line-height:1.55; color:var(--color-text); }
   .side-photo { display:block; width:108px; height:108px; object-fit:cover; object-position:center 30%; border:1px solid var(--color-border-strong); margin:0 0 0.9rem; }
   .side-name { font-family: var(--font-display); font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 0.75rem; color: var(--color-text); }
   .side-affil { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-muted); margin: 0 0 1.1rem; }
@@ -271,6 +270,9 @@ const timeline = [
   .selected-research { scroll-margin-top:6rem; }
   .portfolio-list { display:grid; gap:3.6rem; }
   .research-block { min-width:0; }
+  .field-kicker { margin:0 0 0.75rem; font-family:var(--font-mono); font-size:0.74rem; letter-spacing:0.06em; line-height:1.6; color:var(--color-text-muted); }
+  .field-kicker .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+  .field-kicker span[aria-hidden] { margin:0 0.15em; color:var(--color-text-dim); }
   .bio + .bio { margin-top:1.1rem; }
   .bio :global(a) { color:var(--color-accent); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:0.17em; }
   .bio :global(a:hover) { text-decoration-thickness:2px; }
