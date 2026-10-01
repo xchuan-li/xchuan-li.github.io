@@ -1,3 +1,9 @@
+## Research figures, 2 October 2026 — latest user decision
+
+Prioritize real figures from the project reports. Homepage Research uses the layer × token patching heatmap for prompt framing; the two planned studies use explicitly labelled design schematics. Selected course projects now shows ProtoBias language odds ratios, street-view training sweeps, and the checking-study means ± SD. Keep course status and null results visible. The research index shares these figures; writing and the planned EEG project remain without result images. Clicking a figure opens its full-size SVG.
+
+The patching heatmap preserves all 28 × 7 rounded cells from the final presentation. `src/data/figures/framing-carry.json` is the frozen public summary and `scripts/gen-research-heatmap.mjs` renders the web SVG. Negative values are retained with a diverging scale. Do not turn the early-slogan/late-decision pattern into a claim of a unique causal pathway. Existing report plots are reused without changing data.
+
 ## CV structure, 1 October 2026 — latest user decision
 
 Education presents selected, transcript-backed coursework. Both theses belong in Research experience: the M.Sc. thesis remains within the current modality programme, and the undergraduate thesis is a separate 2024 entry (Leibniz’s metaphysics, logic and universal-language proposal; supervisor Zang Yong). The 2021 invited learning-difficulties project is included in general and cogsci, dated September–December 2021 per XC’s old CV; its work includes materials, testing, response-data analysis and assistance with teaching items and individual learning plans.

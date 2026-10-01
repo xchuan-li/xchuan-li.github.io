@@ -8,7 +8,6 @@ const shortName: Record<string, string> = {
   "Modal language in preschool children": "Preschool modals",
   "Prompt framing and latent control states in language models": "Prompt framing",
 };
-import PortfolioEntry from "../components/PortfolioEntry.astro";
 import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 
@@ -91,10 +90,11 @@ const timeline = [
         </p>
         <nav class="side-toc" aria-label="Work on this page">
           <p class="side-k">On this page</p>
-          <a href="#selected-research"><span></span>Research & Papers</a>
+          <a href="#selected-research"><span></span>Research</a>
           {entriesOfTier("research").map((e) => (
             <a class="side-sub" href={`#w-${slug(e.title)}`}><span></span>{shortName[e.title] ?? e.title}</a>
           ))}
+          <a href="#course-projects"><span></span>Course projects</a>
           <a href="/research" class="side-sub"><span></span>All projects →</a>
           <a href="#background"><span>—</span>Background</a>
         </nav>
@@ -118,7 +118,11 @@ const timeline = [
       <div class="portfolio-list">
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
-          <WorkList entries={entriesOfTier("research")} />
+          <WorkList entries={entriesOfTier("research")} illustrated />
+        </section>
+        <section class="research-block" id="course-projects" aria-labelledby="course-projects-heading">
+          <h2 class="research-group-label" id="course-projects-heading">Selected course projects</h2>
+          <WorkList entries={entriesOfTier("course").filter((entry) => entry.figure)} illustrated />
         </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
@@ -170,26 +174,17 @@ const timeline = [
 </Base>
 
 <script>
-  // The left column marks the section currently in the upper third of the viewport.
-  // Under Research & Papers, the sub-link of the open tab is marked while that section is.
-  const links = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a:not(.side-sub)")];
-  const subs = [...document.querySelectorAll<HTMLAnchorElement>(".side-toc a.side-sub")];
-  const targets = links.map((a) => document.querySelector(a.getAttribute("href") ?? ""));
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.side-toc a[href^="#"]')];
+  const targets = links.map((a) => document.getElementById(a.hash.slice(1)));
   const update = () => {
     let current = -1;
-    targets.forEach((t, i) => {
-      if (t && t.getBoundingClientRect().top < innerHeight * 0.35) current = i;
+    targets.forEach((target, i) => {
+      if (target && target.getBoundingClientRect().top < innerHeight * 0.35) current = i;
     });
-    links.forEach((a, i) => a.setAttribute("aria-current", String(i === current)));
-    const inWork = targets[current]?.id === "work";
-    subs.forEach((a) => {
-      const panel = document.querySelector<HTMLElement>(a.getAttribute("href") ?? "");
-      a.setAttribute("aria-current", String(inWork && !!panel && !panel.hidden));
-    });
+    links.forEach((link, i) => link.setAttribute("aria-current", String(i === current)));
   };
   addEventListener("scroll", update, { passive: true });
-  addEventListener("hashchange", () => setTimeout(update));
-  document.querySelectorAll("[data-ptab]").forEach((b) => b.addEventListener("click", () => setTimeout(update)));
+  addEventListener("hashchange", update);
   update();
 </script>
 

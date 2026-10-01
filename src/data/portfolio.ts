@@ -20,6 +20,7 @@ export interface PortfolioEntry {
   status: string;
   links: { label: string; href: string }[];
   cover?: { src: string; alt: string };
+  figure?: { src: string; mobileSrc?: string; alt: string; caption: string; width: number; height: number };
   note?: { label: string; text: string };
   /** Papers list: meta line, one sentence, writing-sample flag, first-page thumbnail. */
   kind?: string;
@@ -57,6 +58,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Cognitive modelling", desc: projects.modalModels.summary, status: projects.modalModels.status,
         kind: "Project · in development",
         short: "Fits three competing accounts to published human data to ask whether the indirectness of must is semantic or arises from competition with the bare assertion.",
+        figure: {"src": "/images/research/modal-accounts.svg", "alt": "Planned comparison: published human choices inform three competing accounts, evaluated with recovery and held-out predictions.", "caption": "Planned model comparison. The three accounts will be tested on published human choices; no model has been fitted yet.", "width": 760, "height": 260},
         links: [{ label: "Project outline", href: projects.modalModels.href }],
       },
       {
@@ -65,6 +67,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
         kind: "Project · master’s thesis · in planning, no data yet",
         short: "A small study run alongside an existing study of how preschoolers reason about possibilities.",
+        figure: {"src": "/images/research/preschool-association.svg", "alt": "A planned modal-language task and an existing possibilities-reasoning task, connected by a question about association.", "caption": "Study in planning. Compare language understanding with reasoning about possibilities; an association would not establish causal direction.", "width": 760, "height": 230},
         links: [{ label: "Thesis outline", href: projects.thesis.href }],
       },
       {
@@ -73,6 +76,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
         kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
         short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
+        figure: {"src": "/images/research/framing-carry.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
         links: [{ label: "Overview", href: projects.latentControl.href }],
       },
       {
@@ -104,6 +108,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · course paper 2026 · single author",
         short: "With each image pair held fixed and only the prompt language changed, both VLM judges changed their answer on about 70% of items in at least one of seven languages.",
         thumb: "/papers/cross-lingual-protobias-thumb.png",
+        figure: {"src": "/images/research/protobias-language.svg", "alt": "Odds of a typicality error relative to English for Qwen2.5-VL-7B and InternVL3-8B across seven prompt languages, with uncertainty intervals.", "caption": "Same image pairs, different prompt languages. Odds ratios relative to English from an item-clustered regression on 300 demography items; bars show 95% confidence intervals.", "width": 660, "height": 400},
         links: [
           { label: "Paper", href: projects.protobias.href },
           { label: "PDF", href: "/papers/cross-lingual-protobias.pdf" },
@@ -117,6 +122,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · team course project 2026 · report 2026",
         short: "Training choices alone took a fixed 1.69M-parameter network from 0.62 to 0.82 validation accuracy; the best dropout rate depended on training length.",
         thumb: "/papers/street-view-classification-thumb.png",
+        figure: {"src": "/papers/street-view-classification/sweeps.svg", "alt": "Validation accuracy across dropout rates and training lengths. The best dropout setting changes with schedule length, and extending mixup training from 200 to 250 epochs lowers accuracy.", "caption": "Validation accuracy under different training settings. The best dropout rate depends on schedule length; extending training beyond 200 epochs did not improve the tested mixup recipe.", "width": 800, "height": 390},
         links: [
           { label: "Report", href: projects.streetView.href },
           { label: "PDF", href: "/papers/street-view-classification.pdf" },
@@ -129,6 +135,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · course study, Winter 2025–26 · report 2026",
         short: "A complete between-subjects experiment, from design and pilot to data collection (N = 47) and analysis; neither predicted difference was reliable.",
         thumb: "/papers/fact-checking-study-thumb.png",
+        figure: {"src": "/papers/fact-checking-study/means.svg", "alt": "Mean questions checked in Wikipedia-first and ChatGPT-first groups across two rounds, with one-standard-deviation error bars.", "caption": "Questions checked out of 10, mean ± SD. Wikipedia first: n = 29; ChatGPT first: n = 18. Neither group difference was significant (Welch tests: p = .65 and .16).", "width": 660, "height": 420},
         links: [
           { label: "Report", href: projects.psyStudy.href },
           { label: "PDF", href: "/papers/fact-checking-study.pdf" },

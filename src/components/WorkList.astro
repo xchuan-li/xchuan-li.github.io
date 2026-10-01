@@ -4,9 +4,9 @@
 // links and a thumbnail. Field labels (Human study / Language models) are on the
 // item, so topic and weight stay independent of each other.
 import type { PortfolioEntry } from "../data/portfolio";
-interface Props { entries: PortfolioEntry[]; compact?: boolean; }
+interface Props { entries: PortfolioEntry[]; compact?: boolean; illustrated?: boolean; }
 const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
-const { entries, compact = false } = Astro.props;
+const { entries, compact = false, illustrated = false } = Astro.props;
 ---
 {compact ? (
   <ul class="rows">
@@ -21,7 +21,7 @@ const { entries, compact = false } = Astro.props;
     })}
   </ul>
 ) : (
-  <ol class="chain">
+  <ol class:list={["chain", { illustrated }]}>
     {entries.map((e) => {
       const href = e.links[0]?.href;
       return (
@@ -33,7 +33,16 @@ const { entries, compact = false } = Astro.props;
             <p class="short">{e.short ?? e.desc}</p>
             {e.links.length > 1 && <p class="links">{e.links.slice(1).map((l, i) => <>{i > 0 && <span class="sep" aria-hidden="true">·</span>}<a href={l.href}>{l.label}</a></>)}</p>}
           </div>
-          {e.thumb && href && <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={e.thumb} alt="" width="300" height="424" loading="lazy" decoding="async" /></a>}
+          {!illustrated && e.thumb && href && <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={e.thumb} alt="" width="300" height="424" loading="lazy" decoding="async" /></a>}
+          {illustrated && e.figure && <figure class="project-figure">
+            <a class="figure-image" href={e.figure.src} target="_blank" rel="noopener" aria-label={`View full-size figure for ${e.title}`}>
+              <picture>
+              {e.figure.mobileSrc && <source media="(max-width: 620px)" srcset={e.figure.mobileSrc} width="430" height="590" />}
+              <img src={e.figure.src} alt={e.figure.alt} width={e.figure.width} height={e.figure.height} loading="lazy" decoding="async" />
+              </picture>
+            </a>
+            <figcaption>{e.figure.caption} <a href={e.figure.src} target="_blank" rel="noopener">View full size ↗</a></figcaption>
+          </figure>}
         </li>
       );
     })}
@@ -58,6 +67,15 @@ const { entries, compact = false } = Astro.props;
   .thumb { display:block; width:56px; aspect-ratio:1 / 1.414; margin-top:0.2rem; border:1px solid var(--color-border-strong); background:#fff; overflow:hidden; }
   .thumb img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; transition:opacity .15s; }
   .thumb:hover img { opacity:.8; }
+
+  .illustrated .step { padding:1.35rem 0 1.6rem; scroll-margin-top:6rem; }
+  .illustrated .body { grid-column:2 / -1; }
+  .project-figure { grid-column:1 / -1; margin:1.5rem 0 0; min-width:0; }
+  .figure-image { display:block; max-width:640px; margin:0 auto; }
+  .figure-image img { display:block; width:100%; height:auto; }
+  figcaption { max-width:640px; margin:0.9rem auto 0; color:var(--color-text-muted); font-size:0.8rem; line-height:1.6; }
+  figcaption a { margin-left:0.3em; color:var(--color-accent); white-space:nowrap; text-underline-offset:0.2em; }
+  @media (max-width:620px) { .illustrated .body { grid-column:1 / -1; } }
 
   /* Coursework: one line each. */
   .rows { list-style:none; margin:0; padding:0; border-top:1px solid var(--color-border); }

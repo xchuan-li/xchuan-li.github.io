@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="260" viewBox="0 0 760 260" role="img" aria-labelledby="title desc">
+<title id="title">Three accounts of modal choice</title><desc id="desc">Planned comparison, not a result. Published human choices are modelled with strength only, a source condition in meaning, or competition with bare assertions. Model recovery and held-out prediction test whether these accounts can be distinguished.</desc>
+<rect width="760" height="260" fill="white"/>
+<g fill="none" stroke="#8b919c" stroke-width="1.5"><path d="M214 130H244V64H276M244 130H276M244 130V196H276M485 64H515V130H550M485 130H550M485 196H515V130"/><path d="m544 124 6 6-6 6"/></g>
+<g font-family="Georgia,serif" text-anchor="middle" fill="#16181d">
+<text x="110" y="72" font-size="17" fill="#4c515c">Published human choices</text>
+<text x="110" y="118" font-size="24" font-style="italic">p · must p</text><text x="110" y="153" font-size="22" font-style="italic">probably p · might p</text>
+<text x="110" y="199" font-size="15" fill="#4c515c">Evidence strength + source</text>
+<g fill="#f6f7f8" stroke="#c2c8d0"><rect x="276" y="39" width="209" height="50"/><rect x="276" y="105" width="209" height="50"/><rect x="276" y="171" width="209" height="50"/></g>
+<text x="381" y="70" font-size="20">Strength only</text><text x="381" y="136" font-size="20">Source in meaning</text><text x="381" y="201" font-size="20">Competition</text>
+<text x="650" y="104" font-size="22" fill="#17457a">Compare accounts</text><text x="650" y="140" font-size="17">Model recovery</text><text x="650" y="168" font-size="17">Held-out prediction</text>
+<text x="381" y="248" font-size="14" fill="#4c515c">Three candidate explanations · no winner assumed</text>
+</g></svg>

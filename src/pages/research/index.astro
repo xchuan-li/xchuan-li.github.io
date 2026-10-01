@@ -21,7 +21,7 @@ import WorkList from "../../components/WorkList.astro";
       <section class="work-section" id={t.id} aria-labelledby={t.id + "-heading"}>
         <h2 id={t.id + "-heading"}>{t.label}</h2>
         {t.blurb && <p class="section-intro">{t.blurb}</p>}
-        <WorkList entries={entriesOfTier(t.id)} compact={t.compact} />
+        <WorkList entries={entriesOfTier(t.id)} illustrated={t.id !== "writing"} />
       </section>
     ))}
     <p class="program-link">For the questions connecting these projects, see my <a href="/approach">research program</a>.</p>
