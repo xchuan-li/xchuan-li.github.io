@@ -1,3 +1,9 @@
+## CV structure, 1 October 2026 — latest user decision
+
+Education presents selected, transcript-backed coursework. Both theses belong in Research experience: the M.Sc. thesis remains within the current modality programme, and the undergraduate thesis is a separate 2024 entry (Leibniz’s metaphysics, logic and universal-language proposal; supervisor Zang Yong). The 2021 invited learning-difficulties project is included in general and cogsci, dated September–December 2021 per XC’s old CV; its work includes materials, testing, response-data analysis and assistance with teaching items and individual learning plans.
+
+Research experience contains each project once, with context, contribution and output together. The independent typicality working paper has its own entry and attached citation/links; the latent-control-states manuscript status stays in that project's entry. There is no separate Papers and manuscripts section. Preserve the modality programme's three related components; do not fold LCS into it. Application variants retain their intended emphasis/omissions and share this structure. Do not shrink useful descriptions merely to force one page. All three PDFs live in Vault Deliverables/CV-2026-10-01; public/cv.pdf is the general version.
+
 # Project context for Claude
 
 **Read this first before suggesting any changes.** It contains everything an LLM needs to understand the project structure, stack, deployment, and design philosophy.

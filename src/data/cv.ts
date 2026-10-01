@@ -30,6 +30,7 @@ export interface Entry {
   context: string;          // italic line: what it is / where
   when: string;             // right-aligned
   note?: ByVariant<string>; // at most one short line
+  citation?: string;        // output attached to its research entry, never a separate list
   links?: { label: string; href: string }[];
 }
 
@@ -44,9 +45,9 @@ export const education: (Entry & { place: string })[] = [
     id: "msc", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "M.Sc. Human and Artificial Intelligence", when: "Oct. 2025 – exp. 2027",
     note: {
-      general: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: cognitive psychology, experimental design and statistics, interpretability, deep learning.",
-      lm: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: deep learning, interpretability, experimental design and statistics.",
-      cogsci: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: cognitive psychology, experimental design and statistics (both 1.0), epistemology.",
+      general: "Selected coursework: Cognitive Psychology; Foundations in Psychology & Empirical Study Design; Deep Learning; Interpretability for Natural Language Processing.",
+      lm: "Selected coursework: Deep Learning; Interpretability for Natural Language Processing; Deep Learning for Digital Humanities; Foundations in Psychology & Empirical Study Design.",
+      cogsci: "Selected coursework: Cognitive Psychology (1.0); Foundations in Psychology & Empirical Study Design (1.0); Epistemology; Deep Learning.",
     },
   },
   {
@@ -56,14 +57,24 @@ export const education: (Entry & { place: string })[] = [
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",
     context: "B.A. Philosophy", when: "2020 – 2024",
-    note: {
-      default: "Thesis: Leibniz’s characteristica universalis (supervisor: Zang Yong).",
-      cogsci: "Thesis: Leibniz’s characteristica universalis (supervisor: Zang Yong). Coursework in logic and philosophy of language.",
-    },
+    note: "Selected coursework: Logic; Mathematical Logic; Analytic Philosophy; Psychology of Reading; Cognition and Learning Disabilities.",
   },
 ];
 
 const research: Record<string, Entry> = {
+  typicality: {
+    id: "typicality", title: "Typicality in referent choice: what the description leaves open",
+    href: "/research/typicality-in-referent-choice",
+    context: "Independent theoretical study", when: "2026",
+    note: "Distinguishes three conditions for typicality in referent choice and the limits of what a forced-choice task can establish.",
+    citation: "Li, X. (2026). Working paper.",
+    links: [{ label: "lingbuzz/010343", href: "https://lingbuzz.net/lingbuzz/010343" }, { label: "doi:10.5281/zenodo.22855036", href: "https://doi.org/10.5281/zenodo.22855036" }],
+  },
+  undergraduate: {
+    id: "undergraduate", title: "Leibniz’s logical system and characteristica universalis",
+    context: "Undergraduate thesis · Shenzhen University · supervisor: Zang Yong", when: "2024",
+    note: "Analysed Leibniz’s metaphysics, logic and proposal for a universal symbolic language.",
+  },
   threeWays: {
     id: "threeWays", title: "Three Ways of Leaving p Unsettled", href: "/research/three-ways",
     method: "Formal analysis", status: "In development.",
@@ -74,7 +85,7 @@ const research: Record<string, Entry> = {
   thesis: {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
     method: "Human study", status: "In planning.",
-    row: 'modal language in preschool children, added to an ongoing PhD project at MPI CBS Leipzig on how they reason about possibilities.',
+    row: 'modal language in preschool children, alongside a possibilities study at MPI CBS Leipzig; supervised by C. Grosse Wiesmann (UTN), with T. Hopf (MPI CBS).',
     context: "M.Sc. thesis · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
     note: "Adds a developmental modal-language component to an ongoing PhD project at MPI CBS Leipzig on how preschool children reason about possibilities.",
   },
@@ -89,18 +100,18 @@ const research: Record<string, Entry> = {
     id: "lit", title: "Prompt framing and latent control states in language models",
     href: "/research/latent-control-states",
     row: "year-long project course with M. Roth (UTN) and S. Ostermann (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
-    context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI), biweekly meetings",
+    context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI)",
     when: "2026–27",
     note: "Designed and ran the controlled experiments and causal interventions for the utilitarian-framing branch; manuscript in preparation.",
   },
   dyslexia: {
     id: "dyslexia", title: "Learning difficulties in primary-school children",
     row: "with the Shenzhen Learning Disorders Association: test items, response data, individual plans",
-    context: "Research project, invited, with the Shenzhen Learning Disorders Association", when: "Autumn 2021",
-    note: "Selected homophone-character items and ran timed character-reading tests at a primary school; analysed accuracy and timing to classify the difficulties, and designed teaching items and individual plans from the result.",
+    context: "Invited research project · Shenzhen Learning Disorders Association and Yucai No. 2 Primary School", when: "Sep.–Dec. 2021",
+    note: "Prepared character-reading materials and administered timed tests; analysed response data to identify learning difficulties and helped design teaching items and individual learning plans.",
   },
   psy: {
-    id: "psy", title: "Fact-checking after ChatGPT exposure",
+    id: "psy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
     row: "human study, class-wide experiment (N = 49); my part: data analysis",
     context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
     note: {
@@ -124,15 +135,14 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "psy", "protobias", "streetView", "dyslexia"] },
-  lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["lit", "protobias", "streetView", "psy"] },
-  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "dyslexia", "psy", "protobias"] },
+  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "typicality", "protobias", "streetView", "psy", "undergraduate", "dyslexia"] },
+  lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["lit", "protobias", "typicality", "streetView", "psy", "undergraduate"] },
+  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "typicality", "protobias", "psy", "undergraduate", "dyslexia"] },
 };
 export const researchEntry = (id: string) => research[id];
 
-// Research is drawn as one programme (one question, three methods) plus a compact list of
-// earlier work, so the page reads as one line of research rather than six parallel items
-// (XC, 1 Oct 2026, after comparing Hening Wang's and Polina Tsvilodub's pages).
+// Research experience combines the current modality programme and individual projects.
+// Each project appears once, with its role, work and output together (XC, 1 Oct 2026).
 // Question line confirmed by XC, 1 Oct 2026.
 export const programme = {
   title: "Epistemic modality in people and language models",
@@ -145,20 +155,6 @@ export const programmeLabel: Record<string, string> = {
   thesis: "M.Sc. thesis",
   modalLM: "Modal choice",
 };
-export const compactWhen: Record<string, string> = {
-  lit: "2026–27", dyslexia: "2021", psy: "2025–26", protobias: "2026", streetView: "2026",
-};
-
-export interface Paper { id: string; html: string; }
-const papers: Record<string, Paper> = {
-  typicality: { id: "typicality", html: '<b>Li, X.</b> (2026). Typicality in referent choice: What the description leaves open. Working paper. <a href="https://lingbuzz.net/lingbuzz/010343">lingbuzz/010343</a>, <a href="https://doi.org/10.5281/zenodo.22855036">doi:10.5281/zenodo.22855036</a>' },
-  lcs: { id: "lcs", html: 'Prompt framing and latent control states in language models. Manuscript in preparation with M. Roth (UTN) and S. Ostermann (DFKI).' },
-};
-export const paperOrder: Record<Variant, string[]> = {
-  general: ["typicality", "lcs"], lm: ["lcs", "typicality"], cogsci: ["typicality", "lcs"],
-};
-export const paper = (id: string) => papers[id];
-
 export const employment: (Entry & { place: string })[] = [
   {
     id: "it", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",

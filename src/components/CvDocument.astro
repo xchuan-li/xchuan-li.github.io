@@ -1,7 +1,7 @@
 ---
 // Renders one CV variant from src/data/cv.ts. Layout after early-career linguistics CVs
 // (e.g. Hening Wang, Tübingen): title bold left, context italic below, dates italic right,
-// at most one short note per entry; papers as citations. Each item appears once.
+// Education shows training; research entries keep work and outputs together.
 import * as cv from "../data/cv";
 import type { Variant } from "../data/cv";
 interface Props { variant: Variant; }
@@ -37,7 +37,7 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   </section>
 
   <section>
-    <h2>Research</h2>
+    <h2>Research experience</h2>
     <div class="prog">
       <div class="ent-top"><b>{cv.programme.title}</b><i>{cv.programme.when}</i></div>
       <div class="ent-sub"><i>{cv.programme.question}</i></div>
@@ -48,18 +48,17 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
         </div>
       ); })}
     </div>
-    <p class="grp">Research experience</p>
     {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
-      <div class="erow">
-        <span><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b> · {cv.pick(e.row, variant)}</span>
-        <i>{cv.compactWhen[id]}</i>
+      <div class="ent research-ent">
+        <div class="ent-top"><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b><i>{e.when}</i></div>
+        <div class="ent-sub"><i>{e.context}</i></div>
+        {cv.pick(e.note, variant) && <p class="ent-note">{cv.pick(e.note, variant)}</p>}
+        {(e.citation || e.links) && <p class="ent-note output">
+          {e.citation && <span>{e.citation} </span>}
+          {e.links?.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}
+        </p>}
       </div>
     ); })}
-  </section>
-
-  <section>
-    <h2>Papers and manuscripts</h2>
-    {cv.paperOrder[variant].map((id) => <p class="cite" set:html={cv.paper(id).html} />)}
   </section>
 
   <section>
@@ -94,8 +93,6 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   .cvd-interests { margin:1.1rem 0 0; }
   section { margin-top:1.55rem; }
   h2 { font-size:0.8rem; font-weight:600; font-variant-caps:all-small-caps; letter-spacing:0.08em; font-size:1.05rem; margin:0 0 0.55rem; padding-bottom:0.2rem; border-bottom:1px solid #16181d; }
-  .grp { margin:0.7rem 0 0.2rem; font:500 0.68rem/1.4 var(--font-mono); letter-spacing:0.1em; text-transform:uppercase; color:var(--color-text-dim); }
-  .grp:first-of-type { margin-top:0; }
   .ent { margin:0 0 0.55rem; break-inside:avoid; }
   .ent-top, .ent-sub { display:flex; justify-content:space-between; gap:1rem; }
   .ent-top span, .ent-top i, .ent-sub i:last-child:not(:first-child) { white-space:nowrap; }
@@ -103,17 +100,13 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   .ent-sub { color:var(--color-text-muted); font-size:0.9rem; }
   .ent-note { margin:0.1rem 0 0; padding-left:0.9rem; font-size:0.86rem; color:#3b4049; }
   .ent-note a { color:var(--color-accent); }
+  .research-ent { margin-bottom:0.8rem; }
   .prog { margin:0 0 0.9rem; break-inside:avoid; }
   .prog .ent-sub { margin-bottom:0.35rem; }
   .prow { display:grid; grid-template-columns:7.4rem minmax(0,1fr); gap:0.6rem; padding-left:0.9rem; margin:0 0 0.22rem; font-size:0.86rem; color:#3b4049; }
   .pm { font:500 0.66rem/1.9 var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; color:var(--color-text-dim); }
   .pt a { font-weight:600; color:#16181d; }
   .st { color:var(--color-text-dim); font-style:italic; }
-  .erow { display:flex; justify-content:space-between; gap:1rem; margin:0 0 0.18rem; font-size:0.86rem; color:#3b4049; }
-  .erow b { font-weight:600; color:#16181d; }
-  .erow i { white-space:nowrap; color:var(--color-text-muted); }
-  .cite { margin:0 0 0.45rem; padding-left:1.4rem; text-indent:-1.4rem; font-size:0.9rem; }
-  .cite :global(a) { color:var(--color-accent); }
   .kv { display:grid; grid-template-columns:6.5rem minmax(0,1fr); gap:0.8rem; font-size:0.9rem; margin:0 0 0.25rem; }
   .kv span:first-child { font-weight:600; }
   @media (max-width:560px) {
@@ -122,15 +115,18 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
     .ent-top, .ent-sub { flex-direction:column; gap:0; }
     .kv { grid-template-columns:1fr; gap:0; }
     .prow { grid-template-columns:1fr; gap:0; }
-    .erow { flex-direction:column; gap:0; }
   }
 </style>
 
 <style is:global>
   @media print {
-    @page { size: A4; margin: 1.5cm 1.8cm; }
-    html { font-size: 11.9px; }
+    @page {
+      size: A4; margin: 1.5cm 1.8cm 1.7cm;
+      @bottom-left { content: "Xiaochuan Li · CV"; font: 9px Georgia, serif; color: #666; }
+      @bottom-right { content: counter(page) " / " counter(pages); font: 9px Georgia, serif; color: #666; }
+    }
+    html { font-size: 15px; }
     .cvd section { margin-top: 1.15rem; }
-    .cvd .ent { margin-bottom: 0.42rem; }
+    .cvd .ent { margin-bottom: 0.65rem; }
   }
 </style>
