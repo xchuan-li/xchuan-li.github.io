@@ -48,7 +48,7 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
         </div>
       ); })}
     </div>
-    <p class="grp">Earlier research experience</p>
+    <p class="grp">Research experience</p>
     {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
       <div class="erow">
         <span><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b> · {cv.pick(e.row, variant)}</span>

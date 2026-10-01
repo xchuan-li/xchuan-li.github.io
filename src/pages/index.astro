@@ -16,48 +16,53 @@ import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 // answer, and that the research section above does not already cover.
 const timeline = [
   {
-    period: "2020 – 2024",
+    period: "2020 \u2013 2024",
     logo: "/images/logos/szu.svg",
     emblem: true,
     org: "Shenzhen University",
     role: "B.A. Philosophy",
-    phase: "The formal question",
-    did: "Philosophy of language, analytic philosophy, and logic — with a senior thesis on Leibniz’s <em>characteristica universalis</em>, a notation whose form was meant to mirror the structure of thought.",
+    did: "Philosophy of language, analytic philosophy, and logic.",
     groups: [
       {
-        questions: [
-          "What is gained — and lost — when natural language is translated into logic?",
+        label: "Research project, 2022",
+        items: [
+          "Reading-difficulty screening in primary-school children (with the Shenzhen Learning Disorders Association).",
+        ],
+      },
+      {
+        label: "B.A. thesis, 2024",
+        items: [
+          "Leibniz\u2019s <em>characteristica universalis</em> (supervised by Zang Yong).",
         ],
       },
     ],
   },
   {
-    period: "2024 – 2025",
+    period: "2024 \u2013 2025",
     logo: "/images/logos/marburg.svg",
     emblem: true,
     org: "University of Marburg",
-    role: "Student · Preparatory Studies",
-    phase: "Meaning across linguistic forms",
-    did: "A year of preparatory studies as an enrolled student, learning German for graduate work — reading the same meanings through German, Chinese, and English.",
-    groups: [
-      {
-        questions: [
-          "Which parts of an interpretation are encoded, and which are supplied by context?",
-        ],
-      },
-    ],
+    role: "Preparatory studies",
+    did: "A year of German for graduate study.",
+    groups: [],
   },
   {
-    period: "2025 – present",
+    period: "2025 \u2013 present",
     logo: "/images/logos/utn.svg",
     org: "University of Technology Nuremberg (UTN)",
     role: "M.Sc. Human and Artificial Intelligence",
-    phase: "From formal questions to empirical methods",
-    did: "Graduate training in cognitive psychology, experimental design and statistics, deep learning, and interpretability, connecting linguistic questions with evidence from human behaviour and computational models.",
+    did: "Coursework in cognitive psychology, experimental design and statistics, deep learning, and interpretability.",
     groups: [
       {
-        questions: [
-          "How can behavioural experiments distinguish competing accounts of meaning?",
+        label: "Research project, 2026\u201327",
+        items: [
+          "Prompt framing and latent control states in language models (with the German Research Center for Artificial Intelligence, DFKI).",
+        ],
+      },
+      {
+        label: "M.Sc. thesis, 2026\u201327",
+        items: [
+          "Modal language in preschool children (with the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig).",
         ],
       },
     ],
@@ -126,13 +131,12 @@ const timeline = [
             <div class="tl-body">
               <h3 class="tl-org">{t.org}</h3>
               <p class="tl-role">{t.role}</p>
-              <p class="tl-phase">{t.phase}</p>
               <p class="tl-did" set:html={t.did} />
               {t.groups.map((g) => (
                 <div class="tl-group">
                   {g.label && <p class="tl-group-label">{g.label}</p>}
                   <ul class="tl-qs">
-                    {g.questions.map((q) => <li set:html={q} />)}
+                    {g.items.map((q) => <li set:html={q} />)}
                   </ul>
                 </div>
               ))}
@@ -263,7 +267,7 @@ const timeline = [
   .work-index-link { font-size:0.9rem; margin:1.5rem 0 0; }
 
   /* ===== timeline ===== */
-  .tl { display: flex; flex-direction: column; gap: 2rem; }
+  .tl { display: flex; flex-direction: column; gap: 3.25rem; }
   .tl-item { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.75rem; }
   .tl-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
   .tl-logo { min-height: 48px; display: flex; align-items: center; }
@@ -277,10 +281,11 @@ const timeline = [
   .tl-did :global(em) { font-style: italic; }
   .tl-group { margin-top: 0.85rem; }
   .tl-group:first-of-type { margin-top: 0.6rem; }
-  .tl-group-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-text-dim); margin: 0 0 0.4rem; }
+  .tl-group-label { font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600; color: var(--color-accent); margin: 0 0 0.3rem; }
   .tl-qs { list-style: none; margin: 0; padding: 0.1rem 0 0.15rem 0.95rem; border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent); display: flex; flex-direction: column; gap: 0.4rem; }
-  .tl-qs li { font-size: 0.92rem; line-height: 1.5; color: var(--color-text-muted); font-style: italic; }
+  .tl-qs li { font-size: 0.95rem; line-height: 1.65; color: var(--color-text-muted); }
   .tl-qs li :global(em) { color: var(--color-text); font-style: italic; }
+  .tl-qs li + li { margin-top: 0.4rem; }
   @media (max-width: 620px) {
     .tl-item { grid-template-columns: 1fr; gap: 0.9rem; }
     .tl-aside { flex-direction: row; align-items: center; gap: 0.9rem; }

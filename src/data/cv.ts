@@ -44,9 +44,9 @@ export const education: (Entry & { place: string })[] = [
     id: "msc", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "M.Sc. Human and Artificial Intelligence", when: "Oct. 2025 – exp. 2027",
     note: {
-      general: "Coursework: cognitive psychology, experimental design and statistics, interpretability, deep learning.",
-      lm: "Coursework: deep learning, interpretability, experimental design and statistics.",
-      cogsci: "Coursework: cognitive psychology, experimental design and statistics (both 1.0), epistemology.",
+      general: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: cognitive psychology, experimental design and statistics, interpretability, deep learning.",
+      lm: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: deep learning, interpretability, experimental design and statistics.",
+      cogsci: "Thesis in progress: modal language in preschool children (supervisor: Charlotte Grosse Wiesmann). Coursework: cognitive psychology, experimental design and statistics (both 1.0), epistemology.",
     },
   },
   {
@@ -74,9 +74,9 @@ const research: Record<string, Entry> = {
   thesis: {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
     method: "Human study", status: "In planning.",
-    row: 'modal language in preschool children, run alongside an existing study of how they reason about possibilities.',
-    context: "M.Sc. thesis · in planning", when: "2026 –",
-    note: "A small study run alongside an existing study of how preschool children reason about possibilities.",
+    row: 'modal language in preschool children, added to an ongoing PhD project at MPI CBS Leipzig on how they reason about possibilities.',
+    context: "M.Sc. thesis · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
+    note: "Adds a developmental modal-language component to an ongoing PhD project at MPI CBS Leipzig on how preschool children reason about possibilities.",
   },
   modalLM: {
     id: "modalLM", title: "Modal expressions in language models", href: "/research/modal-language-models",
@@ -91,10 +91,18 @@ const research: Record<string, Entry> = {
       cogsci: "A simple cognitive account of modal reasoning, to be tested against language-model behaviour.",
     },
   },
+  lit: {
+    id: "lit", title: "Prompt framing and latent control states in language models",
+    href: "/research/latent-control-states",
+    row: "year-long project course with M. Roth (UTN) and S. Ostermann (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
+    context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI), biweekly meetings",
+    when: "2026–27",
+    note: "Designed and ran the controlled experiments and causal interventions for the utilitarian-framing branch; manuscript in preparation.",
+  },
   dyslexia: {
     id: "dyslexia", title: "Reading-difficulty screening in primary-school children",
     row: "human study with the Shenzhen Learning Disorders Association",
-    context: "Undergraduate course project, with the Shenzhen Learning Disorders Association", when: "Spring 2022",
+    context: "Research project, invited, with the Shenzhen Learning Disorders Association", when: "Spring 2022",
     note: "Helped select homophone-character stimuli and administered a reaction-time task to children at a primary school.",
   },
   psy: {
@@ -122,9 +130,9 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["psy", "protobias", "streetView"] },
-  lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["protobias", "streetView", "psy"] },
-  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["dyslexia", "psy", "protobias"] },
+  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "psy", "protobias", "streetView"] },
+  lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["lit", "protobias", "streetView", "psy"] },
+  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "dyslexia", "psy", "protobias"] },
 };
 export const researchEntry = (id: string) => research[id];
 
@@ -144,13 +152,13 @@ export const programmeLabel: Record<string, string> = {
   modalLM: "Language-model study",
 };
 export const compactWhen: Record<string, string> = {
-  dyslexia: "2022", psy: "2025–26", protobias: "2026", streetView: "2026",
+  lit: "2026–27", dyslexia: "2022", psy: "2025–26", protobias: "2026", streetView: "2026",
 };
 
 export interface Paper { id: string; html: string; }
 const papers: Record<string, Paper> = {
   typicality: { id: "typicality", html: '<b>Li, X.</b> (2026). Typicality in referent choice: What the description leaves open. Working paper. <a href="https://lingbuzz.net/lingbuzz/010343">lingbuzz/010343</a>, <a href="https://doi.org/10.5281/zenodo.22855036">doi:10.5281/zenodo.22855036</a>' },
-  lcs: { id: "lcs", html: 'Prompt framing and latent control states in language models. Manuscript in preparation, with collaborators at DFKI.' },
+  lcs: { id: "lcs", html: 'Prompt framing and latent control states in language models. Manuscript in preparation with M. Roth (UTN) and S. Ostermann (DFKI).' },
 };
 export const paperOrder: Record<Variant, string[]> = {
   general: ["typicality", "lcs"], lm: ["lcs", "typicality"], cogsci: ["typicality", "lcs"],

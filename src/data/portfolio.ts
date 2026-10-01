@@ -112,7 +112,7 @@ export const portfolioSections: PortfolioSection[] = [
         track: "lm", topic: "Mechanistic interpretability",
         title: "Prompt framing and latent control states in language models",
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
-        kind: "Project · manuscript in preparation · with collaborators at DFKI",
+        kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
         short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
         links: [{ label: "Overview", href: projects.latentControl.href }],
       },
