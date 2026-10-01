@@ -27,7 +27,6 @@
       <!-- one line, left to right, through the thing being studied -->
       <path d="M212 150 L306 150 M496 150 L590 150" fill="none" stroke-width="2.4"/>
       <path d="M306 115 L494 112 L496 184 L308 187 Z" fill="#fdfbf4" stroke-width="2.8"/>
-      <text class="w" x="401" y="161" text-anchor="middle">language</text>
 
       <!-- person: no way in -->
       <g transform="translate(63,-126) scale(0.8)">
@@ -56,17 +55,15 @@
         <path d="M612 414 L610 436 M652 413 L654 436" fill="none" stroke-width="4"/>
       </g>
 
-      <g stroke="none">
-        <text class="lbl" x="183" y="252" text-anchor="middle">people</text>
-        <text class="lbl" x="652" y="252" text-anchor="middle">language models</text>
-      </g>
+    </g>
+
+    <!-- Text sits outside the boil filter: the displacement map blurs small type. -->
+    <g stroke="none">
+      <text class="w" x="401" y="161" text-anchor="middle">language</text>
+      <text class="lbl" x="183" y="252" text-anchor="middle">people</text>
+      <text class="lbl" x="652" y="252" text-anchor="middle">language models</text>
     </g>
   </svg>
-  <figcaption>
-    <span class="fnum">Fig. 1</span>
-    Language as it is used by two kinds of language user — only one of which can be opened.
-    Illustration, not results. See the <a href="/approach">research program</a>.
-  </figcaption>
 </figure>
 
 <style>
@@ -74,9 +71,6 @@
   svg { display:block; width:100%; height:auto; }
   svg text { font-family:"Patrick Hand", "Comic Sans MS", cursive; fill:#141414; }
   .lbl { font-size:19px; }
-  .w { font-size:23px; letter-spacing:0.01em; }
+  .w { font-size:22px; }
 
-  figcaption { margin:0.7rem 0 0; font-size:0.82rem; line-height:1.6; color:var(--color-text-muted); }
-  .fnum { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; color:var(--color-text); margin-right:0.5rem; }
-  figcaption a { color:var(--color-accent); }
 </style>

@@ -11,6 +11,11 @@ export const identity =
 export const identityLong =
   "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?";
 
+/** The programme, stated on the homepage above the project list (XC, 1 Oct 2026):
+ *  the object of study is the language user, and the two methods are one pair. */
+export const programmeHtml =
+  "I study how language users compute meaning. Cognitive modelling states an account of understanding as a few competing causal models, each making different predictions about what people say. Interpretability asks which of them a language model implements, by intervening on what it represents. The same hypotheses are tested twice over — once in behaviour, which is as far as people can be opened, and once in representations, which only a model allows.";
+
 /** The current research question, in plain language. */
 export const currentQuestion =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

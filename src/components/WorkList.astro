@@ -5,6 +5,7 @@
 // item, so topic and weight stay independent of each other.
 import type { PortfolioEntry } from "../data/portfolio";
 interface Props { entries: PortfolioEntry[]; compact?: boolean; }
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
 const { entries, compact = false } = Astro.props;
 ---
 {compact ? (
@@ -24,7 +25,7 @@ const { entries, compact = false } = Astro.props;
     {entries.map((e) => {
       const href = e.links[0]?.href;
       return (
-        <li class="step">
+        <li class="step" id={"w-" + slug(e.title)}>
           <p class="topic">{e.topic ?? e.field}</p>
           <div class="body">
             <p class="meta">{e.kind ?? e.status}</p>

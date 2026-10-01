@@ -1,7 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
-import { identityLongHtml } from "../data/program";
+import { identityLongHtml, programmeHtml } from "../data/program";
 import { entriesOfTier } from "../data/portfolio";
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+const shortName: Record<string, string> = {
+  "What decides between must and might": "Modal choice",
+  "Modal language in preschool children": "Preschool modals",
+  "Prompt framing and latent control states in language models": "Prompt framing",
+};
 import PortfolioEntry from "../components/PortfolioEntry.astro";
 import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
@@ -85,10 +91,11 @@ const timeline = [
         </p>
         <nav class="side-toc" aria-label="Work on this page">
           <p class="side-k">On this page</p>
-          {[{ id: "selected-research", label: "Research & Papers" }].map((group) => (
-            <><a href={`#${group.id}`}><span>{group.sec}</span>{group.label}</a>
-</>
+          <a href="#selected-research"><span></span>Research & Papers</a>
+          {entriesOfTier("research").map((e) => (
+            <a class="side-sub" href={`#w-${slug(e.title)}`}><span></span>{shortName[e.title] ?? e.title}</a>
           ))}
+          <a href="/research" class="side-sub"><span></span>All projects →</a>
           <a href="#background"><span>—</span>Background</a>
         </nav>
         <p class="side-links">
@@ -107,6 +114,7 @@ const timeline = [
       <div class="portfolio-list">
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
+          <p class="research-programme" set:html={programmeHtml} />
           <WorkList entries={entriesOfTier("research")} />
         </section>
       </div>
@@ -259,6 +267,7 @@ const timeline = [
   .selected-research { scroll-margin-top:6rem; }
   .portfolio-list { display:grid; gap:3.6rem; }
   .research-block { min-width:0; }
+  .research-programme { margin:0 0 1.5rem; font-size:0.98rem; line-height:1.72; color:var(--color-text-muted); }
   .research-group-label { font-family:var(--font-serif); font-size:1.65rem; font-weight:600; line-height:1.3; margin:0.35rem 0 0.6rem; }
   .research-group-blurb { font-size:0.94rem; line-height:1.6; color:var(--color-text-muted); margin:0 0 1rem; }
   .work-index-link a { color:var(--color-accent); text-underline-offset:0.2em; }
