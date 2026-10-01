@@ -79,17 +79,11 @@ const research: Record<string, Entry> = {
     note: "Adds a developmental modal-language component to an ongoing PhD project at MPI CBS Leipzig on how preschool children reason about possibilities.",
   },
   modalLM: {
-    id: "modalLM", title: "Modal expressions in language models", href: "/research/modal-language-models",
-    method: "Language models", status: "In development.",
-    row: {
-      default: 'diagnostics of how models treat ruled-out possibilities; a cognitive account and internal tests are planned.',
-      cogsci: 'a simple cognitive account of modal reasoning, to be tested against language-model behaviour.',
-    },
-    context: "Language-model study · in development", when: "2026 –",
-    note: {
-      default: "Diagnostics of how models treat ruled-out possibilities; a cognitive account and internal tests are planned.",
-      cogsci: "A simple cognitive account of modal reasoning, to be tested against language-model behaviour.",
-    },
+    id: "modalLM", title: "What decides between must and might", href: "/research/modal-language-models",
+    method: "Computational model", status: "In development.",
+    row: "fits three competing accounts of the choice between <i>must</i> and <i>might</i> to published human data.",
+    context: "Computational model \u00b7 in development", when: "2026 \u2013",
+    note: "Three accounts of how evidence strength and evidence source decide between must and might, fitted and compared on published human data.",
   },
   lit: {
     id: "lit", title: "Prompt framing and latent control states in language models",
@@ -149,7 +143,7 @@ export const programme = {
 export const programmeLabel: Record<string, string> = {
   threeWays: "Three Ways of Leaving p Unsettled",
   thesis: "M.Sc. thesis",
-  modalLM: "Language-model study",
+  modalLM: "Modal choice",
 };
 export const compactWhen: Record<string, string> = {
   lit: "2026–27", dyslexia: "2022", psy: "2025–26", protobias: "2026", streetView: "2026",

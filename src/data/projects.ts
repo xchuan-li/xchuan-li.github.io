@@ -31,12 +31,12 @@ export const projects = {
     status: "Master’s thesis · in planning",
   },
   modalModels: {
-    title: "Modal expressions in language models",
+    title: "What decides between must and might",
     href: "/research/modal-language-models",
-    question: "Can a simple account of modal reasoning explain language-model behaviour and correspond to computations inside the model?",
-    summary: "Diagnostic work on how models treat ruled-out possibilities, now motivating a simple cognitive account and planned tests of its predictions in model behaviour and internal computations.",
-    connection: "Linguistic analysis guides the account; human evidence constrains its cognitive interpretation. The project remains separate from the thesis.",
-    status: "Language-model study · in development",
+    question: "Controlling for how strong the evidence is, does the source of the evidence still act on must directly, or only through its competition with the bare assertion?",
+    summary: "Three competing accounts of how evidence strength and evidence source decide between must and might, fitted and compared on published human data; language models enter later, as a second kind of language user.",
+    connection: "The account is stated so that its variables can be measured in a language model as well; that step comes after the comparison on human data. The project remains separate from the thesis.",
+    status: "Computational model \u00b7 in development",
   },
   typicality: {
     title: "Typicality in referent choice",

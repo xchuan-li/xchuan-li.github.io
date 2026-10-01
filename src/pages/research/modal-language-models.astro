@@ -2,15 +2,15 @@
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 
-// Added 27 September 2026 (XC) so the modality section shows analysis, human study and model study
-// together. Diagnostic runs on pretrained models exist but are not calibrated; controlled training
-// has not started. Report no effect sizes here, and keep it separate from the thesis.
+// Rewritten 1 October 2026 (XC): the project was narrowed to the comparison on human data.
+// Earlier diagnostic runs on pretrained models are not part of it. Nothing has been fitted yet,
+// so claim no result and no winner; keep it separate from the thesis.
 const project = projects.modalModels;
 ---
 
 <Base
   title={`${project.title} · Xiaochuan Li`}
-  description="A developing project connecting simple accounts of modal reasoning with language-model behaviour and planned internal mechanism tests."
+  description="Three competing accounts of how evidence decides between must and might, compared on published human data."
   showProgress={true}
   toc={true}
 >
@@ -21,45 +21,55 @@ const project = projects.modalModels;
     <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">{project.question}</p>
     <p>{project.summary} {project.connection}</p>
 
-    <h2>From a linguistic contrast to a cognitive model</h2>
+    <h2>The finding</h2>
     <p>
-      <a href="/research/three-ways">The linguistic analysis</a> supplies distinctions about
-      possibility, knowledge, and conversational commitments. The proposed next step is to
-      state a small computational account: which alternatives it represents, how evidence
-      updates them, and what responses it predicts. Its cognitive interpretation must be tested
-      against independent human evidence, including suitable developmental findings.
+      Which modal a speaker picks depends on more than how likely the proposition is. In the
+      production data reported by Degen and colleagues (2019), people choosing among a bare
+      assertion, <i>must p</i>, <i>probably p</i> and <i>might p</i> are sensitive both to how
+      strong the evidence is and to whether it was obtained directly or by inference. Those
+      two factors do not act alike: the source matters for <i>must</i> in a way it does not for
+      <i>might</i>.
     </p>
 
-    <h2>What already exists</h2>
+    <h2>Three accounts</h2>
     <p>
-      Diagnostic runs on pretrained models tested how a possibility is treated after exclusion
-      and attempted reopening, using matched continuations and instrument checks. Results are
-      mixed and independent material calibration is incomplete. These runs motivate the next
-      question; they do not establish a cognitive model or an internal mechanism.
+      The pattern has more than one explanation, and they disagree about what <i>must</i> means.
+      On the first, only evidence strength matters and the apparent effect of source is a
+      residue of imperfectly matched strength. On the second, the requirement for indirect
+      evidence is part of the meaning of <i>must</i>. On the third, it is not: <i>must</i>
+      carries no such condition, and the effect arises because a bare assertion is the better
+      thing to say when the evidence is direct, so the source acts on <i>must</i> only through
+      that competition.
     </p>
 
-    <h2>Testing a proposed computation inside an LM</h2>
+    <h2>What a comparison can settle</h2>
     <p>
-      Once a candidate model makes clear predictions, the planned comparison asks whether its
-      intermediate variables can be aligned with LM representations. Changing an aligned state
-      should produce the specific changes predicted by the small model, including answers that
-      should remain unchanged. Tests on new examples and competing models are needed to separate
-      an explanatory correspondence from a convenient readout of the answer.
+      Stated as probabilistic choice models over the four expressions, the three accounts can be
+      fitted to the published trial-level data and compared with model selection criteria. Two
+      checks decide how much the comparison is worth: whether the accounts can be told apart at
+      all in this design — assessed by fitting each to data the others generated — and whether
+      the winner still predicts conditions held out of the fit. If they cannot be told apart,
+      that is the result, and the question becomes what materials would separate them. The
+      original authors note that their data do not adjudicate between the two families of
+      theory; a quantitative comparison is the step after that observation.
     </p>
 
-    <h2>Learning from controlled input</h2>
+    <h2>Language models as a second kind of user</h2>
     <p>
-      Controlled training remains a complementary way to investigate which input cues or
-      learning assumptions support the target distinction. It is a different question from
-      locating an existing computation in a fixed pretrained model. A model trained to follow
-      a prescribed cognitive account cannot then be used as evidence that the original LM
-      acquired that account spontaneously.
+      The same accounts can be fitted to the choices a language model makes over the same four
+      expressions. That asks whether the same account describes a system with a different
+      history, not whether the model resembles a person. A further step, which the behavioural
+      comparison cannot reach in people, is whether strength and source are represented
+      separately inside the model, so that intervening on one changes <i>must</i> and leaves
+      <i>might</i> alone. These come after the comparison on human data, and only if that
+      comparison separates the accounts.
     </p>
 
     <h2>Status</h2>
     <p class="cw-status">
-      Diagnostic runs exist. The cognitive account is being specified; controlled training and
-      causal alignment tests have not begun. This project is separate from the human master's thesis.
+      Not started. The data and analysis scripts are public; the first step is to reproduce the
+      reported analysis before anything is fitted. No account is favoured here, and no result is
+      claimed. This project is separate from the master's thesis.
     </p>
     <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
   </article>

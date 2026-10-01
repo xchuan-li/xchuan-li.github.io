@@ -54,9 +54,9 @@ export const portfolioSections: PortfolioSection[] = [
       {
         tier: "research", track: "langcog", topic: "Computational model",
         title: projects.modalModels.title,
-        field: "Language models", desc: projects.modalModels.summary, status: projects.modalModels.status,
+        field: "Cognitive modelling", desc: projects.modalModels.summary, status: projects.modalModels.status,
         kind: "Project · in development",
-        short: "From diagnostics of ruled-out possibilities to a cognitive account tested in model behaviour and internals.",
+        short: "Fits three competing accounts to published human data to ask whether the indirectness of must is semantic or arises from competition with the bare assertion.",
         links: [{ label: "Project outline", href: projects.modalModels.href }],
       },
       {
