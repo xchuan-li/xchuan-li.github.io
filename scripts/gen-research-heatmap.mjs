@@ -39,3 +39,7 @@ for(let i=0;i<145;i++) mobile+=`<rect x="359" y="${62+i*448/145}" width="10" hei
 for(const v of [-0.2,0,0.5,1,1.25]) mobile+=`<text x="375" y="${62+(1.25-v)/1.45*448+5}" font-size="14">${v}</text>`;
 mobile+='<text x="48" y="536" font-size="15">−55 / −26: unchanged prefix controls</text><text x="48" y="558" font-size="15">−25…−23: slogan words · −22: full stop</text><text x="48" y="580" font-size="15">−23: last slogan word · −1: decision position</text></g></svg>';
 writeFileSync(new URL('../public/images/research/framing-carry-mobile.svg',import.meta.url),mobile);
+
+// Cover: show the complete heatmap body, keeping labels in the linked full figure.
+writeFileSync(new URL('../public/images/research/framing-carry-cover.svg',import.meta.url),
+  svg.replace('width="860" height="365" viewBox="0 0 860 365"', 'width="600" height="230" viewBox="168 56 600 230"'));

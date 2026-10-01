@@ -6,3 +6,7 @@
 - Street-view and checking-study figures are reused from `public/papers/` without changes.
 
 The homepage and research index share captions and accessible descriptions in `src/data/portfolio.ts`. Keep sample sizes, interval definitions, project status and interpretation limits when changing the layout.
+
+## Compact covers (latest layout)
+
+Listings now show four small right-side covers without visible captions. Planned-study schematics are omitted. `framing-carry-cover.svg` is a viewport of the complete grid body, linked to the full labelled figure. The portrait figure is retained as an asset but is no longer used in listings.

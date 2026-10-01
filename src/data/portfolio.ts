@@ -20,7 +20,7 @@ export interface PortfolioEntry {
   status: string;
   links: { label: string; href: string }[];
   cover?: { src: string; alt: string };
-  figure?: { src: string; mobileSrc?: string; alt: string; caption: string; width: number; height: number };
+  figure?: { src: string; preview?: boolean; previewSrc?: string; mobileSrc?: string; alt: string; caption: string; width: number; height: number };
   note?: { label: string; text: string };
   /** Papers list: meta line, one sentence, writing-sample flag, first-page thumbnail. */
   kind?: string;
@@ -58,7 +58,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Cognitive modelling", desc: projects.modalModels.summary, status: projects.modalModels.status,
         kind: "Project · in development",
         short: "Fits three competing accounts to published human data to ask whether the indirectness of must is semantic or arises from competition with the bare assertion.",
-        figure: {"src": "/images/research/modal-accounts.svg", "alt": "Planned comparison: published human choices inform three competing accounts, evaluated with recovery and held-out predictions.", "caption": "Planned model comparison. The three accounts will be tested on published human choices; no model has been fitted yet.", "width": 760, "height": 260},
+        figure: {"src": "/images/research/modal-accounts.svg", "preview": false, "alt": "Planned comparison: published human choices inform three competing accounts, evaluated with recovery and held-out predictions.", "caption": "Planned model comparison. The three accounts will be tested on published human choices; no model has been fitted yet.", "width": 760, "height": 260},
         links: [{ label: "Project outline", href: projects.modalModels.href }],
       },
       {
@@ -67,7 +67,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
         kind: "Project · master’s thesis · in planning, no data yet",
         short: "A small study run alongside an existing study of how preschoolers reason about possibilities.",
-        figure: {"src": "/images/research/preschool-association.svg", "alt": "A planned modal-language task and an existing possibilities-reasoning task, connected by a question about association.", "caption": "Study in planning. Compare language understanding with reasoning about possibilities; an association would not establish causal direction.", "width": 760, "height": 230},
+        figure: {"src": "/images/research/preschool-association.svg", "preview": false, "alt": "A planned modal-language task and an existing possibilities-reasoning task, connected by a question about association.", "caption": "Study in planning. Compare language understanding with reasoning about possibilities; an association would not establish causal direction.", "width": 760, "height": 230},
         links: [{ label: "Thesis outline", href: projects.thesis.href }],
       },
       {
@@ -76,7 +76,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
         kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
         short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
-        figure: {"src": "/images/research/framing-carry.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
+        figure: {"src": "/images/research/framing-carry.svg", "previewSrc": "/images/research/framing-carry-cover.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
         links: [{ label: "Overview", href: projects.latentControl.href }],
       },
       {
