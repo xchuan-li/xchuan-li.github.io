@@ -1,12 +1,12 @@
-# Project figures
+# Project covers — current selection (2 October 2026)
 
-- `framing-carry.svg` and `framing-carry-mobile.svg`: landscape and portrait renderings of the complete 28-layer × 7-position table in the final project presentation (25 September 2026, slide 6). Frozen rounded values and aggregation definition are in `src/data/figures/framing-carry.json`; regenerate with `node scripts/gen-research-heatmap.mjs`. No cells are omitted. Equal absolute carry has equal colour intensity on either side of zero. Colours locate effective single-site interventions; they do not establish a unique natural pathway.
-- `protobias-language.svg`: vector export of the existing language odds-ratio figure used in the ProtoBias course report. Existing points and intervals are preserved.
-- `modal-accounts.svg` and `preschool-association.svg`: design schematics based on the current project outlines, not experimental results.
-- Street-view and checking-study figures are reused from `public/papers/` without changes.
+Covers are static, non-clickable images on the right of existing project entries (196 × 134 px desktop; 112 × 91 px mobile). No visible long captions. The homepage has its original three Research entries only; no added Selected course projects block.
 
-The homepage and research index share captions and accessible descriptions in `src/data/portfolio.ts`. Keep sample sizes, interval definitions, project status and interpretation limits when changing the layout.
+- `framing-carry-cover.svg`: all 28 layers × 7 token positions from the final 25 September presentation, with both axes and a carry colour scale. Same frozen values and diverging colours as `framing-carry.svg`; `scripts/gen-research-heatmap.mjs` generates both, plus the retained portrait asset. No data cells are dropped. The plotted intervention effects do not establish a unique natural transmission pathway.
+- `protobias-image-pair.svg`: embeds the unchanged original JPEG bytes from `subha-roy/dl4dh_data`, config `default`, split `test`, row 734, id `obj00300`, retrieved through the Hugging Face dataset server. Left: `obj_000300_qwen_sd35_pair_00_sc.jpg` (futon on gray carpet). Right: `obj_000300_qwen_sd35_pair_00_adv.jpg` (bed on beige carpet). These are the benchmark's original synthetic stimuli, not newly generated website illustrations. No result from the unpublished co-authored revision is shown.
+- `fact-checking-procedure.svg`: simplified source-order diagram from `reports/fact-checking/fact-checking.tex`, Methods / Design and procedure. Participants randomly received Wikipedia then ChatGPT, or ChatGPT then Wikipedia, as static answer screenshots. Checking was optional. The cover omits consent, overview, final questionnaire and debriefing for brevity; the full report retains the complete procedure.
+- Street-view CNN: no cover, by XC's explicit follow-up. The original report's plots remain unchanged.
+- `modal-accounts.svg` and `preschool-association.svg`: retained design assets, omitted from listings.
+- `protobias-language.svg`: retained original plot export, no longer used as a cover.
 
-## Compact covers (latest layout)
-
-Listings now show four small right-side covers without visible captions. Planned-study schematics are omitted. `framing-carry-cover.svg` is a viewport of the complete grid body, with the full labelled figure retained as a separate asset. Covers are static and non-clickable. The portrait figure is retained as an asset but is no longer used in listings.
+Data-source URL: https://huggingface.co/datasets/subha-roy/dl4dh_data

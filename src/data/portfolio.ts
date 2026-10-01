@@ -108,7 +108,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · course paper 2026 · single author",
         short: "With each image pair held fixed and only the prompt language changed, both VLM judges changed their answer on about 70% of items in at least one of seven languages.",
         thumb: "/papers/cross-lingual-protobias-thumb.png",
-        figure: {"src": "/images/research/protobias-language.svg", "alt": "Odds of a typicality error relative to English for Qwen2.5-VL-7B and InternVL3-8B across seven prompt languages, with uncertainty intervals.", "caption": "Same image pairs, different prompt languages. Odds ratios relative to English from an item-clustered regression on 300 demography items; bars show 95% confidence intervals.", "width": 660, "height": 400},
+        figure: {"src": "/images/research/protobias-image-pair.svg", "alt": "Original ProtoBias benchmark pair: a futon on a gray carpet beside a bed on a beige carpet. Both images are original dataset stimuli.", "caption": "Original object-domain pair, row 734 of subha-roy/dl4dh_data (obj00300). The description specifies a piece of furniture on a gray carpet.", "width": 1028, "height": 512},
         links: [
           { label: "Paper", href: projects.protobias.href },
           { label: "PDF", href: "/papers/cross-lingual-protobias.pdf" },
@@ -122,7 +122,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · team course project 2026 · report 2026",
         short: "Training choices alone took a fixed 1.69M-parameter network from 0.62 to 0.82 validation accuracy; the best dropout rate depended on training length.",
         thumb: "/papers/street-view-classification-thumb.png",
-        figure: {"src": "/papers/street-view-classification/sweeps.svg", "alt": "Validation accuracy across dropout rates and training lengths. The best dropout setting changes with schedule length, and extending mixup training from 200 to 250 epochs lowers accuracy.", "caption": "Validation accuracy under different training settings. The best dropout rate depends on schedule length; extending training beyond 200 epochs did not improve the tested mixup recipe.", "width": 800, "height": 390},
+
         links: [
           { label: "Report", href: projects.streetView.href },
           { label: "PDF", href: "/papers/street-view-classification.pdf" },
@@ -135,7 +135,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · course study, Winter 2025–26 · report 2026",
         short: "A complete between-subjects experiment, from design and pilot to data collection (N = 47) and analysis; neither predicted difference was reliable.",
         thumb: "/papers/fact-checking-study-thumb.png",
-        figure: {"src": "/papers/fact-checking-study/means.svg", "alt": "Mean questions checked in Wikipedia-first and ChatGPT-first groups across two rounds, with one-standard-deviation error bars.", "caption": "Questions checked out of 10, mean ± SD. Wikipedia first: n = 29; ChatGPT first: n = 18. Neither group difference was significant (Welch tests: p = .65 and .16).", "width": 660, "height": 420},
+        figure: {"src": "/images/research/fact-checking-procedure.svg", "alt": "Random assignment to Wikipedia then ChatGPT, or ChatGPT then Wikipedia, for optional checking across two rounds of ten questions.", "caption": "Source-order design from the course report. Both tools were presented as static screenshots; checks were optional.", "width": 420, "height": 286},
         links: [
           { label: "Report", href: projects.psyStudy.href },
           { label: "PDF", href: "/papers/fact-checking-study.pdf" },

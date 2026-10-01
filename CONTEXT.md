@@ -1,12 +1,10 @@
-## Compact project covers, 2 October 2026 — latest user correction
+## Project covers, 2 October 2026 — latest explicit XC correction
 
-Figures belong to the RIGHT of each project as small covers, not full-width figure blocks. Remove visible long captions and full-size text links. Desktop covers are 196 × 134 px; mobile covers stay on the right at 112 × 91 px. Covers are static, non-clickable images with no hover effect (latest user correction). Keep real plots for prompt framing, ProtoBias, street view and the checking study. Omit the two planned-study diagrams from listings because their explanatory text does not work at cover size. The heatmap cover shows the complete grid body; the full SVG asset retains axes and scale. Existing source data and captions remain in the repository.
+Homepage contains the original three Research entries only. The agent-added Selected course projects block and its sidebar link have been removed. Do not add homepage sections merely to accommodate covers. Course projects remain on the existing /research index.
 
-## Research figures, 2 October 2026 — latest user decision
+Right-side covers remain static and non-clickable: desktop 196 × 134 px; mobile 112 × 91 px. Interpretability uses all 196 frozen heatmap cells WITH layer/token axes and a carry colour scale. ProtoBias uses the original object-domain image pair from dataset row 734 (futon on gray carpet / bed on beige carpet), not a results plot. The psychology study uses a compact source-order flowchart grounded in its report (random assignment; Wikipedia → ChatGPT or reverse; optional checks). XC explicitly chose no CNN cover when the dataset was unavailable. Keep the two planned-study schematics omitted from listings. No long captions.
 
-Prioritize real figures from the project reports. Homepage Research uses the layer × token patching heatmap for prompt framing; the two planned studies use explicitly labelled design schematics. Selected course projects now shows ProtoBias language odds ratios, street-view training sweeps, and the checking-study means ± SD. Keep course status and null results visible. The research index shares these figures; writing and the planned EEG project remain without result images. Clicking a figure opens its full-size SVG.
-
-The patching heatmap preserves all 28 × 7 rounded cells from the final presentation. `src/data/figures/framing-carry.json` is the frozen public summary and `scripts/gen-research-heatmap.mjs` renders the web SVG. Negative values are retained with a diverging scale. Do not turn the early-slogan/late-decision pattern into a claim of a unique causal pathway. Existing report plots are reused without changing data.
+The full patching heatmap and frozen values remain in `src/data/figures/framing-carry.json`; regenerate the labelled cover with `node scripts/gen-research-heatmap.mjs`. The plot identifies effective intervention sites, not a unique natural pathway. Asset provenance is in `public/images/research/README.md`.
 
 ## CV structure, 1 October 2026 — latest user decision
 

@@ -40,6 +40,19 @@ for(const v of [-0.2,0,0.5,1,1.25]) mobile+=`<text x="375" y="${62+(1.25-v)/1.45
 mobile+='<text x="48" y="536" font-size="15">−55 / −26: unchanged prefix controls</text><text x="48" y="558" font-size="15">−25…−23: slogan words · −22: full stop</text><text x="48" y="580" font-size="15">−23: last slogan word · −1: decision position</text></g></svg>';
 writeFileSync(new URL('../public/images/research/framing-carry-mobile.svg',import.meta.url),mobile);
 
-// Cover: show the complete heatmap body, keeping labels in the linked full figure.
-writeFileSync(new URL('../public/images/research/framing-carry-cover.svg',import.meta.url),
-  svg.replace('width="860" height="365" viewBox="0 0 860 365"', 'width="600" height="230" viewBox="168 56 600 230"'));
+// Cover keeps all 196 cells, both axes and the colour scale at thumbnail size.
+let cover=`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc"><title id="title">Layer-by-token activation patching</title><desc id="desc">All 28 layers and seven relative token positions from the frozen Qwen2.5-7B report table. Carry is reconstruction of the aggregate contrast; 1 means the full contrast. Negative values are retained.</desc><rect width="420" height="286" fill="white"/><g font-family="Arial,sans-serif" fill="#283648">`;
+const cx=68, cy=12, cellW=11.5, cellH=26;
+data.positions.forEach((pos,j)=> {
+  cover+=`<text x="57" y="${cy+j*cellH+19}" text-anchor="end" font-size="18">${String(pos).replace('-','−')}</text>`;
+  data.layers.forEach(([layer,values])=> {
+    cover+=`<rect x="${cx+layer*cellW}" y="${cy+j*cellH}" width="${cellW}" height="${cellH}" fill="${color(Number(values[j]))}" stroke="#dedfe2" stroke-width="0.45"><title>Layer ${layer}, position ${pos}: ${values[j]}</title></rect>`;
+  });
+});
+cover+='<path d="M68 12V194H390" fill="none" stroke="#87919c" stroke-width="1"/>';
+for(const layer of [0,7,14,21,27]) cover+=`<text x="${cx+layer*cellW+cellW/2}" y="214" font-size="18" text-anchor="middle">${layer}</text>`;
+cover+='<text x="229" y="236" font-size="19" text-anchor="middle">Layer</text><text transform="translate(17 103) rotate(-90)" text-anchor="middle" font-size="18">Token position</text><text x="75" y="264" font-size="18">Carry</text>';
+for(let i=0;i<145;i++) cover+=`<rect x="${135+i*220/145}" y="253" width="${220/145+0.1}" height="11" fill="${color(-0.2+i/100)}"/>`;
+for(const v of [-0.2,0,1,1.25]) cover+=`<text x="${135+(v+0.2)/1.45*220}" y="283" text-anchor="middle" font-size="16">${String(v).replace('-','−')}</text>`;
+cover+='</g></svg>';
+writeFileSync(new URL('../public/images/research/framing-carry-cover.svg',import.meta.url),cover);

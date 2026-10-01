@@ -94,7 +94,6 @@ const timeline = [
           {entriesOfTier("research").map((e) => (
             <a class="side-sub" href={`#w-${slug(e.title)}`}><span></span>{shortName[e.title] ?? e.title}</a>
           ))}
-          <a href="#course-projects"><span></span>Course projects</a>
           <a href="/research" class="side-sub"><span></span>All projects →</a>
           <a href="#background"><span>—</span>Background</a>
         </nav>
@@ -119,10 +118,6 @@ const timeline = [
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
           <WorkList entries={entriesOfTier("research")} illustrated />
-        </section>
-        <section class="research-block" id="course-projects" aria-labelledby="course-projects-heading">
-          <h2 class="research-group-label" id="course-projects-heading">Selected course projects</h2>
-          <WorkList entries={entriesOfTier("course").filter((entry) => entry.figure)} illustrated />
         </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
