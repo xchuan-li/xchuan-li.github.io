@@ -34,9 +34,9 @@ export interface Entry {
 }
 
 export const interests: Record<Variant, string> = {
-  general: "Formal and experimental semantics, psycholinguistics, language models. Current focus: epistemic modality.",
-  lm: "Language models: evaluation, interpretability, and controlled training. Current focus: epistemic modality.",
-  cogsci: "Semantics and pragmatics, psycholinguistics, language development. Current focus: epistemic modality.",
+  general: "Computational cognitive science and language model interpretability. Current focus: epistemic modality.",
+  lm: "Language model interpretability and computational cognitive science. Current focus: epistemic modality.",
+  cogsci: "Computational cognitive science, language development, and interpretability. Current focus: epistemic modality.",
 };
 
 export const education: (Entry & { place: string })[] = [
