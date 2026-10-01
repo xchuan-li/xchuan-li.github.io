@@ -14,7 +14,7 @@ export const identityLong =
 /** The programme, stated on the homepage above the project list (XC, 1 Oct 2026):
  *  the object of study is the language user, and the two methods are one pair. */
 export const programmeHtml =
-  "I study how language users compute meaning. Cognitive modelling states an account of understanding as a few competing causal models, each making different predictions about what people say. Interpretability asks which of them a language model implements, by intervening on what it represents. The same hypotheses are tested twice over — once in behaviour, which is as far as people can be opened, and once in representations, which only a model allows.";
+  "Several accounts of how a word is understood will fit the same behaviour. Cognitive modelling states where they come apart, precisely enough to measure. With people, measuring stops there. A language model can be opened, so interpretability can ask whether the account is what the network runs.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
