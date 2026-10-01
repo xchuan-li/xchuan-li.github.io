@@ -15,7 +15,7 @@ export const identityLong =
  *  Written after the pattern of Hening Wang's and Polina Tsvilodub's pages:
  *  an identity sentence, then the methods, then the actual projects. */
 export const bioHtml =
-  "I am a master\u2019s student in Human and Artificial Intelligence at the University of Technology Nuremberg, working on epistemic modality: what <i>must</i> and <i>might</i> contribute, and how people and language models come to choose one over the other. My thesis is on preschool children, run within an ongoing PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences in Leipzig. Alongside it I spend the year on prompt framing and latent control states in language models, with Michael Roth (UTN) and Simon Ostermann (DFKI). I came to this from philosophy, by way of logic and the philosophy of language.";
+  "I am a master\u2019s student in Human and Artificial Intelligence at the University of Technology Nuremberg, working on epistemic modality: what <i>must</i> and <i>might</i> contribute, and how people and language models come to choose one over the other. My thesis is on preschool children, run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig. Alongside it I spend the year on prompt framing and latent control states in language models, with Michael Roth (UTN) and Simon Ostermann (<a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">DFKI</a>). I came to this from philosophy, by way of logic and the philosophy of language.";
 
 /** The programme, stated on the homepage above the project list (XC, 1 Oct 2026):
  *  the object of study is the language user, and the two methods are one pair. */
