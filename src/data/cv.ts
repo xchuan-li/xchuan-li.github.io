@@ -4,9 +4,9 @@
 // and omissions only — never what an entry says it is.
 // Facts: psychology study per Vault A2u1 (design = group of three, adopted by class
 // vote; analysis = XC); IT job wording per Vault A3x1 §6 (confirmed 27 Sep 2026).
-// Dyslexia screening per Vault C0 (XC, 1 Oct 2026): memory is vague and no documents
-// survive, so the entry claims only the collaboration; cogsci only (off-topic for lm,
-// and general keeps its course projects).
+// Learning-difficulties project per XC’s old CV (1 Oct 2026): autumn 2021,
+// test items, response data and individual plans. Included in general and cogsci;
+// omitted only from the focused lm variant. Original data no longer survives.
 
 export type Variant = "general" | "lm" | "cogsci";
 type ByVariant<T> = T | Partial<Record<Variant, T>> & { default?: T };
@@ -124,7 +124,7 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "psy", "protobias", "streetView"] },
+  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "psy", "protobias", "streetView", "dyslexia"] },
   lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["lit", "protobias", "streetView", "psy"] },
   cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "dyslexia", "psy", "protobias"] },
 };
