@@ -94,10 +94,10 @@ const research: Record<string, Entry> = {
     note: "Designed and ran the controlled experiments and causal interventions for the utilitarian-framing branch; manuscript in preparation.",
   },
   dyslexia: {
-    id: "dyslexia", title: "Reading-difficulty screening in primary-school children",
-    row: "human study with the Shenzhen Learning Disorders Association",
-    context: "Research project, invited, with the Shenzhen Learning Disorders Association", when: "Spring 2022",
-    note: "Helped select homophone-character stimuli and administered a reaction-time task to children at a primary school.",
+    id: "dyslexia", title: "Learning difficulties in primary-school children",
+    row: "with the Shenzhen Learning Disorders Association: test items, response data, individual plans",
+    context: "Research project, invited, with the Shenzhen Learning Disorders Association", when: "Autumn 2021",
+    note: "Selected homophone-character items and ran timed character-reading tests at a primary school; analysed accuracy and timing to classify the difficulties, and designed teaching items and individual plans from the result.",
   },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure",
@@ -146,7 +146,7 @@ export const programmeLabel: Record<string, string> = {
   modalLM: "Modal choice",
 };
 export const compactWhen: Record<string, string> = {
-  lit: "2026–27", dyslexia: "2022", psy: "2025–26", protobias: "2026", streetView: "2026",
+  lit: "2026–27", dyslexia: "2021", psy: "2025–26", protobias: "2026", streetView: "2026",
 };
 
 export interface Paper { id: string; html: string; }
