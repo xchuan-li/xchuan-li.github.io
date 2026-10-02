@@ -1,3 +1,9 @@
+## Homepage sidebar, 2 October 2026 — latest explicit XC decision
+
+XC ▸ Remove the homepage “On this page” directory because the page is short. The sidebar keeps the portrait, name, affiliation, and contact/CV links. Do not restore a homepage table of contents.
+
+AI ▸ Removed the directory markup and its unused styles, title mapping, and scroll-tracking script.
+
 ## Project covers, 2 October 2026 — latest explicit XC correction
 
 Homepage contains the original three Research entries only. The agent-added Selected course projects block and its sidebar link have been removed. Do not add homepage sections merely to accommodate covers. Course projects remain on the existing /research index.
