@@ -32,7 +32,7 @@ export interface PortfolioEntry {
   track?: PaperTrack;
   topic?: string;
   /** How much weight the item carries: own research, writing samples, or coursework. */
-  tier?: "research" | "writing" | "course";
+  tier?: "research" | "writing" | "course" | "earlier";
 }
 export type PaperTrack = "langcog" | "lm";
 /** Tab label (short), then the full heading and its subtitle shown above the open list. */
@@ -53,6 +53,15 @@ export const portfolioSections: PortfolioSection[] = [
     id: "work", sec: "", label: "Research & Papers",
     blurb: "",
     entries: [
+      {
+        tier: "earlier", track: "langcog", topic: "Child reading assessment",
+        title: "Reading difficulties in primary-school children",
+        field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
+        status: "Undergraduate research experience · September–December 2021",
+        kind: "Invited undergraduate project · September–December 2021",
+        short: "I prepared Chinese-character slides and took turns participating in on-site testing and data analysis. In one observed assessment, a child recognised more characters in words than I had anticipated from their single-character reading—prompting a question about how familiar word context helps retrieve pronunciation.",
+        links: [{ label: "Tasks, contribution & an observed example", href: "/research/child-reading-assessment" }],
+      },
       {
         tier: "research", track: "langcog", topic: "Behavioural experiment",
         title: projects.thesis.title,
@@ -151,5 +160,6 @@ export const workTiers: { id: string; label: string; blurb: string; compact: boo
   { id: "research", label: "Research", blurb: "Projects I am responsible for, with their current state.", compact: false },
   { id: "writing", label: "Writing", blurb: "Analyses written up on their own; used as writing samples.", compact: false },
   { id: "course", label: "Course projects", blurb: "", compact: true },
+  { id: "earlier", label: "Earlier research experience", blurb: "An undergraduate introduction to behavioural assessment and research questions about reading.", compact: false },
 ];
 export const entriesOfTier = (t: string) => workEntries.filter((e) => (e.tier ?? "course") === t);

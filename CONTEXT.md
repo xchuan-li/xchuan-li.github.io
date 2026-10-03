@@ -1,3 +1,7 @@
+## Childhood reading assessment, 3 October 2026 — latest XC instruction
+
+XC ▸ Add the undergraduate childhood reading assessment experience to the website, with an actual example. AI ▸ Homepage and /research now have an Earlier research experience entry linking to /research/child-reading-assessment. Keep it distinct from current own research. The example comes from XC's reflection emailed 13 September 2021: unexpectedly stronger recognition in word reading than anticipated from single-character reading. It is one observed case, not a matched-items experiment or established context effect. The reflection supplies no exact characters or words, so none are invented. Materials, on-site testing and alternating data analysis are based on XC's recollection; group timing remains tentative. No millisecond reaction-time, RAN, named standardised test, numerical findings or diagnosis claims. B7/B10 stay off the website.
+
 ## Narrative and unpublished projects, 3 October 2026 — latest XC instruction
 
 XC ▸ “去调整网页 B7和10先不要上网页”. This supersedes earlier three-project and modality-programme presentation decisions below. B7 (modal-choice modelling) and B10 (Show and tell) must not appear in public copy, project cards, project content, HTML CV variants or the downloadable CV. The old B7 URL redirects to /research; its source remains recoverable in Git history. Do not restore it from older notes.

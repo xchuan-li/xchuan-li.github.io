@@ -25,7 +25,7 @@ const timeline = [
       {
         label: "Research project, 2021",
         items: [
-          "Learning difficulties in primary-school children: test items, response data and individual plans (with the Shenzhen Learning Disorders Association).",
+          "<a href=\"/research/child-reading-assessment\">Reading difficulties in primary-school children</a>: character-reading materials, testing and response-data analysis (with the Shenzhen Learning Disorders Association).",
         ],
       },
       {
@@ -103,6 +103,10 @@ const timeline = [
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
           <WorkList entries={entriesOfTier("research")} illustrated />
+        </section>
+        <section class="research-block" id="earlier-work" aria-labelledby="earlier-work-heading">
+          <h2 class="research-group-label" id="earlier-work-heading">Earlier research experience</h2>
+          <WorkList entries={entriesOfTier("earlier")} illustrated />
         </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
