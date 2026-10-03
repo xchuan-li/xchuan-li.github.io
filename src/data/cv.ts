@@ -37,7 +37,7 @@ export interface Entry {
 export const interests: Record<Variant, string> = {
   general: "Computational cognitive science and language model interpretability. Research interests: language, reasoning, and human and artificial cognition.",
   lm: "Language model interpretability and computational cognitive science. Research interests: language, reasoning, and human and artificial cognition.",
-  cogsci: "Computational cognitive science, language development, and interpretability. Research interests: language, reasoning, and human and artificial cognition.",
+  cogsci: "Computational cognitive science and language development. Experimental studies of human cognition and mechanistic analyses of language models.",
 };
 
 export const education: (Entry & { place: string })[] = [
@@ -47,7 +47,7 @@ export const education: (Entry & { place: string })[] = [
     note: {
       general: "Selected coursework: Cognitive Psychology; Foundations in Psychology & Empirical Study Design; Deep Learning; Interpretability for Natural Language Processing.",
       lm: "Selected coursework: Deep Learning; Interpretability for Natural Language Processing; Deep Learning for Digital Humanities; Foundations in Psychology & Empirical Study Design.",
-      cogsci: "Selected coursework: Cognitive Psychology (1.0); Foundations in Psychology & Empirical Study Design (1.0); Epistemology; Deep Learning.",
+      cogsci: "Selected coursework: Cognitive Psychology (1.0); Foundations in Psychology & Empirical Study Design (1.0); Deep Learning (1.0); Epistemology (1.3).",
     },
   },
   {
@@ -86,8 +86,8 @@ const research: Record<string, Entry> = {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
     method: "Human study", status: "In planning.",
     row: 'modal language in preschool children, alongside a possibilities study at MPI CBS Leipzig; supervised by C. Grosse Wiesmann (UTN), with T. Hopf (MPI CBS).',
-    context: "M.Sc. thesis · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
-    note: "Adds a developmental modal-language component to an ongoing PhD project at MPI CBS Leipzig on how preschool children reason about possibilities.",
+    context: "M.Sc. thesis, design stage · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
+    note: "Developing a study comparing preschool children’s understanding of modal language with nonlinguistic reasoning about possibilities. The modal-language component forms part of an ongoing PhD project at MPI CBS Leipzig; data collection has not started.",
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
@@ -95,28 +95,28 @@ const research: Record<string, Entry> = {
     row: "year-long project course with M. Roth (UTN) and S. Ostermann (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
     context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI)",
     when: "2026–27",
-    note: "Designed and ran the controlled experiments and causal interventions for the utilitarian-framing branch; manuscript in preparation.",
+    note: "Investigated how moral wording affects dilemma choices. Designed and ran controlled experiments and activation interventions in 7B and 14B models for the utilitarian-framing branch, with checks of answer labels, option positions, and task understanding; manuscript in preparation.",
   },
   dyslexia: {
     id: "dyslexia", title: "Learning difficulties in primary-school children",
     row: "with the Shenzhen Learning Disorders Association: test items, response data, individual plans",
     context: "Invited research project · Shenzhen Learning Disorders Association and Yucai No. 2 Primary School", when: "Sep.–Dec. 2021",
-    note: "Prepared character-reading materials and administered timed tests; analysed response data to identify learning difficulties and helped design teaching items and individual learning plans.",
+    note: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
   },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
     row: "human study, class-wide experiment (N = 49, 47 analysed); my part: data analysis",
     context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
     note: {
-      default: "Between-subjects experiment (N = 49, 47 analysed), group-designed and adopted for the class-wide study; my part: data analysis.",
-      cogsci: "Between-subjects experiment designed in a group of three and adopted for the class-wide study; PsychoPy/Pavlovia, pilot N = 8; N = 49, 47 analysed; my part: data analysis (JASP).",
+      default: "Co-designed a between-subjects study of optional checking after ChatGPT or Wikipedia answers; adopted for a class-wide experiment (49 participants; 47 analysed). Conducted the individual data analysis and prepared a course report.",
+      cogsci: "Co-designed a between-subjects study of optional checking after ChatGPT or Wikipedia answers; adopted for a class-wide experiment (49 participants; 47 analysed). Conducted the individual data analysis in JASP and prepared a course report.",
     },
   },
   protobias: {
     id: "protobias", title: "Cross-lingual ProtoBias", href: "/research/cross-lingual-protobias",
     row: "VLM evaluation, single-author course project, about 12,600 judgments",
     context: "Single-author course project", when: "Summer 2026",
-    note: "Evaluation of two VLM families across seven prompt languages, about 12,600 judgments.",
+    note: "Held image pairs fixed while varying prompt language across seven languages to evaluate judgments in two VLM families (about 12,600 judgments). Completed a single-author course report with code.",
     links: [{ label: "report", href: "https://xchuan-li.github.io/research/cross-lingual-protobias" }, { label: "code", href: "https://github.com/xchuan-li/cross_lingual_protobias" }],
   },
   streetView: {
@@ -128,9 +128,9 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["thesis", "lit"], earlier: ["threeWays", "typicality", "protobias", "streetView", "psy", "undergraduate", "dyslexia"] },
-  lm:      { current: ["lit", "thesis"], earlier: ["threeWays", "protobias", "typicality", "streetView", "psy", "undergraduate"] },
-  cogsci:  { current: ["thesis", "lit"], earlier: ["threeWays", "typicality", "protobias", "psy", "undergraduate", "dyslexia"] },
+  general: { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "threeWays", "streetView", "undergraduate", "dyslexia"] },
+  lm:      { current: ["lit", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
+  cogsci:  { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "undergraduate", "dyslexia"] },
 };
 export const researchEntry = (id: string) => research[id];
 
@@ -139,7 +139,7 @@ export const employment: (Entry & { place: string })[] = [
   {
     id: "it", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "IT Service Desk (part-time)", when: "Apr. 2026 – present",
-    note: "Designed and delivered IT onboarding training for incoming students, with follow-up one-to-one support; also system installation, service reporting, and inventory.",
+    note: "Delivered student IT onboarding and individual support; handled system installation, service reporting, and inventory.",
   },
 ];
 
