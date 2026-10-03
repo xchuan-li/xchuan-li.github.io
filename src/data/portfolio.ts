@@ -58,7 +58,7 @@ export const portfolioSections: PortfolioSection[] = [
         title: "Reading difficulties in primary-school children",
         field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
         status: "Retrospective assessment report · undergraduate project, 2021",
-        kind: "Undergraduate project, September–December 2021 · retrospective report, October 2026",
+        kind: "Undergraduate project · September–December 2021 · retrospective report",
         short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A retrospective report on reading assessment, with qualitative observations and illustrative character–word contrasts.",
         links: [{ label: "Read report", href: "/research/child-reading-assessment" }],
       },

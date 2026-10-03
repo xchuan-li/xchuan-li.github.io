@@ -1,3 +1,7 @@
+## Childhood project date clarification, 3 October 2026
+
+AI ▸ Project period is September–December 2021, supported by XC’s old CV and a reflection emailed 13 September 2021. The 2022 spring course is separate. The report header now labels Project period: September–December 2021; remove the 2026 write-up date from the card/header to avoid confusing the project date. Retrospective report status remains explicit, so the new text is not presented as an original 2021 manuscript.
+
 ## Childhood report format, 3 October 2026 — latest XC correction
 
 XC ▸ The child-reading page must be an academic report in the same paper format as the other projects, with concrete Chinese character examples, rather than an experience introduction. AI ▸ Replaced it with PaperArticle (author/title block, abstract, numbered sections, two numbered tables, references). Content lives in src/content/papers/child-reading-assessment.html. PaperArticle allows a report without an available PDF; existing PDF links remain unchanged. Added 龄／年龄 and 筑／建筑 as explicitly illustrative examples, not original test materials or observed child responses. Preserve the actual 2021 qualitative observation, retrospective timing uncertainty and missing-data limits; do not manufacture quantitative results or matched-item data. Homepage and index link to the report. This supersedes the prose-page format immediately below.
