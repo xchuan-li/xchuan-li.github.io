@@ -70,7 +70,7 @@ export const portfolioSections: PortfolioSection[] = [
         status: "Course research design · not administered",
         kind: "Undergraduate course project · Psychology of Reading · research design",
         short: "How do readers form a structural interpretation and revise it when later words conflict? Chinese and English sentence materials connect processing hypotheses with proposed reading and comprehension measures.",
-        figure: { src: "/images/research/garden-path-cover.svg", alt: "The sentence 校长表扬了老师推荐的学生, split into a possible initial structure with 老师 as object and the complete structure with 学生 as object.", caption: "Illustrative sentence and structural analyses.", width: 480, height: 320 },
+        figure: { src: "/images/research/garden-path-cover.svg", alt: "The sentence While the teacher taught the students waited outside, split into a possible initial attachment with the students as object and the complete structure with the students as subject.", caption: "Illustrative sentence and structural analyses.", width: 480, height: 320 },
         links: [{ label: "Read report", href: "/research/garden-path-processing" }],
       },
       {

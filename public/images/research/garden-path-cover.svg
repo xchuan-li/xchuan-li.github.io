@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
-<title id="title">A possible initial parse and the complete Chinese sentence structure</title>
-<desc id="desc">Example: 校长表扬了老师推荐的学生. An initial reading may make 老师 the object of praise. In the complete structure, 老师推荐的 modifies 学生, and 学生 is the object of praise. The diagram illustrates a processing hypothesis.</desc>
-<g font-family="Songti SC,Noto Serif CJK SC,serif" fill="#283648"><text x="240" y="39" text-anchor="middle" font-size="30">校长表扬了老师推荐的学生</text></g>
-<path d="M20 57H460" stroke="#ccd2d8" stroke-width="1"/>
-<g font-family="Arial,sans-serif" fill="#65717e" font-size="20"><text x="24" y="90">INITIAL</text><text x="24" y="206">COMPLETE</text></g>
-<g font-family="Songti SC,Noto Serif CJK SC,serif" font-size="30" text-anchor="middle" fill="#283648"><text x="71" y="135">校长</text><text x="189" y="135">表扬了</text><text x="352" y="135">老师</text></g>
-<g stroke="#7d8793" stroke-width="1.7" fill="none"><path d="M24 143H118M133 143H245M287 143H417"/><path d="M249 165V182M242 175L249 182L256 175"/></g>
-<text x="352" y="166" font-family="Arial,sans-serif" fill="#65717e" font-size="19" text-anchor="middle">OBJECT: 老师</text>
-<g font-family="Songti SC,Noto Serif CJK SC,serif" fill="#283648"><text x="24" y="251" font-size="26">[校长]</text><text x="118" y="251" font-size="26">[表扬了]</text><text x="236" y="251" font-size="24">[[老师推荐的]学生]</text></g>
-<path d="M236 262H456" stroke="#426888" stroke-width="2.4"/>
-<text x="346" y="294" font-family="Arial,sans-serif" fill="#426888" font-size="22" text-anchor="middle">OBJECT: 学生</text>
+<title id="title">An initial attachment and the complete English sentence structure</title>
+<desc id="desc">While the teacher taught the students waited outside. Initially, the students may be attached as the object of taught. In the complete structure, the students is the subject of waited outside. This illustrates a processing hypothesis.</desc>
+<g font-family="Georgia,serif" fill="#283648" text-anchor="middle" font-size="27"><text x="240" y="32">While the teacher taught</text><text x="240" y="65">the students waited outside.</text></g>
+<path d="M20 83H460" stroke="#ccd2d8"/>
+<g font-family="Arial,sans-serif" fill="#65717e" font-size="18"><text x="24" y="114">INITIAL</text><text x="24" y="217">COMPLETE</text></g>
+<text x="24" y="149" font-family="Georgia,serif" font-size="20" fill="#283648">[While the teacher taught [the students]] …</text>
+<text x="454" y="177" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#65717e">the students → OBJECT</text>
+<path d="M240 179V195M233 188L240 195L247 188" stroke="#7d8793" stroke-width="1.7" fill="none"/>
+<g font-family="Georgia,serif" font-size="24"><text x="24" y="249" fill="#283648">[While the teacher taught]</text><text x="24" y="281" fill="#426888">[the students]</text><text x="184" y="281" fill="#283648">[waited outside]</text></g>
+<path d="M24 288H172" stroke="#426888" stroke-width="2.4"/>
+<text x="454" y="312" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#426888">the students → SUBJECT</text>
 </svg>
