@@ -1,3 +1,7 @@
+## Site-wide consistency pass, 3 October 2026 (XC: “检查网站每一处表述是否一致”)
+
+AI ▸ Aligned every surface with the 3 October lead question and card questions. Project-page lead questions (`question` in `projects.ts`) now equal the research-card questions. Default, Research Program, CV and Contact meta descriptions, the Research Program opening sentence, the Contact copy, JSON-LD `knowsAbout`, and the share card (`og.png`, via `scripts/gen-og.mjs`; the retired “Causal inference × interpretability … grounding” tagline is gone) now state the broad interest instead of formal-semantics or structured-meaning positioning. Modal choice is “in development; nothing has been fitted yet” everywhere and is written as “to be fitted”, never “fits”. Fact-checking study: N = 49 collected, 47 analysed, on every surface.
+
 ## Research card blurbs, 3 October 2026 — latest explicit XC decision
 
 XC ▸ Replace the homepage/research-index project blurbs (`short` in `portfolio.ts`) with the question each project pursues. AI ▸ Modal choice: evidence strength vs source vs competition between expressions, and comparable predictions. Thesis: children's modal expressions vs conceptual understanding of possibility, and how comprehension and task demands shape the judgement of that ability. Moral framing: outcome weighing vs action-answer tendency vs another process, and how far internal interventions separate them. These state research concerns, not results; keep them as questions.

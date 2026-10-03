@@ -133,7 +133,7 @@ export const portfolioSections: PortfolioSection[] = [
         title: "Does checking with ChatGPT first change how people check and double-check?",
         field: "Course experiment", desc: projects.psyStudy.summary, status: projects.psyStudy.status,
         kind: "Project · course study, Winter 2025–26 · report 2026",
-        short: "A complete between-subjects experiment, from design and pilot to data collection (N = 47) and analysis; neither predicted difference was reliable.",
+        short: "A complete between-subjects experiment, from design and pilot to data collection (N = 49, 47 analysed) and analysis; neither predicted difference was reliable.",
         thumb: "/papers/fact-checking-study-thumb.png",
         figure: {"src": "/images/research/fact-checking-procedure.svg", "alt": "Random assignment to Wikipedia then ChatGPT, or ChatGPT then Wikipedia, for optional checking across two rounds of ten questions.", "caption": "Source-order design from the course report. Both tools were presented as static screenshots; checks were optional.", "width": 420, "height": 286},
         links: [

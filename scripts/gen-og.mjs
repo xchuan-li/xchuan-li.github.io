@@ -90,8 +90,8 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
 
   <text x="78" y="372" font-family="Inter" font-weight="700" font-size="96" fill="#ffffff">Xiaochuan Li<tspan fill="#e88b5f">.</tspan></text>
 
-  <text x="80" y="452" font-family="Inter" font-weight="400" font-size="31" fill="#c9cdd4">Causal inference × interpretability —</text>
-  <text x="80" y="498" font-family="Inter" font-weight="400" font-size="31" fill="#7e8590">stability is necessary, but not sufficient for grounding.</text>
+  <text x="80" y="452" font-family="Inter" font-weight="400" font-size="31" fill="#c9cdd4">Computational cognitive science × interpretability —</text>
+  <text x="80" y="498" font-family="Inter" font-weight="400" font-size="31" fill="#7e8590">how people and machines turn language into inferences and choices.</text>
 
   <rect x="0" y="624" width="1200" height="6" fill="#e88b5f"/>
 </svg>`;

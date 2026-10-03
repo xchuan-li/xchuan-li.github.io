@@ -44,7 +44,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li studies linguistic meaning and inference through formal analysis and controlled model research, and is planning a master’s thesis on modal language in preschool children.";
+  "Xiaochuan Li studies how people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices. Current work: epistemic modality in people and language models, and moral framing in language models.";
 
 export interface Criterion {
   name: string;

@@ -92,9 +92,9 @@ const research: Record<string, Entry> = {
   modalLM: {
     id: "modalLM", title: "What decides between must and might", href: "/research/modal-language-models",
     method: "Computational model", status: "In development.",
-    row: "fits three competing accounts of the choice between <i>must</i> and <i>might</i> to published human data.",
+    row: "three competing accounts of the choice between <i>must</i> and <i>might</i>, to be fitted to published human data.",
     context: "Computational model \u00b7 in development", when: "2026 \u2013",
-    note: "Three accounts of how evidence strength and evidence source decide between must and might, fitted and compared on published human data.",
+    note: "Three accounts of how evidence strength and evidence source decide between must and might, to be fitted and compared on published human data.",
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
@@ -112,11 +112,11 @@ const research: Record<string, Entry> = {
   },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
-    row: "human study, class-wide experiment (N = 49); my part: data analysis",
+    row: "human study, class-wide experiment (N = 49, 47 analysed); my part: data analysis",
     context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
     note: {
-      default: "Between-subjects experiment (N = 49), group-designed and adopted for the class-wide study; my part: data analysis.",
-      cogsci: "Between-subjects experiment designed in a group of three and adopted for the class-wide study; PsychoPy/Pavlovia, pilot N = 8, N = 49; my part: data analysis (JASP).",
+      default: "Between-subjects experiment (N = 49, 47 analysed), group-designed and adopted for the class-wide study; my part: data analysis.",
+      cogsci: "Between-subjects experiment designed in a group of three and adopted for the class-wide study; PsychoPy/Pavlovia, pilot N = 8; N = 49, 47 analysed; my part: data analysis (JASP).",
     },
   },
   protobias: {
