@@ -1,3 +1,6 @@
+## 3 October 2026 — ChatGPT checking experiment on homepage
+XC requests the ChatGPT/Wikipedia source-order study on the homepage. Include its shared portfolio entry after B3/B4 under Research, keeping its completed course experiment status and the existing procedure diagram. The design was developed by a three-person group, data collection was class-wide, and XC completed the analysis; the report is an individual write-up. Keep the research-index tier as course. Homepage copy describes design, sample and contribution, without adding scientific claims. B7/B10 remain off the public site.
+
 ## Undergraduate reports and covers, 3 October 2026 — latest XC instruction
 
 XC ▸ Add the garden-path report, describe project content directly without emphasising recollection, and add title-side schematic covers for both undergraduate projects. AI ▸ Child report now gives project tasks, observation, example pairs and discussion; retrospective/source-reconstruction prose is removed. Preserve the substantive boundaries once: observations are not a matched-item experiment, examples are illustrative, and no quantitative context effect is claimed. Omit unconfirmed timing-unit specifics rather than silently asserting a definite rule.

@@ -1,9 +1,15 @@
 ---
 import Base from "../layouts/Base.astro";
 import { identityLongHtml, bioHtml, programmeHtml } from "../data/program";
-import { entriesOfTier } from "../data/portfolio";
+import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
+
+// Selected coursework keeps its course status in the shared project entry.
+const homepageResearch = workEntries.filter(
+  (entry) => entry.tier === "research" ||
+    entry.links.some((link) => link.href === "/research/fact-checking-study")
+);
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
 // 27 September 2026 (XC): keep the sticky left column; the main column is narrow (720 px)
@@ -102,7 +108,7 @@ const timeline = [
       <div class="portfolio-list">
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
-          <WorkList entries={entriesOfTier("research")} illustrated />
+          <WorkList entries={homepageResearch} illustrated />
         </section>
         <section class="research-block" id="earlier-work" aria-labelledby="earlier-work-heading">
           <h2 class="research-group-label" id="earlier-work-heading">Earlier research experience</h2>
