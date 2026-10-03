@@ -11,16 +11,13 @@ export const identity =
 export const identityLong =
   "How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?";
 
-/** Homepage bio (XC, 1 Oct 2026): who, where, with whom, and how I got here.
- *  Written after the pattern of Hening Wang's and Polina Tsvilodub's pages:
- *  an identity sentence, then the methods, then the actual projects. */
+/** Homepage background and motivation, revised with XC on 3 October 2026. */
 export const bioHtml =
-  "I am a master\u2019s student in Human and Artificial Intelligence at the University of Technology Nuremberg. My current work is on epistemic modality: what <i>must</i> and <i>might</i> contribute, and how people and language models come to choose one over the other. My thesis is on preschool children, run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig. Alongside it I spend the year on how moral framing changes language models\u2019 choices in dilemmas, and what happens inside the model when it does, co-supervised by UTN and <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">DFKI</a>. I came to this from philosophy, by way of logic and the philosophy of language, and from reading and cognitive development, which I studied at the same time.";
+  "I am a master’s student in Human and Artificial Intelligence at the University of Technology Nuremberg, with a background in philosophy. My interest in language and reasoning grew from studying logic and Leibniz, learning languages, and asking how formal accounts of meaning relate to the processes through which people understand and use language.";
 
-/** The programme, stated on the homepage above the project list (XC, 1 Oct 2026):
- *  the object of study is the language user, and the two methods are one pair. */
+/** Human and artificial cognition have independent scientific value. */
 export const programmeHtml =
-  "Several accounts of how a word is understood will fit the same behaviour. Cognitive modelling states where they come apart, precisely enough to measure. With people, measuring stops there. A language model can be opened, so interpretability can ask whether the account is what the network runs.";
+  "I study human cognition through behavioural experiments and artificial systems through controlled model comparisons and mechanistic interpretability. I am interested in how each system processes information and makes decisions, and in the computational explanations that can account for its behaviour.";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
@@ -44,7 +41,7 @@ export const foundation =
 
 /** The default meta description. */
 export const metaDescription =
-  "Xiaochuan Li studies how people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices. Current work: epistemic modality in people and language models, and moral framing in language models.";
+  "Xiaochuan Li studies how people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices. Current work: children’s understanding of modal language and possibility, and moral framing in language models.";
 
 export interface Criterion {
   name: string;

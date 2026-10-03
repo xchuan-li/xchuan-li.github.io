@@ -1,326 +1,94 @@
 ---
 import Base from "../layouts/Base.astro";
-
-// Research Program page (A3g §7). Explains how Xiaochuan works in general; it must
-// not repeat the whole modality case, which lives on Current Work (/research).
+import { identityLong } from "../data/program";
 ---
 
-<Base
-  title="Research Program · Xiaochuan Li"
-  description="How people and artificial systems understand the concepts, evidence, and norms in language: competing accounts written as models, tested on human behaviour and inside language models."
->
+<Base title="Research Program · Xiaochuan Li"
+  description="Language, reasoning, and human and artificial cognition: from philosophy and language learning to behavioural experiments and mechanistic interpretability.">
   <article class="rp">
     <h1 class="rp-h1">Research Program</h1>
+    <p class="rp-lead">{identityLong}</p>
 
     <section class="rp-sec">
-      <p class="rp-lead">
-        I study how people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices. Several accounts of how a word is understood
-        will usually fit the same behaviour. Finding where they come apart, and stating that
-        difference precisely enough to measure, is most of the work. People can be measured from the outside.
-        A language model can be opened, so the same account can also be checked against what the
-        network represents.
+      <h2 class="rp-h2">How I came to these questions</h2>
+      <p class="rp-p">
+        My undergraduate studies in philosophy drew me to logic: a way to make the structure of
+        an argument explicit and examine what follows from it. In my thesis, I studied Leibniz’s
+        logical system and his proposal for a universal symbolic language. This raised a question
+        that continues to interest me: how do formal descriptions of meaning relate to the ways
+        people actually understand and reason?
+      </p>
+      <p class="rp-p">
+        Learning languages gave that question an everyday setting. I found myself paying attention
+        to how sentence structure contributes to meaning, and how different languages can express
+        similar ideas through different structures. This led me to ask when differences in linguistic
+        form affect understanding and thought. Alongside philosophy, I studied psychology and took
+        part in a project on children’s learning difficulties. My master’s studies in Human and
+        Artificial Intelligence have brought these interests into experimental and computational work.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">1</span>The problem</h2>
+      <h2 class="rp-h2">Understanding human cognition</h2>
       <p class="rp-p">
-        Understanding a word is a computation: something has to get from the evidence a speaker
-        has, or the context a hearer is in, to one interpretation rather than another. Theories of
-        meaning say what the end states are and which inferences follow from them. They rarely say
-        how the end state is arrived at, and they are usually compatible with more than one way of
-        arriving at it.
+        I am interested in how people learn concepts, interpret language, and use information to
+        draw conclusions. Linguistic analysis helps state the distinctions a task is meant to test;
+        behavioural experiments ask how people respond to them. Cognitive modelling is a direction
+        I want to develop further, to turn competing explanations into predictions that can be
+        compared with data.
       </p>
       <p class="rp-p">
-        Behavioural data does not settle this on its own. A single pattern of judgements or choices
-        is normally consistent with several accounts. They were never asked a question on which they
-        differ, so collecting more of the same data will not help. Formal semantics states the
-        competing analyses precisely, then stops before the algorithm. On the experimental side the
-        usual design varies one factor at a time, which answers whether that factor matters and
-        leaves the accounts standing. Work on language models reports how closely a model matches
-        people, which says nothing about what either of them is computing.
-      </p>
-      <p class="rp-p">
-        What I work on sits between those: taking competing analyses of a phenomenon, writing them
-        as models that predict incompatible things, and finding or designing the conditions under
-        which the data can choose. An account that cannot be told apart from its rivals will not be
-        rescued by more experiments of the same kind. And a model that reproduces a human pattern
-        says nothing about meaning until someone has stated what it would be reproducing.
+        My <a href="/research/learnability">master’s thesis</a> asks how preschool children’s understanding
+        of modal language relates to their reasoning about possibilities. It is a human developmental
+        study being planned alongside an ongoing project at the Max Planck Institute for Human
+        Cognitive and Brain Sciences. Language comprehension and task demands matter here: a child’s
+        response does not, by itself, settle what concepts they possess.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">2</span>A worked case: what <em>must</em> requires</h2>
+      <h2 class="rp-h2">Understanding artificial systems</h2>
       <p class="rp-p">
-        Seeing rain through the window, you say <em>it&rsquo;s raining</em>. Seeing someone come in
-        with wet hair, you say <em>it must be raining</em>. The odd part is the first case: with the
-        best possible evidence, <em>must</em> gets worse, not better. Something about direct evidence
-        rules it out.
+        Language models are also research objects in their own right. I want to understand how
+        they process information and make decisions. Mechanistic interpretability is one way to
+        study this: intervening on internal representations can help test explanations of a model’s
+        behaviour. Explaining existing abilities is a central motivation for my work.
       </p>
       <p class="rp-p">
-        There is more than one explanation, and they disagree about what <em>must</em> means.
-        It may be written into the meaning of <em>must</em> that the evidence has to be indirect.
-        It may be that <em>must</em> carries no such condition and the bare assertion simply wins
-        the competition whenever the evidence is direct. It may be that the source does nothing
-        at all, and what looks like its effect is unmatched evidence strength.
-      </p>
-
-      <figure class="rp-fig">
-        <svg viewBox="0 0 720 196" role="img" aria-label="Three accounts of the choice between must, might and the bare assertion. In the first, only evidence strength feeds the choice. In the second, strength feeds the choice and the source acts on must directly. In the third, the source acts on the bare assertion, which competes with must.">
-          <g class="fg">
-            <text class="cap" x="6" y="16">(a) strength only</text>
-            <rect x="6" y="36" width="104" height="34" rx="2"/>
-            <text class="lb" x="58" y="58" text-anchor="middle">strength</text>
-            <path d="M58 70 L58 112" marker-end="url(#rp-ar)"/>
-            <rect x="6" y="114" width="104" height="34" rx="2"/>
-            <text class="lb" x="58" y="136" text-anchor="middle">choice</text>
-
-            <text class="cap" x="246" y="16">(b) source in the meaning</text>
-            <rect x="246" y="36" width="104" height="34" rx="2"/>
-            <text class="lb" x="298" y="58" text-anchor="middle">strength</text>
-            <rect x="370" y="36" width="104" height="34" rx="2"/>
-            <text class="lb" x="422" y="58" text-anchor="middle">source</text>
-            <path d="M298 70 L298 112" marker-end="url(#rp-ar)"/>
-            <path d="M422 70 L422 95 L350 95 L350 112" marker-end="url(#rp-ar)"/>
-            <rect x="246" y="114" width="104" height="34" rx="2"/>
-            <text class="lb" x="298" y="136" text-anchor="middle">choice</text>
-            <text class="sm" x="360" y="108">on <tspan font-style="italic">must</tspan></text>
-
-            <text class="cap" x="520" y="16">(c) source via competition</text>
-            <rect x="520" y="36" width="90" height="34" rx="2"/>
-            <text class="lb" x="565" y="58" text-anchor="middle">source</text>
-            <path d="M565 70 L565 92" marker-end="url(#rp-ar)"/>
-            <rect x="520" y="94" width="90" height="30" rx="2"/>
-            <text class="lb" x="565" y="114" text-anchor="middle">bare</text>
-            <path d="M610 109 L666 109" marker-end="url(#rp-bar)"/>
-            <rect x="630" y="36" width="84" height="34" rx="2"/>
-            <text class="lb" x="672" y="58" text-anchor="middle">must</text>
-            <path d="M672 70 L672 96" marker-end="url(#rp-ar)"/>
-            <text class="sm" x="620" y="146">competes</text>
-          </g>
-          <defs>
-            <marker id="rp-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 1 L9 5 L0 9" fill="none" stroke="currentColor" stroke-width="1.6"/>
-            </marker>
-            <marker id="rp-bar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M6 1 L6 9" fill="none" stroke="currentColor" stroke-width="1.8"/>
-            </marker>
-          </defs>
-        </svg>
-        <figcaption><b>Figure 1.</b> Where the three accounts disagree. Holding evidence strength fixed, (b) predicts a direct effect of source on <em>must</em>; (c) predicts the same surface pattern with no such term, because the bare assertion wins when the evidence is direct; (a) predicts the effect disappears once strength is matched.</figcaption>
-      </figure>
-      <p class="rp-p">
-        All three fit the published production data. They are told apart by where they disagree:
-        with strength held fixed, does the source still act on <em>must</em> directly, or only
-        through the competition with the bare assertion? Written as probabilistic choice models
-        over the available expressions, that question becomes a model comparison, and the comparison
-        can be checked for whether this design can separate the three accounts at all.
+        In my project on <a href="/research/latent-control-states">moral framing and dilemma choices</a>,
+        I investigate how moral language changes a model’s decisions and the internal processes
+        involved. The question includes how it weighs outcomes, how it responds to the answer format,
+        and how far controlled interventions can distinguish those explanations.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">3</span>How a comparison is run</h2>
+      <h2 class="rp-h2">What connects the work</h2>
       <p class="rp-p">
-        Each account becomes a probabilistic choice model: given the properties of a situation, it
-        returns a distribution over the expressions a speaker could use. The accounts differ in
-        which properties enter and how, and they differ in how many free parameters that takes,
-        so a comparison has to charge for complexity rather than reward the most flexible model.
-        Fitting is to trial-level data; selection is by the usual criteria and by held-out
-        prediction.
+        Across these projects, I ask how meaning enters a system’s reasoning and what evidence
+        supports an explanation of its behaviour. Human and model studies can inform each other
+        without assuming that they use the same mechanisms. Similar answers can arise from different
+        processes, and an intervention in a model does not establish a mechanism in people.
       </p>
       <p class="rp-p">
-        Before any of that is worth reporting, the design has to be able to separate the accounts at
-        all. Generate data from each model and see whether the fitting procedure recovers the one
-        that produced it. If they can imitate each other here, no amount of real data from that
-        design will choose between them, and what has been learned is about the materials rather
-        than the phenomenon. Whatever survives then has to predict conditions it was not fitted to:
-        items held out, or a second experiment on the same phenomenon with a different task.
-      </p>
-      <p class="rp-p">
-        A comparison that separates nothing is still an outcome, and it arrives with a specification
-        of what would separate them: which factors to cross, which to match, which measurement
-        error in the original materials to remove. That specification is a reason to run a new
-        study, which is more than most studies begin with.
+        I aim to make the alternatives explicit, design comparisons that distinguish them, and keep
+        claims tied to what a task measures. My writing in semantics and pragmatics, including
+        <a href="/research/typicality-in-referent-choice">typicality in referent choice</a>, develops
+        the conceptual distinctions behind those comparisons.
       </p>
     </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">4</span>Two kinds of language user</h2>
-      <p class="rp-p">
-        The same account can be fitted to the choices a language model makes over the same
-        expressions. This is not a test of whether the model resembles a person. It asks whether
-        one account covers a second system with an entirely different history, and where it fails
-        to.
-      </p>
-
-      <figure class="rp-fig">
-        <svg viewBox="0 0 720 174" role="img" aria-label="Two kinds of language user. For people, an account can be tested against behaviour only; what is inside is not reachable. For a language model, the same account can be tested against behaviour and, in addition, against its representations by intervening on them.">
-          <g class="fg">
-            <text class="cap" x="6" y="15">people</text>
-            <rect x="6" y="32" width="112" height="34" rx="2"/>
-            <text class="lb" x="62" y="54" text-anchor="middle">an account</text>
-            <path d="M118 49 L186 49" marker-end="url(#rp-ar2)"/>
-            <rect x="188" y="32" width="112" height="34" rx="2"/>
-            <text class="lb" x="244" y="54" text-anchor="middle">behaviour</text>
-            <g class="dash">
-              <path d="M118 90 L186 90"/>
-              <rect x="188" y="73" width="112" height="34" rx="2"/>
-            </g>
-            <text class="lb dim" x="244" y="95" text-anchor="middle">what is inside</text>
-            <text class="sm" x="6" y="95">stops here</text>
-
-            <text class="cap" x="400" y="15">language models</text>
-            <rect x="400" y="32" width="112" height="34" rx="2"/>
-            <text class="lb" x="456" y="54" text-anchor="middle">an account</text>
-            <path d="M512 49 L580 49" marker-end="url(#rp-ar2)"/>
-            <rect x="582" y="32" width="112" height="34" rx="2"/>
-            <text class="lb" x="638" y="54" text-anchor="middle">behaviour</text>
-            <path d="M512 90 L580 90" marker-end="url(#rp-ar2)"/>
-            <rect x="582" y="73" width="112" height="34" rx="2"/>
-            <text class="lb" x="638" y="95" text-anchor="middle">representations</text>
-            <text class="sm" x="400" y="95">and here</text>
-            <path d="M638 107 L638 130" marker-end="url(#rp-ar2)"/>
-            <text class="sm" x="638" y="146" text-anchor="middle">intervene</text>
-          </g>
-          <defs>
-            <marker id="rp-ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 1 L9 5 L0 9" fill="none" stroke="currentColor" stroke-width="1.6"/>
-            </marker>
-          </defs>
-        </svg>
-        <figcaption><b>Figure 2.</b> Why both kinds of user are needed. The same account is tested against behaviour on either side. Only in a model can the variables it posits be looked for directly, by intervening on them and checking that the predicted responses move while the others hold still.</figcaption>
-      </figure>
-      <p class="rp-p">
-        The asymmetry is the reason for working on both. With people, measurement stops at
-        behaviour. In a model, the variables an account posits can be looked for directly: if
-        strength and source are represented separately, intervening on one should move
-        <em>must</em> and leave <em>might</em> alone. An account that survives behaviour but fails
-        that test was describing the output, not the computation.
-        <a href="https://jmlr.org/papers/v26/23-0058.html">Causal abstraction</a> and
-        <a href="https://proceedings.mlr.press/v236/geiger24a.html">distributed alignment search</a>
-        give this a usable definition. Alignment in a model is evidence about the model. It does
-        not show that people compute the same way.
-      </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">5</span>What the input has to contain</h2>
-      <p class="rp-p">
-        Behaviour tells you what a mature system does, not what it needed in order to get there.
-        That question has a second dimension: a user whose input is limited. Children are one such
-        case, and a model trained on a developmentally plausible corpus is another, with the
-        difference that its input can be edited.
-      </p>
-      <p class="rp-p">
-        This is where the accounts make their sharpest predictions. If the requirement is part of
-        the meaning, the evidence for it has to be in the input somewhere; if it comes from
-        competition with the bare assertion, removing the contexts that set up that competition
-        should change the pattern. Whether such evidence is dense enough in what children actually
-        hear is an empirical question about corpora, answerable before any model is trained.
-      </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">6</span>Where this goes</h2>
-      <p class="rp-p">
-        What follows assumes a comparison that has already separated its candidates. Without that,
-        none of it is answerable.
-      </p>
-      <p class="rp-p">
-        An account that specifies which variables are involved also specifies what a learner has to
-        acquire, and in what order. Children are the case where
-        the end state is still being assembled, so a developmental version of the same contrast
-        can show whether the components come apart in time.
-      </p>
-      <p class="rp-p">
-        Where an account posits distinct variables, a model can be asked whether it keeps them
-        distinct. Intervene on one, and the responses the account predicts should move while the
-        rest hold still. Behaviour reaches this in neither kind of user, and it is what separates
-        an account of the output from an account of the computation.
-      </p>
-      <p class="rp-p">
-        With the input under control the requirements become removable. Take out the evidence an
-        account says is necessary and the capacity should fail to form; take out something else and
-        it should not. That is the strongest form of the question, and it leads back to what
-        children actually hear.
-      </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">7</span>Where the projects sit</h2>
-      <figure class="rp-fig rp-fig-tab">
-      <table class="rp-tab">
-        <thead><tr><th></th><th>Limited input</th><th>Mature</th></tr></thead>
-        <tbody>
-          <tr>
-            <th scope="row">People</th>
-            <td><a href="/research/learnability">preschool children</a></td>
-            <td><a href="/research/modal-language-models">model comparison on human data</a></td>
-          </tr>
-          <tr>
-            <th scope="row">Language models</th>
-            <td>controlled input, not started</td>
-            <td>behaviour, then representations</td>
-          </tr>
-        </tbody>
-      </table>
-      <figcaption><b>Table 1.</b> The two dimensions: whose language use, and whether the input that produced it can be controlled. Only the lower left allows the question of what the input had to contain to be answered by intervention.</figcaption>
-      </figure>
-      <p class="rp-p">
-        <a href="/research/typicality-in-referent-choice">The typicality paper</a> and
-        <a href="/research/three-ways">Three Ways of Leaving <em>p</em> Unsettled</a> do the step
-        that comes before all of this: finding where a contrast lies and stating the competing
-        explanations, which is what a model can then be written for.
-        <a href="/research/latent-control-states">The moral-framing project</a> is on a
-        different question, how a moral sentence changes a model’s dilemma choices and what happens
-        inside the model when it does, and is where the intervention methods are being learned.
-      </p>
-    </section>
-
-    <section class="rp-sec">
-      <h2 class="rp-h2"><span class="rp-n">8</span>What this does not claim</h2>
-      <p class="rp-p">
-        No account has won yet; the comparison has not been run. A model comparison that cannot
-        separate its candidates is a result about the design, and saying so is part of the work.
-        The projects constrain one another without sharing a dataset or a deadline, and a mismatch
-        between them can come from a weak analysis, an inadequate model, a measurement problem, or
-        a genuinely different computation. Telling those apart is the work. A shared mechanism is not assumed in advance.
-      </p>
-    </section>
-
-    <p class="rp-foot"><a href="/research">See how this program is being developed in the current work →</a></p>
+    <p class="rp-foot"><a href="/research">Explore research, writing, and course projects →</a></p>
   </article>
 </Base>
 
 <style>
-  .rp { max-width: 42rem; }
-  .rp-h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1.4rem; color: var(--color-text); }
-  .rp-sec { margin-top: 2.4rem; }
-  .rp-sec:first-of-type { margin-top: 0; }
-  .rp-h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.005em; color: var(--color-text); margin: 0 0 0.7rem; }
-  .rp-n { display:inline-block; min-width:1.5rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--color-text-dim); font-weight:500; }
-  .rp-fig { margin:1.4rem 0 1.5rem; }
-  .rp-fig svg { display:block; width:100%; height:auto; color:var(--color-text); }
-  .rp-fig :global(.fg rect) { fill:none; stroke:currentColor; stroke-width:1.4; }
-  .rp-fig :global(.fg path) { stroke:currentColor; stroke-width:1.4; fill:none; }
-  .rp-fig :global(.lb) { font-family:var(--font-sans); font-size:13px; fill:currentColor; }
-  .rp-fig :global(.cap) { font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; fill:var(--color-text-muted); }
-  .rp-fig :global(.fg .dash path), .rp-fig :global(.fg .dash rect) { stroke-dasharray:4 4; stroke:var(--color-text-dim); }
-  .rp-fig :global(.dim) { fill:var(--color-text-dim); }
-  .rp-fig :global(.sm) { font-family:var(--font-sans); font-size:11.5px; fill:var(--color-text-muted); }
-  .rp-fig figcaption { margin:0.7rem 0 0; font-size:0.86rem; line-height:1.6; color:var(--color-text-muted); }
-  .rp-fig-tab { margin-top:0.2rem; }
+  .rp { max-width:42rem; }
+  .rp-h1 { font-size:1.6rem; font-weight:600; letter-spacing:-0.01em; margin:0 0 1.4rem; color:var(--color-text); }
   .rp-lead { font-family:var(--font-serif); font-size:1.12rem; line-height:1.7; color:var(--color-text); margin:0; text-wrap:pretty; }
-  .rp-tab { width:100%; border-collapse:collapse; margin:0.2rem 0 1.2rem; font-size:0.95rem; }
-  .rp-tab th, .rp-tab td { text-align:left; padding:0.6rem 0.8rem 0.6rem 0; border-bottom:1px solid var(--color-border); vertical-align:top; }
-  .rp-tab thead th { font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-text-muted); font-weight:500; }
-  .rp-tab tbody th { font-weight:600; width:9.5rem; }
-  .rp-tab td { color:var(--color-text-muted); }
-  .rp-tab a { color:var(--color-accent); }
-  .rp-p { font-size: 0.97rem; line-height: 1.72; color: var(--color-text-muted); margin: 0 0 0.9rem; }
-  .rp-p:last-child { margin-bottom: 0; }
-  .rp-p em { font-style: italic; color: var(--color-text); }
-  .rp-foot { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--color-border); font-size: 0.92rem; }
-  .rp-foot a { color: var(--color-accent); text-decoration: none; }
-  .rp-foot a:hover { text-decoration: underline; }
+  .rp-sec { margin-top:2.4rem; }
+  .rp-h2 { font-size:1.05rem; font-weight:600; letter-spacing:-0.005em; color:var(--color-text); margin:0 0 0.7rem; }
+  .rp-p { font-size:0.97rem; line-height:1.72; color:var(--color-text-muted); margin:0 0 0.9rem; }
+  .rp-p:last-child { margin-bottom:0; }
+  .rp a { color:var(--color-accent); text-underline-offset:0.2em; }
+  .rp-foot { margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--color-border); font-size:0.92rem; }
 </style>

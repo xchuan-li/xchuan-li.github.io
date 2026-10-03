@@ -37,6 +37,8 @@ export default defineConfig({
     '/research/mini-causal-models': '/research',
     '/research/ordo': '/research',
     '/research/hangl': '/research',
+    // B7 withdrawn from the public site at XC’s request, 3 October 2026.
+    '/research/modal-language-models': '/research',
   },
   integrations: [mdx(), react(), sitemap({ filter: (page) => !/\/cv\/(lm|cogsci)\/?$/.test(page) })],
   vite: {

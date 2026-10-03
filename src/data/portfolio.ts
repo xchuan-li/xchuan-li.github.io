@@ -1,3 +1,4 @@
+// 3 October 2026 (XC): B7 and B10 stay off the public site; Research contains B3 and B4.
 // Output categories are independent of research topics. Publication status is
 // explicit on every entry; "forthcoming" is reserved for confirmed acceptance.
 // 27 September 2026 (XC): modality connects three projects: linguistic analysis,
@@ -52,15 +53,6 @@ export const portfolioSections: PortfolioSection[] = [
     id: "work", sec: "", label: "Research & Papers",
     blurb: "",
     entries: [
-      {
-        tier: "research", track: "langcog", topic: "Computational model",
-        title: projects.modalModels.title,
-        field: "Cognitive modelling", desc: projects.modalModels.summary, status: projects.modalModels.status,
-        kind: "Project · in development",
-        short: "Do people choose a modal expression because of evidence strength, evidence source, or competition between expressions? And how can these accounts be made to give comparable predictions?",
-        figure: {"src": "/images/research/modal-accounts.svg", "preview": false, "alt": "Planned comparison: published human choices inform three competing accounts, evaluated with recovery and held-out predictions.", "caption": "Planned model comparison. The three accounts will be tested on published human choices; no model has been fitted yet.", "width": 760, "height": 260},
-        links: [{ label: "Project outline", href: projects.modalModels.href }],
-      },
       {
         tier: "research", track: "langcog", topic: "Behavioural experiment",
         title: projects.thesis.title,

@@ -10,9 +10,10 @@ import WorkList from "../../components/WorkList.astro";
     <header>
       <p class="eyebrow">Selected work</p>
       <h1>Research & Projects</h1>
-      <p class="lede">I study linguistic meaning and inference through formal analysis, human studies,
-        and computational methods. My master’s work focuses on modal expressions. Here are the papers,
-        projects, and texts that come from that work.</p>
+      <p class="lede">I study language understanding and reasoning in people and artificial systems.
+        My current projects examine children’s understanding of modal language and possibility,
+        and the effects of moral framing on language-model decisions. Selected writing and course
+        projects document the theoretical and methodological work alongside them.</p>
       <nav class="section-index" aria-label="Work categories">
         {workTiers.map((t) => <a href={"#" + t.id}>{t.label}</a>)}
       </nav>

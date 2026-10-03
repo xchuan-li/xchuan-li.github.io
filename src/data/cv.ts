@@ -35,9 +35,9 @@ export interface Entry {
 }
 
 export const interests: Record<Variant, string> = {
-  general: "Computational cognitive science and language model interpretability. Current focus: epistemic modality.",
-  lm: "Language model interpretability and computational cognitive science. Current focus: epistemic modality.",
-  cogsci: "Computational cognitive science, language development, and interpretability. Current focus: epistemic modality.",
+  general: "Computational cognitive science and language model interpretability. Research interests: language, reasoning, and human and artificial cognition.",
+  lm: "Language model interpretability and computational cognitive science. Research interests: language, reasoning, and human and artificial cognition.",
+  cogsci: "Computational cognitive science, language development, and interpretability. Research interests: language, reasoning, and human and artificial cognition.",
 };
 
 export const education: (Entry & { place: string })[] = [
@@ -89,13 +89,6 @@ const research: Record<string, Entry> = {
     context: "M.Sc. thesis · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
     note: "Adds a developmental modal-language component to an ongoing PhD project at MPI CBS Leipzig on how preschool children reason about possibilities.",
   },
-  modalLM: {
-    id: "modalLM", title: "What decides between must and might", href: "/research/modal-language-models",
-    method: "Computational model", status: "In development.",
-    row: "three competing accounts of the choice between <i>must</i> and <i>might</i>, to be fitted to published human data.",
-    context: "Computational model \u00b7 in development", when: "2026 \u2013",
-    note: "Three accounts of how evidence strength and evidence source decide between must and might, to be fitted and compared on published human data.",
-  },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",
@@ -135,26 +128,13 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "typicality", "protobias", "streetView", "psy", "undergraduate", "dyslexia"] },
-  lm:      { current: ["modalLM", "threeWays", "thesis"], earlier: ["lit", "protobias", "typicality", "streetView", "psy", "undergraduate"] },
-  cogsci:  { current: ["threeWays", "thesis", "modalLM"], earlier: ["lit", "typicality", "protobias", "psy", "undergraduate", "dyslexia"] },
+  general: { current: ["thesis", "lit"], earlier: ["threeWays", "typicality", "protobias", "streetView", "psy", "undergraduate", "dyslexia"] },
+  lm:      { current: ["lit", "thesis"], earlier: ["threeWays", "protobias", "typicality", "streetView", "psy", "undergraduate"] },
+  cogsci:  { current: ["thesis", "lit"], earlier: ["threeWays", "typicality", "protobias", "psy", "undergraduate", "dyslexia"] },
 };
 export const researchEntry = (id: string) => research[id];
 
-// Research experience combines the current modality programme and individual projects.
-// Each project appears once, with its role, work and output together (XC, 1 Oct 2026).
-// Question line confirmed by XC, 1 Oct 2026.
-export const programme = {
-  title: "Epistemic modality in people and language models",
-  when: "2026 –",
-  question: "Current focus · how modal expressions are understood and used, by people and by language models",
-};
-// Link text for each programme row (the rest of the line comes from `row`).
-export const programmeLabel: Record<string, string> = {
-  threeWays: "Three Ways of Leaving p Unsettled",
-  thesis: "M.Sc. thesis",
-  modalLM: "Modal choice",
-};
+// Research entries are independent projects; unpublished projects remain off all variants.
 export const employment: (Entry & { place: string })[] = [
   {
     id: "it", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",

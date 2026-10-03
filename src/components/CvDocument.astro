@@ -38,17 +38,7 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
 
   <section>
     <h2>Research experience</h2>
-    <div class="prog">
-      <div class="ent-top"><b>{cv.programme.title}</b><i>{cv.programme.when}</i></div>
-      <div class="ent-sub"><i>{cv.programme.question}</i></div>
-      {order.current.map((id) => { const e = cv.researchEntry(id); return (
-        <div class="prow">
-          <span class="pm">{e.method}</span>
-          <span class="pt">{e.href ? <a href={e.href}>{cv.programmeLabel[id]}</a> : cv.programmeLabel[id]}: <Fragment set:html={cv.pick(e.row, variant)} /> <span class="st">{e.status}</span></span>
-        </div>
-      ); })}
-    </div>
-    {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
+    {[...order.current, ...order.earlier].map((id) => { const e = cv.researchEntry(id); return (
       <div class="ent research-ent">
         <div class="ent-top"><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b><i>{e.when}</i></div>
         <div class="ent-sub"><i>{e.context}</i></div>

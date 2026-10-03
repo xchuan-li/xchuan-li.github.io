@@ -2,7 +2,7 @@
 
 A research-focused personal website built with Astro 5, MDX, React (for interactive demos), and Tailwind 4. Live at **https://xchuan-li.github.io**.
 
-The site presents one research program: *how structured meaning is represented, processed, and learned*, connecting formal semantics with psycholinguistics and computational language research. Top-level pages (A3g information architecture): **Current Work** (`/research`), **Research Program** (`/approach`), Writing, CV, Contact. The current case study is the three-way distinction among *might p*, *might p or might not p*, and *I don't know whether p*, at the construct stage.
+The site presents research on language, reasoning, and human and artificial cognition. Top-level pages are Research & Projects (`/research`), Research Program (`/approach`), CV, and Contact. The homepage highlights the child-development thesis and the moral-framing project; unpublished modelling projects remain private.
 
 **Before editing any positioning copy, read `CONTEXT.md`** — it carries the red lines (no "two arms", no "internal geometry adjudicates Kratzer vs. Lassiter", no collaborator names, never "LiT"). Shared identity and question copy lives in `src/data/program.ts`; public project descriptions and statuses live in `src/data/projects.ts`. Page-specific framing lives in the relevant page.
 

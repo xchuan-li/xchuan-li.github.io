@@ -1,3 +1,4 @@
+// 3 October 2026 (XC): unpublished B7/B10 are excluded from public project records.
 // Public project descriptions, checked against the Vault and XC on 26 September 2026.
 // B4: manuscript in preparation, not submitted. B1: project/report, not a promised publication.
 // 27 September 2026 (XC): the master's work focuses on modality; ProtoBias is a single-author
@@ -29,14 +30,6 @@ export const projects = {
     summary: "A small study of modal language, planned to run alongside an existing study of how preschool children reason about possibilities.",
     connection: "The formal analysis specifies what modal expressions contribute; the thesis asks how children come to understand them. It includes no language-model study.",
     status: "Master’s thesis · in planning",
-  },
-  modalModels: {
-    title: "What decides between must and might",
-    href: "/research/modal-language-models",
-    question: "Do people choose a modal expression because of evidence strength, evidence source, or competition between expressions? And how can these accounts be made to give comparable predictions?",
-    summary: "Three competing accounts of how evidence strength and evidence source decide between must and might, to be fitted and compared on published human data.",
-    connection: "The account is stated so that its variables can be measured in a language model as well; that step comes after the comparison on human data. The project remains separate from the thesis.",
-    status: "Computational model \u00b7 in development",
   },
   typicality: {
     title: "Typicality in referent choice",
