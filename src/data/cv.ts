@@ -97,7 +97,7 @@ const research: Record<string, Entry> = {
     note: "Three accounts of how evidence strength and evidence source decide between must and might, fitted and compared on published human data.",
   },
   lit: {
-    id: "lit", title: "Prompt framing and latent control states in language models",
+    id: "lit", title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",
     row: "year-long project course with M. Roth (UTN) and S. Ostermann (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
     context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI)",

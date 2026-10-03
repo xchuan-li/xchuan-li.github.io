@@ -2,17 +2,18 @@
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 ---
-<Base title="Prompt framing and latent control states · Xiaochuan Li"
-  description="A manuscript in preparation on prompt framing, controlled model choices, and interventions on internal representations."
+<Base title="Moral framing and dilemma choices · Xiaochuan Li"
+  description="A manuscript in preparation on how moral framing changes language models’ dilemma choices, tested with interventions on internal representations."
   showProgress={true} toc={true}>
   <article class="prose">
     <p class="!mb-6 !text-sm"><a href="/research#work-lm">← Research & Papers</a></p>
     <p class="text-xs uppercase tracking-wider text-[var(--color-text-muted)]">{projects.latentControl.status}</p>
-    <h1>Prompt framing and latent control states in language models</h1>
+    <h1>Moral framing and dilemma choices in language models</h1>
     <p class="!text-lg">{projects.latentControl.question}</p>
     <p>{projects.latentControl.summary}</p>
     <h2>Research question</h2>
-    <p>Different prompt framings can change a model’s answer to the same dilemma.
+    <p>A single moral sentence placed before the same dilemma, such as “Prioritize the greater good.”
+      or “Prioritize doing your duty.”, can change a model’s answer.
       The project asks which changes in internal representations contribute to that behavioural
       difference, and how to distinguish them from effects of answer labels, display order,
       and the model’s understanding of the stated outcomes.</p>

@@ -72,10 +72,10 @@ export const portfolioSections: PortfolioSection[] = [
       },
       {
         tier: "research", track: "lm", topic: "Mechanistic interpretability",
-        title: "Prompt framing and latent control states in language models",
+        title: "Moral framing and dilemma choices in language models",
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
         kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
-        short: "How prompt framing changes model choices in dilemmas, examined with residual-stream interventions and low-rank analysis.",
+        short: "How moral framing changes a language model\u2019s choices in dilemmas, and which internal states carry the change, examined with residual-stream interventions and low-rank analysis.",
         figure: {"src": "/images/research/framing-carry.svg", "previewSrc": "/images/research/framing-carry-cover.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
         links: [{ label: "Overview", href: projects.latentControl.href }],
       },

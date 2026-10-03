@@ -3,7 +3,7 @@
 // 27 September 2026 (XC): the master's work focuses on modality; ProtoBias is a single-author
 // course project on the same footing as the street-view course project, not a research line.
 // Modality connects linguistic analysis, human evidence, a proposed cognitive account,
-// and LM tests. The prompt-framing project is independent of this modality programme.
+// and LM tests. The moral-framing project is independent of this modality programme.
 // The thesis study is planned, not running. Private exploratory work is not published here.
 export const projects = {
   protobias: {
@@ -63,10 +63,10 @@ export const projects = {
     status: "Completed course study · Winter 2025–26",
   },
   latentControl: {
-    title: "Latent Control States",
+    title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",
-    question: "How does prompt framing change model choices, and can the behavioural effect be explained mechanistically?",
-    summary: "A study of prompt framing and model choices, combining controlled dilemma comparisons, residual-stream interventions, and low-rank analysis.",
+    question: "How does moral framing, such as a single sentence telling the model to prioritize the greater good, change a language model\u2019s choices in dilemmas, and which internal processes carry that change?",
+    summary: "A study of how moral framing changes language models\u2019 dilemma choices and their internal processing, combining controlled dilemma comparisons, residual-stream interventions, and low-rank analysis.",
     connection: "The work connects behavioural controls with interventions on internal representations, while checking alternative explanations involving answer format and outcome comprehension.",
     status: "Manuscript in preparation",
   },

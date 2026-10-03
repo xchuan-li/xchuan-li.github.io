@@ -1,3 +1,9 @@
+## Moral-framing wording, 3 October 2026 — latest explicit XC decision
+
+XC ▸ “B4是：道德语言框架如何影响LM的困境选择及其内部过程，不要泛泛说提示词.” Describe the Vault's B4 project as how **moral framing** (a single moral sentence such as “Prioritize the greater good.” vs “Prioritize doing your duty.”) changes language models' **dilemma choices** and the **internal processes** behind them. Do not describe it generically as “prompt framing” or by the group-level label “latent control states”.
+
+AI ▸ Public title is now *Moral framing and dilemma choices in language models* (homepage Research card, bio, Background timeline, CV entry, project page, /approach §7). The URL `/research/latent-control-states` and the internal ids `latentControl` / `lit` are kept so existing links do not break. The project stays independent of the modality programme; this changes its description, not its grouping.
+
 ## Homepage sidebar, 2 October 2026 — latest explicit XC decision
 
 XC ▸ Remove the homepage “On this page” directory because the page is short. The sidebar keeps the portrait, name, affiliation, and contact/CV links. Do not restore a homepage table of contents.
