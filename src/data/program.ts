@@ -7,15 +7,15 @@
 export const identity =
   "I study how linguistic meaning guides inference, and how to identify the information used by people and language models.";
 
-/** Homepage lead: the paradigm as one question, set bold as the page's first visual anchor (XC, 29 Sep 2026). Fig. 1 illustrates it. The sidebar question it replaced is gone. */
+/** Homepage lead: the research interest as one question, set bold as the page's first visual anchor (XC, 3 Oct 2026; replaces the 29 Sep paradigm question). Fig. 1 illustrates it. The sidebar question it replaced is gone. */
 export const identityLong =
-  "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?";
+  "How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?";
 
 /** Homepage bio (XC, 1 Oct 2026): who, where, with whom, and how I got here.
  *  Written after the pattern of Hening Wang's and Polina Tsvilodub's pages:
  *  an identity sentence, then the methods, then the actual projects. */
 export const bioHtml =
-  "I am a master\u2019s student in Human and Artificial Intelligence at the University of Technology Nuremberg, working on epistemic modality: what <i>must</i> and <i>might</i> contribute, and how people and language models come to choose one over the other. My thesis is on preschool children, run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig. Alongside it I spend the year on how moral framing changes language models\u2019 choices in dilemmas, and what happens inside the model when it does, co-supervised by UTN and <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">DFKI</a>. I came to this from philosophy, by way of logic and the philosophy of language, and from reading and cognitive development, which I studied at the same time.";
+  "I am a master\u2019s student in Human and Artificial Intelligence at the University of Technology Nuremberg. My current work is on epistemic modality: what <i>must</i> and <i>might</i> contribute, and how people and language models come to choose one over the other. My thesis is on preschool children, run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig. Alongside it I spend the year on how moral framing changes language models\u2019 choices in dilemmas, and what happens inside the model when it does, co-supervised by UTN and <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">DFKI</a>. I came to this from philosophy, by way of logic and the philosophy of language, and from reading and cognitive development, which I studied at the same time.";
 
 /** The programme, stated on the homepage above the project list (XC, 1 Oct 2026):
  *  the object of study is the language user, and the two methods are one pair. */
@@ -29,7 +29,7 @@ export const currentQuestion =
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =
-  "When people’s understanding of language turns on a distinction, can we state it precisely enough to test whether a language model computes it?";
+  "How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

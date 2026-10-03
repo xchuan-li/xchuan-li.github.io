@@ -1,3 +1,9 @@
+## Homepage lead question and bio, 3 October 2026 — latest explicit XC decision
+
+XC ▸ Modality is “一个很小很小的切口”; opening with it makes the interest look too narrow. The research interest is “人和人工系统如何理解语言中的概念、证据与规范，并形成推断和选择”, and it replaces the bold homepage question.
+
+AI ▸ `identityLong` / `identityLongHtml` now read: “How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?” This supersedes the 29 September lead question below. The bio no longer opens with modality as the research direction: its first sentence gives only programme and university, and modality follows as “My current work is on epistemic modality…”. Concepts, evidence and norms map onto existing work (typicality and ProtoBias; modality; moral framing) but the homepage does not spell out that mapping.
+
 ## Moral-framing wording, 3 October 2026 — latest explicit XC decision
 
 XC ▸ “B4是：道德语言框架如何影响LM的困境选择及其内部过程，不要泛泛说提示词.” Describe the Vault's B4 project as how **moral framing** (a single moral sentence such as “Prioritize the greater good.” vs “Prioritize doing your duty.”) changes language models' **dilemma choices** and the **internal processes** behind them. Do not describe it generically as “prompt framing” or by the group-level label “latent control states”.
