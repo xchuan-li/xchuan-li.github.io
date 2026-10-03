@@ -1,3 +1,7 @@
+## Research card blurbs, 3 October 2026 — latest explicit XC decision
+
+XC ▸ Replace the homepage/research-index project blurbs (`short` in `portfolio.ts`) with the question each project pursues. AI ▸ Modal choice: evidence strength vs source vs competition between expressions, and comparable predictions. Thesis: children's modal expressions vs conceptual understanding of possibility, and how comprehension and task demands shape the judgement of that ability. Moral framing: outcome weighing vs action-answer tendency vs another process, and how far internal interventions separate them. These state research concerns, not results; keep them as questions.
+
 ## Homepage lead question and bio, 3 October 2026 — latest explicit XC decision
 
 XC ▸ Modality is “一个很小很小的切口”; opening with it makes the interest look too narrow. The research interest is “人和人工系统如何理解语言中的概念、证据与规范，并形成推断和选择”, and it replaces the bold homepage question.
