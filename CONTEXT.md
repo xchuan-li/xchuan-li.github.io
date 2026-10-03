@@ -1,3 +1,9 @@
+## Undergraduate reports and covers, 3 October 2026 — latest XC instruction
+
+XC ▸ Add the garden-path report, describe project content directly without emphasising recollection, and add title-side schematic covers for both undergraduate projects. AI ▸ Child report now gives project tasks, observation, example pairs and discussion; retrospective/source-reconstruction prose is removed. Preserve the substantive boundaries once: observations are not a matched-item experiment, examples are illustrative, and no quantitative context effect is claimed. Omit unconfirmed timing-unit specifics rather than silently asserting a definite rule.
+
+Garden-path report: /research/garden-path-processing uses PaperArticle, with Chinese/English examples, structural splits, hypotheses and proposed measures. Label Course research design; no experiment administered. The materials are example designs, not alleged recovered original stimuli. Do not invent a precise project date; the header names Psychology of Reading and undergraduate coursework. Homepage and /research list both items under Earlier research experience with static native SVG covers. Existing report publication status is not upgraded; B7/B10 remain absent. No new LM or cognitive-model study is announced publicly.
+
 ## Childhood project date clarification, 3 October 2026
 
 AI ▸ Project period is September–December 2021, supported by XC’s old CV and a reflection emailed 13 September 2021. The 2022 spring course is separate. The report header now labels Project period: September–December 2021; remove the 2026 write-up date from the card/header to avoid confusing the project date. Retrospective report status remains explicit, so the new text is not presented as an original 2021 manuscript.

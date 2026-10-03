@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+<title id="title">A Chinese character alone and within a word</title>
+<desc id="desc">Illustrative character–word pairs: 龄 and 年龄; 筑 and 建筑. The target character is highlighted within each word. These are example materials, not response data.</desc>
+<g fill="#65717e" font-family="Arial,sans-serif" font-size="22" text-anchor="middle"><text x="92" y="31">CHARACTER</text><text x="342" y="31">WORD</text></g>
+<g font-family="Songti SC,Noto Serif CJK SC,serif" font-size="78" text-anchor="middle"><text x="92" y="126" fill="#283648">龄</text><text x="303" y="126" fill="#65717e">年</text><text x="384" y="126" fill="#426888">龄</text><text x="92" y="267" fill="#283648">筑</text><text x="303" y="267" fill="#65717e">建</text><text x="384" y="267" fill="#426888">筑</text></g>
+<g stroke="#7d8793" stroke-width="2" fill="none"><path d="M161 99H229M220 91L229 99L220 107"/><path d="M161 240H229M220 232L229 240L220 248"/></g>
+<path d="M24 161H456" stroke="#ccd2d8" stroke-width="1"/>
+<g fill="#65717e" font-family="Georgia,serif" font-size="23" text-anchor="middle" font-style="italic"><text x="92" y="151">líng</text><text x="342" y="151">niánlíng</text><text x="92" y="299">zhù</text><text x="342" y="299">jiànzhù</text></g>
+</svg>

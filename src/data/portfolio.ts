@@ -57,10 +57,21 @@ export const portfolioSections: PortfolioSection[] = [
         tier: "earlier", track: "langcog", topic: "Child reading assessment",
         title: "Reading difficulties in primary-school children",
         field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
-        status: "Retrospective assessment report · undergraduate project, 2021",
-        kind: "Undergraduate project · September–December 2021 · retrospective report",
-        short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A retrospective report on reading assessment, with qualitative observations and illustrative character–word contrasts.",
+        status: "Project report · undergraduate reading assessment, 2021",
+        kind: "Undergraduate project · September–December 2021",
+        short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
+        figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 480, height: 320 },
         links: [{ label: "Read report", href: "/research/child-reading-assessment" }],
+      },
+      {
+        tier: "earlier", track: "langcog", topic: "Sentence processing",
+        title: "Garden-path processing in Chinese and English",
+        field: "Research design", desc: "A Psychology of Reading course project on sentence materials, processing hypotheses and ways to distinguish them.",
+        status: "Course research design · not administered",
+        kind: "Undergraduate course project · Psychology of Reading · research design",
+        short: "How do readers form a structural interpretation and revise it when later words conflict? Chinese and English sentence materials connect processing hypotheses with proposed reading and comprehension measures.",
+        figure: { src: "/images/research/garden-path-cover.svg", alt: "The sentence 校长表扬了老师推荐的学生, split into a possible initial structure with 老师 as object and the complete structure with 学生 as object.", caption: "Illustrative sentence and structural analyses.", width: 480, height: 320 },
+        links: [{ label: "Read report", href: "/research/garden-path-processing" }],
       },
       {
         tier: "research", track: "langcog", topic: "Behavioural experiment",
@@ -160,6 +171,6 @@ export const workTiers: { id: string; label: string; blurb: string; compact: boo
   { id: "research", label: "Research", blurb: "Projects I am responsible for, with their current state.", compact: false },
   { id: "writing", label: "Writing", blurb: "Analyses written up on their own; used as writing samples.", compact: false },
   { id: "course", label: "Course projects", blurb: "", compact: true },
-  { id: "earlier", label: "Earlier research experience", blurb: "An undergraduate introduction to behavioural assessment and research questions about reading.", compact: false },
+  { id: "earlier", label: "Earlier research experience", blurb: "Undergraduate projects in reading assessment and sentence-processing research design.", compact: false },
 ];
 export const entriesOfTier = (t: string) => workEntries.filter((e) => (e.tier ?? "course") === t);

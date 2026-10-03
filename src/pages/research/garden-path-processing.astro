@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import PaperArticle from "../../components/PaperArticle.astro";
+import body from "../../content/papers/garden-path-processing.html?raw";
+---
+<Base title="Garden-path processing in Chinese and English · Xiaochuan Li" toc={true}
+  description="A course research design report on temporary syntactic ambiguity in Chinese and English: example sentences, processing hypotheses and proposed behavioural measures.">
+  <PaperArticle
+    back={{ label: "Earlier research experience", href: "/research#earlier" }}
+    status="Course research design · not administered"
+    title="Garden-Path Processing in Chinese and English: Hypotheses and Experimental Design"
+    authors="Xiaochuan Li"
+    affiliation="Undergraduate coursework · Shenzhen University"
+    date="Course: Psychology of Reading"
+    body={body}
+  />
+</Base>
