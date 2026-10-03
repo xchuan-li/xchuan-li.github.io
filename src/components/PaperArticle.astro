@@ -11,7 +11,7 @@ interface Props {
   date: string;
   note?: string;                           // one line, e.g. how the report came about
   body: string;                            // HTML fragment
-  pdf: string;
+  pdf?: string;
   links?: { label: string; href: string }[];
   back?: { label: string; href: string };
 }
@@ -26,10 +26,10 @@ const { status, title, authors, affiliation, date, note, body, pdf, links = [], 
     <p class="paper-aff">{affiliation}</p>
     <p class="paper-date">{date}</p>
     {note && <p class="paper-note">{note}</p>}
-    <p class="paper-actions">
-      <a href={pdf}>PDF ↓</a>
+    {(pdf || links.length > 0) && <p class="paper-actions">
+      {pdf && <a href={pdf}>PDF ↓</a>}
       {links.map((l) => <a href={l.href} rel="noopener">{l.label}</a>)}
-    </p>
+    </p>}
   </header>
   <Fragment set:html={body} />
 </article>
