@@ -53,7 +53,7 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
 
   <section>
     <h2>Employment</h2>
-    {cv.employment.map((e) => (
+    {cv.employment.filter((e) => !e.variants || e.variants.includes(variant)).map((e) => (
       <div class="ent">
         <div class="ent-top"><b>{e.title}</b><span>{e.place}</span></div>
         <div class="ent-sub"><i>{e.context}</i><i>{e.when}</i></div>

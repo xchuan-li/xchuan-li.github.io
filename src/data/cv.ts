@@ -5,7 +5,8 @@
 // Facts: psychology study per Vault A2u1 (design = group of three, adopted by class
 // vote; analysis = XC); IT job wording per Vault A3x1 §6 (confirmed 27 Sep 2026).
 // Learning-difficulties project per XC’s old CV (1 Oct 2026): autumn 2021,
-// test items, response data and individual plans. Included in general and cogsci;
+// test items, response data and individual plans. XC confirmed an internship certificate
+// on 3 Oct 2026; listed under Employment in general and cogsci;
 // omitted only from the focused lm variant. Original data no longer survives.
 
 export type Variant = "general" | "lm" | "cogsci";
@@ -97,12 +98,6 @@ const research: Record<string, Entry> = {
     when: "2026–27",
     note: "Investigated how moral wording affects dilemma choices. Designed and ran controlled experiments and activation interventions in 7B and 14B models for the utilitarian-framing branch, with checks of answer labels, option positions, and task understanding; manuscript in preparation.",
   },
-  dyslexia: {
-    id: "dyslexia", title: "Learning difficulties in primary-school children",
-    row: "with the Shenzhen Learning Disorders Association: test items, response data, individual plans",
-    context: "Invited research project · Shenzhen Learning Disorders Association and Yucai No. 2 Primary School", when: "Sep.–Dec. 2021",
-    note: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
-  },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
     row: "human study, class-wide experiment (N = 49, 47 analysed); my part: data analysis",
@@ -128,18 +123,24 @@ const research: Record<string, Entry> = {
 };
 
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "threeWays", "streetView", "undergraduate", "dyslexia"] },
+  general: { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "threeWays", "streetView", "undergraduate"] },
   lm:      { current: ["lit", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
-  cogsci:  { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "undergraduate", "dyslexia"] },
+  cogsci:  { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "undergraduate"] },
 };
 export const researchEntry = (id: string) => research[id];
 
 // Research entries are independent projects; unpublished projects remain off all variants.
-export const employment: (Entry & { place: string })[] = [
+export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
   {
     id: "it", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "IT Service Desk (part-time)", when: "Apr. 2026 – present",
     note: "Delivered student IT onboarding and individual support; handled system installation, service reporting, and inventory.",
+  },
+  {
+    id: "dyslexia", title: "Shenzhen Learning Disorders Association", place: "Shenzhen, China",
+    context: "Internship · Learning assessment at Yucai No. 2 Primary School", when: "Sep.–Dec. 2021",
+    note: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
+    variants: ["general", "cogsci"],
   },
 ];
 
