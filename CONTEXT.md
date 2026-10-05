@@ -1,3 +1,9 @@
+## Fig. 1: two segmentations, 5 October 2026 — current authority for the homepage figure
+
+XC ▸ The person should say a concrete sentence divided by linguistic structure, and the robot the same sentence divided as a tokenizer divides it: different structures, both use language. Chose draft A; no caption.
+
+AI ▸ `MeaningBridgeFigure.astro` keeps the hand-drawn person, robot and boil. Both say *I don't know whether it's the outage.* in speech bubbles sized to the text. Person: bars between units whose height is the depth of the boundary (syntactic distance, Shen et al. 2018), encoding `[I [[do n't] [know [whether [it ['s [the outage]]]]]]]`; do|n't is a morpheme boundary (Zwicky & Pullum 1983), it|'s a clause boundary inside one written word. Robot: real GPT-2 tokens with ids (checked with the gpt2-large tokenizer; Qwen2.5 splits the same way), equal bars. Red bars mark do + n't vs. don + 't. Positions are frozen from `design-demos/fig1-two-segmentations/draft.html`; change the draft and copy the coordinates. Draft B (dashed linguistic boundaries under the tokens with a question mark: does the model build the hierarchy?) was not chosen. The figure does not claim the model lacks constituent structure; tokens are its input segmentation, not its grammar. This supersedes the person — "language" — model figure.
+
 ## 3 October 2026 — ChatGPT checking experiment on homepage
 XC requests the ChatGPT/Wikipedia source-order study on the homepage. Include its shared portfolio entry after B3/B4 under Research, keeping its completed course experiment status and the existing procedure diagram. The design was developed by a three-person group, data collection was class-wide, and XC completed the analysis; the report is an individual write-up. Keep the research-index tier as course. Homepage copy describes design, sample and contribution, without adding scientific claims. B7/B10 remain off the public site.
 

@@ -1,10 +1,18 @@
 ---
-// People and language models as research objects connected by language.
-// The open model depicts access for interventions, not a claim that human cognition is inaccessible.
+// Fig. 1, 5 Oct 2026 (XC, draft A): a person and a language model say the same sentence.
+// Top: the linguist's segmentation. A bar is as tall as the smallest constituent containing
+// both sides (syntactic distance, Shen et al. 2018), so the heights give the whole tree:
+//   [I [[do n't] [know [whether [it ['s [the outage]]]]]]]
+// do|n't is a morpheme boundary (n't as inflection, Zwicky & Pullum 1983); it|'s is a clause
+// boundary inside one written word.
+// Bottom: real GPT-2 tokens and ids (gpt2-large tokenizer; Qwen2.5 splits the same way).
+// Equal bars: tokens are a flat sequence. Red: do + n't vs. don + 't.
+// Positions are frozen from design-demos/fig1-two-segmentations/draft.html (Patrick Hand, 26px).
+// No caption (XC).
 ---
 <figure class="mbfig" aria-label="Figure 1">
-  <svg viewBox="0 0 800 280" role="img"
-       aria-label="A person on the left and a language model on the right, joined by one straight line through a box that reads: language. The model's casing is open, illustrating the study of its internal computations.">
+  <svg viewBox="0 0 723 275" role="img"
+       aria-label="A person and a language model say the same sentence: I don't know whether it's the outage. The person's copy is divided by bars whose heights give its constituent structure; the model's copy is divided into GPT-2 tokens, shown with their ids, by bars of equal height.">
     <defs>
       <filter id="mb-boil" x="-5%" y="-5%" width="110%" height="110%">
         <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
@@ -15,14 +23,14 @@
     </defs>
 
     <g filter="url(#mb-boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M8 7 L793 4 L795 274 L5 276 Z" fill="#fff"/>
+      <path d="M6 6 L716.9 4 L717.9 268.7 L4 269.7 Z" fill="#fff"/>
 
-      <!-- one line, left to right, through the thing being studied -->
-      <path d="M212 150 L306 150 M496 150 L590 150" fill="none" stroke-width="2.4"/>
-      <path d="M306 115 L494 112 L496 184 L308 187 Z" fill="#fdfbf4" stroke-width="2.8"/>
+      <!-- speech bubbles -->
+      <path d="M114 18 L542 16 L543 119.5 L112 121.5 L112 56 L92 48 L113 40 Z" fill="#fdfbf4" stroke-width="2.4"/>
+      <path d="M150 141.5 L584.9 139.5 L584.9 159.5 L604.9 169.5 L584.9 175.5 L585.9 209.5 L148 211.5 Z" fill="#fdfbf4" stroke-width="2.4"/>
 
       <!-- person -->
-      <g transform="translate(63,-126) scale(0.8)">
+      <g transform="translate(-33,-150) scale(0.66)">
         <circle cx="150" cy="300" r="21" fill="#f2cfa4"/>
         <path d="M131 292 L136 276 L144 288 L150 272 L156 288 L165 276 L169 292" fill="#e8b33c" stroke-width="2.4"/>
         <circle cx="143" cy="301" r="2.4" fill="#141414" stroke="none"/><circle cx="157" cy="301" r="2.4" fill="#141414" stroke="none"/>
@@ -33,7 +41,7 @@
       </g>
 
       <!-- language model: the casing is open -->
-      <g transform="translate(168.4,-99) scale(0.72)">
+      <g transform="translate(275.7,-22.9) scale(0.6)">
         <path d="M631 290 L631 276" fill="none"/><circle cx="631" cy="271" r="5" fill="#e03a2f"/>
         <path d="M600 292 L664 290 L666 338 L598 340 Z" fill="#b9bec4"/>
         <path d="M612 306 L622 306 L622 316 L612 316 Z M640 306 L650 306 L650 316 L640 316 Z" fill="#141414"/>
@@ -47,23 +55,69 @@
         <path d="M678 338 L722 326 L724 402 L678 412 Z" fill="#9aa0a6" stroke-width="2.6"/>
         <path d="M612 414 L610 436 M652 413 L654 436" fill="none" stroke-width="4"/>
       </g>
-
     </g>
 
-    <!-- Text sits outside the boil filter: the displacement map blurs small type. -->
-    <g stroke="none">
-      <text class="w" x="401" y="161" text-anchor="middle">language</text>
-      <text class="lbl" x="183" y="252" text-anchor="middle">people</text>
-      <text class="lbl" x="652" y="252" text-anchor="middle">language models</text>
+    <!-- Text and bars sit outside the boil filter: the displacement map blurs small type. -->
+    <g stroke-width="1.5" stroke="#141414">
+      <!-- person: bar height = depth of the boundary -->
+      <text class="w" x="128" y="54">I</text>
+      <line x1="141.6" x2="141.6" y1="33" y2="105.5"/>
+      <text class="w" x="149.1" y="54">do</text>
+      <line class="mark" x1="172.2" x2="172.2" y1="33" y2="66.5"/>
+      <text class="w" x="174.7" y="54">n't</text>
+      <line x1="207.2" x2="207.2" y1="33" y2="99"/>
+      <text class="w" x="214.7" y="54">know</text>
+      <line x1="267.2" x2="267.2" y1="33" y2="92.5"/>
+      <text class="w" x="274.7" y="54">whether</text>
+      <line x1="355.7" x2="355.7" y1="33" y2="86"/>
+      <text class="w" x="363.2" y="54">it</text>
+      <line x1="380.5" x2="380.5" y1="33" y2="79.5"/>
+      <text class="w" x="383" y="54">'s</text>
+      <line x1="404.8" x2="404.8" y1="33" y2="73"/>
+      <text class="w" x="412.3" y="54">the</text>
+      <line x1="450" x2="450" y1="33" y2="66.5"/>
+      <text class="w" x="457.5" y="54">outage</text>
+      <text class="w" x="520.4" y="54">.</text>
+
+      <!-- model: GPT-2 tokens (leading spaces belong to the token) and their ids -->
+      <text class="w" x="164" y="177.5">I</text>
+      <line x1="174.1" x2="174.1" y1="156.5" y2="183.5"/>
+      <text class="w" x="178.1" y="177.5">&#160;don</text>
+      <line class="mark" x1="220.5" x2="220.5" y1="156.5" y2="183.5"/>
+      <text class="w" x="224.5" y="177.5">'t</text>
+      <line x1="241.7" x2="241.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="245.7" y="177.5">&#160;know</text>
+      <line x1="300.7" x2="300.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="304.7" y="177.5">&#160;whether</text>
+      <line x1="388.2" x2="388.2" y1="156.5" y2="183.5"/>
+      <text class="w" x="392.2" y="177.5">&#160;it</text>
+      <line x1="416.9" x2="416.9" y1="156.5" y2="183.5"/>
+      <text class="w" x="420.9" y="177.5">'s</text>
+      <line x1="439.2" x2="439.2" y1="156.5" y2="183.5"/>
+      <text class="w" x="443.2" y="177.5">&#160;the</text>
+      <line x1="483.4" x2="483.4" y1="156.5" y2="183.5"/>
+      <text class="w" x="487.4" y="177.5">&#160;outage</text>
+      <line x1="559.3" x2="559.3" y1="156.5" y2="183.5"/>
+      <text class="w" x="563.3" y="177.5">.</text>
+      <g class="id" text-anchor="middle">
+        <text x="167.1" y="196.5">40</text><text x="197.3" y="196.5">836</text><text x="231.1" y="196.5">470</text>
+        <text x="271.2" y="196.5">760</text><text x="344.4" y="196.5">1771</text><text x="402.6" y="196.5">340</text>
+        <text x="428.1" y="196.5">338</text><text x="461.3" y="196.5">262</text><text x="521.4" y="196.5">46281</text>
+        <text x="566.1" y="196.5">13</text>
+      </g>
+
+      <text class="lbl" x="66" y="148.2" text-anchor="middle">people</text>
+      <text class="lbl" x="660.9" y="256.7" text-anchor="middle">language models</text>
     </g>
   </svg>
 </figure>
 
 <style>
-  .mbfig { margin:1.6rem auto 0; max-width:580px; }
+  .mbfig { margin:1.6rem auto 0; max-width:600px; }
   svg { display:block; width:100%; height:auto; }
-  svg text { font-family:"Patrick Hand", "Comic Sans MS", cursive; fill:#141414; }
-  .lbl { font-size:19px; }
-  .w { font-size:22px; }
-
+  svg text { stroke:none; fill:#141414; font-family:"Patrick Hand", "Comic Sans MS", cursive; }
+  .w { font-size:26px; }
+  .lbl { font-size:16px; }
+  .id text { font-family:"IBM Plex Mono", monospace; font-size:10px; fill:#6b7177; }
+  .mark { stroke:#e2574c; }
 </style>

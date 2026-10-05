@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fig. 1 draft · two segmentations</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=IBM+Plex+Mono:wght@400&family=Source+Serif+4:wght@400;600&display=swap">
+<!--
+  Draft, 5 Oct 2026 (XC's idea: one sentence, said by a person and by an LM; the person's
+  copy is cut by linguistic structure, the LM's by its tokenizer). The site is untouched.
+
+  Human row: syntactic distance (Shen et al. 2018). A bar between two units is as tall as
+  the smallest constituent that contains both, so heights encode the whole tree:
+    [I [[do n't] [know [whether [it ['s [the outage]]]]]]]
+  do|n't is a morpheme boundary (n't as inflection, Zwicky & Pullum 1983): height 1.
+  it|'s is a clause-level boundary inside one written word: height 3.
+  LM row: real GPT-2 tokenizer output (checked 5 Oct 2026 with transformers, gpt2-large;
+  Qwen2.5 gives the same split). Equal bars: tokens are a flat sequence.
+  Variant B adds the question underneath: does the model build the tree on its own?
+-->
+<style>
+  :root { --ink:#141414; --muted:#6b7177; --coral:#e2574c; --bg:#fff; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Source Serif 4", Georgia, serif; }
+  main { max-width:720px; margin:0 auto; padding:32px 16px 64px; }
+  .intro { font-weight:600; font-size:1.25rem; line-height:1.4; margin:0 0 4px; }
+  .switch { font:12px "IBM Plex Mono", monospace; color:var(--muted); margin:18px 0 6px; }
+  .switch button { font:inherit; background:none; border:1px solid #d5d8db; padding:3px 8px; cursor:pointer; color:var(--muted); }
+  .switch button[aria-pressed="true"] { color:var(--ink); border-color:var(--ink); }
+  figure { margin:1.2rem auto 0; max-width:600px; }
+  svg { display:block; width:100%; height:auto; }
+  svg text.hand { font-family:"Patrick Hand", "Comic Sans MS", cursive; fill:var(--ink); }
+  svg text.mono { font-family:"IBM Plex Mono", monospace; fill:var(--muted); }
+  figcaption { font:11.5px/1.5 "IBM Plex Mono", monospace; color:var(--muted); margin-top:8px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="intro">How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?</p>
+  <div class="switch">Draft:
+    <button data-v="A" aria-pressed="true">A · as described</button>
+    <button data-v="B" aria-pressed="false">B · with the open question</button>
+  </div>
+
+  <figure id="fig">
+    <svg id="svg" viewBox="0 0 720 300" role="img" aria-label="A person and a language model say the same sentence, I don't know whether it's the outage. The person's copy is divided by bars whose heights give its constituent structure; the model's copy is divided into GPT-2 tokens by equal bars.">
+      <defs>
+        <filter id="boil" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
+            <animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/>
+        </filter>
+      </defs>
+
+      <g filter="url(#boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+        <path id="frame" fill="#fff"/>
+        <!-- speech bubbles, sized to their text by the script -->
+        <path id="bub1" fill="#fdfbf4" stroke-width="2.4"/>
+        <path id="bub2" fill="#fdfbf4" stroke-width="2.4"/>
+
+        <!-- person -->
+        <g id="person">
+          <circle cx="150" cy="300" r="21" fill="#f2cfa4"/>
+          <path d="M131 292 L136 276 L144 288 L150 272 L156 288 L165 276 L169 292" fill="#e8b33c" stroke-width="2.4"/>
+          <circle cx="143" cy="301" r="2.4" fill="#141414" stroke="none"/><circle cx="157" cy="301" r="2.4" fill="#141414" stroke="none"/>
+          <path d="M143 311 Q150 316 157 310" fill="none" stroke-width="2.2"/>
+          <path d="M131 322 L169 320 L174 378 L127 380 Z" fill="#e2574c"/>
+          <path d="M140 380 L136 426 M162 379 L167 426" fill="none" stroke-width="4"/>
+          <path d="M131 330 L114 364 M169 330 L186 364" fill="none" stroke-width="4"/>
+        </g>
+
+        <!-- language model: the casing is open -->
+        <g id="robot">
+          <path d="M631 290 L631 276" fill="none"/><circle cx="631" cy="271" r="5" fill="#e03a2f"/>
+          <path d="M600 292 L664 290 L666 338 L598 340 Z" fill="#b9bec4"/>
+          <path d="M612 306 L622 306 L622 316 L612 316 Z M640 306 L650 306 L650 316 L640 316 Z" fill="#141414"/>
+          <path d="M614 328 L648 327" fill="none" stroke-width="2.4"/>
+          <path d="M588 340 L676 338 L678 412 L586 414 Z" fill="#b9bec4"/>
+          <path d="M604 355 L633 380 L658 355 M604 355 L611 397 L633 380 L658 398" fill="none" stroke-width="2.4"/>
+          <g fill="#fff" stroke-width="2.4">
+            <circle cx="604" cy="355" r="6"/><circle cx="658" cy="355" r="6"/>
+            <circle cx="633" cy="380" r="6"/><circle cx="611" cy="397" r="6"/><circle cx="658" cy="398" r="6"/>
+          </g>
+          <path d="M678 338 L722 326 L724 402 L678 412 Z" fill="#9aa0a6" stroke-width="2.6"/>
+          <path d="M612 414 L610 436 M652 413 L654 436" fill="none" stroke-width="4"/>
+        </g>
+      </g>
+
+      <!-- Text and bars sit outside the boil filter: displacement blurs small type. -->
+      <g id="human"></g>
+      <g id="model"></g>
+      <g id="ghost" class="ghost"></g>
+      <text id="lab1" class="hand" text-anchor="middle" font-size="16">people</text>
+      <text id="lab2" class="hand" text-anchor="middle" font-size="16">language models</text>
+    </svg>
+    <figcaption id="cap"></figcaption>
+  </figure>
+</main>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("svg");
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, parent) => {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  parent.appendChild(n); return n;
+};
+
+// Human: units with the syntactic distance of the boundary *before* each unit.
+// gap: horizontal space before the unit (small inside a written word).
+const human = [
+  { t:"I" },
+  { t:"do",      d:7, gap:15 },
+  { t:"n't",     d:1, gap:5, mark:true },
+  { t:"know",    d:6, gap:15 },
+  { t:"whether", d:5, gap:15 },
+  { t:"it",      d:4, gap:15 },
+  { t:"'s",      d:3, gap:5 },
+  { t:"the",     d:2, gap:15 },
+  { t:"outage",  d:1, gap:15 },
+  { t:".",       gap:1 },
+];
+// GPT-2 tokens and ids (gpt2-large tokenizer, 5 Oct 2026). Leading spaces belong to the token.
+const model = [
+  { t:"I", id:40 }, { t:" don", id:836 }, { t:"'t", id:470, mark:true }, { t:" know", id:760 },
+  { t:" whether", id:1771 }, { t:" it", id:340 }, { t:"'s", id:338 }, { t:" the", id:262 },
+  { t:" outage", id:46281 }, { t:".", id:13 },
+];
+
+const FS = 26, STEP = 6.5, PAD = 16;
+const INK = "#141414", RED = "#e2574c";
+function measure(s) {
+  const t = el("text", { class:"hand", "font-size":FS, x:-999, y:-999 }, svg);
+  t.textContent = s.replace(/ /g, " ");
+  const w = t.getComputedTextLength(); t.remove(); return w;
+}
+const sum = a => a.reduce((x, y) => x + y, 0);
+// A hand-drawn box: corners nudged by fixed amounts so it does not look ruled.
+const box = (x0, y0, x1, y1, tail) => {
+  const pts = [[x0+2, y0], [x1, y0-2], [x1+1, y1], [x0, y1+2]];
+  if (tail === "left") {
+    const ym = y0 + 28;
+    return `M${pts[0]} L${pts[1]} L${pts[2]} L${pts[3]} L${x0} ${ym+10} L${x0-20} ${ym+2} L${x0+1} ${ym-6} Z`;
+  }
+  const ym = y0 + 24;
+  return `M${pts[0]} L${pts[1]} L${x1} ${ym-6} L${x1+20} ${ym+4} L${x1} ${ym+10} L${pts[2]} L${pts[3]} Z`;
+};
+
+function draw(v) {
+  for (const id of ["human", "model", "ghost"]) $(id).replaceChildren();
+
+  // Row 1: the person and a bubble just wide enough for the sentence and its bars.
+  const hw = human.map(u => measure(u.t));
+  const w1 = sum(hw) + sum(human.map(u => u.gap || 0));
+  const b1 = { x0:112, y0:18 };
+  const base1 = b1.y0 + PAD + 20, top1 = base1 - 21;
+  b1.x1 = b1.x0 + w1 + 2 * PAD;
+  b1.y1 = base1 + 6 + 7 * STEP + PAD - 2;
+  let x = b1.x0 + PAD;
+  human.forEach((u, i) => {
+    if (u.gap) {
+      const bx = x + u.gap / 2;
+      if (u.d) el("line", { x1:bx, x2:bx, y1:top1, y2:base1 + 6 + u.d * STEP,
+        stroke:u.mark ? RED : INK, "stroke-width":1.5 }, $("human"));
+      x += u.gap;
+    }
+    el("text", { class:"hand", "font-size":FS, x, y:base1 }, $("human")).textContent = u.t;
+    x += hw[i];
+  });
+  $("bub1").setAttribute("d", box(b1.x0, b1.y0, b1.x1, b1.y1, "left"));
+  $("person").setAttribute("transform", `translate(${66 - 0.66 * 150},${b1.y0 + 30 - 0.66 * 300}) scale(0.66)`);
+  $("lab1").setAttribute("x", 66); $("lab1").setAttribute("y", b1.y0 + 30 + 0.66 * 126 + 17);
+
+  // Row 2: the model's bubble, offset right, then the robot.
+  const mw = model.map(u => measure(u.t));
+  const w2 = sum(mw) + 8 * (model.length - 1);
+  const b2 = { x0:b1.x0 + 36, y0:b1.y1 + 22 };
+  const base2 = b2.y0 + PAD + 20, top2 = base2 - 21;
+  b2.x1 = b2.x0 + w2 + 2 * PAD;
+  b2.y1 = base2 + 20 + (v === "B" ? 18 + 7 * 4.5 : 0) + PAD - 4;
+  x = b2.x0 + PAD;
+  model.forEach((u, i) => {
+    if (i > 0) {
+      x += 4;
+      el("line", { x1:x, x2:x, y1:top2, y2:base2 + 6,
+        stroke:u.mark ? RED : INK, "stroke-width":1.5 }, $("model"));
+      // Variant B: where the linguist's boundaries fall, and how deep. Unanswered.
+      if (v === "B" && human[i].d) el("line", { x1:x, x2:x, y1:base2 + 30, y2:base2 + 30 + human[i].d * 4.5,
+        stroke:INK, "stroke-width":1.2, "stroke-dasharray":"2 2.5", opacity:.5 }, $("ghost"));
+      x += 4;
+    }
+    el("text", { class:"hand", "font-size":FS, x, y:base2 }, $("model")).textContent = u.t.replace(/ /g, " ");
+    el("text", { class:"mono", "font-size":10, x:x + mw[i] / 2, y:base2 + 19, "text-anchor":"middle" }, $("model")).textContent = u.id;
+    x += mw[i];
+  });
+  if (v === "B") el("text", { class:"hand", "font-size":22, x:x - 4, y:base2 + 58 }, $("ghost")).textContent = "?";
+  $("bub2").setAttribute("d", box(b2.x0, b2.y0, b2.x1, b2.y1, "right"));
+  const rx = b2.x1 + 70, ry = b2.y0 + 24;
+  $("robot").setAttribute("transform", `translate(${rx - 0.6 * 632},${ry - 0.6 * 314}) scale(0.6)`);
+  $("lab2").setAttribute("x", rx + 6); $("lab2").setAttribute("y", ry + 0.6 * 122 + 18);
+
+  // Frame and viewBox hug the content.
+  const W = Math.max(b1.x1 + 24, rx + 66), H = Math.max(b2.y1, ry + 0.6 * 122 + 18) + 16;
+  $("frame").setAttribute("d", `M6 6 L${W - 4} 4 L${W - 3} ${H - 4} L4 ${H - 3} Z`);
+  svg.setAttribute("viewBox", `0 0 ${W + 2} ${H + 2}`);
+}
+
+const caps = {
+  A: "Same sentence, two segmentations. Top: constituent structure; a bar is as tall as the smallest phrase containing both sides. Bottom: GPT-2 tokens and their ids. Red: do + n't vs. don + 't.",
+  B: "Same sentence, two segmentations. Top: constituent structure (bar height = depth of the boundary). Bottom: GPT-2 tokens and ids, a flat sequence. Dashed: does the model build the hierarchy anyway?",
+};
+function setV(v) {
+  draw(v);
+  $("cap").textContent = caps[v];
+  document.querySelectorAll(".switch button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === v));
+}
+document.querySelectorAll(".switch button").forEach(b => b.onclick = () => setV(b.dataset.v));
+document.fonts.ready.then(() => setV("A"));
+
+</script>
+</body>
+</html>
