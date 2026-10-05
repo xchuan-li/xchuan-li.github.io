@@ -60,7 +60,7 @@ export const portfolioSections: PortfolioSection[] = [
         status: "Project report · undergraduate reading assessment, 2021",
         kind: "Undergraduate project · September–December 2021",
         short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
-        figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 480, height: 320 },
+        figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 420, height: 286 },
         links: [{ label: "Read report", href: "/research/child-reading-assessment" }],
       },
       {
@@ -70,7 +70,7 @@ export const portfolioSections: PortfolioSection[] = [
         status: "Course research design · not administered",
         kind: "Undergraduate course project · Psychology of Reading · research design",
         short: "How do readers form a structural interpretation and revise it when later words conflict? Chinese and English sentence materials connect processing hypotheses with proposed reading and comprehension measures.",
-        figure: { src: "/images/research/garden-path-english-cover.svg", alt: "The sentence While the teacher taught the students waited outside, split into a possible initial attachment with the students as object and the complete structure with the students as subject.", caption: "Illustrative sentence and structural analyses.", width: 480, height: 320 },
+        figure: { src: "/images/research/garden-path-english-cover.svg", alt: "The sentence While the teacher taught the students waited outside, split into a possible initial attachment with the students as object and the complete structure with the students as subject.", caption: "Illustrative sentence and structural analyses.", width: 420, height: 286 },
         links: [{ label: "Read report", href: "/research/garden-path-processing" }],
       },
       {
@@ -147,7 +147,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Completed course experiment · Winter 2025–26 · analysis and report",
         short: "A source-order experiment on optional fact checking (49 participants recruited; 47 analysed). Our group developed the design and the class collected the data; I completed the analysis and report.",
         thumb: "/papers/fact-checking-study-thumb.png",
-        figure: {"src": "/images/research/fact-checking-procedure.svg", "alt": "Random assignment to Wikipedia then ChatGPT, or ChatGPT then Wikipedia, for optional checking across two rounds of ten questions.", "caption": "Source-order design from the course report. Both tools were presented as static screenshots; checks were optional.", "width": 420, "height": 286},
+        figure: {"src": "/images/research/fact-checking-means-cover.svg", "alt": "Mean number of questions checked (of 10) with standard deviations, by round and source order. Wikipedia first: 6.24 then 5.38. ChatGPT first: 5.78 then 7.00. The lines cross; neither difference was reliable.", "caption": "Table 1 of the report as a plot: means ± SD, Wikipedia first n = 29, ChatGPT first n = 18. Neither difference was reliable.", "width": 420, "height": 286},
         links: [
           { label: "Report", href: projects.psyStudy.href },
           { label: "PDF", href: "/papers/fact-checking-study.pdf" },

@@ -1,3 +1,7 @@
+## Project covers as journal figures, 5 October 2026 — latest XC instruction
+
+XC ▸ Covers should look like journal figures, like the moral-framing heatmap; content unchanged. The checking experiment shows its results, not the procedure ("流程图太简单"). AI ▸ Fact-checking cover is Table 1 as a means ± SD plot (`fact-checking-means-cover.svg`); child reading is a booktabs table; garden path is a numbered example with OBJ/SUBJ subscripts. Generator and before-versions: `design-demos/research-covers/`; provenance in `public/images/research/README.md`. A thumbnail table was rejected as unreadable at 196 px. Also fixed: `\cmidrule` leaked into the web report's Table 1 as "2-4(l)5-7"; `build_web.py` now strips it, and the generated HTML was patched the same way.
+
 ## Bio institution links, 5 October 2026 — latest XC instruction
 
 XC ▸ Restore the MPI and DFKI links lost in the 3 October bio rewrite. AI ▸ One sentence appended to `bioHtml`: the M.Sc. thesis runs within an ongoing PhD project at MPI CBS (linked), and the moral-framing project is co-supervised by UTN and DFKI (linked). The rest of the 3 October bio is unchanged; it still does not open with modality and does not mention the unpublished modal-choice project.

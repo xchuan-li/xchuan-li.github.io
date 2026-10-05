@@ -103,6 +103,7 @@ def latex_paper(slug: str, src_dir: str, tex_name: str, preamble: str):
     for pdf in (src / "figs").glob("*.pdf"):
         pdf_to_svg(pdf, figs / (pdf.stem + ".svg"))
     # \paragraph{X} is a run-in bold heading in the paper, not a numbered section
+    tex = re.sub(r"\\cmidrule(\([^)]*\))?\{[^}]*\}", "", tex)  # pandoc prints \cmidrule as text
     tex = re.sub(r"\\paragraph\{([^}]*)\}\s*", lambda m: "\\textbf{" + m.group(1) + "} ", tex)
     # custom item labels (\item[\textbf{H1}]) are kept as run-in bold text
     tex = re.sub(r"\\item\[(.*?)\]\s*", lambda m: "\\item " + m.group(1) + "~", tex)

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+<title id="title">An initial attachment and the complete English sentence structure</title>
+<desc id="desc">While the teacher taught the students waited outside. Initially, the students may be attached as the object of taught. In the complete structure, the students is the subject of waited outside. This illustrates a processing hypothesis.</desc>
+<g font-family="Georgia,serif" fill="#283648" text-anchor="middle" font-size="27"><text x="240" y="32">While the teacher taught</text><text x="240" y="65">the students waited outside.</text></g>
+<path d="M20 83H460" stroke="#ccd2d8"/>
+<g font-family="Arial,sans-serif" fill="#65717e" font-size="18"><text x="24" y="114">INITIAL</text><text x="24" y="217">COMPLETE</text></g>
+<text x="24" y="149" font-family="Georgia,serif" font-size="20" fill="#283648">[While the teacher taught [the students]] …</text>
+<text x="454" y="177" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#65717e">the students → OBJECT</text>
+<path d="M240 179V195M233 188L240 195L247 188" stroke="#7d8793" stroke-width="1.7" fill="none"/>
+<g font-family="Georgia,serif" font-size="24"><text x="24" y="249" fill="#283648">[While the teacher taught]</text><text x="24" y="281" fill="#426888">[the students]</text><text x="184" y="281" fill="#283648">[waited outside]</text></g>
+<path d="M24 288H172" stroke="#426888" stroke-width="2.4"/>
+<text x="454" y="312" text-anchor="end" font-family="Arial,sans-serif" font-size="18" fill="#426888">the students → SUBJECT</text>
+</svg>
