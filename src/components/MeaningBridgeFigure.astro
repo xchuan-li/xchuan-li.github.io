@@ -1,17 +1,16 @@
 ---
-// Fig. 1, 5 Oct 2026 (XC, draft A): a person and a language model say the same sentence.
+// Fig. 1, 5 Oct 2026 (XC, draft A): a human and a language model say the same everyday sentence.
 // Top: the linguist's segmentation. A bar is as tall as the smallest constituent containing
 // both sides (syntactic distance, Shen et al. 2018), so the heights give the whole tree:
-//   [I [[do n't] [know [whether [it ['s [the outage]]]]]]]
-// do|n't is a morpheme boundary (n't as inflection, Zwicky & Pullum 1983); it|'s is a clause
-// boundary inside one written word.
-// Bottom: real GPT-2 tokens and ids (gpt2-large tokenizer; Qwen2.5 splits the same way).
-// Equal bars: tokens are a flat sequence. Red: do + n't vs. don + 't.
+//   [Maybe [[the [kid s]] [took [my [[sun glass] es]]]]]
+// Bottom: real Llama 2 tokens and ids (32k SentencePiece vocabulary; checked with the
+// tokenizer shipped in TinyLlama-1.1B-Chat-v1.0). Equal bars: tokens are a flat sequence.
+// Red: cuts inside a written word (kid|s vs. k|ids; sun|glass|es vs. s|ung|lass|es).
 // Positions are frozen from design-demos/fig1-two-segmentations/draft.html (Patrick Hand, 26px).
 // No caption (XC).
 ---
 <figure class="mbfig" aria-label="Figure 1">
-  <svg viewBox="0 0 723 275" role="img"
+  <svg viewBox="0 0 741 275" role="img"
        aria-label="A human and a language model say the same sentence: I don't know whether it's the outage. The person's copy is divided by bars whose heights give its constituent structure; the model's copy is divided into GPT-2 tokens, shown with their ids, by bars of equal height.">
     <defs>
       <filter id="mb-boil" x="-5%" y="-5%" width="110%" height="110%">
@@ -23,11 +22,11 @@
     </defs>
 
     <g filter="url(#mb-boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M6 6 L716.9 4 L717.9 268.7 L4 269.7 Z" fill="#fff"/>
+      <path d="M6 6 L734.8 4 L735.8 268.7 L4 269.7 Z" fill="#fff"/>
 
       <!-- speech bubbles -->
-      <path d="M114 18 L542 16 L543 119.5 L112 121.5 L112 56 L92 48 L113 40 Z" fill="#fdfbf4" stroke-width="2.4"/>
-      <path d="M150 141.5 L584.9 139.5 L584.9 159.5 L604.9 169.5 L584.9 175.5 L585.9 209.5 L148 211.5 Z" fill="#fdfbf4" stroke-width="2.4"/>
+      <path d="M114 18 L535.9 16 L536.9 119.5 L112 121.5 L112 56 L92 48 L113 40 Z" fill="#fdfbf4" stroke-width="2.4"/>
+      <path d="M150 141.5 L602.8 139.5 L602.8 159.5 L622.8 169.5 L602.8 175.5 L603.8 209.5 L148 211.5 Z" fill="#fdfbf4" stroke-width="2.4"/>
 
       <!-- person -->
       <g transform="translate(-33,-150) scale(0.66)">
@@ -41,7 +40,7 @@
       </g>
 
       <!-- language model: the casing is open -->
-      <g transform="translate(275.7,-22.9) scale(0.6)">
+      <g transform="translate(293.6,-22.9) scale(0.6)">
         <path d="M631 290 L631 276" fill="none"/><circle cx="631" cy="271" r="5" fill="#e03a2f"/>
         <path d="M600 292 L664 290 L666 338 L598 340 Z" fill="#b9bec4"/>
         <path d="M612 306 L622 306 L622 316 L612 316 Z M640 306 L650 306 L650 316 L640 316 Z" fill="#141414"/>
@@ -59,55 +58,54 @@
 
     <!-- Text and bars sit outside the boil filter: the displacement map blurs small type. -->
     <g stroke-width="1.5" stroke="#141414">
-      <!-- person: bar height = depth of the boundary -->
-      <text class="w" x="128" y="54">I</text>
-      <line x1="141.6" x2="141.6" y1="33" y2="105.5"/>
-      <text class="w" x="149.1" y="54">do</text>
-      <line class="mark" x1="172.2" x2="172.2" y1="33" y2="66.5"/>
-      <text class="w" x="174.7" y="54">n't</text>
-      <line x1="207.2" x2="207.2" y1="33" y2="99"/>
-      <text class="w" x="214.7" y="54">know</text>
-      <line x1="267.2" x2="267.2" y1="33" y2="92.5"/>
-      <text class="w" x="274.7" y="54">whether</text>
-      <line x1="355.7" x2="355.7" y1="33" y2="86"/>
-      <text class="w" x="363.2" y="54">it</text>
-      <line x1="380.5" x2="380.5" y1="33" y2="79.5"/>
-      <text class="w" x="383" y="54">'s</text>
-      <line x1="404.8" x2="404.8" y1="33" y2="73"/>
-      <text class="w" x="412.3" y="54">the</text>
-      <line x1="450" x2="450" y1="33" y2="66.5"/>
-      <text class="w" x="457.5" y="54">outage</text>
-      <text class="w" x="520.4" y="54">.</text>
+      <!-- human: bar height = depth of the boundary -->
+      <text class="w" x="128" y="54">Maybe</text>
+      <line x1="193.2" x2="193.2" y1="33" y2="99"/>
+      <text class="w" x="200.7" y="54">the</text>
+      <line x1="238.4" x2="238.4" y1="33" y2="73"/>
+      <text class="w" x="245.9" y="54">kid</text>
+      <line class="mark" x1="275.2" x2="275.2" y1="33" y2="66.5"/>
+      <text class="w" x="277.7" y="54">s</text>
+      <line x1="295.2" x2="295.2" y1="33" y2="92.5"/>
+      <text class="w" x="302.7" y="54">took</text>
+      <line x1="350.9" x2="350.9" y1="33" y2="86"/>
+      <text class="w" x="358.4" y="54">my</text>
+      <line x1="394.6" x2="394.6" y1="33" y2="79.5"/>
+      <text class="w" x="402.1" y="54">sun</text>
+      <line class="mark" x1="436.7" x2="436.7" y1="33" y2="66.5"/>
+      <text class="w" x="439.2" y="54">glass</text>
+      <line class="mark" x1="490.4" x2="490.4" y1="33" y2="73"/>
+      <text class="w" x="492.9" y="54">es</text>
+      <text class="w" x="514.3" y="54">.</text>
 
-      <!-- model: GPT-2 tokens (leading spaces belong to the token) and their ids -->
-      <text class="w" x="164" y="177.5">I</text>
-      <line x1="174.1" x2="174.1" y1="156.5" y2="183.5"/>
-      <text class="w" x="178.1" y="177.5">&#160;don</text>
-      <line class="mark" x1="220.5" x2="220.5" y1="156.5" y2="183.5"/>
-      <text class="w" x="224.5" y="177.5">'t</text>
-      <line x1="241.7" x2="241.7" y1="156.5" y2="183.5"/>
-      <text class="w" x="245.7" y="177.5">&#160;know</text>
-      <line x1="300.7" x2="300.7" y1="156.5" y2="183.5"/>
-      <text class="w" x="304.7" y="177.5">&#160;whether</text>
-      <line x1="388.2" x2="388.2" y1="156.5" y2="183.5"/>
-      <text class="w" x="392.2" y="177.5">&#160;it</text>
-      <line x1="416.9" x2="416.9" y1="156.5" y2="183.5"/>
-      <text class="w" x="420.9" y="177.5">'s</text>
-      <line x1="439.2" x2="439.2" y1="156.5" y2="183.5"/>
-      <text class="w" x="443.2" y="177.5">&#160;the</text>
-      <line x1="483.4" x2="483.4" y1="156.5" y2="183.5"/>
-      <text class="w" x="487.4" y="177.5">&#160;outage</text>
-      <line x1="559.3" x2="559.3" y1="156.5" y2="183.5"/>
-      <text class="w" x="563.3" y="177.5">.</text>
+      <!-- model: Llama 2 tokens (leading spaces belong to the token) and their ids -->
+      <text class="w" x="164" y="177.5">Maybe</text>
+      <line x1="225.7" x2="225.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="229.7" y="177.5">&#160;the</text>
+      <line x1="269.9" x2="269.9" y1="156.5" y2="183.5"/>
+      <text class="w" x="273.9" y="177.5">&#160;k</text>
+      <line class="mark" x1="294.7" x2="294.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="298.7" y="177.5">ids</text>
+      <line x1="328.7" x2="328.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="332.7" y="177.5">&#160;took</text>
+      <line x1="383.3" x2="383.3" y1="156.5" y2="183.5"/>
+      <text class="w" x="387.3" y="177.5">&#160;my</text>
+      <line x1="426" x2="426" y1="156.5" y2="183.5"/>
+      <text class="w" x="430" y="177.5">&#160;s</text>
+      <line class="mark" x1="450" x2="450" y1="156.5" y2="183.5"/>
+      <text class="w" x="454" y="177.5">ung</text>
+      <line class="mark" x1="491.7" x2="491.7" y1="156.5" y2="183.5"/>
+      <text class="w" x="495.7" y="177.5">lass</text>
+      <line class="mark" x1="536.8" x2="536.8" y1="156.5" y2="183.5"/>
+      <text class="w" x="540.8" y="177.5">es</text>
+      <line x1="565.2" x2="565.2" y1="156.5" y2="183.5"/>
+      <text class="w" x="569.2" y="177.5">.</text>
       <g class="id" text-anchor="middle">
-        <text x="167.1" y="196.5">40</text><text x="197.3" y="196.5">836</text><text x="231.1" y="196.5">470</text>
-        <text x="271.2" y="196.5">760</text><text x="344.4" y="196.5">1771</text><text x="402.6" y="196.5">340</text>
-        <text x="428.1" y="196.5">338</text><text x="461.3" y="196.5">262</text><text x="521.4" y="196.5">46281</text>
-        <text x="566.1" y="196.5">13</text>
+        <text x="192.9" y="196.5">7198</text><text x="247.8" y="196.5">278</text><text x="282.3" y="196.5">413</text><text x="311.7" y="196.5">4841</text><text x="356" y="196.5">3614</text><text x="404.7" y="196.5">590</text><text x="438" y="196.5">269</text><text x="470.9" y="196.5">686</text><text x="514.3" y="196.5">605</text><text x="549.5" y="196.5">267</text><text x="580" y="196.5">29889</text>
       </g>
 
       <text class="lbl" x="66" y="148.2" text-anchor="middle">humans</text>
-      <text class="lbl" x="660.9" y="256.7" text-anchor="middle">language models</text>
+      <text class="lbl" x="678.8" y="256.7" text-anchor="middle">language models</text>
     </g>
   </svg>
 </figure>

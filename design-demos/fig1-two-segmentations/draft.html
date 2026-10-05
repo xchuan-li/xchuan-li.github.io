@@ -90,7 +90,7 @@
       <g id="human"></g>
       <g id="model"></g>
       <g id="ghost" class="ghost"></g>
-      <text id="lab1" class="hand" text-anchor="middle" font-size="16">people</text>
+      <text id="lab1" class="hand" text-anchor="middle" font-size="16">humans</text>
       <text id="lab2" class="hand" text-anchor="middle" font-size="16">language models</text>
     </svg>
     <figcaption id="cap"></figcaption>
@@ -110,22 +110,24 @@ const el = (tag, attrs, parent) => {
 // Human: units with the syntactic distance of the boundary *before* each unit.
 // gap: horizontal space before the unit (small inside a written word).
 const human = [
-  { t:"I" },
-  { t:"do",      d:7, gap:15 },
-  { t:"n't",     d:1, gap:5, mark:true },
-  { t:"know",    d:6, gap:15 },
-  { t:"whether", d:5, gap:15 },
-  { t:"it",      d:4, gap:15 },
-  { t:"'s",      d:3, gap:5 },
-  { t:"the",     d:2, gap:15 },
-  { t:"outage",  d:1, gap:15 },
-  { t:".",       gap:1 },
+  // [Maybe [[the [kid s]] [took [my [[sun glass] es]]]]]; red = a cut inside a written word
+  { t:"Maybe" },
+  { t:"the",   d:6, gap:15 },
+  { t:"kid",   d:2, gap:15 },
+  { t:"s",     d:1, gap:5, mark:true },
+  { t:"took",  d:5, gap:15 },
+  { t:"my",    d:4, gap:15 },
+  { t:"sun",   d:3, gap:15 },
+  { t:"glass", d:1, gap:5, mark:true },
+  { t:"es",    d:2, gap:5, mark:true },
+  { t:".",     gap:1 },
 ];
-// GPT-2 tokens and ids (gpt2-large tokenizer, 5 Oct 2026). Leading spaces belong to the token.
+// Llama 2 tokenizer (32k SentencePiece; checked 5 Oct 2026 via TinyLlama-1.1B-Chat-v1.0,
+// which ships the Llama 2 tokenizer). Leading spaces (U+2581) belong to the token.
 const model = [
-  { t:"I", id:40 }, { t:" don", id:836 }, { t:"'t", id:470, mark:true }, { t:" know", id:760 },
-  { t:" whether", id:1771 }, { t:" it", id:340 }, { t:"'s", id:338 }, { t:" the", id:262 },
-  { t:" outage", id:46281 }, { t:".", id:13 },
+  { t:"Maybe", id:7198 }, { t:" the", id:278 }, { t:" k", id:413 }, { t:"ids", id:4841, mark:true },
+  { t:" took", id:3614 }, { t:" my", id:590 }, { t:" s", id:269 }, { t:"ung", id:686, mark:true },
+  { t:"lass", id:605, mark:true }, { t:"es", id:267, mark:true }, { t:".", id:29889 },
 ];
 
 const FS = 26, STEP = 6.5, PAD = 16;
@@ -186,7 +188,7 @@ function draw(v) {
       el("line", { x1:x, x2:x, y1:top2, y2:base2 + 6,
         stroke:u.mark ? RED : INK, "stroke-width":1.5 }, $("model"));
       // Variant B: where the linguist's boundaries fall, and how deep. Unanswered.
-      if (v === "B" && human[i].d) el("line", { x1:x, x2:x, y1:base2 + 30, y2:base2 + 30 + human[i].d * 4.5,
+      if (v === "B" && human[i] && human[i].d) el("line", { x1:x, x2:x, y1:base2 + 30, y2:base2 + 30 + human[i].d * 4.5,
         stroke:INK, "stroke-width":1.2, "stroke-dasharray":"2 2.5", opacity:.5 }, $("ghost"));
       x += 4;
     }
