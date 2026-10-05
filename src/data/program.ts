@@ -11,9 +11,9 @@ export const identity =
 export const identityLong =
   "How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?";
 
-/** Homepage background and motivation, revised with XC on 3 October 2026. */
+/** Homepage background and motivation, revised with XC on 3 October 2026; MPI CBS and DFKI links restored 5 October 2026. */
 export const bioHtml =
-  "I am a master’s student in Human and Artificial Intelligence at the University of Technology Nuremberg, with a background in philosophy. My interest in language and reasoning grew from studying logic and Leibniz, learning languages, and asking how formal accounts of meaning relate to the processes through which people understand and use language.";
+  "I am a master’s student in Human and Artificial Intelligence at the University of Technology Nuremberg, with a background in philosophy. My interest in language and reasoning grew from studying logic and Leibniz, learning languages, and asking how formal accounts of meaning relate to the processes through which people understand and use language. My master’s thesis, on modal language in preschool children, is run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig; my project on moral framing and language models’ dilemma choices is co-supervised by UTN and <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">DFKI</a>.";
 
 /** Human and artificial cognition have independent scientific value. */
 export const programmeHtml =

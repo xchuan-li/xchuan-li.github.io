@@ -1,3 +1,7 @@
+## Bio institution links, 5 October 2026 — latest XC instruction
+
+XC ▸ Restore the MPI and DFKI links lost in the 3 October bio rewrite. AI ▸ One sentence appended to `bioHtml`: the M.Sc. thesis runs within an ongoing PhD project at MPI CBS (linked), and the moral-framing project is co-supervised by UTN and DFKI (linked). The rest of the 3 October bio is unchanged; it still does not open with modality and does not mention the unpublished modal-choice project.
+
 ## Fig. 1: two segmentations, 5 October 2026 — current authority for the homepage figure
 
 XC ▸ The person should say a concrete sentence divided by linguistic structure, and the robot the same sentence divided as a tokenizer divides it: different structures, both use language. Chose draft A; no caption.
