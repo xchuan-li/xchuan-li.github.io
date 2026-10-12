@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>雪球：两种风格</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Jost:wght@400;500&display=swap">
+<style>
+body{margin:0;padding:24px 16px;font:14px/1.6 -apple-system,"PingFang SC",sans-serif;color:#141414;background:#fff}
+.wrap{max-width:600px;margin:0 auto}
+.note{color:#6b7177;font-size:13px;margin:0 0 6px}
+h2{font-size:15px;font-weight:500;margin:28px 0 6px}
+svg{display:block;width:100%;height:auto}
+.A .w{font-family:"Patrick Hand","Comic Sans MS",cursive;font-size:16px}
+.A .bw{font-family:"Patrick Hand","Comic Sans MS",cursive;font-size:12px}
+.B .w{font-family:Jost,"Futura","Avenir Next",sans-serif;font-size:12.5px;letter-spacing:.02em}
+.B .bw{font-family:Jost,"Futura","Avenir Next",sans-serif;font-size:10px;letter-spacing:.03em}
+.frame{border:1px solid #e3e5e8;padding:6px}
+</style></head><body><div class="wrap">
+<p class="note">草稿：同一个推雪球场景，两种风格。滚过的词整块粘到雪球上；碎片 k + ids 合成 kids，s + ung + lass + es 合成 sunglasses。几块雪沿坡滚回去；到句号停住，然后重来。</p>
+
+<h2>A · Jason Windsor 风（延续 Fig. 1 的手绘抖动线）</h2>
+<div class="frame"><svg class="A" viewBox="0 0 460 300" role="img" aria-label="Style A">
+<defs><filter id="boil" x="-5%" y="-5%" width="110%" height="110%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n"><animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<g filter="url(#boil)" stroke="#141414" stroke-linejoin="round" stroke-linecap="round">
+<path d="M10 286 L450 198 L450 300 L10 300 Z" fill="#fdfbf4" stroke="none"/>
+<path d="M10 286 L450 198" fill="none" stroke-width="3"/>
+<path d="M60 40 l4 0 M62 38 l0 4 M380 60 l4 0 M382 58 l0 4 M250 30 l4 0 M252 28 l0 4" stroke-width="1.6"/>
+</g>
+<g class="tok" stroke-width="1.4" stroke="#141414"></g>
+<g class="robot" filter="url(#boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"><g class="body">
+<path d="M631 290 L631 276" fill="none"/><circle cx="631" cy="271" r="5" fill="#e03a2f"/>
+<path d="M600 292 L664 290 L666 338 L598 340 Z" fill="#b9bec4"/>
+<path d="M612 306 L622 306 L622 316 L612 316 Z M640 306 L650 306 L650 316 L640 316 Z" fill="#141414"/>
+<path d="M614 330 Q631 324 648 329" fill="none" stroke-width="2.4"/>
+<path d="M588 340 L676 338 L678 412 L586 414 Z" fill="#b9bec4"/>
+<path d="M604 355 L633 380 L658 355 M604 355 L611 397 L633 380 L658 398" fill="none" stroke-width="2.4"/>
+<g fill="#fff" stroke-width="2.4"><circle cx="604" cy="355" r="6"/><circle cx="658" cy="355" r="6"/><circle cx="633" cy="380" r="6"/><circle cx="611" cy="397" r="6"/><circle cx="658" cy="398" r="6"/></g>
+<path d="M678 338 L722 326 L724 402 L678 412 Z" fill="#9aa0a6" stroke-width="2.6"/>
+<path d="M612 414 L606 436 M652 413 L660 436" fill="none" stroke-width="4"/></g></g>
+<g class="dyn"></g>
+</svg></div>
+
+<h2>B · Noritake 风（黑白、匀称细线、大块留白）</h2>
+<div class="frame"><svg class="B" viewBox="0 0 460 300" role="img" aria-label="Style B">
+<path d="M10 286 L450 198" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round"/>
+<g class="tok" stroke-width="1" stroke="#141414"></g>
+<g class="robot" stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><g class="body">
+<path d="M631 300 L631 284" fill="none"/><circle cx="631" cy="279" r="5" fill="#141414" stroke="none"/>
+<rect x="600" y="300" width="62" height="44" rx="12" fill="#fff"/>
+<circle cx="619" cy="320" r="3.6" fill="#141414" stroke="none"/><circle cx="643" cy="320" r="3.6" fill="#141414" stroke="none"/>
+<path d="M625 333 Q631 336 637 333" fill="none" stroke-width="1.8"/>
+<rect x="604" y="350" width="54" height="56" rx="10" fill="#141414" stroke="none"/>
+<path d="M618 406 L614 434 M644 406 L650 434" fill="none" stroke-width="2.4"/>
+<path d="M608 434 L620 434 M644 434 L656 434" fill="none" stroke-width="2.4"/></g></g>
+<g class="dyn"></g>
+</svg></div>
+<p class="note">A 的机器人沿用 Fig. 1 里那台（打开的机身、红天线）；B 按 Noritake 的习惯重画：圆角方头、两个黑点眼睛、实心黑身体。B 里还没拼成整词的碎片用灰色，保持黑白。</p>
+</div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const WORDS=[['Maybe','w'],['the','w'],['k','f'],['ids','w'],['took','w'],['my','w'],['s','f'],['ung','f'],['lass','f'],['es','w'],['.','e']];
+const CUT=new Set([2,6,7,8]);
+const ground=x=>286-(x-10)*0.2;
+const el=(tag,a)=>{const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);return e};
+const STY={
+ A:{svg:document.querySelector('svg.A'),filter:'url(#boil)',ink:'#141414',frag:'#e2574c',unsaid:'#c4c7cb',ballFill:'#fff',ballStroke:3,arm:3.2,robotScale:0.44,lean:-11,bodyAnchor:[650,436],bit:'#9aa0a6'},
+ B:{svg:document.querySelector('svg.B'),filter:null,ink:'#141414',frag:'#9aa0a6',unsaid:'#d3d5d8',ballFill:'#fff',ballStroke:1.8,arm:2,robotScale:0.5,lean:-13,bodyAnchor:[632,436],bit:'#141414'}};
+function layout(s){const tok=s.svg.querySelector('.tok');tok.innerHTML='';s.toks=[];let cur=132;
+WORDS.forEach((w,i)=>{const t=el('text',{x:cur,y:ground(cur)+24,class:'w',stroke:'none'});t.textContent=w[0];tok.appendChild(t);const wd=t.getComputedTextLength();const c=cur+wd/2;t.setAttribute('y',ground(c)+24);s.toks.push({w:w[0],k:w[1],x:c,el:t});
+if(i<WORDS.length-1){const bx=cur+wd+4,gy=ground(bx);const l=el('line',{x1:bx,x2:bx,y1:gy+9,y2:gy+27});if(CUT.has(i))l.setAttribute('stroke',s===STY.A?'#e2574c':'#9aa0a6');tok.appendChild(l)}cur+=wd+8})}
+function stuck(got){const items=[];let i=0;while(i<got.length){const t=got[i];if(t.k==='f'||t.w==='ids'||t.w==='es'){let j=i;while(j<got.length&&got[j].k==='f')j++;const closer=j<got.length&&(got[j].w==='ids'||got[j].w==='es')?got[j]:null;
+if(closer){items.push({w:got.slice(i,j+1).map(u=>u.w).join(''),frag:false,key:'m'+i});i=j+1}else{for(let k=i;k<j;k++)items.push({w:got[k].w,frag:true,key:'f'+k});i=j}continue}
+if(t.k!=='e')items.push({w:t.w,frag:false,key:'w'+i});i++}return items}
+const POS={};let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+function pos(key){if(!POS[key]){const n=Object.keys(POS).length;POS[key]={phi:n*2.399+0.6,rf:0.6,rot:(rnd()-0.5)*24}}return POS[key]}
+function draw(s,p,drops){const dyn=s.svg.querySelector('.dyn');dyn.innerHTML='';const x0=s.toks[0].x,x1=s.toks[s.toks.length-1].x,x=x0+(x1-x0)*p;
+const got=s.toks.filter(t=>x>=t.x);s.toks.forEach(t=>t.el.setAttribute('fill',x>=t.x?s.ink:s.unsaid));
+const items=stuck(got);const R=18+9.5*Math.sqrt(Math.max(items.length,0.4));const gy=ground(x),cy=gy-R;const theta=(x-x0)/R;
+const ball=el('circle',{cx:x,cy:cy,r:R,fill:s.ballFill,stroke:s.ink,'stroke-width':s.ballStroke});if(s.filter)ball.setAttribute('filter',s.filter);dyn.appendChild(ball);
+items.forEach(it=>{const q=pos(it.key);const a=q.phi+theta;const tx=x+Math.cos(a)*q.rf*R,ty=cy+Math.sin(a)*q.rf*R;const deg=q.rot+theta*180/Math.PI;
+const t=el('text',{class:'bw',x:tx,y:ty,'text-anchor':'middle','dominant-baseline':'central',fill:it.frag?s.frag:s.ink,transform:`rotate(${deg.toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)})`});t.textContent=it.w;dyn.appendChild(t)});
+const has=w=>got.some(t=>t.w===w);
+if(has('took')&&!drops.some(d=>d.tag==='a'))for(let k=0;k<2;k++)drops.push({tag:'a',x:x-R*0.6+k*6,y:cy+R*0.4,vy:-1,vx:-0.7,r:2.6+k});
+if(has('es')&&!drops.some(d=>d.tag==='b'))for(let k=0;k<3;k++)drops.push({tag:'b',x:x-R*0.5+k*5,y:cy+R*0.3,vy:-1.2,vx:-0.8,r:2.2+k*0.8});
+const [bx,by]=s.bodyAnchor;const ax=x-R-30,ay=ground(ax);s.svg.querySelector('.body').setAttribute('transform',`translate(${ax},${ay}) rotate(${s.lean}) scale(${s.robotScale}) translate(${-bx},${-by})`);
+const hx=ax+(s===STY.A?8:6),hy=ay-(s===STY.A?38:34);const arms=el('path',{d:`M${hx} ${hy} L${x-R*0.93} ${cy-R*0.1} M${hx} ${hy+10} L${x-R*0.97} ${cy+R*0.24}`,stroke:s.ink,'stroke-width':s.arm,'stroke-linecap':'round',fill:'none'});if(s.filter)arms.setAttribute('filter',s.filter);dyn.appendChild(arms);
+drops.forEach(d=>{d.vy+=0.18;d.x+=d.vx;d.y+=d.vy;const g2=ground(d.x)-d.r;if(d.y>g2){d.y=g2;d.vx=Math.min(d.vx,-0.9);d.vy=0}
+const c=el('circle',{cx:d.x,cy:d.y,r:d.r,fill:s===STY.A?'#fff':'#fff',stroke:s.ink,'stroke-width':s===STY.A?1.6:1.2});if(s.filter)c.setAttribute('filter',s.filter);dyn.appendChild(c)})}
+const ROLL=10000,HOLD=2600;let t0=null;const dropsA=[],dropsB=[];
+function frame(now){if(t0===null){t0=now;dropsA.length=0;dropsB.length=0;for(const k in POS)delete POS[k];seed=7}const e=now-t0;const p=Math.min(e/ROLL,1);draw(STY.A,p,dropsA);draw(STY.B,p,dropsB);if(e>ROLL+HOLD)t0=null;requestAnimationFrame(frame)}
+function start(){layout(STY.A);layout(STY.B);requestAnimationFrame(frame)}
+document.fonts.ready.then(start);
+</script></body></html>

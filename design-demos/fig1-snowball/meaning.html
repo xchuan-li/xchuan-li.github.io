@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>雪球：意义本身</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=ZCOOL+KuaiLe&display=swap">
+<style>
+body{margin:0;padding:24px 16px;font:14px/1.6 -apple-system,"PingFang SC",sans-serif;color:#141414;background:#fff}
+.wrap{max-width:600px;margin:0 auto}
+.note{color:#6b7177;font-size:13px}
+svg{display:block;width:100%;height:auto}
+.frame{border:1px solid #e3e5e8;padding:6px}
+.w{font-family:"Patrick Hand","ZCOOL KuaiLe",cursive;font-size:17px}
+.zh .w{font-family:"ZCOOL KuaiLe","Patrick Hand",cursive;font-size:17px}
+.lang{font-family:"Patrick Hand","ZCOOL KuaiLe",cursive;font-size:15px;fill:#6b7177}
+.q{font-family:"Patrick Hand",cursive;font-size:13px;fill:#141414}
+</style></head><body><div class="wrap">
+<p class="note">草稿（A 风格）：地上的词是输入，雪球里是这句话描述的情境，随词进来一点点搭起来；虚线＝还没定的部分。德语和中文轮流：同一幅画，搭的顺序不同。机器人已合上。</p>
+<div class="frame"><svg id="fig" viewBox="0 0 460 300" role="img" aria-label="A robot pushes a snowball uphill along a sentence. Inside the snowball, the situation the sentence describes is built up piece by piece; parts not yet determined are dashed. German and Chinese alternate.">
+<defs><filter id="boil" x="-8%" y="-8%" width="116%" height="116%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n"><animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<g filter="url(#boil)" stroke="#141414" stroke-linejoin="round" stroke-linecap="round">
+<path d="M10 286 L450 198 L450 300 L10 300 Z" fill="#fdfbf4" stroke="none"/>
+<path d="M10 286 L450 198" fill="none" stroke-width="3"/>
+<path d="M60 40 l4 0 M62 38 l0 4 M380 60 l4 0 M382 58 l0 4 M250 30 l4 0 M252 28 l0 4" stroke-width="1.6"/>
+</g>
+<text class="lang" x="20" y="30" id="lang"></text>
+<g id="tok" stroke-width="1.4" stroke="#141414"></g>
+<g id="robot" filter="url(#boil)" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"><g id="body">
+<path d="M631 290 L631 276" fill="none"/><circle cx="631" cy="271" r="5" fill="#e03a2f"/>
+<path d="M600 292 L664 290 L666 338 L598 340 Z" fill="#b9bec4"/>
+<path d="M612 306 L622 306 L622 316 L612 316 Z M640 306 L650 306 L650 316 L640 316 Z" fill="#141414"/>
+<path d="M616 330 Q631 324 646 329" fill="none" stroke-width="2.4"/>
+<path d="M592 340 L670 338 L672 412 L590 414 Z" fill="#b9bec4"/>
+<path d="M612 360 L650 359 M612 374 L640 373" fill="none" stroke-width="2.4"/>
+<path d="M612 414 L606 436 M650 413 L658 436" fill="none" stroke-width="4"/></g></g>
+<g id="dyn"></g>
+</svg></div>
+</div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('fig'),tokG=document.getElementById('tok'),dyn=document.getElementById('dyn'),body=document.getElementById('body'),langT=document.getElementById('lang');
+const ground=x=>286-(x-10)*0.2;
+const el=(tag,a)=>{const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);return e};
+const LANGS=[
+ {name:'Deutsch',zh:false,words:['Ich','habe','einen','Apfel','gegessen','.'],ev:[{p:1},{done:'check',act:'slot'},{obj:'one'},{obj:'apple'},{act:'solid',obj:'core'},{}]},
+ {name:'中文',zh:true,words:['我','吃','了','一个','苹果','。'],ev:[{p:1},{act:'solid',obj:'slot',done:'slot'},{done:'check'},{obj:'one'},{obj:'core'},{}]}];
+let L=0,toks=[];
+function layout(){tokG.innerHTML='';toks=[];const lg=LANGS[L];svg.classList.toggle('zh',lg.zh);langT.textContent=lg.name;let cur=150;
+lg.words.forEach((w,i)=>{const t=el('text',{x:cur,y:ground(cur)+25,class:'w',stroke:'none'});t.textContent=w;tokG.appendChild(t);const wd=t.getComputedTextLength();const c=cur+wd/2;t.setAttribute('y',ground(c)+25);toks.push({w,x:c,el:t});
+if(i<lg.words.length-1){const bx=cur+wd+5,gy=ground(bx);tokG.appendChild(el('line',{x1:bx,x2:bx,y1:gy+10,y2:gy+29}))}cur+=wd+11})}
+function apply(st,e){for(const k in e)st[k]=e[k]}
+const F='url(#boil)',INK='#141414';
+function g(attrs){const e=el('g',Object.assign({stroke:INK,'stroke-linecap':'round','stroke-linejoin':'round',filter:F},attrs||{}));dyn.appendChild(e);return e}
+function scene(st,cx,cy,k){
+ const G=g();
+ if(st.p){const px=cx-26*k,py=cy+6*k;G.appendChild(el('circle',{cx:px,cy:py-15*k,r:6*k,fill:'#f2cfa4','stroke-width':2}));
+  G.appendChild(el('path',{d:`M${px} ${py-9*k} L${px} ${py+6*k} M${px} ${py-4*k} L${px+8*k} ${py-7*k} M${px} ${py-4*k} L${px-7*k} ${py+1*k} M${px} ${py+6*k} L${px-5*k} ${py+16*k} M${px} ${py+6*k} L${px+5*k} ${py+16*k}`,fill:'none','stroke-width':2.2}))}
+ const ox=cx+22*k,oy=cy+8*k;
+ if(st.act){const d=`M${cx-16*k} ${cy-3*k} Q${cx-3*k} ${cy-14*k} ${cx+11*k} ${cy-1*k}`;
+  G.appendChild(el('path',{d,fill:'none','stroke-width':2.2,'stroke-dasharray':st.act==='slot'?'3 4':'none'}));
+  G.appendChild(el('path',{d:`M${cx+5*k} ${cy-5*k} L${cx+11*k} ${cy-1*k} L${cx+5*k} ${cy+2*k}`,fill:'none','stroke-width':2.2,'stroke-dasharray':st.act==='slot'?'3 4':'none'}));
+  if(st.act==='slot'){const t=el('text',{class:'q',x:cx-3*k,y:cy-17*k,'text-anchor':'middle',stroke:'none'});t.textContent='?';dyn.appendChild(t)}}
+ if(st.obj==='slot'||st.obj==='one'){G.appendChild(el('circle',{cx:ox,cy:oy,r:8*k,fill:'none','stroke-width':2,'stroke-dasharray':'3 3'}));if(st.obj==='slot'){const t=el('text',{class:'q',x:ox,y:oy+4*k,'text-anchor':'middle',stroke:'none'});t.textContent='?';dyn.appendChild(t)}}
+ if(st.obj==='apple'){G.appendChild(el('circle',{cx:ox,cy:oy,r:8.5*k,fill:'#e2574c','stroke-width':2}));G.appendChild(el('path',{d:`M${ox} ${oy-8*k} L${ox+1*k} ${oy-13*k}`,fill:'none','stroke-width':2}));G.appendChild(el('path',{d:`M${ox+1*k} ${oy-11*k} Q${ox+7*k} ${oy-15*k} ${ox+8*k} ${oy-10*k} Q${ox+4*k} ${oy-8*k} ${ox+1*k} ${oy-11*k} Z`,fill:'#7cb342','stroke-width':1.6}))}
+ if(st.obj==='core'){G.appendChild(el('path',{d:`M${ox-5*k} ${oy-8*k} Q${ox-1*k} ${oy} ${ox-5*k} ${oy+8*k} L${ox+5*k} ${oy+8*k} Q${ox+1*k} ${oy} ${ox+5*k} ${oy-8*k} Z`,fill:'#fdf3d8','stroke-width':2}));G.appendChild(el('path',{d:`M${ox} ${oy-8*k} L${ox+1*k} ${oy-13*k}`,fill:'none','stroke-width':2}))}
+ const dx=cx+16*k,dy=cy-26*k;
+ if(st.done==='slot'){G.appendChild(el('rect',{x:dx-7*k,y:dy-7*k,width:14*k,height:14*k,rx:3,fill:'none','stroke-width':1.8,'stroke-dasharray':'3 3'}));const t=el('text',{class:'q',x:dx,y:dy+4*k,'text-anchor':'middle',stroke:'none'});t.textContent='?';dyn.appendChild(t)}
+ if(st.done==='check')G.appendChild(el('path',{d:`M${dx-6*k} ${dy} L${dx-1*k} ${dy+5*k} L${dx+8*k} ${dy-6*k}`,fill:'none','stroke-width':2.6}));
+}
+const drops=[];
+function draw(p){dyn.innerHTML='';const lg=LANGS[L];const x0=toks[0].x,x1=toks[toks.length-1].x,x=x0+(x1-x0)*p;
+const st={};let n=0;toks.forEach((t,i)=>{const on=x>=t.x;t.el.setAttribute('fill',on?INK:'#c4c7cb');if(on){apply(st,lg.ev[i])}});
+n=['p','act','obj','done'].filter(k=>st[k]).length;
+const R=22+7.5*Math.sqrt(n)*2.2,gy=ground(x),cy=gy-R,theta=(x-x0)/R;
+const ball=el('circle',{cx:x,cy,r:R,fill:'#fff',stroke:INK,'stroke-width':3,filter:F});dyn.appendChild(ball);
+for(let i=0;i<3;i++){const a=theta+i*2.1;dyn.appendChild(el('path',{d:`M${x+Math.cos(a)*(R-5)} ${cy+Math.sin(a)*(R-5)} A${R-5} ${R-5} 0 0 1 ${x+Math.cos(a+0.25)*(R-5)} ${cy+Math.sin(a+0.25)*(R-5)}`,fill:'none',stroke:'#c4c7cb','stroke-width':1.6,filter:F}))}
+scene(st,x,cy,R/56);
+if(p>0.55&&!drops.length)for(let k=0;k<3;k++)drops.push({x:x-R*0.7+k*5,y:cy+R*0.5,vy:-1,vx:-0.8,r:2.4+k*0.7});
+const ax=x-R-30,ay=ground(ax);body.setAttribute('transform',`translate(${ax},${ay}) rotate(-11) scale(0.44) translate(-631,-436)`);
+const hx=ax+10,hy=ay-38;dyn.appendChild(el('path',{d:`M${hx} ${hy} L${x-R*0.93} ${cy-R*0.08} M${hx} ${hy+10} L${x-R*0.97} ${cy+R*0.24}`,stroke:INK,'stroke-width':3.2,'stroke-linecap':'round',fill:'none',filter:F}));
+drops.forEach(d=>{d.vy+=0.18;d.x+=d.vx;d.y+=d.vy;const g2=ground(d.x)-d.r;if(d.y>g2){d.y=g2;d.vx=Math.min(d.vx,-0.9);d.vy=0}dyn.appendChild(el('circle',{cx:d.x,cy:d.y,r:d.r,fill:'#fff',stroke:INK,'stroke-width':1.6,filter:F}))})}
+const ROLL=9000,HOLD=2600;let t0=null;
+function frame(now){if(t0===null){t0=now;drops.length=0;layout()}const e=now-t0;draw(Math.min(e/ROLL,1));if(e>ROLL+HOLD){t0=null;L=(L+1)%LANGS.length}requestAnimationFrame(frame)}
+document.fonts.ready.then(()=>requestAnimationFrame(frame));
+</script></body></html>

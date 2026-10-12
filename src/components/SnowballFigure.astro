@@ -1,0 +1,191 @@
+---
+// Meaning snowball, 12 Oct 2026 (XC; Vault A2s34): a robot leans into a snowball and pushes it uphill
+// along an English sentence with a relative clause, "The dog that the kids found had wings."
+// Inside the ball the scene the sentence describes is built up word by word; dashed parts with "?"
+// are not yet determined (after "that" something happened to the dog, but who and what is open
+// until "kids" and "found"; after "had" the dog has something, until "wings"). The ball grows with
+// each word; twice a few pieces fall off and roll back, and the ball shrinks a little.
+// The robot is closed (no network inside). Illustration, not data.
+// Earlier drafts: design-demos/fig1-snowball/. Reduced motion shows the final state.
+---
+<figure class="snowfig">
+  <svg viewBox="0 74 430 226" role="img"
+       aria-label="A robot pushes a snowball uphill along the sentence The dog that the kids found had wings. Inside the ball the scene is built up word by word: a dog, then the kids, then the finding, then wings on the dog. A few pieces fall off and roll back down.">
+    <defs>
+      <filter id="sn-boil" x="-8%" y="-8%" width="116%" height="116%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="1" result="n">
+          <animate attributeName="seed" values="1;4;8" dur="1.2s" calcMode="discrete" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2"/>
+      </filter>
+    </defs>
+    <g filter="url(#sn-boil)" stroke="#141414" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M10 272 L450 184 L450 300 L10 300 Z" fill="#fdfbf4" stroke="none"/>
+      <path d="M10 272 L450 184" fill="none" stroke-width="2.4"/>
+    </g>
+    <g class="sn-tok" transform="rotate(-11.31 10 272)" stroke="#141414" stroke-width="1.3"></g>
+    <g class="sn-dyn"></g>
+  </svg>
+</figure>
+
+<script is:inline>
+(() => {
+  const fig = document.currentScript.previousElementSibling;
+  const NS = "http://www.w3.org/2000/svg";
+  const tokG = fig.querySelector(".sn-tok"), dyn = fig.querySelector(".sn-dyn");
+  const INK = "#141414", DIM = "#c4c7cb", F = "url(#sn-boil)";
+  const WORDS = ["The", "dog", "that", "the", "kids", "found", "had", "wings", "."];
+  // What each word adds to the scene in the ball.
+  const EV = [{ dog: "slot" }, { dog: "dog" }, { act: "slot" }, { kids: "slot" }, { kids: "kids" },
+              { act: "found" }, { prop: "slot" }, { prop: "wings" }, {}];
+  const DROP = { 4: 2, 6: 3 };              // after "kids" and "had", pieces fall off
+  const SA = Math.sin(Math.atan(0.2)), CA = Math.cos(Math.atan(0.2));
+  const ground = (x) => 272 - (x - 10) * 0.2;
+  const along = (d) => [10 + d * CA, 272 - d * SA];
+  const el = (tag, a, parent) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); (parent || dyn).appendChild(e); return e; };
+  const grp = (a) => el("g", Object.assign({ stroke: INK, "stroke-linecap": "round", "stroke-linejoin": "round", filter: F }, a || {}));
+  const txt = (s, a) => { const t = el("text", Object.assign({ stroke: "none", "text-anchor": "middle" }, a)); t.textContent = s; return t; };
+
+  let toks = [];
+  function layout() {
+    tokG.innerHTML = ""; toks = []; let d = 76;
+    WORDS.forEach((w, i) => {
+      const t = el("text", { x: 10 + d, y: 272 + 21, class: "sn-w", stroke: "none" }, tokG); t.textContent = w;
+      const wd = t.getComputedTextLength();
+      toks.push({ d: d + wd / 2, el: t });
+      if (i < WORDS.length - 1) el("line", { x1: 10 + d + wd + 4, x2: 10 + d + wd + 4, y1: 272 + 7, y2: 272 + 25 }, tokG);
+      d += wd + 8;
+    });
+  }
+
+  // ---- the scene inside the ball; k = 1 when R = 47 ----
+  function q(x, y, k) { txt("?", { x, y: y + 4.5 * k, class: "sn-q", "font-size": 13 * k }); }
+  function slot(x, y, r, k) { el("circle", { cx: x, cy: y, r, fill: "none", "stroke-width": 1.6, "stroke-dasharray": "3 3" }, grp()); q(x, y, k); }
+  function kid(x, base, k, h) {
+    const G = grp({ "stroke-width": 1.7 });
+    el("path", { d: `M${x - 3.5 * k} ${base} L${x - 2.5 * k} ${base - 7 * k} M${x + 3.5 * k} ${base} L${x + 2.5 * k} ${base - 7 * k}`, fill: "none" }, G);
+    el("path", { d: `M${x - 5 * k} ${base - 7 * k} L${x + 5 * k} ${base - 7 * k} L${x + 4 * k} ${base - (16 + h) * k} L${x - 4 * k} ${base - (16 + h) * k} Z`, fill: "#e2574c" }, G);
+    el("circle", { cx: x, cy: base - (21.5 + h) * k, r: 5.5 * k, fill: "#f2cfa4" }, G);
+    el("path", { d: `M${x - 5.5 * k} ${base - (23 + h) * k} L${x - 4 * k} ${base - (28.5 + h) * k} L${x - 1 * k} ${base - (25 + h) * k} L${x + 1.5 * k} ${base - (29 + h) * k} L${x + 3.5 * k} ${base - (25 + h) * k} L${x + 5.5 * k} ${base - (27 + h) * k} L${x + 5.5 * k} ${base - (23 + h) * k}`, fill: "#e8b33c", "stroke-width": 1.3 }, G);
+  }
+  function dog(X, Y, k) {
+    const G = grp({ "stroke-width": 1.8 });
+    el("path", { d: `M${X - 9 * k} ${Y + 5 * k} L${X - 10 * k} ${Y + 14 * k} M${X - 4 * k} ${Y + 6 * k} L${X - 4 * k} ${Y + 14 * k} M${X + 5 * k} ${Y + 6 * k} L${X + 5 * k} ${Y + 14 * k} M${X + 10 * k} ${Y + 5 * k} L${X + 11 * k} ${Y + 14 * k}`, fill: "none" }, G);
+    el("path", { d: `M${X - 12 * k} ${Y - 1 * k} Q${X - 19 * k} ${Y - 5 * k} ${X - 18 * k} ${Y - 12 * k}`, fill: "none" }, G);
+    el("ellipse", { cx: X, cy: Y, rx: 13 * k, ry: 7 * k, fill: "#d9a96a" }, G);
+    el("circle", { cx: X + 14 * k, cy: Y - 7 * k, r: 6.5 * k, fill: "#d9a96a" }, G);
+    el("path", { d: `M${X + 10 * k} ${Y - 12 * k} Q${X + 7 * k} ${Y - 5 * k} ${X + 10 * k} ${Y - 3 * k} Q${X + 12 * k} ${Y - 7 * k} ${X + 12 * k} ${Y - 12 * k} Z`, fill: "#8a5a32", "stroke-width": 1.3 }, G);
+    el("circle", { cx: X + 16.5 * k, cy: Y - 8.5 * k, r: 1.1 * k, fill: INK, stroke: "none" }, G);
+    el("circle", { cx: X + 20.3 * k, cy: Y - 6.5 * k, r: 1.4 * k, fill: INK, stroke: "none" }, G);
+  }
+  function wings(X, Y, k) {
+    const G = grp({ "stroke-width": 1.6 });
+    const w = (dx, s) => el("path", { d: `M${X + dx * k} ${Y - 5 * k} Q${X + (dx - 9 * s) * k} ${Y - 20 * k} ${X + (dx + 6 * s) * k} ${Y - 27 * k} Q${X + (dx + 3 * s) * k} ${Y - 20 * k} ${X + (dx + 9 * s) * k} ${Y - 19 * k} Q${X + (dx + 4 * s) * k} ${Y - 13 * k} ${X + (dx + 8 * s) * k} ${Y - 11 * k} Q${X + (dx + 3 * s) * k} ${Y - 7 * k} ${X + (dx + 2 * s) * k} ${Y - 5 * k} Z`, fill: "#fff" }, G);
+    w(-6, 1); w(-1, 1);
+  }
+  function scene(st, cx, cy, k) {
+    const dx = cx + 12 * k, dy = cy + 10 * k;          // dog
+    const kx = cx - 25 * k, base = cy + 21 * k;         // kids
+    if (st.kids === "slot") slot(kx + 4 * k, cy + 8 * k, 11 * k, k);
+    if (st.kids === "kids") { kid(kx - 4 * k, base, k, 0); kid(kx + 9 * k, base, k, -3); }
+    if (st.act) {
+      const dash = st.act === "slot" ? "3 3" : "none";
+      const G = grp({ "stroke-width": 1.8, fill: "none" });
+      el("path", { d: `M${cx - 15 * k} ${cy - 6 * k} Q${cx - 6 * k} ${cy - 14 * k} ${cx - 1 * k} ${cy + 1 * k}`, "stroke-dasharray": dash }, G);
+      el("path", { d: `M${cx - 5 * k} ${cy - 3 * k} L${cx - 1 * k} ${cy + 1 * k} L${cx + 2 * k} ${cy - 4 * k}`, "stroke-dasharray": dash }, G);
+      if (st.act === "slot") q(cx - 9 * k, cy - 15 * k, k);
+    }
+    if (st.dog === "slot") slot(dx + 3 * k, dy - 2 * k, 13 * k, k);
+    if (st.dog === "dog") dog(dx, dy, k);
+    if (st.prop === "slot") slot(dx - 2 * k, dy - 19 * k, 8 * k, k);
+    if (st.prop === "wings") wings(dx, dy, k);
+  }
+
+  // ---- the robot, closed, leaning into the ball; local units are Fig. 1's robot, hip at (0,0) ----
+  function robot(hx, hy, lean, phase, moving, C, R) {
+    const s = 0.5, c = Math.cos(lean), sn = Math.sin(lean);
+    const P = (x, y) => [hx + s * (x * c - y * sn), hy + s * (x * sn + y * c)];
+    const poly = (pts) => "M" + pts.map((p) => P(p[0], p[1]).map((v) => v.toFixed(1)).join(" ")).join(" L") + " Z";
+    const G = grp({ "stroke-width": 2 });
+    for (const i of [0, 1]) {                           // legs: hip to foot on the slope
+      const [px, py] = P(i ? 18 : -16, -1);
+      const sw = moving ? Math.sin(phase + i * Math.PI) : (i ? 0.4 : -0.4);
+      const fx = px - 4 + 6 * sw, lift = moving ? Math.max(0, -Math.cos(phase + i * Math.PI)) * 3 : 0;
+      el("path", { d: `M${px} ${py} L${fx} ${ground(fx) - 1 - lift} L${fx + 4} ${ground(fx + 4) - 1 - lift}`, fill: "none", "stroke-width": 2.8 }, G);
+    }
+    el("path", { d: poly([[-39, -74], [39, -76], [41, -2], [-41, 0]]), fill: "#b9bec4" }, G);
+    el("path", { d: `M${P(-19, -54)} L${P(19, -55)} M${P(-19, -40)} L${P(9, -41)}`, fill: "none", "stroke-width": 1.4 }, G);
+    el("path", { d: poly([[-31, -122], [33, -124], [35, -76], [-33, -74]]), fill: "#b9bec4" }, G);
+    el("path", { d: poly([[-15, -108], [-5, -108], [-5, -98], [-15, -98]]) + poly([[13, -108], [23, -108], [23, -98], [13, -98]]), fill: INK, "stroke-width": 1 }, G);
+    el("path", { d: `M${P(-12, -86)} L${P(22, -87)} M${P(0, -124)} L${P(0, -137)}`, fill: "none", "stroke-width": 1.6 }, G);
+    const [ax, ay] = P(0, -142); el("circle", { cx: ax, cy: ay, r: 2.6, fill: "#e03a2f", "stroke-width": 1.4 }, G);
+    for (const sy of [-64, -44]) {                      // arms: shoulder to the nearest point of the ball
+      const [sx, syw] = P(36, sy), vx = sx - C[0], vy = syw - C[1], L = Math.hypot(vx, vy);
+      el("path", { d: `M${sx} ${syw} L${C[0] + vx / L * (R - 1)} ${C[1] + vy / L * (R - 1)}`, fill: "none", "stroke-width": 2.6 }, G);
+    }
+    return P;
+  }
+
+  // ---- animation ----
+  const ROLL = 10000, HOLD = 2600, LEAN = 0.36;
+  let R = 24, Rt = 24, spin = 0, lastD = null, fired = new Set(), drops = [];
+  function reset() { R = Rt = 24; spin = 0; lastD = null; fired = new Set(); drops = []; }
+  function draw(p, instant) {
+    dyn.innerHTML = "";
+    const d0 = toks[0].d, d1 = toks[toks.length - 1].d, d = d0 + (d1 - d0) * p;
+    const st = {}; let n = 0;
+    toks.forEach((t, i) => { const on = d >= t.d; t.el.setAttribute("fill", on ? INK : DIM); if (on) { Object.assign(st, EV[i]); n = i + 1; } });
+    for (const i in DROP) if (n > +i && !fired.has(i)) { fired.add(i); if (!instant) for (let j = 0; j < DROP[i]; j++) drops.push({ new: true, j, r: 2.3 + j * 0.7 }); }
+    Rt = 24 + 4.6 * n - 2.5 * fired.size;
+    R = instant ? Rt : R + (Rt - R) * 0.07;
+    const [gx, gy] = along(d), C = [gx - R * SA, gy - R * CA];
+    if (lastD !== null) spin += (d - lastD) / R; lastD = d;
+
+    // robot: place the hip so the arms are about 12 units long
+    const moving = p > 0 && p < 1;
+    let hx = C[0] - R - 22;
+    for (let it = 0; it < 4; it++) {
+      const hy = ground(hx) - 17, s = 0.5;
+      const sx = hx + s * (36 * Math.cos(LEAN) + 64 * Math.sin(LEAN)), sy = hy + s * (36 * Math.sin(LEAN) - 64 * Math.cos(LEAN));
+      hx += Math.hypot(sx - C[0], sy - C[1]) - R - 12;
+    }
+    const bob = moving ? Math.abs(Math.sin(spin * 2.2)) * 1.2 : 0;
+    robot(hx, ground(hx) - 17 - bob, LEAN, spin * 2.2, moving, C, R);
+
+    const B = grp({ "stroke-width": 2.6 });
+    el("circle", { cx: C[0], cy: C[1], r: R, fill: "#fff" }, B);
+    for (let i = 0; i < 3; i++) {
+      const a = spin + i * 2.1, r = R - 5;
+      el("path", { d: `M${C[0] + Math.cos(a) * r} ${C[1] + Math.sin(a) * r} A${r} ${r} 0 0 1 ${C[0] + Math.cos(a + 0.28) * r} ${C[1] + Math.sin(a + 0.28) * r}`, fill: "none", stroke: DIM, "stroke-width": 1.6 }, B);
+    }
+    scene(st, C[0], C[1], R / 47);
+
+    drops.forEach((o) => {
+      if (o.new) { o.new = false; o.x = C[0] - R * 0.75 + o.j * 4; o.y = C[1] + R * 0.45 - o.j * 3; o.vx = -0.6 - o.j * 0.15; o.vy = -0.8; }
+      o.vy += 0.18; o.x += o.vx; o.y += o.vy;
+      const g2 = ground(o.x) - o.r; if (o.y > g2) { o.y = g2; o.vx = Math.min(o.vx * 1.01, -0.9); o.vy = 0; }
+      if (o.x > -10) el("circle", { cx: o.x, cy: o.y, r: o.r, fill: "#fff", stroke: INK, "stroke-width": 1.5, filter: F });
+    });
+  }
+  let t0 = null;
+  function frame(now) {
+    if (t0 === null) { t0 = now; reset(); }
+    const e = now - t0; draw(Math.min(e / ROLL, 1), false);
+    if (e > ROLL + HOLD) t0 = null;
+    requestAnimationFrame(frame);
+  }
+  function start() {
+    layout();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reset(); draw(1, true); }
+    else requestAnimationFrame(frame);
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+})();
+</script>
+
+<style>
+  .snowfig { margin:0; }
+  .snowfig svg { display:block; width:100%; height:auto; overflow:visible; }
+  .snowfig :global(.sn-w) { font-family:"Patrick Hand", "Comic Sans MS", cursive; font-size:17px; }
+  .snowfig :global(.sn-q) { font-family:"Patrick Hand", "Comic Sans MS", cursive; fill:#141414; }
+</style>

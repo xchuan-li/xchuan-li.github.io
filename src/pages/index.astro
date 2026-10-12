@@ -1,9 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import { identityLongHtml, bioHtml, programmeHtml } from "../data/program";
+import { identityLongHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
 import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
+import SnowballFigure from "../components/SnowballFigure.astro";
 
 // 12 Oct 2026 (XC): one trunk. Research = moral framing, modified nouns, thesis;
 // the fact-checking experiment sits under Earlier research experience.
@@ -100,6 +101,12 @@ const timeline = [
 
     <p class="bio" set:html={bioHtml} />
     <p class="bio" set:html={programmeHtml} />
+
+    <!-- 12 Oct 2026 (XC): the meaning snowball, text beside the animation; English only. -->
+    <div class="snowball-block">
+      <p class="bio snowball-text" set:html={snowballHtml} />
+      <SnowballFigure />
+    </div>
 
     <!-- Output type and publication status are separate from research topic. -->
     <section class="sec selected-research" id="selected-research" aria-label="Research and papers">
@@ -234,6 +241,9 @@ const timeline = [
   .field-kicker .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
   .field-kicker span[aria-hidden] { margin:0 0.15em; color:var(--color-text-dim); }
   .bio + .bio { margin-top:1.1rem; }
+  .snowball-block { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:1.6rem; align-items:center; margin:2rem 0 0; }
+  .snowball-block .bio { margin:0; }
+  @media (max-width: 680px) { .snowball-block { grid-template-columns:1fr; gap:1rem; } }
   .bio :global(a) { color:var(--color-accent); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:0.17em; }
   .bio :global(a:hover) { text-decoration-thickness:2px; }
   .bio { margin:2rem 0 0; font-size:1.02rem; line-height:1.75; color:var(--color-text); text-wrap:pretty; }

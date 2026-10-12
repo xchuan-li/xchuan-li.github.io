@@ -11,14 +11,18 @@ export const identity =
 export const identityLong =
   "How do people and artificial systems understand the concepts, evidence, and norms in language, and turn them into inferences and choices?";
 
-/** Homepage background and motivation, revised with XC on 3 October 2026; MPI CBS and DFKI links restored 5 October 2026. */
+/** Homepage background and motivation, revised with XC on 3 October 2026; MPI CBS and DFKI links restored 5 October 2026. 12 Oct 2026 (XC): all three homepage paragraphs shortened; the origin clause (logic, learning languages) and the developmental-order sentence dropped (the thesis card under Research still links the thesis to LM work). Late evening (XC): two closing sentences link the two projects and lead into the paradigm paragraph. Live 12 Oct 2026 (XC). */
 export const bioHtml =
-  "I am a master’s student in Human and Artificial Intelligence at the University of Technology Nuremberg, with a background in philosophy. My interest in language and reasoning grew from studying logic and Leibniz, learning languages, and asking how formal accounts of meaning relate to the processes through which people understand and use language. My master’s thesis, on modal language in preschool children, is run within an ongoing PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig; the order in which children come to distinguish possibility from necessity can then serve as a target for studying how language models learn the same distinction. My project on moral framing and language models’ dilemma choices is supervised at the <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">German Research Center for Artificial Intelligence (DFKI)</a>.";
+  "I am a master’s student in Human and Artificial Intelligence at the University of Technology Nuremberg, with a background in philosophy. My master’s thesis, on modal language in preschool children, is run within a PhD project at <a href=\"https://www.cbs.mpg.de/\" rel=\"noopener\">the Max Planck Institute for Human Cognitive and Brain Sciences</a> in Leipzig; my project on moral framing and dilemma choices in language models is supervised at the <a href=\"https://www.dfki.de/en/web\" rel=\"noopener\">German Research Center for Artificial Intelligence (DFKI)</a>. The thesis looks at children and the DFKI project at language models; both ask how a structure in language, a modal word or a moral frame, shapes what is understood and chosen. My interest is in how people and language models understand and process linguistic structure.";
 
 /** Human and artificial cognition have independent scientific value. */
-/** Paradigm sentence (XC, 12 Oct 2026): one trunk, told from the level of the fields, not "I". Candidate 1 of 3; XC to confirm wording. */
+/** Paradigm sentence (XC, 12 Oct 2026): one trunk, told from the level of the fields, not "I". Candidate 1 of 3, shortened the same evening; live 12 Oct 2026 (XC). */
 export const programmeHtml =
-  "Linguistics and cognitive science provide precise questions about meaning and decades of carefully measured human behaviour. Taken over to language models, those questions become controlled experiments: tests of behaviour show what a model does, and interpretability methods show where in the model it happens.";
+  "Linguistics and cognitive science offer precise questions about meaning and decades of measured human behaviour. In language models, those questions become controlled experiments: behavioural tests show what a model does, interpretability shows where in the model it happens.";
+
+/** The meaning snowball (XC, 12 Oct 2026; Vault A2s34): shown on the homepage between the paradigm sentence and Research, beside SnowballFigure. English only (XC); opens with the comparison (XC: the bare metaphor was too abrupt) and drops "I study", which repeated the bio. Live 12 Oct 2026 (XC). */
+export const snowballHtml =
+  "If we think of meaning as a snowball, it grows with each word as a sentence unfolds, and some of it falls away on the way. How far does the structure of a language decide what sticks, when, and what is lost?";
 
 /** The current research question, in plain language. */
 export const currentQuestion =
