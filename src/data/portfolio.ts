@@ -61,7 +61,7 @@ export const portfolioSections: PortfolioSection[] = [
         tier: "research", track: "lm", topic: "Mechanistic interpretability",
         title: "Moral framing and dilemma choices in language models",
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
-        kind: "Project · 2026–27 · supervised at DFKI · manuscript in preparation",
+        kind: "Project · 2026–27 · supervised at the German Research Center for Artificial Intelligence (DFKI) · manuscript in preparation",
         short: "When moral wording changes a model\u2019s choice, what changes: the weighing of outcomes, a tendency to answer with action, or some other process? And how far can internal interventions tell these apart?",
         figure: {"src": "/images/research/framing-carry.svg", "previewSrc": "/images/research/framing-carry-cover.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
         links: [{ label: "Overview", href: projects.latentControl.href }],

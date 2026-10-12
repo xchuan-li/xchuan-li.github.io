@@ -102,8 +102,8 @@ const research: Record<string, Entry> = {
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",
-    row: "supervised at DFKI; causal interventions in 7B–14B models, utilitarian-framing branch",
-    context: "Supervised at DFKI",
+    row: "supervised at the German Research Center for Artificial Intelligence (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
+    context: "Supervised at the German Research Center for Artificial Intelligence (DFKI)",
     when: "2026–27",
     note: "Investigated how moral wording affects dilemma choices. Designed and ran controlled experiments and activation interventions in 7B and 14B models for the utilitarian-framing branch, with checks of answer labels, option positions, and task understanding; manuscript in preparation.",
   },
