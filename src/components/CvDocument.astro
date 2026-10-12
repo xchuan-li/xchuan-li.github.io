@@ -1,37 +1,46 @@
 ---
-// Renders one CV variant from src/data/cv.ts. Layout after early-career linguistics CVs
-// (e.g. Hening Wang, Tübingen): title bold left, context italic below, dates italic right,
-// Education shows training; research entries keep work and outputs together.
+// Renders one CV variant from src/data/cv.ts. Layout after Titus von der Malsburg's LaTeX CV
+// (XC, 12 Oct 2026): Palatino (TeX Gyre Pagella), centred name, contact table between
+// two rules, plain section headings, a date column on the left and the entry on the right.
+// Three registers (XC, 12 Oct 2026): bold = school, project or employer; italic = degree, organisation
+// or role; roman = what was done. Projects titles stay roman to mark them as secondary.
 import * as cv from "../data/cv";
 import type { Variant } from "../data/cv";
 interface Props { variant: Variant; }
 const { variant } = Astro.props;
 const order = cv.researchOrder[variant];
 const pdf = variant === "general" ? "/cv.pdf" : undefined;
+const country = (place: string) => place.split(", ").pop();
 ---
 <article class="cvd">
-  <header class="cvd-head">
-    <div>
-      <h1>Xiaochuan Li</h1>
-      <p>M.Sc. student, Human and Artificial Intelligence<br />University of Technology Nuremberg</p>
-    </div>
-    <div class="cvd-contact">
-      <a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a><br />
-      <a href="https://xchuan-li.github.io">xchuan-li.github.io</a><br />
-      <a href="https://github.com/xchuan-li">github.com/xchuan-li</a><br />
-      <span>Last updated: October 2026</span>
-    </div>
+  <header class="cvd-title">
+    <h1>Xiaochuan Li</h1>
+    {pdf && <p class="no-print cvd-pdf"><a href={pdf}>Download PDF</a></p>}
   </header>
-  {pdf && <p class="no-print cvd-pdf"><a href={pdf}>Download PDF ↗</a></p>}
-  <p class="cvd-interests">{cv.interests[variant]}</p>
+
+  <div class="cvd-contact">
+    <dl>
+      <dt>Affiliation:</dt><dd>M.Sc. student<br />Human and Artificial Intelligence<br />University of Technology Nuremberg</dd>
+      <dt>E-mail:</dt><dd class="tt"><a href="mailto:xiaochuan.li@utn.de">xiaochuan.li@utn.de</a></dd>
+    </dl>
+    <dl>
+      <dt>Homepage:</dt><dd class="tt"><a href="https://xchuan-li.github.io">xchuan-li.github.io</a></dd>
+      <dt>GitHub:</dt><dd class="tt"><a href="https://github.com/xchuan-li">github.com/xchuan-li</a></dd>
+    </dl>
+  </div>
+
+  <p class="cvd-interests" set:html={cv.interests[variant]} />
 
   <section>
     <h2>Education</h2>
     {cv.education.map((e) => (
-      <div class="ent">
-        <div class="ent-top"><b>{e.title}</b><span>{e.place}</span></div>
-        <div class="ent-sub"><i>{e.context}</i><i>{e.when}</i></div>
-        {cv.pick(e.note, variant) && <p class="ent-note">{cv.pick(e.note, variant)}</p>}
+      <div class="row">
+        <div class="when">{e.when}</div>
+        <div class="what">
+          <div><b>{e.title}</b>, {country(e.place)}</div>
+          <div><i>{e.context}</i></div>
+          {cv.pick(e.note, variant) && <div>{cv.pick(e.note, variant)}</div>}
+        </div>
       </div>
     ))}
   </section>
@@ -39,110 +48,113 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   <section>
     <h2>Research</h2>
     {order.current.map((id) => { const e = cv.researchEntry(id); return (
-      <div class="ent research-ent">
-        <div class="ent-top"><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b><i>{e.when}</i></div>
-        <div class="ent-sub"><i>{e.context}</i></div>
-        {cv.pick(e.note, variant) && <p class="ent-note">{cv.pick(e.note, variant)}</p>}
-        {(e.citation || e.links) && <p class="ent-note output">
-          {e.citation && <span>{e.citation} </span>}
-          {e.links?.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}
-        </p>}
+      <div class="row">
+        <div class="when">{e.when}</div>
+        <div class="what">
+          <div><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b></div>
+          <div><i>{e.context}</i></div>
+          {cv.pick(e.note, variant) && <div>{cv.pick(e.note, variant)}</div>}
+          {(e.citation || e.links) && <div>
+            {e.citation && <span>{e.citation} </span>}
+            {e.links?.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}
+          </div>}
+        </div>
       </div>
     ); })}
   </section>
 
-  <!-- 12 Oct 2026 (XC): secondary work is "Projects", set in a lighter register: regular-weight
-       titles, smaller muted text, one descriptive line, no indent. -->
   <section>
     <h2>Projects</h2>
-    <ul class="projs">
-      {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
-        <li class="proj">
-          <div class="proj-top"><span class="proj-t">{e.href ? <a href={e.href}>{e.title}</a> : e.title}</span><span class="proj-when">{e.when}</span></div>
-          <p class="proj-line"><i>{e.context}.</i> {cv.pick(e.note, variant)}
+    {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
+      <div class="row">
+        <div class="when">{e.when}</div>
+        <div class="what">
+          <div>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</div>
+          <div><i>{e.context}.</i> {cv.pick(e.note, variant)}
             {e.citation && <span> {e.citation}</span>}
             {e.links && <span> {e.links.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}</span>}
-          </p>
-        </li>
-      ); })}
-    </ul>
+          </div>
+        </div>
+      </div>
+    ); })}
   </section>
 
   <section>
     <h2>Employment</h2>
     {cv.employment.filter((e) => !e.variants || e.variants.includes(variant)).map((e) => (
-      <div class="ent">
-        <div class="ent-top"><b>{e.title}</b><span>{e.place}</span></div>
-        <div class="ent-sub"><i>{e.context}</i><i>{e.when}</i></div>
-        {cv.pick(e.note, variant) && <p class="ent-note">{cv.pick(e.note, variant)}</p>}
+      <div class="row">
+        <div class="when">{e.when}</div>
+        <div class="what">
+          <div><b>{e.title}</b>, {country(e.place)}</div>
+          <div><i>{e.context}</i></div>
+          {cv.pick(e.note, variant) && <div>{cv.pick(e.note, variant)}</div>}
+        </div>
       </div>
     ))}
   </section>
 
   <section>
     <h2>Skills and languages</h2>
-    {cv.skills[variant].map((s) => <div class="kv"><span>{s.k}</span><span>{s.v}</span></div>)}
-    <div class="kv"><span>Languages</span><span>{cv.languages}</span></div>
+    {cv.skills[variant].map((s) => <div class="row"><div class="when">{s.k}</div><div class="what">{s.v}</div></div>)}
+    <div class="row"><div class="when">Languages</div><div class="what">{cv.languages}</div></div>
   </section>
 </article>
 
 <style>
-  .cvd { font-size:0.94rem; line-height:1.5; color:#16181d; }
-  .cvd a { color:inherit; text-decoration:none; }
-  .cvd a:hover { color:var(--color-accent); text-decoration:underline; }
-  .cvd-head { display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem; }
-  h1 { font-size:1.9rem; font-weight:600; letter-spacing:-0.01em; margin:0 0 0.25rem; line-height:1.1; }
-  .cvd-head p { margin:0; color:var(--color-text-muted); }
-  .cvd-contact { text-align:right; font-size:0.84rem; line-height:1.55; color:var(--color-text-muted); }
-  .cvd-contact span { color:var(--color-text-dim); }
-  .cvd-pdf { margin:0.8rem 0 0; font:0.78rem/1 var(--font-mono); }
-  .cvd-pdf a { color:var(--color-accent); }
-  .cvd-interests { margin:1.1rem 0 0; }
-  section { margin-top:1.55rem; }
-  h2 { font-size:0.8rem; font-weight:600; font-variant-caps:all-small-caps; letter-spacing:0.08em; font-size:1.05rem; margin:0 0 0.55rem; padding-bottom:0.2rem; border-bottom:1px solid #16181d; }
-  .ent { margin:0 0 0.55rem; break-inside:avoid; }
-  .ent-top, .ent-sub { display:flex; justify-content:space-between; gap:1rem; }
-  .ent-top span, .ent-top i, .ent-sub i:last-child:not(:first-child) { white-space:nowrap; }
-  .ent-top > :last-child { color:var(--color-text-muted); }
-  .ent-sub { color:var(--color-text-muted); font-size:0.9rem; }
-  .ent-note { margin:0.1rem 0 0; padding-left:0.9rem; font-size:0.86rem; color:#3b4049; }
-  .ent-note a { color:var(--color-accent); }
-  .research-ent { margin-bottom:0.8rem; }
-  .prog { margin:0 0 0.9rem; break-inside:avoid; }
-  .prog .ent-sub { margin-bottom:0.35rem; }
-  .prow { display:grid; grid-template-columns:7.4rem minmax(0,1fr); gap:0.6rem; padding-left:0.9rem; margin:0 0 0.22rem; font-size:0.86rem; color:#3b4049; }
-  .pm { font:500 0.66rem/1.9 var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; color:var(--color-text-dim); }
-  .pt a { font-weight:600; color:#16181d; }
-  .st { color:var(--color-text-dim); font-style:italic; }
-  .projs { list-style:none; margin:0; padding:0; }
-  .proj { margin:0 0 0.42rem; break-inside:avoid; }
-  .proj-top { display:flex; justify-content:space-between; gap:1rem; }
-  .proj-t { font-size:0.9rem; font-weight:400; }
-  .proj-when { font-size:0.82rem; font-style:italic; color:var(--color-text-muted); white-space:nowrap; }
-  .proj-line { margin:0.04rem 0 0; font-size:0.8rem; line-height:1.45; color:var(--color-text-muted); }
-  .proj-line i { color:var(--color-text-dim); }
-  .proj-line a { color:var(--color-accent); }
-  .kv { display:grid; grid-template-columns:8.8rem minmax(0,1fr); gap:0.8rem; font-size:0.9rem; margin:0 0 0.25rem; }
-  .kv span:first-child { font-weight:600; white-space:nowrap; }
-  @media (max-width:560px) {
-    .cvd-head { flex-direction:column; align-items:flex-start; }
-    .cvd-contact { text-align:left; }
-    .ent-top, .ent-sub { flex-direction:column; gap:0; }
-    .kv { grid-template-columns:1fr; gap:0; }
-    .proj-top { flex-direction:column; gap:0; }
-    .prow { grid-template-columns:1fr; gap:0; }
+  .cvd {
+    --cv-serif: "TeX Gyre Pagella", Palatino, "Palatino Linotype", "Book Antiqua", "URW Palladio L", P052, serif;
+    --cv-mono: "Latin Modern Mono", "CMU Typewriter Text", Courier, "Courier New", monospace;
+    font-family: var(--cv-serif); font-feature-settings: normal;
+    font-size: 1.02rem; line-height: 1.36; color: #000;
+  }
+  .cvd a { color: inherit; text-decoration: none; }
+  .cvd a:hover { color: var(--color-accent); text-decoration: underline; }
+  .cvd b { font-weight: 700; }
+
+  .cvd-title { text-align: center; margin: 1.2rem 0 1.8rem; }
+  h1 { font-family: var(--cv-serif); font-size: 1.62rem; font-weight: 400; letter-spacing: 0; line-height: 1.2; margin: 0; }
+  .cvd-pdf { margin: 0.9rem 0 0; font-size: 0.92rem; }
+  .cvd-pdf a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  .cvd-contact { display: flex; justify-content: space-between; gap: 1.6rem; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 0.55rem 0.45rem; }
+  .cvd-contact dl { display: grid; grid-template-columns: max-content minmax(0, auto); column-gap: 1rem; row-gap: 0; margin: 0; align-content: start; }
+  .cvd-contact dl:first-child { flex: 0 1 auto; }
+  .cvd-contact dl:last-child { flex: 0 0 auto; }
+  .cvd-contact dt, .cvd-contact dd { margin: 0; }
+  .tt { font-family: var(--cv-mono); font-size: 0.93em; }
+
+  .cvd-interests { margin: 1.6rem 0 0; }
+  section { margin-top: 1.7rem; }
+  h2 { font-family: var(--cv-serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0; line-height: 1.25; margin: 0 0 0.85rem; padding: 0; border: 0; }
+
+  .row { display: grid; grid-template-columns: 9.6rem minmax(0, 1fr); column-gap: 1.1rem; padding-left: 0.45rem; margin: 0 0 0.8rem; break-inside: avoid; }
+  .row:last-child { margin-bottom: 0; }
+  .when { white-space: nowrap; }
+
+  @media (max-width: 560px) {
+    .cvd-contact { flex-direction: column; gap: 0; }
+    .cvd-contact dl { grid-template-columns: 6.4rem minmax(0, 1fr); }
+    .row { grid-template-columns: 1fr; padding-left: 0; margin-bottom: 0.7rem; }
+    .when { white-space: normal; }
+  }
+
+  /* Print overrides live in the scoped block so they win over the screen rules above. */
+  @media print {
+    .cvd { line-height: 1.3; }
+    .cvd-title { margin: 0.2cm 0 1.3rem; }
+    section { margin-top: 1.2rem; }
+    h2 { margin-bottom: 0.65rem; break-after: avoid; }
+    .row { margin-bottom: 0.4rem; }
   }
 </style>
 
 <style is:global>
   @media print {
     @page {
-      size: A4; margin: 1.5cm 1.8cm 1.7cm;
-      @bottom-left { content: "Xiaochuan Li · CV"; font: 9px Georgia, serif; color: #666; }
-      @bottom-right { content: counter(page) " / " counter(pages); font: 9px Georgia, serif; color: #666; }
+      size: A4; margin: 1.8cm 2.1cm 1.6cm;
+      @top-right { content: "XIAOCHUAN LI — CV\2003\2003" counter(page); font: 8.6pt Palatino, "TeX Gyre Pagella", serif; letter-spacing: 0.06em; color: #000; vertical-align: bottom; padding-bottom: 0.45cm; }
     }
-    html { font-size: 15px; }
-    .cvd section { margin-top: 1.15rem; }
-    .cvd .ent { margin-bottom: 0.65rem; }
+    @page :first { @top-right { content: none; } }
+    html { font-size: 10.6pt; }
   }
 </style>

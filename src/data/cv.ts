@@ -9,6 +9,8 @@
 // on 3 Oct 2026; listed under Employment in general and cogsci;
 // omitted only from the focused lm variant. Original data no longer survives.
 
+import { identityLong, programmeHtml } from "./program";
+
 export type Variant = "general" | "lm" | "cogsci";
 type ByVariant<T> = T | Partial<Record<Variant, T>> & { default?: T };
 
@@ -35,11 +37,13 @@ export interface Entry {
   links?: { label: string; href: string }[];
 }
 
-// 12 Oct 2026 (XC): one trunk. The opening line is the same in all variants; variants change emphasis only.
+// 12 Oct 2026 (XC): the opening follows the homepage — the lead question, then the paradigm
+// paragraph — imported from program.ts so the two cannot drift. Variants add one sentence.
+const opening = `${identityLong} ${programmeHtml}`;
 export const interests: Record<Variant, string> = {
-  general: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Research interests: language, reasoning, and human and artificial cognition.",
-  lm: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Methods: activation patching, low-rank analysis, probing, controlled evaluation.",
-  cogsci: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Experience with how human data are produced, from children’s language to adult behavioural experiments.",
+  general: opening,
+  lm: `${opening} Methods: activation patching, low-rank analysis, probing, controlled evaluation.`,
+  cogsci: `${opening} Experience with how human data are produced, from children’s language to adult behavioural experiments.`,
 };
 
 // 12 Oct 2026 (XC): education notes state what each stage trained, not selected coursework;
@@ -56,11 +60,11 @@ export const education: (Entry & { place: string })[] = [
   },
   {
     id: "marburg", title: "University of Marburg", place: "Marburg, Germany",
-    context: "German for graduate study", when: "2024 – 2025",
+    context: "German for graduate study", when: "Oct. 2024 – Jul. 2025",
   },
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",
-    context: "B.A. Philosophy", when: "2020 – 2024",
+    context: "B.A. Philosophy", when: "Sep. 2020 – Jun. 2024",
     note: "Formal logic and proof, including modal logic and Gödel’s incompleteness theorems; philosophy of language; psychology of reading.",
   },
 ];
@@ -69,14 +73,14 @@ const research: Record<string, Entry> = {
   typicality: {
     id: "typicality", title: "Typicality in referent choice: what the description leaves open",
     href: "/research/typicality-in-referent-choice",
-    context: "Independent theoretical study", when: "2026",
+    context: "Independent theoretical study", when: "Sep. 2026",
     note: "Distinguishes three conditions for typicality in referent choice and the limits of what a forced-choice task can establish.",
     citation: "Li, X. (2026). Working paper.",
     links: [{ label: "lingbuzz/010343", href: "https://lingbuzz.net/lingbuzz/010343" }, { label: "doi:10.5281/zenodo.22855036", href: "https://doi.org/10.5281/zenodo.22855036" }],
   },
   undergraduate: {
     id: "undergraduate", title: "Leibniz’s logical system and characteristica universalis",
-    context: "Undergraduate thesis · Shenzhen University", when: "2024",
+    context: "Undergraduate thesis · Shenzhen University", when: "Dec. 2023 – May 2024",
     note: "Analysed Leibniz’s metaphysics, logic and proposal for a universal symbolic language.",
   },
   threeWays: {
@@ -90,13 +94,13 @@ const research: Record<string, Entry> = {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
     method: "Human study", status: "In planning.",
     row: 'modal language in preschool children, part of a PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig.',
-    context: "M.Sc. thesis, design stage · part of a PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig", when: "2026 –",
+    context: "M.Sc. thesis, design stage · part of a PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig", when: "Sep. 2026 –",
     note: "Asks how preschool children come to distinguish possibility from necessity in language, and how this relates to their nonlinguistic reasoning about possibilities; a behavioural study; data collection has not started. It lays the groundwork for later work on modal language in language models.",
   },
   modifiers: {
     id: "modifiers", title: "Property updating in modified nouns in language models",
     href: "/research/modified-nouns",
-    context: "Independent project", when: "2026–",
+    context: "Independent project", when: "Sep. 2026 –",
     note: "Contrasted properties that depend on an added feature with properties that only co-occur with it (13 feature groups, 477 items, three instruction-tuned models), using predictors fixed outside the models: a dependency table, human feature norms and word-association norms; exploratory activation patching. Manuscript in preparation.",
   },
   lit: {
@@ -104,13 +108,13 @@ const research: Record<string, Entry> = {
     href: "/research/latent-control-states",
     row: "supervised at the German Research Center for Artificial Intelligence (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
     context: "Supervised at the German Research Center for Artificial Intelligence (DFKI)",
-    when: "2026–27",
+    when: "Apr. 2026 – Mar. 2027",
     note: "Investigated how moral wording affects dilemma choices. Designed and ran controlled experiments and activation interventions in 7B and 14B models for the utilitarian-framing branch, with checks of answer labels, option positions, and task understanding; manuscript in preparation.",
   },
   psy: {
     id: "psy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
     row: "human study, class-wide experiment (N = 49, 47 analysed); my part: data analysis",
-    context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
+    context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Nov. 2025 – Feb. 2026",
     note: {
       default: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed); co-designed the study, ran the data analysis and wrote the report.",
       cogsci: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed); co-designed the study, ran the data analysis in JASP and wrote the report.",
@@ -119,20 +123,24 @@ const research: Record<string, Entry> = {
   protobias: {
     id: "protobias", title: "Cross-lingual ProtoBias", href: "/research/cross-lingual-protobias",
     row: "VLM evaluation, single-author course project, about 12,600 judgments",
-    context: "Single-author course project", when: "Summer 2026",
+    context: "Single-author course project", when: "May – Aug. 2026",
     note: "Evaluated two VLM families on fixed image pairs across seven prompt languages (about 12,600 judgments); single-author report with code.",
     links: [{ label: "report", href: "https://xchuan-li.github.io/research/cross-lingual-protobias" }, { label: "code", href: "https://github.com/xchuan-li/cross_lingual_protobias" }],
   },
   streetView: {
     id: "streetView", title: "Street-view country classification", href: "/research/street-view-classification",
     row: "team course project, Deep Learning; my part: CNN training and analysis",
-    context: "Team course project, Deep Learning", when: "Summer 2026",
+    context: "Team course project, Deep Learning", when: "May – Jul. 2026",
     note: "My part: CNN training, ablations, and performance analysis.",
   },
 };
 
 // 12 Oct 2026 (XC): two sections — Research (the trunk) and Other research and course projects.
 // No "Writing samples" category (the manuscripts are writing samples too); Three Ways is off the CV.
+// 12 Oct 2026: dates are months (XC: no "Summer"/"Winter"). Verified: B.A. (CHSI), Marburg end (DSH
+// certificate), typicality (LingBuzz), modified nouns (project opened), ProtoBias end (paper date).
+// XC asked for estimates elsewhere: Marburg start, moral framing, thesis start, ProtoBias start,
+// street view, fact-checking, undergraduate thesis are semester-based estimates.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
   general: { current: ["lit", "modifiers", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },
   lm:      { current: ["lit", "modifiers", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
@@ -149,7 +157,7 @@ export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
   },
   {
     id: "dyslexia", title: "Shenzhen Learning Disorders Association", place: "Shenzhen, China",
-    context: "Internship · Learning assessment at Yucai No. 2 Primary School", when: "Sep.–Dec. 2021",
+    context: "Internship · Learning assessment at Yucai No. 2 Primary School", when: "Sep. – Dec. 2021",
     note: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
     variants: ["general", "cogsci"],
   },
