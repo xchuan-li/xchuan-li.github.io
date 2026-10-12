@@ -28,7 +28,7 @@ export const projects = {
     href: "/research/learnability",
     question: "How does children\u2019s use of modal expressions relate to their conceptual understanding of possibility? And how do language comprehension and task demands shape our judgement of that ability?",
     summary: "A small study of modal language, planned to run alongside an existing study of how preschool children reason about possibilities.",
-    connection: "The formal analysis specifies what modal expressions contribute; the thesis asks how children come to understand them. It includes no language-model study.",
+    connection: "The formal analysis specifies what modal expressions contribute; the thesis asks how children come to understand them. The thesis itself includes no language-model study, but the order in which children come to distinguish possibility from necessity can then serve as a target for studying how language models learn the same distinction.",
     status: "Master’s thesis · in planning",
   },
   typicality: {
