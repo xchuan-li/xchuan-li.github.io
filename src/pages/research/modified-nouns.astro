@@ -1,0 +1,72 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
+
+// 12 October 2026 (XC): B5 goes on the site as a project introduction only — no manuscript,
+// no results. The manuscript is in preparation; numbers stay in the Vault until XC has read it.
+const project = projects.modifiers;
+---
+
+<Base
+  title={`${project.title} · Xiaochuan Li`}
+  description="Which properties do language models update when a modifier adds a feature to a noun? Three accounts compared with predictors fixed outside the models. Manuscript in preparation."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research#research" class="!text-[var(--color-accent)]">← Research & Projects</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">{project.status}</div>
+    <h1>{project.title}</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">{project.question}</p>
+    <p>{project.summary}</p>
+
+    <h2>Three accounts</h2>
+    <p>
+      A modified noun rarely keeps all the properties of its head: a <em>wooden spoon</em> keeps the
+      function of a spoon but not its metal look. Telling someone that a dog has wings sets one feature.
+      On a causal-model view of concepts, properties the feature causes or enables (<em>it can fly</em>)
+      should follow, while properties that are only typical of winged things (<em>it has a beak</em>)
+      should not. On a category-based view, the modifier is evidence about what kind of thing is
+      described, so bird properties rise together. On an associative view, the word <em>winged</em>
+      simply primes related words.
+    </p>
+    <p>
+      Each account gets an item-level predictor that does not come from the models: a dependency table
+      written from theory and fixed before testing, feature co-occurrence in human property norms, and
+      word-association strength in human association norms. On these items the three predictors come
+      apart, so they can be compared within one analysis.
+    </p>
+
+    <h2>Materials and controls</h2>
+    <p>
+      Thirteen feature groups (<em>winged</em>, <em>glass</em>, <em>motorized</em>, …) are applied to
+      nouns that lack the feature. For each phrase the model is asked about dependent properties,
+      co-occurring properties and the noun’s own characteristic property. Every item is also asked about
+      the bare noun, about the noun with common modifiers (<em>old</em>, <em>nearby</em>), and about the
+      noun with a feature from another group, which is just as unusual but unrelated to the property in
+      question. A separate set removes features (<em>wingless</em>).
+    </p>
+
+    <h2>Models and measures</h2>
+    <p>
+      Three instruction-tuned models answer yes/no questions; the score is the log-odds of <em>Yes</em>
+      over <em>No</em> at the first answer token, checked under two further phrasings. Before any
+      modifier effect is read, bare-noun scores must agree with human norms. Confidence intervals
+      resample feature groups, so the dependency relations, not the phrases, are the unit of
+      generalization. The success criteria were fixed before the runs.
+    </p>
+
+    <h2>Inside the model</h2>
+    <p>
+      An exploratory activation-patching analysis on pilot materials copies the residual stream at the
+      modifier or noun position into a matched phrase, one layer at a time, to see where the update
+      arises. It is a first look, not yet a full analysis.
+    </p>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      Manuscript in preparation.
+    </p>
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
+  </article>
+</Base>

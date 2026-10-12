@@ -35,30 +35,33 @@ export interface Entry {
   links?: { label: string; href: string }[];
 }
 
+// 12 Oct 2026 (XC): one trunk. The opening line is the same in all variants; variants change emphasis only.
 export const interests: Record<Variant, string> = {
-  general: "Computational cognitive science and language model interpretability. Research interests: language, reasoning, and human and artificial cognition.",
-  lm: "Language model interpretability and computational cognitive science. Research interests: language, reasoning, and human and artificial cognition.",
-  cogsci: "Computational cognitive science and language development. Experimental studies of human cognition and mechanistic analyses of language models.",
+  general: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Research interests: language, reasoning, and human and artificial cognition.",
+  lm: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Methods: activation patching, low-rank analysis, probing, controlled evaluation.",
+  cogsci: "Questions from linguistics and cognitive science, turned into controlled experiments on language models: behavioural tests, then mechanistic interpretability to locate the behaviour inside the model. Experience with how human data are produced, from children’s language to adult behavioural experiments.",
 };
 
+// 12 Oct 2026 (XC): education notes state what each stage trained, not selected coursework;
+// Marburg is listed only as German for graduate study.
 export const education: (Entry & { place: string })[] = [
   {
     id: "msc", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "M.Sc. Human and Artificial Intelligence", when: "Oct. 2025 – exp. 2027",
     note: {
-      general: "Selected coursework: Cognitive Psychology; Foundations in Psychology & Empirical Study Design; Deep Learning; Interpretability for Natural Language Processing.",
-      lm: "Selected coursework: Deep Learning; Interpretability for Natural Language Processing; Deep Learning for Digital Humanities; Foundations in Psychology & Empirical Study Design.",
-      cogsci: "Selected coursework: Cognitive Psychology (1.0); Foundations in Psychology & Empirical Study Design (1.0); Deep Learning (1.0); Epistemology (1.3).",
+      general: "Designing and analysing behavioural experiments; cognitive psychology; training neural networks; interpretability methods for language models.",
+      lm: "Interpretability methods for language models; training neural networks; designing and analysing behavioural experiments; cognitive psychology.",
+      cogsci: "Designing and analysing behavioural experiments; cognitive psychology and cognitive neuroscience; training neural networks; interpretability methods for language models.",
     },
   },
   {
     id: "marburg", title: "University of Marburg", place: "Marburg, Germany",
-    context: "Preparatory studies: German for graduate study", when: "2024 – 2025",
+    context: "German for graduate study", when: "2024 – 2025",
   },
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",
     context: "B.A. Philosophy", when: "2020 – 2024",
-    note: "Selected coursework: Logic; Mathematical Logic; Analytic Philosophy; Psychology of Reading; Cognition and Learning Disabilities.",
+    note: "Formal logic and proof, including modal logic and Gödel’s incompleteness theorems; philosophy of language; psychology of reading.",
   },
 ];
 
@@ -73,7 +76,7 @@ const research: Record<string, Entry> = {
   },
   undergraduate: {
     id: "undergraduate", title: "Leibniz’s logical system and characteristica universalis",
-    context: "Undergraduate thesis · Shenzhen University · supervisor: Zang Yong", when: "2024",
+    context: "Undergraduate thesis · Shenzhen University", when: "2024",
     note: "Analysed Leibniz’s metaphysics, logic and proposal for a universal symbolic language.",
   },
   threeWays: {
@@ -86,15 +89,21 @@ const research: Record<string, Entry> = {
   thesis: {
     id: "thesis", title: "Modal language in preschool children", href: "/research/learnability",
     method: "Human study", status: "In planning.",
-    row: 'modal language in preschool children, alongside a possibilities study at MPI CBS Leipzig; supervised by C. Grosse Wiesmann (UTN), with T. Hopf (MPI CBS).',
-    context: "M.Sc. thesis, design stage · with C. Grosse Wiesmann (UTN) and T. Hopf (MPI CBS Leipzig)", when: "2026 –",
-    note: "Developing a study comparing preschool children’s understanding of modal language with nonlinguistic reasoning about possibilities. The modal-language component forms part of an ongoing PhD project at MPI CBS Leipzig; data collection has not started.",
+    row: 'modal language in preschool children, part of a PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig.',
+    context: "M.Sc. thesis, design stage · part of a PhD project at the Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig", when: "2026 –",
+    note: "Asks how preschool children come to distinguish possibility from necessity in language, and how this relates to their nonlinguistic reasoning about possibilities; a behavioural study; data collection has not started. It lays the groundwork for later work on modal language in language models.",
+  },
+  modifiers: {
+    id: "modifiers", title: "Property updating in modified nouns in language models",
+    href: "/research/modified-nouns",
+    context: "Independent project", when: "2026–",
+    note: "Contrasted properties that depend on an added feature with properties that only co-occur with it (13 feature groups, 477 items, three instruction-tuned models), using predictors fixed outside the models: a dependency table, human feature norms and word-association norms; exploratory activation patching. Manuscript in preparation.",
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",
-    row: "year-long project course with M. Roth (UTN) and S. Ostermann (DFKI); causal interventions in 7B–14B models, utilitarian-framing branch",
-    context: "Year-long project course · with M. Roth (UTN) and S. Ostermann (DFKI)",
+    row: "supervised at DFKI; causal interventions in 7B–14B models, utilitarian-framing branch",
+    context: "Supervised at DFKI",
     when: "2026–27",
     note: "Investigated how moral wording affects dilemma choices. Designed and ran controlled experiments and activation interventions in 7B and 14B models for the utilitarian-framing branch, with checks of answer labels, option positions, and task understanding; manuscript in preparation.",
   },
@@ -103,15 +112,15 @@ const research: Record<string, Entry> = {
     row: "human study, class-wide experiment (N = 49, 47 analysed); my part: data analysis",
     context: "Course study, Foundations in Psychology and Empirical Study Design", when: "Winter 2025–26",
     note: {
-      default: "Co-designed a between-subjects study of optional checking after ChatGPT or Wikipedia answers; adopted for a class-wide experiment (49 participants; 47 analysed). Conducted the individual data analysis and prepared a course report.",
-      cogsci: "Co-designed a between-subjects study of optional checking after ChatGPT or Wikipedia answers; adopted for a class-wide experiment (49 participants; 47 analysed). Conducted the individual data analysis in JASP and prepared a course report.",
+      default: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed); co-designed the study, ran the data analysis and wrote the report.",
+      cogsci: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed); co-designed the study, ran the data analysis in JASP and wrote the report.",
     },
   },
   protobias: {
     id: "protobias", title: "Cross-lingual ProtoBias", href: "/research/cross-lingual-protobias",
     row: "VLM evaluation, single-author course project, about 12,600 judgments",
     context: "Single-author course project", when: "Summer 2026",
-    note: "Held image pairs fixed while varying prompt language across seven languages to evaluate judgments in two VLM families (about 12,600 judgments). Completed a single-author course report with code.",
+    note: "Evaluated two VLM families on fixed image pairs across seven prompt languages (about 12,600 judgments); single-author report with code.",
     links: [{ label: "report", href: "https://xchuan-li.github.io/research/cross-lingual-protobias" }, { label: "code", href: "https://github.com/xchuan-li/cross_lingual_protobias" }],
   },
   streetView: {
@@ -122,10 +131,12 @@ const research: Record<string, Entry> = {
   },
 };
 
+// 12 Oct 2026 (XC): two sections — Research (the trunk) and Other research and course projects.
+// No "Writing samples" category (the manuscripts are writing samples too); Three Ways is off the CV.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "threeWays", "streetView", "undergraduate"] },
-  lm:      { current: ["lit", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
-  cogsci:  { current: ["lit", "thesis"], earlier: ["psy", "protobias", "typicality", "undergraduate"] },
+  general: { current: ["lit", "modifiers", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },
+  lm:      { current: ["lit", "modifiers", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
+  cogsci:  { current: ["lit", "modifiers", "thesis"], earlier: ["typicality", "psy", "protobias", "undergraduate"] },
 };
 export const researchEntry = (id: string) => research[id];
 
@@ -144,17 +155,21 @@ export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
   },
 ];
 
+// 12 Oct 2026: grouped by the steps of the work; the "working proficiency" qualifier on interpretability is dropped (XC reports the B4 analyses biweekly and can explain every step).
 export const skills: Record<Variant, { k: string; v: string }[]> = {
   general: [
-    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX" },
-    { k: "Methods", v: "PsychoPy/Pavlovia, JASP; probing, activation patching, steering (working proficiency)" },
+    { k: "Language models", v: "Controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing, steering" },
+    { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP; testing children" },
+    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
   ],
   lm: [
+    { k: "Language models", v: "Activation patching, low-rank analysis, probing, steering, LoRA; controlled behavioural evaluation, minimal pairs" },
     { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
-    { k: "Methods", v: "Probing, activation patching, steering, LoRA; minimal-pair evaluation (working proficiency)" },
+    { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
   ],
   cogsci: [
-    { k: "Experiments", v: "Between-subjects designs, PsychoPy/Pavlovia, JASP; controlled stimuli and minimal pairs" },
+    { k: "Language models", v: "Controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing" },
+    { k: "Human data", v: "Between-subjects designs, controlled stimuli, PsychoPy/Pavlovia, JASP; testing children" },
     { k: "Programming", v: "Python (pandas, PyTorch, Hugging Face Transformers), Git, LaTeX" },
   ],
 };

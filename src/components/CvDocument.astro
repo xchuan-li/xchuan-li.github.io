@@ -37,8 +37,8 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   </section>
 
   <section>
-    <h2>Research experience</h2>
-    {[...order.current, ...order.earlier].map((id) => { const e = cv.researchEntry(id); return (
+    <h2>Research</h2>
+    {order.current.map((id) => { const e = cv.researchEntry(id); return (
       <div class="ent research-ent">
         <div class="ent-top"><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b><i>{e.when}</i></div>
         <div class="ent-sub"><i>{e.context}</i></div>
@@ -49,6 +49,23 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
         </p>}
       </div>
     ); })}
+  </section>
+
+  <!-- 12 Oct 2026 (XC): secondary work is "Projects", set in a lighter register: regular-weight
+       titles, smaller muted text, one descriptive line, no indent. -->
+  <section>
+    <h2>Projects</h2>
+    <ul class="projs">
+      {order.earlier.map((id) => { const e = cv.researchEntry(id); return (
+        <li class="proj">
+          <div class="proj-top"><span class="proj-t">{e.href ? <a href={e.href}>{e.title}</a> : e.title}</span><span class="proj-when">{e.when}</span></div>
+          <p class="proj-line"><i>{e.context}.</i> {cv.pick(e.note, variant)}
+            {e.citation && <span> {e.citation}</span>}
+            {e.links && <span> {e.links.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}</span>}
+          </p>
+        </li>
+      ); })}
+    </ul>
   </section>
 
   <section>
@@ -97,13 +114,22 @@ const pdf = variant === "general" ? "/cv.pdf" : undefined;
   .pm { font:500 0.66rem/1.9 var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; color:var(--color-text-dim); }
   .pt a { font-weight:600; color:#16181d; }
   .st { color:var(--color-text-dim); font-style:italic; }
-  .kv { display:grid; grid-template-columns:6.5rem minmax(0,1fr); gap:0.8rem; font-size:0.9rem; margin:0 0 0.25rem; }
-  .kv span:first-child { font-weight:600; }
+  .projs { list-style:none; margin:0; padding:0; }
+  .proj { margin:0 0 0.42rem; break-inside:avoid; }
+  .proj-top { display:flex; justify-content:space-between; gap:1rem; }
+  .proj-t { font-size:0.9rem; font-weight:400; }
+  .proj-when { font-size:0.82rem; font-style:italic; color:var(--color-text-muted); white-space:nowrap; }
+  .proj-line { margin:0.04rem 0 0; font-size:0.8rem; line-height:1.45; color:var(--color-text-muted); }
+  .proj-line i { color:var(--color-text-dim); }
+  .proj-line a { color:var(--color-accent); }
+  .kv { display:grid; grid-template-columns:8.8rem minmax(0,1fr); gap:0.8rem; font-size:0.9rem; margin:0 0 0.25rem; }
+  .kv span:first-child { font-weight:600; white-space:nowrap; }
   @media (max-width:560px) {
     .cvd-head { flex-direction:column; align-items:flex-start; }
     .cvd-contact { text-align:left; }
     .ent-top, .ent-sub { flex-direction:column; gap:0; }
     .kv { grid-template-columns:1fr; gap:0; }
+    .proj-top { flex-direction:column; gap:0; }
     .prow { grid-template-columns:1fr; gap:0; }
   }
 </style>

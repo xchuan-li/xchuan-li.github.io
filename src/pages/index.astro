@@ -5,11 +5,9 @@ import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 
-// Selected coursework keeps its course status in the shared project entry.
-const homepageResearch = workEntries.filter(
-  (entry) => entry.tier === "research" ||
-    entry.links.some((link) => link.href === "/research/fact-checking-study")
-);
+// 12 Oct 2026 (XC): one trunk. Research = moral framing, modified nouns, thesis;
+// the fact-checking experiment sits under Earlier research experience.
+const homepageResearch = entriesOfTier("research");
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
 // 27 September 2026 (XC): keep the sticky left column; the main column is narrow (720 px)
@@ -37,7 +35,7 @@ const timeline = [
       {
         label: "B.A. thesis, 2024",
         items: [
-          "Leibniz\u2019s <em>characteristica universalis</em> (supervised by Zang Yong).",
+          "Leibniz\u2019s <em>characteristica universalis</em>.",
         ],
       },
     ],
@@ -47,8 +45,8 @@ const timeline = [
     logo: "/images/logos/marburg.svg",
     emblem: true,
     org: "University of Marburg",
-    role: "Preparatory studies",
-    did: "A year of German for graduate study.",
+    role: "German for graduate study",
+    did: "",
     groups: [],
   },
   {
@@ -133,7 +131,7 @@ const timeline = [
             <div class="tl-body">
               <h3 class="tl-org">{t.org}</h3>
               <p class="tl-role">{t.role}</p>
-              <p class="tl-did" set:html={t.did} />
+              {t.did && <p class="tl-did" set:html={t.did} />}
               {t.groups.map((g) => (
                 <div class="tl-group">
                   {g.label && <p class="tl-group-label">{g.label}</p>}

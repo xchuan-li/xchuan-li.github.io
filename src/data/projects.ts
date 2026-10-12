@@ -55,6 +55,14 @@ export const projects = {
     connection: "The course took me through a full behavioural experiment: design, pilot, revision, online data collection, and analysis.",
     status: "Completed course study · Winter 2025–26",
   },
+  modifiers: {
+    title: "Which properties change when a noun is modified?",
+    href: "/research/modified-nouns",
+    question: "When a modifier adds a feature to a noun, as in a winged dog, which of the noun\u2019s properties does a language model update: those that depend on the feature, those that merely co-occur with it, or those associated with the word?",
+    summary: "A controlled study of modifier\u2013noun phrases in three instruction-tuned language models, comparing three accounts with item-level predictors fixed outside the models.",
+    connection: "Causal-model theories of concepts and human property and association norms supply the contrast and the predictors; the models are tested on matched items, and an exploratory patching analysis looks for where the update arises.",
+    status: "Manuscript in preparation",
+  },
   latentControl: {
     title: "Moral framing and dilemma choices in language models",
     href: "/research/latent-control-states",

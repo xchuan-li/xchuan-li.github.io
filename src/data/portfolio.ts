@@ -12,6 +12,10 @@
 // Later the same day (XC): no spine — the items are independent. Each is either a
 // "Writing sample" (solely XC's own linguistic writing) or a "Project"; the left label
 // is the project type (B7 counts as model evaluation), topics only for writing samples.
+// 12 October 2026 (XC): one trunk with related extensions. Research = the two projects that
+// turn a question from linguistics or cognitive science into language-model experiments
+// (moral framing; modified nouns). Related work = human-data projects (thesis, fact-checking).
+// B5 is shown as a project introduction only, no manuscript.
 import { projects } from "./projects";
 
 export interface PortfolioEntry {
@@ -32,7 +36,7 @@ export interface PortfolioEntry {
   track?: PaperTrack;
   topic?: string;
   /** How much weight the item carries: own research, writing samples, or coursework. */
-  tier?: "research" | "writing" | "course" | "earlier";
+  tier?: "research" | "related" | "writing" | "course" | "earlier";
 }
 export type PaperTrack = "langcog" | "lm";
 /** Tab label (short), then the full heading and its subtitle shown above the open list. */
@@ -54,42 +58,31 @@ export const portfolioSections: PortfolioSection[] = [
     blurb: "",
     entries: [
       {
-        tier: "earlier", track: "langcog", topic: "Child reading assessment",
-        title: "Reading difficulties in primary-school children",
-        field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
-        status: "Project report · undergraduate reading assessment, 2021",
-        kind: "Undergraduate project · September–December 2021",
-        short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
-        figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 420, height: 286 },
-        links: [{ label: "Read report", href: "/research/child-reading-assessment" }],
-      },
-      {
-        tier: "earlier", track: "langcog", topic: "Sentence processing",
-        title: "Garden-path processing in Chinese and English",
-        field: "Research design", desc: "A Psychology of Reading course project on sentence materials, processing hypotheses and ways to distinguish them.",
-        status: "Course research design · not administered",
-        kind: "Undergraduate course project · Psychology of Reading · research design",
-        short: "How do readers form a structural interpretation and revise it when later words conflict? Chinese and English sentence materials connect processing hypotheses with proposed reading and comprehension measures.",
-        figure: { src: "/images/research/garden-path-english-cover.svg", alt: "The sentence While the teacher taught the students waited outside, split into a possible initial attachment with the students as object and the complete structure with the students as subject.", caption: "Illustrative sentence and structural analyses.", width: 420, height: 286 },
-        links: [{ label: "Read report", href: "/research/garden-path-processing" }],
-      },
-      {
-        tier: "research", track: "langcog", topic: "Behavioural experiment",
-        title: projects.thesis.title,
-        field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
-        kind: "Project · master’s thesis · in planning, no data yet",
-        short: "How does children\u2019s use of modal expressions relate to their conceptual understanding of possibility? And how do language comprehension and task demands shape our judgement of that ability?",
-        figure: {"src": "/images/research/preschool-association.svg", "preview": false, "alt": "A planned modal-language task and an existing possibilities-reasoning task, connected by a question about association.", "caption": "Study in planning. Compare language understanding with reasoning about possibilities; an association would not establish causal direction.", "width": 760, "height": 230},
-        links: [{ label: "Thesis outline", href: projects.thesis.href }],
-      },
-      {
         tier: "research", track: "lm", topic: "Mechanistic interpretability",
         title: "Moral framing and dilemma choices in language models",
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
-        kind: "Year-long project course, 2026–27 · with M. Roth (UTN) and S. Ostermann (DFKI) · manuscript in preparation",
+        kind: "Project · 2026–27 · supervised at DFKI · manuscript in preparation",
         short: "When moral wording changes a model\u2019s choice, what changes: the weighing of outcomes, a tendency to answer with action, or some other process? And how far can internal interventions tell these apart?",
         figure: {"src": "/images/research/framing-carry.svg", "previewSrc": "/images/research/framing-carry-cover.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
         links: [{ label: "Overview", href: projects.latentControl.href }],
+      },
+      {
+        tier: "research", track: "lm", topic: "Behaviour and interpretability",
+        title: projects.modifiers.title,
+        field: "Language models", desc: projects.modifiers.summary, status: projects.modifiers.status,
+        kind: "Project · independent · manuscript in preparation",
+        short: "When a modifier adds a feature, as in a winged dog, does a model update the properties that depend on it, those that merely co-occur with it, or those associated with the word?",
+        figure: { src: "/images/research/modified-nouns-did-cover.svg", alt: "Mean update after adding a feature, in nats, with 95% confidence intervals over feature groups. In all three models dependent properties such as can fly moved more than co-occurring ones such as has a beak: Qwen2.5-14B 33.0 vs 5.0, Qwen2.5-7B 22.5 vs 4.9, Llama-3.1-8B 7.0 vs 3.4.", caption: "Dependent vs co-occurring properties.", width: 420, height: 286 },
+        links: [{ label: "Overview", href: projects.modifiers.href }],
+      },
+      {
+        tier: "research", track: "langcog", topic: "Modality · human side",
+        title: projects.thesis.title,
+        field: "Human study", desc: projects.thesis.summary, status: projects.thesis.status,
+        kind: "Project · master’s thesis · in planning, no data yet",
+        short: "How do preschool children come to tell possibility from necessity? The study lays the groundwork for later work on modal language in language models.",
+        figure: {"src": "/images/research/preschool-association.svg", "preview": false, "alt": "A planned modal-language task and an existing possibilities-reasoning task, connected by a question about association.", "caption": "Study in planning. Compare language understanding with reasoning about possibilities; an association would not establish causal direction.", "width": 760, "height": 230},
+        links: [{ label: "Thesis outline", href: projects.thesis.href }],
       },
       {
         tier: "writing", track: "langcog", topic: "Typicality",
@@ -141,7 +134,15 @@ export const portfolioSections: PortfolioSection[] = [
         ],
       },
       {
-        tier: "course", track: "langcog", topic: "Behavioural experiment",
+        tier: "course", track: "langcog", topic: "EEG experiment",
+        title: "A group EEG study in Cognitive Neuroscience",
+        field: "Course project", desc: "", status: "Planned course project · Winter 2026–27",
+        kind: "Project · course study, Winter 2026–27 · planned",
+        short: "A guided group study covering preregistration, EEG recording, and preprocessing and analysis in MNE-Python.",
+        links: [],
+      },
+      {
+        tier: "earlier", track: "langcog", topic: "Behavioural experiment",
         title: "Does checking with ChatGPT first change how people check and double-check?",
         field: "Course experiment", desc: projects.psyStudy.summary, status: projects.psyStudy.status,
         kind: "Completed course experiment · Winter 2025–26 · analysis and report",
@@ -154,12 +155,24 @@ export const portfolioSections: PortfolioSection[] = [
         ],
       },
       {
-        tier: "course", track: "langcog", topic: "EEG experiment",
-        title: "A group EEG study in Cognitive Neuroscience",
-        field: "Course project", desc: "", status: "Planned course project · Winter 2026–27",
-        kind: "Project · course study, Winter 2026–27 · planned",
-        short: "A guided group study covering preregistration, EEG recording, and preprocessing and analysis in MNE-Python.",
-        links: [],
+        tier: "earlier", track: "langcog", topic: "Child reading assessment",
+        title: "Reading difficulties in primary-school children",
+        field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
+        status: "Project report · undergraduate reading assessment, 2021",
+        kind: "Undergraduate project · September–December 2021",
+        short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
+        figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 420, height: 286 },
+        links: [{ label: "Read report", href: "/research/child-reading-assessment" }],
+      },
+      {
+        tier: "earlier", track: "langcog", topic: "Sentence processing",
+        title: "Garden-path processing in Chinese and English",
+        field: "Research design", desc: "A Psychology of Reading course project on sentence materials, processing hypotheses and ways to distinguish them.",
+        status: "Course research design · not administered",
+        kind: "Undergraduate course project · Psychology of Reading · research design",
+        short: "How do readers form a structural interpretation and revise it when later words conflict? Chinese and English sentence materials connect processing hypotheses with proposed reading and comprehension measures.",
+        figure: { src: "/images/research/garden-path-english-cover.svg", alt: "The sentence While the teacher taught the students waited outside, split into a possible initial attachment with the students as object and the complete structure with the students as subject.", caption: "Illustrative sentence and structural analyses.", width: 420, height: 286 },
+        links: [{ label: "Read report", href: "/research/garden-path-processing" }],
       },
     ],
   },
@@ -168,9 +181,9 @@ export const portfolioSections: PortfolioSection[] = [
 /** The one work section's entries, grouped by weight for the homepage and the research index. */
 export const workEntries = portfolioSections[0].entries;
 export const workTiers: { id: string; label: string; blurb: string; compact: boolean }[] = [
-  { id: "research", label: "Research", blurb: "Projects I am responsible for, with their current state.", compact: false },
+  { id: "research", label: "Research", blurb: "Questions from linguistics and cognitive science: the human evidence they start from, and controlled experiments on language models, behaviour first, then inside the model.", compact: false },
   { id: "writing", label: "Writing", blurb: "Analyses written up on their own; used as writing samples.", compact: false },
   { id: "course", label: "Course projects", blurb: "", compact: true },
-  { id: "earlier", label: "Earlier research experience", blurb: "Undergraduate projects in reading assessment and sentence-processing research design.", compact: false },
+  { id: "earlier", label: "Earlier research experience", blurb: "Studies with people: a master’s course experiment, an undergraduate reading assessment and a sentence-processing research design.", compact: false },
 ];
 export const entriesOfTier = (t: string) => workEntries.filter((e) => (e.tier ?? "course") === t);

@@ -4,7 +4,7 @@ import { identityLong } from "../data/program";
 ---
 
 <Base title="Research Program · Xiaochuan Li"
-  description="Language, reasoning, and human and artificial cognition: from philosophy and language learning to behavioural experiments and mechanistic interpretability.">
+  description="Questions from linguistics and cognitive science turned into controlled experiments on language models: behavioural tests and mechanistic interpretability.">
   <article class="rp">
     <h1 class="rp-h1">Research Program</h1>
     <p class="rp-lead">{identityLong}</p>
@@ -28,53 +28,62 @@ import { identityLong } from "../data/program";
       </p>
     </section>
 
+    <!-- 12 Oct 2026 (XC): one trunk, told as the steps of the work rather than two parallel fields. -->
     <section class="rp-sec">
-      <h2 class="rp-h2">Understanding human cognition</h2>
+      <h2 class="rp-h2">From a question about people to an experiment on a model</h2>
       <p class="rp-p">
-        I am interested in how people learn concepts, interpret language, and use information to
-        draw conclusions. Linguistic analysis helps state the distinctions a task is meant to test;
-        behavioural experiments ask how people respond to them. Cognitive modelling is a direction
-        I want to develop further, to turn competing explanations into predictions that can be
-        compared with data.
-      </p>
-      <p class="rp-p">
-        My <a href="/research/learnability">master’s thesis</a> asks how preschool children’s understanding
-        of modal language relates to their reasoning about possibilities. It is a human developmental
-        study being planned alongside an ongoing project at the Max Planck Institute for Human
-        Cognitive and Brain Sciences. Language comprehension and task demands matter here: a child’s
-        response does not, by itself, settle what concepts they possess.
+        Linguistics and cognitive science provide precise questions about meaning and decades of
+        carefully measured human behaviour. Taken over to language models, those questions become
+        controlled experiments: tests of behaviour show what a model does, and interpretability
+        methods show where in the model it happens. The work proceeds in four steps.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">Understanding artificial systems</h2>
+      <h2 class="rp-h2">1. A question with a precise contrast</h2>
       <p class="rp-p">
-        Language models are also research objects in their own right. I want to understand how
-        they process information and make decisions. Mechanistic interpretability is one way to
-        study this: intervening on internal representations can help test explanations of a model’s
-        behaviour. Explaining existing abilities is a central motivation for my work.
-      </p>
-      <p class="rp-p">
-        In my project on <a href="/research/latent-control-states">moral framing and dilemma choices</a>,
-        I investigate how moral language changes a model’s decisions and the internal processes
-        involved. The question includes how it weighs outcomes, how it responds to the answer format,
-        and how far controlled interventions can distinguish those explanations.
+        The question comes with alternatives that predict different outcomes. When a modifier gives a
+        dog wings, does a model update the properties that depend on the new feature, or those that
+        merely co-occur with it? When moral wording changes a model’s dilemma choice, has the weighing
+        of outcomes changed, or a tendency to answer with an action? My writing in semantics and
+        pragmatics, including <a href="/research/typicality-in-referent-choice">typicality in referent
+        choice</a>, is where distinctions of this kind are worked out.
       </p>
     </section>
 
     <section class="rp-sec">
-      <h2 class="rp-h2">What connects the work</h2>
+      <h2 class="rp-h2">2. What the human data measure</h2>
       <p class="rp-p">
-        Across these projects, I ask how meaning enters a system’s reasoning and what evidence
-        supports an explanation of its behaviour. Human and model studies can inform each other
-        without assuming that they use the same mechanisms. Similar answers can arise from different
-        processes, and an intervention in a model does not establish a mechanism in people.
+        Human studies show what a task measures and what it leaves open. My
+        <a href="/research/learnability">master’s thesis</a> on modal language in preschool children and a
+        <a href="/research/fact-checking-study">course experiment</a> on fact-checking taught me how such
+        data are produced; a child’s answer does not, by itself, settle what concepts the child has. In the
+        <a href="/research/modified-nouns">modifier study</a>, human property and association norms supply
+        predictors fixed outside the models.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">3. Behaviour under matched controls</h2>
+      <p class="rp-p">
+        The same contrast is then posed to language models on matched items: bare nouns, common
+        modifiers, and modifiers that are just as unusual but unrelated to the property asked about; in
+        the <a href="/research/latent-control-states">moral-framing project</a>, checks of answer labels,
+        option positions and task understanding.
+      </p>
+    </section>
+
+    <section class="rp-sec">
+      <h2 class="rp-h2">4. Inside the model</h2>
+      <p class="rp-p">
+        Interventions on internal representations test where a behaviour arises: residual-stream
+        patching and low-rank analysis in the moral-framing project, and an exploratory patching
+        analysis in the modifier study.
       </p>
       <p class="rp-p">
-        I aim to make the alternatives explicit, design comparisons that distinguish them, and keep
-        claims tied to what a task measures. My writing in semantics and pragmatics, including
-        <a href="/research/typicality-in-referent-choice">typicality in referent choice</a>, develops
-        the conceptual distinctions behind those comparisons.
+        Human and model studies can inform each other without assuming that they use the same
+        mechanisms. Similar answers can arise from different processes, and an intervention in a model
+        does not establish a mechanism in people.
       </p>
     </section>
     <p class="rp-foot"><a href="/research">Explore research, writing, and course projects →</a></p>
