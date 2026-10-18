@@ -58,9 +58,17 @@ export const projects = {
   modifiers: {
     title: "Which properties change when a noun is modified?",
     href: "/research/modified-nouns",
-    question: "When a modifier adds a feature to a noun, as in a winged dog, which of the noun\u2019s properties does a language model update: those that depend on the feature, those that merely co-occur with it, or those associated with the word?",
+    question: "When a modifier adds a feature to a noun, as in a winged dog, which property answers shift in language models: those that depend on the feature, those that merely co-occur with it, or those associated with the word?",
     summary: "A controlled study of modifier\u2013noun phrases in three instruction-tuned language models, comparing three accounts with item-level predictors fixed outside the models.",
-    connection: "Causal-model theories of concepts and human property and association norms supply the contrast and the predictors; the models are tested on matched items, and an exploratory patching analysis looks for where the update arises.",
+    connection: "Causal-model theories of concepts and human property and association norms supply the contrast and the predictors; the models are tested on matched items, and an exploratory patching analysis looks for where the shift arises.",
+    status: "Manuscript in preparation",
+  },
+  vagueness: {
+    title: "Can vague words teach a scale?",
+    href: "/research/vagueness-scale",
+    question: "Speakers draw the boundaries of words such as tall or green in slightly different places. For a learner that sees only text, is this disagreement noise, or evidence about the scale underneath?",
+    summary: "A theoretical and computational study of vagueness: what speakers\u2019 disagreement about word boundaries costs a listener and what it tells a learner, tested with language models trained only on naming text.",
+    connection: "The language models are learners under controlled input: what they can and cannot recover shows what the text itself carries.",
     status: "Manuscript in preparation",
   },
   latentControl: {

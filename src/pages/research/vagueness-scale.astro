@@ -1,0 +1,65 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
+
+// 18 October 2026 (XC): B18 goes on the site as a project introduction only, no manuscript and
+// no results. The manuscript is in preparation for a double-blind journal (Vault B18h, A3x13).
+const project = projects.vagueness;
+---
+
+<Base
+  title={`${project.title} · Xiaochuan Li`}
+  description="Speakers disagree about where vague words such as tall end. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath? Manuscript in preparation."
+  showProgress={true}
+  toc={true}
+>
+  <article class="prose">
+    <p class="!mb-6 !text-sm"><a href="/research#research" class="!text-[var(--color-accent)]">← Research & Projects</a></p>
+    <div class="text-xs uppercase tracking-wider text-[var(--color-text-dim)] font-medium mb-2">{project.status}</div>
+    <h1>{project.title}</h1>
+    <p class="text-[var(--color-text-muted)] italic !text-lg !mb-3">{project.question}</p>
+    <p>{project.summary}</p>
+
+    <figure>
+      <img src="/images/research/vagueness-concept-cover.png" width="1260" height="476" loading="lazy" decoding="async"
+        alt="Left: figures ordered by height, with one figure near the tall/average boundary called tall by one speaker and average by others. Right: a listener told tall guesses a little wrong either way, while a learner who reads both sentences learns that average and tall are neighbouring categories." />
+      <figcaption>One remark, two readers: the listener pays a small cost, the learner gains evidence about the order of the categories.</figcaption>
+    </figure>
+
+    <h2>The idea</h2>
+    <p>
+      Lipman (2025) showed that when speaker and listener share a goal, vagueness cannot do better than
+      precision. That result is about communication. This project adds a learner who sees only text.
+      For such a learner, the misdescriptions that vagueness produces are informative: an object that
+      some speakers call <em>tall</em> and others call <em>average</em> shows that the two categories
+      are neighbours. Near agreement, such a misdescription costs the listener little, because the object
+      lies close to a boundary, yet it tells the learner something about the order of the categories.
+    </p>
+    <p>
+      A short proposition states when an objective that gives weight to this learner is not maximised by
+      a perfectly precise vocabulary. It does not overturn the result on communication alone.
+    </p>
+
+    <h2>Predictions</h2>
+    <p>
+      Four predictions follow: without disagreement, no order among the categories can be recovered from
+      text; a little disagreement is enough; the direction of disagreement carries the order; and
+      aggregating speakers by majority vote erases it.
+    </p>
+
+    <h2>Learners and data</h2>
+    <p>
+      The learners are language models trained only on naming text, from small transformers and LSTMs
+      trained from scratch to a fine-tuned pretrained model. The tests use an artificial language with a
+      known underlying scale, and the colour naming of individual speakers in the World Color Survey.
+      Success criteria were fixed before the confirmatory runs, and each confirmed result was
+      re-implemented independently from the written specification.
+    </p>
+
+    <h2>Status</h2>
+    <p class="cw-status">
+      Manuscript in preparation.
+    </p>
+    <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
+  </article>
+</Base>

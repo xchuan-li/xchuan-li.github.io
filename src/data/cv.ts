@@ -42,7 +42,7 @@ export interface Entry {
 const opening = `${identityLong} ${programmeHtml}`;
 export const interests: Record<Variant, string> = {
   general: opening,
-  lm: `${opening} Methods: activation patching, low-rank analysis, probing, controlled evaluation.`,
+  lm: `${opening} Methods: training language models from scratch under controlled input; controlled behavioural evaluation; activation patching, low-rank analysis, probing.`,
   cogsci: `${opening} Experience with how human data are produced, from children’s language to adult behavioural experiments.`,
 };
 
@@ -98,10 +98,16 @@ const research: Record<string, Entry> = {
     note: "Asks how preschool children come to distinguish possibility from necessity in language, and how this relates to their nonlinguistic reasoning about possibilities; a behavioural study; data collection has not started. It lays the groundwork for later work on modal language in language models.",
   },
   modifiers: {
-    id: "modifiers", title: "Property updating in modified nouns in language models",
+    id: "modifiers", title: "Feature dependency and property answers for modified nouns in language models",
     href: "/research/modified-nouns",
     context: "Independent project", when: "Sep. 2026 –",
     note: "Contrasted properties that depend on an added feature with properties that only co-occur with it (13 feature groups, 477 items, three instruction-tuned models), using predictors fixed outside the models: a dependency table, human feature norms and word-association norms; exploratory activation patching. Manuscript in preparation.",
+  },
+  vagueness: {
+    id: "vagueness", title: "Vagueness and learning a scale from text",
+    href: "/research/vagueness-scale",
+    context: "Independent project", when: "Oct. 2026 –",
+    note: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Manuscript in preparation.",
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
@@ -141,10 +147,11 @@ const research: Record<string, Entry> = {
 // certificate), typicality (LingBuzz), modified nouns (project opened), ProtoBias end (paper date).
 // XC asked for estimates elsewhere: Marburg start, moral framing, thesis start, ProtoBias start,
 // street view, fact-checking, undergraduate thesis are semester-based estimates.
+// 18 Oct 2026 (XC): B18 (vagueness) added after modified nouns; B5 retitled to match the 18 Oct manuscript wording (no "updating"); training added to methods and skills.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["lit", "modifiers", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },
-  lm:      { current: ["lit", "modifiers", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
-  cogsci:  { current: ["lit", "modifiers", "thesis"], earlier: ["typicality", "psy", "protobias", "undergraduate"] },
+  general: { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },
+  lm:      { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
+  cogsci:  { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "psy", "protobias", "undergraduate"] },
 };
 export const researchEntry = (id: string) => research[id];
 
@@ -166,17 +173,17 @@ export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
 // 12 Oct 2026: grouped by the steps of the work; the "working proficiency" qualifier on interpretability is dropped (XC reports the B4 analyses biweekly and can explain every step).
 export const skills: Record<Variant, { k: string; v: string }[]> = {
   general: [
-    { k: "Language models", v: "Controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing, steering" },
+    { k: "Language models", v: "Training small models from scratch; controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing, steering" },
     { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP; testing children" },
     { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
   ],
   lm: [
-    { k: "Language models", v: "Activation patching, low-rank analysis, probing, steering, LoRA; controlled behavioural evaluation, minimal pairs" },
+    { k: "Language models", v: "Training small models from scratch, fine-tuning, LoRA; activation patching, low-rank analysis, probing, steering; controlled behavioural evaluation, minimal pairs" },
     { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
     { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
   ],
   cogsci: [
-    { k: "Language models", v: "Controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing" },
+    { k: "Language models", v: "Training small models from scratch; controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing" },
     { k: "Human data", v: "Between-subjects designs, controlled stimuli, PsychoPy/Pavlovia, JASP; testing children" },
     { k: "Programming", v: "Python (pandas, PyTorch, Hugging Face Transformers), Git, LaTeX" },
   ],

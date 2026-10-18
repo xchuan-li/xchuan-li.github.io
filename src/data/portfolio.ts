@@ -16,6 +16,7 @@
 // turn a question from linguistics or cognitive science into language-model experiments
 // (moral framing; modified nouns). Related work = human-data projects (thesis, fact-checking).
 // B5 is shown as a project introduction only, no manuscript.
+// 18 October 2026 (XC): B18 (vagueness) added after modified nouns, project introduction only, no manuscript.
 import { projects } from "./projects";
 
 export interface PortfolioEntry {
@@ -71,9 +72,18 @@ export const portfolioSections: PortfolioSection[] = [
         title: projects.modifiers.title,
         field: "Language models", desc: projects.modifiers.summary, status: projects.modifiers.status,
         kind: "Project · independent · manuscript in preparation",
-        short: "When a modifier adds a feature, as in a winged dog, does a model update the properties that depend on it, those that merely co-occur with it, or those associated with the word?",
+        short: "When a modifier adds a feature, as in a winged dog, which property answers shift in language models: those that depend on it, those that merely co-occur with it, or those associated with the word?",
         figure: { src: "/images/research/modified-nouns-did-cover.svg", alt: "Mean update after adding a feature, in nats, with 95% confidence intervals over feature groups. In all three models dependent properties such as can fly moved more than co-occurring ones such as has a beak: Qwen2.5-14B 33.0 vs 5.0, Qwen2.5-7B 22.5 vs 4.9, Llama-3.1-8B 7.0 vs 3.4.", caption: "Dependent vs co-occurring properties.", width: 420, height: 286 },
         links: [{ label: "Overview", href: projects.modifiers.href }],
+      },
+      {
+        tier: "research", track: "lm", topic: "Vagueness · controlled training",
+        title: projects.vagueness.title,
+        field: "Language models", desc: projects.vagueness.summary, status: projects.vagueness.status,
+        kind: "Project · independent · manuscript in preparation",
+        short: "Speakers disagree about where tall ends. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath?",
+        figure: { src: "/images/research/vagueness-card.png", alt: "Figures ordered by height under the words short, average and tall; one figure near the tall/average boundary is called tall by one speaker and average by two others.", caption: "Who is tall?", width: 420, height: 329 },
+        links: [{ label: "Overview", href: projects.vagueness.href }],
       },
       {
         tier: "research", track: "langcog", topic: "Modality · human side",
