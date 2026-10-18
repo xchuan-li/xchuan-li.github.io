@@ -34,3 +34,5 @@ Later the same day, XC ▸ the predictions table is "not scientific enough". AI 
 
 - `vagueness-concept-cover.png` (18 Oct 2026): panels a–b of the B18 concept figure (Vault `B-Research/B18-vagueness-scale/figures/fig0_concept.png`, made by `code/figs/concept2.py --final`), cropped to 0–2780 × 100–1150 px and resized to 1260 px wide. No results; panel c (the proposition) is left out.
 - `vagueness-card.png` (18 Oct 2026): panel a only of the same figure (0–1340 × 100–1150 px, 840 px wide), for the homepage card, where panels a–b were too small to read.
+- `moral-framing-trolley.png` (18 Oct 2026): B4 trolley schematic, Vault `B-Research/B4-LiT_Utilitarian/figures/concept.py --trolley` (fig_trolley_draft.png, 400 dpi). Schematic; numbers are examples.
+- `modified-nouns-measure.png` (18 Oct 2026): B5 measure schematic (panel c of the concept figure), Vault `B-Research/B5-property-constraint-composition/content-layer/figs/concept.py --c-only` (fig_measure_draft.png, 400 dpi). Marker positions are not data.

@@ -1,3 +1,7 @@
+## B4 and B5 schematic figures, 18 October 2026 (late) — latest XC instruction (pushed 18 Oct 2026)
+
+XC ▸ Liked the B18 concept figure and asked for figures in the same style for B4 and B5; for B5 "就要c" (only the measure panel), for B4 a trolley-problem picture as its own figure; then "B4和5的图更新到网站". AI ▸ `moral-framing-trolley.png` (B4) and `modified-nouns-measure.png` (B5) are added to the project pages under the summary; the homepage cards use title-cropped versions (`…-card.png`) instead of the result covers (`framing-carry*.svg`, `modified-nouns-did-cover.svg`, files kept). Sources and provenance in `public/images/research/README.md`. The B5 card is text-heavy and hard to read at card size; alternative offered to XC: the winged-dog panel (a) of the B5 concept figure. XC ▸ "按现在的预览上线：commit 并推送" — kept as previewed.
+
 ## Positioning and B18, 18 October 2026 — latest XC instruction (pushed 18 Oct 2026)
 
 XC ▸ After reading real PhD job ads: language models as a toolbox (training, evaluation, interpretability) for questions from linguistics and cognitive science is the position; cognitive modelling of human data is not a main line (Vault A2s37 §2, A3u18 §7). "定位文字和 B18 都现在改，B18 只写项目介绍不放稿件；上线前给我看预览". XC ▸ After the preview: "开头问题用 A 版，按现在的预览上线：commit、推送，重新生成 cv.pdf 和申请用的三份 CV PDF". AI ▸ Changes:

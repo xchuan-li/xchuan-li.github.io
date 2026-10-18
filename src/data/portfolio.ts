@@ -17,6 +17,7 @@
 // (moral framing; modified nouns). Related work = human-data projects (thesis, fact-checking).
 // B5 is shown as a project introduction only, no manuscript.
 // 18 October 2026 (XC): B18 (vagueness) added after modified nouns, project introduction only, no manuscript.
+// 18 October 2026, late (XC: "B4和5的图更新到网站"): the B4 and B5 cards show schematic figures drawn in the B18 style (trolley; measure) instead of the result covers.
 import { projects } from "./projects";
 
 export interface PortfolioEntry {
@@ -64,7 +65,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
         kind: "Project · 2026–27 · supervised at the German Research Center for Artificial Intelligence (DFKI) · manuscript in preparation",
         short: "When moral wording changes a model\u2019s choice, what changes: the weighing of outcomes, a tendency to answer with action, or some other process? And how far can internal interventions tell these apart?",
-        figure: {"src": "/images/research/framing-carry.svg", "previewSrc": "/images/research/framing-carry-cover.svg", "mobileSrc": "/images/research/framing-carry-mobile.svg", "alt": "Qwen2.5-7B patching heatmap across 28 layers and seven token positions. Strong carry is concentrated at the last slogan word in earlier layers and at the decision position in later layers; prefix controls stay at zero.", "caption": "Same-item activation patching in Qwen2.5-7B: 16 items × 2 answer orders per cell. Colour shows reconstruction of the aggregate greater-good vs duty contrast (1 = full contrast). This localizes effective interventions, not a unique transmission pathway.", "width": 860, "height": 365},
+        figure: { src: "/images/research/moral-framing-trolley-card.png", alt: "A trolley heads along the main track toward one person; a lever at the junction would send it onto a side track with three people. A box with the slogan Prioritize the greater good points to the lever: pulling it becomes more likely even though it costs more lives, which is not what a utilitarian would pick.", caption: "Schematic: the dilemmas drawn as a trolley problem; numbers are examples.", width: 420, height: 298 },
         links: [{ label: "Overview", href: projects.latentControl.href }],
       },
       {
@@ -73,7 +74,7 @@ export const portfolioSections: PortfolioSection[] = [
         field: "Language models", desc: projects.modifiers.summary, status: projects.modifiers.status,
         kind: "Project · independent · manuscript in preparation",
         short: "When a modifier adds a feature, as in a winged dog, which property answers shift in language models: those that depend on it, those that merely co-occur with it, or those associated with the word?",
-        figure: { src: "/images/research/modified-nouns-did-cover.svg", alt: "Mean update after adding a feature, in nats, with 95% confidence intervals over feature groups. In all three models dependent properties such as can fly moved more than co-occurring ones such as has a beak: Qwen2.5-14B 33.0 vs 5.0, Qwen2.5-7B 22.5 vs 4.9, Llama-3.1-8B 7.0 vs 3.4.", caption: "Dependent vs co-occurring properties.", width: 420, height: 286 },
+        figure: { src: "/images/research/modified-nouns-measure-card.png", alt: "Schematic of the measure: the prompt It was a winged dog. Question: Can it fly?, scored as log P(Yes) minus log P(No); on a score axis, a winged dog is compared with an old dog (common modifiers, DiD) and with an aquatic dog (cross-group control, DiD×).", caption: "How a shift is measured (schematic).", width: 420, height: 342 },
         links: [{ label: "Overview", href: projects.modifiers.href }],
       },
       {
