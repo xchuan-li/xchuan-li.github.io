@@ -30,6 +30,11 @@ export const snowballHtml =
 export const currentQuestion =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
 
+/** Homepage lead (XC, 26 Oct 2026: candidate B), from XC's one-sentence direction of 24 Oct 2026 (Vault A2 §1):
+    “我研究语言内部本身有什么我们还没发现的东西”. Homepage only for now; the CV and /approach still use identityLong. */
+export const homeLeadHtml =
+  "What is there in language itself that we have not yet discovered?";
+
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =

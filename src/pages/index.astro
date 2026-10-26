@@ -1,15 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
-import { identityLongHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
+import { homeLeadHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
+import { researchGroups } from "../data/variants";
+import { projects } from "../data/projects";
 import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
 import WorkCarousel from "../components/WorkCarousel.astro";
-import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 import SnowballFigure from "../components/SnowballFigure.astro";
 
 // 12 Oct 2026 (XC): one trunk. Research = moral framing, modified nouns, thesis;
 // the fact-checking experiment sits under Earlier research experience.
 const homepageResearch = entriesOfTier("research");
+// 26 Oct 2026 (XC): Research is grouped by the variant of language each project works in.
+const groupOf = (e: (typeof homepageResearch)[number]) =>
+  researchGroups.find((g) => g.projects.some((k) => projects[k].href === e.links[0]?.href));
+const groupedResearch = [
+  ...researchGroups.map((g) => ({ ...g, entries: g.projects.map((k) => homepageResearch.find((e) => e.links[0]?.href === projects[k].href)).filter((e) => e !== undefined) })),
+  { id: "other", label: "", who: "", projects: [], entries: homepageResearch.filter((e) => !groupOf(e)) },
+].filter((g) => g.entries.length > 0);
 
 // Homepage groups outputs by type and state; /approach retains the research programme.
 // 27 September 2026 (XC): keep the sticky left column; the main column is narrow (720 px)
@@ -98,8 +106,8 @@ const timeline = [
     <div class="main">
     <!-- 18 Oct 2026 (XC approved with the preview; was "Computational cognitive science × language model interpretability"). -->
     <p class="field-kicker">Linguistics &amp; cognitive science <span aria-hidden="true">&#215;</span><span class="sr-only">with</span> language models as research instruments</p>
-    <p class="intro" set:html={identityLongHtml} />
-    <MeaningBridgeFigure />
+    <p class="intro" set:html={homeLeadHtml} />
+    <!-- 26 Oct 2026 (XC): the human-and-robot Fig. 1 is gone (an LM drawn as a speaker no longer fits A2s36); nothing replaces it for now. -->
 
     <p class="bio" set:html={bioHtml} />
     <p class="bio" set:html={programmeHtml} />
@@ -115,7 +123,12 @@ const timeline = [
       <div class="portfolio-list">
         <section class="research-block" id="work" aria-labelledby="work-heading">
           <h2 class="research-group-label" id="work-heading">Research</h2>
-          <WorkList entries={homepageResearch} illustrated />
+          {groupedResearch.map((g) => (
+            <div class="vgroup">
+              {g.label && <h3 class="vgroup-h">{g.label}<span>{g.who}</span></h3>}
+              <WorkList entries={g.entries} illustrated />
+            </div>
+          ))}
         </section>
         <section class="research-block" id="earlier-work" aria-labelledby="earlier-work-heading">
           <h2 class="research-group-label" id="earlier-work-heading">Earlier research experience</h2>
@@ -251,6 +264,9 @@ const timeline = [
   .bio :global(a:hover) { text-decoration-thickness:2px; }
   .bio { margin:2rem 0 0; font-size:1.02rem; line-height:1.75; color:var(--color-text); text-wrap:pretty; }
   .research-group-label { font-family:var(--font-serif); font-size:1.65rem; font-weight:600; line-height:1.3; margin:0.35rem 0 0.6rem; }
+  .vgroup + .vgroup { margin-top:2.2rem; }
+  .vgroup-h { margin:1rem 0 0.7rem; font-family:var(--font-serif); font-size:1.12rem; font-weight:600; font-style:italic; line-height:1.35; color:var(--color-text); }
+  .vgroup-h span { margin-left:0.55rem; font-family:var(--font-mono); font-size:0.7rem; font-style:normal; font-weight:400; letter-spacing:0.06em; color:var(--color-text-dim); }
   .research-group-blurb { font-size:0.94rem; line-height:1.6; color:var(--color-text-muted); margin:0 0 1rem; }
   .work-index-link a { color:var(--color-accent); text-underline-offset:0.2em; }
   .work-index-link { font-size:0.9rem; margin:1.5rem 0 0; }
