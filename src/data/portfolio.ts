@@ -17,6 +17,7 @@
 // (moral framing; modified nouns). Related work = human-data projects (thesis, fact-checking).
 // B5 is shown as a project introduction only, no manuscript.
 // 18 October 2026 (XC): B18 (vagueness) added after modified nouns, project introduction only, no manuscript.
+// 26 October 2026 (XC): the B18 preprint is on Zenodo; the card links its concept DOI.
 // 18 October 2026, late (XC: "B4和5的图更新到网站"): the B4 and B5 cards show schematic figures drawn in the B18 style (trolley; measure) instead of the result covers.
 import { projects } from "./projects";
 
@@ -85,10 +86,10 @@ export const portfolioSections: PortfolioSection[] = [
         tier: "research", track: "lm", topic: "Vagueness · controlled training",
         title: projects.vagueness.title,
         field: "Language models", desc: projects.vagueness.summary, status: projects.vagueness.status,
-        kind: "Project · independent · manuscript in preparation",
+        kind: "Project · independent · preprint 2026",
         short: "Speakers disagree about where tall ends. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath?",
         figure: { src: "/images/research/vagueness-card.png", alt: "Figures ordered by height under the words short, average and tall; one figure near the tall/average boundary is called tall by one speaker and average by two others.", caption: "Who is tall?", width: 420, height: 329 },
-        links: [{ label: "Overview", href: projects.vagueness.href }],
+        links: [{ label: "Overview", href: projects.vagueness.href }, { label: "DOI", href: "https://doi.org/10.5281/zenodo.23677586" }],
       },
       {
         tier: "research", track: "langcog", topic: "Modality · human side",

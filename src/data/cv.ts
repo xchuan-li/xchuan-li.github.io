@@ -107,7 +107,8 @@ const research: Record<string, Entry> = {
     id: "vagueness", title: "Vagueness and learning a scale from text",
     href: "/research/vagueness-scale",
     context: "Independent project", when: "Oct. 2026 –",
-    note: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Manuscript in preparation.",
+    note: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Preprint.",
+    links: [{ label: "doi:10.5281/zenodo.23677586", href: "https://doi.org/10.5281/zenodo.23677586" }],
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
@@ -147,6 +148,7 @@ const research: Record<string, Entry> = {
 // certificate), typicality (LingBuzz), modified nouns (project opened), ProtoBias end (paper date).
 // XC asked for estimates elsewhere: Marburg start, moral framing, thesis start, ProtoBias start,
 // street view, fact-checking, undergraduate thesis are semester-based estimates.
+// 26 Oct 2026 (XC): B18 preprint on Zenodo; the entry links its concept DOI.
 // 18 Oct 2026 (XC): B18 (vagueness) added after modified nouns; B5 retitled to match the 18 Oct manuscript wording (no "updating"); training added to methods and skills.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
   general: { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },

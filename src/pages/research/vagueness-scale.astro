@@ -3,13 +3,14 @@ import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 
 // 18 October 2026 (XC): B18 goes on the site as a project introduction only, no manuscript and
-// no results. The manuscript is in preparation for a double-blind journal (Vault B18h, A3x13).
+// no results. 26 October 2026 (XC): the preprint is on Zenodo (concept DOI 10.5281/zenodo.23677586,
+// CC BY 4.0, Vault B18f8); the page links it and otherwise stays a project introduction.
 const project = projects.vagueness;
 ---
 
 <Base
   title={`${project.title} · Xiaochuan Li`}
-  description="Speakers disagree about where vague words such as tall end. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath? Manuscript in preparation."
+  description="Speakers disagree about where vague words such as tall end. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath? Preprint on Zenodo."
   showProgress={true}
   toc={true}
 >
@@ -58,7 +59,7 @@ const project = projects.vagueness;
 
     <h2>Status</h2>
     <p class="cw-status">
-      Manuscript in preparation.
+      Preprint, October 2026: Li, X. (2026). <a href="https://doi.org/10.5281/zenodo.23677586"><em>What Can Be Learned from Vagueness</em></a>. Zenodo. doi:10.5281/zenodo.23677586 (CC BY 4.0).
     </p>
     <p class="!mt-10 !text-sm !text-[var(--color-text-dim)]"><a href="/research">← Back to Research & Projects</a></p>
   </article>

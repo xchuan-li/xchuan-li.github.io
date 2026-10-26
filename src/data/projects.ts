@@ -69,7 +69,7 @@ export const projects = {
     question: "Speakers draw the boundaries of words such as tall or green in slightly different places. For a learner that sees only text, is this disagreement noise, or evidence about the scale underneath?",
     summary: "A theoretical and computational study of vagueness: what speakers\u2019 disagreement about word boundaries costs a listener and what it tells a learner, tested with language models trained only on naming text.",
     connection: "The language models are learners under controlled input: what they can and cannot recover shows what the text itself carries.",
-    status: "Manuscript in preparation",
+    status: "Preprint · Zenodo, October 2026",
   },
   latentControl: {
     title: "Moral framing and dilemma choices in language models",
