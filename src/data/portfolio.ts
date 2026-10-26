@@ -179,7 +179,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Undergraduate project · September–December 2021",
         short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
         figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 420, height: 286 },
-        poster: { src: "/images/research/child-reading-poster.jpg", pdf: "/papers/child-reading-poster.pdf", width: 1600, height: 1132, line: "Undergraduate project in Shenzhen, 2021; I helped run the reading assessments.", alt: "Poster: Does a word help a child read a character? On black, the character 龄 alone in a white circle, and the word 年龄 as two overlapping circles." },
+        poster: { src: "/images/research/child-reading-poster.jpg", pdf: "/papers/child-reading-poster.pdf", width: 1600, height: 1132, line: "Undergraduate project in Shenzhen, 2021; I helped run the reading assessments.", alt: "Poster: Does a word help a child read a character? Cut-paper puzzle pieces: 龄 alone as a red piece whose knob holds nothing, and 年龄 as a black and a red piece locked together on yellow." },
         links: [{ label: "Read report", href: "/research/child-reading-assessment" }, { label: "Poster", href: "/papers/child-reading-poster.pdf" }],
       },
     ],
