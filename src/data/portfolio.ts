@@ -28,8 +28,10 @@ export interface PortfolioEntry {
   links: { label: string; href: string }[];
   cover?: { src: string; alt: string };
   figure?: { src: string; preview?: boolean; previewSrc?: string; mobileSrc?: string; alt: string; caption: string; width: number; height: number };
-  // Poster shown in the homepage carousel of earlier work (26 Oct 2026, XC); `pdf` is where it links.
-  poster?: { src: string; pdf: string; alt: string; width: number; height: number };
+  // Poster image shown in the homepage carousel of earlier work (26 Oct 2026, XC); `pdf` is where it links.
+  // Both images are the Swiss-style intro posters (reports/posters-swiss); the fact-checking link is the academic A0 poster.
+  // line: the grey line under the poster; it says what the poster does not (context, role).
+  poster?: { src: string; pdf: string; alt: string; width: number; height: number; line: string };
   note?: { label: string; text: string };
   /** Papers list: meta line, one sentence, writing-sample flag, first-page thumbnail. */
   kind?: string;
@@ -162,7 +164,7 @@ export const portfolioSections: PortfolioSection[] = [
         short: "Participants answered ten general-knowledge questions and could check each answer, first with ChatGPT or Wikipedia (assigned at random), then with the other source. Starting with ChatGPT did not reduce double-checking (N = 47). Designed in a group of three and run by the whole class; I did the analysis and wrote the report and poster.",
         thumb: "/papers/fact-checking-study-thumb.png",
         figure: {"src": "/images/research/fact-checking-means-cover.svg", "alt": "Mean number of questions checked (of 10) with standard deviations, by round and source order. Wikipedia first: 6.24 then 5.38. ChatGPT first: 5.78 then 7.00. The lines cross; neither difference was reliable.", "caption": "Table 1 of the report as a plot: means ± SD, Wikipedia first n = 29, ChatGPT first n = 18. Neither difference was reliable.", "width": 420, "height": 286},
-        poster: { src: "/images/research/fact-checking-poster.jpg", pdf: "/papers/fact-checking-poster.pdf", width: 1600, height: 1132, alt: "Poster: Taking a Language Model’s Word for It? How people check answers from an AI chatbot and from an encyclopedia. Introduction and method, results, and conclusions in three columns." },
+        poster: { src: "/images/research/fact-checking-highlight.jpg", pdf: "/papers/fact-checking-poster.pdf", width: 1600, height: 1132, line: "Course experiment at UTN, 2025–26; designed in a group of three; I did the analysis.", alt: "Poster: Taking a language model’s word for it? Four diagonal bars, red for ChatGPT first and black for Wikipedia first, show the average answers checked at the first and second check (5.8 and 7.0, 6.2 and 5.4); a dot matrix shows each person’s count at the second check, bunched at none and at all ten." },
         links: [
           { label: "Report", href: projects.psyStudy.href },
           { label: "PDF", href: "/papers/fact-checking-study.pdf" },
@@ -177,7 +179,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Undergraduate project · September–December 2021",
         short: "How does presenting a Chinese character alone or within a word change access to its pronunciation? A project report on reading assessment, with qualitative observations and character–word examples.",
         figure: { src: "/images/research/child-reading-cover.svg", alt: "Illustrative Chinese character–word pairs: 龄／年龄 and 筑／建筑, with the target character highlighted.", caption: "Character presentation examples.", width: 420, height: 286 },
-        poster: { src: "/images/research/child-reading-poster.jpg", pdf: "/papers/child-reading-poster.pdf", width: 1600, height: 1132, alt: "Poster: Does a word help a child read a character? The character 龄 shown on its own and inside the word 年龄, as example tiles." },
+        poster: { src: "/images/research/child-reading-poster.jpg", pdf: "/papers/child-reading-poster.pdf", width: 1600, height: 1132, line: "Undergraduate project in Shenzhen, 2021; I helped run the reading assessments.", alt: "Poster: Does a word help a child read a character? On black, the character 龄 alone in a white circle, and the word 年龄 as two overlapping circles." },
         links: [{ label: "Read report", href: "/research/child-reading-assessment" }, { label: "Poster", href: "/papers/child-reading-poster.pdf" }],
       },
     ],
