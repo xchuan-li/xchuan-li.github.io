@@ -10,8 +10,12 @@ export const identity =
 /** Homepage lead: the research interest as one question, set bold as the page's first visual anchor (XC, 3 Oct 2026; replaces the 29 Sep paradigm question). Fig. 1 illustrates it. The sidebar question it replaced is gone. */
 // 18 Oct 2026 (XC: "定位文字…现在改"): LM as research instrument, not an understanding subject (Vault A2s36, A2s37).
 // XC chose candidate A on 18 Oct 2026 (B was "What does the structure of a language carry, and what can be recovered from language alone?"); live 18 Oct 2026.
+// 26 Oct 2026 (XC): the lead becomes the direct English of XC's one sentence of 24 Oct (Vault A2 §1:
+// “我研究语言内部本身有什么我们还没发现的东西”); first on the homepage, then the same day on the CV and /approach
+// ("CV 和 Research Program 页的开头也换成新句子"). The 18 Oct question was "How does linguistic structure organise
+// and transform information, and what can people and language models tell us about it?".
 export const identityLong =
-  "How does linguistic structure organise and transform information, and what can people and language models tell us about it?";
+  "What is there in language itself that we have not yet discovered?";
 
 /** Homepage background and motivation, revised with XC on 3 October 2026; MPI CBS and DFKI links restored 5 October 2026. 12 Oct 2026 (XC): all three homepage paragraphs shortened; the origin clause (logic, learning languages) and the developmental-order sentence dropped (the thesis card under Research still links the thesis to LM work). Late evening (XC): two closing sentences link the two projects and lead into the paradigm paragraph. Live 12 Oct 2026 (XC). */
 export const bioHtml =
@@ -30,15 +34,10 @@ export const snowballHtml =
 export const currentQuestion =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";
 
-/** Homepage lead (XC, 26 Oct 2026: candidate B), from XC's one-sentence direction of 24 Oct 2026 (Vault A2 §1):
-    “我研究语言内部本身有什么我们还没发现的东西”. Homepage only for now; the CV and /approach still use identityLong. */
-export const homeLeadHtml =
-  "What is there in language itself that we have not yet discovered?";
-
 // Marked-up variants, for surfaces that carry emphasis (rendered with set:html).
 // Keep the prose identical to the plain versions above — only the markup differs.
 export const identityLongHtml =
-  "How does linguistic structure organise and transform information, and what can people and language models tell us about it?";
+  "What is there in language itself that we have not yet discovered?";
 
 export const currentQuestionHtml =
   "How do epistemic expressions differ in what they contribute to a conversation, and do those differences affect later access to a specific possibility?";

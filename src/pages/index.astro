@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { homeLeadHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
+import { identityLongHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
 import { researchGroups } from "../data/variants";
 import { projects } from "../data/projects";
 import { entriesOfTier, workEntries } from "../data/portfolio";
@@ -106,7 +106,7 @@ const timeline = [
     <div class="main">
     <!-- 18 Oct 2026 (XC approved with the preview; was "Computational cognitive science × language model interpretability"). -->
     <p class="field-kicker">Linguistics &amp; cognitive science <span aria-hidden="true">&#215;</span><span class="sr-only">with</span> language models as research instruments</p>
-    <p class="intro" set:html={homeLeadHtml} />
+    <p class="intro" set:html={identityLongHtml} />
     <!-- 26 Oct 2026 (XC): the human-and-robot Fig. 1 is gone (an LM drawn as a speaker no longer fits A2s36); nothing replaces it for now. -->
 
     <p class="bio" set:html={bioHtml} />

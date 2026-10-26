@@ -1,3 +1,7 @@
+## New lead on the CV and Research Program page; cv.pdf re-exported, 26 October 2026 — latest XC instruction
+
+XC ▸ "CV 和 Research Program 页的开头也换成新句子，cv.pdf 一起重新导出". AI ▸ `identityLong` / `identityLongHtml` are now "What is there in language itself that we have not yet discovered?", so the homepage, `/approach` and the CV opening share one source again (the homepage-only `homeLeadHtml` is gone). `public/cv.pdf` printed from the local build (A4, two pages) and its links rewritten from `http://localhost:4398` to `https://xchuan-li.github.io` (9 links; none left on localhost). The Vault application PDFs (`_Exports/PhD Application/CV-2026-10-18/`) still carry the 18 October sentence.
+
 ## Homepage: research grouped by variant of language; new lead; Fig. 1 removed, 26 October 2026 — latest XC instruction
 
 XC ▸ Asked whether the homepage opening and the two robot figures still fit the research direction (Vault A2 §1, 24 Oct: "我研究语言内部本身有什么我们还没发现的东西。LM、儿童、病理语言都是语言的变体……"; A2v14, 26 Oct: personal projects B18 → B17 → B5). Proposed that every project is a variant of language: 发展中的语言 (B3), 部件残缺的语言 (B17), 从统计规律中恢复的语言 (LM), 模糊的语言 (B18), 动态的语言 (B5). AI ▸ pointed out that vagueness and composition are properties, not variants, so each project = one property × one variant; a homepage strip and a full properties × variants table on /approach were built and dropped (XC: "太丑 太直白 而且每个不像是一个完整的研究"). A Swiss-style restyle of the whole homepage was also tried the same day and not adopted ("不太好看"; kept on the local branch `swiss-redesign`, not pushed).
