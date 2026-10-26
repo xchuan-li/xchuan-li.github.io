@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Child reading poster · Xiaochuan Li</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@400&family=Noto+Sans+SC:wght@700&display=block" rel="stylesheet">
+<style>
+  /* A0 landscape, "research highlight" layout (direction F, XC, 26 Oct 2026). Lighter than an academic
+     poster, no details. The characters sit in tiles as an example, not as decoration (XC: big characters
+     felt out of place). Type is sized to stay legible when the poster is shown 720 px wide on the site.
+     Facts follow src/content/papers/child-reading-assessment.html: one observed child, example characters. */
+  @page { size: 1189mm 841mm; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { width: 1189mm; height: 841mm; overflow: hidden; }
+  body { width: 1189mm; height: 841mm; overflow: hidden; position: relative; background: #fff; color: #111827;
+         font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  p { margin: 0; }
+  .abs { position: absolute; }
+
+  .top { left: 50mm; right: 50mm; top: 44mm; display: flex; justify-content: space-between; border-top: 1.4mm solid #111827; padding-top: 6mm;
+         font: 700 30pt/1 'Source Sans 3'; letter-spacing: .2em; text-transform: uppercase; }
+  .top span:last-child { color: #2f5bd3; }
+
+  .block { left: 50mm; top: 100mm; width: 610mm; height: 640mm; background: #2f5bd3; color: #fff; }
+  .lab { font: 700 30pt/1 'Source Sans 3'; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+  .tile { width: 140mm; height: 140mm; border-radius: 9mm; display: flex; align-items: center; justify-content: center;
+          font: 700 220pt/1 'Noto Sans SC', sans-serif; }
+  .tile.on { background: #fff; color: #111827; }
+  .tile.ctx { border: 1.4mm solid rgba(255,255,255,.75); color: #fff; }
+  .gloss { font: 400 34pt/1.25 'Source Sans 3'; color: #fff; }
+  .gloss i { font-style: italic; }
+  .cap { font: 400 26pt/1 'Source Sans 3'; color: rgba(255,255,255,.75); }
+
+  .right { left: 700mm; top: 100mm; width: 440mm; }
+  h1 { margin: 0; font: 700 112pt/1.02 'Source Sans 3'; letter-spacing: -.015em; }
+  .dek { font: 400 48pt/1.3 'Source Serif 4', serif; color: #374151; margin-top: 11mm; }
+  .brief { counter-reset: n; margin-top: 4mm; }
+  .it { display: grid; grid-template-columns: 22mm 1fr; margin-top: 10mm; counter-increment: n; }
+  .it::before { content: counter(n); font: 700 40pt/1.2 'Source Sans 3'; color: #2f5bd3; grid-row: span 2; }
+  .it .l { font: 700 36pt/1.25 'Source Sans 3'; }
+  .it .t { font: 400 38pt/1.3 'Source Sans 3'; color: #374151; }
+
+  .foot { left: 700mm; right: 50mm; bottom: 101mm; display: flex; gap: 8mm; align-items: flex-end; font: 400 25pt/1.35 'Source Sans 3'; color: #4b5563; }
+  .foot img { width: 40mm; height: 40mm; }
+</style>
+</head>
+<body>
+<div class="abs top"><span>Undergraduate project · Shenzhen, 2021</span><span>Research highlight</span></div>
+
+<div class="abs block"></div>
+<p class="abs lab" style="left:360mm; top:140mm">On its own</p>
+<div class="abs tile on" style="left:360mm; top:175mm">龄</div>
+<p class="abs gloss" style="left:360mm; top:330mm">líng <i>‘age’</i></p>
+<svg class="abs" style="left:405mm; top:375mm; width:50mm; height:60mm" viewBox="0 0 50 60" aria-hidden="true">
+  <path d="M25,2 L25,52" stroke="#fff" stroke-width="2.4" fill="none"/><path d="M12,40 L25,54 L38,40" stroke="#fff" stroke-width="2.4" fill="none"/>
+</svg>
+<p class="abs lab" style="left:200mm; top:440mm">Inside a word</p>
+<div class="abs tile ctx" style="left:200mm; top:475mm">年</div>
+<div class="abs tile on" style="left:360mm; top:475mm">龄</div>
+<p class="abs gloss" style="left:200mm; top:630mm">nián líng <i>‘year’ + ‘age’ = ‘age’</i></p>
+<p class="abs cap" style="left:95mm; top:700mm">Example characters, not test items.</p>
+
+<div class="abs right">
+  <h1>Does a word help a child read a character?</h1>
+  <p class="dek">In a 2021 reading assessment, one child could read only the simplest characters on their own, but knew more of them inside words.</p>
+  <div class="brief">
+    <div class="it"><p class="l">The question</p><p class="t">Does a familiar word cue the character’s sound, or is the word read as a whole?</p></div>
+    <div class="it"><p class="l">A fair test</p><p class="t">The same characters, alone and inside words, after checking which words a child knows.</p></div>
+  </div>
+</div>
+
+<div class="abs foot"><img src="qr.svg" alt="QR code to the report"><span>Xiaochuan Li · Shenzhen University, with the Shenzhen Learning Disorders Association</span></div>
+</body>
+</html>

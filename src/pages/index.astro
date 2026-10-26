@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import { identityLongHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
 import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
+import WorkCarousel from "../components/WorkCarousel.astro";
 import MeaningBridgeFigure from "../components/MeaningBridgeFigure.astro";
 import SnowballFigure from "../components/SnowballFigure.astro";
 
@@ -118,7 +119,8 @@ const timeline = [
         </section>
         <section class="research-block" id="earlier-work" aria-labelledby="earlier-work-heading">
           <h2 class="research-group-label" id="earlier-work-heading">Earlier research experience</h2>
-          <WorkList entries={entriesOfTier("earlier")} illustrated />
+          <!-- 26 Oct 2026 (XC): earlier work as a carousel, one project and its poster at a time. -->
+          <WorkCarousel entries={entriesOfTier("earlier")} label="Earlier research experience" />
         </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>

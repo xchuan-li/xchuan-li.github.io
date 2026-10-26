@@ -48,10 +48,10 @@ export const projects = {
     status: "Completed team course project",
   },
   psyStudy: {
-    title: "Fact-checking after ChatGPT exposure",
+    title: "Taking a language model’s word for it?",
     href: "/research/fact-checking-study",
     question: "Does meeting ChatGPT first, rather than Wikipedia, change whether people check an answer and whether they double-check it with another source?",
-    summary: "A between-subjects course experiment, designed in a group of three and run by the whole class (49 participants, 47 analysed). My part was the data analysis.",
+    summary: "A between-subjects course experiment (N = 47), designed in a group of three and run by the whole class; I did the analysis and wrote the report and poster.",
     connection: "The course took me through a full behavioural experiment: design, pilot, revision, online data collection, and analysis.",
     status: "Completed course study · Winter 2025–26",
   },

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fact-checking poster · Xiaochuan Li</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=block" rel="stylesheet">
+<style>
+  /* A0 landscape. Numbers come from stats.json via build_poster.py; edit the template, not poster.html.
+     Conventions followed (university poster guides): sans-serif title and headings, serif body, two typefaces,
+     ~700 words, sentences under 20 words, take-home message at the top, captions that state the finding,
+     logo and QR code to the full report, contact at the end. */
+  @page { size: 1189mm 841mm; margin: 0; }
+  :root {
+    --ink: #16181d; --muted: #4c515c; --rule: #d6dae0;
+    --acc: #17457a; --acc-tint: #eef2f7; --wiki: #9aa0a8;
+    --serif: 'Source Serif 4', 'STIX Two Text', Georgia, serif;
+    --sans: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body { width: 1189mm; height: 841mm; overflow: hidden; color: var(--ink); font-family: var(--serif);
+         font-size: 30pt; line-height: 1.34; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+         font-variant-numeric: lining-nums; display: flex; flex-direction: column; }
+
+  header { display: grid; grid-template-columns: 1fr auto; gap: 20mm; align-items: start; padding: 28mm 40mm 0; }
+  .kicker { font: 600 19pt/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); margin: 0 0 8mm; }
+  h1 { font: 700 100pt/1.02 var(--sans); letter-spacing: -0.015em; margin: 0; }
+  .sub { font: 400 46pt/1.15 var(--sans); color: var(--muted); margin: 5mm 0 0; }
+  .byline { margin: 10mm 0 0; font-family: var(--sans); }
+  .author { font-size: 38pt; font-weight: 600; margin-right: 10mm; }
+  .aff { font-size: 29pt; color: var(--muted); }
+  .badge { display: flex; flex-direction: column; align-items: center; gap: 7mm; padding-top: 4mm; }
+  .badge .logo svg { display: block; width: 92mm; height: auto; }
+  .badge .qr svg { display: block; width: 62mm; height: 62mm; }
+  .badge .qrlab { font: 400 18pt/1.2 var(--sans); color: var(--muted); text-align: center; margin: -3mm 0 0; }
+
+  .finding { margin: 12mm 40mm 0; padding: 8mm 12mm; background: var(--acc-tint); border-left: 3.2mm solid var(--acc);
+             font-size: 34pt; line-height: 1.28; }
+  .finding b { font-family: var(--sans); color: var(--acc); }
+
+  main { flex: 1; display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: 0 26mm; padding: 13mm 40mm 0; min-height: 0; }
+  .col { display: flex; flex-direction: column; min-height: 0; }
+  h2 { font: 700 42pt/1.1 var(--sans); color: var(--acc); margin: 0 0 5mm; padding-top: 4mm; border-top: 1.1mm solid var(--acc); }
+  section + section { margin-top: 11mm; }
+  p { margin: 0 0 4.5mm; }
+  .lab { font: 700 30pt/1.2 var(--sans); margin: 5mm 0 2.5mm; }
+  .rq { margin: 1mm 0 5mm; padding: 3.5mm 0 3.5mm 7mm; border-left: 1.2mm solid var(--rule); font-style: italic; }
+  .pairs { display: grid; grid-template-columns: 19mm 1fr; gap: 0; margin: 0 0 1mm; }
+  .pairs > span:nth-child(odd) { font: 700 30pt/1.34 var(--sans); color: var(--acc); }
+  .pairs > span:nth-child(even) { margin-bottom: 3mm; }
+  .gpt { color: var(--acc); font-weight: 600; }
+  .wiki { color: #6d737c; font-weight: 600; }
+  dl.method { display: grid; grid-template-columns: 46mm 1fr; gap: 0 5mm; margin: 0; }
+  dl.method dt { font: 700 28pt/1.4 var(--sans); }
+  dl.method dd { margin: 0 0 3.4mm; }
+  figure { margin: 2mm 0 4mm; }
+  figure svg { display: block; width: 100%; height: auto; }
+  figcaption { font: 400 23pt/1.3 var(--sans); color: var(--muted); margin-top: 2.5mm; }
+  figcaption b { color: var(--ink); font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 25pt; font-variant-numeric: tabular-nums lining-nums;
+          border-top: 0.7mm solid var(--ink); border-bottom: 0.7mm solid var(--ink); margin: 1mm 0 2mm; }
+  th, td { padding: 2.1mm 2.6mm; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { font: 600 23pt/1.2 var(--sans); border-bottom: 0.35mm solid var(--ink); vertical-align: bottom; }
+  thead th span { font-weight: 400; }
+  .tnote { font: 400 22pt/1.3 var(--sans); color: var(--muted); margin: 0 0 5mm; }
+  .tnote b { color: var(--ink); }
+  ul.plain { margin: 0 0 3mm; padding-left: 8mm; }
+  ul.plain li { margin: 0 0 2.4mm; }
+  .refs { margin-top: auto; padding-top: 6mm; }
+  .refs p { font: 400 20pt/1.3 var(--sans); padding-left: 8mm; text-indent: -8mm; margin: 0 0 2mm; color: var(--muted); }
+
+  footer { display: flex; justify-content: flex-end; margin: 8mm 40mm 0; padding: 4.5mm 0 15mm; border-top: 0.35mm solid var(--rule);
+           font: 400 22pt/1.3 var(--sans); color: var(--muted); }
+  footer b { color: var(--ink); font-weight: 600; margin-right: 4mm; }
+
+  /* procedure diagram */
+  .proc text { font-family: var(--sans); fill: var(--ink); }
+  .proc .box { fill: #fff; stroke: var(--ink); stroke-width: 2.4; }
+  .proc .box.w { stroke: var(--wiki); stroke-width: 4.5; }
+  .proc .box.g { stroke: var(--acc); stroke-width: 4.5; }
+  .proc .box.s { fill: #f1f3f6; stroke: none; }
+  .proc .arr { stroke: var(--ink); stroke-width: 2.6; fill: none; marker-end: url(#ah); }
+  .proc .t1 { font-size: 33px; font-weight: 700; }
+  .proc .t2 { font-size: 30px; }
+  .proc .tn { font-size: 27px; fill: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <p class="kicker">Behavioural experiment · Humans and AI systems</p>
+    <h1>Taking a Language Model’s Word for It?</h1>
+    <p class="sub">How people check answers from an AI chatbot and from an encyclopedia</p>
+    <p class="byline"><span class="author">Xiaochuan Li</span><span class="aff">University of Technology Nuremberg · M.Sc. Human and AI</span></p>
+  </div>
+  <div class="badge">
+    <div class="logo">{{LOGO}}</div>
+    <div class="qr">{{QR}}</div>
+    <p class="qrlab">Full report</p>
+  </div>
+</header>
+
+<div class="finding"><b>Take-home.</b> People who could check with an AI chatbot first did not double-check less; descriptively,
+  they double-checked more. Neither group difference was reliable (<i>N</i> = {{N}}).</div>
+
+<main>
+  <div class="col">
+    <section>
+      <h2>Introduction</h2>
+      <p>Language models now answer many everyday questions. Whether people let such an answer settle a question shapes how
+        information passes between AI systems and humans.</p>
+      <p>ChatGPT is discussed as an <i>epistemic authority</i>: a source whose answer counts as a reason to believe
+        (Cooper et al., 2024; Hauswald, 2025). Relying on it is a form of cognitive offloading (Shanmugasundaram &amp; Tamilarasu, 2023).</p>
+      <p class="rq">Does checking with an AI chatbot first, rather than an encyclopedia, change how often people check
+        their answers, and how often they check again elsewhere?</p>
+      <div class="pairs">
+        <span>H1</span><span>With ChatGPT first, people check <b>more</b> answers in round 1.</span>
+        <span>H2</span><span>With ChatGPT first, people check <b>fewer</b> answers with the second source.</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Method</h2>
+      <dl class="method">
+        <dt>Design</dt><dd>Between subjects; first tool assigned at random: <span class="wiki">Wikipedia first</span> or <span class="gpt">ChatGPT first</span>.</dd>
+        <dt>Sample</dt><dd>{{N_TOTAL}} took part, {{N_DECLINED}} declined consent; {{N}} analysed ({{NW}} and {{NG}}). Convenience sample.</dd>
+        <dt>Task</dt><dd>Ten two-option general-knowledge questions (<i>What is the coloured portion of the eye called? Iris / Pupil</i>).
+          Each tool’s answer appeared as a fixed screenshot.</dd>
+      </dl>
+      <figure class="proc">
+        <svg viewBox="0 0 1340 470" role="img" aria-label="Procedure: random assignment to Wikipedia first or ChatGPT first; round 1 with the first tool, round 2 with the other, then questionnaire and debriefing.">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16181d"/></marker></defs>
+          <rect class="box s" x="0" y="170" width="210" height="130" rx="10"/>
+          <text class="t1" x="105" y="226" text-anchor="middle">Consent,</text>
+          <text class="t2" x="105" y="262" text-anchor="middle">instructions</text>
+          <text class="tn" x="105" y="342" text-anchor="middle">random</text>
+          <text class="tn" x="105" y="374" text-anchor="middle">assignment</text>
+          <path class="arr" d="M210,220 C250,220 250,115 288,115"/>
+          <path class="arr" d="M210,250 C250,250 250,355 288,355"/>
+          <text class="tn" x="442" y="44" text-anchor="middle">Wikipedia first, n = {{NW}}</text>
+          <rect class="box w" x="292" y="60" width="300" height="110" rx="10"/>
+          <text class="t1" x="442" y="106" text-anchor="middle">Round 1</text>
+          <text class="t2" x="442" y="144" text-anchor="middle">check: Wikipedia</text>
+          <path class="arr" d="M592,115 L668,115"/>
+          <rect class="box g" x="672" y="60" width="300" height="110" rx="10"/>
+          <text class="t1" x="822" y="106" text-anchor="middle">Round 2</text>
+          <text class="t2" x="822" y="144" text-anchor="middle">check: ChatGPT</text>
+          <rect class="box g" x="292" y="300" width="300" height="110" rx="10"/>
+          <text class="t1" x="442" y="346" text-anchor="middle">Round 1</text>
+          <text class="t2" x="442" y="384" text-anchor="middle">check: ChatGPT</text>
+          <path class="arr" d="M592,355 L668,355"/>
+          <rect class="box w" x="672" y="300" width="300" height="110" rx="10"/>
+          <text class="t1" x="822" y="346" text-anchor="middle">Round 2</text>
+          <text class="t2" x="822" y="384" text-anchor="middle">check: Wikipedia</text>
+          <text class="tn" x="442" y="452" text-anchor="middle">ChatGPT first, n = {{NG}}</text>
+          <path class="arr" d="M972,115 C1012,115 1012,220 1052,220"/>
+          <path class="arr" d="M972,355 C1012,355 1012,250 1052,250"/>
+          <rect class="box s" x="1056" y="170" width="284" height="130" rx="10"/>
+          <text class="t1" x="1198" y="226" text-anchor="middle">Questionnaire,</text>
+          <text class="t2" x="1198" y="262" text-anchor="middle">debriefing</text>
+        </svg>
+        <figcaption><b>Figure 1.</b> Every answer could be checked twice: first with the assigned tool, then with the other.
+          Participants also rated their certainty (1–4).</figcaption>
+      </figure>
+      <dl class="method">
+        <dt>Measures</dt><dd>Answers checked in round 1 and in round 2 (each 0–10); certainty; accuracy.</dd>
+        <dt>Analysis</dt><dd>Welch’s <i>t</i>-tests, Cohen’s <i>d</i>, Pearson correlations. Unanswered check prompts count as not checked.</dd>
+      </dl>
+    </section>
+  </div>
+
+  <div class="col">
+    <section>
+      <h2>Results: source order and checking</h2>
+      <figure>
+        {{FIG_MAIN}}
+        <figcaption><b>Figure 2.</b> ChatGPT-first participants checked slightly less in round 1 and more in round 2.
+          Dots: participants; diamonds: mean with 95% CI.</figcaption>
+      </figure>
+      <table>
+        <thead><tr><th></th><th>Wikipedia first<br><span>(<i>n</i> = {{NW}})</span></th><th>ChatGPT first<br><span>(<i>n</i> = {{NG}})</span></th><th>Welch <i>t</i> (<i>df</i>)</th><th><i>p</i></th><th><i>d</i></th></tr></thead>
+        <tbody>
+          <tr><td>Round 1</td><td>{{R1W_M}} ({{R1W_SD}})</td><td>{{R1G_M}} ({{R1G_SD}})</td><td>{{R1_T}} ({{R1_DF}})</td><td>{{R1_PT}}</td><td>{{R1_D}}</td></tr>
+          <tr><td>Round 2</td><td>{{R2W_M}} ({{R2W_SD}})</td><td>{{R2G_M}} ({{R2G_SD}})</td><td>{{R2_T}} ({{R2_DF}})</td><td>{{R2_PT}}</td><td>{{R2_D}}</td></tr>
+        </tbody>
+      </table>
+      <p class="tnote"><b>Table 1.</b> Answers checked, <i>M</i> (<i>SD</i>) of 10. <i>t</i> and <i>d</i>: ChatGPT first minus Wikipedia first.</p>
+      <div class="pairs">
+        <span>H1</span><span><b>Not supported.</b> ChatGPT first led to slightly <i>fewer</i> round-1 checks.</span>
+        <span>H2</span><span><b>Not supported.</b> ChatGPT first led to <i>more</i> round-2 checks; {{R2G_GE9}} of {{NG}} checked nine or more answers.</span>
+      </div>
+      <p>Round-2 counts split between almost none and almost all.</p>
+    </section>
+  </div>
+
+  <div class="col">
+    <section>
+      <h2>Does doubt drive double-checking?</h2>
+      <p>If it does, round-2 checks should rise as accuracy and certainty fall.</p>
+      <figure>
+        {{FIG_CORR}}
+        <figcaption><b>Figure 3.</b> Certainty tracked accuracy, but neither predicted round-2 checking.
+          Pairwise complete cases; points jittered.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Conclusions</h2>
+      <ul class="plain">
+        <li>An AI-first check did not reduce double-checking; descriptively, more followed.</li>
+        <li>If this holds in larger samples, AI answers prompt further checking rather than settle the question.</li>
+        <li>Double-checking did not follow doubt; one-click checks may explain how often people checked.</li>
+      </ul>
+      <p class="lab">Limitations and next steps</p>
+      <p>Small, unbalanced sample; easy items; cost-free checks. Next: a larger sample, harder items, checks that cost time,
+        and item-level models of certainty and trust in each tool.</p>
+    </section>
+
+    <section class="refs">
+      <p>Cooper, G., Tang, K.-S., &amp; Rappa, N. A. (2024). Generative artificial intelligence as epistemic authority? In H. Crompton &amp; D. Burke (Eds.), <i>Artificial Intelligence Applications in Higher Education</i>. Routledge.</p>
+      <p>Hauswald, R. (2025). Artificial epistemic authorities. <i>Social Epistemology, 39</i>(6), 716–725.</p>
+      <p>Shanmugasundaram, M., &amp; Tamilarasu, A. (2023). The impact of digital technology, social media, and artificial intelligence on cognitive functions: A review. <i>Frontiers in Cognition, 2</i>, 1203077.</p>
+    </section>
+  </div>
+</main>
+
+<footer><span><b>Contact</b>xiaochuan.li@utn.de · xchuan-li.github.io</span></footer>
+</body>
+</html>

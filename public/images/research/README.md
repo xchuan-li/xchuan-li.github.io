@@ -4,14 +4,13 @@ XC ▸ The covers should look like journal figures, like the moral-framing heatm
 
 - `fact-checking-means-cover.svg` (now the cover): Table 1 of `reports/fact-checking/fact-checking.tex` drawn as means ± SD by round and source order. Same numbers as the table; no new statistics. `fact-checking-procedure.svg` was restyled but is no longer listed.
 - `child-reading-cover.svg`: booktabs-style table of the same illustrative pairs.
-- `garden-path-english-cover.svg`: numbered-example layout; the same initial and complete bracketings, with OBJ / SUBJ as subscripts.
 
 # Undergraduate project covers — 3 October 2026
 
 XC ▸ Add static schematics beside the child-reading and garden-path project titles. The established WorkList cover sizes and non-clickable placement are retained on the homepage and /research.
 
 - child-reading-cover.svg: native SVG typography showing 龄／年龄 and 筑／建筑, the same illustrative pairs as the report. These are explanatory materials, not original recovered stimuli or child-response data. The arrow indicates presentation in a word, not a measured improvement.
-- garden-path-english-cover.svg: native SVG typography and structural brackets for While the teacher taught the students waited outside. A candidate initial interpretation attaches the students as the object of taught; the complete structure makes it the subject of waited. This is a processing hypothesis, not an empirical trace.
+- garden-path-english-cover.svg: removed with the garden-path project, 26 Oct 2026 (XC).
 
 # Project covers — current selection (2 October 2026)
 
