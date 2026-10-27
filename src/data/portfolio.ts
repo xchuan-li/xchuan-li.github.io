@@ -34,6 +34,8 @@ export interface PortfolioEntry {
   // line: the grey line under the poster; it says what the poster does not (context, role).
   poster?: { src: string; pdf: string; alt: string; width: number; height: number; line: string };
   note?: { label: string; text: string };
+  /** Homepage earlier-work rows (27 Oct 2026): one line under the title, what the project is and when. */
+  brief?: string;
   /** Papers list: meta line, one sentence, writing-sample flag, first-page thumbnail. */
   kind?: string;
   short?: string;
@@ -127,6 +129,7 @@ export const portfolioSections: PortfolioSection[] = [
         // (explicit description against a typical default, evaluated on VLM judges across seven languages).
         tier: "earlier", track: "lm", topic: "Model evaluation",
         title: "Cross-lingual prototypicality bias in multimodal evaluation metrics and VLM judges",
+        brief: "Whether an explicit description overrides a typical default in vision–language models: two VLM judges, seven languages, the image pairs held fixed. Course paper, 2026.",
         field: "Course paper", desc: projects.protobias.summary, status: projects.protobias.status,
         kind: "Project · course paper 2026 · single author",
         short: "With each image pair held fixed and only the prompt language changed, both VLM judges changed their answer on about 70% of items in at least one of seven languages.",
@@ -162,6 +165,7 @@ export const portfolioSections: PortfolioSection[] = [
       {
         tier: "earlier", track: "langcog", topic: "Behavioural experiment",
         title: "Taking a language model’s word for it?",
+        brief: "Whether starting with ChatGPT rather than Wikipedia makes people double-check less; a class experiment with 47 participants. Winter 2025–26.",
         field: "Course experiment", desc: projects.psyStudy.summary, status: projects.psyStudy.status,
         kind: "Course experiment · Winter 2025–26 · report and poster",
         short: "Participants answered ten general-knowledge questions and could check each answer, first with ChatGPT or Wikipedia (assigned at random), then with the other source. Starting with ChatGPT did not reduce double-checking (N = 47). Designed in a group of three and run by the whole class; I did the analysis and wrote the report and poster.",
@@ -177,6 +181,7 @@ export const portfolioSections: PortfolioSection[] = [
       {
         tier: "earlier", track: "langcog", topic: "Child reading assessment",
         title: "Reading difficulties in primary-school children",
+        brief: "How showing a Chinese character alone or inside a word changes access to its pronunciation; a reading assessment with primary-school children in Shenzhen. September–December 2021.",
         field: "Behavioural assessment", desc: "An invited undergraduate project involving character-reading materials, testing and response-data analysis.",
         status: "Project report · undergraduate reading assessment, 2021",
         kind: "Undergraduate project · September–December 2021",

@@ -4,11 +4,25 @@
 // links and a thumbnail. Field labels (Human study / Language models) are on the
 // item, so topic and weight stay independent of each other.
 import type { PortfolioEntry } from "../data/portfolio";
-interface Props { entries: PortfolioEntry[]; compact?: boolean; illustrated?: boolean; }
+// 27 Oct 2026 (XC): `simple` rows for earlier work on the homepage: the title, then one
+// line that says what the project is and when ("项目名字 下面一句话介绍内容和时间就可以了").
+interface Props { entries: PortfolioEntry[]; compact?: boolean; illustrated?: boolean; simple?: boolean; }
 const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
-const { entries, compact = false, illustrated = false } = Astro.props;
+const { entries, compact = false, illustrated = false, simple = false } = Astro.props;
 ---
-{compact ? (
+{simple ? (
+  <ul class="simple">
+    {entries.map((e) => {
+      const href = e.links[0]?.href;
+      return (
+        <li class="simple-row">
+          <h4 class="simple-t">{href ? <a href={href}>{e.title}</a> : e.title}</h4>
+          <p class="simple-line">{e.brief ?? e.short ?? e.desc}</p>
+        </li>
+      );
+    })}
+  </ul>
+) : compact ? (
   <ul class="rows">
     {entries.map((e) => {
       const href = e.links[0]?.href;
@@ -72,6 +86,15 @@ const { entries, compact = false, illustrated = false } = Astro.props;
     .illustrated .step { grid-template-columns:minmax(0,1fr) 112px; column-gap:1rem; }
     .project-cover { width:112px; height:91px; }
   }
+
+  /* Earlier work on the homepage: title, then one line (content and time). */
+  .simple { list-style:none; margin:0; padding:0; border-top:1px solid var(--color-border); }
+  .simple-row { padding:0.85rem 0 0.95rem; border-bottom:1px solid var(--color-border); }
+  .simple-t { margin:0 0 0.25rem; font-family:var(--font-serif); font-size:1.08rem; font-weight:600; line-height:1.35; color:var(--color-text); text-wrap:pretty; }
+  .simple-t a { color:var(--color-text); text-decoration:none; }
+  .simple-t a::after { content:" →"; color:var(--color-accent); font-weight:400; }
+  .simple-t a:hover { color:var(--color-accent); text-decoration:underline; text-underline-offset:0.15em; }
+  .simple-line { margin:0; font-size:0.93rem; line-height:1.55; color:var(--color-text-muted); text-wrap:pretty; }
 
   /* Coursework: one line each. */
   .rows { list-style:none; margin:0; padding:0; border-top:1px solid var(--color-border); }
