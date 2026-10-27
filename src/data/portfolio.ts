@@ -123,7 +123,9 @@ export const portfolioSections: PortfolioSection[] = [
         links: [{ label: "Question & diagnostics", href: projects.threeWays.href }],
       },
       {
-        tier: "course", track: "lm", topic: "Model evaluation",
+        // 27 Oct 2026 (XC): shown under Earlier research experience; it is where the typicality line started
+        // (explicit description against a typical default, evaluated on VLM judges across seven languages).
+        tier: "earlier", track: "lm", topic: "Model evaluation",
         title: "Cross-lingual prototypicality bias in multimodal evaluation metrics and VLM judges",
         field: "Course paper", desc: projects.protobias.summary, status: projects.protobias.status,
         kind: "Project · course paper 2026 · single author",
@@ -193,6 +195,6 @@ export const workTiers: { id: string; label: string; blurb: string; compact: boo
   { id: "research", label: "Research", blurb: "Questions from linguistics and cognitive science: the human evidence they start from, and controlled experiments on language models, behaviour first, then inside the model.", compact: false },
   { id: "writing", label: "Writing", blurb: "Analyses written up on their own; used as writing samples.", compact: false },
   { id: "course", label: "Course projects", blurb: "", compact: true },
-  { id: "earlier", label: "Earlier research experience", blurb: "Studies with people: a master’s course experiment, an undergraduate reading assessment and a sentence-processing research design.", compact: false },
+  { id: "earlier", label: "Earlier research experience", blurb: "A course evaluation of vision–language models, a master’s course experiment with people, and an undergraduate reading assessment.", compact: false },
 ];
 export const entriesOfTier = (t: string) => workEntries.filter((e) => (e.tier ?? "course") === t);

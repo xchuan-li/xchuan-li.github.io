@@ -1,12 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import { identityLongHtml, bioHtml, programmeHtml, snowballHtml } from "../data/program";
+import { identityLongHtml, bioHtml, programmeHtml } from "../data/program";
 import { researchGroups } from "../data/variants";
 import { projects } from "../data/projects";
 import { entriesOfTier, workEntries } from "../data/portfolio";
 import WorkList from "../components/WorkList.astro";
-import WorkCarousel from "../components/WorkCarousel.astro";
-import SnowballFigure from "../components/SnowballFigure.astro";
 
 // 12 Oct 2026 (XC): one trunk. Research = moral framing, modified nouns, thesis;
 // the fact-checking experiment sits under Earlier research experience.
@@ -112,11 +110,7 @@ const timeline = [
     <p class="bio" set:html={bioHtml} />
     <p class="bio" set:html={programmeHtml} />
 
-    <!-- 12 Oct 2026 (XC): the meaning snowball, text beside the animation; English only. -->
-    <div class="snowball-block">
-      <p class="bio snowball-text" set:html={snowballHtml} />
-      <SnowballFigure />
-    </div>
+    <!-- 27 Oct 2026 (XC): the opening is shorter; the meaning-snowball paragraph and its figure are gone ("雪球什么的可以不用说，言简意赅"). -->
 
     <!-- Output type and publication status are separate from research topic. -->
     <section class="sec selected-research" id="selected-research" aria-label="Research and papers">
@@ -132,8 +126,10 @@ const timeline = [
         </section>
         <section class="research-block" id="earlier-work" aria-labelledby="earlier-work-heading">
           <h2 class="research-group-label" id="earlier-work-heading">Earlier research experience</h2>
-          <!-- 26 Oct 2026 (XC): earlier work as a carousel, one project and its poster at a time. -->
-          <WorkCarousel entries={entriesOfTier("earlier")} label="Earlier research experience" />
+          <!-- 27 Oct 2026 (XC): the poster carousel was too big and too showy; a row of small covers was tried and
+               did not look right either. Earlier work is now one line each, the compact rows the course projects use
+               (WorkCarousel kept in the repo). The cross-lingual ProtoBias paper joins as the first piece of the typicality line. -->
+          <WorkList entries={entriesOfTier("earlier")} compact />
         </section>
       </div>
       <p class="work-index-link"><a href="/research">Browse all research and projects →</a></p>
@@ -257,9 +253,6 @@ const timeline = [
   .field-kicker .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
   .field-kicker span[aria-hidden] { margin:0 0.15em; color:var(--color-text-dim); }
   .bio + .bio { margin-top:1.1rem; }
-  .snowball-block { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:1.6rem; align-items:center; margin:2rem 0 0; }
-  .snowball-block .bio { margin:0; }
-  @media (max-width: 680px) { .snowball-block { grid-template-columns:1fr; gap:1rem; } }
   .bio :global(a) { color:var(--color-accent); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:0.17em; }
   .bio :global(a:hover) { text-decoration-thickness:2px; }
   .bio { margin:2rem 0 0; font-size:1.02rem; line-height:1.75; color:var(--color-text); text-wrap:pretty; }
