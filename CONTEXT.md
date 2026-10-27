@@ -1,4 +1,4 @@
-## Earlier work as one line each; ProtoBias joins; homepage opening shortened, 27 October 2026 — latest XC instruction (not pushed)
+## Earlier work as one line each; ProtoBias joins; homepage opening shortened, 27 October 2026 — latest XC instruction (pushed 27 Oct 2026)
 
 XC ▸ The two carousel posters on the homepage no longer pleased him ("有点太大 太花哨"). Options offered and tried in order: B, one row of three small covers in the research-card grammar (built, previewed; XC: "不好看呢感觉" — a photo pair, a plot and Chinese characters side by side do not read as one thing); then, asked how other sites do it (a plain reverse-chronological list; or one small thumbnail per entry, every entry alike; seniors show only "selected"), XC chose C: "c吧". Same message: "把首页开头缩短一点，雪球什么的可以不用说，言简意赅". Earlier the same evening: B1 belongs on the homepage as earlier work, the start of the typicality line ("B1其实就是典型性语言在VLM上面的评测啊……跟我的研究方向挺对口的"; the line runs B1 → lingbuzz/010343 → B5 → the "two-level update" branch, Vault B5a21).
 
