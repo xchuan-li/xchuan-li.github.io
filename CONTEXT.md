@@ -385,9 +385,7 @@ src/
 │   ├── index.astro                 # Home: sticky left column + intro → Fig. 1 → Latest → Selected research → Background →
 │   │                               # Contact. `latest` and `researchGroups` are defined inline.
 │   ├── approach.astro              # Research Program (the long version of the programme).
-│   ├── playground.astro            # RELAY + Information Machines + StemmaLM card; moved off the homepage.
-│   ├── stemmalm.astro              # StemmaLM (2026-10-28, XC): model-organism registry + chat (chat only
-│   │                               # with the local model service; closed on the static site).
+│   ├── playground.astro            # RELAY + Information Machines; moved off the homepage.
 │   ├── information-machines.astro  # Standalone piece linked from Playground.
 │   ├── cv.astro                    # CV (PDF link → /cv.pdf; @media print styles it). /cv.pdf is
 │   │                               # printed from /cv with headless Chrome: two A4 pages (2026-10-12).
