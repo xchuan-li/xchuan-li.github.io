@@ -1,0 +1,195 @@
+---
+import Base from "../layouts/Base.astro";
+
+// StemmaLM (2026-10-28, XC named it; a stemma is the family tree of copied manuscripts): model organisms of language. Small language models raised
+// from scratch on what adults say to children (AO-CHILDES, age-ordered), one snapshot per month
+// of age. The page is a registry plus a chat box; chatting needs the local model service
+// (POST api/chat), so on the static site it stays closed. Linked from the Playground.
+const strains = {
+  EN1: "English; character-level nanoGPT, 6 layers × 6 heads × 384 wide, about 10.8M parameters",
+};
+const envs = {
+  WT1: "adult speech from AO-CHILDES with all child turns removed, fed once in order of the child's age, 0–72 months",
+};
+const individuals = [
+  { serial: 1, strain: "EN1", env: "WT1", gen: 0, lesion: null, seed: 1, parent: null, status: "training" },
+  { serial: 2, strain: "EN1", env: "WT1", gen: 0, lesion: null, seed: 2, parent: null, status: "training" },
+  { serial: 3, strain: "EN1", env: "WT1", gen: 0, lesion: null, seed: 3, parent: null, status: "training" },
+];
+const registry = { strains, envs, individuals };
+---
+
+<Base
+  title="StemmaLM · Xiaochuan Li"
+  description="Small language models raised from scratch on what adults say to children, one snapshot per month of age, numbered into a lineage."
+>
+  <article class="mo">
+    <h1 class="mo-title">StemmaLM</h1>
+    <p class="mo-sub">Model organisms of language</p>
+
+    <h2 class="mo-h" id="registry">Registry</h2>
+    <div class="mo-tbl">
+      <table>
+        <thead>
+          <tr><th>No.</th><th>ID</th><th>Parent</th><th>Status</th></tr>
+        </thead>
+        <tbody id="mo-rows"></tbody>
+      </table>
+    </div>
+
+    <h2 class="mo-h" id="talk">Talk</h2>
+    <div class="mo-who" id="mo-who">#1@30m</div>
+    <div class="mo-age">
+      <label for="mo-age">Age in months</label>
+      <input type="range" id="mo-age" min="0" max="72" step="1" value="30" />
+      <div class="mo-ticks" aria-hidden="true"><span>0</span><span>12</span><span>24</span><span>36</span><span>48</span><span>60</span><span>72</span></div>
+    </div>
+    <div class="mo-log" id="mo-log" aria-live="polite"></div>
+    <form id="mo-compose" autocomplete="off">
+      <input id="mo-say" type="text" aria-label="What you say" />
+      <button type="submit" id="mo-send">Send</button>
+    </form>
+
+    <p class="mo-foot">Data: CHILDES (CC BY-NC-SA 4.0)</p>
+  </article>
+</Base>
+
+<script is:inline define:vars={{ registry }}>
+  var REGISTRY = registry;
+  var STATUS = { untrained: "Not trained", training: "Training", trained: "Grown" };
+  var state = { selected: 1, age: 30, logs: {}, api: false };
+
+  function fullId(i) { return [i.strain, i.env, "G" + i.gen, i.lesion || "—", "s" + i.seed].join("·"); }
+  function find(n) { return REGISTRY.individuals.find(function (i) { return i.serial === n; }); }
+  function td(text, cls) { var c = document.createElement("td"); if (cls) c.className = cls; c.textContent = text; return c; }
+
+  function renderTable() {
+    var body = document.getElementById("mo-rows");
+    body.innerHTML = "";
+    var gens = {};
+    REGISTRY.individuals.forEach(function (i) { (gens[i.gen] = gens[i.gen] || []).push(i); });
+    Object.keys(gens).map(Number).sort(function (a, b) { return a - b; }).forEach(function (g) {
+      var gr = document.createElement("tr"); gr.className = "mo-group";
+      var c = td("G" + g); c.colSpan = 4; gr.appendChild(c); body.appendChild(gr);
+      gens[g].forEach(function (i) {
+        var tr = document.createElement("tr");
+        tr.className = "mo-ind" + (i.serial === state.selected ? " mo-sel" : "");
+        tr.tabIndex = 0;
+        tr.setAttribute("aria-label", "#" + i.serial + " " + fullId(i) + " " + STATUS[i.status]);
+        tr.appendChild(td("#" + i.serial, "mo-id"));
+        tr.appendChild(td(fullId(i), "mo-id"));
+        tr.appendChild(td(i.parent ? "#" + i.parent : "—", "mo-id"));
+        tr.appendChild(td(STATUS[i.status]));
+        tr.addEventListener("click", function () { select(i.serial); });
+        tr.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(i.serial); } });
+        body.appendChild(tr);
+      });
+    });
+  }
+
+  function renderTalk() {
+    var i = find(state.selected);
+    var trained = i.status === "trained";
+    document.getElementById("mo-who").textContent = "#" + i.serial + "@" + state.age + "m";
+    document.getElementById("mo-age").disabled = !trained;
+    var can = trained && state.api;
+    document.getElementById("mo-say").disabled = !can;
+    document.getElementById("mo-send").disabled = !can;
+    var log = document.getElementById("mo-log");
+    log.innerHTML = "";
+    var msgs = state.logs[i.serial + "@" + state.age] || [];
+    if (!msgs.length) {
+      var p = document.createElement("p"); p.className = "mo-empty";
+      p.textContent = !trained ? "Not grown yet" : !state.api ? "Not connected to the model service" : "";
+      log.appendChild(p); return;
+    }
+    msgs.forEach(function (m) {
+      var d = document.createElement("div"); d.className = "mo-line";
+      var w = document.createElement("span"); w.className = "mo-speaker";
+      w.textContent = m.role === "adult" ? "you" : "#" + i.serial + "@" + state.age + "m";
+      var t = document.createElement("span"); t.className = "mo-text"; t.textContent = m.text;
+      d.appendChild(w); d.appendChild(t); log.appendChild(d);
+    });
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function select(n) {
+    state.selected = n;
+    try { history.replaceState(null, "", "#i" + n); } catch (e) {}
+    renderTable(); renderTalk();
+  }
+
+  document.getElementById("mo-age").addEventListener("input", function (e) { state.age = Number(e.target.value); renderTalk(); });
+  document.getElementById("mo-compose").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = document.getElementById("mo-say"), text = input.value.trim();
+    if (!text) return;
+    var i = find(state.selected), key = i.serial + "@" + state.age;
+    var msgs = state.logs[key] = state.logs[key] || [];
+    msgs.push({ role: "adult", text: text }); input.value = ""; renderTalk();
+    fetch("api/chat", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ serial: i.serial, age_months: state.age, messages: msgs }) })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { msgs.push({ role: "model", text: j.reply }); renderTalk(); })
+      .catch(function () { msgs.push({ role: "model", text: "(no answer from the model service)" }); renderTalk(); });
+  });
+
+  (function boot() {
+    var m = /^#i(\d+)$/.exec(location.hash || "");
+    if (m && find(Number(m[1]))) state.selected = Number(m[1]);
+    renderTable(); renderTalk();
+    // the model service only exists when the page is served locally; the public site stays static
+    if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.port === "4398") return;
+    fetch("api/registry").then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (reg) { if (reg && reg.individuals) { REGISTRY = reg; state.api = true; renderTable(); renderTalk(); } })
+      .catch(function () {});
+  })();
+</script>
+
+<style>
+  .mo { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
+  .mo-title { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 500; margin: 0 0 0.4rem; color: var(--color-text); }
+  .mo-sub { font-style: italic; color: var(--color-text-muted); margin: 0; }
+  .mo-h {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--color-text-dim);
+    margin: 2.6rem 0 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--color-border);
+  }
+  .mo-tbl { overflow-x: auto; }
+  .mo table { border-collapse: collapse; width: 100%; min-width: 26rem; font-size: 0.92rem; }
+  .mo th, .mo td { padding: 0.35rem 0.6rem; text-align: left; white-space: nowrap; }
+  .mo thead th {
+    font-weight: 500; color: var(--color-text-muted);
+    border-top: 1.5px solid var(--color-text); border-bottom: 1px solid var(--color-text);
+  }
+  .mo tbody tr:last-child td { border-bottom: 1.5px solid var(--color-text); }
+  :global(.mo-group) td { font-style: italic; color: var(--color-text-muted); padding-top: 0.6rem; }
+  :global(.mo-ind) { cursor: pointer; }
+  :global(.mo-ind:hover) td, :global(.mo-sel) td { background: var(--color-surface); }
+  :global(.mo-ind:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+  :global(.mo-id) { font-family: var(--font-mono); font-size: 0.85em; font-variant-numeric: tabular-nums; }
+  .mo-who { font-family: var(--font-mono); font-size: 0.95rem; color: var(--color-text); }
+  .mo-age { margin: 0.6rem 0 0.8rem; display: grid; gap: 0.15rem; max-width: 30rem; }
+  .mo-age label { font-size: 0.85rem; color: var(--color-text-muted); }
+  .mo-age input { width: 100%; accent-color: var(--color-accent); }
+  .mo-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--color-text-dim); }
+  .mo-log {
+    border: 1px solid var(--color-border); min-height: 9rem; max-height: 20rem; overflow-y: auto;
+    padding: 0.7rem 0.8rem; display: grid; gap: 0.3rem; align-content: start;
+  }
+  :global(.mo-line) { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 0.7rem; }
+  :global(.mo-speaker) { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-dim); padding-top: 0.2rem; }
+  :global(.mo-text) { overflow-wrap: anywhere; }
+  :global(.mo-empty) { color: var(--color-text-dim); font-style: italic; text-align: center; margin: 0; padding-block: 2.2rem; }
+  #mo-compose { display: flex; gap: 0.5rem; margin-top: 0.6rem; }
+  #mo-say {
+    flex: 1; min-width: 0; font: inherit; color: var(--color-text); background: var(--color-bg);
+    border: 1px solid var(--color-border-strong); padding: 0.3rem 0.5rem;
+  }
+  #mo-send {
+    font: inherit; color: var(--color-text); background: var(--color-surface);
+    border: 1px solid var(--color-border-strong); padding: 0.3rem 1rem; cursor: pointer;
+  }
+  #mo-compose :disabled { opacity: 0.5; cursor: not-allowed; }
+  .mo-foot { margin-top: 2.4rem; font-size: 0.82rem; color: var(--color-text-dim); }
+</style>

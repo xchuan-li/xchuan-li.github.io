@@ -23,12 +23,21 @@ const playground = [
     steps: ["Add", "Link", "Revise", "Retract"],
     desc: "A language whose grammar has a single job: move information around — introduce a fact, link it to what came before, revise it, take it back. It grows slowly, kept honest with a changelog and a suite of tests.",
   },
+  {
+    variant: "stemma",
+    title: "StemmaLM",
+    tag: "Model organisms of language",
+    href: "/stemmalm",
+    cta: "Open the registry",
+    steps: ["Raise", "Speak", "Age", "Teach"],
+    desc: "Small language models raised from scratch on what adults say to children, one snapshot per month of age. Each one is numbered into a lineage by strain, upbringing, generation, lesion and seed.",
+  },
 ];
 ---
 
 <Base
   title="Playground · Xiaochuan Li"
-  description="Small playable things built out of language: RELAY, a puzzle where you reverse-engineer a language you have never seen, and Information Machines, a constructed language whose grammar only moves information around."
+  description="Small playable things built out of language: RELAY, a puzzle where you reverse-engineer a language you have never seen; Information Machines, a constructed language whose grammar only moves information around; and StemmaLM, small language models raised on what adults say to children."
   wide={true}
 >
   <div class="wrap">
@@ -65,6 +74,13 @@ const playground = [
                     <path class="pr-mouth" d="M49 80h30" />
                   </g>
                 </svg>
+              )}
+              {p.variant === "stemma" && (
+                <div class="pi">
+                  <span class="pi-row">#1&nbsp;&nbsp;EN1·WT1·G0·—·s1</span>
+                  <span class="pi-row">#2&nbsp;&nbsp;EN1·WT1·G0·—·s2</span>
+                  <span class="pi-row">#3&nbsp;&nbsp;EN1·WT1·G0·—·s3</span>
+                </div>
               )}
               {p.variant === "im" && (
                 <svg class="pg" viewBox="0 0 220 200" role="img" aria-label="An information state being introduced, linked, and revised">
@@ -159,6 +175,10 @@ const playground = [
   }
   .play-relay .play-fig { background: radial-gradient(125% 125% at 50% 0%, #eef3ff 0%, #e3ebff 100%); }
   .play-im .play-fig { background: radial-gradient(125% 125% at 50% 0%, #f6f8fb 0%, #edf0f5 100%); }
+  .play-stemma .play-fig { background: radial-gradient(125% 125% at 50% 0%, #f6f8fb 0%, #edf0f5 100%); }
+  .pi { display: grid; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--pg-ink); }
+  .pi-row { white-space: nowrap; }
+  .play-stemma:hover { border-color: color-mix(in srgb, var(--pg-ink) 40%, var(--card-border)); }
   .play-fig svg { height: 150px; width: auto; display: block; }
 
   /* --- RELAY robot --- */
@@ -220,6 +240,7 @@ const playground = [
   .play-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-bottom: 1.05rem; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-text-muted); }
   .play-chips-relay .play-chip:not(:first-child)::before { content: "\2192"; margin-right: 0.45rem; color: var(--pg-blue); }
   .play-chips-im .play-chip:not(:first-child)::before { content: "\00b7"; margin-right: 0.45rem; color: var(--pg-amber); font-weight: 700; }
+  .play-chips-stemma .play-chip:not(:first-child)::before { content: "\2192"; margin-right: 0.45rem; color: var(--pg-indigo); }
   .play-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
   .play-relay .play-cta { color: var(--pg-blue); }
   .play-im .play-cta { color: var(--pg-indigo); }
