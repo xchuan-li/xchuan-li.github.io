@@ -102,9 +102,9 @@ const research: Record<string, Entry> = {
     note: "Behavioural study of how preschoolers acquire modal words such as <i>might</i> and <i>must</i>. In design.",
   },
   gPsy: {
-    id: "gPsy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
-    context: "Course experiment, Foundations in Psychology and Empirical Study Design", when: "Feb. 2026",
-    note: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed). Co-designed the study, ran the analysis in JASP and wrote the report.",
+    id: "gPsy", title: "How the first information source shapes verification: a between-subjects experiment", href: "/research/fact-checking-study",
+    context: "Course experiment (group of three), M.Sc. Human and AI", when: "Feb. 2026",
+    note: "Participants checked general-knowledge answers with ChatGPT or Wikipedia first, assigned at random; from pilot (N = 8) and revision to online data collection on Pavlovia (49 participants, 47 analysed) and analysis in JASP. Co-designed the study, ran the analysis and wrote the report.",
   },
   gBa: {
     id: "gBa", title: "Leibniz’s logical system and characteristica universalis",
