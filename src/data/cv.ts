@@ -11,12 +11,12 @@
 
 import { identityLong, programmeHtml } from "./program";
 
-export type Variant = "general" | "lm" | "cogsci";
+export type Variant = "general" | "lm" | "cogsci" | "training";
 type ByVariant<T> = T | Partial<Record<Variant, T>> & { default?: T };
 
 export function pick<T>(v: ByVariant<T> | undefined, variant: Variant): T | undefined {
   if (v === undefined || v === null) return undefined;
-  if (typeof v === "object" && !Array.isArray(v) && ("default" in v || "general" in v || "lm" in v || "cogsci" in v)) {
+  if (typeof v === "object" && !Array.isArray(v) && ("default" in v || "general" in v || "lm" in v || "cogsci" in v || "training" in v)) {
     const o = v as Partial<Record<Variant, T>> & { default?: T };
     return o[variant] ?? o.default;
   }
@@ -40,10 +40,13 @@ export interface Entry {
 // 12 Oct 2026 (XC): the opening follows the homepage — the lead question, then the paradigm
 // paragraph — imported from program.ts so the two cannot drift. Variants add one sentence.
 const opening = `${identityLong} ${programmeHtml}`;
+// 3 Nov 2026 (XC): general opening is XC's own research-interests line, as in the application PDF.
 export const interests: Record<Variant, string> = {
-  general: opening,
+  general: "Learning and representation of linguistic meaning; semantic and pragmatic inference; controlled language-model experiments and causal interpretability.",
   lm: `${opening} Methods: training language models from scratch under controlled input; controlled behavioural evaluation; activation patching, low-rank analysis, probing.`,
   cogsci: `${opening} Experience with how human data are produced, from children’s language to adult behavioural experiments.`,
+  // 3 Nov 2026: training variant for Micha Heilbron (MPI Nijmegen), who asked for a CV for a possible position needing a language-model training background.
+  training: `${opening} Methods: training language models from scratch under controlled input, from small transformers and LSTMs to fine-tuning a pretrained model, on a Slurm GPU cluster; controlled behavioural evaluation; activation patching, low-rank analysis, probing.`,
 };
 
 // 12 Oct 2026 (XC): education notes state what each stage trained, not selected coursework;
@@ -53,9 +56,10 @@ export const education: (Entry & { place: string })[] = [
     id: "msc", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "M.Sc. Human and Artificial Intelligence", when: "Oct. 2025 – exp. 2027",
     note: {
-      general: "Designing and analysing behavioural experiments; cognitive psychology; training neural networks; interpretability methods for language models.",
+      general: "Coursework: deep learning, interpretability of language models, psychology and empirical study design, cognitive neuroscience.",
       lm: "Interpretability methods for language models; training neural networks; designing and analysing behavioural experiments; cognitive psychology.",
       cogsci: "Designing and analysing behavioural experiments; cognitive psychology and cognitive neuroscience; training neural networks; interpretability methods for language models.",
+      training: "Training neural networks; interpretability methods for language models; designing and analysing behavioural experiments; cognitive psychology.",
     },
   },
   {
@@ -65,11 +69,48 @@ export const education: (Entry & { place: string })[] = [
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",
     context: "B.A. Philosophy", when: "Sep. 2020 – Jun. 2024",
-    note: "Formal logic and proof, including modal logic and Gödel’s incompleteness theorems; philosophy of language; psychology of reading.",
+    note: {
+      default: "Formal logic and proof, including modal logic and Gödel’s incompleteness theorems; philosophy of language; psychology of reading.",
+      general: "Coursework: formal and modal logic, philosophy of language.",
+    },
   },
 ];
 
 const research: Record<string, Entry> = {
+  // 3 Nov 2026 (XC): the general CV follows the application PDF of that day (one Research experience
+  // list, language-model work first, then human studies); these entries are general-only so the
+  // lm / cogsci / training variants keep their wording.
+  gStemma: {
+    id: "gStemma", title: "StemmaLM", href: "https://stemmalm.github.io",
+    context: "Independent infrastructure for language-model lineages", when: "Ongoing",
+    note: "Trained 60+ language models (up to 98M parameters) from scratch on child-scale corpora and controlled variants of them. Built the corpora, the training pipeline on an HPC cluster, and a public model registry.",
+    links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
+  },
+  gVagueness: {
+    id: "gVagueness", title: "What can be learned from vagueness", href: "/research/vagueness-scale",
+    context: "Independent project", when: "Oct. 2026",
+    note: "Tested whether disagreement between speakers lets a learner recover the order of categories from text alone, with a formal result and transformers and LSTMs trained from scratch. Preprint.",
+  },
+  gLit: {
+    id: "gLit", title: "Moral framing and dilemma choices in language models", href: "/research/latent-control-states",
+    context: "Project with the German Research Center for Artificial Intelligence (DFKI)", when: "Apr. 2026",
+    note: "Led the utilitarian-framing branch: how moral framing changes dilemma choices in 7B and 14B models, studied with controlled prompts and activation patching. Manuscript in preparation.",
+  },
+  gThesis: {
+    id: "gThesis", title: "Modal language development in preschoolers", href: "/research/learnability",
+    context: "M.Sc. thesis, Max Planck Institute for Human Cognitive and Brain Sciences", when: "Ongoing",
+    note: "Behavioural study of how preschoolers acquire modal words such as <i>might</i> and <i>must</i>. In design.",
+  },
+  gPsy: {
+    id: "gPsy", title: "Fact-checking after ChatGPT exposure", href: "/research/fact-checking-study",
+    context: "Course experiment, Foundations in Psychology and Empirical Study Design", when: "Feb. 2026",
+    note: "Between-subjects experiment on optional checking after ChatGPT or Wikipedia answers (49 participants, 47 analysed). Co-designed the study, ran the analysis in JASP and wrote the report.",
+  },
+  gBa: {
+    id: "gBa", title: "Leibniz’s logical system and characteristica universalis",
+    context: "B.A. thesis, Shenzhen University", when: "May 2024",
+    note: "Leibniz’s logic and his proposal for a universal symbolic language in which reasoning becomes calculation.",
+  },
   typicality: {
     id: "typicality", title: "Typicality in referent choice: what the description leaves open",
     href: "/research/typicality-in-referent-choice",
@@ -107,7 +148,10 @@ const research: Record<string, Entry> = {
     id: "vagueness", title: "Vagueness and learning a scale from text",
     href: "/research/vagueness-scale",
     context: "Independent project", when: "Oct. 2026 –",
-    note: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Preprint.",
+    note: {
+      default: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Preprint.",
+      training: "Trained language models only on naming text, from small transformers and LSTMs trained from scratch to a fine-tuned pretrained model, to test when speakers’ disagreement about word boundaries gives a text-only learner evidence about the scale (artificial language with a known scale; World Color Survey). Success criteria fixed before the confirmatory runs; each confirmed result re-implemented independently from the written specification. Preprint.",
+    },
     links: [{ label: "doi:10.5281/zenodo.23677586", href: "https://doi.org/10.5281/zenodo.23677586" }],
   },
   lit: {
@@ -151,23 +195,35 @@ const research: Record<string, Entry> = {
 // 26 Oct 2026 (XC): B18 preprint on Zenodo; the entry links its concept DOI.
 // 18 Oct 2026 (XC): B18 (vagueness) added after modified nouns; B5 retitled to match the 18 Oct manuscript wording (no "updating"); training added to methods and skills.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "protobias", "streetView", "psy", "undergraduate"] },
+  general: { current: ["gStemma", "gVagueness", "gLit", "gThesis", "gPsy", "gBa"], earlier: [] },
   lm:      { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
   cogsci:  { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "psy", "protobias", "undergraduate"] },
+  training: { current: ["vagueness", "lit", "typicality", "thesis"], earlier: ["protobias", "streetView"] },
 };
 export const researchEntry = (id: string) => research[id];
+
+// 3 Nov 2026: a Preprints section, shown only where listed.
+export const preprints: Partial<Record<Variant, string[]>> = {
+  general: ['Li, X. (2026). <i>What can be learned from vagueness</i> [Preprint]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23677586">https://doi.org/10.5281/zenodo.23677586</a>'],
+};
 
 // Research entries are independent projects; unpublished projects remain off all variants.
 export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
   {
     id: "it", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
     context: "IT Service Desk (part-time)", when: "Apr. 2026 – present",
-    note: "Delivered student IT onboarding and individual support; handled system installation, service reporting, and inventory.",
+    note: {
+      default: "Delivered student IT onboarding and individual support; handled system installation, service reporting, and inventory.",
+      general: "Student IT support; basic HPC user administration (resource allocation, access rights).",
+    },
   },
   {
     id: "dyslexia", title: "Shenzhen Learning Disorders Association", place: "Shenzhen, China",
     context: "Internship · Learning assessment at Yucai No. 2 Primary School", when: "Sep. – Dec. 2021",
-    note: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
+    note: {
+      default: "Prepared character-reading materials, administered timed assessments, and analysed response data to support the assessment of learning difficulties; contributed to teaching items and individual learning plans.",
+      general: "Ran reading assessments with primary-school children referred for learning difficulties.",
+    },
     variants: ["general", "cogsci"],
   },
 ];
@@ -175,13 +231,21 @@ export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
 // 12 Oct 2026: grouped by the steps of the work; the "working proficiency" qualifier on interpretability is dropped (XC reports the B4 analyses biweekly and can explain every step).
 export const skills: Record<Variant, { k: string; v: string }[]> = {
   general: [
-    { k: "Language models", v: "Training small models from scratch; controlled behavioural evaluation, minimal pairs; activation patching, low-rank analysis, probing, steering" },
-    { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP; testing children" },
-    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
+    { k: "Training", v: "Small transformers and LSTMs trained from scratch; fine-tuning, LoRA" },
+    { k: "Interpretability", v: "Activation patching, low-rank analysis, probing, steering" },
+    { k: "Evaluation", v: "Controlled behavioural evaluation, minimal pairs" },
+    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC GPU cluster" },
+    { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
   ],
   lm: [
     { k: "Language models", v: "Training small models from scratch, fine-tuning, LoRA; activation patching, low-rank analysis, probing, steering; controlled behavioural evaluation, minimal pairs" },
     { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC cluster" },
+    { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
+  ],
+  training: [
+    { k: "Training", v: "Small transformers and LSTMs trained from scratch; fine-tuning, LoRA; CNN training and ablations" },
+    { k: "Analysis", v: "Activation patching, low-rank analysis, probing, steering; controlled behavioural evaluation, minimal pairs" },
+    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC GPU cluster" },
     { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
   ],
   cogsci: [
