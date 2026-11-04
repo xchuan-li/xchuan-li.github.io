@@ -152,7 +152,7 @@ const research: Record<string, Entry> = {
       default: "A proposition on when speakers’ disagreement about word boundaries, a small cost to a listener, gives a text-only learner evidence about the scale, tested with language models trained from scratch on naming text (artificial language; World Color Survey). Preprint.",
       training: "Trained language models only on naming text, from small transformers and LSTMs trained from scratch to a fine-tuned pretrained model, to test when speakers’ disagreement about word boundaries gives a text-only learner evidence about the scale (artificial language with a known scale; World Color Survey). Success criteria fixed before the confirmatory runs; each confirmed result re-implemented independently from the written specification. Preprint.",
     },
-    links: [{ label: "doi:10.5281/zenodo.23677586", href: "https://doi.org/10.5281/zenodo.23677586" }],
+    links: [{ label: "lingbuzz/010504", href: "https://lingbuzz.net/lingbuzz/010504" }, { label: "doi:10.5281/zenodo.23677586", href: "https://doi.org/10.5281/zenodo.23677586" }],
   },
   lit: {
     id: "lit", title: "Moral framing and dilemma choices in language models",
@@ -204,7 +204,7 @@ export const researchEntry = (id: string) => research[id];
 
 // 3 Nov 2026: a Preprints section, shown only where listed.
 export const preprints: Partial<Record<Variant, string[]>> = {
-  general: ['Li, X. (2026). <i>What can be learned from vagueness</i> [Preprint]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23677586">https://doi.org/10.5281/zenodo.23677586</a>'],
+  general: ['Li, X. (2026). <i>The direction of disagreement: What departures from the majority term teach a text-only learner</i> [Preprint]. LingBuzz, lingbuzz/010504. <a href="https://lingbuzz.net/lingbuzz/010504">https://lingbuzz.net/lingbuzz/010504</a>'],
 };
 
 // Research entries are independent projects; unpublished projects remain off all variants.

@@ -91,7 +91,7 @@ export const portfolioSections: PortfolioSection[] = [
         kind: "Project · independent · preprint 2026",
         short: "Speakers disagree about where tall ends. For a learner that sees only text, is that disagreement noise, or evidence about the scale underneath?",
         figure: { src: "/images/research/vagueness-card.png", alt: "Figures ordered by height under the words short, average and tall; one figure near the tall/average boundary is called tall by one speaker and average by two others.", caption: "Who is tall?", width: 420, height: 329 },
-        links: [{ label: "Overview", href: projects.vagueness.href }, { label: "DOI", href: "https://doi.org/10.5281/zenodo.23677586" }],
+        links: [{ label: "Overview", href: projects.vagueness.href }, { label: "LingBuzz", href: "https://lingbuzz.net/lingbuzz/010504" }, { label: "DOI", href: "https://doi.org/10.5281/zenodo.23677586" }],
       },
       {
         tier: "research", track: "langcog", topic: "Modality · human side",
