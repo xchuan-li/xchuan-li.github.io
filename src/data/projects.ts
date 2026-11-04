@@ -64,7 +64,7 @@ export const projects = {
     status: "Manuscript in preparation",
   },
   vagueness: {
-    title: "Can vague words teach a scale?",
+    title: "The direction of disagreement",
     href: "/research/vagueness-scale",
     question: "Speakers draw the boundaries of words such as tall or green in slightly different places. For a learner that sees only text, is this disagreement noise, or evidence about the scale underneath?",
     summary: "A theoretical and computational study of vagueness: what speakers\u2019 disagreement about word boundaries costs a listener and what it tells a learner, tested with language models trained only on naming text.",

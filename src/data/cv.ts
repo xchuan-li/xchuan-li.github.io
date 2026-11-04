@@ -87,7 +87,7 @@ const research: Record<string, Entry> = {
     links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
   },
   gVagueness: {
-    id: "gVagueness", title: "What can be learned from vagueness", href: "/research/vagueness-scale",
+    id: "gVagueness", title: "The direction of disagreement: what departures from the majority term teach a text-only learner", href: "/research/vagueness-scale",
     context: "Independent project", when: "Oct. 2026",
     note: "Tested whether disagreement between speakers lets a learner recover the order of categories from text alone, with a formal result and transformers and LSTMs trained from scratch. Preprint.",
   },
@@ -145,7 +145,7 @@ const research: Record<string, Entry> = {
     note: "Contrasted properties that depend on an added feature with properties that only co-occur with it (13 feature groups, 477 items, three instruction-tuned models), using predictors fixed outside the models: a dependency table, human feature norms and word-association norms; exploratory activation patching. Manuscript in preparation.",
   },
   vagueness: {
-    id: "vagueness", title: "Vagueness and learning a scale from text",
+    id: "vagueness", title: "The direction of disagreement: what departures from the majority term teach a text-only learner",
     href: "/research/vagueness-scale",
     context: "Independent project", when: "Oct. 2026 –",
     note: {
