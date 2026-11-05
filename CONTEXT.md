@@ -1,4 +1,8 @@
-## General CV research focus opens with language and cognition, 5 November 2026 — latest XC instruction
+## StemmaLM logo on the CV, 5 November 2026 — latest XC instruction
+
+XC ▸ "stemmalm在简历上可以加上logo 这样能明显区分". AI ▸ `public/images/stemmalm-logo.svg` is an unmodified copy of the logo in the stemmalm.github.io repository; `Entry.logo` in `cv.ts`; the infrastructure row in `CvDocument.astro` shows it beside the title and italic line.
+
+## General CV research focus opens with language and cognition, 5 November 2026
 
 XC ▸ The old sentence ("I study what language itself contains that we have not yet found") felt too big; wanted language and cognition, to connect linguistics and cognitive science. Chose the candidate "I study language and cognition, especially how the structure of language shapes learning and thought." AI ▸ Changed in `interests.general` in `cv.ts` only. The homepage, `/approach` and the lm, cogsci and training CVs still use `identityLong` ("What is there in language itself that we have not yet discovered?").
 

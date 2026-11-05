@@ -35,6 +35,7 @@ export interface Entry {
   note?: ByVariant<string>; // at most one short line
   citation?: string;        // output attached to its research entry, never a separate list
   links?: { label: string; href: string }[];
+  logo?: string;            // infrastructure rows: image beside the title and italic line
 }
 
 // 12 Oct 2026 (XC): the opening follows the homepage — the lead question, then the paradigm
@@ -206,7 +207,7 @@ export const preprints: Partial<Record<Variant, string[]>> = {
 // 5 Nov 2026 (XC): StemmaLM is long-term infrastructure, listed apart from research. Add "Used in" once a paper uses it.
 export const infrastructure: Partial<Record<Variant, Entry[]>> = {
   general: [{
-    id: "stemma", title: "StemmaLM", href: "https://stemmalm.github.io",
+    id: "stemma", title: "StemmaLM", href: "https://stemmalm.github.io", logo: "/images/stemmalm-logo.svg",
     context: "Long-term infrastructure for language-model lineages", when: "", // 5 Nov 2026 (XC): no date; aligned with Preprints
     note: "Turned questions about language development and transmission into model lineages raised on child-scale corpora and controlled variants: 60+ models, up to 98M parameters, public registry.<br /><i>Methods:</i> training from scratch, minimal-pair evaluation, Slurm on an HPC GPU cluster.",
     links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],

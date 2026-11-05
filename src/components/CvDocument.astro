@@ -75,8 +75,13 @@ const country = (place: string) => place.split(", ").pop();
     {cv.infrastructure[variant]!.map((e) => (
       <div class="row row-full">
         <div class="what">
-          <div><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b></div>
-          <div><i>{e.context}</i></div>
+          <div class="logo-head">
+            {e.logo && <img class="logo" src={e.logo} alt="" />}
+            <div>
+              <div><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b></div>
+              <div><i>{e.context}</i></div>
+            </div>
+          </div>
           {cv.pick(e.note, variant) && <div set:html={cv.pick(e.note, variant)} />}
           {e.links && <div>{e.links.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}</div>}
         </div>
@@ -153,6 +158,8 @@ const country = (place: string) => place.split(", ").pop();
   .row:last-child { margin-bottom: 0; }
   .when { white-space: nowrap; }
   .row-full { grid-template-columns: minmax(0, 1fr); }
+  .logo-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.2rem; }
+  .logo { width: 1.9em; height: 1.9em; flex: none; }
 
   @media (max-width: 560px) {
     .cvd-contact { flex-direction: column; gap: 0; }
