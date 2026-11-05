@@ -42,7 +42,8 @@ export interface Entry {
 const opening = `${identityLong} ${programmeHtml}`;
 // 3 Nov 2026 (XC): general opening is XC's own research-interests line, as in the application PDF.
 export const interests: Record<Variant, string> = {
-  general: "Learning and representation of linguistic meaning; semantic and pragmatic inference; controlled language-model experiments and causal interpretability.",
+  // 5 Nov 2026 (XC): the focus is turning linguistics and cognitive-science questions into LM measurements.
+  general: "I study what language itself contains that we have not yet found. I turn questions from linguistics and cognitive science into measurements on language models, where the input can be controlled and the internals can be changed.",
   lm: `${opening} Methods: training language models from scratch under controlled input; controlled behavioural evaluation; activation patching, low-rank analysis, probing.`,
   cogsci: `${opening} Experience with how human data are produced, from children’s language to adult behavioural experiments.`,
   // 3 Nov 2026: training variant for Micha Heilbron (MPI Nijmegen), who asked for a CV for a possible position needing a language-model training background.
@@ -80,31 +81,26 @@ const research: Record<string, Entry> = {
   // 3 Nov 2026 (XC): the general CV follows the application PDF of that day (one Research experience
   // list, language-model work first, then human studies); these entries are general-only so the
   // lm / cogsci / training variants keep their wording.
-  gStemma: {
-    id: "gStemma", title: "StemmaLM", href: "https://stemmalm.github.io",
-    context: "Independent infrastructure for language-model lineages", when: "Ongoing",
-    note: "Trained 60+ language models (up to 98M parameters) from scratch on child-scale corpora and controlled variants of them. Built the corpora, the training pipeline on an HPC cluster, and a public model registry.",
-    links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
-  },
+  // 5 Nov 2026 (XC): each entry says how the question became an experiment, then method keywords; no findings. StemmaLM has its own section.
   gVagueness: {
     id: "gVagueness", title: "The direction of disagreement: what departures from the majority term teach a text-only learner", href: "/research/vagueness-scale",
-    context: "Independent project", when: "Oct. 2026",
-    note: "Tested whether disagreement between speakers lets a learner recover the order of categories from text alone, with a formal result and transformers and LSTMs trained from scratch. Preprint.",
+    context: "Independent project", when: "Oct. 2026 – present",
+    note: "Turned vagueness into a learning experiment: models read only naming sentences, with speakers’ disagreement kept or randomly replaced, and are tested on whether they recover the order of categories.<br /><i>Methods:</i> formal proof, transformers and LSTMs trained from scratch, fine-tuning, World Color Survey.",
   },
   gLit: {
     id: "gLit", title: "Moral framing and dilemma choices in language models", href: "/research/latent-control-states",
-    context: "Project with the German Research Center for Artificial Intelligence (DFKI)", when: "Apr. 2026",
-    note: "Led the utilitarian-framing branch: how moral framing changes dilemma choices in 7B and 14B models, studied with controlled prompts and activation patching. Manuscript in preparation.",
+    context: "Project with the German Research Center for Artificial Intelligence (DFKI)", when: "Apr. – Nov. 2026",
+    note: "Led the utilitarian-framing branch: turned moral decisions into minimal pairs to measure how framing shifts language-model choices. Manuscript in preparation.<br /><i>Methods:</i> probing, activation patching, low-rank analysis, steering.",
   },
   gThesis: {
     id: "gThesis", title: "Modal language development in preschoolers", href: "/research/learnability",
-    context: "M.Sc. thesis, Max Planck Institute for Human Cognitive and Brain Sciences", when: "Ongoing",
+    context: "M.Sc. thesis, Max Planck Institute for Human Cognitive and Brain Sciences", when: "Sep. 2026 – present",
     note: "Behavioural study of how preschoolers acquire modal words such as <i>might</i> and <i>must</i>. In design.",
   },
   gPsy: {
     id: "gPsy", title: "How the first information source shapes verification: a between-subjects experiment", href: "/research/fact-checking-study",
-    context: "Course experiment (group of three), M.Sc. Human and AI", when: "Feb. 2026",
-    note: "Participants checked general-knowledge answers with ChatGPT or Wikipedia first, assigned at random; from pilot (N = 8) and revision to online data collection on Pavlovia (49 participants, 47 analysed) and analysis in JASP. Co-designed the study, ran the analysis and wrote the report.",
+    context: "Small-scale psychology experiment", when: "Feb. 2026",
+    note: "<i>Methods:</i> between-subjects design, Pavlovia (49 participants, 47 analysed), JASP.",
   },
   gBa: {
     id: "gBa", title: "Leibniz’s logical system and characteristica universalis",
@@ -195,7 +191,7 @@ const research: Record<string, Entry> = {
 // 26 Oct 2026 (XC): B18 preprint on Zenodo; the entry links its concept DOI.
 // 18 Oct 2026 (XC): B18 (vagueness) added after modified nouns; B5 retitled to match the 18 Oct manuscript wording (no "updating"); training added to methods and skills.
 export const researchOrder: Record<Variant, { current: string[]; earlier: string[] }> = {
-  general: { current: ["gStemma", "gVagueness", "gLit", "gThesis", "gPsy", "gBa"], earlier: [] },
+  general: { current: ["gVagueness", "gThesis", "gLit", "gPsy", "gBa"], earlier: [] },
   lm:      { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["protobias", "streetView", "typicality", "psy", "undergraduate"] },
   cogsci:  { current: ["lit", "modifiers", "vagueness", "thesis"], earlier: ["typicality", "psy", "protobias", "undergraduate"] },
   training: { current: ["vagueness", "lit", "typicality", "thesis"], earlier: ["protobias", "streetView"] },
@@ -205,6 +201,16 @@ export const researchEntry = (id: string) => research[id];
 // 3 Nov 2026: a Preprints section, shown only where listed.
 export const preprints: Partial<Record<Variant, string[]>> = {
   general: ['Li, X. (2026). <i>The direction of disagreement: What departures from the majority term teach a text-only learner</i> [Preprint]. LingBuzz, lingbuzz/010504. <a href="https://lingbuzz.net/lingbuzz/010504">https://lingbuzz.net/lingbuzz/010504</a>'],
+};
+
+// 5 Nov 2026 (XC): StemmaLM is long-term infrastructure, listed apart from research. Add "Used in" once a paper uses it.
+export const infrastructure: Partial<Record<Variant, Entry[]>> = {
+  general: [{
+    id: "stemma", title: "StemmaLM", href: "https://stemmalm.github.io",
+    context: "Long-term infrastructure for language-model lineages", when: "Oct. 2026 – present",
+    note: "Turned questions about language development and transmission into model lineages raised on child-scale corpora and controlled variants: 60+ models, up to 98M parameters, public registry.<br /><i>Methods:</i> training from scratch, minimal-pair evaluation, Slurm on an HPC GPU cluster.",
+    links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
+  }],
 };
 
 // Research entries are independent projects; unpublished projects remain off all variants.
@@ -231,11 +237,11 @@ export const employment: (Entry & { place: string; variants?: Variant[] })[] = [
 // 12 Oct 2026: grouped by the steps of the work; the "working proficiency" qualifier on interpretability is dropped (XC reports the B4 analyses biweekly and can explain every step).
 export const skills: Record<Variant, { k: string; v: string }[]> = {
   general: [
-    { k: "Training", v: "Small transformers and LSTMs trained from scratch; fine-tuning, LoRA" },
-    { k: "Interpretability", v: "Activation patching, low-rank analysis, probing, steering" },
-    { k: "Evaluation", v: "Controlled behavioural evaluation, minimal pairs" },
-    { k: "Programming", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC GPU cluster" },
     { k: "Human data", v: "Experimental design, PsychoPy/Pavlovia, JASP" },
+    { k: "Evaluation", v: "Controlled behavioural evaluation, minimal pairs" },
+    { k: "Training", v: "Small transformers and LSTMs trained from scratch; fine-tuning" },
+    { k: "Interpretability", v: "Activation patching, low-rank analysis, probing, steering" },
+    { k: "Tools", v: "Python (PyTorch, Hugging Face Transformers, pandas, scikit-learn), Git, LaTeX, Slurm on an HPC GPU cluster" },
   ],
   lm: [
     { k: "Language models", v: "Training small models from scratch, fine-tuning, LoRA; activation patching, low-rank analysis, probing, steering; controlled behavioural evaluation, minimal pairs" },

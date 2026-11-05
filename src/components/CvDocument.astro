@@ -30,7 +30,7 @@ const country = (place: string) => place.split(", ").pop();
   </div>
 
   {variant === "general"
-    ? <section class="cvd-interests-sec"><h2>Research interests</h2><p class="cvd-interests-line" set:html={cv.interests[variant]} /></section>
+    ? <section class="cvd-interests-sec"><h2>Research focus</h2><p class="cvd-interests-line" set:html={cv.interests[variant]} /></section>
     : <p class="cvd-interests" set:html={cv.interests[variant]} />}
 
   <section>
@@ -68,6 +68,21 @@ const country = (place: string) => place.split(", ").pop();
   {cv.preprints[variant] && <section>
     <h2>Preprints</h2>
     {cv.preprints[variant]!.map((p) => <div class="row row-full"><div class="what" set:html={p} /></div>)}
+  </section>}
+
+  {cv.infrastructure[variant] && <section>
+    <h2>Research infrastructure</h2>
+    {cv.infrastructure[variant]!.map((e) => (
+      <div class="row">
+        <div class="when">{e.when}</div>
+        <div class="what">
+          <div><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b></div>
+          <div><i>{e.context}</i></div>
+          {cv.pick(e.note, variant) && <div set:html={cv.pick(e.note, variant)} />}
+          {e.links && <div>{e.links.map((link, index) => <Fragment>{index > 0 && " · "}<a href={link.href}>{link.label}</a></Fragment>)}</div>}
+        </div>
+      </div>
+    ))}
   </section>}
 
   {order.earlier.length > 0 && <section>

@@ -70,7 +70,7 @@ export const portfolioSections: PortfolioSection[] = [
         tier: "research", track: "lm", topic: "Mechanistic interpretability",
         title: "Moral framing and dilemma choices in language models",
         field: "Mechanistic interpretability", desc: projects.latentControl.summary, status: projects.latentControl.status,
-        kind: "Project · 2026–27 · supervised at the German Research Center for Artificial Intelligence (DFKI) · manuscript in preparation",
+        kind: "Project · 2026 · supervised at the German Research Center for Artificial Intelligence (DFKI) · manuscript in preparation",
         short: "When moral wording changes a model\u2019s choice, what changes: the weighing of outcomes, a tendency to answer with action, or some other process? And how far can internal interventions tell these apart?",
         figure: { src: "/images/research/moral-framing-trolley-card.png", alt: "A trolley heads along the main track toward one person; a lever at the junction would send it onto a side track with three people. A box with the slogan Prioritize the greater good points to the lever: pulling it becomes more likely even though it costs more lives, which is not what a utilitarian would pick.", caption: "Schematic: the dilemmas drawn as a trolley problem; numbers are examples.", width: 420, height: 298 },
         links: [{ label: "Overview", href: projects.latentControl.href }],
