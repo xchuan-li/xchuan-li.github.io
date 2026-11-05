@@ -1,4 +1,8 @@
-## StemmaLM logo on the CV, 5 November 2026 — latest XC instruction
+## General CV research focus second sentence uses language models as learners, 5 November 2026 — latest XC instruction
+
+XC ▸ The two sentences repeated each other; proposed "With learner as LM, which has only the literal input, the question ... can be investigated". AI ▸ `interests.general` second sentence: "With language models as learners, which receive only controlled input and whose internals can be changed, these questions can be tested experimentally." ("literal" replaced because it reads as non-figurative.) XC ▸ "改 上线".
+
+## StemmaLM logo on the CV, 5 November 2026
 
 XC ▸ "stemmalm在简历上可以加上logo 这样能明显区分". AI ▸ `public/images/stemmalm-logo.svg` is an unmodified copy of the logo in the stemmalm.github.io repository; `Entry.logo` in `cv.ts`; the infrastructure row in `CvDocument.astro` shows it beside the title and italic line.
 

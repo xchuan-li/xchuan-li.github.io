@@ -44,7 +44,7 @@ const opening = `${identityLong} ${programmeHtml}`;
 // 3 Nov 2026 (XC): general opening is XC's own research-interests line, as in the application PDF.
 export const interests: Record<Variant, string> = {
   // 5 Nov 2026 (XC): the focus is turning linguistics and cognitive-science questions into LM measurements.
-  general: "I study language and cognition, especially how the structure of language shapes learning and thought. I turn questions from linguistics and cognitive science into measurements on language models, where the input can be controlled and the internals can be changed.",
+  general: "I study language and cognition, especially how the structure of language shapes learning and thought. With language models as learners, which receive only controlled input and whose internals can be changed, these questions can be tested experimentally.",
   lm: `${opening} Methods: training language models from scratch under controlled input; controlled behavioural evaluation; activation patching, low-rank analysis, probing.`,
   cogsci: `${opening} Experience with how human data are produced, from children’s language to adult behavioural experiments.`,
   // 3 Nov 2026: training variant for Micha Heilbron (MPI Nijmegen), who asked for a CV for a possible position needing a language-model training background.
