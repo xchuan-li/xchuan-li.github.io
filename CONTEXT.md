@@ -1,4 +1,8 @@
-## Marburg line reads "DSH-2 (C1 level)", 5 November 2026 — latest XC instruction
+## General CV research focus opens with language and cognition, 5 November 2026 — latest XC instruction
+
+XC ▸ The old sentence ("I study what language itself contains that we have not yet found") felt too big; wanted language and cognition, to connect linguistics and cognitive science. Chose the candidate "I study language and cognition, especially how the structure of language shapes learning and thought." AI ▸ Changed in `interests.general` in `cv.ts` only. The homepage, `/approach` and the lm, cogsci and training CVs still use `identityLong` ("What is there in language itself that we have not yet discovered?").
+
+## Marburg line reads "DSH-2 (C1 level)", 5 November 2026
 
 XC ▸ "把C1改成 C1 Level", then lowercase "level" after asking which is better. AI ▸ Changed on the Marburg education line; the Languages row keeps "German (C1), English (C1)".
 
