@@ -65,7 +65,7 @@ export const education: (Entry & { place: string })[] = [
   },
   {
     id: "marburg", title: "University of Marburg", place: "Marburg, Germany",
-    context: "German for graduate study; DSH-2 (C1)", when: "Oct. 2024 – Jul. 2025",
+    context: "German for graduate study; DSH-2 (C1 Level)", when: "Oct. 2024 – Jul. 2025",
   },
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",
@@ -207,7 +207,7 @@ export const preprints: Partial<Record<Variant, string[]>> = {
 export const infrastructure: Partial<Record<Variant, Entry[]>> = {
   general: [{
     id: "stemma", title: "StemmaLM", href: "https://stemmalm.github.io",
-    context: "Long-term infrastructure for language-model lineages", when: "Oct. 2026 – present",
+    context: "Long-term infrastructure for language-model lineages", when: "", // 5 Nov 2026 (XC): no date; aligned with Preprints
     note: "Turned questions about language development and transmission into model lineages raised on child-scale corpora and controlled variants: 60+ models, up to 98M parameters, public registry.<br /><i>Methods:</i> training from scratch, minimal-pair evaluation, Slurm on an HPC GPU cluster.",
     links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
   }],

@@ -1,4 +1,12 @@
-## DSH-2 named on the Marburg education line, 5 November 2026 — latest XC instruction
+## Marburg line reads "DSH-2 (C1 Level)", 5 November 2026 — latest XC instruction
+
+XC ▸ "把C1改成 C1 Level". AI ▸ Changed on the Marburg education line; the Languages row keeps "German (C1), English (C1)".
+
+## StemmaLM date removed on the CV, 5 November 2026
+
+XC ▸ "stemma的日期不用写，跟预印本对齐就行". AI ▸ The Research infrastructure entry has no date and uses the full-width `row-full` layout, the same left edge as Preprints.
+
+## DSH-2 named on the Marburg education line, 5 November 2026
 
 XC ▸ German matters more than expected and the CV did not stress it: mention DSH-2 (C1) under Marburg. AI ▸ `education` entry `marburg` in `cv.ts` now reads "German for graduate study; DSH-2 (C1)" in every CV variant (certificate dated 2025-07-24, Vault A1). The Languages row is unchanged.
 

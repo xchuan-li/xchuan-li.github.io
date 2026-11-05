@@ -73,8 +73,7 @@ const country = (place: string) => place.split(", ").pop();
   {cv.infrastructure[variant] && <section>
     <h2>Research infrastructure</h2>
     {cv.infrastructure[variant]!.map((e) => (
-      <div class="row">
-        <div class="when">{e.when}</div>
+      <div class="row row-full">
         <div class="what">
           <div><b>{e.href ? <a href={e.href}>{e.title}</a> : e.title}</b></div>
           <div><i>{e.context}</i></div>
