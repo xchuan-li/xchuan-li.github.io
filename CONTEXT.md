@@ -1,4 +1,8 @@
-## General CV research focus second sentence uses language models as learners, 5 November 2026 — latest XC instruction
+## General CV B.A. thesis note reworded, 5 November 2026 — latest XC instruction
+
+XC ▸ Say more: to what extent language can be calculated, and how Leibniz, by building a logical system, reveals the relation between language and the world. Final wording from XC: "To what extent language can be calculated, and how Leibniz, by building a logical system, sought to reveal the relation between language and the external world." AI ▸ Changed in `gBa` only; the other CV variants keep their undergraduate entry.
+
+## General CV research focus second sentence uses language models as learners, 5 November 2026
 
 XC ▸ The two sentences repeated each other; proposed "With learner as LM, which has only the literal input, the question ... can be investigated". AI ▸ `interests.general` second sentence: "With language models as learners, which receive only controlled input and whose internals can be changed, these questions can be tested experimentally." ("literal" replaced because it reads as non-figurative.) XC ▸ "改 上线".
 

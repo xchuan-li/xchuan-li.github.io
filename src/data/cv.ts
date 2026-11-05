@@ -106,7 +106,7 @@ const research: Record<string, Entry> = {
   gBa: {
     id: "gBa", title: "Leibniz’s logical system and characteristica universalis",
     context: "B.A. thesis, Shenzhen University", when: "May 2024",
-    note: "Leibniz’s logic and his proposal for a universal symbolic language in which reasoning becomes calculation.",
+    note: "To what extent language can be calculated, and how Leibniz, by building a logical system, sought to reveal the relation between language and the external world.",
   },
   typicality: {
     id: "typicality", title: "Typicality in referent choice: what the description leaves open",
