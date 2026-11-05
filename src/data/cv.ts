@@ -209,7 +209,7 @@ export const infrastructure: Partial<Record<Variant, Entry[]>> = {
   general: [{
     id: "stemma", title: "StemmaLM", href: "https://stemmalm.github.io", logo: "/images/stemmalm-logo.svg",
     context: "Long-term infrastructure for language-model lineages", when: "", // 5 Nov 2026 (XC): no date; aligned with Preprints
-    note: "Turned questions about language development and transmission into model lineages raised on child-scale corpora and controlled variants: 60+ models, up to 98M parameters, public registry.<br /><i>Methods:</i> training from scratch, minimal-pair evaluation, Slurm on an HPC GPU cluster.",
+    note: "A collection of small language-model lineages, raised under controlled conditions on corpora selected by features and size: 60+ models, up to 98M parameters, public registry.<br /><i>Methods:</i> model training, controlled corpus selection, GPU cluster, analysis of how language and behaviour change across models.",
     links: [{ label: "stemmalm.github.io", href: "https://stemmalm.github.io" }],
   }],
 };

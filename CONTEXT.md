@@ -1,4 +1,8 @@
-## General CV B.A. thesis note reworded, 5 November 2026 — latest XC instruction
+## StemmaLM CV note describes a collection of lineages, 5 November 2026 — latest XC instruction
+
+XC ▸ StemmaLM holds models from different projects as a lineage collection, an asset. The note should say that corpora with different features and sizes are selected to train lineages of small models under control; methods are model training, controlled corpus selection, GPU cluster, and analysis of language and behaviour change; do not open with a verb form that reads as passive. AI ▸ New note in `infrastructure.general` (noun opening, numbers kept); XC ▸ "好 就这样吧".
+
+## General CV B.A. thesis note reworded, 5 November 2026
 
 XC ▸ Say more: to what extent language can be calculated, and how Leibniz, by building a logical system, reveals the relation between language and the world. Final wording from XC: "To what extent language can be calculated, and how Leibniz, by building a logical system, sought to reveal the relation between language and the external world." AI ▸ Changed in `gBa` only; the other CV variants keep their undergraduate entry.
 
