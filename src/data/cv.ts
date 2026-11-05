@@ -65,7 +65,7 @@ export const education: (Entry & { place: string })[] = [
   },
   {
     id: "marburg", title: "University of Marburg", place: "Marburg, Germany",
-    context: "German for graduate study; DSH-2 (C1 Level)", when: "Oct. 2024 – Jul. 2025",
+    context: "German for graduate study; DSH-2 (C1 level)", when: "Oct. 2024 – Jul. 2025",
   },
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",

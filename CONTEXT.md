@@ -1,6 +1,6 @@
-## Marburg line reads "DSH-2 (C1 Level)", 5 November 2026 — latest XC instruction
+## Marburg line reads "DSH-2 (C1 level)", 5 November 2026 — latest XC instruction
 
-XC ▸ "把C1改成 C1 Level". AI ▸ Changed on the Marburg education line; the Languages row keeps "German (C1), English (C1)".
+XC ▸ "把C1改成 C1 Level", then lowercase "level" after asking which is better. AI ▸ Changed on the Marburg education line; the Languages row keeps "German (C1), English (C1)".
 
 ## StemmaLM date removed on the CV, 5 November 2026
 
