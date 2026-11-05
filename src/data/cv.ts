@@ -51,7 +51,7 @@ export const interests: Record<Variant, string> = {
 };
 
 // 12 Oct 2026 (XC): education notes state what each stage trained, not selected coursework;
-// Marburg is listed only as German for graduate study.
+// Marburg is listed as German for graduate study; 5 Nov 2026 (XC): name the DSH-2 result here.
 export const education: (Entry & { place: string })[] = [
   {
     id: "msc", title: "University of Technology Nuremberg", place: "Nuremberg, Germany",
@@ -65,7 +65,7 @@ export const education: (Entry & { place: string })[] = [
   },
   {
     id: "marburg", title: "University of Marburg", place: "Marburg, Germany",
-    context: "German for graduate study", when: "Oct. 2024 – Jul. 2025",
+    context: "German for graduate study; DSH-2 (C1)", when: "Oct. 2024 – Jul. 2025",
   },
   {
     id: "ba", title: "Shenzhen University", place: "Shenzhen, China",

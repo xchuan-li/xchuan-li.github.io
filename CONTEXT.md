@@ -1,4 +1,8 @@
-## General CV rebuilt around translating questions into LM experiments, 5 November 2026 — latest XC instruction
+## DSH-2 named on the Marburg education line, 5 November 2026 — latest XC instruction
+
+XC ▸ German matters more than expected and the CV did not stress it: mention DSH-2 (C1) under Marburg. AI ▸ `education` entry `marburg` in `cv.ts` now reads "German for graduate study; DSH-2 (C1)" in every CV variant (certificate dated 2025-07-24, Vault A1). The Languages row is unchanged.
+
+## General CV rebuilt around translating questions into LM experiments, 5 November 2026
 
 XC ▸ The point of the CV is turning linguistics and cognitive-science questions into things language models can measure, not CS. StemmaLM is long-term infrastructure and goes apart from research. Each project states two things only: how the question became an experiment, and method keywords. No findings. Moral framing: "不用说的这么具体", minimal pairs; DFKI dates end November 2026. Swap DFKI and the M.A. thesis; sync to the site and the CV page.
 
