@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc">
+<title id="title">Two source orders in the checking experiment</title>
+<desc id="desc">Participants were randomly assigned to Wikipedia first or ChatGPT first. Round 1 offered optional checks while answering ten questions; round 2 offered the other source for optional double-checking. Sources were shown as static screenshots.</desc>
+<rect width="420" height="286" fill="white"/>
+<g font-family="Arial,sans-serif" fill="#283648">
+<text x="254" y="22" text-anchor="middle" font-size="18">Random assignment</text>
+<path d="M254 30V42M178 42H330" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<path d="M178 42L178 68M174 63L178 68L182 63" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<path d="M330 42L330 68M326 63L330 68L334 63" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<path d="M178 114L178 158M174 153L178 158L182 153" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<path d="M330 114L330 158M326 153L330 158L334 153" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<path d="M92 70V204" stroke="#87919c" stroke-width="1"/>
+<path d="M86 92.0H92M86 182.0H92" stroke="#87919c" stroke-width="1"/>
+<g font-size="17" text-anchor="end"><text x="81" y="98.0">Round 1</text><text x="81" y="188.0">Round 2</text></g>
+<rect x="114.0" y="70" width="128" height="44" fill="white" stroke="#87919c" stroke-width="1"/>
+<text x="178" y="99.0" text-anchor="middle" font-size="19">Wikipedia</text>
+<rect x="266.0" y="70" width="128" height="44" fill="rgb(209,218,228)" stroke="#17457a" stroke-width="1"/>
+<text x="330" y="99.0" text-anchor="middle" font-size="19">ChatGPT</text>
+<rect x="114.0" y="160" width="128" height="44" fill="rgb(209,218,228)" stroke="#17457a" stroke-width="1"/>
+<text x="178" y="189.0" text-anchor="middle" font-size="19">ChatGPT</text>
+<rect x="266.0" y="160" width="128" height="44" fill="white" stroke="#87919c" stroke-width="1"/>
+<text x="330" y="189.0" text-anchor="middle" font-size="19">Wikipedia</text>
+<path d="M92 236H400" stroke="#ccd2d8" stroke-width="1"/>
+<text x="254" y="264" text-anchor="middle" font-size="16" fill="#65717e">Optional checking · 10 questions</text>
+</g></svg>

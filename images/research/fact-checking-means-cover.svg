@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc">
+<title id="title">Questions checked in each round, by source order</title>
+<desc id="desc">Means and standard deviations of the number of questions checked (of 10). Round 1, first tool: Wikipedia first 6.24 (SD 2.80, n = 29), ChatGPT first 5.78 (SD 3.64, n = 18). Round 2, other tool: Wikipedia first 5.38 (SD 3.90), ChatGPT first 7.00 (SD 3.65). Neither difference was reliable.</desc>
+<rect width="420" height="286" fill="white"/>
+<g font-family="Arial,sans-serif" fill="#283648">
+<path d="M92 39V226H320" fill="none" stroke="#87919c" stroke-width="1"/>
+<path d="M86 226H92" stroke="#87919c"/><text x="80" y="232" text-anchor="end" font-size="17">0</text>
+<path d="M86 141H92" stroke="#87919c"/><text x="80" y="147" text-anchor="end" font-size="17">5</text>
+<path d="M86 56H92" stroke="#87919c"/><text x="80" y="62" text-anchor="end" font-size="17">10</text>
+<text transform="translate(30 132.5) rotate(-90)" text-anchor="middle" font-size="17">Questions checked</text>
+<text x="150" y="250" text-anchor="middle" font-size="17">Round 1</text><text x="150" y="270" text-anchor="middle" font-size="15" fill="#65717e">first tool</text>
+<text x="290" y="250" text-anchor="middle" font-size="17">Round 2</text><text x="290" y="270" text-anchor="middle" font-size="15" fill="#65717e">other tool</text>
+<path d="M143 119.92L283 134.54000000000002" stroke="#9aa0a8" stroke-width="1.6"/>
+<path d="M143 167.51999999999998V72.32000000000002M139 167.51999999999998H147M139 72.32000000000002H147" stroke="#9aa0a8" stroke-width="1"/>
+<circle cx="143" cy="119.92" r="4.5" fill="#9aa0a8"/>
+<path d="M283 200.84V68.24000000000001M279 200.84H287M279 68.24000000000001H287" stroke="#9aa0a8" stroke-width="1"/>
+<circle cx="283" cy="134.54000000000002" r="4.5" fill="#9aa0a8"/>
+<text x="312" y="140.54000000000002" font-size="16" fill="#9aa0a8">Wikipedia first</text>
+<path d="M157 127.74L297 107.0" stroke="#17457a" stroke-width="1.6"/>
+<path d="M157 189.62V65.86000000000001M153 189.62H161M153 65.86000000000001H161" stroke="#17457a" stroke-width="1"/>
+<circle cx="157" cy="127.74" r="4.5" fill="#17457a"/>
+<path d="M297 169.05V44.94999999999999M293 169.05H301M293 44.94999999999999H301" stroke="#17457a" stroke-width="1"/>
+<circle cx="297" cy="107.0" r="4.5" fill="#17457a"/>
+<text x="312" y="113.0" font-size="16" fill="#17457a">ChatGPT first</text>
+</g></svg>

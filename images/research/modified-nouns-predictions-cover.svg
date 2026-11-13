@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc">
+<title id="title">What two accounts predict for a winged dog</title>
+<desc id="desc">For a winged dog, the dependency account predicts that can fly rises and has a beak does not change; the co-occurrence account predicts that both rise. Theoretical predictions, not results.</desc>
+<rect width="420" height="286" fill="white"/>
+<path d="M20 14H400" stroke="#283648" stroke-width="1.4"/><path d="M20 58H400" stroke="#283648" stroke-width="0.8"/><path d="M20 272H400" stroke="#283648" stroke-width="1.4"/>
+<path d="M226 50H298" stroke="#283648" stroke-width="0.6"/><path d="M318 50H404" stroke="#283648" stroke-width="0.6"/>
+<text x="24" y="42" font-family="Georgia,serif" font-style="italic" font-size="19" fill="#283648">a winged dog</text>
+<g font-family="Arial,sans-serif" font-size="13" fill="#283648" text-anchor="middle"><text x="262" y="40">Dependency</text><text x="361" y="40">Co-occurrence</text></g>
+<g font-family="Georgia,serif" fill="#283648"><text x="24" y="124" font-size="19">Can it fly?</text><text x="24" y="218" font-size="19">Does it have a beak?</text></g>
+<g font-family="Georgia,serif" font-style="italic" font-size="14" fill="#65717e"><text x="24" y="146">depends on wings</text><text x="24" y="240">co-occurs with wings</text></g>
+<path d="M20 170H400" stroke="#c9ced4" stroke-width="0.6"/>
+<g font-family="Arial,sans-serif" font-size="30" text-anchor="middle"><text x="262" y="132" fill="#17457a">↑</text><text x="361" y="132" fill="#17457a">↑</text><text x="262" y="226" fill="#87919c">–</text><text x="361" y="226" fill="#17457a">↑</text></g>
+</svg>

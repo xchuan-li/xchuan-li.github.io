@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-labelledby="title desc">
+<title id="title">Modal language and reasoning about possibilities</title><desc id="desc">Planned relationship between two tasks in preschool children. Language understanding will be compared with reasoning about possibilities. No causal direction or result is asserted; task details remain to be agreed.</desc>
+<rect width="760" height="230" fill="white"/>
+<g fill="none" stroke="#17457a" stroke-width="1.8"><path d="M108 24H206V76H157L142 89V76H108Z"/><path d="M122 41H191M122 55H176"/>
+<circle cx="598" cy="28" r="7"/><path d="M598 35V47L569 65M598 47 627 65"/><circle cx="565" cy="72" r="9"/><circle cx="631" cy="72" r="9"/>
+<path d="M281 118H474" stroke="#8b919c" stroke-dasharray="4 5"/>
+</g><g font-family="Georgia,serif" fill="#16181d" text-anchor="middle">
+<text x="158" y="127" font-size="24">Modal language</text><text x="158" y="157" font-size="18" fill="#4c515c">Understanding expressions</text>
+<text x="598" y="127" font-size="24">Possibility reasoning</text><text x="598" y="157" font-size="18" fill="#4c515c">Considering alternatives</text>
+<rect x="340" y="92" width="74" height="48" fill="white"/><text x="377" y="128" font-size="35" fill="#17457a">?</text>
+<text x="378" y="198" font-size="18">How are the two performances related?</text><text x="378" y="222" font-size="14" fill="#4c515c">Planned association study · task details under discussion</text>
+</g></svg>

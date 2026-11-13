@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" width="840" height="420" font-family="'Latin Modern Roman','CMU Serif','Times New Roman',Times,serif">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#000"/></marker></defs>
+  <rect width="840" height="420" fill="#fff"/>
+  <rect x="20" y="40" width="390" height="64" fill="#fbdcbc" stroke="#000" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="215" y="82" font-size="29" text-anchor="middle">“Prioritize the greater good.”</text>
+  <rect x="20" y="130" width="390" height="64" fill="#cfe2f6" stroke="#000" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="215" y="172" font-size="29" text-anchor="middle">“Prioritize doing your duty.”</text>
+  <rect x="20" y="290" width="390" height="64" fill="#fff" stroke="#000" stroke-width="2"/>
+  <text x="215" y="332" font-size="29" text-anchor="middle" font-style="italic">the same dilemma</text>
+  <rect x="500" y="130" width="140" height="130" fill="#f6fad2" stroke="#000" stroke-width="2.5"/>
+  <text x="570" y="210" font-size="46" text-anchor="middle">LM</text>
+  <g stroke="#000" stroke-width="2.2" fill="none" marker-end="url(#ah)">
+    <path d="M410 72 L498 160"/>
+    <path d="M410 162 L498 190"/>
+    <path d="M410 322 L498 232"/>
+    <path d="M640 195 L700 195"/>
+  </g>
+  <text x="712" y="184" font-size="29">act, or</text>
+  <text x="712" y="222" font-size="29">not?</text>
+</svg>

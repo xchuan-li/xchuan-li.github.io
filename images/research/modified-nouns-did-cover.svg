@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc">
+<title id="title">Dependent properties move more than co-occurring ones</title>
+<desc id="desc">Mean update (DiD, nats; target minus common modifiers) after adding a feature, with 95% confidence intervals over 13 feature groups, original phrasing. Qwen2.5-14B: dependent 33.0 [25.4, 41.2], co-occurring 5.0 [2.6, 7.5]. Qwen2.5-7B: dependent 22.5 [18.1, 27.3], co-occurring 4.8 [2.0, 7.4]. Llama-3.1-8B: dependent 7.0 [5.2, 9.2], co-occurring 3.4 [1.6, 5.0].</desc>
+<rect width="420" height="286" fill="white"/>
+<g font-family="Arial,sans-serif" fill="#283648">
+<path d="M78 32V226H404" fill="none" stroke="#87919c" stroke-width="1"/>
+<path d="M72 226.0H78" stroke="#87919c"/><text x="67" y="232.0" text-anchor="end" font-size="17">0</text>
+<path d="M72 135.52H78" stroke="#87919c"/><text x="67" y="141.52" text-anchor="end" font-size="17">20</text>
+<path d="M72 45.05H78" stroke="#87919c"/><text x="67" y="51.05" text-anchor="end" font-size="17">40</text>
+<text transform="translate(24 131.0) rotate(-90)" text-anchor="middle" font-size="16">Update (nats)</text>
+<text x="214" y="250" text-anchor="middle" font-size="17">Dependent</text><text x="214" y="270" text-anchor="middle" font-size="15" font-style="italic" fill="#65717e">can fly</text>
+<text x="336" y="250" text-anchor="middle" font-size="17">Co-occurring</text><text x="336" y="270" text-anchor="middle" font-size="15" font-style="italic" fill="#65717e">has a beak</text>
+<path d="M205 76.71L327 203.25" stroke="#17457a" stroke-width="1.6"/>
+<path d="M205 111.14V39.44M201 111.14H209M201 39.44H209" stroke="#17457a" stroke-width="1"/>
+<circle cx="205" cy="76.71" r="4.5" fill="#17457a"/>
+<path d="M327 214.42V192.07M323 214.42H331M323 192.07H331" stroke="#17457a" stroke-width="1"/>
+<circle cx="327" cy="203.25" r="4.5" fill="#17457a"/>
+<text x="193" y="81.71" text-anchor="end" font-size="15" fill="#17457a">Qwen2.5-14B</text>
+<path d="M214 124.21L336 204.06" stroke="#5b7fa6" stroke-width="1.6"/>
+<path d="M214 144.03V102.32M210 144.03H218M210 102.32H218" stroke="#5b7fa6" stroke-width="1"/>
+<circle cx="214" cy="124.21" r="4.5" fill="#5b7fa6"/>
+<path d="M336 216.73V192.48M332 216.73H340M332 192.48H340" stroke="#5b7fa6" stroke-width="1"/>
+<circle cx="336" cy="204.06" r="4.5" fill="#5b7fa6"/>
+<text x="202" y="129.20999999999998" text-anchor="end" font-size="15" fill="#5b7fa6">Qwen2.5-7B</text>
+<path d="M223 194.24L345 210.66" stroke="#9aa0a8" stroke-width="1.6"/>
+<path d="M223 202.7V184.34M219 202.7H227M219 184.34H227" stroke="#9aa0a8" stroke-width="1"/>
+<circle cx="223" cy="194.24" r="4.5" fill="#9aa0a8"/>
+<path d="M345 218.54V203.52M341 218.54H349M341 203.52H349" stroke="#9aa0a8" stroke-width="1"/>
+<circle cx="345" cy="210.66" r="4.5" fill="#9aa0a8"/>
+<text x="211" y="199.24" text-anchor="end" font-size="15" fill="#9aa0a8">Llama-3.1-8B</text>
+</g></svg>

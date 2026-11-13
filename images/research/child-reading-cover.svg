@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" viewBox="0 0 420 286" role="img" aria-labelledby="title desc">
+<title id="title">A Chinese character alone and within a word</title>
+<desc id="desc">Illustrative character–word pairs: 龄 and 年龄; 筑 and 建筑. The target character is highlighted within each word. These are example materials, not response data.</desc>
+<rect width="420" height="286" fill="white"/>
+<path d="M20 14H400" stroke="#283648" stroke-width="1.4"/><path d="M20 52H400" stroke="#283648" stroke-width="0.8"/><path d="M20 272H400" stroke="#283648" stroke-width="1.4"/>
+<g font-family="Arial,sans-serif" font-size="17" fill="#283648" text-anchor="middle"><text x="100" y="40">Character</text><text x="310" y="40">Word</text></g>
+<g font-family="Songti SC,Noto Serif CJK SC,serif" font-size="60" text-anchor="middle"><text x="100" y="124" fill="#283648">龄</text><text x="280" y="124" fill="#65717e">年</text><text x="340" y="124" fill="#17457a">龄</text></g>
+<path d="M166 103L226 103M221 99L226 103L221 107" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<g font-family="Georgia,serif" font-style="italic" font-size="16" fill="#65717e" text-anchor="middle"><text x="100" y="150">líng</text><text x="310" y="150">niánlíng</text></g>
+<g font-family="Songti SC,Noto Serif CJK SC,serif" font-size="60" text-anchor="middle"><text x="100" y="230" fill="#283648">筑</text><text x="280" y="230" fill="#65717e">建</text><text x="340" y="230" fill="#17457a">筑</text></g>
+<path d="M166 209L226 209M221 205L226 209L221 213" fill="none" stroke="#87919c" stroke-width="1.3"/>
+<g font-family="Georgia,serif" font-style="italic" font-size="16" fill="#65717e" text-anchor="middle"><text x="100" y="256">zhù</text><text x="310" y="256">jiànzhù</text></g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" width="840" height="500">
+  <rect width="840" height="500" fill="#fff"/>
+  <g font-family="Menlo, 'Courier New', monospace" font-size="24">
+    <rect x="30" y="52" width="430" height="56" rx="8" fill="#d8edd3" stroke="#3b7a36" stroke-width="2.5"/>
+    <text x="245" y="89" text-anchor="middle" fill="#111">what adults said to children</text>
+    <rect x="30" y="400" width="240" height="56" rx="8" fill="#f6d6d6" stroke="#b23a3a" stroke-width="2.5"/>
+    <text x="150" y="437" text-anchor="middle" fill="#111">#1’s copy</text>
+  </g>
+  <g stroke="#222" stroke-width="2.5" fill="none">
+    <path d="M460 80 C510 80 520 80 560 80"/>
+    <path d="M630 122 C620 200 560 230 520 268"/>
+    <path d="M330 332 C290 360 200 370 150 400"/>
+    <path d="M270 428 L560 428"/>
+  </g>
+  <line x1="30" y1="300" x2="810" y2="300" stroke="#444" stroke-width="2" stroke-dasharray="9 7"/>
+  <g font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="22" fill="#666">
+    <text x="30" y="286">Generation 0</text>
+    <text x="30" y="328">Generation 1</text>
+  </g>
+  <rect x="240" y="268" width="370" height="64" rx="32" fill="#fff" stroke="#777" stroke-width="2.5"/>
+  <text x="425" y="308" text-anchor="middle" font-family="Menlo, 'Courier New', monospace" font-size="24" fill="#111">#1 writes its own copy</text>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="54" fill="#111">
+    <rect x="560" y="38" width="140" height="84" rx="12" fill="#fff" stroke="#222" stroke-width="3.5"/>
+    <text x="630" y="100" text-anchor="middle">#1</text>
+    <rect x="560" y="386" width="140" height="84" rx="12" fill="#fff" stroke="#222" stroke-width="3.5"/>
+    <text x="630" y="448" text-anchor="middle">#2</text>
+  </g>
+</svg>
